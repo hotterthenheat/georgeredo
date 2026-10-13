@@ -9,5 +9,9 @@ Research workspace produced on 2026-10-13. Read the deliverables in this order:
 5. `VALIDATION_PLAN.md` — datasets, tests, bias controls, metrics.
 6. `SLAYER_INDEPENDENT_IMPLEMENTATION_SPEC.md` — original spec for Slayer Terminal.
 7. `UNKNOWNS_AND_NEXT_STEPS.md` — blockers, open questions, next steps.
+8. `BACKTEST_RESULTS.md` — independent backtest of the reconstructed strategy (144 variants, SPY/QQQ/IWM 0DTE, Jun 2025 – Oct 2026) with cost models, baselines and IS/OOS.
+9. `STRATEGY_SPEC.md` — the strategy as reconstructed and tested: exact rules, parameters, verdict, and the paper-only configuration recommended for Slayer Terminal.
+
+`backtest/` holds the reproducible backtest code and the run outputs.
 
 `evidence/` holds sanitized evidence: public page text, documented API responses (all four trade books, gzipped), decoded SSR payloads, screenshots, REA observation output, provider catalogs and response samples, the authenticated member-surface capture (`auth_pages/`, `auth_api/`, `auth_interactions/`, SSE sample), analysis outputs and the scripts that produced them. No credentials, cookies, auth tokens or the account e-mail are stored anywhere in this repository (automated redaction, then grep-verified). The minified GeorgeFi JS bundle and the raw market-data bar files are intentionally excluded (`.gitignore`); only derived listings and compressed archives are kept.

@@ -1,0 +1,16 @@
+progress 0 / 1044 {'hits': 0, 'misses': 24, 'errors': 0}
+short day ('SPY', '2025-07-03', 210, 182, True, True)
+short day ('SPY', '2025-11-28', 210, 202, True, True)
+short day ('SPY', '2025-12-24', 210, 138, True, True)
+progress 200 / 1044 {'hits': 0, 'misses': 696, 'errors': 0}
+short day ('QQQ', '2025-07-03', 210, 248, True, True)
+progress 400 / 1044 {'hits': 0, 'misses': 1386, 'errors': 0}
+short day ('QQQ', '2025-11-28', 210, 253, True, True)
+short day ('QQQ', '2025-12-24', 210, 187, True, True)
+progress 600 / 1044 {'hits': 0, 'misses': 1817, 'errors': 0}
+short day ('IWM', '2025-07-03', 210, 151, True, True)
+progress 800 / 1044 {'hits': 0, 'misses': 2640, 'errors': 0}
+short day ('IWM', '2025-11-28', 210, 46, True, True)
+short day ('IWM', '2025-12-24', 210, 72, True, True)
+progress 1000 / 1044 {'hits': 0, 'misses': 3022, 'errors': 0}
+done 1044 short days 9 {'hits': 0, 'misses': 3132, 'errors': 0}

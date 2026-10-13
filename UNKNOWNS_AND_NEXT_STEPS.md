@@ -42,6 +42,15 @@ What could not be determined, why, and the highest-value next investigations, in
 
 ---
 
+## 3b. Backtest outcome (added after the independent backtest)
+
+The reconstructed strategy (level-sweep reversal and continuation entries on SPY/QQQ/IWM 0DTE contracts, GEX gates, session windows, GeorgeFi-style exit engines) was run over 345 sessions (2025-06-02 → 2026-10-09) in 144 variants. None has positive expectancy after a 1–2 % half-spread and $0.70/side fees; the best variant is −$2.4 per contract-trade (95 % CI −4.1 … −0.5) against a random-entry baseline of −$3.2. The reconstruction coincides with GeorgeFi's own SPY/QQQ/IWM entries only 7–9 % of the time within ±5 minutes, so GeorgeFi's live entry rule is **not** reproduced by the published description. Details in `BACKTEST_RESULTS.md`; what this means for Slayer in `STRATEGY_SPEC.md`.
+
+Open items this creates:
+- Which inputs GeorgeFi actually keys on (the 46 % direction agreement within 30 minutes says its entries are not plain level sweeps). The member-surface collector is the way to find out.
+- SPX index bars require a CBOE-approved UW entitlement; the backtest therefore excluded SPX, GeorgeFi's most profitable ticker.
+- Spread assumptions are modelled; live NBBO capture would replace them.
+
 ## 4. Confidence summary
 
 | Claim | Confidence | Basis |

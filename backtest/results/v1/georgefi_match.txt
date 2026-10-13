@@ -1,0 +1,7 @@
+GeorgeFi SPY/QQQ/IWM scalps in window: 188
+sweep         ict     : same-direction signal within ±5 min of GeorgeFi entry: 14/188 = 7.4% | any signal within ±5 min: 16.0%
+sweep         ict+gex : same-direction signal within ±5 min of GeorgeFi entry: 16/188 = 8.5% | any signal within ±5 min: 17.6%
+continuation  ict     : same-direction signal within ±5 min of GeorgeFi entry: 9/188 = 4.8% | any signal within ±5 min: 9.6%
+continuation  ict+gex : same-direction signal within ±5 min of GeorgeFi entry: 10/188 = 5.3% | any signal within ±5 min: 10.6%
+our sweep signals in GeorgeFi period: 2944; with a same-direction GeorgeFi entry within ±5 min: 19 (0.6%)
+direction agreement within ±30 min: agree=124 disagree=143
