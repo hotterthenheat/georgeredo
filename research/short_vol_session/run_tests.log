@@ -1,0 +1,20 @@
+skip half-day SPY 2025-07-03 210
+skip half-day SPY 2025-11-28 210
+skip half-day SPY 2025-12-24 210
+skip half-day QQQ 2025-07-03 210
+skip half-day QQQ 2025-11-28 210
+skip half-day QQQ 2025-12-24 210
+skip half-day IWM 2025-07-03 210
+skip half-day IWM 2025-11-28 210
+skip half-day IWM 2025-12-24 210
+ticker-days 1017
+decisions: straddle 6102 strangle 2034 orb 1475 mom 1017 gap 1017 | unique contract-days 11355
+already cached 6094 to fetch 5261
+options contract-days to load: 11355
+options 0 / 11355 {'hits': 1164, 'misses': 71, 'errors': 0}
+options 1000 / 11355 {'hits': 1702, 'misses': 403, 'errors': 0}
+options 2000 / 11355 {'hits': 2245, 'misses': 831, 'errors': 0}
+options 3000 / 11355 {'hits': 2792, 'misses': 1322, 'errors': 0}
+options 4000 / 11355 {'hits': 3378, 'misses': 1717, 'errors': 0}
+options 5000 / 11355 {'hits': 3880, 'misses': 2174, 'errors': 0}
+options 6000 / 11355 {'hits': 4387, 'misses': 2686, 'errors': 0}

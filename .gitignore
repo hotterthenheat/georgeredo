@@ -8,3 +8,7 @@ evidence/validation/uw_bars/
 evidence/validation/uw_tape_bars/
 node_modules/
 __pycache__/
+
+# deep-research intermediate caches (raw option bars, grid arrays)
+research/**/*.pkl
+research/**/*.npz
