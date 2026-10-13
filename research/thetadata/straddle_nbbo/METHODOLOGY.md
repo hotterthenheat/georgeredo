@@ -56,3 +56,14 @@ is the close of the row stamped T−1.
 * Exit legs are often near-worthless at 15:55, where the quote is $0.01 wide and the ask is one tick above a bid of $0.00–$0.01; buying those back costs the full ask. Letting them expire is not modelled (pin risk).
 * Single regime (16 months); two tail dates dominate the lane's income (see RESULTS.md); no margin, sizing or assignment modelling.
 * ThetaData 1-minute NBBO is consolidated (OPRA) and the exchange code of the best quote is recorded; it was not cross-checked against a second quote source.
+
+## Run record (2026-10-13)
+* Fetch: 7 phases (13:00 first, then stock bars, random baseline, 09:35, 10:00, 11:00, 14:30), 4,682 contract-days / stock-days fetched + 3,454 cache hits (strikes repeat across entry times),
+  0 errors, 0 no-data, 2 gRPC retries, 111 re-logins forced by other studies' logins on the shared key (every job completed). Wall time about 30 minutes at 2 concurrent requests.
+* Coverage: 5,084 fixed-time straddles (339 sessions × 3 tickers × 5 entry times, minus one 09:35 IWM straddle with no quote row at the entry minute) and 1,017 random-time baseline straddles;
+  the 15:55 exit row is a real quote row (not forward-filled) for 99.9 % of straddles.
+* Outputs: `csv/straddles_nbbo.csv.gz` (one row per straddle, 59 columns: quotes and sizes at entry and exit, half-spreads, P&L under every variant, the modelled study's numbers for the same row),
+  `csv/stats_lanes.csv`, `csv/half_spread_distribution.csv`, `RESULTS.md`, `verify_interval.json`.
+* Reading the half-spread tables: a leg quoted 0.00 × 0.02 at the exit has mid $0.01 and half-spread $0.01, i.e. "100 % of mid"; the $ columns and the %-of-credit columns are the economically
+  meaningful ones for the exit side.
+* Reproduce: `set -a; . <env file with THETADATA_KEY>; set +a; python3 -I fetch.py 13:00 stock random 09:35 10:00 11:00 14:30` (fills the cache), then `python3 -I analyze.py` (no key needed).

@@ -282,6 +282,13 @@ def main():
     g3 = fixed.query("time=='13:00'"); s3 = summ(g3, 'pnl_exec'); su = summ(g3, 'uw_pnl_spread')
     P(f"\nModelled vs measured, 13:00 all three tickers (the modelled headline): modelled +{su['mean']:.2f} [{su['lo']:.2f}, {su['hi']:.2f}] vs executable {s3['mean']:.2f} [{s3['lo']:.2f}, {s3['hi']:.2f}] on the same {s3['n']} straddles "
       f"-> the modelled spread was {'OPTIMISTIC' if su['mean'] > s3['mean'] else 'PESSIMISTIC'} by {su['mean'] - s3['mean']:.2f} $ per straddle. SPY+QQQ: modelled {summ(g, 'uw_pnl_spread')['mean']:.2f} vs executable {s['mean']:.2f}.")
+    gq = fixed.query("time=='13:00' and ticker!='IWM'")
+    P(f"\n**Verdict.** Under measured NBBO fills the pre-registered 13:00 SPY+QQQ lane earns {s['mean']:.2f} $ per straddle [{s['lo']:.2f}, {s['hi']:.2f}] (n={s['n']}), "
+      f"{sne['mean']:.2f} [{sne['lo']:.2f}, {sne['hi']:.2f}] without FOMC/CPI/NFP days, and {summ(gq, 'pnl_exec_stop2.0')['mean']:.2f} with the 2.0x stop: the lower bound is below zero in every "
+      f"specification, so criterion 1 FAILS and the lane is not promotable. The entry-side half-spread is small (median {hs_med:.2f} % of credit, i.e. about half the modelled 1 %), but the 15:55 "
+      f"buy-back of two near-worthless legs costs a median {gq['hs_exit_pct_credit'].median():.2f} % of credit (mean {gq['hs_exit_pct_credit'].mean():.2f} %), which the modelled rule "
+      f"(max(1 %, $0.01) per leg) under-charged: realized round-trip cost {gq['gap'].mean():.2f} $ vs modelled {(gq['uw_pnl_mid']-gq['uw_pnl_spread']).mean():.2f} $ per straddle. "
+      f"The random-baseline criterion passes by {rbq['diff']-rbq['cost']:.2f} $ with a CI that includes zero, so it carries no weight.")
     open(HERE + '/RESULTS.md', 'w').write('\n'.join(L) + '\n')
     print('\n'.join(L))
 
