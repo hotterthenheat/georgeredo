@@ -1,0 +1,70 @@
+{
+ "check": "option_history_quote_SPY_2020-06-01_1m",
+ "ok": true,
+ "rows": 318,
+ "cols": [
+  "symbol",
+  "expiration",
+  "strike",
+  "right",
+  "timestamp",
+  "bid_size",
+  "bid_exchange",
+  "bid",
+  "bid_condition",
+  "ask_size",
+  "ask_exchange",
+  "ask",
+  "ask_condition"
+ ],
+ "first": "2020-06-01 12:59:00-04:00",
+ "last": "2020-06-01 13:01:00-04:00",
+ "ms": 2432,
+ "head": [
+  {
+   "symbol": "SPY",
+   "expiration": "2020-06-01",
+   "strike": 160.0,
+   "right": "CALL",
+   "timestamp": "2020-06-01 12:59:00-04:00",
+   "bid_size": 10,
+   "bid_exchange": 60,
+   "bid": 145.3,
+   "bid_condition": 50,
+   "ask_size": 69,
+   "ask_exchange": 9,
+   "ask": 145.61,
+   "ask_condition": 50
+  },
+  {
+   "symbol": "SPY",
+   "expiration": "2020-06-01",
+   "strike": 160.0,
+   "right": "CALL",
+   "timestamp": "2020-06-01 13:00:00-04:00",
+   "bid_size": 69,
+   "bid_exchange": 9,
+   "bid": 145.36,
+   "bid_condition": 50,
+   "ask_size": 38,
+   "ask_exchange": 4,
+   "ask": 145.66,
+   "ask_condition": 50
+  },
+  {
+   "symbol": "SPY",
+   "expiration": "2020-06-01",
+   "strike": 160.0,
+   "right": "CALL",
+   "timestamp": "2020-06-01 13:01:00-04:00",
+   "bid_size": 10,
+   "bid_exchange": 60,
+   "bid": 145.4,
+   "bid_condition": 50,
+   "ask_size": 50,
+   "ask_exchange": 9,
+   "ask": 145.66,
+   "ask_condition": 50
+  }
+ ]
+}

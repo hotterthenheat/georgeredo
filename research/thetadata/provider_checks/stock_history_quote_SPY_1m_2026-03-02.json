@@ -1,0 +1,54 @@
+{
+ "check": "stock_history_quote_SPY_1m_2026-03-02",
+ "ok": true,
+ "rows": 391,
+ "cols": [
+  "timestamp",
+  "bid_size",
+  "bid_exchange",
+  "bid",
+  "bid_condition",
+  "ask_size",
+  "ask_exchange",
+  "ask",
+  "ask_condition"
+ ],
+ "first": "2026-03-02 09:30:00-05:00",
+ "last": "2026-03-02 16:00:00-05:00",
+ "ms": 251,
+ "head": [
+  {
+   "timestamp": "2026-03-02 09:30:00-05:00",
+   "bid_size": 4480,
+   "bid_exchange": 7,
+   "bid": 678.64,
+   "bid_condition": 0,
+   "ask_size": 120,
+   "ask_exchange": 9,
+   "ask": 678.7,
+   "ask_condition": 0
+  },
+  {
+   "timestamp": "2026-03-02 09:31:00-05:00",
+   "bid_size": 480,
+   "bid_exchange": 1,
+   "bid": 679.19,
+   "bid_condition": 0,
+   "ask_size": 80,
+   "ask_exchange": 65,
+   "ask": 679.22,
+   "ask_condition": 0
+  },
+  {
+   "timestamp": "2026-03-02 09:32:00-05:00",
+   "bid_size": 680,
+   "bid_exchange": 7,
+   "bid": 680.0,
+   "bid_condition": 0,
+   "ask_size": 280,
+   "ask_exchange": 9,
+   "ask": 680.02,
+   "ask_condition": 0
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+{
+ "check": "option_list_expirations_SPY",
+ "ok": true,
+ "rows": 2146,
+ "cols": [
+  "symbol",
+  "expiration"
+ ],
+ "first": null,
+ "last": null,
+ "ms": 224,
+ "head": [
+  {
+   "symbol": "SPY",
+   "expiration": "2012-06-01"
+  },
+  {
+   "symbol": "SPY",
+   "expiration": "2012-06-08"
+  },
+  {
+   "symbol": "SPY",
+   "expiration": "2012-06-16"
+  }
+ ]
+}

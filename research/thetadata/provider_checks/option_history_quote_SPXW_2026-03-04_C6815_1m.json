@@ -1,0 +1,70 @@
+{
+ "check": "option_history_quote_SPXW_2026-03-04_C6815_1m",
+ "ok": true,
+ "rows": 3,
+ "cols": [
+  "symbol",
+  "expiration",
+  "strike",
+  "right",
+  "timestamp",
+  "bid_size",
+  "bid_exchange",
+  "bid",
+  "bid_condition",
+  "ask_size",
+  "ask_exchange",
+  "ask",
+  "ask_condition"
+ ],
+ "first": "2026-03-04 12:59:00-05:00",
+ "last": "2026-03-04 13:01:00-05:00",
+ "ms": 68,
+ "head": [
+  {
+   "symbol": "SPXW",
+   "expiration": "2026-03-04",
+   "strike": 6815.0,
+   "right": "CALL",
+   "timestamp": "2026-03-04 12:59:00-05:00",
+   "bid_size": 13,
+   "bid_exchange": 5,
+   "bid": 64.1,
+   "bid_condition": 50,
+   "ask_size": 9,
+   "ask_exchange": 5,
+   "ask": 64.8,
+   "ask_condition": 50
+  },
+  {
+   "symbol": "SPXW",
+   "expiration": "2026-03-04",
+   "strike": 6815.0,
+   "right": "CALL",
+   "timestamp": "2026-03-04 13:00:00-05:00",
+   "bid_size": 4,
+   "bid_exchange": 5,
+   "bid": 61.9,
+   "bid_condition": 50,
+   "ask_size": 9,
+   "ask_exchange": 5,
+   "ask": 62.6,
+   "ask_condition": 50
+  },
+  {
+   "symbol": "SPXW",
+   "expiration": "2026-03-04",
+   "strike": 6815.0,
+   "right": "CALL",
+   "timestamp": "2026-03-04 13:01:00-05:00",
+   "bid_size": 9,
+   "bid_exchange": 5,
+   "bid": 64.1,
+   "bid_condition": 50,
+   "ask_size": 4,
+   "ask_exchange": 5,
+   "ask": 64.8,
+   "ask_condition": 50
+  }
+ ]
+}

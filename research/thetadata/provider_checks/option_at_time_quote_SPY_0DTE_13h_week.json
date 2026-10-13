@@ -1,0 +1,6 @@
+{
+ "check": "option_at_time_quote_SPY_0DTE_13h_week",
+ "ok": false,
+ "error": "_MultiThreadedRendezvous: <_MultiThreadedRendezvous of RPC that terminated with:\n\tstatus = StatusCode.INVALID_ARGUMENT\n\tdetails = \"Error parsing expiration Cannot parse date string: 0DTE\"\n\tdebug_error_string = \"INVALID_ARGUMENT:Error parsing expiration Cannot parse date string: 0DTE\"\n>",
+ "ms": 51
+}
