@@ -39,8 +39,10 @@ def darkpool_rth(ticker, date, max_pages=60):
         d = data.get(f'darkpool/{ticker}', {'date': date, 'limit': 500, 'newer_than': newer, 'older_than': older})
         page = (d or {}).get('data') or []
         pages += 1
-        new = [r for r in page if r.get('tracking_id') not in seen]
-        for r in new: seen.add(r.get('tracking_id')); rows.append(r)
+        # tracking_id is null on some dates (e.g. 2025-09..2025-12), so de-duplicate on a composite key
+        def key(r): return r.get('tracking_id') or (r.get('executed_at'), r.get('price'), r.get('size'), r.get('market_center'), r.get('volume'))
+        new = [r for r in page if key(r) not in seen]
+        for r in new: seen.add(key(r)); rows.append(r)
         if len(page) < 500: break
         older = page[-1]['executed_at']
         if not new: break

@@ -198,3 +198,32 @@ a = [r for r in go if r['big'] == 1]; P(f"coin-flip baseline on gap days (mean o
 C.write_csv(CSV + '/summary_all.csv', summary_rows)
 open(os.path.dirname(os.path.abspath(__file__)) + '/summary.md', 'w').write('\n'.join(md))
 print('\n'.join(md))
+
+# ---------------- period split (first half 2025-06..2026-01 vs second half 2026-02..2026-10) for headline variants ----------------
+P('## Period split (spread model, $/trade): 2025-06-02..2026-01-31 vs 2026-02-01..2026-10-09'); P()
+SPLIT = '2026-02-01'
+head = [('T1 short straddle hold 09:35', [r for r in fixed if r['variant'] == 'short_hold' and r['time'] == '09:35']),
+        ('T1 short straddle hold 10:00', [r for r in fixed if r['variant'] == 'short_hold' and r['time'] == '10:00']),
+        ('T1 short straddle hold 13:00', [r for r in fixed if r['variant'] == 'short_hold' and r['time'] == '13:00']),
+        ('T1 short straddle hold 13:00 QQQ only', [r for r in fixed if r['variant'] == 'short_hold' and r['time'] == '13:00' and r['ticker'] == 'QQQ']),
+        ('T1 short straddle stop2.0 13:00', [r for r in fixed if r['variant'] == 'short_stop2.0' and r['time'] == '13:00']),
+        ('T1 short straddle hold, all 5 times pooled', [r for r in fixed if r['variant'] == 'short_hold']),
+        ('T1 long straddle hold 09:35', [r for r in fixed if r['variant'] == 'long_hold' and r['time'] == '09:35']),
+        ('T2 short strangle hold 10:00', [r for r in f2 if r['variant'] == 'short_hold']),
+        ('T2 short strangle hold 10:00 Wed only', [r for r in f2 if r['variant'] == 'short_hold' and r['weekday'] == 'Wed']),
+        ('T3 ORB fade (first break)', [r for r in o if r['first'] == 1 and r['variant'] == 'fade']),
+        ('T3 ORB breakout (first break)', [r for r in o if r['first'] == 1 and r['variant'] == 'breakout']),
+        ('T4 momentum_hold 15:00', [r for r in m if r['variant'] == 'momentum_hold']),
+        ('T4 momentum_hold 15:00, |first30|>=30bp', big),
+        ('T5 gap toward_fill 09:35', [r for r in go if r['big'] == 1 and r['variant'] == 'toward_fill'])]
+lines = []
+for label, rows in head:
+    a = C.summ([r for r in rows if r['date'] < SPLIT]); b = C.summ([r for r in rows if r['date'] >= SPLIT]); s = C.summ(rows)
+    lines.append([label, s['n'], f"{s['mean']:.2f} [{s['lo']:.2f}, {s['hi']:.2f}]", a['n'], f"{a['mean']:.2f} [{a['lo']:.2f}, {a['hi']:.2f}]", b['n'], f"{b['mean']:.2f} [{b['lo']:.2f}, {b['hi']:.2f}]"])
+    summary_rows.append(dict(table='period split', variant=label, model='spread', n=s['n'], mean=s['mean'], lo=s['lo'], hi=s['hi'], n_first=a['n'], mean_first=a['mean'], lo_first=a['lo'], hi_first=a['hi'], n_second=b['n'], mean_second=b['mean'], lo_second=b['lo'], hi_second=b['hi']))
+tbl(['variant', 'n all', 'mean [CI] all', 'n 1st half', 'mean [CI] 1st half', 'n 2nd half', 'mean [CI] 2nd half'], lines)
+# mean cost per trade (mid minus spread) for the combos
+P('Mean round-trip cost per trade implied by the spread model (mid P&L minus spread P&L), $:'); P()
+tbl(['variant', 'mean cost $', 'mean credit $', 'cost as % of credit'], [[label, f"{np.mean([r['pnl_mid']-r['pnl_spread'] for r in rows]):.2f}", f"{np.mean([r['credit'] for r in rows]):.2f}", f"{100*np.mean([r['pnl_mid']-r['pnl_spread'] for r in rows])/np.mean([r['credit'] for r in rows])/100:.1f}%"] for label, rows in head[:8]])
+C.write_csv(CSV + '/summary_all.csv', summary_rows)
+open(os.path.dirname(os.path.abspath(__file__)) + '/summary.md', 'w').write('\n'.join(md))
