@@ -27,7 +27,7 @@ No Compass research plan existed in this repository, so this is the initial plan
 | GEX-regime/exit-grid study | Reproduced exactly given the committed random control set; the control draw itself was cache-dependent (see report errata) | same, follow-up section |
 | GeorgeFi history on the account | 1,149 ledger trades (Epoch 1: 546, 2026-01-20→02-27; Epoch 2: 489 main + 114 side-book, 2026-03-02→10-13) + 84 SPX paper trades; two retrieval routes agree id-for-id; sums reconcile to the epoch totals | `research/georgefi_full_history/HISTORY_EXTENT.md` |
 | Independent bars for that history | 1,229 of 1,233 rows have entry-day UW contract bars (missing: 4 plain-SPX-root rows) | `research/georgefi_full_history/results/RESULTS.md` §0 |
-| Provider entitlements (live, 2026-10-13) | UW: contract bars from 2025-04-01, stock bars from 2022-09-28, concurrency 3, index bars 422; Massive: aggregates only, no index, no ticks | `research/georgefi_full_history/provider_audit_2026-10-13.md` |
+| Provider entitlements (live, 2026-10-13) | UW: contract bars from 2025-04-01, stock bars from 2022-09-28, concurrency 3, index bars 422 | `research/georgefi_full_history/provider_audit_2026-10-13.md` |
 
 ## 3. GeorgeFi's record, as it stands after independent pricing (closed questions)
 
@@ -73,7 +73,7 @@ Consequence for Compass: no lane may be justified by GeorgeFi's performance, and
 ## 7. Items that require the user's decision
 
 - Renew or let lapse the GeorgeFi subscription (needed only for H12).
-- Rotate the Unusual Whales and Massive keys and change the GeorgeFi password that were shared in chat.
+- Rotate the Unusual Whales and ThetaData keys and change the GeorgeFi password that were shared in chat.
 - Whether to create a `main` branch and open a pull request; all work is on `claude/lucid-heisenberg-bpyq7k` in dedicated directories because this session is pinned to that branch.
 
 ## 8. Update, 2026-10-13 evening: results with measured quotes (ThetaData PRO)

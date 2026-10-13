@@ -1,8 +1,8 @@
 import json, os, csv, collections, sys
 SP=sys.argv[1]
 ts=json.load(open(SP+'/evidence/public_api/trades_all.json'))['trades']
-ub=set(os.listdir(SP+'/evidence/validation/uw_bars')); tb=set(os.listdir(SP+'/evidence/validation/uw_tape_bars')); mb=set(os.listdir(SP+'/evidence/validation/bars'))
-print('uw_bars files', len(ub), '| uw_tape_bars files', len(tb), '| massive bars files', len(mb))
+ub=set(os.listdir(SP+'/evidence/validation/uw_bars')); tb=set(os.listdir(SP+'/evidence/validation/uw_tape_bars'))
+print('uw_bars files', len(ub), '| uw_tape_bars files', len(tb))
 ids=set(t['id'] for t in ts); print('ledger trades', len(ts), 'unique ids', len(ids))
 entry_ok=[t for t in ts if f"{t['id']}_{t['entryTime'][:10]}.json" in ub]
 missing=[t for t in ts if f"{t['id']}_{t['entryTime'][:10]}.json" not in ub]
@@ -18,8 +18,6 @@ print('trades with entry AND exit-day files:', len(both))
 # empty-data files
 empty=[f for f in ub if not json.load(open(SP+'/evidence/validation/uw_bars/'+f))['data']]
 print('uw_bars files with empty data[]:', len(empty), empty[:10])
-# massive bars coverage
-mids=set(f[:-5] for f in mb); print('massive bars: trade ids covered', len(mids&ids), 'of', len(ids), '| not in ledger', len(mids-ids))
 # tape coverage
 rows=list(csv.DictReader(open(SP+'/evidence/analysis/public_tape_signals.csv')))
 subs=('index-read','trade-now','moc-wick','block-sniper','sus-strike','momentum-ignition','relative-burst','big-print','accumulation-sniper','power-hour','anchor-book','hold-advisor')

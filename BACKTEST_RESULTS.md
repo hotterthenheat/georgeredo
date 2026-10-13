@@ -89,7 +89,7 @@ GeorgeFi's live entries are therefore **not** reproduced by the published "sweep
 
 ## 5. What was not tested (and why)
 
-- ^SPX / ^NDX / ^RUT cash index contracts (no index bars on this UW entitlement; Massive has no index entitlement either).
+- ^SPX / ^NDX / ^RUT cash index contracts (no index bars on this UW entitlement).
 - Flow-burst ("sus strike") gating: requires per-strike intraday flow for every ticker-day (1.2 MB each) or the full-tape archives; feasible but ~500 MB per ticker-year.
 - VIX-scaled trails (UW does not serve VIX on this entitlement; a 1-day IV percentile proxy is cached but was not used as a gate).
 - Position sizing and portfolio effects; results are per-contract, equal-weighted.

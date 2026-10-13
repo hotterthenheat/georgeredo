@@ -12,8 +12,8 @@ A reproducible plan for testing whether GeorgeFi's observable signals have value
 | **D2 Public signal tape** | `GET /api/public/todays-signals?date=` for the 8 sessions the UI exposes | 972 alerts, 2026-10-06 → 10-13 | every subsystem's alert with minute timestamp, contract string, direction, loud flag, paper-book state | Only the last ~8 sessions are retrievable; alerts are heads-ups more than orders; 142 rows have no parsable contract |
 | **D3 Recap alerts** | SSR payloads of `/recaps/<date>` | 147 alerts across 9 sessions (102 actionable) | entry price at alert, one-minute-high peak, exit call, source record ids | Curated by the operator ("a selection of the day's alerts"); peaks are highs, not fills |
 | **D4 Live decision snapshots** | `GET /api/analysis` polled every 5 min | 20 decisions per snapshot | how direction/confidence/grade/levels evolve within a session | 1 session so far |
-| **M1 Contract minute bars** | UW `option-contract/{id}/intraday` (primary) and Massive option aggs (cross-check) | one file per trade/day | OHLC, volume, IV range, ask/bid-side premium | no NBBO history |
-| **M2 Underlying bars** | UW `stock/{t}/ohlc/1m`, Massive stock aggs | per session | levels (PDH/PDL/ORB/VWAP), realized moves | index bars only via UW |
+| **M1 Contract minute bars** | UW `option-contract/{id}/intraday` | one file per trade/day | OHLC, volume, IV range, ask/bid-side premium | no NBBO history |
+| **M2 Underlying bars** | UW `stock/{t}/ohlc/1m` | per session | levels (PDH/PDL/ORB/VWAP), realized moves | index bars only via UW |
 | **M3 Dealer exposure** | UW `greek-exposure/strike`, `spot-exposures`, `gex-levels` | per session | regime, flip, walls | model estimates |
 | **M4 Flow** | UW `flow-per-strike-intraday`, `option-trades` (live), full-tape archives (history) | per session | per-strike premium bursts to re-detect "sus strikes" | tick history needs 1.5 GB/day downloads |
 
@@ -80,7 +80,7 @@ Per test: n, win rate, average win, average loss, expectancy ($ and % of premium
 
 ## 5. Data required that we do not yet have
 
-- NBBO history for option contracts (Massive plan upgrade or UW full-tape archives) to replace the spread proxy with measured spreads.
+- NBBO history for option contracts (UW full-tape archives, or ThetaData — `DATA_PROVIDER_AUDIT.md` §7) to replace the spread proxy with measured spreads.
 - The member-only pages (dealer-flow, GEX, hold, weeklies) to capture the *inputs* at alert time rather than only the outputs.
 - Longer public-tape history: the UI keeps 8 sessions; a daily collector started on 2026-10-13 (`evidence/scripts/poll_analysis.sh`) should run every session.
 - Epoch-1 trade ledger (only aggregates are published).
@@ -90,13 +90,12 @@ Per test: n, win rate, average win, average loss, expectancy ($ and % of premium
 ## 6. Reproduction
 
 ```
-# 1. secrets in env (never in files): UW_API_TOKEN, MASSIVE_API_KEY
+# 1. secrets in env (never in files): UW_API_TOKEN
 # 2. public datasets
 python3 -I evidence/scripts/profile_trades.py evidence/public_api/trades_all.json       # after gunzip
 python3 -I evidence/scripts/analyze_trades_a.py …  analyze_trades_b.py … analyze_trades_c.py … analyze_trades_d.py …
 # 3. market data
 SP=<scratch> python3 -I evidence/scripts/fetch_uw_bars.py        # UW contract minute bars
-SP=<scratch> python3 -I evidence/scripts/fetch_bars_mt.py        # Massive cross-check (5 req/min)
 # 4. validation
 SP=<scratch> python3 -I evidence/scripts/validate_trades.py      # T1–T4 (see SIGNAL_RESEARCH §6 for output)
 ```

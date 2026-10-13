@@ -31,8 +31,8 @@ cp -r $REPO/evidence/public_api/. $STAGE/evidence/public_api/
 cd $STAGE/evidence/public_api && for g in *.gz; do gunzip -kc "$g" > "${g%.gz}"; done   # trades_all.json (29.97 MB, 489 trades) + 3 book files
 cp $REPO/evidence/validation/*.txt $STAGE/evidence/validation/      # the two result JSONs are NOT copied: the scripts regenerate them
 cd $STAGE/evidence/validation && tar xzf $REPO/evidence/validation/uw_bars.tar.gz \
-  && tar xzf $REPO/evidence/validation/uw_tape_bars.tar.gz && tar xzf $REPO/evidence/validation/massive_bars_partial.tar.gz
-# archives extract to uw_bars/<trade_id>_<YYYY-MM-DD>.json, uw_tape_bars/<contract>_<YYYY-MM-DD>.json, bars/<trade_id>.json
+  && tar xzf $REPO/evidence/validation/uw_tape_bars.tar.gz
+# archives extract to uw_bars/<trade_id>_<YYYY-MM-DD>.json, uw_tape_bars/<contract>_<YYYY-MM-DD>.json
 cd $STAGE/evidence/scripts; export SP=$STAGE
 python3 -I validate_trades.py   > $STAGE/out/validation_T1-T4.txt     # also writes $SP/evidence/validation/validation_results.json
 python3 -I gate_validity.py     > $STAGE/out/validation_T5_gates.txt
@@ -85,11 +85,12 @@ So: (a) two `-I` runs of the same script on the same data do not agree with each
 |---|---|---|
 | `uw_bars.tar.gz` | 506 JSON files (`uw_bars/<trade_id>_<day>.json`) | Exactly the 506 (trade, day) jobs `fetch_uw_bars.py` would generate for the 489 ledger trades (entry day + exit day for multi-day trades): 506 present, 0 absent, 0 extra. **All 489 trades have an entry-day file and an exit-day file.** 3 files have an empty `data` array (UW returned no bars): `81kodfn91162hwg_2026-04-17` and `wrz65879h3yf4c9_2026-04-17` (both `^SPX O:SPX260417C07055000`), `3i5i5g4100v5op2_2026-03-20` (`^SPX O:SPX260320P06585000`). `validate_trades.py` treats an empty bar list as missing, which is exactly the committed `missing_bars=3`, `evaluated=486`. Matches `uw_fetch_log.txt` (`FINISHED ok 506 fail 0`). |
 | `uw_tape_bars.tar.gz` | 643 JSON files (`uw_tape_bars/<contract>_<session>.json`) | The CSV yields 648 unique (contract, session) pairs across the fetched subsystems; 643 present, 5 absent — exactly the five `code=422` failures in `uw_tape_fetch_log.txt` (AMZN270121C00260000 2026-10-09, MSFT261217C00550000 2026-10-13, MSFT270121C00550000 2026-10-13, NVDA270119C00225000 2026-10-09, SPY261215C00780000 2026-10-13). 825 of the 830 alerts with an OCC symbol have a bar file, matching `alerts with bars: 825 of 830`. No empty `data` arrays. |
-| `massive_bars_partial.tar.gz` | 85 JSON files (`bars/<trade_id>.json`) | 85 of 489 trade ids; written by `fetch_bars.py` / `fetch_bars_slow.py`. **Not read by any committed validation script** (T1–T6 use only `uw_bars` / `uw_tape_bars`); labelled "cross-check, partial" in `GEORGEFI_SIGNAL_RESEARCH.md`. |
+
+Massive/Polygon cross-check archive removed (provider retired 2026-10-13); T1–T6 never read it.
 
 ## 6. What a third party needs
 
-1. Only the committed repo: `evidence/scripts/*.py`, `evidence/public_api/trades_all.json.gz` (+ `todays_signals_history/*.json` for the CSV), the three validation tarballs, and Python ≥3.10 stdlib (no third-party packages). No network, no API keys.
+1. Only the committed repo: `evidence/scripts/*.py`, `evidence/public_api/trades_all.json.gz` (+ `todays_signals_history/*.json` for the CSV), the two validation tarballs, and Python ≥3.10 stdlib (no third-party packages). No network, no API keys.
 2. Set `SP` to a directory laid out like `evidence/` (the scripts read `$SP/evidence/public_api/trades_all.json`, `$SP/evidence/validation/uw_bars/…`, `$SP/evidence/validation/uw_tape_bars/…`, `$SP/evidence/analysis/public_tape_signals.csv` and **write** `$SP/evidence/validation/{validation_results,tape_value_results}.json` and `$SP/evidence/analysis/public_tape_signals.csv`). Run from a copy, not the repo, or the committed files are overwritten in place.
 3. Expect `analyze_trades_a.py` to crash after the pnl% quantile line; the committed `trades_breakdown.txt` is that partial stdout.
 4. Expect `validation_T5_gates.txt` CI/p/order to differ from the committed file on every run unless the hash seed is fixed; the author's hash seed is unknown, so the committed CI digits are not recoverable. The point estimates are. A fix would be to iterate `sorted(fams)` (not applied here).

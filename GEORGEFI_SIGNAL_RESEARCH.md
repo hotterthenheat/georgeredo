@@ -16,7 +16,6 @@ Vocabulary: **Observed** = seen in a response; **Calculated** = computed by us f
 | D4 | Live decision snapshots (`/api/analysis`) | 20 decisions × 3 snapshots at writing (collector keeps running) | `evidence/public_api/analysis.json`, `evidence/analysis_snapshots/` |
 | M1 | UW 1-minute contract bars for every D1 contract/day | 506 files | `evidence/validation/uw_bars.tar.gz` |
 | M2 | UW 1-minute bars for every D2 contract/session | 643 files | `evidence/validation/uw_tape_bars.tar.gz` |
-| M3 | Massive 1-minute bars (cross-check, partial because of the 5/min limit) | see `fetch_log.txt` | `evidence/validation/massive_bars_partial.tar.gz` |
 
 ---
 
@@ -150,13 +149,11 @@ The recorded expectancy is not distinguishable from zero; with any realistic bid
 
 **T6 Public tape**: see R6. Aggregate: `loud=true` alerts' contracts −11.6 % at +60 min (n=80); every 0DTE alert contract to 15:55: mean +0.1 %, median −5.7 %, 35 % positive (n=296).
 
-**Cross-check UW vs Massive bars**: for the 85 contracts fetched from both providers before the Massive rate limit stalled the cross-check, 28,674 overlapping minutes have a median absolute close difference of 0.0 % (p90 0.0 %) and a median volume ratio of 1.0, so the UW-based results above would not change on Massive data.
-
 ---
 
 ## 7. What is confirmed, calculated, inferred, unknown (summary)
 
-- **Confirmed**: server-side 1-minute decision loop; ~100-tag additive ledger with caps/floors/gates; ICT level vocabulary; UW/Massive-style inputs; sus-strike/ignition/burst/hold-advisor subsystems; exit-reason families; RSI-band `crowd_mood`; published rule set differs from recorded behaviour on cooldown, daily stop, trades/day.
+- **Confirmed**: server-side 1-minute decision loop; ~100-tag additive ledger with caps/floors/gates; ICT level vocabulary; inputs in the style of GeorgeFi's own providers (Unusual Whales, Massive); sus-strike/ignition/burst/hold-advisor subsystems; exit-reason families; RSI-band `crowd_mood`; published rule set differs from recorded behaviour on cooldown, daily stop, trades/day.
 - **Calculated**: Epoch-2 record ≈ zero expectancy before costs, negative after; exits (not entries) explain the positive record; no entry-timing edge vs random; no OOS grade/confidence separation; tape alerts carry no stand-alone direction.
 - **Inferred**: inversion is framing for sweep-reclaim fades; grade = banding of post-cap score with conflict-count adjustment; AT_PIN outperformance is ticker-confounded.
 - **Unknown**: exact scoring constants and band edges; committed-read lane; member-cockpit inputs; detector thresholds for sus strikes; which exits were manual.

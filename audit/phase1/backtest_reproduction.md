@@ -20,7 +20,7 @@ Headline numbers of the re-run (identical to v1): 18 386 raw signals (sweep/ict+
 
 - Python 3.13.16, numpy 2.5.3 (the only non-stdlib dependency; used by `report.py` only), Linux 6.18.44 x86_64, 4 CPUs, 15 GB RAM.
 - Scripts run with `python3 -I` and `PYTHONDONTWRITEBYTECODE=1`; no `__pycache__` written into the repo.
-- Unusual Whales token loaded only in the same shell command as the python run (`set -a; . "$SP/secrets/research.env"; set +a`), never printed or logged; the logs were grepped for `Bearer`/`UW_API` (0 hits). Parallelism: `run.py` uses `ThreadPoolExecutor(max_workers=6)`; Step D used 3 workers. No Massive/Polygon calls (the backtest code only talks to `api.unusualwhales.com`).
+- Unusual Whales token loaded only in the same shell command as the python run (`set -a; . "$SP/secrets/research.env"; set +a`), never printed or logged; the logs were grepped for `Bearer`/`UW_API` (0 hits). Parallelism: `run.py` uses `ThreadPoolExecutor(max_workers=6)`; Step D used 3 workers. The backtest code only talks to `api.unusualwhales.com`.
 
 ## Code-reading notes (what determines reproducibility)
 

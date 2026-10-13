@@ -18,7 +18,7 @@ Total: 1,149 ledger trades + 84 paper trades, raw bodies preserved with SHA-256 
   - Epoch 1: reported +$43,248 (78.8 % win rate). On the 452 rows with prints in both minutes: reported +$36,729 → bar-VWAP +$21,567 → spread + fees +$7,914 (+$17.5/trade, 95 % CI [−3.6, 36.9]) → adverse −$24,279. 45.4 % of entry premiums lie inside the traded range; 382 of 546 rows are same-contract-same-minute repeats carrying 95 % of the P&L.
   - Epoch 2 (all books): reported −$3,757; main book +$3,974 (+$8.1/trade [−11.1, 29.1]); covered rows +$2,043 → −$3,098 VWAP → −$14,913 spread.
   - Independent reconstruction from the entry minute (trail engine, 972 0DTE rows): Epoch 1 +$5.8/contract after spread [−5.7, 16.3], Epoch 2 +$2.3 [−10.5, 14.9]; MFE percentile vs time-matched random minutes 53 (cluster CI [47.5, 59.2]) and 48. No robust entry-timing information.
-- **Provider re-audit** (live): UW contract 1-minute bars from 2025-04-01, stock bars from 2022-09-28, concurrency cap 3, index bars 422 on SPX/NDX/RUT; `option-contracts?date=` returns historical chains with NBBO (undocumented); Massive aggregates only.
+- **Provider re-audit** (live): UW contract 1-minute bars from 2025-04-01, stock bars from 2022-09-28, concurrency cap 3, index bars 422 on SPX/NDX/RUT; `option-contracts?date=` returns historical chains with NBBO (undocumented).
 
 ## Artifacts saved and repository changes (branch `claude/lucid-heisenberg-bpyq7k`)
 - New: `audit/phase1/` (three reproduction reports, regenerated differing outputs, pruning log), `research/georgefi_full_history/` (raw exports, normalized tables, `HISTORY_EXTENT.md`, provider re-audit + checks, reconstruction code and results, methodology), `COMPASS_RESEARCH_PLAN.md`, this report.
@@ -26,7 +26,7 @@ Total: 1,149 ledger trades + 84 paper trades, raw bodies preserved with SHA-256 
 - No deliverable was overwritten; no credentials, cookies or tokens are in the repository (scanned before every commit); no orders, no UI or position changes.
 
 ## Unresolved blockers
-1. Index 1-minute bars (SPX/NDX/RUT) are unavailable on both providers; 184 Epoch 2 main-book trades are index contracts whose underlying path cannot be replayed (contract bars can).
+1. Index 1-minute bars (SPX/NDX/RUT) are unavailable on this UW entitlement; 184 Epoch 2 main-book trades are index contracts whose underlying path cannot be replayed (contract bars can).
 2. Executable spreads are modelled, not measured; NBBO capture is the prerequisite for every short-premium decision.
 3. The GeorgeFi trial ends 2026-10-14 11:09 ET; further member-surface collection needs the subscription (user decision).
 4. The repository has only the working branch; a `main` branch and pull request need the user's go-ahead. The API keys and password shared in chat should be rotated.

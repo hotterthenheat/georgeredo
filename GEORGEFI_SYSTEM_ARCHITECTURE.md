@@ -47,7 +47,7 @@ All 489 Epoch-2 trades belong to `v2.0.0-ict`. The 30-day scorecards for the oth
 
 - `/api/analysis` returns 20 `decisions` (one per covered ticker) and the same 20 objects again as `signals`; `marketStatus`, `indices` (6 quotes), `updatedAt`. [observed]
 - Core index/ETF decisions (`^SPX`, `^RUT`, `SPY`, `QQQ`, `IWM`, `^NDX`) share one `generatedAt` to the millisecond (`2026-10-13T14:14:54.474Z`), single names have individual earlier timestamps → **[inferred]** one scheduler pass per minute computes the core six together, single names on a slower/independent loop (`/how` says "every minute during market hours"; MWF single-name board per `/mcp`).
-- Each decision object carries: `direction`, `action` (`WATCHING`, `WAITING FOR TRIGGER`, `WATCHING (Pending Entry)`, `BUY_CALLS`, `BLOCKED: <reason>`), `confidence` (0–100), `setupGrade` (A+…B-), `contract` (`0DTE $7800 P`), `premium`, `optionSymbol` (OCC, e.g. `O:SPXW261013P07800000` — Massive/Polygon symbology), `confluenceSignals[]` (the gate ledger), `reason` text, `ictContext` (price, rsi, sparkline[20], volumeAnalysis incl. VIX, weeklyProfile, gexSummary), `gexProfile` (totalGEX, gammaFlip, maxGEXStrike, regime, pinRisk, acceleratorScore, directionalBias), `watchLevels` (nearest bullish/bearish level, `sweepsToday[]` with `sweptAt`, `primaryTarget`, `hasTripleConfirmation`), `chopState`, `isChopDay`, `shouldWaitForPM`, `grindingState`, `crowd_mood`, `strategyVersion`, `expiresAt`. Both camelCase and snake_case duplicates are present (`setupGrade`/`setup_grade`) → **[inferred]** a serialization layer that merges a Python-style backend record with a JS-style view model, or a migration between the two.
+- Each decision object carries: `direction`, `action` (`WATCHING`, `WAITING FOR TRIGGER`, `WATCHING (Pending Entry)`, `BUY_CALLS`, `BLOCKED: <reason>`), `confidence` (0–100), `setupGrade` (A+…B-), `contract` (`0DTE $7800 P`), `premium`, `optionSymbol` (OCC, e.g. `O:SPXW261013P07800000` — the Massive/Polygon symbology of GeorgeFi's own provider), `confluenceSignals[]` (the gate ledger), `reason` text, `ictContext` (price, rsi, sparkline[20], volumeAnalysis incl. VIX, weeklyProfile, gexSummary), `gexProfile` (totalGEX, gammaFlip, maxGEXStrike, regime, pinRisk, acceleratorScore, directionalBias), `watchLevels` (nearest bullish/bearish level, `sweepsToday[]` with `sweptAt`, `primaryTarget`, `hasTripleConfirmation`), `chopState`, `isChopDay`, `shouldWaitForPM`, `grindingState`, `crowd_mood`, `strategyVersion`, `expiresAt`. Both camelCase and snake_case duplicates are present (`setupGrade`/`setup_grade`) → **[inferred]** a serialization layer that merges a Python-style backend record with a JS-style view model, or a migration between the two.
 - The watch-level vocabulary (ORH/ORL, PDH/PDL, PWH/PWL, PMH/PML, GEX_SUPPORT/GEX_RESISTANCE, EM_1SD/2SD) matches the `/how` description exactly. [observed]
 
 ### 2.3 Subsystems seen on the public tape (6 sessions, 972 rows)
@@ -71,7 +71,7 @@ Greeks at entry (`entryDelta`, `entryIV`, …) are present as fields but are **z
 ```mermaid
 flowchart LR
   subgraph Providers
-    M[Massive / Polygon<br/>OCC option symbols, NBBO, bars]
+    M["Massive / Polygon (GeorgeFi's own provider)<br/>OCC option symbols, NBBO, bars"]
     UW[Unusual Whales<br/>option tape, GEX/vanna/charm, dark pool]
     N[News / social sources<br/>Situation Room]
   end
@@ -105,7 +105,7 @@ flowchart LR
 
 Solid edges are observed (an endpoint, payload or field proves the link). Dotted edges are allowed by CSP but were never seen in use.
 
-Evidence for the provider edges: recap `sources` arrays cite `massive:O:SPXW261012P07800000@14:52` as the price source for one-minute highs; `quoteQuality.source = "websocket"` with NBBO fields; MCP FAQ "dealer GEX from the live websocket cache"; CSP websocket hosts; `/api/options/prices` returns `source: "nbbo"`. Which provider feeds which field is **[inferred]**: option bars/NBBO → Massive; sus-strike/flow/GEX → Unusual Whales (UW is the only allowed host that offers per-strike flow and dealer Greeks). Unusual Whales' own `gex-levels` endpoint uses the field names `gamma_flip`, `call_wall`, `put_wall`, `gamma_magnet`, which correspond to GeorgeFi's `gammaFlip`, `GEX_RESISTANCE/SUPPORT`, `maxGEXStrike` concepts, but GeorgeFi's `totalGEX` values ($8.4B for ^SPX) are on a different scale from UW's per-strike `call_gex` numbers, so GeorgeFi aggregates its own exposure from chain data rather than copying UW's summary. [inferred from numbers; unverified]
+Evidence for the provider edges: recap `sources` arrays cite `massive:O:SPXW261012P07800000@14:52` as the price source for one-minute highs; `quoteQuality.source = "websocket"` with NBBO fields; MCP FAQ "dealer GEX from the live websocket cache"; CSP websocket hosts; `/api/options/prices` returns `source: "nbbo"`. Which of GeorgeFi's providers feeds which field is **[inferred]**: option bars/NBBO → Massive; sus-strike/flow/GEX → Unusual Whales (UW is the only allowed host that offers per-strike flow and dealer Greeks). Unusual Whales' own `gex-levels` endpoint uses the field names `gamma_flip`, `call_wall`, `put_wall`, `gamma_magnet`, which correspond to GeorgeFi's `gammaFlip`, `GEX_RESISTANCE/SUPPORT`, `maxGEXStrike` concepts, but GeorgeFi's `totalGEX` values ($8.4B for ^SPX) are on a different scale from UW's per-strike `call_gex` numbers, so GeorgeFi aggregates its own exposure from chain data rather than copying UW's summary. [inferred from numbers; unverified]
 
 ---
 
@@ -137,13 +137,13 @@ Evidence for the provider edges: recap `sources` arrays cite `massive:O:SPXW2610
 - `timestamp` on `/api/analysis` root is epoch milliseconds. [observed]
 - Trade `expirationDate` is midnight UTC of the expiry date. [observed]
 - Minute-level cycle; SSE heartbeat; public tape refresh 30 s. [observed]
-- Massive OCC symbology (`O:SPXW…`, `O:NDXP…`, `O:RUTW…`) is used end-to-end, including in recap sources. [observed]
+- GeorgeFi uses its provider's Massive OCC symbology (`O:SPXW…`, `O:NDXP…`, `O:RUTW…`) end-to-end, including in recap sources. [observed]
 
 ---
 
 ## 7. What remains unknown about the architecture
 
-- Whether member cockpits open browser-direct websockets to Massive/Unusual Whales (CSP permits it) or only consume the server SSE; which `types=` values the SSE supports beyond `heartbeat`.
+- Whether member cockpits open browser-direct websockets to GeorgeFi's providers (Massive/Unusual Whales; CSP permits it) or only consume the server SSE; which `types=` values the SSE supports beyond `heartbeat`.
 - The internal composition of the engine (language/runtime). Clues: snake_case/camelCase duplication, Python-style datetime strings, "§293/§310" section references in MCP descriptions (an internal spec document), `ENV_BACKFILLED:v5.x` tags.
 - Exact provider→field mapping and whether UW's REST or websocket feeds are used for sus-strike detection.
 - Any rate limiting on `/api/*` (none advertised; none hit during ~30 requests).

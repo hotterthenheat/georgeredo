@@ -21,18 +21,18 @@ Nothing in this document is a trading strategy ready for live orders. The resear
 
 | Component | Provider / endpoint | Cadence | Storage |
 |---|---|---|---|
-| Underlying 1-min bars for SPX, NDX, RUT, SPY, QQQ, IWM and the single-name universe | Unusual Whales `stock/{t}/ohlc/1m` (indices) and Massive stock aggregates (ETFs/singles) | pull each minute during RTH; daily backfill | `bars_underlying(ticker, ts_utc, o,h,l,c,v,src)` |
+| Underlying 1-min bars for SPX, NDX, RUT, SPY, QQQ, IWM and the single-name universe | ThetaData stock 1-min bars (ETFs/singles) and SPX/RUT 1-min index prices (NDX needs the Nasdaq add-on); UW `stock/{t}/ohlc/1m` as the second copy for ETFs | pull each minute during RTH; daily backfill | `bars_underlying(ticker, ts_utc, o,h,l,c,v,src)` |
 | Option contract 1-min bars with IV range and side-of-trade premium | UW `option-contract/{id}/intraday` (historical) and UW `option_trades` websocket channel (live) | live stream + EOD backfill | `bars_option(occ, ts_utc, o,h,l,c, vol_ask, vol_bid, vol_mid, prem_ask, prem_bid, iv_lo, iv_hi)` |
-| Option NBBO at decision time | UW live `option-trades` fields `nbbo_bid/ask` (today) ; Massive quotes **not entitled** | live only | `quotes_option(occ, ts, bid, ask, bid_sz, ask_sz, src)` |
+| Option NBBO at decision time | ThetaData option NBBO (1 s / 1 m, live and historical); UW live `option-trades` fields `nbbo_bid/ask` (today) | live + historical | `quotes_option(occ, ts, bid, ask, bid_sz, ask_sz, src)` |
 | Dealer exposure estimates | UW `greek-exposure/strike` (EOD), `spot-exposures` (1-min totals), `gex-levels` (flip, walls, magnet) | EOD + 1-min | `dealer_exposure(ticker, date, strike, call_gex, put_gex, charm, vanna)`; `dealer_levels(ticker, date, flip, call_wall, put_wall, magnet, source)` |
 | Per-strike flow | UW `flow-per-strike-intraday` (1-min) ; `full-tape/{date}` zips for tick history | 1-min live; nightly archive | `flow_strike_min(ticker, ts, strike, side, prem_ask, prem_bid, vol_ask, vol_bid, trades)` |
 | Dark pool prints | UW `darkpool/{t}` | live | optional lane input |
 | Market tide / net premium | UW `market-tide`, `net-prem-ticks` | 5-min / 1-min | regime context |
 | Volatility context | UW `volatility/realized`, `iv-rank`, VIX term structure | daily | sizing / trail inputs |
-| Contract reference | Massive `v3/reference/options/contracts` | daily | strike/expiry/exercise style; OCC symbol builder |
+| Contract reference | UW `stock/{t}/option-contracts?date=` (chain with strike, expiry, OI, NBBO, Greeks) | daily | strike/expiry/exercise style; OCC symbol builder |
 | Session clock | computed | — | ET session state, holidays, early closes |
 
-Budget rules: Massive ≤ 5 requests/min (observed plan limit); UW unthrottled but cache every response. All raw responses are stored verbatim with fetch time so features can be rebuilt.
+Budget rules: ThetaData ≤ 8 concurrent requests and one live login per key (PRO plan); UW ≤ 3 concurrent requests (observed cap), otherwise unthrottled, but cache every response. All raw responses are stored verbatim with fetch time so features can be rebuilt.
 
 ---
 

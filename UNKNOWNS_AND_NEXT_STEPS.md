@@ -10,7 +10,7 @@ What could not be determined, why, and the highest-value next investigations, in
 |---|---|---|---|
 | **Member-only surface** | Resolved: the user supplied credentials, the research browser signed in through the normal form, and all 27 member routes were inventoried (plan "The Bob", 24-hour trial ending 2026-10-14 11:09 ET) | Inputs at alert time, the SSE event catalog, four trade books and the `spx_gex_engine` paper book were captured (`evidence/auth_*`) | Trial expires 2026-10-14; a second day of capture needs the subscription kept active. The password was shared in chat and should be changed after this research. |
 | MCP access on the account | `/account/mcp` reports `mcp_access_disabled` (separate product; 403 on every call) | MCP tool payloads were not captured; their descriptions and schemas are from the public discovery endpoint | Subscribe to an MCP plan if tool payloads are wanted; REST/SSE already expose equivalent objects |
-| Massive plan limits | 403 on trades, quotes, snapshots, indices; 5 req/min; ~2-year history | No historical NBBO → spread costs are modelled, not measured; no index minute bars from Massive | Upgrade plan if tick-level fill analysis is wanted; UW covers indices and 1-min option bars |
+| Historical NBBO | UW REST serves option ticks for the latest day only; history is 1.5 GB/day archives | No historical NBBO → spread costs are modelled, not measured | ThetaData (`DATA_PROVIDER_AUDIT.md` §7) supplies option NBBO history |
 | UW option-trade history | Only latest trading day via REST; history is 1.5 GB/day archives | Re-detecting GeorgeFi's "sus strikes" historically needs bulk downloads | Nightly archive job; or UW websocket `option_trades` capture going forward |
 | GeorgeFi Epoch-1 ledger | Only aggregates are published (546 trades, +540 %) | The strongest-looking period cannot be validated | Ask GeorgeFi for the export, or treat Epoch 1 as unverifiable |
 | Bulk-request permission | The permission classifier blocked one 14-endpoint loop | Endpoints were called individually instead; no data lost | none needed |
@@ -70,7 +70,7 @@ Open items this creates (in priority order):
 
 | Claim | Confidence | Basis |
 |---|---|---|
-| GeorgeFi is a Nuxt/PocketBase app with a server-side engine fed by Massive and Unusual Whales | High | headers, bundle, payload ids, CSP, recap source refs |
+| GeorgeFi is a Nuxt/PocketBase app with a server-side engine fed by its own Massive and Unusual Whales accounts | High | headers, bundle, payload ids, CSP, recap source refs |
 | Decision objects expose a ~100-tag additive scoring ledger with caps and grades | High | 489 trade ledgers + 20 live decisions |
 | `crowd_mood` is an RSI threshold label (45/55) | High | 60/60 observations |
 | The product does *not* mechanically trade against the crowd label | High for the observed sample | 13/20 same-side, 2/20 opposite |
