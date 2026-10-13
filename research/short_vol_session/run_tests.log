@@ -9,13 +9,20 @@ skip half-day IWM 2025-11-28 210
 skip half-day IWM 2025-12-24 210
 ticker-days 1017
 decisions: straddle 6102 strangle 2034 orb 1475 mom 1017 gap 1017 | unique contract-days 11355
-already cached 6094 to fetch 5261
+already cached 11276 to fetch 79
 options contract-days to load: 11355
-options 0 / 11355 {'hits': 1164, 'misses': 71, 'errors': 0}
-options 1000 / 11355 {'hits': 1702, 'misses': 403, 'errors': 0}
-options 2000 / 11355 {'hits': 2245, 'misses': 831, 'errors': 0}
-options 3000 / 11355 {'hits': 2792, 'misses': 1322, 'errors': 0}
-options 4000 / 11355 {'hits': 3378, 'misses': 1717, 'errors': 0}
-options 5000 / 11355 {'hits': 3880, 'misses': 2174, 'errors': 0}
-options 6000 / 11355 {'hits': 4387, 'misses': 2686, 'errors': 0}
-options 7000 / 11355 {'hits': 4851, 'misses': 3217, 'errors': 0}
+options 0 / 11355 {'hits': 1046, 'misses': 0, 'errors': 0}
+options 1000 / 11355 {'hits': 2038, 'misses': 0, 'errors': 0}
+options 2000 / 11355 {'hits': 3037, 'misses': 0, 'errors': 0}
+options 3000 / 11355 {'hits': 4038, 'misses': 0, 'errors': 0}
+options 4000 / 11355 {'hits': 5039, 'misses': 0, 'errors': 0}
+options 5000 / 11355 {'hits': 6037, 'misses': 0, 'errors': 0}
+options 6000 / 11355 {'hits': 7039, 'misses': 0, 'errors': 0}
+options 7000 / 11355 {'hits': 8036, 'misses': 0, 'errors': 0}
+options 8000 / 11355 {'hits': 9035, 'misses': 0, 'errors': 0}
+options 9000 / 11355 {'hits': 10037, 'misses': 0, 'errors': 0}
+options 10000 / 11355 {'hits': 11037, 'misses': 0, 'errors': 0}
+options 11000 / 11355 {'hits': 12038, 'misses': 0, 'errors': 0}
+options done {'hits': 12305, 'misses': 79, 'errors': 0}
+prefetch done at 81 s
+T1 rows 30510 103 s

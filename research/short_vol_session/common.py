@@ -32,9 +32,21 @@ def ubars(tk, d):
     k = (tk, d)
     if k not in _ub: _ub[k] = data.underlying_bars(tk, d)
     return _ub[k]
+def _safe_option_bars(c, d):
+    """data.option_bars with retries: the cache directory is shared with other processes, so a file can be read while it is being written."""
+    import time
+    for i in range(4):
+        try: return data.option_bars(c, d)
+        except Exception as e:
+            time.sleep(1 + i)
+            if i >= 2:
+                f = os.path.join(data.CACHE, data._key(f'option-contract/{c}/intraday', {'date': d}) + '.json.gz')
+                try: os.remove(f); print('removed corrupt cache file', f[-80:], flush=True)
+                except OSError: pass
+    print('FAILED option bars', c, d, flush=True); return []
 def obars(c, d):
     k = (c, d)
-    if k not in _ob: _ob[k] = data.option_bars(c, d)
+    if k not in _ob: _ob[k] = _safe_option_bars(c, d)
     return _ob[k]
 def ivpct_prior(tk, d):
     """1-day IV percentile of the PRIOR session (known before today's open)."""
@@ -44,7 +56,7 @@ def ivpct_prior(tk, d):
 def prefetch(needs, label='bars'):
     needs = sorted({n for n in needs if n not in _ob})
     print(label, 'contract-days to load:', len(needs), flush=True)
-    def f(j): return j, data.option_bars(*j)
+    def f(j): return j, _safe_option_bars(*j)
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as ex:
         for n, (j, b) in enumerate(ex.map(f, needs)):
             _ob[j] = b
