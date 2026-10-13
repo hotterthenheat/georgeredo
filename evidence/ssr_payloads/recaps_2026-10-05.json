@@ -1,0 +1,2136 @@
+{
+ "data": {
+  "recap-day-2026-10-05": {
+   "date": "2026-10-05",
+   "dayLabel": "Monday, Oct 5, 2026",
+   "films": [
+    {
+     "id": "7kx2mfub25z1vac",
+     "date": "2026-10-05",
+     "dayLabel": "Monday, Oct 5, 2026",
+     "title": "Day recap \u2014 Monday, Oct 5, 2026",
+     "template": "tape",
+     "duration": 43.125,
+     "publishedAt": "2026-10-06T02:21:46.406Z",
+     "cuts": [
+      {
+       "cut": "tape-dark-16x9",
+       "theme": "dark",
+       "format": "16x9",
+       "mp4": "https://george-bucket.nyc3.digitaloceanspaces.com/recaps/2026-10-05/7kx2mfub25z1vac/rmuw1qsr5/tape-dark-16x9/tape-dark-16x9-1080p60.mp4",
+       "webm": null,
+       "voMp4": "https://george-bucket.nyc3.digitaloceanspaces.com/recaps/2026-10-05/7kx2mfub25z1vac/rmuw1qsr5/tape-dark-16x9/tape-dark-16x9-1080p60-vo.mp4",
+       "voWebm": null,
+       "poster": "https://george-bucket.nyc3.digitaloceanspaces.com/recaps/2026-10-05/7kx2mfub25z1vac/rmuw1qsr5/tape-dark-16x9/poster.jpg",
+       "captions": "/api/recap-captions/7kx2mfub25z1vac?cut=tape-dark-16x9"
+      },
+      {
+       "cut": "tape-dark-9x16",
+       "theme": "dark",
+       "format": "9x16",
+       "mp4": "https://george-bucket.nyc3.digitaloceanspaces.com/recaps/2026-10-05/7kx2mfub25z1vac/rmuw1qsr5/tape-dark-9x16/tape-dark-9x16-1080p60.mp4",
+       "webm": null,
+       "voMp4": "https://george-bucket.nyc3.digitaloceanspaces.com/recaps/2026-10-05/7kx2mfub25z1vac/rmuw1qsr5/tape-dark-9x16/tape-dark-9x16-1080p60-vo.mp4",
+       "voWebm": null,
+       "poster": "https://george-bucket.nyc3.digitaloceanspaces.com/recaps/2026-10-05/7kx2mfub25z1vac/rmuw1qsr5/tape-dark-9x16/poster.jpg",
+       "captions": "/api/recap-captions/7kx2mfub25z1vac?cut=tape-dark-9x16"
+      },
+      {
+       "cut": "tape-light-16x9",
+       "theme": "light",
+       "format": "16x9",
+       "mp4": "https://george-bucket.nyc3.digitaloceanspaces.com/recaps/2026-10-05/7kx2mfub25z1vac/rmuw1qsr5/tape-light-16x9/tape-light-16x9-1080p60.mp4",
+       "webm": null,
+       "voMp4": "https://george-bucket.nyc3.digitaloceanspaces.com/recaps/2026-10-05/7kx2mfub25z1vac/rmuw1qsr5/tape-light-16x9/tape-light-16x9-1080p60-vo.mp4",
+       "voWebm": null,
+       "poster": "https://george-bucket.nyc3.digitaloceanspaces.com/recaps/2026-10-05/7kx2mfub25z1vac/rmuw1qsr5/tape-light-16x9/poster.jpg",
+       "captions": "/api/recap-captions/7kx2mfub25z1vac?cut=tape-light-16x9"
+      },
+      {
+       "cut": "tape-light-9x16",
+       "theme": "light",
+       "format": "9x16",
+       "mp4": "https://george-bucket.nyc3.digitaloceanspaces.com/recaps/2026-10-05/7kx2mfub25z1vac/rmuw1qsr5/tape-light-9x16/tape-light-9x16-1080p60.mp4",
+       "webm": null,
+       "voMp4": "https://george-bucket.nyc3.digitaloceanspaces.com/recaps/2026-10-05/7kx2mfub25z1vac/rmuw1qsr5/tape-light-9x16/tape-light-9x16-1080p60-vo.mp4",
+       "voWebm": null,
+       "poster": "https://george-bucket.nyc3.digitaloceanspaces.com/recaps/2026-10-05/7kx2mfub25z1vac/rmuw1qsr5/tape-light-9x16/poster.jpg",
+       "captions": "/api/recap-captions/7kx2mfub25z1vac?cut=tape-light-9x16"
+      }
+     ],
+     "summary": {
+      "version": 1,
+      "date": "2026-10-05",
+      "dayLabel": "Monday, Oct 5, 2026",
+      "template": "tape",
+      "duration": 43.125,
+      "heroId": "4y0izgrw7dd49e0",
+      "endCard": "Real alerts from Monday, Oct 5, 2026 \u2014 what George saw and flagged.",
+      "fine": [
+       "Peaks are one-minute highs from the first full minute after each alert to its exit call, its stop, or 16:00 \u2014 not fills.",
+       "Entries are the price George tracked the alert from, or that minute's close. A selection of the day's alerts, each with how it ended."
+      ],
+      "tickerTape": {
+       "ticker": "^SPX",
+       "series": [
+        [
+         570,
+         7729.7
+        ],
+        [
+         571,
+         7737.01
+        ],
+        [
+         572,
+         7738.75
+        ],
+        [
+         573,
+         7737.63
+        ],
+        [
+         574,
+         7738.31
+        ],
+        [
+         575,
+         7738.22
+        ],
+        [
+         576,
+         7736.34
+        ],
+        [
+         577,
+         7734.2
+        ],
+        [
+         578,
+         7735.35
+        ],
+        [
+         579,
+         7735.29
+        ],
+        [
+         580,
+         7735.22
+        ],
+        [
+         581,
+         7737.6900000000005
+        ],
+        [
+         582,
+         7736.42
+        ],
+        [
+         583,
+         7734.81
+        ],
+        [
+         584,
+         7735.63
+        ],
+        [
+         585,
+         7735.39
+        ],
+        [
+         586,
+         7732.4800000000005
+        ],
+        [
+         587,
+         7734.45
+        ],
+        [
+         588,
+         7734.55
+        ],
+        [
+         589,
+         7734.16
+        ],
+        [
+         590,
+         7735.31
+        ],
+        [
+         591,
+         7736.650000000001
+        ],
+        [
+         592,
+         7735.55
+        ],
+        [
+         593,
+         7733.33
+        ],
+        [
+         594,
+         7733.1900000000005
+        ],
+        [
+         595,
+         7735.85
+        ],
+        [
+         596,
+         7735.360000000001
+        ],
+        [
+         597,
+         7735.52
+        ],
+        [
+         598,
+         7732.97
+        ],
+        [
+         599,
+         7736.21
+        ],
+        [
+         600,
+         7729.8
+        ],
+        [
+         601,
+         7735.97
+        ],
+        [
+         602,
+         7737.81
+        ],
+        [
+         603,
+         7738.7
+        ],
+        [
+         604,
+         7739.24
+        ],
+        [
+         605,
+         7741.54
+        ],
+        [
+         606,
+         7742.1
+        ],
+        [
+         607,
+         7742.95
+        ],
+        [
+         608,
+         7744.97
+        ],
+        [
+         609,
+         7746.85
+        ],
+        [
+         610,
+         7745.41
+        ],
+        [
+         611,
+         7747.99
+        ],
+        [
+         612,
+         7749.22
+        ],
+        [
+         613,
+         7749.76
+        ],
+        [
+         614,
+         7748.21
+        ],
+        [
+         615,
+         7751.92
+        ],
+        [
+         616,
+         7753.84
+        ],
+        [
+         617,
+         7753.93
+        ],
+        [
+         618,
+         7752.96
+        ],
+        [
+         619,
+         7753.5
+        ],
+        [
+         620,
+         7756.67
+        ],
+        [
+         621,
+         7755.27
+        ],
+        [
+         622,
+         7756.400000000001
+        ],
+        [
+         623,
+         7755.3
+        ],
+        [
+         624,
+         7756.28
+        ],
+        [
+         625,
+         7756.75
+        ],
+        [
+         626,
+         7756.6
+        ],
+        [
+         627,
+         7755.07
+        ],
+        [
+         628,
+         7753.84
+        ],
+        [
+         629,
+         7756.01
+        ],
+        [
+         630,
+         7752.2
+        ],
+        [
+         631,
+         7750.7300000000005
+        ],
+        [
+         632,
+         7748.38
+        ],
+        [
+         633,
+         7746.400000000001
+        ],
+        [
+         634,
+         7746.900000000001
+        ],
+        [
+         635,
+         7747.96
+        ],
+        [
+         636,
+         7747.26
+        ],
+        [
+         637,
+         7750.87
+        ],
+        [
+         638,
+         7751.64
+        ],
+        [
+         639,
+         7752.27
+        ],
+        [
+         640,
+         7752.35
+        ],
+        [
+         641,
+         7752.58
+        ],
+        [
+         642,
+         7750.47
+        ],
+        [
+         643,
+         7750.400000000001
+        ],
+        [
+         644,
+         7751.18
+        ],
+        [
+         645,
+         7752.2300000000005
+        ],
+        [
+         646,
+         7752.53
+        ],
+        [
+         647,
+         7752.05
+        ],
+        [
+         648,
+         7751.1900000000005
+        ],
+        [
+         649,
+         7752.7300000000005
+        ],
+        [
+         650,
+         7753.1
+        ],
+        [
+         651,
+         7751.4400000000005
+        ],
+        [
+         652,
+         7751.6
+        ],
+        [
+         653,
+         7752.83
+        ],
+        [
+         654,
+         7752.99
+        ],
+        [
+         655,
+         7751.7
+        ],
+        [
+         656,
+         7752.72
+        ],
+        [
+         657,
+         7756.46
+        ],
+        [
+         658,
+         7756.57
+        ],
+        [
+         659,
+         7756.87
+        ],
+        [
+         660,
+         7756.650000000001
+        ],
+        [
+         661,
+         7756.57
+        ],
+        [
+         662,
+         7755.37
+        ],
+        [
+         663,
+         7754.26
+        ],
+        [
+         664,
+         7756.63
+        ],
+        [
+         665,
+         7755.150000000001
+        ],
+        [
+         666,
+         7754.360000000001
+        ],
+        [
+         667,
+         7754.72
+        ],
+        [
+         668,
+         7754.26
+        ],
+        [
+         669,
+         7752.8
+        ],
+        [
+         670,
+         7754.16
+        ],
+        [
+         671,
+         7753.150000000001
+        ],
+        [
+         672,
+         7752.74
+        ],
+        [
+         673,
+         7753.07
+        ],
+        [
+         674,
+         7754.63
+        ],
+        [
+         675,
+         7753.1
+        ],
+        [
+         676,
+         7753.92
+        ],
+        [
+         677,
+         7754.77
+        ],
+        [
+         678,
+         7753.7300000000005
+        ],
+        [
+         679,
+         7755.03
+        ],
+        [
+         680,
+         7755.400000000001
+        ],
+        [
+         681,
+         7754.08
+        ],
+        [
+         682,
+         7753.96
+        ],
+        [
+         683,
+         7755.41
+        ],
+        [
+         684,
+         7756.610000000001
+        ],
+        [
+         685,
+         7756.38
+        ],
+        [
+         686,
+         7755.03
+        ],
+        [
+         687,
+         7755.38
+        ],
+        [
+         688,
+         7755.42
+        ],
+        [
+         689,
+         7757.29
+        ],
+        [
+         690,
+         7757.66
+        ],
+        [
+         691,
+         7758.41
+        ],
+        [
+         692,
+         7759.2300000000005
+        ],
+        [
+         693,
+         7759.88
+        ],
+        [
+         694,
+         7759.02
+        ],
+        [
+         695,
+         7758.400000000001
+        ],
+        [
+         696,
+         7758.91
+        ],
+        [
+         697,
+         7758.9800000000005
+        ],
+        [
+         698,
+         7759.650000000001
+        ],
+        [
+         699,
+         7759.54
+        ],
+        [
+         700,
+         7758.91
+        ],
+        [
+         701,
+         7761.27
+        ],
+        [
+         702,
+         7761.89
+        ],
+        [
+         703,
+         7763.01
+        ],
+        [
+         704,
+         7761.99
+        ],
+        [
+         705,
+         7759.97
+        ],
+        [
+         706,
+         7759.85
+        ],
+        [
+         707,
+         7760.51
+        ],
+        [
+         708,
+         7761.31
+        ],
+        [
+         709,
+         7762.29
+        ],
+        [
+         710,
+         7762.14
+        ],
+        [
+         711,
+         7763.110000000001
+        ],
+        [
+         712,
+         7762.3
+        ],
+        [
+         713,
+         7762.14
+        ],
+        [
+         714,
+         7761.8
+        ],
+        [
+         715,
+         7761
+        ],
+        [
+         716,
+         7761.400000000001
+        ],
+        [
+         717,
+         7762.06
+        ],
+        [
+         718,
+         7761.54
+        ],
+        [
+         719,
+         7762.03
+        ],
+        [
+         720,
+         7760.09
+        ],
+        [
+         721,
+         7760.92
+        ],
+        [
+         722,
+         7760.59
+        ],
+        [
+         723,
+         7758.34
+        ],
+        [
+         724,
+         7758.82
+        ],
+        [
+         725,
+         7759.29
+        ],
+        [
+         726,
+         7759.22
+        ],
+        [
+         727,
+         7758.2
+        ],
+        [
+         728,
+         7758.9800000000005
+        ],
+        [
+         729,
+         7760.43
+        ],
+        [
+         730,
+         7759.41
+        ],
+        [
+         731,
+         7760.1900000000005
+        ],
+        [
+         732,
+         7761.17
+        ],
+        [
+         733,
+         7761.21
+        ],
+        [
+         734,
+         7760.81
+        ],
+        [
+         735,
+         7758.89
+        ],
+        [
+         736,
+         7759.4800000000005
+        ],
+        [
+         737,
+         7758.900000000001
+        ],
+        [
+         738,
+         7758.51
+        ],
+        [
+         739,
+         7758.52
+        ],
+        [
+         740,
+         7758.28
+        ],
+        [
+         741,
+         7758.95
+        ],
+        [
+         742,
+         7760.58
+        ],
+        [
+         743,
+         7763.62
+        ],
+        [
+         744,
+         7763.89
+        ],
+        [
+         745,
+         7763.38
+        ],
+        [
+         746,
+         7764.41
+        ],
+        [
+         747,
+         7764.24
+        ],
+        [
+         748,
+         7764.35
+        ],
+        [
+         749,
+         7764.71
+        ],
+        [
+         750,
+         7765.14
+        ],
+        [
+         751,
+         7764.43
+        ],
+        [
+         752,
+         7763.89
+        ],
+        [
+         753,
+         7764.84
+        ],
+        [
+         754,
+         7765.43
+        ],
+        [
+         755,
+         7766.56
+        ],
+        [
+         756,
+         7767.59
+        ],
+        [
+         757,
+         7767.7300000000005
+        ],
+        [
+         758,
+         7769
+        ],
+        [
+         759,
+         7768.31
+        ],
+        [
+         760,
+         7769.07
+        ],
+        [
+         761,
+         7770.64
+        ],
+        [
+         762,
+         7771.43
+        ],
+        [
+         763,
+         7772.35
+        ],
+        [
+         764,
+         7773.24
+        ],
+        [
+         765,
+         7772.81
+        ],
+        [
+         766,
+         7772.12
+        ],
+        [
+         767,
+         7770.860000000001
+        ],
+        [
+         768,
+         7771.21
+        ],
+        [
+         769,
+         7771.85
+        ],
+        [
+         770,
+         7772.34
+        ],
+        [
+         771,
+         7772.46
+        ],
+        [
+         772,
+         7772.9400000000005
+        ],
+        [
+         773,
+         7773.39
+        ],
+        [
+         774,
+         7772.42
+        ],
+        [
+         775,
+         7770.63
+        ],
+        [
+         776,
+         7770.93
+        ],
+        [
+         777,
+         7770.34
+        ],
+        [
+         778,
+         7771
+        ],
+        [
+         779,
+         7769.66
+        ],
+        [
+         780,
+         7769.29
+        ],
+        [
+         781,
+         7769.83
+        ],
+        [
+         782,
+         7768.31
+        ],
+        [
+         783,
+         7767.96
+        ],
+        [
+         784,
+         7767.22
+        ],
+        [
+         785,
+         7767.57
+        ],
+        [
+         786,
+         7768.28
+        ],
+        [
+         787,
+         7769.38
+        ],
+        [
+         788,
+         7768.860000000001
+        ],
+        [
+         789,
+         7768.68
+        ],
+        [
+         790,
+         7769.62
+        ],
+        [
+         791,
+         7770.03
+        ],
+        [
+         792,
+         7770.2
+        ],
+        [
+         793,
+         7770.14
+        ],
+        [
+         794,
+         7770.610000000001
+        ],
+        [
+         795,
+         7772.1900000000005
+        ],
+        [
+         796,
+         7772.21
+        ],
+        [
+         797,
+         7770.54
+        ],
+        [
+         798,
+         7770.41
+        ],
+        [
+         799,
+         7771.68
+        ],
+        [
+         800,
+         7772.41
+        ],
+        [
+         801,
+         7771.29
+        ],
+        [
+         802,
+         7771.78
+        ],
+        [
+         803,
+         7772.22
+        ],
+        [
+         804,
+         7772.42
+        ],
+        [
+         805,
+         7771.37
+        ],
+        [
+         806,
+         7770.900000000001
+        ],
+        [
+         807,
+         7771.1
+        ],
+        [
+         808,
+         7772.28
+        ],
+        [
+         809,
+         7772.21
+        ],
+        [
+         810,
+         7770.95
+        ],
+        [
+         811,
+         7771.62
+        ],
+        [
+         812,
+         7771.2
+        ],
+        [
+         813,
+         7771.14
+        ],
+        [
+         814,
+         7771.29
+        ],
+        [
+         815,
+         7771.1
+        ],
+        [
+         816,
+         7771.58
+        ],
+        [
+         817,
+         7772.1
+        ],
+        [
+         818,
+         7771.04
+        ],
+        [
+         819,
+         7770.24
+        ],
+        [
+         820,
+         7769.83
+        ],
+        [
+         821,
+         7771.01
+        ],
+        [
+         822,
+         7771.3
+        ],
+        [
+         823,
+         7773.18
+        ],
+        [
+         824,
+         7776.89
+        ],
+        [
+         825,
+         7776.81
+        ],
+        [
+         826,
+         7776.03
+        ],
+        [
+         827,
+         7775.1
+        ],
+        [
+         828,
+         7775.610000000001
+        ],
+        [
+         829,
+         7775.64
+        ],
+        [
+         830,
+         7775.41
+        ],
+        [
+         831,
+         7775.76
+        ],
+        [
+         832,
+         7775.22
+        ],
+        [
+         833,
+         7776.34
+        ],
+        [
+         834,
+         7774.91
+        ],
+        [
+         835,
+         7774.55
+        ],
+        [
+         836,
+         7774.6900000000005
+        ],
+        [
+         837,
+         7775.49
+        ],
+        [
+         838,
+         7775.95
+        ],
+        [
+         839,
+         7776.28
+        ],
+        [
+         840,
+         7776.41
+        ],
+        [
+         841,
+         7777.59
+        ],
+        [
+         842,
+         7777.37
+        ],
+        [
+         843,
+         7777.16
+        ],
+        [
+         844,
+         7777.12
+        ],
+        [
+         845,
+         7774.35
+        ],
+        [
+         846,
+         7774.1
+        ],
+        [
+         847,
+         7773.77
+        ],
+        [
+         848,
+         7774.29
+        ],
+        [
+         849,
+         7775.38
+        ],
+        [
+         850,
+         7775.45
+        ],
+        [
+         851,
+         7775.63
+        ],
+        [
+         852,
+         7775.62
+        ],
+        [
+         853,
+         7775.75
+        ],
+        [
+         854,
+         7776.29
+        ],
+        [
+         855,
+         7776.63
+        ],
+        [
+         856,
+         7777.57
+        ],
+        [
+         857,
+         7777.89
+        ],
+        [
+         858,
+         7777.55
+        ],
+        [
+         859,
+         7776.89
+        ],
+        [
+         860,
+         7776.7300000000005
+        ],
+        [
+         861,
+         7778.56
+        ],
+        [
+         862,
+         7777.67
+        ],
+        [
+         863,
+         7777.610000000001
+        ],
+        [
+         864,
+         7778.06
+        ],
+        [
+         865,
+         7777.45
+        ],
+        [
+         866,
+         7778.95
+        ],
+        [
+         867,
+         7779.97
+        ],
+        [
+         868,
+         7781.25
+        ],
+        [
+         869,
+         7780.28
+        ],
+        [
+         870,
+         7780.650000000001
+        ],
+        [
+         871,
+         7779.360000000001
+        ],
+        [
+         872,
+         7779.6
+        ],
+        [
+         873,
+         7779.95
+        ],
+        [
+         874,
+         7779.96
+        ],
+        [
+         875,
+         7781.22
+        ],
+        [
+         876,
+         7781.03
+        ],
+        [
+         877,
+         7780.38
+        ],
+        [
+         878,
+         7779.75
+        ],
+        [
+         879,
+         7780.51
+        ],
+        [
+         880,
+         7780.71
+        ],
+        [
+         881,
+         7780.59
+        ],
+        [
+         882,
+         7780.6900000000005
+        ],
+        [
+         883,
+         7779.33
+        ],
+        [
+         884,
+         7779.92
+        ],
+        [
+         885,
+         7780.06
+        ],
+        [
+         886,
+         7780.01
+        ],
+        [
+         887,
+         7779.45
+        ],
+        [
+         888,
+         7779.25
+        ],
+        [
+         889,
+         7779.88
+        ],
+        [
+         890,
+         7779.57
+        ],
+        [
+         891,
+         7781.24
+        ],
+        [
+         892,
+         7781.41
+        ],
+        [
+         893,
+         7781.51
+        ],
+        [
+         894,
+         7781.110000000001
+        ],
+        [
+         895,
+         7781.150000000001
+        ],
+        [
+         896,
+         7782.25
+        ],
+        [
+         897,
+         7783.4800000000005
+        ],
+        [
+         898,
+         7784.610000000001
+        ],
+        [
+         899,
+         7784.27
+        ],
+        [
+         900,
+         7785.13
+        ],
+        [
+         901,
+         7786.62
+        ],
+        [
+         902,
+         7788.84
+        ],
+        [
+         903,
+         7788.6
+        ],
+        [
+         904,
+         7787.67
+        ],
+        [
+         905,
+         7787.95
+        ],
+        [
+         906,
+         7787.6900000000005
+        ],
+        [
+         907,
+         7787
+        ],
+        [
+         908,
+         7785.9800000000005
+        ],
+        [
+         909,
+         7786.6
+        ],
+        [
+         910,
+         7786.45
+        ],
+        [
+         911,
+         7787.09
+        ],
+        [
+         912,
+         7787.63
+        ],
+        [
+         913,
+         7788.9400000000005
+        ],
+        [
+         914,
+         7790.37
+        ],
+        [
+         915,
+         7790.53
+        ],
+        [
+         916,
+         7790.52
+        ],
+        [
+         917,
+         7791.32
+        ],
+        [
+         918,
+         7793.51
+        ],
+        [
+         919,
+         7793.26
+        ],
+        [
+         920,
+         7792.89
+        ],
+        [
+         921,
+         7791.95
+        ],
+        [
+         922,
+         7791.2
+        ],
+        [
+         923,
+         7790.96
+        ],
+        [
+         924,
+         7790.93
+        ],
+        [
+         925,
+         7791.88
+        ],
+        [
+         926,
+         7792.150000000001
+        ],
+        [
+         927,
+         7790.99
+        ],
+        [
+         928,
+         7790.57
+        ],
+        [
+         929,
+         7790.12
+        ],
+        [
+         930,
+         7789.34
+        ],
+        [
+         931,
+         7789.33
+        ],
+        [
+         932,
+         7787.3
+        ],
+        [
+         933,
+         7787.150000000001
+        ],
+        [
+         934,
+         7786.8
+        ],
+        [
+         935,
+         7786.93
+        ],
+        [
+         936,
+         7787.38
+        ],
+        [
+         937,
+         7788.78
+        ],
+        [
+         938,
+         7788.650000000001
+        ],
+        [
+         939,
+         7786.78
+        ],
+        [
+         940,
+         7786.3
+        ],
+        [
+         941,
+         7785.14
+        ],
+        [
+         942,
+         7784.99
+        ],
+        [
+         943,
+         7785.51
+        ],
+        [
+         944,
+         7784.58
+        ],
+        [
+         945,
+         7781.77
+        ],
+        [
+         946,
+         7779.63
+        ],
+        [
+         947,
+         7778.85
+        ],
+        [
+         948,
+         7780.08
+        ],
+        [
+         949,
+         7778.4400000000005
+        ],
+        [
+         950,
+         7775.110000000001
+        ],
+        [
+         951,
+         7774.900000000001
+        ],
+        [
+         952,
+         7773.03
+        ],
+        [
+         953,
+         7772.39
+        ],
+        [
+         954,
+         7771.74
+        ],
+        [
+         955,
+         7770.05
+        ],
+        [
+         956,
+         7771.59
+        ],
+        [
+         957,
+         7772.2
+        ],
+        [
+         958,
+         7773.21
+        ],
+        [
+         959,
+         7774.22
+        ]
+       ],
+       "open": 7730.860000000001,
+       "close": 7774.22,
+       "high": [
+        919,
+        7794.35
+       ],
+       "low": [
+        570,
+        7727.59
+       ]
+      },
+      "alerts": [
+       {
+        "id": "kyfcvg2jyiomwa8",
+        "family": "full_size",
+        "at": "9:33:56",
+        "min": 573.933,
+        "ticker": "QQQ",
+        "contract": "QQQ 751C",
+        "posture": "FULL SIZE",
+        "side": "C",
+        "lean": "LONG",
+        "title": "FULL SIZE \u2014 QQQ 0DTE ~$751C \u2014 INDEX READ \u00b7 LONG \u00b7 at the high (93% of range) \u00b7 chart it first, then buy calls",
+        "entry": {
+         "price": 1.83,
+         "basis": "anchor"
+        },
+        "peak": {
+         "price": 3.35,
+         "at": "9:45",
+         "pct": 83,
+         "basis": "one-minute high"
+        },
+        "exit": {
+         "at": "9:57:27",
+         "kind": "GET OUT",
+         "words": "GET OUT \u2014 QQQ $751C \u2014 +25% now (peaked +64%)",
+         "nowPct": 25,
+         "peakedPct": 64,
+         "alertId": "zirhx28aptp4pk0"
+        },
+        "sources": [
+         "alert_send_ledger/kyfcvg2jyiomwa8",
+         "hold_advisor_states/gmlefjz9p5ri2qy",
+         "alert_send_ledger/zirhx28aptp4pk0",
+         "massive:O:QQQ261005C00751000@9:45"
+        ]
+       },
+       {
+        "id": "k3hywpntw1hq4qh",
+        "family": "full_size",
+        "at": "9:33:58",
+        "min": 573.967,
+        "ticker": "IWM",
+        "contract": "IWM 281P",
+        "posture": "FULL SIZE",
+        "side": "P",
+        "lean": "SHORT",
+        "title": "FULL SIZE \u2014 IWM 0DTE ~$281P \u2014 INDEX READ \u00b7 SHORT \u00b7 at the low (9% of range) \u00b7 chart it first, then buy puts",
+        "entry": {
+         "price": 0.605,
+         "basis": "anchor"
+        },
+        "peak": {
+         "price": 1.25,
+         "at": "9:55",
+         "pct": 106,
+         "basis": "one-minute high"
+        },
+        "exit": null,
+        "sources": [
+         "alert_send_ledger/k3hywpntw1hq4qh",
+         "hold_advisor_states/qqf7h2uho0a8d9v",
+         "massive:O:IWM261005P00281000@9:55"
+        ]
+       },
+       {
+        "id": "bte3v0rik01dzws",
+        "family": "full_size",
+        "at": "9:35:43",
+        "min": 575.717,
+        "ticker": "^NDX",
+        "contract": "^NDX 30,900C",
+        "posture": "FULL SIZE",
+        "side": "C",
+        "lean": "LONG",
+        "title": "FULL SIZE \u2014 ^NDX 0DTE ~$30,900C \u2014 INDEX READ \u00b7 LONG \u00b7 near the high (88% of range) \u00b7 chart it first, then buy calls",
+        "entry": {
+         "price": 80.8,
+         "basis": "anchor"
+        },
+        "peak": {
+         "price": 208.91,
+         "at": "15:14",
+         "pct": 158,
+         "basis": "one-minute high"
+        },
+        "exit": null,
+        "sources": [
+         "alert_send_ledger/bte3v0rik01dzws",
+         "hold_advisor_states/zzulfhxdwpus0lj",
+         "massive:O:NDXP261005C30900000@15:14"
+        ]
+       },
+       {
+        "id": "0aoekjy1werm6lk",
+        "family": "surge",
+        "at": "9:45:30",
+        "min": 585.5,
+        "ticker": "^SPX",
+        "contract": "^SPX 7785C",
+        "posture": "SURGE",
+        "side": "C",
+        "lean": "LONG",
+        "title": "SURGE \u2014 ^SPX $7785C 0DTE \u2014 TAPE SURGE \u2014 CALL SIZE BUILDING",
+        "entry": null,
+        "peak": null,
+        "exit": null,
+        "sources": [
+         "alert_send_ledger/0aoekjy1werm6lk"
+        ]
+       },
+       {
+        "id": "m2ijspvqo7cm1mr",
+        "family": "full_size",
+        "at": "9:47:23",
+        "min": 587.383,
+        "ticker": "^RUT",
+        "contract": "^RUT 2825P",
+        "posture": "FULL SIZE",
+        "side": "P",
+        "lean": "SHORT",
+        "title": "FULL SIZE \u2014 ^RUT 0DTE ~$2,825P \u2014 INDEX READ \u00b7 SHORT \u00b7 buy puts now",
+        "entry": {
+         "price": 9.05,
+         "basis": "anchor"
+        },
+        "peak": {
+         "price": 10.15,
+         "at": "9:53",
+         "pct": 12,
+         "basis": "one-minute high"
+        },
+        "exit": {
+         "at": "10:15:44",
+         "kind": "STOPPED",
+         "words": "Stopped \u00b7 10:15",
+         "nowPct": -84,
+         "peakedPct": null,
+         "alertId": null
+        },
+        "sources": [
+         "alert_send_ledger/m2ijspvqo7cm1mr",
+         "hold_advisor_states/kxnwrbhr0fuv3ec",
+         "massive:O:RUTW261005P02825000@9:53"
+        ]
+       },
+       {
+        "id": "tzef4qu52dookey",
+        "family": "full_size",
+        "at": "10:10:29",
+        "min": 610.483,
+        "ticker": "SPY",
+        "contract": "SPY 772C",
+        "posture": "FULL SIZE",
+        "side": "C",
+        "lean": "LONG",
+        "title": "FULL SIZE \u2014 SPY 0DTE ~$772C \u2014 INDEX READ \u00b7 LONG \u00b7 at the high (95% of range) \u00b7 chart it first, then buy calls",
+        "entry": {
+         "price": 0.955,
+         "basis": "anchor"
+        },
+        "peak": {
+         "price": 4.61,
+         "at": "15:19",
+         "pct": 382,
+         "basis": "one-minute high"
+        },
+        "exit": null,
+        "sources": [
+         "alert_send_ledger/tzef4qu52dookey",
+         "hold_advisor_states/qcqganbtkxycm8t",
+         "massive:O:SPY261005C00772000@15:19"
+        ]
+       },
+       {
+        "id": "w9n10px5sexne61",
+        "family": "full_size",
+        "at": "10:11:43",
+        "min": 611.717,
+        "ticker": "^RUT",
+        "contract": "^RUT 2840C",
+        "posture": "FULL SIZE",
+        "side": "C",
+        "lean": "LONG",
+        "title": "FULL SIZE \u2014 ^RUT 0DTE ~$2,840C \u2014 INDEX READ \u00b7 LONG \u00b7 buy calls now",
+        "entry": {
+         "price": 5.7,
+         "basis": "anchor"
+        },
+        "peak": {
+         "price": 20.41,
+         "at": "15:19",
+         "pct": 258,
+         "basis": "one-minute high"
+        },
+        "exit": null,
+        "sources": [
+         "alert_send_ledger/w9n10px5sexne61",
+         "hold_advisor_states/xkutkguu9yrkcl8",
+         "massive:O:RUTW261005C02840000@15:19"
+        ]
+       },
+       {
+        "id": "l3u46fx07kovrje",
+        "family": "full_size",
+        "at": "11:51:23",
+        "min": 711.383,
+        "ticker": "^RUT",
+        "contract": "^RUT 2845C",
+        "posture": "FULL SIZE",
+        "side": "C",
+        "lean": "LONG",
+        "title": "FULL SIZE \u2014 ^RUT 0DTE ~$2,845C \u2014 INDEX READ \u00b7 LONG \u00b7 buy calls now",
+        "entry": {
+         "price": 4.1,
+         "basis": "anchor"
+        },
+        "peak": {
+         "price": 14.79,
+         "at": "15:14",
+         "pct": 260,
+         "basis": "one-minute high"
+        },
+        "exit": null,
+        "sources": [
+         "alert_send_ledger/l3u46fx07kovrje",
+         "hold_advisor_states/oormvtc2uw01rcl",
+         "massive:O:RUTW261005C02845000@15:14"
+        ]
+       },
+       {
+        "id": "21vavwrg41c7qt7",
+        "family": "surge",
+        "at": "12:14:16",
+        "min": 734.267,
+        "ticker": "^SPX",
+        "contract": "^SPX 7780C",
+        "posture": "SURGE",
+        "side": "C",
+        "lean": "LONG",
+        "title": "SURGE \u2014 ^SPX $7780C 0DTE \u2014 TAPE SURGE \u2014 CALL SIZE BUILDING",
+        "entry": null,
+        "peak": null,
+        "exit": null,
+        "sources": [
+         "alert_send_ledger/21vavwrg41c7qt7"
+        ]
+       },
+       {
+        "id": "4y0izgrw7dd49e0",
+        "family": "buy_and_forget",
+        "at": "13:31:25",
+        "min": 811.417,
+        "ticker": "^SPX",
+        "contract": "^SPX 7770C",
+        "posture": "HALF SIZE",
+        "side": "C",
+        "lean": "LONG",
+        "title": "HALF SIZE \u2014 ^SPX $7770C 0DTE \u2014 @ $5.60 \u00b7 leg 1 of 2 \u00b7 50% risk \u00b7 buy CALLS \u00b7 exit: +15% arms a breakeven floor, 35% giveback trail",
+        "entry": {
+         "price": 5.6,
+         "basis": "anchor"
+        },
+        "peak": {
+         "price": 24.63,
+         "at": "15:19",
+         "pct": 339,
+         "basis": "one-minute high"
+        },
+        "exit": null,
+        "sources": [
+         "alert_send_ledger/4y0izgrw7dd49e0",
+         "trade_now_events/e5kdhuhksdehlje",
+         "hold_advisor_states/j0c31k5g08p3e6w",
+         "massive:O:SPXW261005C07770000@15:19"
+        ]
+       },
+       {
+        "id": "763aby2j7vmxhg0",
+        "family": "surge",
+        "at": "15:01:19",
+        "min": 901.317,
+        "ticker": "^SPX",
+        "contract": "^SPX 7790C",
+        "posture": "SURGE",
+        "side": "C",
+        "lean": "LONG",
+        "title": "SURGE \u2014 ^SPX $7790C 0DTE \u2014 TAPE SURGE \u2014 CALL SIZE BUILDING",
+        "entry": null,
+        "peak": null,
+        "exit": null,
+        "sources": [
+         "alert_send_ledger/763aby2j7vmxhg0"
+        ]
+       },
+       {
+        "id": "n8pj8l41oam8yih",
+        "family": "buy_and_forget",
+        "at": "15:08:36",
+        "min": 908.6,
+        "ticker": "^SPX",
+        "contract": "^SPX 7790C",
+        "posture": "HALF SIZE",
+        "side": "C",
+        "lean": "LONG",
+        "title": "HALF SIZE \u2014 ^SPX $7790C 0DTE \u2014 @ $2.23 \u00b7 leg 1 of 2 \u00b7 50% risk \u00b7 buy CALLS \u00b7 exit: +15% arms a breakeven floor, 35% giveback trail",
+        "entry": {
+         "price": 2.225,
+         "basis": "anchor"
+        },
+        "peak": {
+         "price": 7.5,
+         "at": "15:19",
+         "pct": 237,
+         "basis": "one-minute high"
+        },
+        "exit": {
+         "at": "15:30:30",
+         "kind": "LOCK MOST",
+         "words": "LOCK MOST \u2014 ^SPX $7790C -13% (peaked +57%)",
+         "nowPct": -13,
+         "peakedPct": 57,
+         "alertId": "czeqhv53crfk3ac"
+        },
+        "sources": [
+         "alert_send_ledger/n8pj8l41oam8yih",
+         "trade_now_events/6qtnnhb6fkq5cbc",
+         "hold_advisor_states/7rzv15vu7ul5dy6",
+         "alert_send_ledger/czeqhv53crfk3ac",
+         "massive:O:SPXW261005C07790000@15:19"
+        ]
+       }
+      ],
+      "ladderIds": [
+       "m2ijspvqo7cm1mr",
+       "tzef4qu52dookey",
+       "w9n10px5sexne61",
+       "l3u46fx07kovrje",
+       "4y0izgrw7dd49e0",
+       "n8pj8l41oam8yih"
+      ],
+      "chapters": [
+       {
+        "id": "chapter-1",
+        "kicker": "9:33\u20139:47 \u00b7 5 alerts",
+        "title": "The open",
+        "alertIds": [
+         "kyfcvg2jyiomwa8",
+         "k3hywpntw1hq4qh",
+         "bte3v0rik01dzws",
+         "0aoekjy1werm6lk",
+         "m2ijspvqo7cm1mr"
+        ]
+       },
+       {
+        "id": "chapter-2",
+        "kicker": "10:10\u201310:11 \u00b7 2 alerts",
+        "title": "Morning",
+        "alertIds": [
+         "tzef4qu52dookey",
+         "w9n10px5sexne61"
+        ]
+       },
+       {
+        "id": "chapter-3",
+        "kicker": "11:51\u201312:14 \u00b7 2 alerts",
+        "title": "Midday",
+        "alertIds": [
+         "l3u46fx07kovrje",
+         "21vavwrg41c7qt7"
+        ]
+       },
+       {
+        "id": "chapter-4",
+        "kicker": "13:31\u201315:08 \u00b7 3 alerts",
+        "title": "Afternoon",
+        "alertIds": [
+         "4y0izgrw7dd49e0",
+         "763aby2j7vmxhg0",
+         "n8pj8l41oam8yih"
+        ]
+       }
+      ],
+      "filmAt": {
+       "763aby2j7vmxhg0": 24.844,
+       "k3hywpntw1hq4qh": 7.031,
+       "kyfcvg2jyiomwa8": 6.094,
+       "l3u46fx07kovrje": 13.594,
+       "m2ijspvqo7cm1mr": 10.313,
+       "w9n10px5sexne61": 12.188,
+       "21vavwrg41c7qt7": 15,
+       "4y0izgrw7dd49e0": 16.875,
+       "bte3v0rik01dzws": 7.969,
+       "n8pj8l41oam8yih": 26.25,
+       "tzef4qu52dookey": 11.25,
+       "0aoekjy1werm6lk": 9.375
+      },
+      "tally": {
+       "ticker": "^SPX",
+       "n": 13,
+       "above": 5,
+       "below": 7,
+       "at": 0,
+       "unparsed": 1,
+       "ids": [
+        "p4m1mukzv9a9qgy",
+        "xbkj6e9vb28ejx9",
+        "7hqxk4rbwclwvic",
+        "dwzmry51m9jlo88",
+        "ao8gx35m8fzpvnq",
+        "txp729d9pdyydzs",
+        "wmxqlnb5ag3uynp",
+        "0cuv2qjgnekx036",
+        "4qpivjggoo5nnzi",
+        "rpqzxwjiir2dcj5",
+        "hjbg1f4hq9jmvcs",
+        "9h3xfoxwnqgnqwp",
+        "czeqhv53crfk3ac"
+       ],
+       "line": "George sent 13 exit calls on SPX today (get out / lock most): 5 above the price they were tracked from, 7 below \u2014 each by its own \"now\" %."
+      }
+     }
+    }
+   ],
+   "sigmaRungs": [
+    7818,
+    7793,
+    7768,
+    7744,
+    7719,
+    7694,
+    7669,
+    7644,
+    7619
+   ],
+   "sigmaPostedRungs": []
+  }
+ },
+ "state": {
+  "$scolor-mode": {
+   "preference": "system",
+   "value": "system",
+   "unknown": true,
+   "forced": false
+  },
+  "$sauth-user": null,
+  "$sopen-access-state": {
+   "active": false,
+   "scheduled": false,
+   "audience": "authenticated",
+   "grantTier": "premium",
+   "grantsPremium": true,
+   "allowsGuests": false,
+   "requireVerifiedEmail": true,
+   "startsAt": null,
+   "expiresAt": 1783364688113,
+   "banner": {
+    "active": false,
+    "message": "Free preview is live \u2014 the whole site is unlocked. Subscribe to keep your access.",
+    "ctaText": "See plans",
+    "ctaHref": "/pricing"
+   }
+  },
+  "$stoasts": [],
+  "$snav-signals": null,
+  "$snav-market-status": null,
+  "$snav-indices": null,
+  "$snav-decisions": null,
+  "$snav-data-loaded": false,
+  "$snav-fetching": false,
+  "$scommand-palette-open": false,
+  "$ssite-config": {
+   "_priority": {
+    "env": -15,
+    "url": -3,
+    "name": -3
+   },
+   "env": "production",
+   "name": "George",
+   "url": "https://georgefi.trade"
+  }
+ },
+ "once": [],
+ "_errors": {
+  "recap-day-2026-10-05": -1
+ },
+ "serverRendered": true,
+ "path": "/recaps/2026-10-05"
+}

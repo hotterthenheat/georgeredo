@@ -1,0 +1,21 @@
+HTTP/1.1 200 Connection Established
+
+HTTP/2 200 
+date: Tue, 13 Oct 2026 14:14:18 GMT
+content-type: text/html;charset=utf-8
+server: cloudflare
+x-content-type-options: nosniff
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), geolocation=(), payment=(self)
+x-xss-protection: 1; mode=block
+content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://js.stripe.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https://george-bucket.nyc3.digitaloceanspaces.com https://*.digitaloceanspaces.com https://*.cdn.digitaloceanspaces.com; connect-src 'self' https://api.georgefi.trade https://*.georgefi.trade https://www.google-analytics.com https://www.googletagmanager.com https://api.stripe.com https://api.iconify.design https://cloudflareinsights.com wss://socket.massive.com wss://*.massive.com wss://*.unusualwhales.com; frame-src https://js.stripe.com https://hooks.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self'
+x-powered-by: Nuxt
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+cf-cache-status: DYNAMIC
+vary: accept-encoding
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=tAo6gY5WWyBVkaSDWoRtHHVk2zPecvKMsf7KhEkr%2Bkqt08z%2F%2BXlLtANEF5JRf%2FoJfUUhXaaWhVv4hjaAKqjLgKXXEgP6QYPII%2B7663P2efezWb7e1QcSD4DcxOEL2K%2B%2B3A%3D%3D"}]}
+cf-ray: a49ef322d9b94303-EWR
+alt-svc: h3=":443"; ma=86400
+

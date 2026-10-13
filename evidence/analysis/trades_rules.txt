@@ -1,0 +1,35 @@
+--- SNIPER-exit trades: 152 tickers [('^SPX', 64), ('QQQ', 34), ('META', 12), ('^NDX', 10), ('SPY', 9), ('^RUT', 7)]
+    spx_sniper_window: [('', 152)]
+    spx_sniper_grade: [('', 152)]
+    spx_sniper_sub_mode: [('', 152)]
+    spx_sniper_paper_mode: [('False', 152)]
+    spx_sniper_trail_stop_pct: [('0', 152)]
+    spx_sniper_conviction: [('0', 152)]
+    confidence: [(82, 39), (100, 36), (0, 33), (72, 14), (90, 7), (69, 5), (91, 3), (87, 2)]
+    targets_json sample: [None, None, None]
+    sniperSnapshot sample: null
+    size: [(1, 127), (2, 16), (3, 9)] entryPremium med 3.8825
+    T1 lock pct: n 43 min 31.0 med 37.0 max 60.0
+    emergency pct: n 62 min -50.0 med -30.65 max -24.0
+--- STOP LOSS levels: [(-12.0, 25), (0.0, 12), (-20.0, 8), (-18.0, 6), (8.0, 5), (-25.0, 3), (-22.0, 3), (1.0, 3), (9.0, 2), (-17.0, 1), (222.0, 1), (16.0, 1)]
+    by VIX bucket (level counts): {}
+--- HARD KILL floors: [(-25.0, 12), (-28.0, 4)]
+--- TRAILING PROFIT locked levels: [(12.0, 8), (8.0, 8), (10.0, 7), (13.0, 3), (11.0, 3), (9.0, 2), (14.0, 1), (24.0, 1), (22.0, 1), (17.0, 1)]
+--- entry second bucket: [(0, 61), (10, 87), (20, 79), (30, 91), (40, 89), (50, 82)]  minute mod 5: [(0, 122), (1, 124), (2, 91), (3, 72), (4, 80)]
+--- trades/day: max 15 dist [(1, 12), (2, 23), (3, 17), (4, 18), (5, 17), (6, 8), (7, 6), (8, 3), (9, 3), (10, 4), (13, 1), (14, 1), (15, 1)]
+--- same-ticker re-entry gap minutes: n 216 min 0.0 p10 0.0 med 37.6
+    gaps < 30 min: 79  <5min: 41
+--- max trades per ticker per day: 8 dist [(1, 166), (2, 55), (3, 25), (4, 12), (5, 5), (6, 6), (7, 3), (8, 1)]
+--- max same-direction per ticker per day: 8 dist [(1, 195), (2, 62), (3, 20), (4, 11), (5, 4), (6, 4), (7, 2), (8, 1)]
+--- entries after day P&L <= -$300 (approx, uses realized pnl of earlier entries): 10 of 489
+--- size by grade: {'A+': [(1, 106), (2, 25), (3, 21), (5, 15)], 'A': [(1, 182), (2, 19), (3, 18), (5, 6)], 'A-': [(1, 37), (3, 12), (2, 2), (5, 2)], 'B+': [(1, 22), (2, 3), (3, 3), (5, 1)]}
+--- scalp exits after 15:50 ET: [('15:57', 1), ('16:50', 1)]
+--- confidence==0 trades: 225 exit cats [('TRAILING PROFIT (+', 29), ('STOP LOSS (-12%)', 12), ('WIDENED STOP LOSS ', 12), ('🎯 SNIPER: TRAILING', 11), ('STOP LOSS (0%)', 11)] entrySource [('', 225)] tickers [('^SPX', 56), ('SPY', 55), ('QQQ', 54), ('IWM', 24), ('UCO', 5)]
+--- action naming by month: {'2026-03': [('BUY PUTS', 66), ('BUY CALLS', 58)], '2026-04': [('BUY CALLS', 41), ('BUY PUTS', 39)], '2026-05': [('BUY CALLS', 35), ('BUY PUTS', 25), ('BUY_CALLS', 5), ('BUY_PUTS', 4)], '2026-06': [('BUY_CALLS', 29), ('BUY_PUTS', 16)], '2026-07': [('BUY_PUTS', 31), ('BUY_CALLS', 19)], '2026-08': [('BUY_PUTS', 39), ('BUY_CALLS', 33)], '2026-09': [('BUY_CALLS', 29), ('BUY_PUTS', 15)], '2026-10': [('BUY_CALLS', 3), ('BUY_PUTS', 2)]}
+--- sniper rationale: Week is down 1.02% with lower lows. Trend continuation expected. | Structure: BULLISH | OB: BULLISH | Liquidity: BUY_SIDE | Breaker: BEARISH | NY_CLOSE
+--- sniper rationale: Week is up 1.12% with higher highs. Trend continuation expected. | OB: BEARISH | Liquidity: SELL_SIDE | Sweep: SELL_SIDE | Breaker: BULLISH | NY_CLOSE
+--- STANDARD rationale: Week is down 1.02% with lower lows. Trend continuation expected. | Structure: BULLISH | OB: BULLISH | Liquidity: BUY_SIDE | Breaker: BEARISH | NY_CLOSE
+--- STANDARD rationale: Week is up 1.12% with higher highs. Trend continuation expected. | OB: BEARISH | Liquidity: SELL_SIDE | Sweep: SELL_SIDE | Breaker: BULLISH | NY_CLOSE
+--- directionAuditPath sample: null
+--- riskBudget sample: {"accountType": "0DTE", "availableBuyingPower": 11561.300000000003, "buyingPowerPercent": 0.08130573551417226, "computedAt": "2026-10-08T19:25:26.753Z", "contractMultiplier": 100, "contracts": 1, "entryDebit": 9.4, "exerciseStyle": "EUROPEAN", "maxLossDollars": 188, "maxLossPercent": 0.016261147102834453, "positionDebit": 940, "positionDebitPercent": 0.08130573551417226, "settlement": "CASH", "stopLossPercent": 0.2, "ticker": "^RUT"}
+--- pnlAttribution sample: null

@@ -1,0 +1,1 @@
+{"error":{"code":"historical_data_not_supported","message":"This endpoint only returns data for the latest trading day. Use /api/option-trades/full-tape/:date to download the full market file for a historical trading day."}}

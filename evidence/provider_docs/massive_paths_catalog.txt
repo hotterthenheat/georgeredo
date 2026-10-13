@@ -1,0 +1,882 @@
+GET /benzinga/v1/analyst-insights  [benzinga]
+  summary: None
+  params: [('date', 'query', False), ('date.any_of', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('last_updated', 'query', False), ('last_updated.gt', 'query', False), ('last_updated.gte', 'query', False), ('last_updated.lt', 'query', False), ('last_updated.lte', 'query', False), ('firm', 'query', False), ('firm.any_of', 'query', False), ('firm.gt', 'query', False), ('firm.gte', 'query', False), ('firm.lt', 'query', False), ('firm.lte', 'query', False), ('rating_action', 'query', False), ('rating_action.any_of', 'query', False), ('rating_action.gt', 'query', False), ('rating_action.gte', 'query', False), ('rating_action.lt', 'query', False), ('rating_action.lte', 'query', False), ('benzinga_firm_id', 'query', False), ('benzinga_firm_id.any_of', 'query', False), ('benzinga_firm_id.gt', 'query', False), ('benzinga_firm_id.gte', 'query', False), ('benzinga_firm_id.lt', 'query', False), ('benzinga_firm_id.lte', 'query', False), ('benzinga_rating_id', 'query', False), ('benzinga_rating_id.any_of', 'query', False), ('benzinga_rating_id.gt', 'query', False), ('benzinga_rating_id.gte', 'query', False), ('benzinga_rating_id.lt', 'query', False), ('benzinga_rating_id.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A comprehensive database of financial analyst insights and ratings for various publicly traded companies, capturing detailed information about analyst recommendations and price targets.
+
+GET /benzinga/v1/analysts  [benzinga]
+  summary: None
+  params: [('benzinga_id', 'query', False), ('benzinga_id.any_of', 'query', False), ('benzinga_id.gt', 'query', False), ('benzinga_id.gte', 'query', False), ('benzinga_id.lt', 'query', False), ('benzinga_id.lte', 'query', False), ('benzinga_firm_id', 'query', False), ('benzinga_firm_id.any_of', 'query', False), ('benzinga_firm_id.gt', 'query', False), ('benzinga_firm_id.gte', 'query', False), ('benzinga_firm_id.lt', 'query', False), ('benzinga_firm_id.lte', 'query', False), ('firm_name', 'query', False), ('firm_name.any_of', 'query', False), ('firm_name.gt', 'query', False), ('firm_name.gte', 'query', False), ('firm_name.lt', 'query', False), ('firm_name.lte', 'query', False), ('full_name', 'query', False), ('full_name.any_of', 'query', False), ('full_name.gt', 'query', False), ('full_name.gte', 'query', False), ('full_name.lt', 'query', False), ('full_name.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A comprehensive database of financial analysts, containing detailed performance metrics and identification information for individual analysts across various financial firms.
+
+GET /benzinga/v1/bulls-bears-say  [benzinga]
+  summary: None
+  params: [('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('benzinga_id', 'query', False), ('benzinga_id.any_of', 'query', False), ('benzinga_id.gt', 'query', False), ('benzinga_id.gte', 'query', False), ('benzinga_id.lt', 'query', False), ('benzinga_id.lte', 'query', False), ('last_updated', 'query', False), ('last_updated.gt', 'query', False), ('last_updated.gte', 'query', False), ('last_updated.lt', 'query', False), ('last_updated.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A comprehensive database of analyst bull and bear case summaries for publicly traded companies, providing concise summaries of both bullish and bearish investment arguments to help investors see both sides of the story before making investment decisions.
+
+GET /benzinga/v1/consensus-ratings/{ticker}  [benzinga]
+  summary: None
+  params: [('date', 'query', False), ('date.any_of', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('limit', 'query', False), ('ticker', 'path', True)]
+  x: {}
+  desc: A comprehensive financial consensus ratings table that aggregates analyst recommendations and price targets for individual stock tickers, capturing detailed rating breakdowns and statistical insights.
+
+GET /benzinga/v1/earnings  [benzinga]
+  summary: None
+  params: [('date', 'query', False), ('date.any_of', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('importance', 'query', False), ('importance.any_of', 'query', False), ('importance.gt', 'query', False), ('importance.gte', 'query', False), ('importance.lt', 'query', False), ('importance.lte', 'query', False), ('last_updated', 'query', False), ('last_updated.any_of', 'query', False), ('last_updated.gt', 'query', False), ('last_updated.gte', 'query', False), ('last_updated.lt', 'query', False), ('last_updated.lte', 'query', False), ('date_status', 'query', False), ('date_status.any_of', 'query', False), ('date_status.gt', 'query', False), ('date_status.gte', 'query', False), ('date_status.lt', 'query', False), ('date_status.lte', 'query', False), ('eps_surprise_percent', 'query', False), ('eps_surprise_percent.any_of', 'query', False), ('eps_surprise_percent.gt', 'query', False), ('eps_surprise_percent.gte', 'query', False), ('eps_surprise_percent.lt', 'query', False), ('eps_surprise_percent.lte', 'query', False), ('revenue_surprise_percent', 'query', False), ('revenue_surprise_percent.any_of', 'query', False), ('revenue_surprise_percent.gt', 'query', False), ('revenue_surprise_percent.gte', 'query', False), ('revenue_surprise_percent.lt', 'query', False), ('revenue_surprise_percent.lte', 'query', False), ('fiscal_year', 'query', False), ('fiscal_year.any_of', 'query', False), ('fiscal_year.gt', 'query', False), ('fiscal_year.gte', 'query', False), ('fiscal_year.lt', 'query', False), ('fiscal_year.lte', 'query', False), ('fiscal_period', 'query', False), ('fiscal_period.any_of', 'query', False), ('fiscal_period.gt', 'query', False), ('fiscal_period.gte', 'query', False), ('fiscal_period.lt', 'query', False), ('fiscal_period.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: This table contains earnings data from Benzinga, tracking both actual and estimated financial metrics for publicly traded companies. It includes EPS and revenue figures with surprise calculations, along with metadata like fiscal periods, company identifiers, and reporting timestamps.
+
+GET /benzinga/v1/firms  [benzinga]
+  summary: None
+  params: [('benzinga_id', 'query', False), ('benzinga_id.any_of', 'query', False), ('benzinga_id.gt', 'query', False), ('benzinga_id.gte', 'query', False), ('benzinga_id.lt', 'query', False), ('benzinga_id.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A comprehensive database of financial firms, tracking unique identifiers, names, and basic metadata for various financial institutions and research firms.
+
+GET /benzinga/v1/guidance  [benzinga]
+  summary: None
+  params: [('date', 'query', False), ('date.any_of', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('positioning', 'query', False), ('positioning.any_of', 'query', False), ('positioning.gt', 'query', False), ('positioning.gte', 'query', False), ('positioning.lt', 'query', False), ('positioning.lte', 'query', False), ('importance', 'query', False), ('importance.any_of', 'query', False), ('importance.gt', 'query', False), ('importance.gte', 'query', False), ('importance.lt', 'query', False), ('importance.lte', 'query', False), ('last_updated', 'query', False), ('last_updated.any_of', 'query', False), ('last_updated.gt', 'query', False), ('last_updated.gte', 'query', False), ('last_updated.lt', 'query', False), ('last_updated.lte', 'query', False), ('fiscal_year', 'query', False), ('fiscal_year.any_of', 'query', False), ('fiscal_year.gt', 'query', False), ('fiscal_year.gte', 'query', False), ('fiscal_year.lt', 'query', False), ('fiscal_year.lte', 'query', False), ('fiscal_period', 'query', False), ('fiscal_period.any_of', 'query', False), ('fiscal_period.gt', 'query', False), ('fiscal_period.gte', 'query', False), ('fiscal_period.lt', 'query', False), ('fiscal_period.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A comprehensive database of financial guidance and earnings estimates for various companies, capturing key metrics related to earnings per share (EPS) and revenue projections across different fiscal periods.
+
+GET /benzinga/v1/ratings  [benzinga]
+  summary: None
+  params: [('date', 'query', False), ('date.any_of', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('importance', 'query', False), ('importance.gt', 'query', False), ('importance.gte', 'query', False), ('importance.lt', 'query', False), ('importance.lte', 'query', False), ('last_updated', 'query', False), ('last_updated.gt', 'query', False), ('last_updated.gte', 'query', False), ('last_updated.lt', 'query', False), ('last_updated.lte', 'query', False), ('rating_action', 'query', False), ('rating_action.any_of', 'query', False), ('rating_action.gt', 'query', False), ('rating_action.gte', 'query', False), ('rating_action.lt', 'query', False), ('rating_action.lte', 'query', False), ('price_target_action', 'query', False), ('price_target_action.any_of', 'query', False), ('price_target_action.gt', 'query', False), ('price_target_action.gte', 'query', False), ('price_target_action.lt', 'query', False), ('price_target_action.lte', 'query', False), ('benzinga_id', 'query', False), ('benzinga_id.any_of', 'query', False), ('benzinga_id.gt', 'query', False), ('benzinga_id.gte', 'query', False), ('benzinga_id.lt', 'query', False), ('benzinga_id.lte', 'query', False), ('benzinga_analyst_id', 'query', False), ('benzinga_analyst_id.any_of', 'query', False), ('benzinga_analyst_id.gt', 'query', False), ('benzinga_analyst_id.gte', 'query', False), ('benzinga_analyst_id.lt', 'query', False), ('benzinga_analyst_id.lte', 'query', False), ('benzinga_firm_id', 'query', False), ('benzinga_firm_id.any_of', 'query', False), ('benzinga_firm_id.gt', 'query', False), ('benzinga_firm_id.gte', 'query', False), ('benzinga_firm_id.lt', 'query', False), ('benzinga_firm_id.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: This table contains analyst ratings and price target data from investment firms, tracking rating changes (upgrades, downgrades, initiates coverage, etc.) and price target adjustments for publicly traded companies. Each record includes the analyst details, company information, current and previous ratings/targets, and metadata like timestamps and Benzinga identifiers.
+
+GET /benzinga/v2/news  [benzinga]
+  summary: None
+  params: [('published', 'query', False), ('published.gt', 'query', False), ('published.gte', 'query', False), ('published.lt', 'query', False), ('published.lte', 'query', False), ('channels', 'query', False), ('channels.all_of', 'query', False), ('channels.any_of', 'query', False), ('tags', 'query', False), ('tags.all_of', 'query', False), ('tags.any_of', 'query', False), ('author', 'query', False), ('author.any_of', 'query', False), ('author.gt', 'query', False), ('author.gte', 'query', False), ('author.lt', 'query', False), ('author.lte', 'query', False), ('stocks', 'query', False), ('stocks.all_of', 'query', False), ('stocks.any_of', 'query', False), ('tickers', 'query', False), ('tickers.all_of', 'query', False), ('tickers.any_of', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A comprehensive news article database from Benzinga, containing detailed information about financial news articles including metadata, content, and associated financial information.
+
+GET /consumer-spending/eu/v1/merchant-aggregates  [fable]
+  summary: None
+  params: [('transaction_date', 'query', False), ('transaction_date.gt', 'query', False), ('transaction_date.gte', 'query', False), ('transaction_date.lt', 'query', False), ('transaction_date.lte', 'query', False), ('name', 'query', False), ('name.any_of', 'query', False), ('name.gt', 'query', False), ('name.gte', 'query', False), ('name.lt', 'query', False), ('name.lte', 'query', False), ('user_country', 'query', False), ('user_country.any_of', 'query', False), ('channel', 'query', False), ('channel.any_of', 'query', False), ('consumer_type', 'query', False), ('consumer_type.any_of', 'query', False), ('parent_name', 'query', False), ('parent_name.any_of', 'query', False), ('parent_name.gt', 'query', False), ('parent_name.gte', 'query', False), ('parent_name.lt', 'query', False), ('parent_name.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: Aggregated consumer transactions from European credit card panels, structured for flexible analysis and faster access to insights. Each row represents daily credit card, debit card, or open banking transactions (7-day lag from transaction date) at a tagged merchant or payment processor, split across Currency, Country, Online/Offline, and Credit/Debit dimensions. Includes ticker (Bloomberg standard) and industry mapping for ~250 US public companies across 6 European countries (UK, DE, FR, IT, ES,
+
+GET /consumer-spending/eu/v1/merchant-hierarchy  [fable]
+  summary: None
+  params: [('lookup_name', 'query', False), ('lookup_name.any_of', 'query', False), ('lookup_name.gt', 'query', False), ('lookup_name.gte', 'query', False), ('lookup_name.lt', 'query', False), ('lookup_name.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('listing_status', 'query', False), ('listing_status.any_of', 'query', False), ('active_from', 'query', False), ('active_from.gt', 'query', False), ('active_from.gte', 'query', False), ('active_from.lt', 'query', False), ('active_from.lte', 'query', False), ('active_to', 'query', False), ('active_to.gt', 'query', False), ('active_to.gte', 'query', False), ('active_to.lt', 'query', False), ('active_to.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: Reference data mapping merchants to parent companies, tickers, sectors, and industries across Fable's European consumer transaction panel. Each row represents a single merchant with its corporate hierarchy and classification metadata. Weekly snapshots contain ~3,500 merchants covering ~250 US public companies. Use lookup_name to join with the name field from the merchant-aggregates endpoint, filtering by active_from and active_to to match a specific transaction_date (e.g., active_from.lte=2025-0
+
+GET /crypto/v1/exchanges  [global_crypto]
+  summary: None
+  params: [('limit', 'query', False)]
+  x: {}
+  desc: Global cryptocurrency exchanges and digital asset trading platforms, including major centralized exchanges (Coinbase, Binance, Bitfinex, etc.) that facilitate trading of cryptocurrencies and digital tokens worldwide.
+
+GET /etf-global/v1/analytics  [etfglobal]
+  summary: None
+  params: [('composite_ticker', 'query', False), ('composite_ticker.any_of', 'query', False), ('composite_ticker.gt', 'query', False), ('composite_ticker.gte', 'query', False), ('composite_ticker.lt', 'query', False), ('composite_ticker.lte', 'query', False), ('processed_date', 'query', False), ('processed_date.gt', 'query', False), ('processed_date.gte', 'query', False), ('processed_date.lt', 'query', False), ('processed_date.lte', 'query', False), ('effective_date', 'query', False), ('effective_date.gt', 'query', False), ('effective_date.gte', 'query', False), ('effective_date.lt', 'query', False), ('effective_date.lte', 'query', False), ('risk_total_score', 'query', False), ('risk_total_score.gt', 'query', False), ('risk_total_score.gte', 'query', False), ('risk_total_score.lt', 'query', False), ('risk_total_score.lte', 'query', False), ('reward_score', 'query', False), ('reward_score.gt', 'query', False), ('reward_score.gte', 'query', False), ('reward_score.lt', 'query', False), ('reward_score.lte', 'query', False), ('quant_total_score', 'query', False), ('quant_total_score.gt', 'query', False), ('quant_total_score.gte', 'query', False), ('quant_total_score.lt', 'query', False), ('quant_total_score.lte', 'query', False), ('quant_grade', 'query', False), ('quant_grade.any_of', 'query', False), ('quant_grade.gt', 'query', False), ('quant_grade.gte', 'query', False), ('quant_grade.lt', 'query', False), ('quant_grade.lte', 'query', False), ('quant_composite_technical', 'query', False), ('quant_composite_technical.gt', 'query', False), ('quant_composite_technical.gte', 'query', False), ('quant_composite_technical.lt', 'query', False), ('quant_composite_technical.lte', 'query', False), ('quant_composite_sentiment', 'query', False), ('quant_composite_sentiment.gt', 'query', False), ('quant_composite_sentiment.gte', 'query', False), ('quant_composite_sentiment.lt', 'query', False), ('quant_composite_sentiment.lte', 'query', False), ('quant_composite_behavioral', 'query', False), ('quant_composite_behavioral.gt', 'query', False), ('quant_composite_behavioral.gte', 'query', False), ('quant_composite_behavioral.lt', 'query', False), ('quant_composite_behavioral.lte', 'query', False), ('quant_composite_fundamental', 'query', False), ('quant_composite_fundamental.gt', 'query', False), ('quant_composite_fundamental.gte', 'query', False), ('quant_composite_fundamental.lt', 'query', False), ('quant_composite_fundamental.lte', 'query', False), ('quant_composite_global', 'query', False), ('quant_composite_global.gt', 'query', False), ('quant_composite_global.gte', 'query', False), ('quant_composite_global.lt', 'query', False), ('quant_composite_global.lte', 'query', False), ('quant_composite_quality', 'query', False), ('quant_composite_quality.gt', 'query', False), ('quant_composite_quality.gte', 'query', False), ('quant_composite_quality.lt', 'query', False), ('quant_composite_quality.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: ETF Global analytics data containing risk scores, reward metrics, and quantitative analysis for ETF composite tickers.
+
+GET /etf-global/v1/constituents  [etfglobal]
+  summary: None
+  params: [('composite_ticker', 'query', False), ('composite_ticker.any_of', 'query', False), ('composite_ticker.gt', 'query', False), ('composite_ticker.gte', 'query', False), ('composite_ticker.lt', 'query', False), ('composite_ticker.lte', 'query', False), ('constituent_ticker', 'query', False), ('constituent_ticker.any_of', 'query', False), ('constituent_ticker.gt', 'query', False), ('constituent_ticker.gte', 'query', False), ('constituent_ticker.lt', 'query', False), ('constituent_ticker.lte', 'query', False), ('effective_date', 'query', False), ('effective_date.gt', 'query', False), ('effective_date.gte', 'query', False), ('effective_date.lt', 'query', False), ('effective_date.lte', 'query', False), ('processed_date', 'query', False), ('processed_date.gt', 'query', False), ('processed_date.gte', 'query', False), ('processed_date.lt', 'query', False), ('processed_date.lte', 'query', False), ('us_code', 'query', False), ('us_code.any_of', 'query', False), ('us_code.gt', 'query', False), ('us_code.gte', 'query', False), ('us_code.lt', 'query', False), ('us_code.lte', 'query', False), ('isin', 'query', False), ('isin.any_of', 'query', False), ('isin.gt', 'query', False), ('isin.gte', 'query', False), ('isin.lt', 'query', False), ('isin.lte', 'query', False), ('figi', 'query', False), ('figi.any_of', 'query', False), ('figi.gt', 'query', False), ('figi.gte', 'query', False), ('figi.lt', 'query', False), ('figi.lte', 'query', False), ('sedol', 'query', False), ('sedol.any_of', 'query', False), ('sedol.gt', 'query', False), ('sedol.gte', 'query', False), ('sedol.lt', 'query', False), ('sedol.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: ETF Global constituents data containing detailed information about the securities held within ETFs, including weights, market values, and security identifiers.
+
+GET /etf-global/v1/fund-flows  [etfglobal]
+  summary: None
+  params: [('processed_date', 'query', False), ('processed_date.gt', 'query', False), ('processed_date.gte', 'query', False), ('processed_date.lt', 'query', False), ('processed_date.lte', 'query', False), ('effective_date', 'query', False), ('effective_date.gt', 'query', False), ('effective_date.gte', 'query', False), ('effective_date.lt', 'query', False), ('effective_date.lte', 'query', False), ('composite_ticker', 'query', False), ('composite_ticker.any_of', 'query', False), ('composite_ticker.gt', 'query', False), ('composite_ticker.gte', 'query', False), ('composite_ticker.lt', 'query', False), ('composite_ticker.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: ETF Global fund flow data containing information about ETF share movements, net asset values, and fund flow metrics.
+
+GET /etf-global/v1/profiles  [etfglobal]
+  summary: None
+  params: [('processed_date', 'query', False), ('processed_date.gt', 'query', False), ('processed_date.gte', 'query', False), ('processed_date.lt', 'query', False), ('processed_date.lte', 'query', False), ('effective_date', 'query', False), ('effective_date.gt', 'query', False), ('effective_date.gte', 'query', False), ('effective_date.lt', 'query', False), ('effective_date.lte', 'query', False), ('composite_ticker', 'query', False), ('composite_ticker.any_of', 'query', False), ('composite_ticker.gt', 'query', False), ('composite_ticker.gte', 'query', False), ('composite_ticker.lt', 'query', False), ('composite_ticker.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: ETF Global industry profile data containing comprehensive ETF metadata including financial metrics, operational details, and exposure information.
+
+GET /etf-global/v1/taxonomies  [etfglobal]
+  summary: None
+  params: [('processed_date', 'query', False), ('processed_date.gt', 'query', False), ('processed_date.gte', 'query', False), ('processed_date.lt', 'query', False), ('processed_date.lte', 'query', False), ('effective_date', 'query', False), ('effective_date.gt', 'query', False), ('effective_date.gte', 'query', False), ('effective_date.lt', 'query', False), ('effective_date.lte', 'query', False), ('composite_ticker', 'query', False), ('composite_ticker.any_of', 'query', False), ('composite_ticker.gt', 'query', False), ('composite_ticker.gte', 'query', False), ('composite_ticker.lt', 'query', False), ('composite_ticker.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: ETF Global taxonomy data containing detailed classification and categorization information for ETFs including investment strategy, methodology, and structural characteristics.
+
+GET /fed/v1/funding-conditions  [fed]
+  summary: None
+  params: [('date', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: Daily U.S. money-market funding conditions from the Federal Reserve and the Federal Reserve Bank of New York, including the Federal Funds Effective Rate, SOFR, OBFR, tri-party general collateral repo rates, Treasury-collateralized overnight reverse repo and repo operation amounts, and commercial paper rates. One row per calendar day; daily federal-funds series generally populate calendar-day rows, while market-rate, volume, and commercial-paper series are generally published on business days and
+
+GET /fed/v1/inflation  [fed]
+  summary: None
+  params: [('date', 'query', False), ('date.any_of', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A table tracking inflation and price indices, including Consumer Price Index (CPI) and Personal Consumption Expenditures (PCE) metrics over time.
+
+GET /fed/v1/inflation-expectations  [fed]
+  summary: None
+  params: [('date', 'query', False), ('date.any_of', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A table tracking inflation expectations from both market-based and economic model perspectives across different time horizons.
+
+GET /fed/v1/labor-market  [fed]
+  summary: None
+  params: [('date', 'query', False), ('date.any_of', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: Labor market indicators from the Federal Reserve, including unemployment rate, labor force participation, average hourly earnings, and job openings data.
+
+GET /fed/v1/treasury-yields  [fed]
+  summary: None
+  params: [('date', 'query', False), ('date.any_of', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A record of U.S. Treasury bond yields across various maturity periods, tracking historical interest rates from short-term to long-term government securities.
+
+GET /forex/v1/exchanges  [global_forex]
+  summary: None
+  params: [('limit', 'query', False)]
+  x: {}
+  desc: Global foreign exchange (FX) trading venues and market infrastructure, including electronic trading platforms, banks, and other institutions facilitating currency pair trading worldwide.
+
+GET /futures/v1/aggs/{ticker}  [futures:aggregates]
+  summary: Aggregates
+  params: [('ticker', 'path', True), ('resolution', 'query', False), ('window_start', 'query', False), ('limit', 'query', False), ('window_start.gte', 'query', False), ('window_start.gt', 'query', False), ('window_start.lte', 'query', False), ('window_start.lt', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Futures data", "name": "futures"}}
+  desc: Get aggregates for a contract in a given time range.
+
+GET /futures/v1/contracts  [us_futures]
+  summary: futures contracts API
+  params: [('date', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('product_code', 'query', False), ('product_code.any_of', 'query', False), ('product_code.gt', 'query', False), ('product_code.gte', 'query', False), ('product_code.lt', 'query', False), ('product_code.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('active', 'query', False), ('type', 'query', False), ('type.any_of', 'query', False), ('first_trade_date', 'query', False), ('first_trade_date.gt', 'query', False), ('first_trade_date.gte', 'query', False), ('first_trade_date.lt', 'query', False), ('first_trade_date.lte', 'query', False), ('last_trade_date', 'query', False), ('last_trade_date.gt', 'query', False), ('last_trade_date.gte', 'query', False), ('last_trade_date.lt', 'query', False), ('last_trade_date.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: The Contracts API provides a single source for discovering all listed futures contracts and retrieving complete contract specifications. You can query the full contract index with filters for product code, trade dates, active status, and date, returning key attributes such as ticker, first and last trade dates, days to maturity, exchange code, and order quantity limits in paginated form. The same API also returns the full specification for a single contract, including settlement dates, tick size
+
+GET /futures/v1/exchanges  [us_futures]
+  summary: None
+  params: [('limit', 'query', False)]
+  x: {}
+  desc: US futures exchanges and trading venues including major derivatives exchanges (CME, CBOT, NYMEX, COMEX) and other futures market infrastructure for commodity, financial, and other derivative contract trading.
+
+GET /futures/v1/market-status  [us_futures]
+  summary: Market Status API
+  params: [('product_code', 'query', False), ('product_code.any_of', 'query', False), ('product_code.gt', 'query', False), ('product_code.gte', 'query', False), ('product_code.lt', 'query', False), ('product_code.lte', 'query', False), ('limit', 'query', False)]
+  x: {}
+  desc: Retrieve the current market status for a specific product or products. This endpoint returns real-time indicators, such as open, pause, close, for futures products, along with the corresponding exchange and product codes and an evaluation timestamp. This information enables users to monitor operational conditions and adjust their trading strategies accordingly.  Use Cases: Real-time monitoring, algorithm scheduling, UI updates, operational planning.
+
+GET /futures/v1/products  [us_futures]
+  summary: Futures Products API
+  params: [('name', 'query', False), ('name.any_of', 'query', False), ('name.gt', 'query', False), ('name.gte', 'query', False), ('name.lt', 'query', False), ('name.lte', 'query', False), ('product_code', 'query', False), ('product_code.any_of', 'query', False), ('product_code.gt', 'query', False), ('product_code.gte', 'query', False), ('product_code.lt', 'query', False), ('product_code.lte', 'query', False), ('date', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('trading_venue', 'query', False), ('trading_venue.any_of', 'query', False), ('trading_venue.gt', 'query', False), ('trading_venue.gte', 'query', False), ('trading_venue.lt', 'query', False), ('trading_venue.lte', 'query', False), ('sector', 'query', False), ('sector.any_of', 'query', False), ('sub_sector', 'query', False), ('sub_sector.any_of', 'query', False), ('asset_class', 'query', False), ('asset_class.any_of', 'query', False), ('asset_sub_class', 'query', False), ('asset_sub_class.any_of', 'query', False), ('type', 'query', False), ('type.any_of', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: The Products API is a unified source for discovering all supported futures products and retrieving full product specifications. It returns the complete product universe with product codes, names, exchange identifiers, sector and asset class classifications, product type, settlement method, and pricing and quotation details. You can filter by name, exchange, sector, asset class, product type, or date to capture the product set or product definition that existed at a specific point in time. It als
+
+GET /futures/v1/products/new  [us_futures]
+  summary: Futures Products API
+  params: [('name', 'query', False), ('name.any_of', 'query', False), ('name.gt', 'query', False), ('name.gte', 'query', False), ('name.lt', 'query', False), ('name.lte', 'query', False), ('product_code', 'query', False), ('product_code.any_of', 'query', False), ('product_code.gt', 'query', False), ('product_code.gte', 'query', False), ('product_code.lt', 'query', False), ('product_code.lte', 'query', False), ('provider_id', 'query', False), ('provider_id.any_of', 'query', False), ('provider_id.gt', 'query', False), ('provider_id.gte', 'query', False), ('provider_id.lt', 'query', False), ('provider_id.lte', 'query', False), ('date', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('trading_venue', 'query', False), ('trading_venue.any_of', 'query', False), ('trading_venue.gt', 'query', False), ('trading_venue.gte', 'query', False), ('trading_venue.lt', 'query', False), ('trading_venue.lte', 'query', False), ('sector', 'query', False), ('sector.any_of', 'query', False), ('sub_sector', 'query', False), ('sub_sector.any_of', 'query', False), ('asset_class', 'query', False), ('asset_class.any_of', 'query', False), ('asset_sub_class', 'query', False), ('asset_sub_class.any_of', 'query', False), ('type', 'query', False), ('type.any_of', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: The Products API is a unified source for discovering all supported futures products and retrieving full product specifications. It returns the complete product universe with product codes, names, exchange identifiers, sector and asset class classifications, product type, settlement method, and pricing and quotation details. You can filter by name, exchange, sector, asset class, product type, or date to capture the product set or product definition that existed at a specific point in time. It als
+
+GET /futures/v1/quotes/{ticker}  [us_futures]
+  summary: None
+  params: [('timestamp', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.lt', 'query', False), ('timestamp.lte', 'query', False), ('session_end_date', 'query', False), ('limit', 'query', False), ('sort', 'query', False), ('ticker', 'path', True)]
+  x: {}
+  desc: Retrieve quote data for a specified futures contract ticker. Each record includes the best bid and offer prices, sizes, and timestamps, reflecting the prevailing quote environment at each moment. This endpoint supports detailed analysis of price dynamics and liquidity conditions to inform trading decisions and market research.  Use Cases: Liquidity analysis, price discovery, trading strategy refinement, market research.
+
+GET /futures/v1/schedules  [us_futures]
+  summary: Futures Schedules API
+  params: [('product_code', 'query', False), ('product_code.any_of', 'query', False), ('product_code.gt', 'query', False), ('product_code.gte', 'query', False), ('product_code.lt', 'query', False), ('product_code.lte', 'query', False), ('session_end_date', 'query', False), ('session_end_date.gt', 'query', False), ('session_end_date.gte', 'query', False), ('session_end_date.lt', 'query', False), ('session_end_date.lte', 'query', False), ('trading_venue', 'query', False), ('trading_venue.any_of', 'query', False), ('trading_venue.gt', 'query', False), ('trading_venue.gte', 'query', False), ('trading_venue.lt', 'query', False), ('trading_venue.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: The Schedules API provides a unified way to retrieve trading schedules for futures markets, returning precise session open and close times, intraday breaks, and any adjustments for holidays or special events. You can filter schedules by session_end_date or retrieve the schedule for a single product using its product code. All times are returned in Coordinated Universal Time (UTC), making it straightforward to align trading, execution, and operational workflows across systems.  Use Cases: Schedul
+
+GET /futures/v1/snapshot  [us_futures]
+  summary: futures_snapshot_v1 API
+  params: [('product_code', 'query', False), ('product_code.any_of', 'query', False), ('product_code.gt', 'query', False), ('product_code.gte', 'query', False), ('product_code.lt', 'query', False), ('product_code.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: Retrieve a snapshot of the most recent futures contract data.
+
+GET /futures/v1/trades/{ticker}  [us_futures]
+  summary: None
+  params: [('timestamp', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.lt', 'query', False), ('timestamp.lte', 'query', False), ('session_end_date', 'query', False), ('limit', 'query', False), ('sort', 'query', False), ('ticker', 'path', True)]
+  x: {}
+  desc: Retrieve comprehensive, tick-level trade data for a specified futures contract ticker over a defined time range. Each record includes the trade price, size, session start date, and precise timestamps, capturing individual trade events throughout the period. This granular data is essential for constructing aggregated bars and performing detailed analyses of intraday price movements, making it a valuable tool for backtesting, algorithmic strategy development, and market research.  Use Cases: Intra
+
+GET /options/v1/exchanges  [us_options]
+  summary: None
+  params: [('limit', 'query', False)]
+  x: {}
+  desc: US options exchanges and trading venues including traditional options exchanges (CBOE, ISE, etc.), Securities Information Processors (SIP), and other options market infrastructure for derivatives trading.
+
+GET /options/v3/quotes/{ticker}  [us_options]
+  summary: None
+  params: [('timestamp', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.lt', 'query', False), ('timestamp.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False), ('ticker', 'path', True)]
+  x: {}
+  desc: Contains NBBO (National Best Bid and Offer) quote records for US options contracts, capturing bid/ask prices, sizes, and exchange attribution at nanosecond precision.
+
+GET /options/v3/trades/{ticker}  [us_options]
+  summary: None
+  params: [('timestamp', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.lt', 'query', False), ('timestamp.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False), ('ticker', 'path', True)]
+  x: {}
+  desc: Contains individual trade transactions for US options contracts, capturing trade execution details including pricing, timing, and exchange information.
+
+GET /stocks/dev/trades/{ticker}  [us_stocks_all]
+  summary: None
+  params: [('sip_timestamp', 'query', False), ('sip_timestamp.gt', 'query', False), ('sip_timestamp.gte', 'query', False), ('sip_timestamp.lt', 'query', False), ('sip_timestamp.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False), ('ticker', 'path', True)]
+  x: {}
+  desc: Contains individual trade transactions for US stocks, capturing trade execution details including pricing, timing, and exchange information.
+
+GET /stocks/filings/10-K/vX/sections  [reference]
+  summary: None
+  params: [('cik', 'query', False), ('cik.any_of', 'query', False), ('cik.gt', 'query', False), ('cik.gte', 'query', False), ('cik.lt', 'query', False), ('cik.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('section', 'query', False), ('section.any_of', 'query', False), ('filing_date', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.lt', 'query', False), ('filing_date.lte', 'query', False), ('period_end', 'query', False), ('period_end.gt', 'query', False), ('period_end.gte', 'query', False), ('period_end.lt', 'query', False), ('period_end.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: SEC document text sections providing raw text content from specific sections of SEC filings (10-K, 10-Q, etc.).
+
+GET /stocks/filings/10-K/vX_0/sections  [reference]
+  summary: None
+  params: [('cik', 'query', False), ('cik.any_of', 'query', False), ('cik.gt', 'query', False), ('cik.gte', 'query', False), ('cik.lt', 'query', False), ('cik.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('section', 'query', False), ('section.any_of', 'query', False), ('filing_date', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.lt', 'query', False), ('filing_date.lte', 'query', False), ('period_end', 'query', False), ('period_end.gt', 'query', False), ('period_end.gte', 'query', False), ('period_end.lt', 'query', False), ('period_end.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: SEC document text sections providing raw text content from specific sections of SEC filings (10-K, 10-Q, etc.).
+
+GET /stocks/filings/8-K/vX/disclosures  [reference]
+  summary: None
+  params: [('cik', 'query', False), ('cik.any_of', 'query', False), ('tickers', 'query', False), ('tickers.all_of', 'query', False), ('tickers.any_of', 'query', False), ('filing_date', 'query', False), ('filing_date.any_of', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.lt', 'query', False), ('filing_date.lte', 'query', False), ('tertiary_category', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: SEC 8-K filing disclosure categorization. A single 8-K filing can produce multiple rows when it covers multiple disclosure types — each row represents one tagged disclosure within the filing, classified into primary, secondary, and tertiary categories with a supporting text excerpt. The full classification list is available at /stocks/taxonomies/vX/disclosures.
+
+GET /stocks/filings/8-K/vX/text  [reference]
+  summary: None
+  params: [('cik', 'query', False), ('cik.any_of', 'query', False), ('cik.gt', 'query', False), ('cik.gte', 'query', False), ('cik.lt', 'query', False), ('cik.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('form_type', 'query', False), ('form_type.any_of', 'query', False), ('form_type.gt', 'query', False), ('form_type.gte', 'query', False), ('form_type.lt', 'query', False), ('form_type.lte', 'query', False), ('filing_date', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.lt', 'query', False), ('filing_date.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: SEC 8-K filings text providing parsed content from current report filings. 8-K forms report material events such as earnings, acquisitions, executive changes, and other significant corporate events.
+
+GET /stocks/filings/vX/13-F  [reference]
+  summary: None
+  params: [('filer_cik', 'query', False), ('filer_cik.any_of', 'query', False), ('filing_date', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.lt', 'query', False), ('filing_date.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: SEC Form 13F filings data showing institutional investment manager holdings. Form 13F is required to be filed quarterly by institutional investment managers with at least $100 million in qualifying assets under management.
+
+GET /stocks/filings/vX/form-3  [reference]
+  summary: None
+  params: [('issuer_cik', 'query', False), ('issuer_cik.any_of', 'query', False), ('owner_cik', 'query', False), ('owner_cik.any_of', 'query', False), ('tickers', 'query', False), ('tickers.all_of', 'query', False), ('tickers.any_of', 'query', False), ('form_type', 'query', False), ('filing_date', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.lt', 'query', False), ('filing_date.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: SEC Form 3 filings reporting initial statements of beneficial ownership of securities. Filed by corporate insiders (directors, officers, and 10%+ shareholders) when they first acquire a position.
+
+GET /stocks/filings/vX/form-4  [reference]
+  summary: None
+  params: [('issuer_cik', 'query', False), ('issuer_cik.any_of', 'query', False), ('owner_cik', 'query', False), ('owner_cik.any_of', 'query', False), ('tickers', 'query', False), ('tickers.all_of', 'query', False), ('tickers.any_of', 'query', False), ('form_type', 'query', False), ('filing_date', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.lt', 'query', False), ('filing_date.lte', 'query', False), ('transaction_code', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: SEC Form 4 filings reporting changes in beneficial ownership of securities. Filed by corporate insiders (directors, officers, and 10%+ shareholders) within two business days of a transaction.
+
+GET /stocks/filings/vX/index  [reference]
+  summary: None
+  params: [('cik', 'query', False), ('cik.any_of', 'query', False), ('cik.gt', 'query', False), ('cik.gte', 'query', False), ('cik.lt', 'query', False), ('cik.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('form_type', 'query', False), ('form_type.any_of', 'query', False), ('form_type.gt', 'query', False), ('form_type.gte', 'query', False), ('form_type.lt', 'query', False), ('form_type.lte', 'query', False), ('filing_date', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.lt', 'query', False), ('filing_date.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: SEC EDGAR master index providing metadata for all SEC filings including form types, filing dates, and direct links to source documents.
+
+GET /stocks/filings/vX/risk-factors  [reference]
+  summary: None
+  params: [('filing_date', 'query', False), ('filing_date.any_of', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.lt', 'query', False), ('filing_date.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('cik', 'query', False), ('cik.any_of', 'query', False), ('cik.gt', 'query', False), ('cik.gte', 'query', False), ('cik.lt', 'query', False), ('cik.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: The risk factors identified in companies' 10K filings.
+
+GET /stocks/financials/v1/balance-sheets  [financials]
+  summary: None
+  params: [('cik', 'query', False), ('cik.any_of', 'query', False), ('cik.gt', 'query', False), ('cik.gte', 'query', False), ('cik.lt', 'query', False), ('cik.lte', 'query', False), ('tickers', 'query', False), ('tickers.all_of', 'query', False), ('tickers.any_of', 'query', False), ('period_end', 'query', False), ('period_end.gt', 'query', False), ('period_end.gte', 'query', False), ('period_end.lt', 'query', False), ('period_end.lte', 'query', False), ('filing_date', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.lt', 'query', False), ('filing_date.lte', 'query', False), ('fiscal_year', 'query', False), ('fiscal_year.gt', 'query', False), ('fiscal_year.gte', 'query', False), ('fiscal_year.lt', 'query', False), ('fiscal_year.lte', 'query', False), ('fiscal_quarter', 'query', False), ('fiscal_quarter.gt', 'query', False), ('fiscal_quarter.gte', 'query', False), ('fiscal_quarter.lt', 'query', False), ('fiscal_quarter.lte', 'query', False), ('timeframe', 'query', False), ('timeframe.any_of', 'query', False), ('timeframe.gt', 'query', False), ('timeframe.gte', 'query', False), ('timeframe.lt', 'query', False), ('timeframe.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A comprehensive financial dataset containing quarterly and annual balance sheet data for public companies. Includes detailed asset, liability, and equity positions representing the company's financial position at specific points in time. Balance sheet data represents point-in-time snapshots rather than cumulative flows, showing what the company owns, owes, and shareholders' equity as of each period end date.
+
+GET /stocks/financials/v1/cash-flow-statements  [financials]
+  summary: None
+  params: [('cik', 'query', False), ('cik.any_of', 'query', False), ('cik.gt', 'query', False), ('cik.gte', 'query', False), ('cik.lt', 'query', False), ('cik.lte', 'query', False), ('period_end', 'query', False), ('period_end.gt', 'query', False), ('period_end.gte', 'query', False), ('period_end.lt', 'query', False), ('period_end.lte', 'query', False), ('filing_date', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.lt', 'query', False), ('filing_date.lte', 'query', False), ('tickers', 'query', False), ('tickers.all_of', 'query', False), ('tickers.any_of', 'query', False), ('fiscal_year', 'query', False), ('fiscal_year.gt', 'query', False), ('fiscal_year.gte', 'query', False), ('fiscal_year.lt', 'query', False), ('fiscal_year.lte', 'query', False), ('fiscal_quarter', 'query', False), ('fiscal_quarter.gt', 'query', False), ('fiscal_quarter.gte', 'query', False), ('fiscal_quarter.lt', 'query', False), ('fiscal_quarter.lte', 'query', False), ('timeframe', 'query', False), ('timeframe.any_of', 'query', False), ('timeframe.gt', 'query', False), ('timeframe.gte', 'query', False), ('timeframe.lt', 'query', False), ('timeframe.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A comprehensive financial dataset containing quarterly, annual, and trailing twelve-month cash flow statement data for public companies. Includes detailed operating, investing, and financing cash flows with proper TTM calculations that sum all cash flow components over four quarters. TTM records are validated to ensure exactly four distinct quarters spanning 250-400 days for accurate trailing twelve-month cash flow analysis.
+
+GET /stocks/financials/v1/income-statements  [financials]
+  summary: None
+  params: [('cik', 'query', False), ('cik.any_of', 'query', False), ('cik.gt', 'query', False), ('cik.gte', 'query', False), ('cik.lt', 'query', False), ('cik.lte', 'query', False), ('tickers', 'query', False), ('tickers.all_of', 'query', False), ('tickers.any_of', 'query', False), ('period_end', 'query', False), ('period_end.gt', 'query', False), ('period_end.gte', 'query', False), ('period_end.lt', 'query', False), ('period_end.lte', 'query', False), ('filing_date', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.lt', 'query', False), ('filing_date.lte', 'query', False), ('fiscal_year', 'query', False), ('fiscal_year.gt', 'query', False), ('fiscal_year.gte', 'query', False), ('fiscal_year.lt', 'query', False), ('fiscal_year.lte', 'query', False), ('fiscal_quarter', 'query', False), ('fiscal_quarter.gt', 'query', False), ('fiscal_quarter.gte', 'query', False), ('fiscal_quarter.lt', 'query', False), ('fiscal_quarter.lte', 'query', False), ('timeframe', 'query', False), ('timeframe.any_of', 'query', False), ('timeframe.gt', 'query', False), ('timeframe.gte', 'query', False), ('timeframe.lt', 'query', False), ('timeframe.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A comprehensive database of income statement financial data for public companies, including key metrics such as revenue, expenses, and net income for various reporting periods.
+
+GET /stocks/financials/v1/ratios  [financials]
+  summary: None
+  params: [('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('cik', 'query', False), ('cik.any_of', 'query', False), ('cik.gt', 'query', False), ('cik.gte', 'query', False), ('cik.lt', 'query', False), ('cik.lte', 'query', False), ('price', 'query', False), ('price.gt', 'query', False), ('price.gte', 'query', False), ('price.lt', 'query', False), ('price.lte', 'query', False), ('average_volume', 'query', False), ('average_volume.gt', 'query', False), ('average_volume.gte', 'query', False), ('average_volume.lt', 'query', False), ('average_volume.lte', 'query', False), ('market_cap', 'query', False), ('market_cap.gt', 'query', False), ('market_cap.gte', 'query', False), ('market_cap.lt', 'query', False), ('market_cap.lte', 'query', False), ('earnings_per_share', 'query', False), ('earnings_per_share.gt', 'query', False), ('earnings_per_share.gte', 'query', False), ('earnings_per_share.lt', 'query', False), ('earnings_per_share.lte', 'query', False), ('price_to_earnings', 'query', False), ('price_to_earnings.gt', 'query', False), ('price_to_earnings.gte', 'query', False), ('price_to_earnings.lt', 'query', False), ('price_to_earnings.lte', 'query', False), ('price_to_book', 'query', False), ('price_to_book.gt', 'query', False), ('price_to_book.gte', 'query', False), ('price_to_book.lt', 'query', False), ('price_to_book.lte', 'query', False), ('price_to_sales', 'query', False), ('price_to_sales.gt', 'query', False), ('price_to_sales.gte', 'query', False), ('price_to_sales.lt', 'query', False), ('price_to_sales.lte', 'query', False), ('price_to_cash_flow', 'query', False), ('price_to_cash_flow.gt', 'query', False), ('price_to_cash_flow.gte', 'query', False), ('price_to_cash_flow.lt', 'query', False), ('price_to_cash_flow.lte', 'query', False), ('price_to_free_cash_flow', 'query', False), ('price_to_free_cash_flow.gt', 'query', False), ('price_to_free_cash_flow.gte', 'query', False), ('price_to_free_cash_flow.lt', 'query', False), ('price_to_free_cash_flow.lte', 'query', False), ('dividend_yield', 'query', False), ('dividend_yield.gt', 'query', False), ('dividend_yield.gte', 'query', False), ('dividend_yield.lt', 'query', False), ('dividend_yield.lte', 'query', False), ('return_on_assets', 'query', False), ('return_on_assets.gt', 'query', False), ('return_on_assets.gte', 'query', False), ('return_on_assets.lt', 'query', False), ('return_on_assets.lte', 'query', False), ('return_on_equity', 'query', False), ('return_on_equity.gt', 'query', False), ('return_on_equity.gte', 'query', False), ('return_on_equity.lt', 'query', False), ('return_on_equity.lte', 'query', False), ('debt_to_equity', 'query', False), ('debt_to_equity.gt', 'query', False), ('debt_to_equity.gte', 'query', False), ('debt_to_equity.lt', 'query', False), ('debt_to_equity.lte', 'query', False), ('current', 'query', False), ('current.gt', 'query', False), ('current.gte', 'query', False), ('current.lt', 'query', False), ('current.lte', 'query', False), ('quick', 'query', False), ('quick.gt', 'query', False), ('quick.gte', 'query', False), ('quick.lt', 'query', False), ('quick.lte', 'query', False), ('cash', 'query', False), ('cash.gt', 'query', False), ('cash.gte', 'query', False), ('cash.lt', 'query', False), ('cash.lte', 'query', False), ('ev_to_sales', 'query', False), ('ev_to_sales.gt', 'query', False), ('ev_to_sales.gte', 'query', False), ('ev_to_sales.lt', 'query', False), ('ev_to_sales.lte', 'query', False), ('ev_to_ebitda', 'query', False), ('ev_to_ebitda.gt', 'query', False), ('ev_to_ebitda.gte', 'query', False), ('ev_to_ebitda.lt', 'query', False), ('ev_to_ebitda.lte', 'query', False), ('enterprise_value', 'query', False), ('enterprise_value.gt', 'query', False), ('enterprise_value.gte', 'query', False), ('enterprise_value.lt', 'query', False), ('enterprise_value.lte', 'query', False), ('free_cash_flow', 'query', False), ('free_cash_flow.gt', 'query', False), ('free_cash_flow.gte', 'query', False), ('free_cash_flow.lt', 'query', False), ('free_cash_flow.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: A comprehensive financial ratios dataset providing key valuation, profitability, liquidity, and leverage metrics for public companies. Combines data from income statements, balance sheets, and cash flow statements with daily stock prices to calculate ratios on a daily basis. Uses trailing twelve months (TTM) data for income/cash flow metrics and quarterly data for balance sheet items. Fundamental data updates are applied starting from each filing's period end date. Market cap calculations use po
+
+GET /stocks/taxonomies/vX/disclosures  [reference]
+  summary: None
+  params: [('taxonomy', 'query', False), ('taxonomy.any_of', 'query', False), ('taxonomy.gt', 'query', False), ('taxonomy.gte', 'query', False), ('taxonomy.lt', 'query', False), ('taxonomy.lte', 'query', False), ('primary_category', 'query', False), ('primary_category.any_of', 'query', False), ('primary_category.gt', 'query', False), ('primary_category.gte', 'query', False), ('primary_category.lt', 'query', False), ('primary_category.lte', 'query', False), ('secondary_category', 'query', False), ('secondary_category.any_of', 'query', False), ('secondary_category.gt', 'query', False), ('secondary_category.gte', 'query', False), ('secondary_category.lt', 'query', False), ('secondary_category.lte', 'query', False), ('tertiary_category', 'query', False), ('tertiary_category.any_of', 'query', False), ('tertiary_category.gt', 'query', False), ('tertiary_category.gte', 'query', False), ('tertiary_category.lt', 'query', False), ('tertiary_category.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: The complete list of 8-K disclosure classifications used in the 8-K disclosures endpoint.
+
+GET /stocks/taxonomies/vX/risk-factors  [reference]
+  summary: None
+  params: [('taxonomy', 'query', False), ('taxonomy.gt', 'query', False), ('taxonomy.gte', 'query', False), ('taxonomy.lt', 'query', False), ('taxonomy.lte', 'query', False), ('primary_category', 'query', False), ('primary_category.any_of', 'query', False), ('primary_category.gt', 'query', False), ('primary_category.gte', 'query', False), ('primary_category.lt', 'query', False), ('primary_category.lte', 'query', False), ('secondary_category', 'query', False), ('secondary_category.any_of', 'query', False), ('secondary_category.gt', 'query', False), ('secondary_category.gte', 'query', False), ('secondary_category.lt', 'query', False), ('secondary_category.lte', 'query', False), ('tertiary_category', 'query', False), ('tertiary_category.any_of', 'query', False), ('tertiary_category.gt', 'query', False), ('tertiary_category.gte', 'query', False), ('tertiary_category.lt', 'query', False), ('tertiary_category.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: The complete list of risk factor classifications used in the risk factors endpoint.
+
+GET /stocks/v1/dividends  [us_stocks_reference]
+  summary: None
+  params: [('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('ex_dividend_date', 'query', False), ('ex_dividend_date.gt', 'query', False), ('ex_dividend_date.gte', 'query', False), ('ex_dividend_date.lt', 'query', False), ('ex_dividend_date.lte', 'query', False), ('frequency', 'query', False), ('frequency.gt', 'query', False), ('frequency.gte', 'query', False), ('frequency.lt', 'query', False), ('frequency.lte', 'query', False), ('distribution_type', 'query', False), ('distribution_type.any_of', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: Contains historical dividend payment records for US stocks with split-adjusted amounts and historical adjustment factors for price normalization.
+
+GET /stocks/v1/exchanges  [us_stocks_all]
+  summary: None
+  params: [('limit', 'query', False)]
+  x: {}
+  desc: US stock exchanges, trading venues, and reporting facilities including exchanges (NYSE, Nasdaq), Trade Reporting Facilities (TRF), Securities Information Processors (SIP), and OTC Reporting Facilities (ORF) for equity trading.
+
+GET /stocks/v1/short-interest  [reference]
+  summary: None
+  params: [('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('days_to_cover', 'query', False), ('days_to_cover.any_of', 'query', False), ('days_to_cover.gt', 'query', False), ('days_to_cover.gte', 'query', False), ('days_to_cover.lt', 'query', False), ('days_to_cover.lte', 'query', False), ('settlement_date', 'query', False), ('settlement_date.any_of', 'query', False), ('settlement_date.gt', 'query', False), ('settlement_date.gte', 'query', False), ('settlement_date.lt', 'query', False), ('settlement_date.lte', 'query', False), ('avg_daily_volume', 'query', False), ('avg_daily_volume.any_of', 'query', False), ('avg_daily_volume.gt', 'query', False), ('avg_daily_volume.gte', 'query', False), ('avg_daily_volume.lt', 'query', False), ('avg_daily_volume.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: Comprehensive FINRA short interest data that tracks the short selling metrics for securities on a specific settlement date.
+
+GET /stocks/v1/short-volume  [reference]
+  summary: None
+  params: [('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('date', 'query', False), ('date.any_of', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('short_volume_ratio', 'query', False), ('short_volume_ratio.any_of', 'query', False), ('short_volume_ratio.gt', 'query', False), ('short_volume_ratio.gte', 'query', False), ('short_volume_ratio.lt', 'query', False), ('short_volume_ratio.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: Contains short selling volume for different stock tickers, capturing total trading volume, short sale details, and breakdown by different trading platforms.
+
+GET /stocks/v1/splits  [us_stocks_reference]
+  summary: None
+  params: [('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('execution_date', 'query', False), ('execution_date.gt', 'query', False), ('execution_date.gte', 'query', False), ('execution_date.lt', 'query', False), ('execution_date.lte', 'query', False), ('adjustment_type', 'query', False), ('adjustment_type.any_of', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: Contains historical stock split and reverse split events for US equities with historical adjustment factors for price normalization.
+
+GET /stocks/vX/float  [reference]
+  summary: None
+  params: [('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('free_float_percent', 'query', False), ('free_float_percent.gt', 'query', False), ('free_float_percent.gte', 'query', False), ('free_float_percent.lt', 'query', False), ('free_float_percent.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: Contains free float data for US-listed securities, showing the most recent available number of shares available for public trading and the percentage of total shares outstanding.
+
+GET /tmx/v1/corporate-events  [tmx]
+  summary: None
+  params: [('date', 'query', False), ('date.any_of', 'query', False), ('date.gt', 'query', False), ('date.gte', 'query', False), ('date.lt', 'query', False), ('date.lte', 'query', False), ('type', 'query', False), ('type.any_of', 'query', False), ('type.gt', 'query', False), ('type.gte', 'query', False), ('type.lt', 'query', False), ('type.lte', 'query', False), ('status', 'query', False), ('status.any_of', 'query', False), ('status.gt', 'query', False), ('status.gte', 'query', False), ('status.lt', 'query', False), ('status.lte', 'query', False), ('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('isin', 'query', False), ('isin.any_of', 'query', False), ('isin.gt', 'query', False), ('isin.gte', 'query', False), ('isin.lt', 'query', False), ('isin.lte', 'query', False), ('trading_venue', 'query', False), ('trading_venue.any_of', 'query', False), ('trading_venue.gt', 'query', False), ('trading_venue.gte', 'query', False), ('trading_venue.lt', 'query', False), ('trading_venue.lte', 'query', False), ('tmx_company_id', 'query', False), ('tmx_company_id.gt', 'query', False), ('tmx_company_id.gte', 'query', False), ('tmx_company_id.lt', 'query', False), ('tmx_company_id.lte', 'query', False), ('tmx_record_id', 'query', False), ('tmx_record_id.any_of', 'query', False), ('tmx_record_id.gt', 'query', False), ('tmx_record_id.gte', 'query', False), ('tmx_record_id.lt', 'query', False), ('tmx_record_id.lte', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: Contains corporate events and announcements for publicly traded companies, including earnings releases, conferences, dividends, and business updates sourced from TMX.
+
+GET /v1/conversion/{from}/{to}  [fx:conversion]
+  summary: Real-time Currency Conversion
+  params: [('from', 'path', True), ('to', 'path', True), ('amount', 'query', False), ('precision', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "NBBO data", "name": "nbbo"}, "x-polygon-entitlement-market-type": {"description": "Forex data", "name": "fx"}}
+  desc: Get currency conversions using the latest market conversion rates. Note than you can convert in both directions. For example USD to CAD or CAD to USD.
+
+GET /v1/historic/crypto/{from}/{to}/{date}  [crypto:trades]
+  summary: Historic Crypto Trades
+  params: [('from', 'path', True), ('to', 'path', True), ('date', 'path', True), ('offset', 'query', False), ('limit', 'query', False)]
+  x: {"x-polygon-deprecation": {"date": 1654056060000, "replaces": {"name": "Trades v3", "path": "get_v3_trades__cryptoticker"}}, "x-polygon-entitlement-data-type": {"description": "Trade data", "name": "trades"}, "x-polygon-entitlement-market-type": {"description": "Crypto data", "name": "crypto"}}
+  desc: Get historic trade ticks for a cryptocurrency pair. 
+
+GET /v1/historic/forex/{from}/{to}/{date}  [fx:trades]
+  summary: Historic Forex Ticks
+  params: [('from', 'path', True), ('to', 'path', True), ('date', 'path', True), ('offset', 'query', False), ('limit', 'query', False)]
+  x: {"x-polygon-deprecation": {"date": 1654056060000, "replaces": {"name": "Quotes (BBO) v3", "path": "get_v3_quotes__fxticker"}}, "x-polygon-entitlement-data-type": {"description": "NBBO data", "name": "nbbo"}, "x-polygon-entitlement-market-type": {"description": "Forex data", "name": "fx"}}
+  desc: Get historic ticks for a forex currency pair. 
+
+GET /v1/indicators/ema/{cryptoTicker}  [crypto:aggregates]
+  summary: Exponential Moving Average (EMA)
+  params: [('cryptoTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Crypto data", "name": "crypto"}}
+  desc: Get the exponential moving average (EMA) for a ticker symbol over a given time range.
+
+GET /v1/indicators/ema/{fxTicker}  [fx:aggregates]
+  summary: Exponential Moving Average (EMA)
+  params: [('fxTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Forex data", "name": "fx"}}
+  desc: Get the exponential moving average (EMA) for a ticker symbol over a given time range.
+
+GET /v1/indicators/ema/{indicesTicker}  [indices:aggregates]
+  summary: Exponential Moving Average (EMA)
+  params: [('indicesTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-allowed-limited-tickers": true, "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Indices data", "name": "indices"}}
+  desc: Get the exponential moving average (EMA) for a ticker symbol over a given time range.
+
+GET /v1/indicators/ema/{optionsTicker}  [options:aggregates]
+  summary: Exponential Moving Average (EMA)
+  params: [('optionsTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Options data", "name": "options"}}
+  desc: Get the exponential moving average (EMA) for a ticker symbol over a given time range.
+
+GET /v1/indicators/ema/{stockTicker}  [stocks:aggregates]
+  summary: Exponential Moving Average (EMA)
+  params: [('stockTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}}
+  desc: Get the exponential moving average (EMA) for a ticker symbol over a given time range.
+
+GET /v1/indicators/macd/{cryptoTicker}  [crypto:aggregates]
+  summary: Moving Average Convergence/Divergence (MACD)
+  params: [('cryptoTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('short_window', 'query', False), ('long_window', 'query', False), ('signal_window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Crypto data", "name": "crypto"}}
+  desc: Get moving average convergence/divergence (MACD) data for a ticker symbol over a given time range.
+
+GET /v1/indicators/macd/{fxTicker}  [fx:aggregates]
+  summary: Moving Average Convergence/Divergence (MACD)
+  params: [('fxTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('short_window', 'query', False), ('long_window', 'query', False), ('signal_window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Forex data", "name": "fx"}}
+  desc: Get moving average convergence/divergence (MACD) data for a ticker symbol over a given time range.
+
+GET /v1/indicators/macd/{indicesTicker}  [indices:aggregates]
+  summary: Moving Average Convergence/Divergence (MACD)
+  params: [('indicesTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('short_window', 'query', False), ('long_window', 'query', False), ('signal_window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-allowed-limited-tickers": true, "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Indices data", "name": "indices"}}
+  desc: Get moving average convergence/divergence (MACD) for a ticker symbol over a given time range.
+
+GET /v1/indicators/macd/{optionsTicker}  [options:aggregates]
+  summary: Moving Average Convergence/Divergence (MACD)
+  params: [('optionsTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('short_window', 'query', False), ('long_window', 'query', False), ('signal_window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Options data", "name": "options"}}
+  desc: Get moving average convergence/divergence (MACD) for a ticker symbol over a given time range.
+
+GET /v1/indicators/macd/{stockTicker}  [stocks:aggregates]
+  summary: Moving Average Convergence/Divergence (MACD)
+  params: [('stockTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('short_window', 'query', False), ('long_window', 'query', False), ('signal_window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}}
+  desc: Get moving average convergence/divergence (MACD) data for a ticker symbol over a given time range.
+
+GET /v1/indicators/rsi/{cryptoTicker}  [crypto:aggregates]
+  summary: Relative Strength Index (RSI)
+  params: [('cryptoTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Crypto data", "name": "crypto"}}
+  desc: Get the relative strength index (RSI) for a ticker symbol over a given time range.
+
+GET /v1/indicators/rsi/{fxTicker}  [fx:aggregates]
+  summary: Relative Strength Index (RSI)
+  params: [('fxTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Forex data", "name": "fx"}}
+  desc: Get the relative strength index (RSI) for a ticker symbol over a given time range.
+
+GET /v1/indicators/rsi/{indicesTicker}  [indices:aggregates]
+  summary: Relative Strength Index (RSI)
+  params: [('indicesTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-allowed-limited-tickers": true, "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Indices data", "name": "indices"}}
+  desc: Get the relative strength index (RSI) for a ticker symbol over a given time range.
+
+GET /v1/indicators/rsi/{optionsTicker}  [options:aggregates]
+  summary: Relative Strength Index (RSI)
+  params: [('optionsTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Options data", "name": "options"}}
+  desc: Get the relative strength index (RSI) for a ticker symbol over a given time range.
+
+GET /v1/indicators/rsi/{stockTicker}  [stocks:aggregates]
+  summary: Relative Strength Index (RSI)
+  params: [('stockTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}}
+  desc: Get the relative strength index (RSI) for a ticker symbol over a given time range.
+
+GET /v1/indicators/sma/{cryptoTicker}  [crypto:aggregates]
+  summary: Simple Moving Average (SMA)
+  params: [('cryptoTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Crypto data", "name": "crypto"}}
+  desc: Get the simple moving average (SMA) for a ticker symbol over a given time range.
+
+GET /v1/indicators/sma/{fxTicker}  [fx:aggregates]
+  summary: Simple Moving Average (SMA)
+  params: [('fxTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Forex data", "name": "fx"}}
+  desc: Get the simple moving average (SMA) for a ticker symbol over a given time range.
+
+GET /v1/indicators/sma/{indicesTicker}  [indices:aggregates]
+  summary: Simple Moving Average (SMA)
+  params: [('indicesTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-allowed-limited-tickers": true, "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Indices data", "name": "indices"}}
+  desc: Get the simple moving average (SMA) for a ticker symbol over a given time range.
+
+GET /v1/indicators/sma/{optionsTicker}  [options:aggregates]
+  summary: Simple Moving Average (SMA)
+  params: [('optionsTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Options data", "name": "options"}}
+  desc: Get the simple moving average (SMA) for a ticker symbol over a given time range.
+
+GET /v1/indicators/sma/{stockTicker}  [stocks:aggregates]
+  summary: Simple Moving Average (SMA)
+  params: [('stockTicker', 'path', True), ('timestamp', 'query', False), ('timespan', 'query', False), ('adjusted', 'query', False), ('window', 'query', False), ('series_type', 'query', False), ('expand_underlying', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}}
+  desc: Get the simple moving average (SMA) for a ticker symbol over a given time range.
+
+GET /v1/last/crypto/{from}/{to}  [crypto:last:trade]
+  summary: Last Trade for a Crypto Pair
+  params: [('from', 'path', True), ('to', 'path', True)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Trade data", "name": "trades"}, "x-polygon-entitlement-market-type": {"description": "Crypto data", "name": "crypto"}}
+  desc: Get the last trade tick for a cryptocurrency pair.
+
+GET /v1/last_quote/currencies/{from}/{to}  [fx:last:quote]
+  summary: Last Quote for a Currency Pair
+  params: [('from', 'path', True), ('to', 'path', True)]
+  x: {"x-polygon-entitlement-data-type": {"description": "NBBO data", "name": "nbbo"}, "x-polygon-entitlement-market-type": {"description": "Forex data", "name": "fx"}}
+  desc: Get the last quote tick for a forex currency pair.
+
+GET /v1/marketstatus/now  [reference:stocks:market]
+  summary: Market Status
+  params: []
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}}
+  desc: Get the current trading status of the exchanges and overall financial markets.
+
+GET /v1/marketstatus/upcoming  [reference:stocks:market]
+  summary: Market Holidays
+  params: []
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}}
+  desc: Get upcoming market holidays and their open/close times.
+
+GET /v1/open-close/crypto/{from}/{to}/{date}  [crypto:open-close]
+  summary: Daily Open/Close
+  params: [('from', 'path', True), ('to', 'path', True), ('date', 'path', True), ('adjusted', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Crypto data", "name": "crypto"}}
+  desc: Get the open, close prices of a cryptocurrency symbol on a certain day. 
+
+GET /v1/open-close/{indicesTicker}/{date}  [stocks:open-close]
+  summary: Daily Open/Close
+  params: [('indicesTicker', 'path', True), ('date', 'path', True)]
+  x: {"x-polygon-entitlement-allowed-limited-tickers": true, "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Indices data", "name": "indices"}}
+  desc: Get the open, close and afterhours values of a index symbol on a certain date. 
+
+GET /v1/open-close/{optionsTicker}/{date}  [options:open-close]
+  summary: Daily Open/Close
+  params: [('optionsTicker', 'path', True), ('date', 'path', True), ('adjusted', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Options data", "name": "options"}}
+  desc: Get the open, close and afterhours prices of an options contract on a certain date. 
+
+GET /v1/open-close/{stocksTicker}/{date}  [stocks:open-close]
+  summary: Daily Open/Close
+  params: [('stocksTicker', 'path', True), ('date', 'path', True), ('adjusted', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}}
+  desc: Get the open, close and afterhours prices of a stock symbol on a certain date. 
+
+GET /v1/reference/ipos  [us_stocks_reference]
+  summary: None
+  params: [('ticker', 'query', False), ('ticker.any_of', 'query', False), ('ticker.gt', 'query', False), ('ticker.gte', 'query', False), ('ticker.lt', 'query', False), ('ticker.lte', 'query', False), ('us_code', 'query', False), ('us_code.any_of', 'query', False), ('us_code.gt', 'query', False), ('us_code.gte', 'query', False), ('us_code.lt', 'query', False), ('us_code.lte', 'query', False), ('isin', 'query', False), ('isin.any_of', 'query', False), ('isin.gt', 'query', False), ('isin.gte', 'query', False), ('isin.lt', 'query', False), ('isin.lte', 'query', False), ('listing_date', 'query', False), ('listing_date.gt', 'query', False), ('listing_date.gte', 'query', False), ('listing_date.lt', 'query', False), ('listing_date.lte', 'query', False), ('ipo_status', 'query', False), ('ipo_status.any_of', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {}
+  desc: Contains comprehensive data about Initial Public Offerings (IPOs) and direct listings for US stocks, tracking both historical and pending offerings with detailed pricing, share, and timing information.
+
+GET /v1/reference/sec/filings  [reference:sec:filings]
+  summary: SEC Filings
+  params: [('type', 'query', False), ('filing_date', 'query', False), ('period_of_report_date', 'query', False), ('has_xbrl', 'query', False), ('entities.company_data.name', 'query', False), ('entities.company_data.cik', 'query', False), ('entities.company_data.ticker', 'query', False), ('entities.company_data.sic', 'query', False), ('filing_date.gte', 'query', False), ('filing_date.gt', 'query', False), ('filing_date.lte', 'query', False), ('filing_date.lt', 'query', False), ('period_of_report_date.gte', 'query', False), ('period_of_report_date.gt', 'query', False), ('period_of_report_date.lte', 'query', False), ('period_of_report_date.lt', 'query', False), ('entities.company_data.name.search', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}, "x-polygon-paginate": {"sort": {"default": "filing_date", "enum": ["filing_date", "period_of_report_date"]}}}
+  desc: List filings
+
+GET /v1/reference/sec/filings/{filing_id}  [reference:sec:filing]
+  summary: SEC Filing
+  params: [('filing_id', 'path', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}}
+  desc: Get filing
+
+GET /v1/reference/sec/filings/{filing_id}/files  [reference:sec:filing:files]
+  summary: SEC Filing Files
+  params: [('filing_id', 'path', False), ('sequence', 'query', False), ('filename', 'query', False), ('sequence.gte', 'query', False), ('sequence.gt', 'query', False), ('sequence.lte', 'query', False), ('sequence.lt', 'query', False), ('filename.gte', 'query', False), ('filename.gt', 'query', False), ('filename.lte', 'query', False), ('filename.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}, "x-polygon-paginate": {"sort": {"default": "sequence", "enum": ["sequence", "filename"]}}}
+  desc: List filing files
+
+GET /v1/reference/sec/filings/{filing_id}/files/{file_id}  [reference:sec:filing:file]
+  summary: SEC Filing File
+  params: [('filing_id', 'path', False), ('file_id', 'path', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}}
+  desc: Get filing file
+
+GET /v1/related-companies/{ticker}  [reference:related:companies]
+  summary: Related Companies
+  params: [('ticker', 'path', True)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}}
+  desc: Get a list of tickers related to the queried ticker based on News and Returns data.
+
+GET /v1/summaries  [?]
+  summary: Summaries
+  params: [('ticker.any_of', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}}
+  desc: Get everything needed to visualize the tick-by-tick movement of a list of tickers.
+
+GET /v2/aggs/grouped/locale/global/market/crypto/{date}  [crypto:aggregates]
+  summary: Grouped Daily (Bars)
+  params: [('date', 'path', True), ('adjusted', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Crypto data", "name": "crypto"}}
+  desc: Get the daily open, high, low, and close (OHLC) for the entire cryptocurrency markets. 
+
+GET /v2/aggs/grouped/locale/global/market/fx/{date}  [fx:aggregates]
+  summary: Grouped Daily (Bars)
+  params: [('date', 'path', True), ('adjusted', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Forex data", "name": "fx"}}
+  desc: Get the daily open, high, low, and close (OHLC) for the entire forex markets. 
+
+GET /v2/aggs/grouped/locale/us/market/stocks/{date}  [stocks:aggregates]
+  summary: Grouped Daily (Bars)
+  params: [('date', 'path', True), ('adjusted', 'query', False), ('include_otc', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}}
+  desc: Get the daily open, high, low, and close (OHLC) for the entire stocks/equities markets. 
+
+GET /v2/aggs/ticker/{cryptoTicker}/prev  [crypto:aggregates]
+  summary: Previous Close
+  params: [('cryptoTicker', 'path', True), ('adjusted', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Crypto data", "name": "crypto"}}
+  desc: Get the previous day's open, high, low, and close (OHLC) for the specified cryptocurrency pair. 
+
+GET /v2/aggs/ticker/{cryptoTicker}/range/{multiplier}/{timespan}/{from}/{to}  [crypto:aggregates]
+  summary: Aggregates (Bars)
+  params: [('cryptoTicker', 'path', True), ('multiplier', 'path', True), ('timespan', 'path', True), ('from', 'path', True), ('to', 'path', True), ('adjusted', 'query', False), ('sort', 'query', False), ('limit', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Crypto data", "name": "crypto"}}
+  desc: Get aggregate bars for a cryptocurrency pair over a given date range in custom time window sizes. <br /> <br /> For example, if timespan = ‘minute’ and multiplier = ‘5’ then 5-minute bars will be returned. 
+
+GET /v2/aggs/ticker/{forexTicker}/prev  [fx:aggregates]
+  summary: Previous Close
+  params: [('forexTicker', 'path', True), ('adjusted', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Forex data", "name": "fx"}}
+  desc: Get the previous day's open, high, low, and close (OHLC) for the specified forex pair. 
+
+GET /v2/aggs/ticker/{forexTicker}/range/{multiplier}/{timespan}/{from}/{to}  [fx:aggregates]
+  summary: Aggregates (Bars)
+  params: [('forexTicker', 'path', True), ('multiplier', 'path', True), ('timespan', 'path', True), ('from', 'path', True), ('to', 'path', True), ('adjusted', 'query', False), ('sort', 'query', False), ('limit', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Forex data", "name": "fx"}}
+  desc: Get aggregate bars for a forex pair over a given date range in custom time window sizes. <br /> <br /> For example, if timespan = ‘minute’ and multiplier = ‘5’ then 5-minute bars will be returned. 
+
+GET /v2/aggs/ticker/{indicesTicker}/prev  [indices:aggregates]
+  summary: Previous Close
+  params: [('indicesTicker', 'path', True)]
+  x: {"x-polygon-entitlement-allowed-limited-tickers": true, "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Indices data", "name": "indices"}}
+  desc: Get the previous day's open, high, low, and close (OHLC) for the specified index. 
+
+GET /v2/aggs/ticker/{indicesTicker}/range/{multiplier}/{timespan}/{from}/{to}  [indices:aggregates]
+  summary: Aggregates (Bars)
+  params: [('indicesTicker', 'path', True), ('multiplier', 'path', True), ('timespan', 'path', True), ('from', 'path', True), ('to', 'path', True), ('sort', 'query', False), ('limit', 'query', False)]
+  x: {"x-polygon-entitlement-allowed-limited-tickers": true, "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Indices data", "name": "indices"}}
+  desc: Get aggregate bars for an index over a given date range in custom time window sizes. <br /> <br /> For example, if timespan = ‘minute’ and multiplier = ‘5’ then 5-minute bars will be returned. 
+
+GET /v2/aggs/ticker/{optionsTicker}/prev  [options:aggregates]
+  summary: Previous Close
+  params: [('optionsTicker', 'path', True), ('adjusted', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Options data", "name": "options"}}
+  desc: Get the previous day's open, high, low, and close (OHLC) for the specified option contract. 
+
+GET /v2/aggs/ticker/{optionsTicker}/range/{multiplier}/{timespan}/{from}/{to}  [options:aggregates]
+  summary: Aggregates (Bars)
+  params: [('optionsTicker', 'path', True), ('multiplier', 'path', True), ('timespan', 'path', True), ('from', 'path', True), ('to', 'path', True), ('adjusted', 'query', False), ('sort', 'query', False), ('limit', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Options data", "name": "options"}}
+  desc: Get aggregate bars for an option contract over a given date range in custom time window sizes. <br /> <br /> For example, if timespan = ‘minute’ and multiplier = ‘5’ then 5-minute bars will be returned. 
+
+GET /v2/aggs/ticker/{stocksTicker}/prev  [stocks:aggregates]
+  summary: Previous Close
+  params: [('stocksTicker', 'path', True), ('adjusted', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}}
+  desc: Get the previous day's open, high, low, and close (OHLC) for the specified stock ticker. 
+
+GET /v2/aggs/ticker/{stocksTicker}/range/{multiplier}/{timespan}/{from}/{to}  [stocks:aggregates]
+  summary: Aggregates (Bars)
+  params: [('stocksTicker', 'path', True), ('multiplier', 'path', True), ('timespan', 'path', True), ('from', 'path', True), ('to', 'path', True), ('adjusted', 'query', False), ('sort', 'query', False), ('limit', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}}
+  desc: Get aggregate bars for a stock over a given date range in custom time window sizes. <br /> <br /> For example, if timespan = ‘minute’ and multiplier = ‘5’ then 5-minute bars will be returned. 
+
+GET /v2/last/nbbo/{stocksTicker}  [stocks:last:quote]
+  summary: Last Quote
+  params: [('stocksTicker', 'path', True)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "NBBO data", "name": "nbbo"}, "x-polygon-entitlement-market-type": {"description": "S
+  desc: Get the most recent NBBO (Quote) tick for a given stock.
+
+GET /v2/last/trade/{optionsTicker}  [options:last:trade]
+  summary: Last Trade
+  params: [('optionsTicker', 'path', True)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Trade data", "name": "trades"}, "x-polygon-entitlement-market-type": {"description":
+  desc: Get the most recent trade for a given options contract.
+
+GET /v2/last/trade/{stocksTicker}  [stocks:last:trade]
+  summary: Last Trade
+  params: [('stocksTicker', 'path', True)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Trade data", "name": "trades"}, "x-polygon-entitlement-market-type": {"description":
+  desc: Get the most recent trade for a given stock.
+
+GET /v2/reference/news  [reference:news]
+  summary: Ticker News
+  params: [('ticker', 'query', False), ('published_utc', 'query', False), ('ticker.gte', 'query', False), ('ticker.gt', 'query', False), ('ticker.lte', 'query', False), ('ticker.lt', 'query', False), ('published_utc.gte', 'query', False), ('published_utc.gt', 'query', False), ('published_utc.lte', 'query', False), ('published_utc.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}, "x-polygon-paginate": {"order": {"default": "desc"}, "sort": {"default": "published_utc", "enum": ["published_utc"], "limit": {"default": 10, "maximum": 1000, "minimum": 1}}}}
+  desc: Get the most recent news articles relating to a stock ticker symbol, including a summary of the article and a link to the original source.
+
+GET /v2/snapshot/locale/global/markets/crypto/tickers  [crypto:snapshot]
+  summary: All Tickers
+  params: [('tickers', 'query', False)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"descr
+  desc: Get the current minute, day, and previous day’s aggregate, as well as the last trade and quote for all traded cryptocurrency symbols. <br /> <br /> Note: Snapshot data is cleared at 12am EST and gets populated as data is received from the exchanges. This can happen as early as 4am EST. 
+
+GET /v2/snapshot/locale/global/markets/crypto/tickers/{ticker}  [crypto:snapshot]
+  summary: Ticker
+  params: [('ticker', 'path', True)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"descr
+  desc: Get the current minute, day, and previous day’s aggregate, as well as the last trade and quote for a single traded cryptocurrency symbol. <br /> <br /> Note: Snapshot data is cleared at 12am EST and gets populated as data is received from the exchanges. 
+
+GET /v2/snapshot/locale/global/markets/crypto/tickers/{ticker}/book  [crypto:snapshot]
+  summary: Ticker Full Book (L2)
+  params: [('ticker', 'path', True)]
+  x: {"x-polygon-deprecation": {"date": 1719838800000}, "x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregat
+  desc: Get the current level 2 book of a single ticker. This is the combined book from all of the exchanges. <br /> <br /> Note: Snapshot data is cleared at 12am EST and gets populated as data is received from the exchanges. 
+
+GET /v2/snapshot/locale/global/markets/crypto/{direction}  [crypto:snapshot]
+  summary: Gainers/Losers
+  params: [('direction', 'path', True)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"descr
+  desc: Get the current top 20 gainers or losers of the day in cryptocurrency markets. <br /> <br /> Top gainers are those tickers whose price has increased by the highest percentage since the previous day's close. Top losers are those tickers whose price has decreased by the highest percentage since the previous day's close. <br /> <br /> Note: Snapshot data is cleared at 12am EST and gets populated as data is received from the exchanges. 
+
+GET /v2/snapshot/locale/global/markets/forex/tickers  [fx:snapshot]
+  summary: All Tickers
+  params: [('tickers', 'query', False)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"descr
+  desc: Get the current minute, day, and previous day’s aggregate, as well as the last trade and quote for all traded forex symbols. <br /> <br /> Note: Snapshot data is cleared at 12am EST and gets populated as data is received from the exchanges. This can happen as early as 4am EST. 
+
+GET /v2/snapshot/locale/global/markets/forex/tickers/{ticker}  [fx:snapshot]
+  summary: Ticker
+  params: [('ticker', 'path', True)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"descr
+  desc: Get the current minute, day, and previous day’s aggregate, as well as the last trade and quote for a single traded currency symbol. <br /> <br /> Note: Snapshot data is cleared at 12am EST and gets populated as data is received from the exchanges. 
+
+GET /v2/snapshot/locale/global/markets/forex/{direction}  [fx:snapshot]
+  summary: Gainers/Losers
+  params: [('direction', 'path', True)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"descr
+  desc: Get the current top 20 gainers or losers of the day in forex markets. <br /> <br /> Top gainers are those tickers whose price has increased by the highest percentage since the previous day's close. Top losers are those tickers whose price has decreased by the highest percentage since the previous day's close. <br /> <br /> Note: Snapshot data is cleared at 12am EST and gets populated as data is received from the exchanges. 
+
+GET /v2/snapshot/locale/us/markets/stocks/tickers  [stocks:snapshot]
+  summary: All Tickers
+  params: [('tickers', 'query', False), ('include_otc', 'query', False)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"descr
+  desc: Get the most up-to-date market data for all traded stock symbols. <br /> <br /> Note: Snapshot data is cleared at 3:30am EST and gets populated as data is received from the exchanges. This can happen as early as 4am EST. 
+
+GET /v2/snapshot/locale/us/markets/stocks/tickers/{stocksTicker}  [stocks:snapshot]
+  summary: Ticker
+  params: [('stocksTicker', 'path', True)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"descr
+  desc: Get the most up-to-date market data for a single traded stock ticker. <br /> <br /> Note: Snapshot data is cleared at 3:30am EST and gets populated as data is received from the exchanges. This can happen as early as 4am EST. 
+
+GET /v2/snapshot/locale/us/markets/stocks/{direction}  [stocks:snapshot]
+  summary: Gainers/Losers
+  params: [('direction', 'path', True), ('include_otc', 'query', False)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"descr
+  desc: Get the most up-to-date market data for the current top 20 gainers or losers of the day in the stocks/equities markets. <br /> <br /> Top gainers are those tickers whose price has increased by the highest percentage since the previous day's close. Top losers are those tickers whose price has decreased by the highest percentage since the previous day's close. This output will only include tickers with a trading volume of 10,000 or more. <br /> <br /> Note: Snapshot data is cleared at 3:30am EST a
+
+GET /v2/ticks/stocks/nbbo/{ticker}/{date}  [stocks:quotes]
+  summary: Quotes (NBBO)
+  params: [('ticker', 'path', True), ('date', 'path', True), ('timestamp', 'query', False), ('timestampLimit', 'query', False), ('reverse', 'query', False), ('limit', 'query', False)]
+  x: {"x-polygon-deprecation": {"date": 1654056060000, "replaces": {"name": "Quotes (NBBO) v3", "path": "get_v3_quotes__stockticker"}}, "x-polygon-entitlement-data-type": {"description": "NBBO data", "name": "nbbo"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}}
+  desc: Get NBBO quotes for a given ticker symbol on a specified date. 
+
+GET /v2/ticks/stocks/trades/{ticker}/{date}  [stocks:trades]
+  summary: Trades
+  params: [('ticker', 'path', True), ('date', 'path', True), ('timestamp', 'query', False), ('timestampLimit', 'query', False), ('reverse', 'query', False), ('limit', 'query', False)]
+  x: {"x-polygon-deprecation": {"date": 1654056060000, "replaces": {"name": "Trades v3", "path": "get_v3_trades__stockticker"}}, "x-polygon-entitlement-data-type": {"description": "Trade data", "name": "trades"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}}
+  desc: Get trades for a given ticker symbol on a specified date. 
+
+GET /v3/quotes/{fxTicker}  [fx:quotes]
+  summary: Quotes (BBO)
+  params: [('fxTicker', 'path', True), ('timestamp', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "NBBO data", "name": "nbbo"}, "x-polygon-entitlement-market-type": {"description": "Forex data", "name": "fx"}, "x-polygon-paginate": {"limit": {"default": 1000, "example": 10, "max": 50000}, "order": {"default": "desc"}, "sort": {"default": "times
+  desc: Get BBO quotes for a ticker symbol in a given time range.
+
+GET /v3/quotes/{optionsTicker}  [options:quotes]
+  summary: Quotes
+  params: [('optionsTicker', 'path', True), ('timestamp', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "NBBO data", "name": "nbbo"}, "x-polygon-entitlement-market-type": {"description": "Options data", "name": "options"}, "x-polygon-paginate": {"limit": {"default": 1000, "example": 10, "max": 50000}, "order": {"default": "desc"}, "sort": {"default":
+  desc: Get quotes for an options ticker symbol in a given time range.
+
+GET /v3/quotes/{stockTicker}  [stocks:quotes]
+  summary: Quotes (NBBO)
+  params: [('stockTicker', 'path', True), ('timestamp', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "NBBO data", "name": "nbbo"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}, "x-polygon-paginate": {"limit": {"default": 1000, "example": 10, "max": 50000}, "order": {"default": "desc"}, "sort": {"default": "
+  desc: Get NBBO quotes for a ticker symbol in a given time range.
+
+GET /v3/reference/conditions  [reference:conditions]
+  summary: Conditions
+  params: [('asset_class', 'query', False), ('data_type', 'query', False), ('id', 'query', False), ('sip', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}, "x-polygon-paginate": {"limit": {"default": 10, "max": 1000}, "sort": {"default": "asset_class", "enum": ["asset_class", "id", "type", "name", "data_types", "legacy"]}}}
+  desc: List all conditions that Massive uses.
+
+GET /v3/reference/dividends  [reference:dividends]
+  summary: Dividends v3
+  params: [('ticker', 'query', False), ('ex_dividend_date', 'query', False), ('record_date', 'query', False), ('declaration_date', 'query', False), ('pay_date', 'query', False), ('frequency', 'query', False), ('cash_amount', 'query', False), ('dividend_type', 'query', False), ('ticker.gte', 'query', False), ('ticker.gt', 'query', False), ('ticker.lte', 'query', False), ('ticker.lt', 'query', False), ('ex_dividend_date.gte', 'query', False), ('ex_dividend_date.gt', 'query', False), ('ex_dividend_date.lte', 'query', False), ('ex_dividend_date.lt', 'query', False), ('record_date.gte', 'query', False), ('record_date.gt', 'query', False), ('record_date.lte', 'query', False), ('record_date.lt', 'query', False), ('declaration_date.gte', 'query', False), ('declaration_date.gt', 'query', False), ('declaration_date.lte', 'query', False), ('declaration_date.lt', 'query', False), ('pay_date.gte', 'query', False), ('pay_date.gt', 'query', False), ('pay_date.lte', 'query', False), ('pay_date.lt', 'query', False), ('cash_amount.gte', 'query', False), ('cash_amount.gt', 'query', False), ('cash_amount.lte', 'query', False), ('cash_amount.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}, "x-polygon-paginate": {"limit": {"default": 10, "max": 1000}, "sort": {"default": "ex_dividend_date", "enum": ["ex_dividend_date", "pay_date", "declaration_date", "record_date", "cash_amount", "ticker"]}}}
+  desc: Get a list of historical cash dividends, including the ticker symbol, declaration date, ex-dividend date, record date, pay date, frequency, and amount.
+
+GET /v3/reference/exchanges  [reference:exchanges]
+  summary: Exchanges
+  params: [('asset_class', 'query', False), ('locale', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}}
+  desc: List all exchanges that Massive knows about.
+
+GET /v3/reference/options/contracts  [reference:options:contracts:list]
+  summary: Options Contracts
+  params: [('underlying_ticker', 'query', False), ('ticker', 'query', False), ('contract_type', 'query', False), ('expiration_date', 'query', False), ('as_of', 'query', False), ('strike_price', 'query', False), ('expired', 'query', False), ('underlying_ticker.gte', 'query', False), ('underlying_ticker.gt', 'query', False), ('underlying_ticker.lte', 'query', False), ('underlying_ticker.lt', 'query', False), ('expiration_date.gte', 'query', False), ('expiration_date.gt', 'query', False), ('expiration_date.lte', 'query', False), ('expiration_date.lt', 'query', False), ('strike_price.gte', 'query', False), ('strike_price.gt', 'query', False), ('strike_price.lte', 'query', False), ('strike_price.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}, "x-polygon-paginate": {"limit": {"default": 10, "max": 1000}, "sort": {"default": "ticker", "enum": ["ticker", "underlying_ticker", "expiration_date", "strike_price"]}}}
+  desc: Query for historical options contracts. This provides both active and expired options contracts.
+
+GET /v3/reference/options/contracts/{options_ticker}  [reference:options:contract]
+  summary: Options Contract
+  params: [('options_ticker', 'path', True), ('as_of', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}}
+  desc: Get an options contract
+
+GET /v3/reference/splits  [reference:stocks]
+  summary: Stock Splits v3
+  params: [('ticker', 'query', False), ('execution_date', 'query', False), ('reverse_split', 'query', False), ('ticker.gte', 'query', False), ('ticker.gt', 'query', False), ('ticker.lte', 'query', False), ('ticker.lt', 'query', False), ('execution_date.gte', 'query', False), ('execution_date.gt', 'query', False), ('execution_date.lte', 'query', False), ('execution_date.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}, "x-polygon-paginate": {"limit": {"default": 10, "max": 1000}, "sort": {"default": "execution_date", "enum": ["execution_date", "ticker"]}}}
+  desc: Get a list of historical stock splits, including the ticker symbol, the execution date, and the factors of the split ratio.
+
+GET /v3/reference/tickers  [reference:tickers:list]
+  summary: Tickers
+  params: [('ticker', 'query', False), ('type', 'query', False), ('market', 'query', False), ('exchange', 'query', False), ('cusip', 'query', False), ('cik', 'query', False), ('date', 'query', False), ('search', 'query', False), ('active', 'query', False), ('ticker.gte', 'query', False), ('ticker.gt', 'query', False), ('ticker.lte', 'query', False), ('ticker.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}, "x-polygon-paginate": {"limit": {"default": 100, "max": 1000}, "sort": {"default": "ticker", "enum": ["ticker", "name", "market", "locale", "primary_exchange", "type", "currency_symbol", "currency_name", "bas
+  desc: Query all ticker symbols which are supported by Massive. This API currently includes Stocks/Equities, Indices, Forex, and Crypto.
+
+GET /v3/reference/tickers/types  [reference:tickers:types]
+  summary: Ticker Types
+  params: [('asset_class', 'query', False), ('locale', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}}
+  desc: List all ticker types that Massive has.
+
+GET /v3/reference/tickers/{ticker}  [reference:tickers:get]
+  summary: Ticker Details v3
+  params: [('ticker', 'path', True), ('date', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}}
+  desc: Get a single ticker supported by Massive. This response will have detailed information about the ticker and the company behind it.
+
+GET /v3/snapshot  [?]
+  summary: Universal Snapshot
+  params: [('ticker', 'query', False), ('type', 'query', False), ('ticker.gte', 'query', False), ('ticker.gt', 'query', False), ('ticker.lte', 'query', False), ('ticker.lt', 'query', False), ('ticker.any_of', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Snapshot data", "name": "snapshots"}, "x-polygon-entitlement-market-type": {"descrip
+  desc: Get snapshots for assets of all types
+
+GET /v3/snapshot/indices  [indices:snapshot]
+  summary: Indices Snapshot
+  params: [('ticker.any_of', 'query', False), ('ticker', 'query', False), ('ticker.gte', 'query', False), ('ticker.gt', 'query', False), ('ticker.lte', 'query', False), ('ticker.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"descr
+  desc: Get a Snapshot of indices data for said tickers
+
+GET /v3/snapshot/options/{underlyingAsset}  [options:snapshot]
+  summary: Options Chain
+  params: [('underlyingAsset', 'path', True), ('strike_price', 'query', False), ('expiration_date', 'query', False), ('contract_type', 'query', False), ('strike_price.gte', 'query', False), ('strike_price.gt', 'query', False), ('strike_price.lte', 'query', False), ('strike_price.lt', 'query', False), ('expiration_date.gte', 'query', False), ('expiration_date.gt', 'query', False), ('expiration_date.lte', 'query', False), ('expiration_date.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"descr
+  desc: Get the snapshot of all options contracts for an underlying ticker.
+
+GET /v3/snapshot/options/{underlyingAsset}/{optionContract}  [options:snapshot]
+  summary: Option Contract
+  params: [('underlyingAsset', 'path', True), ('optionContract', 'path', True)]
+  x: {"x-polygon-entitlement-allowed-timeframes": [{"description": "Real Time Data", "name": "realtime"}, {"description": "15 minute delayed data", "name": "delayed"}], "x-polygon-entitlement-data-type": {"description": "Aggregate data", "name": "aggregates"}, "x-polygon-entitlement-market-type": {"descr
+  desc: Get the snapshot of an option contract for a stock equity.
+
+GET /v3/trades/{cryptoTicker}  [crypto:trades]
+  summary: Trades
+  params: [('cryptoTicker', 'path', True), ('timestamp', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Trade data", "name": "trades"}, "x-polygon-entitlement-market-type": {"description": "Crypto data", "name": "crypto"}, "x-polygon-paginate": {"limit": {"default": 1000, "example": 10, "max": 50000}, "order": {"default": "desc"}, "sort": {"default"
+  desc: Get trades for a crypto ticker symbol in a given time range.
+
+GET /v3/trades/{optionsTicker}  [options:trades]
+  summary: Trades
+  params: [('optionsTicker', 'path', True), ('timestamp', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Trade data", "name": "trades"}, "x-polygon-entitlement-market-type": {"description": "Options data", "name": "options"}, "x-polygon-paginate": {"limit": {"default": 1000, "example": 10, "max": 50000}, "order": {"default": "desc"}, "sort": {"defaul
+  desc: Get trades for an options ticker symbol in a given time range.
+
+GET /v3/trades/{stockTicker}  [stocks:trades]
+  summary: Trades
+  params: [('stockTicker', 'path', True), ('timestamp', 'query', False), ('timestamp.gte', 'query', False), ('timestamp.gt', 'query', False), ('timestamp.lte', 'query', False), ('timestamp.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Trade data", "name": "trades"}, "x-polygon-entitlement-market-type": {"description": "Stocks data", "name": "stocks"}, "x-polygon-paginate": {"limit": {"default": 1000, "example": 10, "max": 50000}, "order": {"default": "desc"}, "sort": {"default"
+  desc: Get trades for a ticker symbol in a given time range.
+
+GET /vX/reference/ipos  [reference:stocks:ipos]
+  summary: IPOs
+  params: [('ticker', 'query', False), ('us_code', 'query', False), ('isin', 'query', False), ('listing_date', 'query', False), ('ipo_status', 'query', False), ('listing_date.gte', 'query', False), ('listing_date.gt', 'query', False), ('listing_date.lte', 'query', False), ('listing_date.lt', 'query', False), ('order', 'query', False), ('limit', 'query', False), ('sort', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}, "x-polygon-paginate": {"limit": {"default": 10, "max": 1000}, "order": {"default": "desc", "example": "desc"}, "sort": {"default": "listing_date", "enum": ["listing_date", "ticker", "last_updated", "security_
+  desc: The IPOs API provides access to detailed information about Initial Public Offerings (IPOs), including both upcoming and historical events. With this API, you can query for a comprehensive list of IPOs, along with key details such as the issuer name, ticker symbol, ISIN, IPO date, number of shares offered, expected price range, and final offering price. You can filter the results by status to focus on new, rumors, pending, historical, and more.
+
+GET /vX/reference/tickers/{id}/events  [reference:tickers:get]
+  summary: Ticker Events
+  params: [('id', 'path', True), ('types', 'query', False)]
+  x: {"x-polygon-entitlement-data-type": {"description": "Reference data", "name": "reference"}, "x-polygon-experimental": {}}
+  desc: Get a timeline of events for the entity associated with the given ticker, CUSIP, or Composite FIGI.
+

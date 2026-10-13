@@ -1,0 +1,3 @@
+#!/bin/bash
+# Poll the documented public analysis endpoint every 5 minutes for ~2 hours (24 samples) to observe how decisions change across refreshes.
+SP="$1"; for i in $(seq 1 24); do ts=$(date -u +%Y%m%dT%H%M%SZ); curl -sS -o "$SP/evidence/analysis_snapshots/analysis_$ts.json" --max-time 30 -A "Mozilla/5.0 (X11; Linux x86_64) Chrome/130.0" "https://georgefi.trade/api/analysis"; curl -sS -o "$SP/evidence/analysis_snapshots/tape_$ts.json" --max-time 30 -A "Mozilla/5.0 (X11; Linux x86_64) Chrome/130.0" "https://georgefi.trade/api/public/todays-signals?date=$(date -u +%Y-%m-%d)"; sleep 300; done
