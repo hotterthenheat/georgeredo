@@ -51,6 +51,21 @@ Open items this creates:
 - SPX index bars require a CBOE-approved UW entitlement; the backtest therefore excluded SPX, GeorgeFi's most profitable ticker.
 - Spread assumptions are modelled; live NBBO capture would replace them.
 
+## 3c. Edge-search outcome (added after the deep-research round)
+
+Six parallel studies (three literature reviews, three empirical tests on our Unusual Whales data, 339 sessions 2025-06-02 → 2026-10-09, SPY/QQQ/IWM) looked for a tradeable 0DTE input among per-strike flow bursts, signed net premium / net delta / market tide, dark-pool prints, dealer gamma regime and intraday gamma/charm/vanna, walls/magnet pinning, session effects (ORB, half-hour seasonality, first→last-30 momentum, gap fill) and exit engineering. Full report: `reports/Finding a 0DTE options edge.md`; notes in `research_notes/Finding a 0DTE options edge/`; code and outputs in `research/`.
+
+- 0 of 62 predictive feature×horizon×ticker cells survive multiple-testing correction; the only survivors are the *negative* net returns of burst contracts. Flow aggregates are 0.5–0.67 rank-correlated with the trailing 15-minute move and ≤0.02 with the forward move.
+- Prior-day gamma regime does not separate continuation from reversal (POS−NEG slope +0.03 [−0.12, +0.19], sign flips IS→OOS). Intraday negative gamma predicts larger absolute moves (IC −0.21) but not their sign. Walls and magnet behave like distance-matched random levels.
+- 0 of 576 exit-engine configurations have positive spread-model expectancy on strategy or random entries; the gross ceiling of any path-shaping rule is ≈1.5 % of premium against a 3–6 % measured round trip.
+- Short ATM straddles earn +$7 to +$17 per straddle at mid at every entry time (13:00 strongest), but every pooled spread-model interval spans zero and two tail days outweigh sixteen months of income.
+
+Open items this creates (in priority order):
+1. Capture live NBBO for SPY/QQQ ATM 0DTE contracts in the early afternoon (UW `option_trades` websocket) for a few weeks; the executable half-spread is the one number that can move the 13:00 short-straddle interval off zero.
+2. Run directional ideas (gamma-conditioned last-30-minute momentum, noise-band intraday momentum) in shares/futures, where a 1 bp effect clears costs; our gamma test had ~1,016 ticker-days against ~6,000 in the published sample.
+3. Extend the flow panel back to 2022-09-28 (~1,000 sessions) and use strike-level `spot-exposures` and same-day `gex-levels` for a proper wall test.
+4. Obtain the SPX index-bar entitlement so $5–10 premium SPXW contracts (half the proportional cost) can be tested, short-premium first.
+
 ## 4. Confidence summary
 
 | Claim | Confidence | Basis |
@@ -64,3 +79,5 @@ Open items this creates:
 | Setup grades / confidence do not separate outcomes out of sample | Medium | T5 pre-registered tests, n=171 OOS |
 | Public-tape alerts (sus-strike etc.) have no stand-alone directional value | Low-medium | 6 sessions only (T6) |
 | Member cockpit inputs add information | Unknown | not observed |
+| No tested UW input (flow, tide, dark pool, bursts, gamma regime, walls, session effects) times long 0DTE entries better than random after costs | High for SPY/QQQ/IWM, Jun 2025–Oct 2026 | 62 cells, 576 exit configs, 144 variants; report §2–§4 |
+| Short ATM straddle premium is real at mid but within one modelled spread | Medium | 30,510 straddle-days; spreads modelled, not measured |
