@@ -26,3 +26,7 @@ options 11000 / 11355 {'hits': 12038, 'misses': 0, 'errors': 0}
 options done {'hits': 12305, 'misses': 79, 'errors': 0}
 prefetch done at 81 s
 T1 rows 30510 103 s
+T2 rows 8068 108 s
+T3 rows 1475 4919 110 s
+T4 rows 1017 4068 112 s
+T5 rows 1017 2034 113 s {'hits': 13322, 'misses': 79, 'errors': 0}

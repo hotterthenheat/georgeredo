@@ -187,7 +187,7 @@ def summ(rows, key='pnl_spread', clusters='date', order='date'):
     rows = sorted(rows, key=lambda r: (r[order], r.get('entry_t', '')))
     v = np.array([float(r[key]) for r in rows]); cl = [r[clusters] for r in rows] if clusters else None
     lo, hi = boot_ci(v, cl); w = v[v > 0]; l = v[v < 0]
-    return dict(n=int(len(v)), mean=round(float(v.mean()), 2), lo=round(lo, 2), hi=round(hi, 2), median=round(float(np.median(v)), 2), wr=round(100 * (v > 0).mean(), 1),
+    return dict(n=int(len(v)), mean=round(float(v.mean()), 4), lo=round(lo, 4), hi=round(hi, 4), median=round(float(np.median(v)), 4), wr=round(100 * (v > 0).mean(), 1),
                 pf=round(float(w.sum() / abs(l.sum())), 2) if len(l) and l.sum() != 0 else float('inf'), total=round(float(v.sum()), 0), mdd=round(maxdd(v), 0),
                 sd=round(float(v.std(ddof=1)), 1) if len(v) > 1 else float('nan'), t=round(float(v.mean() / (v.std(ddof=1) / math.sqrt(len(v)))), 2) if len(v) > 1 and v.std() > 0 else float('nan'))
 

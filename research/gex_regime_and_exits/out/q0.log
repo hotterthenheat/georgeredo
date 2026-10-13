@@ -1,0 +1,4 @@
+gex-levels records 1044 source {'vol': 1044} snapshot time (UTC HH:MM) [('20:00', 582), ('21:00', 249), ('20:14', 204), ('18:00', 6), ('20:11', 1), ('20:10', 1)]
+all snapshots at/after 18:00Z (post 14:00 ET): True
+spot-exposures 2026-04-06 rows 541 first 2026-04-06T10:30:00.000000Z last 2026-04-06T20:00:00.000000Z | pre-RTH rows with vol/dir == 0: 150 / 150 | RTH rows with vol != 0: 391 / 391
+keys ['charm_per_one_percent_move_dir', 'charm_per_one_percent_move_oi', 'charm_per_one_percent_move_vol', 'gamma_per_one_percent_move_dir', 'gamma_per_one_percent_move_oi', 'gamma_per_one_percent_move_vol', 'price', 'start_time', 'ticker', 'ticker_id', 'time', 'vanna_per_one_percent_move_dir', 'vanna_per_one_percent_move_oi', 'vanna_per_one_percent_move_vol']

@@ -150,7 +150,7 @@ def mom(rows, x, y, label):
     pos = Y[X > 0]; neg = Y[X < 0]; agree = 100 * np.mean(np.sign(X) == np.sign(Y))
     cond = np.where(X > 0, Y, -Y); lo, hi = C.boot_ci(cond, [r['date'] for r in rows])
     return [label, n, f'{rr:.3f}', f'{slope:.3f}', f'{t:.2f}', f'{agree:.1f}%', f'{pos.mean():.2f} (n={len(pos)})', f'{neg.mean():.2f} (n={len(neg)})', f'{cond.mean():.2f} [{lo:.2f},{hi:.2f}]']
-H4 = ['x -> y', 'n', 'corr', 'slope', 't', 'sign agree', 'mean y | x>0', 'mean y | x<0', 'mean of sign(x)*y bp [CI]']
+H4 = ['x -> y', 'n', 'corr', 'slope', 't', 'sign agree', 'mean y given x>0', 'mean y given x<0', 'mean of sign(x)*y bp [CI]']
 lines = []
 for tk in ['ALL'] + C.TICKERS:
     rows = [r for r in h if tk == 'ALL' or r['ticker'] == tk]
