@@ -204,8 +204,9 @@ def fill_class(fs, keyf, keynames):
         rec['median_entry_ask_size'] = statistics.median([x['entry_ask_size'] for x in en if isnum(x['entry_ask_size'])]) if en else ''
         out.append(rec)
     return out
-FC = fill_class(F, lambda x: (x['epoch'], 'ALL', 'ALL'), ['epoch', 'book', 'account_type']) + fill_class(F, lambda x: (x['epoch'], x['book'], x['account_type']), ['epoch', 'book', 'account_type'])
-FCr = fill_class(F, lambda x: (x['epoch'], x['root']), ['epoch', 'root'])
+Fo = [x for x in F if x['kind'] == 'opt']; Fs = [x for x in F if x['kind'] == 'stk']
+FC = fill_class(Fo, lambda x: (x['epoch'], 'ALL', 'ALL'), ['epoch', 'book', 'account_type']) + fill_class(Fo, lambda x: (x['epoch'], x['book'], x['account_type']), ['epoch', 'book', 'account_type']) + fill_class(Fs, lambda x: (x['epoch'], x['book'], 'SHARES (stock NBBO)'), ['epoch', 'book', 'account_type'])
+FCr = fill_class(Fo, lambda x: (x['epoch'], x['root']), ['epoch', 'root'])
 write_csv(RES + '/F_nbbo_fill_class.csv', FC + [dict(epoch=c['epoch'], book='root:' + c['root'], account_type='ALL', **{k: v for k, v in c.items() if k not in ('epoch', 'root')}) for c in FCr])
 
 # ---------- E1 ledger-size sensitivity: does the better-than-market share depend on the reported size (bid/ask depth)?
@@ -283,7 +284,7 @@ def spreads(fs, keyf, keynames):
             rec[f'{nm}_mid_median'] = round(statistics.median(mids), 3) if mids else ''
         out.append(rec)
     return out
-SPR = spreads(F, lambda x: (x['epoch'], 'ALL'), ['epoch', 'root']) + spreads(F, lambda x: (x['epoch'], x['root']), ['epoch', 'root'])
+SPR = spreads([x for x in F if x['kind'] == 'opt'], lambda x: (x['epoch'], 'ALL'), ['epoch', 'root']) + spreads(F, lambda x: (x['epoch'], x['root']), ['epoch', 'root'])
 write_csv(RES + '/F_nbbo_spreads.csv', SPR)
 # realized half-spread (% of mid) by assumption bucket, for the comparison sentence
 def bucket(root, kind):
@@ -300,11 +301,11 @@ for b in SPRb:
 csize = collections.Counter(x['cluster'] for x in F if x['group'] == 'ledger')
 REP = []
 for x in F:
-    if x['group'] != 'ledger' or x['kind'] != 'opt': continue
+    if x['group'] != 'ledger' or x['kind'] not in ('opt', 'stk'): continue
     r = x['_r']; x['_repeat'] = csize[x['cluster']] >= 2
     ck = N.contract_key(r, r['entry_date']); qs = [q for q in book.minute(ck, r['entry_dt']) if isnum(q[1]) and isnum(q[2]) and q[2] > 0]
     p = r['entry_px']
-    rec = dict(epoch=x['epoch'], book=x['book'], account_type=x['account_type'], trade_id=x['trade_id'], root=x['root'], cluster=x['cluster'], cluster_size=csize[x['cluster']], is_repeat=x['_repeat'],
+    rec = dict(epoch=x['epoch'], book=x['book'], account_type=x['account_type'], trade_id=x['trade_id'], root=x['root'], kind=x['kind'], cluster=x['cluster'], cluster_size=csize[x['cluster']], is_repeat=x['_repeat'],
                entry_premium=p, pnl_reported=x['pnl_reported'], n_quote_seconds=len(qs))
     if qs:
         nb = len(set((b, a) for _, b, a in qs)); minb = min(b for _, b, _ in qs); maxa = max(a for _, _, a in qs); minm = min((a + b) / 2 for _, b, a in qs); maxm = max((a + b) / 2 for _, b, a in qs)
@@ -327,7 +328,9 @@ def rep_summary(rs):
             rec['reported_pnl_below_min_bid'] = round(sum(z['pnl_reported'] for z in w if z['below_min_bid']), 2)
         out.append(rec)
     return out
-REPS = rep_summary(REP)
+REPS = rep_summary([z for z in REP if z['kind'] == 'opt'])
+n_rep_all = {ep: sum(1 for z in REP if z['epoch'] == ep and z['is_repeat']) for ep in ('E1', 'E2')}
+n_rep_opt = {ep: sum(1 for z in REP if z['epoch'] == ep and z['is_repeat'] and z['kind'] == 'opt') for ep in ('E1', 'E2')}
 print(f'repeats done {time.time() - T0:.0f}s', flush=True)
 
 # ---------------------------------------------------------------- RESULTS_NBBO.md
@@ -423,7 +426,7 @@ T(['| epoch | root | assumed | n entry | entry hs % median (mean) | entry hs $ m
   [f"| {s['epoch']} | {s['root']} | {pct(s['assumed_half_spread_pct']) if isinstance(s['assumed_half_spread_pct'], float) and isnum(s['assumed_half_spread_pct']) else 'n/a'} | {s['n_entry']} | {pct(s['entry_hs_pct_median'])} ({pct(s['entry_hs_pct_mean'])}) | {s['entry_hs_median']} | {pct(s['entry_share_above_assumed']) if s['entry_share_above_assumed'] != '' else 'n/a'} | {s['n_exit']} | {pct(s['exit_hs_pct_median'])} ({pct(s['exit_hs_pct_mean'])}) | {s['exit_hs_median']} | {s['entry_mid_median']} |" for s in SPR if s['n_entry'] >= 5])
 
 H('## 5. Epoch 1 same-contract-same-minute repeats vs the NBBO within the minute')
-MD.append(f'For every ledger option row, all 1-second NBBO rows of the reported entry minute (up to 60). "repeat" = the row shares contract and entry minute with at least one other ledger row (RESULTS.md: 382 such rows in Epoch 1). "matches any quote" = the reported entry premium equals the bid or ask (±${TOL}) or the mid (±${MID_TOL}) of at least one second of that minute.')
+MD.append(f'For every ledger option row, all 1-second NBBO rows of the reported entry minute (up to 60). "repeat" = the row shares contract and entry minute with at least one other ledger row: {n_rep_all["E1"]} Epoch 1 rows (RESULTS.md: 382), of which {n_rep_opt["E1"]} are option rows (the rest are share rows, listed in F_nbbo_repeats.csv with kind = stk but not summarised here); Epoch 2 {n_rep_all["E2"]} rows. "matches any quote" = the reported entry premium equals the bid or ask (±${TOL}) or the mid (±${MID_TOL}) of at least one second of that minute. Option rows only in this table.')
 MD.append('')
 T(['| epoch | rows | n | with minute quotes | clusters | reported P&L | NBBO changed in minute | median distinct NBBOs | matches bid | matches ask | matches mid | matches any quote | within [min bid, max ask] | below min bid | above max ask | below min mid | reported P&L of rows below min bid |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|'] +
   [f"| {s['epoch']} | {s['rows']} | {s['n']} | {s['n_with_minute_quotes']} | {s['n_clusters']} | {f0(s['reported_pnl'])} | {pct(s.get('nbbo_changed'))} | {s.get('median_distinct_nbbo', 'n/a')} | {pct(s.get('matches_bid_any_second'))} | {pct(s.get('matches_ask_any_second'))} | {pct(s.get('matches_mid_any_second'))} | {pct(s.get('matches_any_quote'))} | {pct(s.get('within_minute_nbbo_range'))} | {pct(s.get('below_min_bid'))} | {pct(s.get('above_max_ask'))} | {pct(s.get('below_min_mid'))} | {f0(s.get('reported_pnl_below_min_bid'))} |" for s in REPS])
