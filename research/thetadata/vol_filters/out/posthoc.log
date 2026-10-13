@@ -1,0 +1,21 @@
+skip_fomc | skip_month_end train: share 0.920 hit 0.648 (d +0.0136) delta +0.0309 test: share 0.924 hit 0.704 (d +0.0245) delta +0.0436
+skip_fomc | skip_vix_gt_train_p80 train: share 0.776 hit 0.646 (d +0.0116) delta +0.0220 test: share 0.931 hit 0.695 (d +0.0162) delta +0.0360
+skip_fomc | skip_vix_rise_gt10pct train: share 0.928 hit 0.640 (d +0.0057) delta +0.0189 test: share 0.937 hit 0.688 (d +0.0092) delta +0.0284
+skip_fomc | skip_vix_gt_60d_p80 train: share 0.759 hit 0.648 (d +0.0134) delta +0.0208 test: share 0.743 hit 0.686 (d +0.0067) delta +0.0142
+FOMC|month_end train primary: share 0.920 hit 0.648 (d +0.0136) delta +0.0309 CI [+0.0170, +0.0473]
+FOMC|month_end train alt: share 0.921 hit 0.663 (d +0.0144) delta +0.0210 CI [+0.0090, +0.0341]
+FOMC|month_end test primary: share 0.924 hit 0.704 (d +0.0245) delta +0.0436 CI [+0.0231, +0.0665]
+FOMC|month_end test alt: share 0.924 hit 0.685 (d +0.0209) delta +0.0440 CI [+0.0215, +0.0716]
+2017 delta -0.0167 hit 0.709 vs 0.719 share 0.918
+2018 delta +0.0303 hit 0.646 vs 0.629 share 0.923
+2019 delta +0.0356 hit 0.714 vs 0.691 share 0.928
+2020 delta +0.0062 hit 0.572 vs 0.566 share 0.912
+2021 delta +0.0309 hit 0.680 vs 0.673 share 0.920
+2022 delta +0.0796 hit 0.591 vs 0.564 share 0.920
+2023 delta +0.0688 hit 0.614 vs 0.593 share 0.919
+2024 delta +0.0472 hit 0.690 vs 0.667 share 0.932
+2025 delta +0.0297 hit 0.763 vs 0.729 share 0.923
+2026 delta +0.0243 hit 0.760 vs 0.742 share 0.923
+FOMC days n=77: median |pm move| 0.410% vs clean 0.217%; p90 1.854% vs 0.787%; hit(k_fair) 0.325 vs 0.658; mean outcome FOMC -0.881 vs clean +0.032
+FOMC days on a Wednesday: 72 of 77; Wednesdays in sample 478
+trade-all test: n=938, k_fair=0.5053, k_alt=0.6734; worst test day ratio 7.62 on 2024-04-04

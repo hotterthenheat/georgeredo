@@ -37,7 +37,10 @@ Results note: `research_notes/High win rate 0DTE lanes/empirical_vol_filters_spx
      morning range vs. prior-day range, morning efficiency, gap / prior-day range / 5-day RV train-80th-pct, day of week, month-end, holiday-adjacent.
      Mean outcome per trading day counts skipped days as 0. Rules are ranked on train (k_fair) and reported on test with paired block-bootstrap CIs of the
      difference vs. trade-all. All 465 OR-pairs in `rules_pairs_all.csv`; the top-15 train pairs with test CIs in `rules_pairs_top.csv`; `by_year.csv`; `quintiles.csv`.
-* Seeds: numpy default_rng(20251013). Run: `SP=<scratchpad> python3 build_daily.py && python3 analyze.py`.
+* `robustness.py` -> `out/rules_alt_scale.csv`, `out/robustness.log`: log-log elasticity of the afternoon on the morning range, every rule re-run under an alternative
+  scale (trailing 20-day geometric mean of the afternoon range), Wednesday ex-FOMC, half-size instead of skip, and k-robustness of the key rules.
+* `posthoc.py` -> `out/posthoc.log`: checks run after the train-selected results were seen (FOMC-or-month-end pair on both scales, FOMC-day statistics); flagged as post-hoc in the note.
+* Seeds: numpy default_rng(20251013). Run: `SP=<scratchpad> python3 build_daily.py && python3 analyze.py && python3 robustness.py && python3 posthoc.py`.
 
 ## Caveats
 * The "morning-implied scale" is the realized 09:30-13:00 range, not an option-implied move (no implied data in this cache); the stylized payoff is a selection test, not a P&L forecast.
