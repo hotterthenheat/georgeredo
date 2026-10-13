@@ -51,9 +51,9 @@ Consequence for Compass: no lane may be justified by GeorgeFi's performance, and
 | H6 | Wall / magnet pin fades | **Closed, rejected** | indistinguishable from distance-matched random levels | None |
 | H7 | Exit-engine improvements alone | **Closed, not promotable** | 0/576 positive after costs on strategy entries and on both random draws; gross ceiling ≈ 1.5 % of premium vs 3–6 % cost | Keep trail engine as the default risk layer; stop searching exits for alpha |
 | H8 | Session plays in options (ORB, gap fill, half-hour seasonality, 15:00 momentum) | **Closed, rejected** | every option expression negative; underlying effects null | None |
-| H9 | 13:00 short ATM straddle, SPY/QQQ, close 15:55 | **Open, candidate paper lane** | +$16.7 mid [5.4, 27.7]; +$8.4 after spread [−3.2, 19.5]; two tail days exceed 16 months of income | Pre-registered test T-A below; prerequisite NBBO capture |
-| H10 | Gamma-conditioned last-half-hour momentum, in shares/futures | **Open, candidate (not options)** | peer-reviewed effect only on negative-gamma days; our option test underpowered (1,016 ticker-days) | Pre-registered test T-B on SPY shares back to 2022-09-28 |
-| H11 | SPXW contracts (larger premium, lower proportional cost) for short premium | **Open, data-gated** | index bars unavailable (422); SPXW contract bars and the spot-exposures `price` series are available | Test T-C using contract bars plus the per-minute `price` field as the index proxy |
+| H9 | 13:00 short ATM straddle, SPY/QQQ, close 15:55 | **Closed, rejected at measured NBBO (§8)** | +$16.7 mid [5.4, 27.7]; +$8.4 after spread [−3.2, 19.5]; two tail days exceed 16 months of income | Pre-registered test T-A below; prerequisite NBBO capture |
+| H10 | Gamma-conditioned last-half-hour momentum, in shares/futures | **Closed, rejected (§8)** | peer-reviewed effect only on negative-gamma days; our option test underpowered (1,016 ticker-days) | Pre-registered test T-B on SPY shares back to 2022-09-28 |
+| H11 | SPXW contracts (larger premium, lower proportional cost) for short premium | **Closed on the pre-registered design; one post-hoc variant to pre-register (§8)** | index bars unavailable (422); SPXW contract bars and the spot-exposures `price` series are available | Test T-C using contract bars plus the per-minute `price` field as the index proxy |
 | H12 | GeorgeFi's committed-read inputs (five-contributor vote, bursts, accelerator) time entries | **Open, blocked** | needs weeks of member-surface collection; subscription lapses 2026-10-14 | Only if the user renews the subscription; otherwise closed by default |
 
 ## 5. Pre-registered next tests (in order)
@@ -75,3 +75,27 @@ Consequence for Compass: no lane may be justified by GeorgeFi's performance, and
 - Renew or let lapse the GeorgeFi subscription (needed only for H12).
 - Rotate the Unusual Whales and Massive keys and change the GeorgeFi password that were shared in chat.
 - Whether to create a `main` branch and open a pull request; all work is on `claude/lucid-heisenberg-bpyq7k` in dedicated directories because this session is pinned to that branch.
+
+## 8. Update, 2026-10-13 evening: results with measured quotes (ThetaData PRO)
+
+The user supplied a ThetaData key (PRO on options, stocks and indices; `research/thetadata/provider_audit.md`). It removed the two data blockers named in §6 and §7 (executable spreads, index minute prices), so the three pre-registered tests were run at measured NBBO. Every number below is day-clustered; details and code in `research/thetadata/`.
+
+| Test | Pre-registered gate | Result at measured NBBO | Verdict |
+|---|---|---|---|
+| T-A 13:00 short ATM straddle, SPY+QQQ (n = 678, 17 months) | lower 95 % bound > 0; round-trip cost ≤ 1.5 % of credit; beats random by > 1 round trip | +$8.60 per straddle [−6.07, 22.45]; realized round trip 3.9 % of credit (entry half-spread 0.6 %, but buying back near-worthless legs at 15:55 costs 5–6 % of leg value); vs random +$13.10 [−2.42, 29.14] against a $12.93 cost; IWM −$9.50 [−18.69, −0.44]; every other entry time negative | **FAIL**; the modelled-spread result (+$8.36) was optimistic by about $5 per straddle |
+| T-B gamma-conditioned last-30-minute momentum, SPY shares (598 gamma-known days 2024-05-14 → 2026-10-09; 2,332 days unconditional 2017 →) | net Sharpe > 1.0 on negative-gamma days (≥ 300), ≈ 0 on positive | negative-gamma days −3.07 bp/day [−5.73, −0.52], Sharpe −2.15 (SPY-proxy); slope of last-30 on rest-of-day −1.4 ×100 [−7.6, 4.8] vs the published +6.6; the two gamma proxies agree on the regime only 52 % of days; unconditional 2017–2026 Sharpe 0.14 cost-free | **FAIL** (wrong sign) |
+| T-C 13:00 SPXW short straddle, close 15:55 (339 sessions) | as T-A with 1.5 % half-spread, $1/contract/side | +$72.4 per day [−75.8, 214.2], PF 1.16, max drawdown −$21,180, worst day −$8,499; entry half-spread 0.87 % of credit (passes); vs random +$40.6 [−73.4, 164.2] against a $68.9 cost | **FAIL** on the pre-registered design |
+
+Post-hoc observation, not a result: holding the SPXW straddle to the 16:00 cash settlement instead of buying it back (no exit spread) gives +$156.8 per day [+5.8, +305.0] over all 339 sessions, but [−18.5, +288.6] once FOMC/CPI/NFP days are excluded, and it was not pre-registered. It is logged as hypothesis **H13** below and may only be promoted through a new pre-registered test on data not used here.
+
+**GeorgeFi's record at the NBBO (`research/georgefi_full_history/results/RESULTS_NBBO.md`).** With quotes at the reported second (99 % coverage): 58 % of Epoch 1 trades were filled better than the market offered on at least one side; repricing at ask-in/bid-out cuts the covered Epoch 1 record from $39,297 to $12,039 (+$22 per trade, day-clustered CI [−11, 66]) and Epoch 2 from −$3,294 to −$24,988; among the 382 same-minute repeats, 27 % are priced below the lowest bid of their minute. Realized half-spreads: SPY/QQQ 0.5 % of mid, SPXW 0.9 %, IWM 0.7–0.9 %, RUTW 4.5 %, NDXP 7.5 %, single names 3.5–4 %. The §3 verdicts stand and are now based on measured, not modelled, costs.
+
+**Register changes.** H9, H10 closed (rejected). H11 closed on its pre-registered form. New:
+
+| # | Hypothesis | Status | Pre-registered test |
+|---|---|---|---|
+| H13 | SPXW 13:00 short ATM straddle held to PM settlement, event days excluded | Open, candidate | **T-E**: window 2022-01-03 → 2025-05-29 (ThetaData, never used here), same entry rule, FOMC/CPI/NFP exclusion fixed in advance, settlement at the 16:00 SPX print, $1/contract/side, margin and tail sizing stated before the run; pass = lower 95 % day-clustered bound > 0 with ≥ 500 days, and the 2025-06 → 2026-10 window then treated as the holdout, not re-used for selection |
+| H14 | Exit-side spread engineering for short premium (leave near-worthless legs to expire, or buy back only when the ask ≤ $0.05) | Open, mechanical | **T-F**: re-run T-A with the rule fixed in advance on the same 339 sessions; pass criteria as T-A; this addresses the 3.9 % round trip directly and is cheap |
+
+**Infrastructure notes from this round.** ThetaData enforces one live login per key (a second process invalidates the first; run one fetch process per key). Cost assumptions in `backtest/costs.py` should be replaced by measured half-spreads per root (0.5 % SPY/QQQ, 0.9 % SPXW, 4.5 % RUTW, 7.5 % NDXP, 3.5–4 % single names) before any further option backtest; the T-D calibration step in §5 is therefore done by measurement rather than by the daily chain.
+

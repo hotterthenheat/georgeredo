@@ -32,3 +32,10 @@ python3 -I ../code/fetch_all.py                     # fetches T-C sessions first
 OUT_DIR=. python3 -I analyze_tc.py
 ```
 Outputs: `tc_straddles.csv` (one row per session, every quote used), `tc_random_baseline.csv`, `tc_summary.csv`, `tc_paired_vs_random.csv`, `tc_spreads.csv`, `tc_by_month.csv`, `tc_gate.csv`, `tc_skipped.csv`, `RESULTS.md` (generated).
+
+## Run notes (2026-10-13)
+
+* 339 sessions; every session had an existing 5-point strike at the rounded 13:00 SPX level and a two-sided NBBO on both legs at 13:00; 2,034 contract-day quote files fetched (13:00 strike plus five baseline strikes per session, de-duplicated where strikes coincide). The committed baseline minutes are in `random_baseline_minutes.csv` (copied from `$SP/theta/tc/`).
+* Settlement close from ThetaData EOD on 338 sessions (checked: SPX 2025-06-02 = 5935.94), the 16:00:00 tick on 2026-06-09 (EOD row missing).
+* ThetaData permits one login per key; the pull ran in a single process shared with T-B and re-authenticated 48 times when other logins on the shared key invalidated the session; no request failed.
+* Quote-row convention verified against the 1-second series: the 1-minute row stamped `HH:MM` is the state at `HH:MM:00`; the 09:30 option row carries zeros before the first quote.

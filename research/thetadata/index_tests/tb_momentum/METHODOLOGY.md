@@ -40,3 +40,9 @@ python3 -I code/fetch_all.py                        # one ThetaData session (the
 UW_GEX_CSV=$UW_OUT OUT_DIR=tb_momentum python3 -I tb_momentum/analyze_tb.py
 ```
 Outputs: `tb_daily.csv` (one row per session with every price, return, regime and stamp used), `tb_summary.csv`, `tb_regression.csv`, `tb_by_year.csv`, `tb_gate.csv`, `tb_gex_availability.csv`, `RESULTS.md` (generated).
+
+## Run notes (2026-10-13)
+
+* ThetaData allows one login session per key; a second process invalidates the first ("Invalid session ID"). All ThetaData requests were therefore made from a single process with two worker threads (`code/fetch_all.py`), and `code/td_cache.py` re-authenticates on `UNAUTHENTICATED` with a 15 s backoff. During the pull the session was invalidated 48 times by other logins on the shared key and recovered every time; 0 requests failed, 3 gRPC backoffs. 565 monthly files (113 months × SPX 1m, VIX 1m, SPY 1m, SPX EOD, SPY EOD), 51 MB gzip.
+* Data gaps: 2019-06-14 has no SPX print before 09:35 (day dropped); the SPX EOD row for 2026-06-09 is missing (2026-06-10 is `unknown` under the SPX proxy only). 20 early closes dropped.
+* The SPY and SPX `gex-levels` flips agree on the regime label on only 52.4 % of the 597 days where both exist, and the prior close lies on average 24 bp from the flip; the regime is therefore a weak classifier in this data, which is reported as a sensitivity, not corrected for.

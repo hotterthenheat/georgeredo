@@ -33,3 +33,12 @@ Total: 1,149 ledger trades + 84 paper trades, raw bodies preserved with SHA-256 
 
 ## Next research steps (pre-registered in `COMPASS_RESEARCH_PLAN.md` §5)
 T-A 13:00 short ATM straddle paper lane with NBBO capture; T-B gamma-conditioned last-half-hour momentum in SPY shares back to 2022-09-28; T-C the same short-premium design on SPXW using contract bars and the spot-exposures price series; T-D spread calibration from the historical option chains before any promotion decision.
+
+## Addendum (2026-10-13 evening): ThetaData round
+
+- **Key and entitlement.** ThetaData key verified PRO on options, stocks and indices (NDX excluded); stored only in the session env file; rotate it.
+- **Records retrieved.** 4,682 SPY/QQQ/IWM contract-days of 1-minute NBBO (5,084 straddles, 339 sessions); 1,699 one-second NBBO windows around GeorgeFi's 1,233 entries and exits (99 % coverage); 2,353 SPX sessions of minute prices 2017-06-01 → 2026-10-09 plus SPY/VIX; 2,034 SPXW contract-days of NBBO.
+- **Results.** T-A straddle at real quotes FAIL (+$8.60 [−6.07, 22.45]); T-B momentum FAIL (wrong sign, −3.07 bp/day on negative-gamma days); T-C SPXW straddle FAIL on the pre-registered design (+$72.4/day [−75.8, 214.2]); GeorgeFi Epoch 1 executable at NBBO $12,039 vs $39,297 reported with 58 % of fills better than the market offered. One post-hoc variant (hold SPXW to settlement) is logged as H13 with a pre-registered out-of-sample test T-E.
+- **Artifacts.** `research/thetadata/` (audit, straddle_nbbo, index_tests), `research/georgefi_full_history/results/RESULTS_NBBO.md`, `COMPASS_RESEARCH_PLAN.md` §8, `DATA_PROVIDER_AUDIT.md` §7.
+- **Blockers.** None new; NDX needs the Nasdaq add-on. Next steps: T-F (exit-side rule) and T-E (settlement variant, 2022–2025 window) as pre-registered in the plan.
+

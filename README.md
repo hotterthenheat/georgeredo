@@ -16,7 +16,8 @@ Research workspace produced on 2026-10-13. Read the deliverables in this order:
 11. `audit/phase1/` — reproduction audit of everything above (backtest, validation tests, the three studies): what reproduces exactly, what needed a fix, and the fixes applied as additions.
 12. `research/georgefi_full_history/` — the complete GeorgeFi trade history accessible on the account (both epochs, all books, paper book; 1,149 + 84 records), raw exports with hashes, normalized tables, the live provider re-audit, and the reconstruction of every trade against independent bars (`results/RESULTS.md`).
 13. `COMPASS_RESEARCH_PLAN.md` — the Compass research plan: promotion criteria, preservation rules, hypothesis register with verdicts, pre-registered next tests.
-14. `AUDIT_AND_FULL_HISTORY_REPORT.md` — completion report for the audit and full-history phases.
+14. `AUDIT_AND_FULL_HISTORY_REPORT.md` — completion report for the audit and full-history phases (with the ThetaData addendum).
+15. `research/thetadata/` — ThetaData entitlement audit (PRO) and the measured-quote studies: `straddle_nbbo/` (T-A at real bid/ask), `index_tests/` (T-B momentum, T-C SPXW straddle); GeorgeFi's fills at the NBBO are in `research/georgefi_full_history/results/RESULTS_NBBO.md`. Verdicts are in `COMPASS_RESEARCH_PLAN.md` §8.
 
 `backtest/` holds the reproducible backtest code and the run outputs.
 

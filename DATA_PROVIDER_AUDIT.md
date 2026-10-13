@@ -129,3 +129,7 @@ Full call table (109 calls) and evidence: `research/georgefi_full_history/provid
 - **Index option roots**: SPXW/NDXP/RUTW work on UW and Massive; plain SPX/NDX/RUT weekly roots are rejected; the 3rd-Friday `SPX…` root returns 0 bars where its `SPXW…` twin returns bars.
 - **Works better than documented**: `gex-levels` and `spot-exposures` work for the SPX index (per-minute `price` included) and for old dates (no 90-day limit); `stock/{t}/option-contracts?date=` returns the historical chain with OI, NBBO and Greeks (undocumented); `net-prem-ticks` and `flow-per-strike-intraday` work for SPX; `flow-alerts` ignores `date` but honours `newer_than`/`older_than`; ticker-level `greek-exposure` series starts 2025-10-14 regardless of `date`.
 
+## 7. ThetaData (added 2026-10-13 evening)
+
+The user's ThetaData key is PRO for options, stocks and indices (`research/thetadata/provider_audit.md`): option NBBO at 1-minute, 1-second and tick level back to 2012–2013, stock minute bars back to 2014 and tick data, SPX/VIX/RUT minute prices back to 2017 and 1-second today, 8 concurrent requests. NDX is a separate Nasdaq add-on and is not included. Access is through the official Python client (gRPC/TLS, no local terminal); the server allows one live login per key. This supersedes the index-bar and spread limitations in §6 for every purpose except NDX.
+
