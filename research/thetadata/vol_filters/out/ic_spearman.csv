@@ -1,0 +1,345 @@
+sample,predictor,predictor_label,target,target_label,n,spearman,ci_lo,ci_hi,mean_x1,mean_x0
+all,log_range_0930_1030,(a) log range 09:30-10:30,absmove_pm,|13:00->16:00 move|,2333,0.3687,0.3150,0.4148,,
+all,log_range_0930_1030,(a) log range 09:30-10:30,range_pm,13:00-16:00 range,2333,0.6026,0.5431,0.6477,,
+all,log_range_0930_1030,(a) log range 09:30-10:30,ratio,|pm move| / morning range,2333,-0.0646,-0.1144,-0.0192,,
+all,log_range_0930_1030,(a) log range 09:30-10:30,range_day,full-day range,2333,0.7531,0.7148,0.7854,,
+all,log_rv_0930_1030,(a) log RV 09:30-10:30,absmove_pm,|13:00->16:00 move|,2333,0.4184,0.3654,0.4671,,
+all,log_rv_0930_1030,(a) log RV 09:30-10:30,range_pm,13:00-16:00 range,2333,0.6760,0.6249,0.7197,,
+all,log_rv_0930_1030,(a) log RV 09:30-10:30,ratio,|pm move| / morning range,2333,0.0048,-0.0418,0.0526,,
+all,log_rv_0930_1030,(a) log RV 09:30-10:30,range_day,full-day range,2333,0.7574,0.7180,0.7901,,
+all,log_range_0930_1300,(a) log range 09:30-13:00,absmove_pm,|13:00->16:00 move|,2333,0.3835,0.3270,0.4331,,
+all,log_range_0930_1300,(a) log range 09:30-13:00,range_pm,13:00-16:00 range,2333,0.6403,0.5873,0.6839,,
+all,log_range_0930_1300,(a) log range 09:30-13:00,ratio,|pm move| / morning range,2333,-0.1364,-0.1853,-0.0879,,
+all,log_range_0930_1300,(a) log range 09:30-13:00,range_day,full-day range,2333,0.8783,0.8580,0.8965,,
+all,log_rv_0930_1300,(a) log RV 09:30-13:00,absmove_pm,|13:00->16:00 move|,2333,0.4322,0.3778,0.4771,,
+all,log_rv_0930_1300,(a) log RV 09:30-13:00,range_pm,13:00-16:00 range,2333,0.7158,0.6681,0.7566,,
+all,log_rv_0930_1300,(a) log RV 09:30-13:00,ratio,|pm move| / morning range,2333,-0.0131,-0.0613,0.0327,,
+all,log_rv_0930_1300,(a) log RV 09:30-13:00,range_day,full-day range,2333,0.8053,0.7709,0.8326,,
+all,eff_am,(a) morning efficiency |move|/range,absmove_pm,|13:00->16:00 move|,2333,-0.0017,-0.0427,0.0394,,
+all,eff_am,(a) morning efficiency |move|/range,range_pm,13:00-16:00 range,2333,0.0055,-0.0305,0.0413,,
+all,eff_am,(a) morning efficiency |move|/range,ratio,|pm move| / morning range,2333,-0.1234,-0.1674,-0.0848,,
+all,eff_am,(a) morning efficiency |move|/range,range_day,full-day range,2333,0.1962,0.1582,0.2377,,
+all,log_vix_0931,(b) log VIX 09:31,absmove_pm,|13:00->16:00 move|,2329,0.4017,0.3403,0.4526,,
+all,log_vix_0931,(b) log VIX 09:31,range_pm,13:00-16:00 range,2329,0.6344,0.5652,0.6888,,
+all,log_vix_0931,(b) log VIX 09:31,ratio,|pm move| / morning range,2329,0.0612,0.0130,0.1113,,
+all,log_vix_0931,(b) log VIX 09:31,range_day,full-day range,2329,0.6777,0.6174,0.7232,,
+all,log_vix_1300,(b) log VIX 13:00,absmove_pm,|13:00->16:00 move|,2332,0.4158,0.3604,0.4657,,
+all,log_vix_1300,(b) log VIX 13:00,range_pm,13:00-16:00 range,2332,0.6642,0.6014,0.7197,,
+all,log_vix_1300,(b) log VIX 13:00,ratio,|pm move| / morning range,2332,0.0628,0.0121,0.1112,,
+all,log_vix_1300,(b) log VIX 13:00,range_day,full-day range,2332,0.7021,0.6486,0.7448,,
+all,vix_chg_open_1300,(b) VIX change open->13:00,absmove_pm,|13:00->16:00 move|,2329,0.0263,-0.0136,0.0614,,
+all,vix_chg_open_1300,(b) VIX change open->13:00,range_pm,13:00-16:00 range,2329,0.1032,0.0604,0.1457,,
+all,vix_chg_open_1300,(b) VIX change open->13:00,ratio,|pm move| / morning range,2329,0.0128,-0.0234,0.0492,,
+all,vix_chg_open_1300,(b) VIX change open->13:00,range_day,full-day range,2329,0.0418,-0.0005,0.0855,,
+all,vix_hi_60d,(b) VIX13 > 60d p80,absmove_pm,|13:00->16:00 move|,2333,0.2284,0.1662,0.2854,0.0059,0.0030
+all,vix_hi_60d,(b) VIX13 > 60d p80,range_pm,13:00-16:00 range,2333,0.3862,0.3175,0.4520,0.0108,0.0054
+all,vix_hi_60d,(b) VIX13 > 60d p80,ratio,|pm move| / morning range,2333,0.0052,-0.0423,0.0470,0.4763,0.4982
+all,vix_hi_60d,(b) VIX13 > 60d p80,range_day,full-day range,2333,0.4214,0.3561,0.4859,0.0176,0.0089
+all,log_prev_range,(c) log prior-day range,absmove_pm,|13:00->16:00 move|,2331,0.3311,0.2702,0.3850,,
+all,log_prev_range,(c) log prior-day range,range_pm,13:00-16:00 range,2331,0.5816,0.5183,0.6376,,
+all,log_prev_range,(c) log prior-day range,ratio,|pm move| / morning range,2331,0.0055,-0.0437,0.0501,,
+all,log_prev_range,(c) log prior-day range,range_day,full-day range,2331,0.6183,0.5557,0.6671,,
+all,log_prev_rv5,(c) log 5d RV,absmove_pm,|13:00->16:00 move|,2326,0.3143,0.2469,0.3708,,
+all,log_prev_rv5,(c) log 5d RV,range_pm,13:00-16:00 range,2326,0.5396,0.4651,0.5982,,
+all,log_prev_rv5,(c) log 5d RV,ratio,|pm move| / morning range,2326,0.0139,-0.0321,0.0587,,
+all,log_prev_rv5,(c) log 5d RV,range_day,full-day range,2326,0.5704,0.5018,0.6288,,
+all,log_prev_rv20,(c) log 20d RV,absmove_pm,|13:00->16:00 move|,2311,0.3322,0.2621,0.3893,,
+all,log_prev_rv20,(c) log 20d RV,range_pm,13:00-16:00 range,2311,0.5569,0.4793,0.6226,,
+all,log_prev_rv20,(c) log 20d RV,ratio,|pm move| / morning range,2311,0.0425,-0.0119,0.0882,,
+all,log_prev_rv20,(c) log 20d RV,range_day,full-day range,2311,0.5787,0.4985,0.6370,,
+all,fomc,(d) FOMC,absmove_pm,|13:00->16:00 move|,2333,0.0937,0.0519,0.1366,0.0073,0.0035
+all,fomc,(d) FOMC,range_pm,13:00-16:00 range,2333,0.1673,0.1332,0.1947,0.0133,0.0063
+all,fomc,(d) FOMC,ratio,|pm move| / morning range,2333,0.1361,0.0891,0.1810,1.3862,0.4629
+all,fomc,(d) FOMC,range_day,full-day range,2333,0.0757,0.0411,0.1107,0.0151,0.0107
+all,cpi,(d) CPI,absmove_pm,|13:00->16:00 move|,2333,-0.0240,-0.0606,0.0124,0.0034,0.0036
+all,cpi,(d) CPI,range_pm,13:00-16:00 range,2333,0.0092,-0.0220,0.0369,0.0066,0.0066
+all,cpi,(d) CPI,ratio,|pm move| / morning range,2333,-0.0391,-0.0763,0.0019,0.3977,0.4981
+all,cpi,(d) CPI,range_day,full-day range,2333,0.0121,-0.0158,0.0418,0.0115,0.0108
+all,nfp,(d) NFP,absmove_pm,|13:00->16:00 move|,2333,-0.0027,-0.0338,0.0334,0.0033,0.0036
+all,nfp,(d) NFP,range_pm,13:00-16:00 range,2333,0.0084,-0.0169,0.0427,0.0065,0.0066
+all,nfp,(d) NFP,ratio,|pm move| / morning range,2333,-0.0391,-0.0712,-0.0006,0.3684,0.4994
+all,nfp,(d) NFP,range_day,full-day range,2333,0.0372,0.0084,0.0656,0.0120,0.0108
+all,opex,(d) monthly opex,absmove_pm,|13:00->16:00 move|,2333,-0.0028,-0.0379,0.0341,0.0033,0.0036
+all,opex,(d) monthly opex,range_pm,13:00-16:00 range,2333,-0.0162,-0.0434,0.0139,0.0059,0.0066
+all,opex,(d) monthly opex,ratio,|pm move| / morning range,2333,0.0060,-0.0320,0.0475,0.4363,0.4963
+all,opex,(d) monthly opex,range_day,full-day range,2333,-0.0214,-0.0445,0.0078,0.0101,0.0109
+all,quad_opex,(d) quarterly opex,absmove_pm,|13:00->16:00 move|,2333,-0.0069,-0.0498,0.0325,0.0037,0.0036
+all,quad_opex,(d) quarterly opex,range_pm,13:00-16:00 range,2333,0.0029,-0.0317,0.0410,0.0067,0.0066
+all,quad_opex,(d) quarterly opex,ratio,|pm move| / morning range,2333,-0.0105,-0.0554,0.0305,0.4273,0.4945
+all,quad_opex,(d) quarterly opex,range_day,full-day range,2333,-0.0025,-0.0377,0.0377,0.0117,0.0108
+all,any_event,(d) FOMC|CPI|NFP,absmove_pm,|13:00->16:00 move|,2333,0.0352,-0.0033,0.0794,0.0044,0.0035
+all,any_event,(d) FOMC|CPI|NFP,range_pm,13:00-16:00 range,2333,0.1015,0.0700,0.1352,0.0083,0.0063
+all,any_event,(d) FOMC|CPI|NFP,ratio,|pm move| / morning range,2333,0.0217,-0.0141,0.0645,0.6477,0.4715
+all,any_event,(d) FOMC|CPI|NFP,range_day,full-day range,2333,0.0776,0.0458,0.1135,0.0127,0.0106
+all,dow0,(e) Monday,absmove_pm,|13:00->16:00 move|,2333,-0.0534,-0.0911,-0.0165,0.0033,0.0037
+all,dow0,(e) Monday,range_pm,13:00-16:00 range,2333,-0.0852,-0.1164,-0.0566,0.0059,0.0067
+all,dow0,(e) Monday,ratio,|pm move| / morning range,2333,-0.0342,-0.0755,0.0043,0.4360,0.5066
+all,dow0,(e) Monday,range_day,full-day range,2333,-0.0654,-0.0966,-0.0359,0.0101,0.0110
+all,dow1,(e) Tuesday,absmove_pm,|13:00->16:00 move|,2333,-0.0314,-0.0678,0.0085,0.0033,0.0037
+all,dow1,(e) Tuesday,range_pm,13:00-16:00 range,2333,-0.0360,-0.0633,-0.0096,0.0061,0.0067
+all,dow1,(e) Tuesday,ratio,|pm move| / morning range,2333,-0.0306,-0.0710,0.0084,0.4460,0.5057
+all,dow1,(e) Tuesday,range_day,full-day range,2333,-0.0269,-0.0518,-0.0003,0.0104,0.0110
+all,dow2,(e) Wednesday,absmove_pm,|13:00->16:00 move|,2333,0.0396,0.0024,0.0759,0.0042,0.0035
+all,dow2,(e) Wednesday,range_pm,13:00-16:00 range,2333,0.0654,0.0360,0.0923,0.0074,0.0064
+all,dow2,(e) Wednesday,ratio,|pm move| / morning range,2333,0.0686,0.0279,0.1097,0.6503,0.4529
+all,dow2,(e) Wednesday,range_day,full-day range,2333,0.0116,-0.0147,0.0375,0.0111,0.0108
+all,dow3,(e) Thursday,absmove_pm,|13:00->16:00 move|,2333,0.0442,0.0088,0.0814,0.0038,0.0036
+all,dow3,(e) Thursday,range_pm,13:00-16:00 range,2333,0.0682,0.0421,0.0940,0.0070,0.0065
+all,dow3,(e) Thursday,ratio,|pm move| / morning range,2333,0.0159,-0.0273,0.0528,0.5036,0.4908
+all,dow3,(e) Thursday,range_day,full-day range,2333,0.0629,0.0396,0.0890,0.0115,0.0107
+all,dow4,(e) Friday,absmove_pm,|13:00->16:00 move|,2333,-0.0004,-0.0319,0.0369,0.0035,0.0037
+all,dow4,(e) Friday,range_pm,13:00-16:00 range,2333,-0.0149,-0.0395,0.0119,0.0064,0.0066
+all,dow4,(e) Friday,ratio,|pm move| / morning range,2333,-0.0209,-0.0579,0.0196,0.4246,0.5104
+all,dow4,(e) Friday,range_day,full-day range,2333,0.0161,-0.0047,0.0390,0.0111,0.0108
+all,month_end,(e) month-end,absmove_pm,|13:00->16:00 move|,2333,0.0835,0.0426,0.1161,0.0047,0.0036
+all,month_end,(e) month-end,range_pm,13:00-16:00 range,2333,0.0775,0.0459,0.1059,0.0078,0.0065
+all,month_end,(e) month-end,ratio,|pm move| / morning range,2333,0.0769,0.0399,0.1138,0.6959,0.4834
+all,month_end,(e) month-end,range_day,full-day range,2333,0.0350,0.0024,0.0675,0.0114,0.0108
+all,holiday_adj,(e) holiday-adjacent,absmove_pm,|13:00->16:00 move|,2333,-0.0273,-0.0690,0.0114,0.0030,0.0037
+all,holiday_adj,(e) holiday-adjacent,range_pm,13:00-16:00 range,2333,-0.0302,-0.0716,0.0087,0.0058,0.0066
+all,holiday_adj,(e) holiday-adjacent,ratio,|pm move| / morning range,2333,-0.0298,-0.0674,0.0099,0.4124,0.4993
+all,holiday_adj,(e) holiday-adjacent,range_day,full-day range,2333,-0.0266,-0.0719,0.0156,0.0100,0.0109
+all,pre_holiday,(e) pre-holiday,absmove_pm,|13:00->16:00 move|,2333,-0.0006,-0.0356,0.0330,0.0031,0.0036
+all,pre_holiday,(e) pre-holiday,range_pm,13:00-16:00 range,2333,-0.0240,-0.0596,0.0120,0.0056,0.0066
+all,pre_holiday,(e) pre-holiday,ratio,|pm move| / morning range,2333,0.0082,-0.0320,0.0436,0.4658,0.4943
+all,pre_holiday,(e) pre-holiday,range_day,full-day range,2333,-0.0364,-0.0726,-0.0033,0.0093,0.0109
+all,post_holiday,(e) post-holiday,absmove_pm,|13:00->16:00 move|,2333,-0.0371,-0.0752,-0.0029,0.0029,0.0036
+all,post_holiday,(e) post-holiday,range_pm,13:00-16:00 range,2333,-0.0180,-0.0524,0.0157,0.0059,0.0066
+all,post_holiday,(e) post-holiday,ratio,|pm move| / morning range,2333,-0.0492,-0.0895,-0.0077,0.3603,0.4981
+all,post_holiday,(e) post-holiday,range_day,full-day range,2333,-0.0008,-0.0362,0.0355,0.0106,0.0109
+all,log_absgap,(f) log |overnight gap|,absmove_pm,|13:00->16:00 move|,2331,0.2122,0.1639,0.2552,,
+all,log_absgap,(f) log |overnight gap|,range_pm,13:00-16:00 range,2331,0.3323,0.2780,0.3874,,
+all,log_absgap,(f) log |overnight gap|,ratio,|pm move| / morning range,2331,0.0078,-0.0338,0.0506,,
+all,log_absgap,(f) log |overnight gap|,range_day,full-day range,2331,0.3745,0.3227,0.4233,,
+all,neg_gamma_prev,(g) prior-day SPY close < UW gamma flip (2024-05-13+),absmove_pm,|13:00->16:00 move|,598,0.1009,0.0017,0.1748,0.0031,0.0028
+all,neg_gamma_prev,(g) prior-day SPY close < UW gamma flip (2024-05-13+),range_pm,13:00-16:00 range,598,0.0617,-0.0268,0.1204,0.0056,0.0055
+all,neg_gamma_prev,(g) prior-day SPY close < UW gamma flip (2024-05-13+),ratio,|pm move| / morning range,598,0.0969,0.0117,0.1736,0.4374,0.3941
+all,neg_gamma_prev,(g) prior-day SPY close < UW gamma flip (2024-05-13+),range_day,full-day range,598,0.0267,-0.0649,0.0956,0.0100,0.0098
+train,log_range_0930_1030,(a) log range 09:30-10:30,absmove_pm,|13:00->16:00 move|,1395,0.4428,0.3736,0.5029,,
+train,log_range_0930_1030,(a) log range 09:30-10:30,range_pm,13:00-16:00 range,1395,0.6932,0.6323,0.7415,,
+train,log_range_0930_1030,(a) log range 09:30-10:30,ratio,|pm move| / morning range,1395,-0.0274,-0.0875,0.0418,,
+train,log_range_0930_1030,(a) log range 09:30-10:30,range_day,full-day range,1395,0.8071,0.7681,0.8362,,
+train,log_rv_0930_1030,(a) log RV 09:30-10:30,absmove_pm,|13:00->16:00 move|,1395,0.4979,0.4409,0.5518,,
+train,log_rv_0930_1030,(a) log RV 09:30-10:30,range_pm,13:00-16:00 range,1395,0.7622,0.7093,0.8034,,
+train,log_rv_0930_1030,(a) log RV 09:30-10:30,ratio,|pm move| / morning range,1395,0.0489,-0.0078,0.1036,,
+train,log_rv_0930_1030,(a) log RV 09:30-10:30,range_day,full-day range,1395,0.8129,0.7679,0.8437,,
+train,log_range_0930_1300,(a) log range 09:30-13:00,absmove_pm,|13:00->16:00 move|,1395,0.4460,0.3753,0.5059,,
+train,log_range_0930_1300,(a) log range 09:30-13:00,range_pm,13:00-16:00 range,1395,0.7213,0.6668,0.7688,,
+train,log_range_0930_1300,(a) log range 09:30-13:00,ratio,|pm move| / morning range,1395,-0.1029,-0.1680,-0.0371,,
+train,log_range_0930_1300,(a) log range 09:30-13:00,range_day,full-day range,1395,0.9058,0.8838,0.9231,,
+train,log_rv_0930_1300,(a) log RV 09:30-13:00,absmove_pm,|13:00->16:00 move|,1395,0.5071,0.4477,0.5601,,
+train,log_rv_0930_1300,(a) log RV 09:30-13:00,range_pm,13:00-16:00 range,1395,0.7956,0.7524,0.8278,,
+train,log_rv_0930_1300,(a) log RV 09:30-13:00,ratio,|pm move| / morning range,1395,0.0287,-0.0274,0.0894,,
+train,log_rv_0930_1300,(a) log RV 09:30-13:00,range_day,full-day range,1395,0.8545,0.8229,0.8790,,
+train,eff_am,(a) morning efficiency |move|/range,absmove_pm,|13:00->16:00 move|,1395,-0.0151,-0.0700,0.0370,,
+train,eff_am,(a) morning efficiency |move|/range,range_pm,13:00-16:00 range,1395,0.0126,-0.0313,0.0586,,
+train,eff_am,(a) morning efficiency |move|/range,ratio,|pm move| / morning range,1395,-0.1389,-0.1887,-0.0861,,
+train,eff_am,(a) morning efficiency |move|/range,range_day,full-day range,1395,0.1779,0.1281,0.2281,,
+train,log_vix_0931,(b) log VIX 09:31,absmove_pm,|13:00->16:00 move|,1392,0.4792,0.4189,0.5310,,
+train,log_vix_0931,(b) log VIX 09:31,range_pm,13:00-16:00 range,1392,0.7228,0.6526,0.7773,,
+train,log_vix_0931,(b) log VIX 09:31,ratio,|pm move| / morning range,1392,0.0988,0.0461,0.1574,,
+train,log_vix_0931,(b) log VIX 09:31,range_day,full-day range,1392,0.7412,0.6777,0.7878,,
+train,log_vix_1300,(b) log VIX 13:00,absmove_pm,|13:00->16:00 move|,1395,0.4919,0.4215,0.5455,,
+train,log_vix_1300,(b) log VIX 13:00,range_pm,13:00-16:00 range,1395,0.7476,0.6804,0.7948,,
+train,log_vix_1300,(b) log VIX 13:00,ratio,|pm move| / morning range,1395,0.0998,0.0468,0.1597,,
+train,log_vix_1300,(b) log VIX 13:00,range_day,full-day range,1395,0.7611,0.6979,0.8069,,
+train,vix_chg_open_1300,(b) VIX change open->13:00,absmove_pm,|13:00->16:00 move|,1392,0.0040,-0.0515,0.0561,,
+train,vix_chg_open_1300,(b) VIX change open->13:00,range_pm,13:00-16:00 range,1392,0.0815,0.0232,0.1375,,
+train,vix_chg_open_1300,(b) VIX change open->13:00,ratio,|pm move| / morning range,1392,-0.0040,-0.0551,0.0421,,
+train,vix_chg_open_1300,(b) VIX change open->13:00,range_day,full-day range,1392,0.0200,-0.0416,0.0759,,
+train,vix_hi_60d,(b) VIX13 > 60d p80,absmove_pm,|13:00->16:00 move|,1395,0.2710,0.1977,0.3472,0.0070,0.0032
+train,vix_hi_60d,(b) VIX13 > 60d p80,range_pm,13:00-16:00 range,1395,0.4167,0.3323,0.5013,0.0127,0.0056
+train,vix_hi_60d,(b) VIX13 > 60d p80,ratio,|pm move| / morning range,1395,0.0292,-0.0307,0.0901,0.5180,0.5018
+train,vix_hi_60d,(b) VIX13 > 60d p80,range_day,full-day range,1395,0.4398,0.3555,0.5176,0.0199,0.0093
+train,log_prev_range,(c) log prior-day range,absmove_pm,|13:00->16:00 move|,1394,0.4216,0.3525,0.4829,,
+train,log_prev_range,(c) log prior-day range,range_pm,13:00-16:00 range,1394,0.6740,0.6007,0.7268,,
+train,log_prev_range,(c) log prior-day range,ratio,|pm move| / morning range,1394,0.0467,-0.0136,0.1060,,
+train,log_prev_range,(c) log prior-day range,range_day,full-day range,1394,0.6992,0.6371,0.7454,,
+train,log_prev_rv5,(c) log 5d RV,absmove_pm,|13:00->16:00 move|,1389,0.3858,0.3064,0.4540,,
+train,log_prev_rv5,(c) log 5d RV,range_pm,13:00-16:00 range,1389,0.6338,0.5613,0.6958,,
+train,log_prev_rv5,(c) log 5d RV,ratio,|pm move| / morning range,1389,0.0356,-0.0164,0.0944,,
+train,log_prev_rv5,(c) log 5d RV,range_day,full-day range,1389,0.6474,0.5708,0.7019,,
+train,log_prev_rv20,(c) log 20d RV,absmove_pm,|13:00->16:00 move|,1374,0.4113,0.3265,0.4762,,
+train,log_prev_rv20,(c) log 20d RV,range_pm,13:00-16:00 range,1374,0.6551,0.5727,0.7146,,
+train,log_prev_rv20,(c) log 20d RV,ratio,|pm move| / morning range,1374,0.0742,0.0084,0.1360,,
+train,log_prev_rv20,(c) log 20d RV,range_day,full-day range,1374,0.6595,0.5784,0.7126,,
+train,fomc,(d) FOMC,absmove_pm,|13:00->16:00 move|,1395,0.0877,0.0282,0.1398,0.0079,0.0039
+train,fomc,(d) FOMC,range_pm,13:00-16:00 range,1395,0.1384,0.0980,0.1787,0.0142,0.0069
+train,fomc,(d) FOMC,ratio,|pm move| / morning range,1395,0.1286,0.0735,0.1835,1.2661,0.4787
+train,fomc,(d) FOMC,range_day,full-day range,1395,0.0590,0.0172,0.1042,0.0167,0.0114
+train,cpi,(d) CPI,absmove_pm,|13:00->16:00 move|,1395,-0.0190,-0.0660,0.0284,0.0038,0.0040
+train,cpi,(d) CPI,range_pm,13:00-16:00 range,1395,0.0079,-0.0281,0.0434,0.0070,0.0072
+train,cpi,(d) CPI,ratio,|pm move| / morning range,1395,-0.0230,-0.0791,0.0300,0.4445,0.5083
+train,cpi,(d) CPI,range_day,full-day range,1395,0.0062,-0.0309,0.0436,0.0122,0.0116
+train,nfp,(d) NFP,absmove_pm,|13:00->16:00 move|,1395,-0.0175,-0.0585,0.0266,0.0033,0.0040
+train,nfp,(d) NFP,range_pm,13:00-16:00 range,1395,-0.0134,-0.0408,0.0236,0.0067,0.0072
+train,nfp,(d) NFP,ratio,|pm move| / morning range,1395,-0.0315,-0.0749,0.0175,0.3954,0.5107
+train,nfp,(d) NFP,range_day,full-day range,1395,0.0043,-0.0288,0.0409,0.0117,0.0116
+train,opex,(d) monthly opex,absmove_pm,|13:00->16:00 move|,1395,0.0099,-0.0362,0.0504,0.0038,0.0040
+train,opex,(d) monthly opex,range_pm,13:00-16:00 range,1395,-0.0214,-0.0563,0.0128,0.0064,0.0072
+train,opex,(d) monthly opex,ratio,|pm move| / morning range,1395,0.0271,-0.0253,0.0783,0.4808,0.5065
+train,opex,(d) monthly opex,range_day,full-day range,1395,-0.0199,-0.0521,0.0112,0.0109,0.0116
+train,quad_opex,(d) quarterly opex,absmove_pm,|13:00->16:00 move|,1395,0.0110,-0.0390,0.0524,0.0045,0.0040
+train,quad_opex,(d) quarterly opex,range_pm,13:00-16:00 range,1395,0.0048,-0.0434,0.0530,0.0078,0.0071
+train,quad_opex,(d) quarterly opex,ratio,|pm move| / morning range,1395,0.0107,-0.0394,0.0585,0.4863,0.5056
+train,quad_opex,(d) quarterly opex,range_day,full-day range,1395,0.0049,-0.0447,0.0524,0.0133,0.0116
+train,any_event,(d) FOMC|CPI|NFP,absmove_pm,|13:00->16:00 move|,1395,0.0278,-0.0194,0.0791,0.0047,0.0039
+train,any_event,(d) FOMC|CPI|NFP,range_pm,13:00-16:00 range,1395,0.0727,0.0346,0.1110,0.0088,0.0069
+train,any_event,(d) FOMC|CPI|NFP,ratio,|pm move| / morning range,1395,0.0334,-0.0140,0.0848,0.6459,0.4851
+train,any_event,(d) FOMC|CPI|NFP,range_day,full-day range,1395,0.0459,0.0075,0.0853,0.0134,0.0113
+train,dow0,(e) Monday,absmove_pm,|13:00->16:00 move|,1395,-0.0530,-0.1018,-0.0063,0.0037,0.0041
+train,dow0,(e) Monday,range_pm,13:00-16:00 range,1395,-0.0730,-0.1101,-0.0374,0.0066,0.0073
+train,dow0,(e) Monday,ratio,|pm move| / morning range,1395,-0.0476,-0.0970,-0.0049,0.4443,0.5194
+train,dow0,(e) Monday,range_day,full-day range,1395,-0.0469,-0.0864,-0.0073,0.0109,0.0118
+train,dow1,(e) Tuesday,absmove_pm,|13:00->16:00 move|,1395,-0.0168,-0.0639,0.0306,0.0038,0.0040
+train,dow1,(e) Tuesday,range_pm,13:00-16:00 range,1395,-0.0076,-0.0391,0.0238,0.0069,0.0072
+train,dow1,(e) Tuesday,ratio,|pm move| / morning range,1395,-0.0246,-0.0741,0.0291,0.4764,0.5127
+train,dow1,(e) Tuesday,range_day,full-day range,1395,-0.0065,-0.0371,0.0251,0.0112,0.0117
+train,dow2,(e) Wednesday,absmove_pm,|13:00->16:00 move|,1395,0.0211,-0.0260,0.0654,0.0044,0.0039
+train,dow2,(e) Wednesday,range_pm,13:00-16:00 range,1395,0.0420,0.0086,0.0718,0.0077,0.0070
+train,dow2,(e) Wednesday,ratio,|pm move| / morning range,1395,0.0525,0.0036,0.1114,0.6455,0.4691
+train,dow2,(e) Wednesday,range_day,full-day range,1395,0.0040,-0.0272,0.0300,0.0117,0.0116
+train,dow3,(e) Thursday,absmove_pm,|13:00->16:00 move|,1395,0.0308,-0.0179,0.0751,0.0041,0.0040
+train,dow3,(e) Thursday,range_pm,13:00-16:00 range,1395,0.0480,0.0212,0.0820,0.0075,0.0071
+train,dow3,(e) Thursday,ratio,|pm move| / morning range,1395,0.0008,-0.0497,0.0528,0.4913,0.5088
+train,dow3,(e) Thursday,range_day,full-day range,1395,0.0447,0.0133,0.0752,0.0123,0.0114
+train,dow4,(e) Friday,absmove_pm,|13:00->16:00 move|,1395,0.0165,-0.0246,0.0553,0.0039,0.0040
+train,dow4,(e) Friday,range_pm,13:00-16:00 range,1395,-0.0118,-0.0410,0.0156,0.0071,0.0072
+train,dow4,(e) Friday,ratio,|pm move| / morning range,1395,0.0176,-0.0341,0.0652,0.4622,0.5159
+train,dow4,(e) Friday,range_day,full-day range,1395,0.0033,-0.0258,0.0292,0.0118,0.0115
+train,month_end,(e) month-end,absmove_pm,|13:00->16:00 move|,1395,0.0615,0.0220,0.0974,0.0046,0.0040
+train,month_end,(e) month-end,range_pm,13:00-16:00 range,1395,0.0557,0.0170,0.0863,0.0081,0.0071
+train,month_end,(e) month-end,ratio,|pm move| / morning range,1395,0.0476,-0.0022,0.0914,0.6765,0.4968
+train,month_end,(e) month-end,range_day,full-day range,1395,0.0193,-0.0203,0.0584,0.0119,0.0116
+train,holiday_adj,(e) holiday-adjacent,absmove_pm,|13:00->16:00 move|,1395,-0.0068,-0.0560,0.0448,0.0036,0.0040
+train,holiday_adj,(e) holiday-adjacent,range_pm,13:00-16:00 range,1395,-0.0146,-0.0772,0.0356,0.0066,0.0072
+train,holiday_adj,(e) holiday-adjacent,ratio,|pm move| / morning range,1395,-0.0003,-0.0562,0.0585,0.4772,0.5072
+train,holiday_adj,(e) holiday-adjacent,range_day,full-day range,1395,-0.0160,-0.0785,0.0393,0.0110,0.0116
+train,pre_holiday,(e) pre-holiday,absmove_pm,|13:00->16:00 move|,1395,0.0163,-0.0286,0.0527,0.0036,0.0040
+train,pre_holiday,(e) pre-holiday,range_pm,13:00-16:00 range,1395,-0.0162,-0.0661,0.0271,0.0063,0.0072
+train,pre_holiday,(e) pre-holiday,ratio,|pm move| / morning range,1395,0.0345,-0.0174,0.0808,0.5349,0.5043
+train,pre_holiday,(e) pre-holiday,range_day,full-day range,1395,-0.0322,-0.0812,0.0064,0.0101,0.0117
+train,post_holiday,(e) post-holiday,absmove_pm,|13:00->16:00 move|,1395,-0.0260,-0.0741,0.0257,0.0036,0.0040
+train,post_holiday,(e) post-holiday,range_pm,13:00-16:00 range,1395,-0.0040,-0.0522,0.0441,0.0069,0.0072
+train,post_holiday,(e) post-holiday,ratio,|pm move| / morning range,1395,-0.0353,-0.0900,0.0215,0.4181,0.5081
+train,post_holiday,(e) post-holiday,range_day,full-day range,1395,0.0102,-0.0383,0.0586,0.0119,0.0116
+train,log_absgap,(f) log |overnight gap|,absmove_pm,|13:00->16:00 move|,1394,0.2578,0.1961,0.3231,,
+train,log_absgap,(f) log |overnight gap|,range_pm,13:00-16:00 range,1394,0.3901,0.3173,0.4597,,
+train,log_absgap,(f) log |overnight gap|,ratio,|pm move| / morning range,1394,0.0223,-0.0306,0.0767,,
+train,log_absgap,(f) log |overnight gap|,range_day,full-day range,1394,0.4290,0.3612,0.4892,,
+test,log_range_0930_1030,(a) log range 09:30-10:30,absmove_pm,|13:00->16:00 move|,938,0.2320,0.1619,0.2971,,
+test,log_range_0930_1030,(a) log range 09:30-10:30,range_pm,13:00-16:00 range,938,0.4206,0.3296,0.4845,,
+test,log_range_0930_1030,(a) log range 09:30-10:30,ratio,|pm move| / morning range,938,-0.1324,-0.2016,-0.0573,,
+test,log_range_0930_1030,(a) log range 09:30-10:30,range_day,full-day range,938,0.6396,0.5706,0.6945,,
+test,log_rv_0930_1030,(a) log RV 09:30-10:30,absmove_pm,|13:00->16:00 move|,938,0.2630,0.1780,0.3363,,
+test,log_rv_0930_1030,(a) log RV 09:30-10:30,range_pm,13:00-16:00 range,938,0.4852,0.4013,0.5439,,
+test,log_rv_0930_1030,(a) log RV 09:30-10:30,ratio,|pm move| / morning range,938,-0.0832,-0.1628,-0.0073,,
+test,log_rv_0930_1030,(a) log RV 09:30-10:30,range_day,full-day range,938,0.6284,0.5523,0.6799,,
+test,log_range_0930_1300,(a) log range 09:30-13:00,absmove_pm,|13:00->16:00 move|,938,0.2646,0.1930,0.3262,,
+test,log_range_0930_1300,(a) log range 09:30-13:00,range_pm,13:00-16:00 range,938,0.4694,0.3810,0.5362,,
+test,log_range_0930_1300,(a) log range 09:30-13:00,ratio,|pm move| / morning range,938,-0.2014,-0.2636,-0.1409,,
+test,log_range_0930_1300,(a) log range 09:30-13:00,range_day,full-day range,938,0.8179,0.7797,0.8474,,
+test,log_rv_0930_1300,(a) log RV 09:30-13:00,absmove_pm,|13:00->16:00 move|,938,0.2790,0.2018,0.3511,,
+test,log_rv_0930_1300,(a) log RV 09:30-13:00,range_pm,13:00-16:00 range,938,0.5340,0.4488,0.5991,,
+test,log_rv_0930_1300,(a) log RV 09:30-13:00,ratio,|pm move| / morning range,938,-0.1035,-0.1843,-0.0297,,
+test,log_rv_0930_1300,(a) log RV 09:30-13:00,range_day,full-day range,938,0.6889,0.6195,0.7326,,
+test,eff_am,(a) morning efficiency |move|/range,absmove_pm,|13:00->16:00 move|,938,0.0256,-0.0370,0.0837,,
+test,eff_am,(a) morning efficiency |move|/range,range_pm,13:00-16:00 range,938,-0.0026,-0.0615,0.0563,,
+test,eff_am,(a) morning efficiency |move|/range,ratio,|pm move| / morning range,938,-0.0963,-0.1597,-0.0331,,
+test,eff_am,(a) morning efficiency |move|/range,range_day,full-day range,938,0.2355,0.1871,0.2851,,
+test,log_vix_0931,(b) log VIX 09:31,absmove_pm,|13:00->16:00 move|,937,0.2134,0.1116,0.2935,,
+test,log_vix_0931,(b) log VIX 09:31,range_pm,13:00-16:00 range,937,0.4003,0.2782,0.4895,,
+test,log_vix_0931,(b) log VIX 09:31,ratio,|pm move| / morning range,937,-0.0488,-0.1325,0.0323,,
+test,log_vix_0931,(b) log VIX 09:31,range_day,full-day range,937,0.5115,0.4090,0.5862,,
+test,log_vix_1300,(b) log VIX 13:00,absmove_pm,|13:00->16:00 move|,937,0.2315,0.1458,0.3073,,
+test,log_vix_1300,(b) log VIX 13:00,range_pm,13:00-16:00 range,937,0.4468,0.3316,0.5383,,
+test,log_vix_1300,(b) log VIX 13:00,ratio,|pm move| / morning range,937,-0.0476,-0.1331,0.0330,,
+test,log_vix_1300,(b) log VIX 13:00,range_day,full-day range,937,0.5527,0.4558,0.6321,,
+test,vix_chg_open_1300,(b) VIX change open->13:00,absmove_pm,|13:00->16:00 move|,937,0.0664,0.0130,0.1284,,
+test,vix_chg_open_1300,(b) VIX change open->13:00,range_pm,13:00-16:00 range,937,0.1464,0.0860,0.2189,,
+test,vix_chg_open_1300,(b) VIX change open->13:00,ratio,|pm move| / morning range,937,0.0403,-0.0119,0.0990,,
+test,vix_chg_open_1300,(b) VIX change open->13:00,range_day,full-day range,937,0.0905,0.0366,0.1570,,
+test,vix_hi_60d,(b) VIX13 > 60d p80,absmove_pm,|13:00->16:00 move|,938,0.1697,0.0975,0.2424,0.0042,0.0027
+test,vix_hi_60d,(b) VIX13 > 60d p80,range_pm,13:00-16:00 range,938,0.3568,0.2792,0.4459,0.0082,0.0049
+test,vix_hi_60d,(b) VIX13 > 60d p80,ratio,|pm move| / morning range,938,-0.0284,-0.0933,0.0292,0.4178,0.4928
+test,vix_hi_60d,(b) VIX13 > 60d p80,range_day,full-day range,938,0.4091,0.3083,0.4967,0.0143,0.0084
+test,log_prev_range,(c) log prior-day range,absmove_pm,|13:00->16:00 move|,937,0.1496,0.0641,0.2257,,
+test,log_prev_range,(c) log prior-day range,range_pm,13:00-16:00 range,937,0.3762,0.2685,0.4623,,
+test,log_prev_range,(c) log prior-day range,ratio,|pm move| / morning range,937,-0.0803,-0.1438,-0.0137,,
+test,log_prev_range,(c) log prior-day range,range_day,full-day range,937,0.4316,0.3413,0.5150,,
+test,log_prev_rv5,(c) log 5d RV,absmove_pm,|13:00->16:00 move|,937,0.1573,0.0663,0.2271,,
+test,log_prev_rv5,(c) log 5d RV,range_pm,13:00-16:00 range,937,0.3215,0.2039,0.4102,,
+test,log_prev_rv5,(c) log 5d RV,ratio,|pm move| / morning range,937,-0.0418,-0.1054,0.0217,,
+test,log_prev_rv5,(c) log 5d RV,range_day,full-day range,937,0.3791,0.2591,0.4659,,
+test,log_prev_rv20,(c) log 20d RV,absmove_pm,|13:00->16:00 move|,937,0.1284,0.0285,0.2034,,
+test,log_prev_rv20,(c) log 20d RV,range_pm,13:00-16:00 range,937,0.2884,0.1604,0.3796,,
+test,log_prev_rv20,(c) log 20d RV,ratio,|pm move| / morning range,937,-0.0585,-0.1343,0.0083,,
+test,log_prev_rv20,(c) log 20d RV,range_day,full-day range,937,0.3518,0.2202,0.4409,,
+test,fomc,(d) FOMC,absmove_pm,|13:00->16:00 move|,938,0.1040,0.0285,0.1775,0.0064,0.0030
+test,fomc,(d) FOMC,range_pm,13:00-16:00 range,938,0.2168,0.1709,0.2671,0.0119,0.0055
+test,fomc,(d) FOMC,ratio,|pm move| / morning range,938,0.1467,0.0707,0.2079,1.5743,0.4394
+test,fomc,(d) FOMC,range_day,full-day range,938,0.1139,0.0498,0.1688,0.0127,0.0096
+test,cpi,(d) CPI,absmove_pm,|13:00->16:00 move|,938,-0.0313,-0.1012,0.0325,0.0027,0.0031
+test,cpi,(d) CPI,range_pm,13:00-16:00 range,938,0.0128,-0.0476,0.0702,0.0060,0.0057
+test,cpi,(d) CPI,ratio,|pm move| / morning range,938,-0.0626,-0.1261,-0.0008,0.3276,0.4830
+test,cpi,(d) CPI,range_day,full-day range,938,0.0284,-0.0271,0.0797,0.0104,0.0097
+test,nfp,(d) NFP,absmove_pm,|13:00->16:00 move|,938,0.0189,-0.0414,0.0808,0.0033,0.0031
+test,nfp,(d) NFP,range_pm,13:00-16:00 range,938,0.0467,-0.0019,0.1039,0.0063,0.0057
+test,nfp,(d) NFP,ratio,|pm move| / morning range,938,-0.0522,-0.1136,0.0086,0.3261,0.4827
+test,nfp,(d) NFP,range_day,full-day range,938,0.0990,0.0399,0.1501,0.0126,0.0096
+test,opex,(d) monthly opex,absmove_pm,|13:00->16:00 move|,938,-0.0244,-0.0858,0.0401,0.0026,0.0031
+test,opex,(d) monthly opex,range_pm,13:00-16:00 range,938,-0.0087,-0.0509,0.0490,0.0051,0.0057
+test,opex,(d) monthly opex,ratio,|pm move| / morning range,938,-0.0269,-0.0890,0.0340,0.3713,0.4811
+test,opex,(d) monthly opex,range_day,full-day range,938,-0.0285,-0.0797,0.0297,0.0090,0.0098
+test,quad_opex,(d) quarterly opex,absmove_pm,|13:00->16:00 move|,938,-0.0374,-0.1119,0.0382,0.0023,0.0031
+test,quad_opex,(d) quarterly opex,range_pm,13:00-16:00 range,938,0.0008,-0.0470,0.0534,0.0051,0.0057
+test,quad_opex,(d) quarterly opex,ratio,|pm move| / morning range,938,-0.0453,-0.1225,0.0332,0.3368,0.4780
+test,quad_opex,(d) quarterly opex,range_day,full-day range,938,-0.0178,-0.0760,0.0506,0.0093,0.0097
+test,any_event,(d) FOMC|CPI|NFP,absmove_pm,|13:00->16:00 move|,938,0.0467,-0.0200,0.1086,0.0039,0.0030
+test,any_event,(d) FOMC|CPI|NFP,range_pm,13:00-16:00 range,938,0.1518,0.0915,0.2110,0.0076,0.0054
+test,any_event,(d) FOMC|CPI|NFP,ratio,|pm move| / morning range,938,0.0031,-0.0667,0.0773,0.6505,0.4513
+test,any_event,(d) FOMC|CPI|NFP,range_day,full-day range,938,0.1441,0.0837,0.2014,0.0118,0.0094
+test,dow0,(e) Monday,absmove_pm,|13:00->16:00 move|,938,-0.0541,-0.1171,0.0058,0.0026,0.0032
+test,dow0,(e) Monday,range_pm,13:00-16:00 range,938,-0.1095,-0.1711,-0.0618,0.0049,0.0059
+test,dow0,(e) Monday,ratio,|pm move| / morning range,938,-0.0136,-0.0863,0.0475,0.4238,0.4877
+test,dow0,(e) Monday,range_day,full-day range,938,-0.1041,-0.1604,-0.0577,0.0090,0.0099
+test,dow1,(e) Tuesday,absmove_pm,|13:00->16:00 move|,938,-0.0527,-0.1127,0.0057,0.0025,0.0032
+test,dow1,(e) Tuesday,range_pm,13:00-16:00 range,938,-0.0840,-0.1311,-0.0362,0.0050,0.0059
+test,dow1,(e) Tuesday,ratio,|pm move| / morning range,938,-0.0371,-0.0967,0.0218,0.4013,0.4952
+test,dow1,(e) Tuesday,range_day,full-day range,938,-0.0651,-0.1085,-0.0155,0.0091,0.0099
+test,dow2,(e) Wednesday,absmove_pm,|13:00->16:00 move|,938,0.0702,0.0049,0.1296,0.0039,0.0029
+test,dow2,(e) Wednesday,range_pm,13:00-16:00 range,938,0.1051,0.0502,0.1597,0.0069,0.0054
+test,dow2,(e) Wednesday,ratio,|pm move| / morning range,938,0.0928,0.0249,0.1566,0.6573,0.4289
+test,dow2,(e) Wednesday,range_day,full-day range,938,0.0263,-0.0292,0.0766,0.0101,0.0096
+test,dow3,(e) Thursday,absmove_pm,|13:00->16:00 move|,938,0.0648,0.0112,0.1304,0.0034,0.0030
+test,dow3,(e) Thursday,range_pm,13:00-16:00 range,938,0.1039,0.0608,0.1443,0.0062,0.0056
+test,dow3,(e) Thursday,ratio,|pm move| / morning range,938,0.0375,-0.0193,0.1055,0.5221,0.4641
+test,dow3,(e) Thursday,range_day,full-day range,938,0.0978,0.0584,0.1426,0.0104,0.0096
+test,dow4,(e) Friday,absmove_pm,|13:00->16:00 move|,938,-0.0294,-0.0923,0.0258,0.0029,0.0031
+test,dow4,(e) Friday,range_pm,13:00-16:00 range,938,-0.0178,-0.0654,0.0347,0.0053,0.0058
+test,dow4,(e) Friday,ratio,|pm move| / morning range,938,-0.0804,-0.1422,-0.0194,0.3690,0.5023
+test,dow4,(e) Friday,range_day,full-day range,938,0.0434,0.0023,0.0866,0.0100,0.0097
+test,month_end,(e) month-end,absmove_pm,|13:00->16:00 move|,938,0.1177,0.0479,0.1825,0.0049,0.0030
+test,month_end,(e) month-end,range_pm,13:00-16:00 range,938,0.1183,0.0605,0.1765,0.0073,0.0056
+test,month_end,(e) month-end,ratio,|pm move| / morning range,938,0.1197,0.0481,0.1805,0.7256,0.4637
+test,month_end,(e) month-end,range_day,full-day range,938,0.0681,0.0124,0.1269,0.0107,0.0097
+test,holiday_adj,(e) holiday-adjacent,absmove_pm,|13:00->16:00 move|,938,-0.0555,-0.1258,0.0007,0.0023,0.0031
+test,holiday_adj,(e) holiday-adjacent,range_pm,13:00-16:00 range,938,-0.0501,-0.1215,0.0048,0.0047,0.0058
+test,holiday_adj,(e) holiday-adjacent,ratio,|pm move| / morning range,938,-0.0693,-0.1241,-0.0110,0.3289,0.4874
+test,holiday_adj,(e) holiday-adjacent,range_day,full-day range,938,-0.0416,-0.1136,0.0085,0.0086,0.0098
+test,pre_holiday,(e) pre-holiday,absmove_pm,|13:00->16:00 move|,938,-0.0264,-0.0935,0.0345,0.0025,0.0031
+test,pre_holiday,(e) pre-holiday,range_pm,13:00-16:00 range,938,-0.0341,-0.0987,0.0230,0.0047,0.0057
+test,pre_holiday,(e) pre-holiday,ratio,|pm move| / morning range,938,-0.0300,-0.0927,0.0275,0.3716,0.4795
+test,pre_holiday,(e) pre-holiday,range_day,full-day range,938,-0.0419,-0.0937,0.0034,0.0081,0.0098
+test,post_holiday,(e) post-holiday,absmove_pm,|13:00->16:00 move|,938,-0.0501,-0.1132,0.0006,0.0021,0.0031
+test,post_holiday,(e) post-holiday,range_pm,13:00-16:00 range,938,-0.0354,-0.0933,0.0149,0.0047,0.0057
+test,post_holiday,(e) post-holiday,ratio,|pm move| / morning range,938,-0.0654,-0.1245,-0.0039,0.2897,0.4831
+test,post_holiday,(e) post-holiday,range_day,full-day range,938,-0.0164,-0.0812,0.0380,0.0091,0.0098
+test,log_absgap,(f) log |overnight gap|,absmove_pm,|13:00->16:00 move|,937,0.1316,0.0648,0.1941,,
+test,log_absgap,(f) log |overnight gap|,range_pm,13:00-16:00 range,937,0.2259,0.1632,0.2933,,
+test,log_absgap,(f) log |overnight gap|,ratio,|pm move| / morning range,937,-0.0195,-0.0855,0.0429,,
+test,log_absgap,(f) log |overnight gap|,range_day,full-day range,937,0.2683,0.2009,0.3272,,
+test,neg_gamma_prev,(g) prior-day SPY close < UW gamma flip (2024-05-13+),absmove_pm,|13:00->16:00 move|,598,0.1009,0.0024,0.1782,0.0031,0.0028
+test,neg_gamma_prev,(g) prior-day SPY close < UW gamma flip (2024-05-13+),range_pm,13:00-16:00 range,598,0.0617,-0.0252,0.1178,0.0056,0.0055
+test,neg_gamma_prev,(g) prior-day SPY close < UW gamma flip (2024-05-13+),ratio,|pm move| / morning range,598,0.0969,0.0103,0.1647,0.4374,0.3941
+test,neg_gamma_prev,(g) prior-day SPY close < UW gamma flip (2024-05-13+),range_day,full-day range,598,0.0267,-0.0665,0.0905,0.0100,0.0098
