@@ -46,8 +46,8 @@ print('--- scalp hold minutes: n',len(hold),'min',round(min(hold),1),'p25',round
 pp=[r['pnlpct'] for r in rows if isinstance(r['pnlpct'],(int,float))]
 print('--- pnl% quantiles:', [round(q*100,1) for q in statistics.quantiles(pp,n=10)])
 dl=[r['delta'] for r in rows if isinstance(r['delta'],(int,float)) and r['delta']!=0]
-print('--- entryDelta: n',len(dl),'med',round(statistics.median([abs(x) for x in dl]),3),'q',[round(abs(q),3) for q in statistics.quantiles([abs(x) for x in dl],n=4)])
-iv=[r['iv'] for r in rows if isinstance(r['iv'],(int,float)) and r['iv']>0]; print('--- entryIV: n',len(iv),'med',round(statistics.median(iv),3))
+print('--- entryDelta: n',len(dl),'med',round(statistics.median([abs(x) for x in dl]),3),'q',[round(abs(q),3) for q in statistics.quantiles([abs(x) for x in dl],n=4)]) if len(dl)>=2 else print('--- entryDelta: n',len(dl),'(not recorded)')  # guard added 2026-10-13 audit
+iv=[r['iv'] for r in rows if isinstance(r['iv'],(int,float)) and r['iv']>0]; print('--- entryIV: n',len(iv),'med',round(statistics.median(iv),3) if iv else '(not recorded)')
 # daily P&L
 dd=collections.defaultdict(float)
 for r in rows: dd[r['date']]+=r['pnl']

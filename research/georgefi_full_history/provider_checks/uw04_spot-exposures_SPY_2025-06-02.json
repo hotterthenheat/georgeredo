@@ -1,0 +1,58 @@
+{
+ "check_id": "uw04_spot-exposures_SPY_2025-06-02",
+ "provider": "unusualwhales",
+ "url_path": "/api/stock/SPY/spot-exposures",
+ "params": {
+  "date": "2025-06-02"
+ },
+ "status": 200,
+ "elapsed_ms": 359,
+ "ran_at_utc": "2026-10-13T18:56:24.338582+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4ruxxBFI59E2EB6kkJ",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 274438,
+ "body_head": "{\"data\":[{\"time\":\"2025-06-02T10:30:00.000000Z\",\"ticker\":\"SPY\",\"start_time\":\"2025-06-02T10:30:00.000000Z\",\"price\":\"586.40\",\"ticker_id\":2447,\"charm_per_one_percent_move_dir\":\"0\",\"charm_per_one_percent_move_oi\":\"-10211929.47\",\"charm_per_one_percent_move_vol\":\"0\",\"gamma_per_one_percent_move_dir\":\"0\",\"ga",
+ "row_count": 493,
+ "rows_container": "data",
+ "first_ts": "2025-06-02T10:30:00.000000Z",
+ "last_ts": "2025-06-02T19:59:00.000000Z",
+ "min_ts": "2025-06-02T10:30:00.000000Z",
+ "max_ts": "2025-06-02T19:59:00.000000Z",
+ "row_keys": [
+  "charm_per_one_percent_move_dir",
+  "charm_per_one_percent_move_oi",
+  "charm_per_one_percent_move_vol",
+  "gamma_per_one_percent_move_dir",
+  "gamma_per_one_percent_move_oi",
+  "gamma_per_one_percent_move_vol",
+  "price",
+  "start_time",
+  "ticker",
+  "ticker_id",
+  "time",
+  "vanna_per_one_percent_move_dir",
+  "vanna_per_one_percent_move_oi",
+  "vanna_per_one_percent_move_vol"
+ ],
+ "extra": {
+  "first_row_sample": {
+   "time": "2025-06-02T10:30:00.000000Z",
+   "ticker": "SPY",
+   "start_time": "2025-06-02T10:30:00.000000Z",
+   "price": "586.40",
+   "ticker_id": "2447",
+   "charm_per_one_percent_move_dir": "0",
+   "charm_per_one_percent_move_oi": "-10211929.47",
+   "charm_per_one_percent_move_vol": "0",
+   "gamma_per_one_percent_move_dir": "0",
+   "gamma_per_one_percent_move_oi": "5336756.3",
+   "gamma_per_one_percent_move_vol": "0",
+   "vanna_per_one_percent_move_dir": "0.00",
+   "vanna_per_one_percent_move_oi": "-105324.42",
+   "vanna_per_one_percent_move_vol": "0.00"
+  }
+ }
+}

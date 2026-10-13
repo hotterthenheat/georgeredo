@@ -1,0 +1,65 @@
+{
+ "check_id": "uw05_flow-per-strike-intraday_SPY_2025-06-02",
+ "provider": "unusualwhales",
+ "url_path": "/api/stock/SPY/flow-per-strike-intraday",
+ "params": {
+  "date": "2025-06-02"
+ },
+ "status": 200,
+ "elapsed_ms": 392,
+ "ran_at_utc": "2026-10-13T18:59:45.546872+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4r6fMzckdbV1kDPW0F",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 1030465,
+ "body_head": "{\"data\":[{\"timestamp\":\"2025-06-02T13:30:23.128000Z\",\"date\":\"2025-06-02\",\"ticker\":\"SPY\",\"trades\":4,\"volume\":14,\"call_volume\":12,\"put_volume\":2,\"call_volume_ask_side\":2,\"call_volume_bid_side\":5,\"put_volume_ask_side\":0,\"put_volume_bid_side\":2,\"strike\":\"450\",\"call_trades\":3,\"put_trades\":1,\"put_premium\":",
+ "row_count": 2157,
+ "rows_container": "data",
+ "first_ts": "2025-06-02T13:30:23.128000Z",
+ "last_ts": "2025-06-02T19:57:00.237000Z",
+ "min_ts": "2025-06-02T13:30:05.288000Z",
+ "max_ts": "2025-06-02T20:14:59.573000Z",
+ "row_keys": [
+  "call_premium",
+  "call_premium_ask_side",
+  "call_premium_bid_side",
+  "call_trades",
+  "call_volume",
+  "call_volume_ask_side",
+  "call_volume_bid_side",
+  "date",
+  "net_premium",
+  "put_premium",
+  "put_premium_ask_side",
+  "put_premium_bid_side",
+  "put_trades",
+  "put_volume",
+  "put_volume_ask_side",
+  "put_volume_bid_side",
+  "strike",
+  "ticker",
+  "timestamp",
+  "trades",
+  "volume"
+ ],
+ "extra": {
+  "first_row_sample": {
+   "timestamp": "2025-06-02T13:30:23.128000Z",
+   "date": "2025-06-02",
+   "ticker": "SPY",
+   "trades": "4",
+   "volume": "14",
+   "call_volume": "12",
+   "put_volume": "2",
+   "call_volume_ask_side": "2",
+   "call_volume_bid_side": "5",
+   "put_volume_ask_side": "0",
+   "put_volume_bid_side": "2",
+   "strike": "450",
+   "call_trades": "3",
+   "put_trades": "1"
+  }
+ }
+}

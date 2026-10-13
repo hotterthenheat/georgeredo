@@ -1,0 +1,48 @@
+{
+ "check_id": "uw05_greek-exposure_SPY_2026-03-02",
+ "provider": "unusualwhales",
+ "url_path": "/api/stock/SPY/greek-exposure",
+ "params": {
+  "date": "2026-03-02"
+ },
+ "status": 200,
+ "elapsed_ms": 282,
+ "ran_at_utc": "2026-10-13T18:59:44.185700+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4r6afLTxq1easDOx4E",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 24436,
+ "body_head": "{\"data\":[{\"date\":\"2025-10-14\",\"call_gamma\":\"3027817.7246\",\"put_gamma\":\"-5888151.9822\",\"call_delta\":\"159872647.2310\",\"put_delta\":\"-189287514.0719\",\"call_charm\":\"-285887856.2892\",\"put_charm\":\"212444885.5897\",\"call_vanna\":\"76743662.7497\",\"put_vanna\":\"-389065979.8704\"},{\"date\":\"2025-10-15\",\"call_gamma\":",
+ "row_count": 95,
+ "rows_container": "data",
+ "first_ts": "2025-10-14",
+ "last_ts": "2026-03-02",
+ "min_ts": "2025-10-14",
+ "max_ts": "2026-03-02",
+ "row_keys": [
+  "call_charm",
+  "call_delta",
+  "call_gamma",
+  "call_vanna",
+  "date",
+  "put_charm",
+  "put_delta",
+  "put_gamma",
+  "put_vanna"
+ ],
+ "extra": {
+  "first_row_sample": {
+   "date": "2025-10-14",
+   "call_gamma": "3027817.7246",
+   "put_gamma": "-5888151.9822",
+   "call_delta": "159872647.2310",
+   "put_delta": "-189287514.0719",
+   "call_charm": "-285887856.2892",
+   "put_charm": "212444885.5897",
+   "call_vanna": "76743662.7497",
+   "put_vanna": "-389065979.8704"
+  }
+ }
+}

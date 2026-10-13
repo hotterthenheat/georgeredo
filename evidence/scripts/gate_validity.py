@@ -14,7 +14,7 @@ def boot_diff(a,b,n=2000):
     diffs.sort(); return (statistics.mean(a)-statistics.mean(b), diffs[int(0.025*n)], diffs[int(0.975*n)], sum(1 for d in diffs if d<=0)/n)
 fams=collections.Counter(f for t in ts for f in tagset(t))
 rows=[]
-for f,n in fams.items():
+for f,n in sorted(fams.items()):  # sorted: deterministic consumption of the seeded RNG (2026-10-13 audit fix; original output kept as validation_T5_gates.txt)
     if n<30 or n>len(ts)-30: continue
     a=[pnl(t) for t in ts if f in tagset(t)]; b=[pnl(t) for t in ts if f not in tagset(t)]
     r=boot_diff(a,b); 

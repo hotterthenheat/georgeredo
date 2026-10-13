@@ -1,0 +1,103 @@
+alerts with bars: 825 of 830
+=== sus-strike (n=421)
+   +15m                                                 n= 421 mean=  -0.2% med=  +0.0% pos=  36%
+   +60m                                                 n= 421 mean=  -0.9% med=  +0.0% pos=  36%
+   to 15:55 / last bar                                  n= 421 mean=  -0.6% med=  +0.0% pos=  35%
+   MFE                                                  n= 421 mean=  +4.5% med=  +1.2% pos=  65%
+   MAE                                                  n= 421 mean=  -4.3% med=  -1.7% pos=  15%
+     direction=LONG +60m                                n= 223 mean=  +0.5% med=  +0.0% pos=  40%
+     direction=SHORT +60m                               n= 183 mean=  -2.2% med=  -0.2% pos=  31%
+     direction=(none) +60m                              n=  15 mean=  -5.7% med=  -3.6% pos=  33%
+     kind=STEALTH LIGHT +60m                            n= 365 mean=  -0.8% med=  +0.0% pos=  36%
+     kind=STEALTH LIGHT to close                        n= 365 mean=  -0.8% med=  +0.0% pos=  35%
+     kind=STEALTH BUILDING +60m                         n=  32 mean=  -0.4% med=  -0.4% pos=  28%
+     kind=STEALTH BUILDING to close                     n=  32 mean=  -0.9% med=  -0.4% pos=  28%
+     kind=KILLER STRONG +60m                            n=  11 mean=  -0.5% med=  -0.2% pos=  36%
+     kind=KILLER STRONG to close                        n=  11 mean=  +1.5% med=  -0.4% pos=  36%
+=== momentum-ignition (n=91)
+   +15m                                                 n=  91 mean=  -2.9% med=  -2.5% pos=  40%
+   +60m                                                 n=  91 mean= -10.3% med= -11.4% pos=  30%
+   to 15:55 / last bar                                  n=  91 mean=  -3.4% med=  -6.8% pos=  34%
+   MFE                                                  n=  91 mean= +34.5% med= +14.3% pos=  87%
+   MAE                                                  n=  91 mean= -32.1% med= -23.5% pos=   2%
+     direction=(none) +60m                              n=  91 mean= -10.3% med= -11.4% pos=  30%
+     kind=SUSTAINED · WATCH +60m                        n=  73 mean= -12.1% med= -11.4% pos=  27%
+     kind=SUSTAINED · WATCH to close                    n=  73 mean=  -8.3% med=  -6.9% pos=  30%
+     kind=BANG · WATCH +60m                             n=  18 mean=  -3.0% med= -16.7% pos=  39%
+     kind=BANG · WATCH to close                         n=  18 mean= +16.5% med=  +1.8% pos=  50%
+=== index-read (n=1)
+=== relative-burst (n=23)
+   +15m                                                 n=  23 mean= -20.9% med= -13.6% pos=  17%
+   +60m                                                 n=  23 mean= -10.3% med= -21.1% pos=  26%
+   to 15:55 / last bar                                  n=  23 mean= -12.6% med= -20.0% pos=  26%
+   MFE                                                  n=  23 mean= +40.4% med= +20.0% pos=  91%
+   MAE                                                  n=  23 mean= -43.8% med= -38.6% pos=   0%
+     direction=(none) +60m                              n=  23 mean= -10.3% med= -21.1% pos=  26%
+     kind=SURGE WATCH · WATCH +60m                      n=  12 mean=  +1.4% med= -20.5% pos=  25%
+     kind=SURGE WATCH · WATCH to close                  n=  12 mean=  -8.3% med= -20.5% pos=  25%
+     kind=BURST · WATCH +60m                            n=   7 mean= -13.5% med= -26.1% pos=  29%
+     kind=BURST · WATCH to close                        n=   7 mean= -14.8% med= -26.1% pos=  29%
+=== block-sniper (n=17)
+   +15m                                                 n=  17 mean=  -3.1% med= -13.9% pos=  35%
+   +60m                                                 n=  17 mean=  -6.6% med= -11.3% pos=  35%
+   to 15:55 / last bar                                  n=  17 mean= -10.5% med= -16.7% pos=  29%
+   MFE                                                  n=  17 mean= +82.7% med= +67.4% pos= 100%
+   MAE                                                  n=  17 mean= -56.5% med= -48.1% pos=   0%
+     direction=NEUTRAL +60m                             n=   9 mean=  -8.0% med= -16.7% pos=  22%
+     kind=STRONG +60m                                   n=  17 mean=  -6.6% med= -11.3% pos=  35%
+     kind=STRONG to close                               n=  17 mean= -10.5% med= -16.7% pos=  29%
+=== moc-wick (n=19)
+   +15m                                                 n=  19 mean= -40.4% med= -45.7% pos=  16%
+   +60m                                                 n=  19 mean= -29.2% med= -45.7% pos=  16%
+   to 15:55 / last bar                                  n=  19 mean= +36.7% med=  +0.0% pos=  47%
+   MFE                                                  n=  19 mean= +78.3% med= +24.4% pos=  84%
+   MAE                                                  n=  19 mean= -59.7% med= -65.5% pos=   0%
+     direction=(none) +60m                              n=  15 mean= -21.2% med= -45.7% pos=  20%
+     kind=WICK PRINTED · WATCH +60m                     n=  11 mean= -46.6% med= -53.4% pos=   9%
+     kind=WICK PRINTED · WATCH to close                 n=  11 mean= +35.1% med=  +0.0% pos=  45%
+=== big-print (n=5)
+   +15m                                                 n=   5 mean=+600.7% med= -62.5% pos=  20%
+   +60m                                                 n=   5 mean=+600.7% med= -62.5% pos=  20%
+   to 15:55 / last bar                                  n=   5 mean=  +1.0% med=  +0.0% pos=  40%
+   MFE                                                  n=   5 mean=+648.1% med=  +0.0% pos=  40%
+   MAE                                                  n=   5 mean= -36.6% med= -68.8% pos=  20%
+     direction=(none) +60m                              n=   5 mean=+600.7% med= -62.5% pos=  20%
+     kind=FAST-MONEY FOLLOW · WATCH +60m                n=   5 mean=+600.7% med= -62.5% pos=  20%
+     kind=FAST-MONEY FOLLOW · WATCH to close            n=   5 mean=  +1.0% med=  +0.0% pos=  40%
+=== accumulation-sniper (n=11)
+   +15m                                                 n=  11 mean= -37.7% med=  -8.1% pos=  18%
+   +60m                                                 n=  11 mean= -42.2% med= -12.2% pos=   9%
+   to 15:55 / last bar                                  n=  11 mean= -18.9% med=  -6.9% pos=  18%
+   MFE                                                  n=  11 mean=  -5.0% med=  +1.2% pos=  64%
+   MAE                                                  n=  11 mean= -44.1% med= -12.2% pos=   9%
+     direction=SHORT +60m                               n=   7 mean= -41.6% med=  -6.9% pos=   0%
+     kind=ACCUMULATING STRONG +60m                      n=   9 mean= -30.5% med=  -6.9% pos=  11%
+     kind=ACCUMULATING STRONG to close                  n=   9 mean= -10.8% med=  -6.2% pos=  22%
+=== trade-now (n=2)
+=== hold-advisor (n=232)
+   +15m                                                 n= 232 mean=  -6.0% med=  +0.0% pos=  35%
+   +60m                                                 n= 232 mean= -10.9% med=  -0.4% pos=  30%
+   to 15:55 / last bar                                  n= 232 mean=  +1.5% med=  -1.6% pos=  38%
+   MFE                                                  n= 232 mean= +39.9% med= +12.2% pos=  73%
+   MAE                                                  n= 232 mean= -29.4% med= -15.6% pos=   5%
+     direction=LONG +60m                                n= 115 mean=  -9.5% med=  -1.8% pos=  34%
+     direction=SHORT +60m                               n=  92 mean= -14.5% med=  -6.2% pos=  30%
+     direction=(none) +60m                              n=  25 mean=  -3.8% med=  +0.0% pos=   8%
+     kind=MOMENTUM IGNITION GET OUT +60m                n=  29 mean=  -9.0% med=  -9.3% pos=  34%
+     kind=MOMENTUM IGNITION GET OUT to close            n=  29 mean=  -3.4% med=  -5.0% pos=  38%
+     kind=ACCUMULATION EXPIRED HOLD +60m                n=  21 mean=  +2.9% med=  +0.0% pos=  33%
+     kind=ACCUMULATION EXPIRED HOLD to close            n=  21 mean= +25.8% med=  +0.0% pos=  43%
+     kind=ACCUMULATION EXHAUSTING +60m                  n=  21 mean=  +3.9% med=  +2.0% pos=  62%
+     kind=ACCUMULATION EXHAUSTING to close              n=  21 mean=  +2.4% med=  +0.4% pos=  52%
+     kind=ACCUMULATION TRIM +60m                        n=  19 mean=  -4.1% med=  +0.0% pos=  47%
+     kind=ACCUMULATION TRIM to close                    n=  19 mean=  -3.2% med=  -3.7% pos=  42%
+     kind=MOMENTUM IGNITION EXHAUSTING +60m             n=  16 mean= -13.2% med= -13.9% pos=  31%
+     kind=MOMENTUM IGNITION EXHAUSTING to close         n=  16 mean= -11.2% med= -13.9% pos=  31%
+     kind=ACCUMULATION GET OUT +60m                     n=  16 mean=  +1.6% med=  -6.7% pos=  31%
+     kind=ACCUMULATION GET OUT to close                 n=  16 mean=  -0.2% med=  -2.7% pos=  31%
+=== loud=True all subsystems
+   loud +60m                                            n=  80 mean= -11.6% med= -18.1% pos=  34%
+   loud to close                                        n=  80 mean=  -6.2% med=  -9.9% pos=  39%
+=== all 0DTE contracts baseline (every alert)
+   0DTE alert contract to 15:55                         n= 296 mean=  +0.1% med=  -5.7% pos=  35%
+   non-0DTE to last bar                                 n= 529 mean=  -1.0% med=  +0.0% pos=  35%

@@ -1,0 +1,52 @@
+{
+ "check_id": "uw02_intraday_SPY250515C00590000_2025-05-15",
+ "provider": "unusualwhales",
+ "url_path": "/api/option-contract/SPY250515C00590000/intraday",
+ "params": {
+  "date": "2025-05-15"
+ },
+ "status": 200,
+ "elapsed_ms": 449,
+ "ran_at_utc": "2026-10-13T19:00:42.060181+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4r9xrEILsc-UEBiQ_K",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 161782,
+ "body_head": "{\"data\":[{\"close\":\"0.42\",\"high\":\"0.5\",\"low\":\"0.42\",\"open\":\"0.5\",\"start_time\":\"2025-05-15T20:14:00Z\",\"avg_price\":\"0.4859\",\"iv_high\":\"0.010581\",\"iv_low\":\"0.006120\",\"premium_ask_side\":14989,\"premium_bid_side\":177,\"premium_mid_side\":90,\"premium_no_side\":0,\"trading_hours\":null,\"volume_ask_side\":308,\"volu",
+ "row_count": 405,
+ "rows_container": "data",
+ "first_ts": "2025-05-15T20:14:00Z",
+ "last_ts": "2025-05-15T13:30:00Z",
+ "min_ts": "2025-05-15T13:30:00Z",
+ "max_ts": "2025-05-15T20:14:00Z",
+ "row_keys": [
+  "avg_price",
+  "close",
+  "high",
+  "iv_high",
+  "iv_low",
+  "low",
+  "open",
+  "premium_ask_side",
+  "premium_bid_side",
+  "premium_mid_side",
+  "premium_no_side",
+  "start_time",
+  "trading_hours",
+  "volume_ask_side",
+  "volume_bid_side",
+  "volume_mid_side",
+  "volume_multi",
+  "volume_no_side",
+  "volume_stock_multi"
+ ],
+ "extra": {
+  "total_volume": 614367,
+  "total_premium": 38948569.0,
+  "close_min": 0.12,
+  "close_max": 1.48,
+  "iv_fields_present": true
+ }
+}

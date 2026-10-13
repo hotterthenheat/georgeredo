@@ -1,0 +1,43 @@
+{
+ "check_id": "uw04_gex-levels_SPY_2024-06-03",
+ "provider": "unusualwhales",
+ "url_path": "/api/stock/SPY/gex-levels",
+ "params": {
+  "date": "2024-06-03"
+ },
+ "status": 200,
+ "elapsed_ms": 220,
+ "ran_at_utc": "2026-10-13T18:59:45.527453+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4r6fsQd8lW2hYDQ5gF",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 221,
+ "body_head": "{\"data\":{\"date\":\"2024-06-03\",\"time\":\"2024-06-03T20:14:58.000000Z\",\"source\":\"vol\",\"call_wall\":\"529\",\"gamma_flip\":\"528.96\",\"gamma_magnet\":\"528\",\"nearby_flips\":[\"528.96\",\"529.97\",\"525.17\",\"524.04\",\"532.5\"],\"put_wall\":\"525\"}}",
+ "row_count": 1,
+ "rows_container": "data_object",
+ "first_ts": "2024-06-03T20:14:58.000000Z",
+ "last_ts": "2024-06-03T20:14:58.000000Z",
+ "min_ts": "2024-06-03T20:14:58.000000Z",
+ "max_ts": "2024-06-03T20:14:58.000000Z",
+ "row_keys": [
+  "call_wall",
+  "date",
+  "gamma_flip",
+  "gamma_magnet",
+  "nearby_flips",
+  "put_wall",
+  "source",
+  "time"
+ ],
+ "extra": {
+  "date": "2024-06-03",
+  "time": "2024-06-03T20:14:58.000000Z",
+  "source": "vol",
+  "gamma_flip": "528.96",
+  "call_wall": "529",
+  "put_wall": "525",
+  "gamma_magnet": "528"
+ }
+}

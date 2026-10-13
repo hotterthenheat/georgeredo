@@ -1,0 +1,50 @@
+{
+ "check_id": "uw05_greek-exposure-strike_SPY_2025-06-02",
+ "provider": "unusualwhales",
+ "url_path": "/api/stock/SPY/greek-exposure/strike",
+ "params": {
+  "date": "2025-06-02"
+ },
+ "status": 200,
+ "elapsed_ms": 373,
+ "ran_at_utc": "2026-10-13T18:59:44.334815+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4r6bJKSdNVDs8DYGyD",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 78896,
+ "body_head": "{\"data\":[{\"date\":\"2025-06-02\",\"strike\":\"150\",\"call_gex\":\"3.8024\",\"put_gex\":\"-85.1441\",\"call_delta\":\"135420.8355\",\"put_delta\":\"-7604.4852\",\"call_charm\":\"1884.3941\",\"put_charm\":\"162156.0685\",\"call_vanna\":\"429.0812\",\"put_vanna\":\"-269218.8787\"},{\"date\":\"2025-06-02\",\"strike\":\"155\",\"call_gex\":\"1.0630\",\"pu",
+ "row_count": 336,
+ "rows_container": "data",
+ "first_ts": "2025-06-02",
+ "last_ts": "2025-06-02",
+ "min_ts": "2025-06-02",
+ "max_ts": "2025-06-02",
+ "row_keys": [
+  "call_charm",
+  "call_delta",
+  "call_gex",
+  "call_vanna",
+  "date",
+  "put_charm",
+  "put_delta",
+  "put_gex",
+  "put_vanna",
+  "strike"
+ ],
+ "extra": {
+  "first_row_sample": {
+   "date": "2025-06-02",
+   "strike": "150",
+   "call_gex": "3.8024",
+   "put_gex": "-85.1441",
+   "call_delta": "135420.8355",
+   "put_delta": "-7604.4852",
+   "call_charm": "1884.3941",
+   "put_charm": "162156.0685",
+   "call_vanna": "429.0812",
+   "put_vanna": "-269218.8787"
+  }
+ }
+}

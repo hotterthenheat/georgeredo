@@ -1,0 +1,3306 @@
+[
+ {
+  "check_id": "uw01_ohlc_SPY_1m_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/ohlc/1m",
+  "params": {
+   "date": "2026-03-02",
+   "limit": 2500
+  },
+  "status": 200,
+  "row_count": 855,
+  "first_ts": "2026-03-03T00:59:00Z",
+  "last_ts": "2026-03-02T09:00:00Z",
+  "min_ts": "2026-03-02T09:00:00Z",
+  "max_ts": "2026-03-03T00:59:00Z",
+  "elapsed_ms": 1154,
+  "top": null,
+  "extra": {
+   "by_market_time": {
+    "po": 179,
+    "r": 390,
+    "pr": 286
+   },
+   "rth_rows": 390,
+   "rth_min": "2026-03-02T14:30:00Z",
+   "rth_max": "2026-03-02T20:59:00Z",
+   "sample": {
+    "open": "684.34",
+    "high": "684.4208",
+    "low": "684.34",
+    "close": "684.4208",
+    "volume": 1010,
+    "total_volume": 87477153
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw01_ohlc_SPY_1m_2025-01-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/ohlc/1m",
+  "params": {
+   "date": "2025-01-02",
+   "limit": 2500
+  },
+  "status": 200,
+  "row_count": 655,
+  "first_ts": "2025-01-03T00:59:00Z",
+  "last_ts": "2025-01-02T09:00:00Z",
+  "min_ts": "2025-01-02T09:00:00Z",
+  "max_ts": "2025-01-03T00:59:00Z",
+  "elapsed_ms": 1033,
+  "top": null,
+  "extra": {
+   "by_market_time": {
+    "po": 112,
+    "r": 390,
+    "pr": 153
+   },
+   "rth_rows": 390,
+   "rth_min": "2025-01-02T14:30:00Z",
+   "rth_max": "2025-01-02T20:59:00Z",
+   "sample": {
+    "open": "585.86",
+    "high": "585.86",
+    "low": "585.86",
+    "close": "585.86",
+    "volume": 3516,
+    "total_volume": 50203680
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw01_ohlc_SPY_1m_2024-06-03",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/ohlc/1m",
+  "params": {
+   "date": "2024-06-03",
+   "limit": 2500
+  },
+  "status": 200,
+  "row_count": 660,
+  "first_ts": "2024-06-03T23:59:00Z",
+  "last_ts": "2024-06-03T08:00:00Z",
+  "min_ts": "2024-06-03T08:00:00Z",
+  "max_ts": "2024-06-03T23:59:00Z",
+  "elapsed_ms": 1070,
+  "top": null,
+  "extra": {
+   "by_market_time": {
+    "po": 109,
+    "r": 390,
+    "pr": 161
+   },
+   "rth_rows": 390,
+   "rth_min": "2024-06-03T13:30:00Z",
+   "rth_max": "2024-06-03T19:59:00Z",
+   "sample": {
+    "open": "527.53",
+    "high": "527.53",
+    "low": "527.53",
+    "close": "527.53",
+    "volume": 3248,
+    "total_volume": 46835676
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw01_ohlc_SPY_1m_2023-06-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/ohlc/1m",
+  "params": {
+   "date": "2023-06-01",
+   "limit": 2500
+  },
+  "status": 200,
+  "row_count": 678,
+  "first_ts": "2023-06-01T23:59:00Z",
+  "last_ts": "2023-06-01T08:02:00Z",
+  "min_ts": "2023-06-01T08:02:00Z",
+  "max_ts": "2023-06-01T23:59:00Z",
+  "elapsed_ms": 330,
+  "top": null,
+  "extra": {
+   "by_market_time": {
+    "po": 117,
+    "r": 390,
+    "pr": 171
+   },
+   "rth_rows": 390,
+   "rth_min": "2023-06-01T13:30:00Z",
+   "rth_max": "2023-06-01T19:59:00Z",
+   "sample": {
+    "open": "421.99",
+    "high": "421.99",
+    "low": "421.99",
+    "close": "421.99",
+    "volume": 13817,
+    "total_volume": 88863765
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_IWM260302C00259000_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/IWM260302C00259000/intraday",
+  "params": {
+   "date": "2026-03-02"
+  },
+  "status": 200,
+  "row_count": 130,
+  "first_ts": "2026-03-02T21:01:00Z",
+  "last_ts": "2026-03-02T14:30:00Z",
+  "min_ts": "2026-03-02T14:30:00Z",
+  "max_ts": "2026-03-02T21:01:00Z",
+  "elapsed_ms": 283,
+  "top": null,
+  "extra": {
+   "total_volume": 6753,
+   "total_premium": 1186917.0,
+   "close_min": 1.38,
+   "close_max": 5.27,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY260302C00682000_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY260302C00682000/intraday",
+  "params": {
+   "date": "2026-03-02"
+  },
+  "status": 200,
+  "row_count": 356,
+  "first_ts": "2026-03-02T21:05:00Z",
+  "last_ts": "2026-03-02T14:30:00Z",
+  "min_ts": "2026-03-02T14:30:00Z",
+  "max_ts": "2026-03-02T21:05:00Z",
+  "elapsed_ms": 359,
+  "top": null,
+  "extra": {
+   "total_volume": 93817,
+   "total_premium": 25960507.0,
+   "close_min": 1.49,
+   "close_max": 6.52,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_QQQ260303P00595000_2026-03-03",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/QQQ260303P00595000/intraday",
+  "params": {
+   "date": "2026-03-03"
+  },
+  "status": 200,
+  "row_count": 398,
+  "first_ts": "2026-03-03T21:14:00Z",
+  "last_ts": "2026-03-03T14:30:00Z",
+  "min_ts": "2026-03-03T14:30:00Z",
+  "max_ts": "2026-03-03T21:14:00Z",
+  "elapsed_ms": 493,
+  "top": null,
+  "extra": {
+   "total_volume": 154161,
+   "total_premium": 22899035.0,
+   "close_min": 0.01,
+   "close_max": 4.35,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPXW260304C06815000_2026-03-04",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPXW260304C06815000/intraday",
+  "params": {
+   "date": "2026-03-04"
+  },
+  "status": 200,
+  "row_count": 164,
+  "first_ts": "2026-03-04T20:59:00Z",
+  "last_ts": "2026-03-04T14:30:00Z",
+  "min_ts": "2026-03-04T14:30:00Z",
+  "max_ts": "2026-03-04T20:59:00Z",
+  "elapsed_ms": 355,
+  "top": null,
+  "extra": {
+   "total_volume": 3169,
+   "total_premium": 11857352.0,
+   "close_min": 23.3,
+   "close_max": 69.0,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPX260304C06815000_2026-03-04",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPX260304C06815000/intraday",
+  "params": {
+   "date": "2026-03-04"
+  },
+  "status": 422,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 205,
+  "top": {
+   "msg": "SPX260304C06815000 does not exist"
+  },
+  "extra": null,
+  "error": {
+   "path": "/api/option-contract/SPX260304C06815000/intraday",
+   "msg": "SPX260304C06815000 does not exist",
+   "query": "date=2026-03-04",
+   "url": "api.unusualwhales.com:80/api/option-contract/SPX260304C06815000/intraday?date=2026-03-04"
+  },
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPX260320P06585000_2026-03-20",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPX260320P06585000/intraday",
+  "params": {
+   "date": "2026-03-20"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 198,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPXW260320P06585000_2026-03-20",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPXW260320P06585000/intraday",
+  "params": {
+   "date": "2026-03-20"
+  },
+  "status": 200,
+  "row_count": 280,
+  "first_ts": "2026-03-20T19:57:00Z",
+  "last_ts": "2026-03-20T13:30:00Z",
+  "min_ts": "2026-03-20T13:30:00Z",
+  "max_ts": "2026-03-20T19:57:00Z",
+  "elapsed_ms": 572,
+  "top": null,
+  "extra": {
+   "total_volume": 5064,
+   "total_premium": 16814308.0,
+   "close_min": 18.0,
+   "close_max": 105.3,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_NDXP260515P29130000_2026-05-15",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/NDXP260515P29130000/intraday",
+  "params": {
+   "date": "2026-05-15"
+  },
+  "status": 200,
+  "row_count": 116,
+  "first_ts": "2026-05-15T19:59:00Z",
+  "last_ts": "2026-05-15T13:30:00Z",
+  "min_ts": "2026-05-15T13:30:00Z",
+  "max_ts": "2026-05-15T19:59:00Z",
+  "elapsed_ms": 291,
+  "top": null,
+  "extra": {
+   "total_volume": 465,
+   "total_premium": 1153523.0,
+   "close_min": 1.0,
+   "close_max": 154.0,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_NDX260515P29130000_2026-05-15",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/NDX260515P29130000/intraday",
+  "params": {
+   "date": "2026-05-15"
+  },
+  "status": 422,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 254,
+  "top": {
+   "msg": "NDX260515P29130000 does not exist"
+  },
+  "extra": null,
+  "error": {
+   "path": "/api/option-contract/NDX260515P29130000/intraday",
+   "msg": "NDX260515P29130000 does not exist",
+   "query": "date=2026-05-15",
+   "url": "api.unusualwhales.com:80/api/option-contract/NDX260515P29130000/intraday?date=2026-05-15"
+  },
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_RUTW261008C02785000_2026-10-08",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/RUTW261008C02785000/intraday",
+  "params": {
+   "date": "2026-10-08"
+  },
+  "status": 200,
+  "row_count": 204,
+  "first_ts": "2026-10-08T19:59:00Z",
+  "last_ts": "2026-10-08T13:30:00Z",
+  "min_ts": "2026-10-08T13:30:00Z",
+  "max_ts": "2026-10-08T19:59:00Z",
+  "elapsed_ms": 326,
+  "top": null,
+  "extra": {
+   "total_volume": 1527,
+   "total_premium": 525113.0,
+   "close_min": 0.46,
+   "close_max": 10.54,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_RUT261008C02785000_2026-10-08",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/RUT261008C02785000/intraday",
+  "params": {
+   "date": "2026-10-08"
+  },
+  "status": 422,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 221,
+  "top": {
+   "msg": "RUT261008C02785000 does not exist"
+  },
+  "extra": null,
+  "error": {
+   "path": "/api/option-contract/RUT261008C02785000/intraday",
+   "msg": "RUT261008C02785000 does not exist",
+   "query": "date=2026-10-08",
+   "url": "api.unusualwhales.com:80/api/option-contract/RUT261008C02785000/intraday?date=2026-10-08"
+  },
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_META260819C00545000_2026-08-19",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/META260819C00545000/intraday",
+  "params": {
+   "date": "2026-08-19"
+  },
+  "status": 200,
+  "row_count": 232,
+  "first_ts": "2026-08-19T19:59:00Z",
+  "last_ts": "2026-08-19T13:30:00Z",
+  "min_ts": "2026-08-19T13:30:00Z",
+  "max_ts": "2026-08-19T19:59:00Z",
+  "elapsed_ms": 269,
+  "top": null,
+  "extra": {
+   "total_volume": 10242,
+   "total_premium": 3610319.0,
+   "close_min": 1.17,
+   "close_max": 9.0,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY250602C00590000_2025-06-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250602C00590000/intraday",
+  "params": {
+   "date": "2025-06-02"
+  },
+  "status": 200,
+  "row_count": 405,
+  "first_ts": "2025-06-02T20:14:00Z",
+  "last_ts": "2025-06-02T13:30:00Z",
+  "min_ts": "2025-06-02T13:30:00Z",
+  "max_ts": "2025-06-02T20:14:00Z",
+  "elapsed_ms": 442,
+  "top": null,
+  "extra": {
+   "total_volume": 445764,
+   "total_premium": 40385627.0,
+   "close_min": 0.28,
+   "close_max": 3.09,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY240603C00528000_2024-06-03",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY240603C00528000/intraday",
+  "params": {
+   "date": "2024-06-03"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 223,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY240603C00530000_2024-06-03",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY240603C00530000/intraday",
+  "params": {
+   "date": "2024-06-03"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 254,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY240603C00525000_2024-06-03",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY240603C00525000/intraday",
+  "params": {
+   "date": "2024-06-03"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 168,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY230601C00420000_2023-06-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY230601C00420000/intraday",
+  "params": {
+   "date": "2023-06-01"
+  },
+  "status": 403,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 225,
+  "top": {
+   "code": "historic_data_access_missing",
+   "message": "The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2023-06-01 in query param date will not return historical data.\n\nAPI Basic and API Advanced subscriptions inclu"
+  },
+  "extra": null,
+  "error": {
+   "code": "historic_data_access_missing",
+   "message": "The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2023-06-01 in query param date will not return historical data.\n\nAPI Basic and API Advanced subscriptions include up to 730 trading days of historical data. View API plans at https://unusualwhales.com/pricing?product=api.\n\nFor access beyond standard plan limits, email dev@unusualwhales.com with your use case.\n\nNote: For the endpoints /api/institution, /api/stock/:ticker/ohlc/:candle_size, /api/insider/transactions, /api/insider/:sector/sector-flow, /api/insider/:ticker, /api/insider/:ticker/ticker-flow, /api/stock/:ticker/insider-buy-sells, /api/market/correlations, /api/alerts there is no limitations on accessing historical data.\n"
+  },
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY230601C00422000_2023-06-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY230601C00422000/intraday",
+  "params": {
+   "date": "2023-06-01"
+  },
+  "status": 403,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 183,
+  "top": {
+   "code": "historic_data_access_missing",
+   "message": "The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2023-06-01 in query param date will not return historical data.\n\nAPI Basic and API Advanced subscriptions inclu"
+  },
+  "extra": null,
+  "error": {
+   "code": "historic_data_access_missing",
+   "message": "The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2023-06-01 in query param date will not return historical data.\n\nAPI Basic and API Advanced subscriptions include up to 730 trading days of historical data. View API plans at https://unusualwhales.com/pricing?product=api.\n\nFor access beyond standard plan limits, email dev@unusualwhales.com with your use case.\n\nNote: For the endpoints /api/institution, /api/stock/:ticker/ohlc/:candle_size, /api/insider/transactions, /api/insider/:sector/sector-flow, /api/insider/:ticker, /api/insider/:ticker/ticker-flow, /api/stock/:ticker/insider-buy-sells, /api/market/correlations, /api/alerts there is no limitations on accessing historical data.\n"
+  },
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY230601C00418000_2023-06-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY230601C00418000/intraday",
+  "params": {
+   "date": "2023-06-01"
+  },
+  "status": 403,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 236,
+  "top": {
+   "code": "historic_data_access_missing",
+   "message": "The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2023-06-01 in query param date will not return historical data.\n\nAPI Basic and API Advanced subscriptions inclu"
+  },
+  "extra": null,
+  "error": {
+   "code": "historic_data_access_missing",
+   "message": "The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2023-06-01 in query param date will not return historical data.\n\nAPI Basic and API Advanced subscriptions include up to 730 trading days of historical data. View API plans at https://unusualwhales.com/pricing?product=api.\n\nFor access beyond standard plan limits, email dev@unusualwhales.com with your use case.\n\nNote: For the endpoints /api/institution, /api/stock/:ticker/ohlc/:candle_size, /api/insider/transactions, /api/insider/:sector/sector-flow, /api/insider/:ticker, /api/insider/:ticker/ticker-flow, /api/stock/:ticker/insider-buy-sells, /api/market/correlations, /api/alerts there is no limitations on accessing historical data.\n"
+  },
+  "host": null
+ },
+ {
+  "check_id": "uw03_ohlc_SPX_1m_2026-10-09",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPX/ohlc/1m",
+  "params": {
+   "date": "2026-10-09",
+   "limit": 5
+  },
+  "status": 422,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 240,
+  "top": {
+   "code": "cboe_index_access_missing",
+   "msg": "Prices for the CBOE index SPX require provisioned access and CBOE approval. Contact oskar@unusualwhales.com, enterprise@unusualwhales.com or nastja.petrovic@unusualwhales.com to request access."
+  },
+  "extra": null,
+  "error": {
+   "code": "cboe_index_access_missing",
+   "path": "/api/stock/SPX/ohlc/1m",
+   "msg": "Prices for the CBOE index SPX require provisioned access and CBOE approval. Contact oskar@unusualwhales.com, enterprise@unusualwhales.com or nastja.petrovic@unusualwhales.com to request access.",
+   "query": "date=2026-10-09&limit=5",
+   "url": "api.unusualwhales.com:80/api/stock/SPX/ohlc/1m?date=2026-10-09&limit=5"
+  },
+  "host": null
+ },
+ {
+  "check_id": "uw03_ohlc_NDX_1m_2026-10-09",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/NDX/ohlc/1m",
+  "params": {
+   "date": "2026-10-09",
+   "limit": 5
+  },
+  "status": 422,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 213,
+  "top": {
+   "code": "cboe_index_access_missing",
+   "msg": "Prices for the CBOE index NDX require provisioned access and CBOE approval. Contact oskar@unusualwhales.com, enterprise@unusualwhales.com or nastja.petrovic@unusualwhales.com to request access."
+  },
+  "extra": null,
+  "error": {
+   "code": "cboe_index_access_missing",
+   "path": "/api/stock/NDX/ohlc/1m",
+   "msg": "Prices for the CBOE index NDX require provisioned access and CBOE approval. Contact oskar@unusualwhales.com, enterprise@unusualwhales.com or nastja.petrovic@unusualwhales.com to request access.",
+   "query": "date=2026-10-09&limit=5",
+   "url": "api.unusualwhales.com:80/api/stock/NDX/ohlc/1m?date=2026-10-09&limit=5"
+  },
+  "host": null
+ },
+ {
+  "check_id": "uw03_ohlc_RUT_1m_2026-10-09",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/RUT/ohlc/1m",
+  "params": {
+   "date": "2026-10-09",
+   "limit": 5
+  },
+  "status": 422,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 160,
+  "top": {
+   "code": "cboe_index_access_missing",
+   "msg": "Prices for the CBOE index RUT require provisioned access and CBOE approval. Contact oskar@unusualwhales.com, enterprise@unusualwhales.com or nastja.petrovic@unusualwhales.com to request access."
+  },
+  "extra": null,
+  "error": {
+   "code": "cboe_index_access_missing",
+   "path": "/api/stock/RUT/ohlc/1m",
+   "msg": "Prices for the CBOE index RUT require provisioned access and CBOE approval. Contact oskar@unusualwhales.com, enterprise@unusualwhales.com or nastja.petrovic@unusualwhales.com to request access.",
+   "query": "date=2026-10-09&limit=5",
+   "url": "api.unusualwhales.com:80/api/stock/RUT/ohlc/1m?date=2026-10-09&limit=5"
+  },
+  "host": null
+ },
+ {
+  "check_id": "uw03_ohlc_SPXW_1m_2026-10-09",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPXW/ohlc/1m",
+  "params": {
+   "date": "2026-10-09",
+   "limit": 5
+  },
+  "status": 422,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 268,
+  "top": {
+   "code": "cboe_index_access_missing",
+   "msg": "Prices for the CBOE index SPXW require provisioned access and CBOE approval. Contact oskar@unusualwhales.com, enterprise@unusualwhales.com or nastja.petrovic@unusualwhales.com to request access."
+  },
+  "extra": null,
+  "error": {
+   "code": "cboe_index_access_missing",
+   "path": "/api/stock/SPXW/ohlc/1m",
+   "msg": "Prices for the CBOE index SPXW require provisioned access and CBOE approval. Contact oskar@unusualwhales.com, enterprise@unusualwhales.com or nastja.petrovic@unusualwhales.com to request access.",
+   "query": "date=2026-10-09&limit=5",
+   "url": "api.unusualwhales.com:80/api/stock/SPXW/ohlc/1m?date=2026-10-09&limit=5"
+  },
+  "host": null
+ },
+ {
+  "check_id": "uw04_gex-levels_SPY_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/gex-levels",
+  "params": {
+   "date": "2026-03-02"
+  },
+  "status": 200,
+  "row_count": 1,
+  "first_ts": "2026-03-02T21:00:00.000000Z",
+  "last_ts": "2026-03-02T21:00:00.000000Z",
+  "min_ts": "2026-03-02T21:00:00.000000Z",
+  "max_ts": "2026-03-02T21:00:00.000000Z",
+  "elapsed_ms": 530,
+  "top": null,
+  "extra": {
+   "date": "2026-03-02",
+   "time": "2026-03-02T21:00:00.000000Z",
+   "source": "vol",
+   "gamma_flip": "686.8",
+   "call_wall": "688",
+   "put_wall": "686",
+   "gamma_magnet": "686"
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw04_gex-levels_SPY_2025-06-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/gex-levels",
+  "params": {
+   "date": "2025-06-02"
+  },
+  "status": 200,
+  "row_count": 1,
+  "first_ts": "2025-06-02T20:14:58.000000Z",
+  "last_ts": "2025-06-02T20:14:58.000000Z",
+  "min_ts": "2025-06-02T20:14:58.000000Z",
+  "max_ts": "2025-06-02T20:14:58.000000Z",
+  "elapsed_ms": 176,
+  "top": null,
+  "extra": {
+   "date": "2025-06-02",
+   "time": "2025-06-02T20:14:58.000000Z",
+   "source": "vol",
+   "gamma_flip": "592.5",
+   "call_wall": "594",
+   "put_wall": "588",
+   "gamma_magnet": "593"
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw04_gex-levels_SPX_2026-10-09",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPX/gex-levels",
+  "params": {
+   "date": "2026-10-09"
+  },
+  "status": 200,
+  "row_count": 1,
+  "first_ts": "2026-10-09T20:00:00.000000Z",
+  "last_ts": "2026-10-09T20:00:00.000000Z",
+  "min_ts": "2026-10-09T20:00:00.000000Z",
+  "max_ts": "2026-10-09T20:00:00.000000Z",
+  "elapsed_ms": 247,
+  "top": null,
+  "extra": {
+   "date": "2026-10-09",
+   "time": "2026-10-09T20:00:00.000000Z",
+   "source": "vol",
+   "gamma_flip": "7795.46",
+   "call_wall": "7815",
+   "put_wall": "7805",
+   "gamma_magnet": "7810"
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw04_spot-exposures_SPY_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/spot-exposures",
+  "params": {
+   "date": "2026-03-02"
+  },
+  "status": 200,
+  "row_count": 549,
+  "first_ts": "2026-03-02T11:30:00.000000Z",
+  "last_ts": "2026-03-02T21:00:00.000000Z",
+  "min_ts": "2026-03-02T11:30:00.000000Z",
+  "max_ts": "2026-03-02T21:00:00.000000Z",
+  "elapsed_ms": 485,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "time": "2026-03-02T11:30:00.000000Z",
+    "ticker": "SPY",
+    "start_time": "2026-03-02T11:30:00.000000Z",
+    "price": "679.4",
+    "ticker_id": "2447",
+    "charm_per_one_percent_move_dir": "0",
+    "charm_per_one_percent_move_oi": "-17780455.1",
+    "charm_per_one_percent_move_vol": "0",
+    "gamma_per_one_percent_move_dir": "0",
+    "gamma_per_one_percent_move_oi": "2584930.51",
+    "gamma_per_one_percent_move_vol": "0",
+    "vanna_per_one_percent_move_dir": "0.00",
+    "vanna_per_one_percent_move_oi": "-129227.50",
+    "vanna_per_one_percent_move_vol": "0.00"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw04_spot-exposures_SPY_2025-06-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/spot-exposures",
+  "params": {
+   "date": "2025-06-02"
+  },
+  "status": 200,
+  "row_count": 493,
+  "first_ts": "2025-06-02T10:30:00.000000Z",
+  "last_ts": "2025-06-02T19:59:00.000000Z",
+  "min_ts": "2025-06-02T10:30:00.000000Z",
+  "max_ts": "2025-06-02T19:59:00.000000Z",
+  "elapsed_ms": 359,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "time": "2025-06-02T10:30:00.000000Z",
+    "ticker": "SPY",
+    "start_time": "2025-06-02T10:30:00.000000Z",
+    "price": "586.40",
+    "ticker_id": "2447",
+    "charm_per_one_percent_move_dir": "0",
+    "charm_per_one_percent_move_oi": "-10211929.47",
+    "charm_per_one_percent_move_vol": "0",
+    "gamma_per_one_percent_move_dir": "0",
+    "gamma_per_one_percent_move_oi": "5336756.3",
+    "gamma_per_one_percent_move_vol": "0",
+    "vanna_per_one_percent_move_dir": "0.00",
+    "vanna_per_one_percent_move_oi": "-105324.42",
+    "vanna_per_one_percent_move_vol": "0.00"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw04_spot-exposures_SPY_2026-10-09",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/spot-exposures",
+  "params": {
+   "date": "2026-10-09"
+  },
+  "status": 200,
+  "row_count": 527,
+  "first_ts": "2026-10-09T10:35:00.000000Z",
+  "last_ts": "2026-10-09T20:00:00.000000Z",
+  "min_ts": "2026-10-09T10:35:00.000000Z",
+  "max_ts": "2026-10-09T20:00:00.000000Z",
+  "elapsed_ms": 356,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "time": "2026-10-09T10:35:23.884000Z",
+    "ticker": "SPY",
+    "start_time": "2026-10-09T10:35:00.000000Z",
+    "price": "776.69",
+    "ticker_id": "2447",
+    "charm_per_one_percent_move_dir": "0",
+    "charm_per_one_percent_move_oi": "-2833293728807.44",
+    "charm_per_one_percent_move_vol": "0",
+    "gamma_per_one_percent_move_dir": "0",
+    "gamma_per_one_percent_move_oi": "2741203760.37",
+    "gamma_per_one_percent_move_vol": "0",
+    "vanna_per_one_percent_move_dir": "0",
+    "vanna_per_one_percent_move_oi": "743864226.5",
+    "vanna_per_one_percent_move_vol": "0"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_flow-per-strike-intraday_SPY_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/flow-per-strike-intraday",
+  "params": {
+   "date": "2026-03-02"
+  },
+  "status": 200,
+  "row_count": 2915,
+  "first_ts": "2026-03-02T14:30:58.378000Z",
+  "last_ts": "2026-03-02T21:14:58.759000Z",
+  "min_ts": "2026-03-02T14:30:52.212000Z",
+  "max_ts": "2026-03-02T21:14:59.122000Z",
+  "elapsed_ms": 415,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "timestamp": "2026-03-02T14:30:58.378000Z",
+    "date": "2026-03-02",
+    "ticker": "SPY",
+    "trades": "46",
+    "volume": "987",
+    "call_volume": "1",
+    "put_volume": "986",
+    "call_volume_ask_side": "1",
+    "call_volume_bid_side": "0",
+    "put_volume_ask_side": "294",
+    "put_volume_bid_side": "690",
+    "strike": "610",
+    "call_trades": "1",
+    "put_trades": "45"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_net-prem-ticks_SPY_2025-06-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/net-prem-ticks",
+  "params": {
+   "date": "2025-06-02"
+  },
+  "status": 200,
+  "row_count": 405,
+  "first_ts": "2025-06-02T13:30:00.000000Z",
+  "last_ts": "2025-06-02T20:14:00.000000Z",
+  "min_ts": "2025-06-02T13:30:00.000000Z",
+  "max_ts": "2025-06-02T20:14:00.000000Z",
+  "elapsed_ms": 271,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "date": "2025-06-02",
+    "call_volume": "23830",
+    "put_volume": "18260",
+    "call_volume_ask_side": "12141",
+    "call_volume_bid_side": "10352",
+    "put_volume_ask_side": "6929",
+    "put_volume_bid_side": "9717",
+    "tape_time": "2025-06-02T13:30:00.000000Z",
+    "net_call_volume": "1789",
+    "net_call_premium": "-908104.00",
+    "net_put_volume": "-2788",
+    "net_put_premium": "-829134.00",
+    "net_delta": "54605.9394770373684951400"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_net-prem-ticks_SPY_2022-09-28",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/net-prem-ticks",
+  "params": {
+   "date": "2022-09-28"
+  },
+  "status": 403,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 308,
+  "top": {
+   "code": "historic_data_access_missing",
+   "message": "The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2022-09-28 in query param date will not return historical data.\n\nAPI Basic and API Advanced subscriptions inclu"
+  },
+  "extra": null,
+  "error": {
+   "code": "historic_data_access_missing",
+   "message": "The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2022-09-28 in query param date will not return historical data.\n\nAPI Basic and API Advanced subscriptions include up to 730 trading days of historical data. View API plans at https://unusualwhales.com/pricing?product=api.\n\nFor access beyond standard plan limits, email dev@unusualwhales.com with your use case.\n\nNote: For the endpoints /api/institution, /api/stock/:ticker/ohlc/:candle_size, /api/insider/transactions, /api/insider/:sector/sector-flow, /api/insider/:ticker, /api/insider/:ticker/ticker-flow, /api/stock/:ticker/insider-buy-sells, /api/market/correlations, /api/alerts there is no limitations on accessing historical data.\n"
+  },
+  "host": null
+ },
+ {
+  "check_id": "uw05_market-tide_2022-09-28",
+  "provider": "unusualwhales",
+  "url_path": "/api/market/market-tide",
+  "params": {
+   "date": "2022-09-28"
+  },
+  "status": 403,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 217,
+  "top": {
+   "code": "historic_data_access_missing",
+   "message": "The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2022-09-28 in query param date will not return historical data.\n\nAPI Basic and API Advanced subscriptions inclu"
+  },
+  "extra": null,
+  "error": {
+   "code": "historic_data_access_missing",
+   "message": "The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2022-09-28 in query param date will not return historical data.\n\nAPI Basic and API Advanced subscriptions include up to 730 trading days of historical data. View API plans at https://unusualwhales.com/pricing?product=api.\n\nFor access beyond standard plan limits, email dev@unusualwhales.com with your use case.\n\nNote: For the endpoints /api/institution, /api/stock/:ticker/ohlc/:candle_size, /api/insider/transactions, /api/insider/:sector/sector-flow, /api/insider/:ticker, /api/insider/:ticker/ticker-flow, /api/stock/:ticker/insider-buy-sells, /api/market/correlations, /api/alerts there is no limitations on accessing historical data.\n"
+  },
+  "host": null
+ },
+ {
+  "check_id": "uw05_darkpool_SPY_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/darkpool/SPY",
+  "params": {
+   "date": "2026-03-02",
+   "limit": 500
+  },
+  "status": 200,
+  "row_count": 500,
+  "first_ts": "2026-03-02T23:57:31Z",
+  "last_ts": "2026-03-02T20:59:42Z",
+  "min_ts": "2026-03-02T20:59:42Z",
+  "max_ts": "2026-03-02T23:57:31Z",
+  "elapsed_ms": 209,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "size": "365",
+    "ticker": "SPY",
+    "price": "685.28",
+    "volume": "87367724",
+    "executed_at": "2026-03-02T23:57:31Z",
+    "canceled": "False",
+    "premium": "250127.20",
+    "sale_cond_codes": "None",
+    "nbbo_ask": "685.29",
+    "nbbo_bid": "685.22",
+    "ext_hour_sold_codes": "extended_hours_trade",
+    "market_center": "L",
+    "nbbo_ask_quantity": "120",
+    "nbbo_bid_quantity": "1"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_greek-exposure_SPY_2025-06-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/greek-exposure",
+  "params": {
+   "date": "2025-06-02"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 242,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_interpolated-iv_SPY_2025-06-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/interpolated-iv",
+  "params": {
+   "date": "2025-06-02"
+  },
+  "status": 200,
+  "row_count": 9,
+  "first_ts": "2025-06-02",
+  "last_ts": "2025-06-02",
+  "min_ts": "2025-06-02",
+  "max_ts": "2025-06-02",
+  "elapsed_ms": 241,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "date": "2025-06-02",
+    "days": "1",
+    "percentile": "0.344",
+    "volatility": "0.146",
+    "implied_move_perc": "0.005"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_flow-alerts_SPY_limit5",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-trades/flow-alerts",
+  "params": {
+   "ticker_symbol": "SPY",
+   "limit": 5
+  },
+  "status": 200,
+  "row_count": 5,
+  "first_ts": "1791917764816",
+  "last_ts": "1791917760300",
+  "min_ts": "1791917760300",
+  "max_ts": "1791917767035",
+  "elapsed_ms": 336,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "marketcap": "821107576559",
+    "issue_type": "ETF",
+    "total_premium": "10587",
+    "expiry": "2026-10-13",
+    "alert_rule": "RepeatedHits",
+    "theo": "0.19007181328548622",
+    "ticker": "SPY",
+    "vega": "0.03147733329683478",
+    "theta": "-3.4845392808068754",
+    "has_multileg": "False",
+    "has_sweep": "False",
+    "next_earnings_date": "None",
+    "bid": "0.19",
+    "rho": "0.0003227867877163346"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_flow-alerts_SPY_limit5_date_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-trades/flow-alerts",
+  "params": {
+   "ticker_symbol": "SPY",
+   "limit": 5,
+   "date": "2026-03-02"
+  },
+  "status": 200,
+  "row_count": 5,
+  "first_ts": "1791917764816",
+  "last_ts": "1791917760300",
+  "min_ts": "1791917760300",
+  "max_ts": "1791917767035",
+  "elapsed_ms": 169,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "has_multileg": "False",
+    "rho": "0.0003227867877163346",
+    "total_bid_side_prem": "10507",
+    "expiry": "2026-10-13",
+    "theo": "0.19007181328548622",
+    "delta": "0.34156343239960724",
+    "vega": "0.03147733329683478",
+    "theta": "-3.4845392808068754",
+    "created_at": "2026-10-13T18:56:14.774928Z",
+    "rule_id": "e6b9f0b6-fcd9-44fe-9d1c-f53521c152c3",
+    "start_time": "1791917764816",
+    "sector": "None",
+    "expiry_count": "1",
+    "iv": "0.09742696903835597"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_flow-alerts_SPY_limit5_newer_older_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-trades/flow-alerts",
+  "params": {
+   "ticker_symbol": "SPY",
+   "limit": 5,
+   "newer_than": "2026-03-02T00:00:00Z",
+   "older_than": "2026-03-03T00:00:00Z"
+  },
+  "status": 200,
+  "row_count": 5,
+  "first_ts": "1772486091674",
+  "last_ts": "1772485917717",
+  "min_ts": "1772485917717",
+  "max_ts": "1772486091674",
+  "elapsed_ms": 276,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "marketcap": "821107576559",
+    "issue_type": "ETF",
+    "total_premium": "507408",
+    "expiry": "2026-03-20",
+    "alert_rule": "RepeatedHitsDescendingFill",
+    "theo": "None",
+    "ticker": "SPY",
+    "vega": "None",
+    "theta": "None",
+    "has_multileg": "False",
+    "has_sweep": "False",
+    "next_earnings_date": "None",
+    "bid": "10.45",
+    "rho": "None"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw06_option-contracts_SPY_date_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/option-contracts",
+  "params": {
+   "date": "2026-03-02",
+   "limit": 100
+  },
+  "status": 200,
+  "row_count": 100,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 306,
+  "top": null,
+  "extra": {
+   "expiry_min": "",
+   "expiry_max": "",
+   "n_expiries": 1,
+   "first_row_sample": {
+    "delta": "0.0454794902489855",
+    "theta": "-0.01503615395639202",
+    "gamma": "0.1189795862040721",
+    "open_interest": "3866",
+    "volume": "472654",
+    "last_price": "0.01",
+    "option_symbol": "SPY260302C00687000",
+    "prev_oi": "3483",
+    "bid_volume": "227804",
+    "ask_volume": "226018",
+    "mid_volume": "18832",
+    "avg_price": "0.60977093180212163655",
+    "implied_volatility": "0.168436733697871",
+    "nbbo_ask": "0.02",
+    "nbbo_bid": "0.01",
+    "rho": "1.903565073709499e-06"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw06_option-contracts_SPY_date_2026-03-02_expiry_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/option-contracts",
+  "params": {
+   "date": "2026-03-02",
+   "expiry": "2026-03-02",
+   "limit": 100
+  },
+  "status": 200,
+  "row_count": 100,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 404,
+  "top": null,
+  "extra": {
+   "expiry_min": "",
+   "expiry_max": "",
+   "n_expiries": 1,
+   "first_row_sample": {
+    "delta": "0.0454794902489855",
+    "theta": "-0.01503615395639202",
+    "gamma": "0.1189795862040721",
+    "open_interest": "3866",
+    "volume": "472654",
+    "last_price": "0.01",
+    "option_symbol": "SPY260302C00687000",
+    "ask_volume": "226018",
+    "bid_volume": "227804",
+    "nbbo_bid": "0.01",
+    "nbbo_ask": "0.02",
+    "implied_volatility": "0.168436733697871",
+    "rho": "1.903565073709499e-06",
+    "vega": "0.001619869338600654",
+    "avg_price": "0.60977093180212163655",
+    "prev_oi": "3483"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "m01_aggs_SPY_1m_2026-03-02",
+  "provider": "massive",
+  "url_path": "/v2/aggs/ticker/SPY/range/1/minute/2026-03-02/2026-03-02",
+  "params": {
+   "adjusted": "true",
+   "sort": "asc",
+   "limit": 50000
+  },
+  "status": 200,
+  "row_count": 935,
+  "first_ts": "2026-03-02T09:00:00Z",
+  "last_ts": "2026-03-03T00:59:00Z",
+  "min_ts": "2026-03-02T09:00:00Z",
+  "max_ts": "2026-03-03T00:59:00Z",
+  "elapsed_ms": 230,
+  "top": {
+   "resultsCount": "935",
+   "queryCount": "935",
+   "status": "OK"
+  },
+  "extra": {
+   "resultsCount": 935,
+   "queryCount": 935,
+   "first": {
+    "v": 8485,
+    "vw": 676.9578,
+    "o": 677.66,
+    "c": 677,
+    "h": 677.66,
+    "l": 676.54,
+    "t": 1772442000000,
+    "n": 281
+   },
+   "last": {
+    "v": 1055.7072,
+    "vw": 684.837,
+    "o": 684.34,
+    "c": 684.4208,
+    "h": 684.4208,
+    "l": 684.31,
+    "t": 1772499540000,
+    "n": 36
+   },
+   "total_v": 85698191.51946
+  },
+  "error": null,
+  "host": "https://api.massive.com"
+ },
+ {
+  "check_id": "m02_aggs_SPY_1m_2024-06-03",
+  "provider": "massive",
+  "url_path": "/v2/aggs/ticker/SPY/range/1/minute/2024-06-03/2024-06-03",
+  "params": {
+   "adjusted": "true",
+   "sort": "asc",
+   "limit": 50000
+  },
+  "status": 403,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 398,
+  "top": {
+   "status": "NOT_AUTHORIZED",
+   "message": "Your plan doesn't include this data timeframe. Please upgrade your plan at https://polygon.io/pricing"
+  },
+  "extra": null,
+  "error": {
+   "status": "NOT_AUTHORIZED",
+   "request_id": "15bbd296a10140fc3a848ebb0727c670",
+   "message": "Your plan doesn't include this data timeframe. Please upgrade your plan at https://polygon.io/pricing"
+  },
+  "host": "https://api.massive.com"
+ },
+ {
+  "check_id": "m03_aggs_O_SPY260302C00682000_1m_2026-03-02",
+  "provider": "massive",
+  "url_path": "/v2/aggs/ticker/O:SPY260302C00682000/range/1/minute/2026-03-02/2026-03-02",
+  "params": {
+   "adjusted": "true",
+   "sort": "asc",
+   "limit": 50000
+  },
+  "status": 200,
+  "row_count": 354,
+  "first_ts": "2026-03-02T14:30:00Z",
+  "last_ts": "2026-03-02T21:05:00Z",
+  "min_ts": "2026-03-02T14:30:00Z",
+  "max_ts": "2026-03-02T21:05:00Z",
+  "elapsed_ms": 1011,
+  "top": {
+   "resultsCount": "354",
+   "queryCount": "354",
+   "status": "OK"
+  },
+  "extra": {
+   "resultsCount": 354,
+   "queryCount": 354,
+   "first": {
+    "v": 910,
+    "vw": 1.3354,
+    "o": 1.33,
+    "c": 1.49,
+    "h": 1.53,
+    "l": 1.13,
+    "t": 1772461800000,
+    "n": 235
+   },
+   "last": {
+    "v": 15,
+    "vw": 4,
+    "o": 4,
+    "c": 4,
+    "h": 4,
+    "l": 4,
+    "t": 1772485500000,
+    "n": 1
+   },
+   "total_v": 87626
+  },
+  "error": null,
+  "host": "https://api.massive.com"
+ },
+ {
+  "check_id": "m04_aggs_I_SPX_1m_2026-03-02",
+  "provider": "massive",
+  "url_path": "/v2/aggs/ticker/I:SPX/range/1/minute/2026-03-02/2026-03-02",
+  "params": {
+   "sort": "asc",
+   "limit": 50000
+  },
+  "status": 403,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 464,
+  "top": {
+   "status": "NOT_AUTHORIZED",
+   "message": "You are not entitled to this data. Please upgrade your plan at https://massive.com/pricing"
+  },
+  "extra": null,
+  "error": {
+   "status": "NOT_AUTHORIZED",
+   "request_id": "41b6e24787f381de2761446bca349846",
+   "message": "You are not entitled to this data. Please upgrade your plan at https://massive.com/pricing"
+  },
+  "host": "https://api.massive.com"
+ },
+ {
+  "check_id": "m05_trades_O_SPY260302C00682000",
+  "provider": "massive",
+  "url_path": "/v3/trades/O:SPY260302C00682000",
+  "params": {
+   "timestamp": "2026-03-02",
+   "limit": 1
+  },
+  "status": 403,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 400,
+  "top": {
+   "status": "NOT_AUTHORIZED",
+   "message": "You are not entitled to this data. Please upgrade your plan at https://massive.com/pricing"
+  },
+  "extra": null,
+  "error": {
+   "status": "NOT_AUTHORIZED",
+   "request_id": "4d3a984232daa115b809cf058a4bf99c",
+   "message": "You are not entitled to this data. Please upgrade your plan at https://massive.com/pricing"
+  },
+  "host": "https://api.massive.com"
+ },
+ {
+  "check_id": "m06_quotes_O_SPY260302C00682000",
+  "provider": "massive",
+  "url_path": "/v3/quotes/O:SPY260302C00682000",
+  "params": {
+   "timestamp": "2026-03-02",
+   "limit": 1
+  },
+  "status": 403,
+  "row_count": null,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 180,
+  "top": {
+   "status": "NOT_AUTHORIZED",
+   "message": "You are not entitled to this data. Please upgrade your plan at https://massive.com/pricing"
+  },
+  "extra": null,
+  "error": {
+   "status": "NOT_AUTHORIZED",
+   "request_id": "ddf591b291a0971ef50457d2627e9891",
+   "message": "You are not entitled to this data. Please upgrade your plan at https://massive.com/pricing"
+  },
+  "host": "https://api.massive.com"
+ },
+ {
+  "check_id": "m07_aggs_O_RUTW261008C02785000_1m_2026-10-08",
+  "provider": "massive",
+  "url_path": "/v2/aggs/ticker/O:RUTW261008C02785000/range/1/minute/2026-10-08/2026-10-08",
+  "params": {
+   "adjusted": "true",
+   "sort": "asc",
+   "limit": 50000
+  },
+  "status": 200,
+  "row_count": 201,
+  "first_ts": "2026-10-08T13:30:00Z",
+  "last_ts": "2026-10-08T19:59:00Z",
+  "min_ts": "2026-10-08T13:30:00Z",
+  "max_ts": "2026-10-08T19:59:00Z",
+  "elapsed_ms": 480,
+  "top": {
+   "resultsCount": "201",
+   "queryCount": "201",
+   "status": "OK"
+  },
+  "extra": {
+   "resultsCount": 201,
+   "queryCount": 201,
+   "first": {
+    "v": 1,
+    "vw": 5.96,
+    "o": 5.96,
+    "c": 5.96,
+    "h": 5.96,
+    "l": 5.96,
+    "t": 1791466200000,
+    "n": 1
+   },
+   "last": {
+    "v": 32,
+    "vw": 8.4094,
+    "o": 8.5,
+    "c": 8.4,
+    "h": 8.5,
+    "l": 8.4,
+    "t": 1791489540000,
+    "n": 20
+   },
+   "total_v": 1508
+  },
+  "error": null,
+  "host": "https://api.massive.com"
+ },
+ {
+  "check_id": "m08_aggs_O_NDXP260515P29130000_1m_2026-05-15",
+  "provider": "massive",
+  "url_path": "/v2/aggs/ticker/O:NDXP260515P29130000/range/1/minute/2026-05-15/2026-05-15",
+  "params": {
+   "adjusted": "true",
+   "sort": "asc",
+   "limit": 50000
+  },
+  "status": 200,
+  "row_count": 117,
+  "first_ts": "2026-05-15T13:30:00Z",
+  "last_ts": "2026-05-15T20:00:00Z",
+  "min_ts": "2026-05-15T13:30:00Z",
+  "max_ts": "2026-05-15T20:00:00Z",
+  "elapsed_ms": 154,
+  "top": {
+   "resultsCount": "117",
+   "queryCount": "117",
+   "status": "OK"
+  },
+  "extra": {
+   "resultsCount": 117,
+   "queryCount": 117,
+   "first": {
+    "v": 1,
+    "vw": 109.1,
+    "o": 109.1,
+    "c": 109.1,
+    "h": 109.1,
+    "l": 109.1,
+    "t": 1778851800000,
+    "n": 1
+   },
+   "last": {
+    "v": 14,
+    "vw": 5,
+    "o": 5,
+    "c": 5,
+    "h": 5,
+    "l": 5,
+    "t": 1778875200000,
+    "n": 1
+   },
+   "total_v": 465
+  },
+  "error": null,
+  "host": "https://api.massive.com"
+ },
+ {
+  "check_id": "uw01_ohlc_SPY_1m_2025-06-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/ohlc/1m",
+  "params": {
+   "date": "2025-06-02",
+   "limit": 2500
+  },
+  "status": 200,
+  "row_count": 721,
+  "first_ts": "2025-06-02T23:59:00Z",
+  "last_ts": "2025-06-02T08:00:00Z",
+  "min_ts": "2025-06-02T08:00:00Z",
+  "max_ts": "2025-06-02T23:59:00Z",
+  "elapsed_ms": 1271,
+  "top": null,
+  "extra": {
+   "by_market_time": {
+    "po": 147,
+    "r": 390,
+    "pr": 184
+   },
+   "rth_rows": 390,
+   "rth_min": "2025-06-02T13:30:00Z",
+   "rth_max": "2025-06-02T19:59:00Z",
+   "sample": {
+    "open": "591.4992",
+    "high": "591.5",
+    "low": "591.4401",
+    "close": "591.4401",
+    "volume": 2507,
+    "total_volume": 61630153
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw01_ohlc_SPY_1m_2022-09-28",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/ohlc/1m",
+  "params": {
+   "date": "2022-09-28",
+   "limit": 2500
+  },
+  "status": 200,
+  "row_count": 814,
+  "first_ts": "2022-09-28T23:59:00Z",
+  "last_ts": "2022-09-28T08:00:00Z",
+  "min_ts": "2022-09-28T08:00:00Z",
+  "max_ts": "2022-09-28T23:59:00Z",
+  "elapsed_ms": 1085,
+  "top": null,
+  "extra": {
+   "by_market_time": {
+    "po": 164,
+    "r": 390,
+    "pr": 260
+   },
+   "rth_rows": 390,
+   "rth_min": "2022-09-28T13:30:00Z",
+   "rth_max": "2022-09-28T19:59:00Z",
+   "sample": {
+    "open": "370.05",
+    "high": "370.07",
+    "low": "370.05",
+    "close": "370.07",
+    "volume": 14277,
+    "total_volume": 110801976
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw01_ohlc_SPY_1m_2021-06-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/ohlc/1m",
+  "params": {
+   "date": "2021-06-01",
+   "limit": 2500
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 1178,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY250102C00585000_2025-01-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250102C00585000/intraday",
+  "params": {
+   "date": "2025-01-02"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 330,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY250102C00590000_2025-01-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250102C00590000/intraday",
+  "params": {
+   "date": "2025-01-02"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 327,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY241014C00580000_2024-10-14",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY241014C00580000/intraday",
+  "params": {
+   "date": "2024-10-14"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 324,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY241014C00585000_2024-10-14",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY241014C00585000/intraday",
+  "params": {
+   "date": "2024-10-14"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 275,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY240801C00550000_2024-08-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY240801C00550000/intraday",
+  "params": {
+   "date": "2024-08-01"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 186,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY240801C00545000_2024-08-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY240801C00545000/intraday",
+  "params": {
+   "date": "2024-08-01"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 201,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY231113C00440000_2023-11-13",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY231113C00440000/intraday",
+  "params": {
+   "date": "2023-11-13"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 255,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY231113C00445000_2023-11-13",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY231113C00445000/intraday",
+  "params": {
+   "date": "2023-11-13"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 271,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_historic_SPY240603C00528000",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY240603C00528000/historic",
+  "params": {
+   "limit": 10
+  },
+  "status": 200,
+  "row_count": 10,
+  "first_ts": "2024-06-03",
+  "last_ts": "2024-05-20",
+  "min_ts": "2024-05-20",
+  "max_ts": "2024-06-03",
+  "elapsed_ms": 227,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "multi_leg_volume": "25791",
+    "nbbo_ask_size": "187",
+    "avg_price": "0.3638937797703238268313660295",
+    "low_price": "0.01",
+    "last_tape_time": "2024-06-03T21:48:03Z",
+    "date": "2024-06-03",
+    "trades": "28820",
+    "open_price": "1.62",
+    "volume": "349971",
+    "underlying_close": "527.80",
+    "implied_volatility": "0.086194151949194",
+    "high_price": "1.70",
+    "sweep_volume": "39072",
+    "open_interest": "9103"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_historic_SPY241014C00580000",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY241014C00580000/historic",
+  "params": {
+   "limit": 10
+  },
+  "status": 200,
+  "row_count": 10,
+  "first_ts": "2024-10-14",
+  "last_ts": "2024-10-01",
+  "min_ts": "2024-10-01",
+  "max_ts": "2024-10-14",
+  "elapsed_ms": 203,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "underlying_close": "584.32",
+    "high_price": "5.11",
+    "nbbo_ask_size": "22",
+    "nbbo_bid": "4.15",
+    "cross_volume": "0",
+    "neutral_volume": "0",
+    "date": "2024-10-14",
+    "last_price": "4.30",
+    "ask_volume": "6888",
+    "last_tape_time": "2024-10-14T21:32:17Z",
+    "implied_volatility": "0.0394400735324248",
+    "stock_multi_leg_volume": "8",
+    "floor_volume": "20",
+    "iv_low": "0.003740518533770189"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_historic_SPY250602C00590000",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250602C00590000/historic",
+  "params": {
+   "limit": 10
+  },
+  "status": 200,
+  "row_count": 10,
+  "first_ts": "2025-06-02",
+  "last_ts": "2025-05-19",
+  "min_ts": "2025-05-19",
+  "max_ts": "2025-06-02",
+  "elapsed_ms": 250,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "underlying_close": "592.71",
+    "high_price": "3.22",
+    "nbbo_ask_size": "100",
+    "nbbo_bid": "2.78",
+    "cross_volume": "0",
+    "neutral_volume": "24436",
+    "date": "2025-06-02",
+    "last_price": "3.05",
+    "ask_volume": "210762",
+    "last_tape_time": "2025-06-02T21:30:19Z",
+    "implied_volatility": "0.02542316327639278",
+    "stock_multi_leg_volume": "1309",
+    "floor_volume": "110",
+    "iv_low": "0.004425335279037444"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_greek-exposure_SPY_nodate",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/greek-exposure",
+  "params": {},
+  "status": 200,
+  "row_count": 251,
+  "first_ts": "2025-10-14",
+  "last_ts": "2026-10-13",
+  "min_ts": "2025-10-14",
+  "max_ts": "2026-10-13",
+  "elapsed_ms": 312,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "date": "2025-10-14",
+    "call_gamma": "3027817.7246",
+    "put_gamma": "-5888151.9822",
+    "call_delta": "159872647.2310",
+    "put_delta": "-189287514.0719",
+    "call_charm": "-285887856.2892",
+    "put_charm": "212444885.5897",
+    "call_vanna": "76743662.7497",
+    "put_vanna": "-389065979.8704"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_greek-exposure_SPY_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/greek-exposure",
+  "params": {
+   "date": "2026-03-02"
+  },
+  "status": 200,
+  "row_count": 95,
+  "first_ts": "2025-10-14",
+  "last_ts": "2026-03-02",
+  "min_ts": "2025-10-14",
+  "max_ts": "2026-03-02",
+  "elapsed_ms": 282,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "date": "2025-10-14",
+    "call_gamma": "3027817.7246",
+    "put_gamma": "-5888151.9822",
+    "call_delta": "159872647.2310",
+    "put_delta": "-189287514.0719",
+    "call_charm": "-285887856.2892",
+    "put_charm": "212444885.5897",
+    "call_vanna": "76743662.7497",
+    "put_vanna": "-389065979.8704"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_greek-exposure-strike_SPY_2025-06-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/greek-exposure/strike",
+  "params": {
+   "date": "2025-06-02"
+  },
+  "status": 200,
+  "row_count": 336,
+  "first_ts": "2025-06-02",
+  "last_ts": "2025-06-02",
+  "min_ts": "2025-06-02",
+  "max_ts": "2025-06-02",
+  "elapsed_ms": 373,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "date": "2025-06-02",
+    "strike": "150",
+    "call_gex": "3.8024",
+    "put_gex": "-85.1441",
+    "call_delta": "135420.8355",
+    "put_delta": "-7604.4852",
+    "call_charm": "1884.3941",
+    "put_charm": "162156.0685",
+    "call_vanna": "429.0812",
+    "put_vanna": "-269218.8787"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_greek-exposure-strike_SPY_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/greek-exposure/strike",
+  "params": {
+   "date": "2026-03-02"
+  },
+  "status": 200,
+  "row_count": 434,
+  "first_ts": "2026-03-02",
+  "last_ts": "2026-03-02",
+  "min_ts": "2026-03-02",
+  "max_ts": "2026-03-02",
+  "elapsed_ms": 341,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "date": "2026-03-02",
+    "strike": "50",
+    "call_gex": "0.0000",
+    "put_gex": "-3.7803",
+    "call_delta": "13099.9994",
+    "put_delta": "-589.7501",
+    "call_charm": "100.3750",
+    "put_charm": "-1162.6848",
+    "call_vanna": "-196.3571",
+    "put_vanna": "17420.2098"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_greek-exposure-strike_SPX_2026-10-09",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPX/greek-exposure/strike",
+  "params": {
+   "date": "2026-10-09"
+  },
+  "status": 200,
+  "row_count": 890,
+  "first_ts": "2026-10-09",
+  "last_ts": "2026-10-09",
+  "min_ts": "2026-10-09",
+  "max_ts": "2026-10-09",
+  "elapsed_ms": 420,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "date": "2026-10-09",
+    "strike": "200",
+    "call_gex": "0.0001",
+    "put_gex": "0.0000",
+    "call_delta": "1373097.5569",
+    "put_delta": "-0.0663",
+    "call_charm": "347.0495",
+    "put_charm": "2701.7484",
+    "call_vanna": "-2062.0627",
+    "put_vanna": "-15856.7083"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_net-prem-ticks_SPY_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/net-prem-ticks",
+  "params": {
+   "date": "2026-03-02"
+  },
+  "status": 200,
+  "row_count": 405,
+  "first_ts": "2026-03-02T14:30:00.000000Z",
+  "last_ts": "2026-03-02T21:14:00.000000Z",
+  "min_ts": "2026-03-02T14:30:00.000000Z",
+  "max_ts": "2026-03-02T21:14:00.000000Z",
+  "elapsed_ms": 537,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "date": "2026-03-02",
+    "call_volume": "30371",
+    "put_volume": "78307",
+    "call_volume_ask_side": "13114",
+    "call_volume_bid_side": "13699",
+    "put_volume_ask_side": "28886",
+    "put_volume_bid_side": "46009",
+    "tape_time": "2026-03-02T14:30:00.000000Z",
+    "net_call_volume": "-585",
+    "net_call_premium": "48548.0000",
+    "net_put_volume": "-17123",
+    "net_put_premium": "-3202104.00",
+    "net_delta": "321523.853385749311558200"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_net-prem-ticks_SPY_2024-06-03",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/net-prem-ticks",
+  "params": {
+   "date": "2024-06-03"
+  },
+  "status": 200,
+  "row_count": 406,
+  "first_ts": "2024-06-03T13:30:00.000000Z",
+  "last_ts": "2024-06-03T20:15:00.000000Z",
+  "min_ts": "2024-06-03T13:30:00.000000Z",
+  "max_ts": "2024-06-03T20:15:00.000000Z",
+  "elapsed_ms": 317,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "date": "2024-06-03",
+    "call_volume": "38226",
+    "put_volume": "38392",
+    "call_volume_ask_side": "17564",
+    "call_volume_bid_side": "18825",
+    "put_volume_ask_side": "24384",
+    "put_volume_bid_side": "12835",
+    "tape_time": "2024-06-03T13:30:00.000000Z",
+    "net_call_premium": "-1702684",
+    "net_call_volume": "-1261",
+    "net_put_premium": "1145775",
+    "net_put_volume": "11549",
+    "net_delta": "-4393.72984152303"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_net-prem-ticks_SPY_2023-11-13",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/net-prem-ticks",
+  "params": {
+   "date": "2023-11-13"
+  },
+  "status": 200,
+  "row_count": 406,
+  "first_ts": "2023-11-13T14:30:00.000000Z",
+  "last_ts": "2023-11-13T21:15:00.000000Z",
+  "min_ts": "2023-11-13T14:30:00.000000Z",
+  "max_ts": "2023-11-13T21:15:00.000000Z",
+  "elapsed_ms": 343,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "date": "2023-11-13",
+    "call_volume": "35920",
+    "put_volume": "35559",
+    "call_volume_ask_side": "25368",
+    "call_volume_bid_side": "9895",
+    "put_volume_ask_side": "19264",
+    "put_volume_bid_side": "15519",
+    "tape_time": "2023-11-13T14:30:00.000000Z",
+    "net_call_premium": "271953",
+    "net_call_volume": "15473",
+    "net_put_premium": "348325",
+    "net_put_volume": "3745",
+    "net_delta": "-139.336299294919"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_net-prem-ticks_SPX_2026-10-09",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPX/net-prem-ticks",
+  "params": {
+   "date": "2026-10-09"
+  },
+  "status": 200,
+  "row_count": 450,
+  "first_ts": "2026-10-09T13:30:00.000000Z",
+  "last_ts": "2026-10-09T20:59:00.000000Z",
+  "min_ts": "2026-10-09T13:30:00.000000Z",
+  "max_ts": "2026-10-09T20:59:00.000000Z",
+  "elapsed_ms": 304,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "date": "2026-10-09",
+    "call_volume": "8046",
+    "put_volume": "14628",
+    "call_volume_ask_side": "3504",
+    "call_volume_bid_side": "3333",
+    "put_volume_ask_side": "5358",
+    "put_volume_bid_side": "7160",
+    "tape_time": "2026-10-09T13:30:00.000000Z",
+    "net_call_premium": "-139716.0000",
+    "net_call_volume": "171",
+    "net_put_premium": "-2139610.0000",
+    "net_put_volume": "-1802",
+    "net_delta": "17018.5847276585262493300"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_market-tide_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/market/market-tide",
+  "params": {
+   "date": "2026-03-02"
+  },
+  "status": 200,
+  "row_count": 81,
+  "first_ts": "2026-03-02T09:30:00-05:00",
+  "last_ts": "2026-03-02T16:10:00-05:00",
+  "min_ts": "2026-03-02T09:30:00-05:00",
+  "max_ts": "2026-03-02T16:10:00-05:00",
+  "elapsed_ms": 263,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "timestamp": "2026-03-02T09:30:00-05:00",
+    "date": "2026-03-02",
+    "net_call_premium": "26638955.0000",
+    "net_put_premium": "-24772239.0000",
+    "net_volume": "154650"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_market-tide_2024-06-03",
+  "provider": "unusualwhales",
+  "url_path": "/api/market/market-tide",
+  "params": {
+   "date": "2024-06-03"
+  },
+  "status": 200,
+  "row_count": 82,
+  "first_ts": "2024-06-03T09:30:00-04:00",
+  "last_ts": "2024-06-03T16:35:00-04:00",
+  "min_ts": "2024-06-03T09:30:00-04:00",
+  "max_ts": "2024-06-03T16:35:00-04:00",
+  "elapsed_ms": 296,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "timestamp": "2024-06-03T09:30:00-04:00",
+    "date": "2024-06-03",
+    "net_call_premium": "32012984.0000",
+    "net_put_premium": "-3307642.0000",
+    "net_volume": "26063"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_interpolated-iv_SPY_2026-03-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/interpolated-iv",
+  "params": {
+   "date": "2026-03-02"
+  },
+  "status": 200,
+  "row_count": 9,
+  "first_ts": "2026-03-02",
+  "last_ts": "2026-03-02",
+  "min_ts": "2026-03-02",
+  "max_ts": "2026-03-02",
+  "elapsed_ms": 292,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "date": "2026-03-02",
+    "days": "1",
+    "percentile": "0.83",
+    "volatility": "0.216",
+    "implied_move_perc": "0.001"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_flow-per-strike-intraday_SPY_2025-06-02",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/flow-per-strike-intraday",
+  "params": {
+   "date": "2025-06-02"
+  },
+  "status": 200,
+  "row_count": 2157,
+  "first_ts": "2025-06-02T13:30:23.128000Z",
+  "last_ts": "2025-06-02T19:57:00.237000Z",
+  "min_ts": "2025-06-02T13:30:05.288000Z",
+  "max_ts": "2025-06-02T20:14:59.573000Z",
+  "elapsed_ms": 392,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "timestamp": "2025-06-02T13:30:23.128000Z",
+    "date": "2025-06-02",
+    "ticker": "SPY",
+    "trades": "4",
+    "volume": "14",
+    "call_volume": "12",
+    "put_volume": "2",
+    "call_volume_ask_side": "2",
+    "call_volume_bid_side": "5",
+    "put_volume_ask_side": "0",
+    "put_volume_bid_side": "2",
+    "strike": "450",
+    "call_trades": "3",
+    "put_trades": "1"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw05_flow-per-strike-intraday_SPX_2026-10-09",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPX/flow-per-strike-intraday",
+  "params": {
+   "date": "2026-10-09"
+  },
+  "status": 200,
+  "row_count": 1121,
+  "first_ts": "2026-10-09T13:39:35.850000Z",
+  "last_ts": "2026-10-09T19:53:24.874000Z",
+  "min_ts": "2026-10-09T13:30:02.126000Z",
+  "max_ts": "2026-10-09T20:53:16.740000Z",
+  "elapsed_ms": 1127,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "timestamp": "2026-10-09T13:39:35.850000Z",
+    "date": "2026-10-09",
+    "ticker": "SPX",
+    "trades": "2",
+    "volume": "2",
+    "call_volume": "2",
+    "put_volume": "0",
+    "call_volume_ask_side": "1",
+    "call_volume_bid_side": "1",
+    "put_volume_ask_side": "0",
+    "put_volume_bid_side": "0",
+    "strike": "400",
+    "put_premium": "0",
+    "call_premium": "1467780.0000"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw04_gex-levels_SPY_2024-06-03",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/gex-levels",
+  "params": {
+   "date": "2024-06-03"
+  },
+  "status": 200,
+  "row_count": 1,
+  "first_ts": "2024-06-03T20:14:58.000000Z",
+  "last_ts": "2024-06-03T20:14:58.000000Z",
+  "min_ts": "2024-06-03T20:14:58.000000Z",
+  "max_ts": "2024-06-03T20:14:58.000000Z",
+  "elapsed_ms": 220,
+  "top": null,
+  "extra": {
+   "date": "2024-06-03",
+   "time": "2024-06-03T20:14:58.000000Z",
+   "source": "vol",
+   "gamma_flip": "528.96",
+   "call_wall": "529",
+   "put_wall": "525",
+   "gamma_magnet": "528"
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw04_spot-exposures_SPY_2024-06-03",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/spot-exposures",
+  "params": {
+   "date": "2024-06-03"
+  },
+  "status": 200,
+  "row_count": 545,
+  "first_ts": "2024-06-03T10:30:00.000000Z",
+  "last_ts": "2024-06-03T20:00:00.000000Z",
+  "min_ts": "2024-06-03T10:30:00.000000Z",
+  "max_ts": "2024-06-03T20:00:00.000000Z",
+  "elapsed_ms": 409,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "time": "2024-06-03T10:30:43.779000Z",
+    "ticker": "SPY",
+    "start_time": "2024-06-03T10:30:00.000000Z",
+    "price": "528.13",
+    "ticker_id": "2447",
+    "charm_per_one_percent_move_dir": "0",
+    "charm_per_one_percent_move_oi": "-2701721004440.29",
+    "charm_per_one_percent_move_vol": "0",
+    "gamma_per_one_percent_move_dir": "0",
+    "gamma_per_one_percent_move_oi": "-2260403765.45",
+    "gamma_per_one_percent_move_vol": "0",
+    "vanna_per_one_percent_move_dir": "0.00",
+    "vanna_per_one_percent_move_oi": "498608722.58",
+    "vanna_per_one_percent_move_vol": "0.00"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw04_spot-exposures_SPX_2026-10-09",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPX/spot-exposures",
+  "params": {
+   "date": "2026-10-09"
+  },
+  "status": 200,
+  "row_count": 521,
+  "first_ts": "2026-10-09T10:36:00.000000Z",
+  "last_ts": "2026-10-09T20:00:00.000000Z",
+  "min_ts": "2026-10-09T10:36:00.000000Z",
+  "max_ts": "2026-10-09T20:00:00.000000Z",
+  "elapsed_ms": 240,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "time": "2026-10-09T10:36:59.901000Z",
+    "ticker": "SPX",
+    "start_time": "2026-10-09T10:36:00.000000Z",
+    "price": "7795",
+    "ticker_id": "10462",
+    "charm_per_one_percent_move_dir": "0",
+    "charm_per_one_percent_move_oi": "-12858555596132.56",
+    "charm_per_one_percent_move_vol": "0",
+    "gamma_per_one_percent_move_dir": "0",
+    "gamma_per_one_percent_move_oi": "95505457895.66",
+    "gamma_per_one_percent_move_vol": "0",
+    "vanna_per_one_percent_move_dir": "0",
+    "vanna_per_one_percent_move_oi": "3136814181.78",
+    "vanna_per_one_percent_move_vol": "0"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw06_option-contracts_SPY_nodate_limit5",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/option-contracts",
+  "params": {
+   "limit": 5
+  },
+  "status": 200,
+  "row_count": 5,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 263,
+  "top": null,
+  "extra": {
+   "expiry_min": "20261013",
+   "expiry_max": "20261013",
+   "n_expiries": 1,
+   "first_row_sample": {
+    "delta": "0.344365640442341",
+    "theta": "-0.1950546226721028",
+    "gamma": "0.434341569321211",
+    "open_interest": "11999",
+    "volume": "1025801",
+    "last_price": "0.23",
+    "option_symbol": "SPY261013C00778000",
+    "ask_volume": "508916",
+    "bid_volume": "508204",
+    "nbbo_bid": "0.22",
+    "nbbo_ask": "0.23",
+    "implied_volatility": "0.1020067597047287",
+    "rho": "0.000397813012902337",
+    "vega": "0.0349099146298597",
+    "avg_price": "0.3937612363411616873058224694",
+    "prev_oi": "3165"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw06_option-contracts_SPY_date_2025-06-02_limit5",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/option-contracts",
+  "params": {
+   "date": "2025-06-02",
+   "limit": 5
+  },
+  "status": 200,
+  "row_count": 5,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 591,
+  "top": null,
+  "extra": {
+   "expiry_min": "20250602",
+   "expiry_max": "20250602",
+   "n_expiries": 1,
+   "first_row_sample": {
+    "delta": "0.974941637584939",
+    "theta": "-0.01470960589274562",
+    "gamma": "0.0377380269708651",
+    "open_interest": "8510",
+    "volume": "445764",
+    "last_price": "3.05",
+    "option_symbol": "SPY250602C00590000",
+    "prev_oi": "4772",
+    "bid_volume": "210566",
+    "ask_volume": "210762",
+    "mid_volume": "24436",
+    "avg_price": "0.90598673289004944320",
+    "implied_volatility": "0.02542316327639278",
+    "nbbo_ask": "3.18",
+    "nbbo_bid": "2.78",
+    "rho": "3.56991073675563e-06"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY250303C00585000_2025-03-03",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250303C00585000/intraday",
+  "params": {
+   "date": "2025-03-03"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 813,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_historic_SPY250303C00585000",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250303C00585000/historic",
+  "params": {
+   "limit": 3
+  },
+  "status": 200,
+  "row_count": 3,
+  "first_ts": "2025-03-03",
+  "last_ts": "2025-02-27",
+  "min_ts": "2025-02-27",
+  "max_ts": "2025-03-03",
+  "elapsed_ms": 757,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "underlying_close": "583.77",
+    "high_price": "12.44",
+    "nbbo_ask_size": "91",
+    "nbbo_bid": "0.21",
+    "cross_volume": "0",
+    "neutral_volume": "4742",
+    "date": "2025-03-03",
+    "last_price": "0.20",
+    "ask_volume": "23679",
+    "last_tape_time": "2025-03-03T22:45:10Z",
+    "implied_volatility": "0.01370542040060411",
+    "stock_multi_leg_volume": "8",
+    "floor_volume": "50",
+    "iv_low": "0.01013050205029313"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY250303C00590000_2025-03-03",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250303C00590000/intraday",
+  "params": {
+   "date": "2025-03-03"
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 495,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_historic_SPY250303C00590000",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250303C00590000/historic",
+  "params": {
+   "limit": 3
+  },
+  "status": 200,
+  "row_count": 3,
+  "first_ts": "2025-03-03",
+  "last_ts": "2025-02-27",
+  "min_ts": "2025-02-27",
+  "max_ts": "2025-03-03",
+  "elapsed_ms": 179,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "multi_leg_volume": "4711",
+    "nbbo_ask_size": "1032",
+    "avg_price": "1.1910166503002913",
+    "low_price": "0.01",
+    "last_tape_time": "2025-03-03T22:45:09Z",
+    "date": "2025-03-03",
+    "trades": "20225",
+    "open_price": "6.50",
+    "volume": "184321",
+    "underlying_close": "583.77",
+    "implied_volatility": "0.04290572051477876",
+    "high_price": "7.62",
+    "sweep_volume": "17163",
+    "open_interest": "11874"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw06_option-contracts_SPY_date_2025-03-03_limit3",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/option-contracts",
+  "params": {
+   "date": "2025-03-03",
+   "limit": 3
+  },
+  "status": 200,
+  "row_count": 3,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 340,
+  "top": null,
+  "extra": {
+   "expiry_min": "20250303",
+   "expiry_max": "20250303",
+   "n_expiries": 1,
+   "first_row_sample": {
+    "delta": "1.117809912803691e-07",
+    "theta": "-0.00887510594597157",
+    "gamma": "3.03364865763632e-07",
+    "open_interest": "9220",
+    "volume": "294944",
+    "last_price": "0.01",
+    "option_symbol": "SPY250303C00595000",
+    "ask_volume": "139195",
+    "bid_volume": "141027",
+    "nbbo_bid": "0",
+    "nbbo_ask": "0.01",
+    "implied_volatility": "0.0782150136666277",
+    "rho": "4.49421794152158e-13",
+    "vega": "2.9055023575793102e-09",
+    "avg_price": "0.88520932787240967777",
+    "prev_oi": "4234"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY250401C00560000_2025-04-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250401C00560000/intraday",
+  "params": {
+   "date": "2025-04-01"
+  },
+  "status": 200,
+  "row_count": 405,
+  "first_ts": "2025-04-01T20:14:00Z",
+  "last_ts": "2025-04-01T13:30:00Z",
+  "min_ts": "2025-04-01T13:30:00Z",
+  "max_ts": "2025-04-01T20:14:00Z",
+  "elapsed_ms": 477,
+  "top": null,
+  "extra": {
+   "total_volume": 446322,
+   "total_premium": 44148156.0,
+   "close_min": 0.06,
+   "close_max": 3.28,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_historic_SPY250401C00560000",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250401C00560000/historic",
+  "params": {
+   "limit": 3
+  },
+  "status": 200,
+  "row_count": 3,
+  "first_ts": "2025-04-01",
+  "last_ts": "2025-03-28",
+  "min_ts": "2025-03-28",
+  "max_ts": "2025-04-01",
+  "elapsed_ms": 268,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "last_price": "0.99",
+    "iv_low": "0.00896332111320202",
+    "total_premium": "44148156.00",
+    "nbbo_ask_size": "1",
+    "last_tape_time": "2025-04-01T21:30:21Z",
+    "date": "2025-04-01",
+    "total_ask_changes": "93565",
+    "iv_high": "0.762369395736046",
+    "floor_volume": "529",
+    "low_price": "0.05",
+    "cross_volume": "0",
+    "nbbo_bid": "0.96",
+    "high_price": "3.36",
+    "volume": "446322"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY250401C00565000_2025-04-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250401C00565000/intraday",
+  "params": {
+   "date": "2025-04-01"
+  },
+  "status": 200,
+  "row_count": 367,
+  "first_ts": "2025-04-01T20:06:00Z",
+  "last_ts": "2025-04-01T13:30:00Z",
+  "min_ts": "2025-04-01T13:30:00Z",
+  "max_ts": "2025-04-01T20:06:00Z",
+  "elapsed_ms": 381,
+  "top": null,
+  "extra": {
+   "total_volume": 171496,
+   "total_premium": 3326786.0,
+   "close_min": 0.01,
+   "close_max": 0.48,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_historic_SPY250401C00565000",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250401C00565000/historic",
+  "params": {
+   "limit": 3
+  },
+  "status": 200,
+  "row_count": 3,
+  "first_ts": "2025-04-01",
+  "last_ts": "2025-03-28",
+  "min_ts": "2025-03-28",
+  "max_ts": "2025-04-01",
+  "elapsed_ms": 455,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "multi_leg_volume": "13007",
+    "nbbo_ask_size": "3143",
+    "avg_price": "0.1939862154219340392778840332",
+    "low_price": "0.01",
+    "last_tape_time": "2025-04-01T21:30:22Z",
+    "date": "2025-04-01",
+    "trades": "20084",
+    "open_price": "0.20",
+    "volume": "171496",
+    "underlying_close": "560.97",
+    "implied_volatility": "0.0479748517667366",
+    "high_price": "0.52",
+    "sweep_volume": "15702",
+    "open_interest": "9542"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw06_option-contracts_SPY_date_2025-04-01_limit3",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/option-contracts",
+  "params": {
+   "date": "2025-04-01",
+   "limit": 3
+  },
+  "status": 200,
+  "row_count": 3,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 486,
+  "top": null,
+  "extra": {
+   "expiry_min": "20250401",
+   "expiry_max": "20250401",
+   "n_expiries": 1,
+   "first_row_sample": {
+    "delta": "0.917756947115282",
+    "theta": "-0.0291705792933292",
+    "gamma": "0.1951079303292225",
+    "open_interest": "12229",
+    "volume": "446322",
+    "last_price": "0.99",
+    "option_symbol": "SPY250401C00560000",
+    "ask_volume": "214296",
+    "bid_volume": "205284",
+    "avg_price": "0.9891548254399290198556199323",
+    "nbbo_bid": "0.96",
+    "nbbo_ask": "1.07",
+    "prev_oi": "2880",
+    "mid_volume": "26742",
+    "floor_volume": "529",
+    "high_price": "3.36"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY250501C00565000_2025-05-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250501C00565000/intraday",
+  "params": {
+   "date": "2025-05-01"
+  },
+  "status": 200,
+  "row_count": 401,
+  "first_ts": "2025-05-01T20:13:00Z",
+  "last_ts": "2025-05-01T13:30:00Z",
+  "min_ts": "2025-05-01T13:30:00Z",
+  "max_ts": "2025-05-01T20:13:00Z",
+  "elapsed_ms": 395,
+  "top": null,
+  "extra": {
+   "total_volume": 323167,
+   "total_premium": 20680102.0,
+   "close_min": 0.01,
+   "close_max": 1.26,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_historic_SPY250501C00565000",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250501C00565000/historic",
+  "params": {
+   "limit": 3
+  },
+  "status": 200,
+  "row_count": 3,
+  "first_ts": "2025-05-01",
+  "last_ts": "2025-04-29",
+  "min_ts": "2025-04-29",
+  "max_ts": "2025-05-01",
+  "elapsed_ms": 221,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "underlying_close": "558.47",
+    "high_price": "1.32",
+    "nbbo_ask_size": "318",
+    "nbbo_bid": "0",
+    "cross_volume": "0",
+    "neutral_volume": "10934",
+    "date": "2025-05-01",
+    "last_price": "0.01",
+    "ask_volume": "147992",
+    "last_tape_time": "2025-05-01T21:30:28Z",
+    "implied_volatility": "0.0620858268592206",
+    "stock_multi_leg_volume": "1",
+    "floor_volume": "0",
+    "iv_low": "0.01629074610697668"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY250501C00570000_2025-05-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250501C00570000/intraday",
+  "params": {
+   "date": "2025-05-01"
+  },
+  "status": 200,
+  "row_count": 385,
+  "first_ts": "2025-05-01T20:14:00Z",
+  "last_ts": "2025-05-01T13:30:00Z",
+  "min_ts": "2025-05-01T13:30:00Z",
+  "max_ts": "2025-05-01T20:14:00Z",
+  "elapsed_ms": 344,
+  "top": null,
+  "extra": {
+   "total_volume": 97790,
+   "total_premium": 868251.0,
+   "close_min": 0.01,
+   "close_max": 0.2,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_historic_SPY250501C00570000",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250501C00570000/historic",
+  "params": {
+   "limit": 3
+  },
+  "status": 200,
+  "row_count": 3,
+  "first_ts": "2025-05-01",
+  "last_ts": "2025-04-29",
+  "min_ts": "2025-04-29",
+  "max_ts": "2025-05-01",
+  "elapsed_ms": 242,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "underlying_close": "558.47",
+    "high_price": "0.22",
+    "nbbo_ask_size": "803",
+    "nbbo_bid": "0",
+    "cross_volume": "0",
+    "neutral_volume": "683",
+    "date": "2025-05-01",
+    "last_price": "0.01",
+    "ask_volume": "54106",
+    "last_tape_time": "2025-05-01T21:30:28Z",
+    "implied_volatility": "0.0907812489864318",
+    "stock_multi_leg_volume": "0",
+    "floor_volume": "0",
+    "iv_low": "0.01710684444905468"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw06_option-contracts_SPY_date_2025-05-01_limit3",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/option-contracts",
+  "params": {
+   "date": "2025-05-01",
+   "limit": 3
+  },
+  "status": 200,
+  "row_count": 3,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 291,
+  "top": null,
+  "extra": {
+   "expiry_min": "20250501",
+   "expiry_max": "20250501",
+   "n_expiries": 1,
+   "first_row_sample": {
+    "delta": "0.01581778665951264",
+    "theta": "-0.01304343445204384",
+    "gamma": "0.01712849857204325",
+    "open_interest": "3067",
+    "volume": "435438",
+    "last_price": "0.01",
+    "option_symbol": "SPY250501C00562000",
+    "ask_volume": "203632",
+    "bid_volume": "202481",
+    "nbbo_bid": "0",
+    "nbbo_ask": "0.01",
+    "implied_volatility": "0.03929672532533587",
+    "rho": "9.80146153346892e-08",
+    "vega": "0.000233032312942724",
+    "avg_price": "1.4295923185390343",
+    "prev_oi": "925"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY250515C00590000_2025-05-15",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250515C00590000/intraday",
+  "params": {
+   "date": "2025-05-15"
+  },
+  "status": 200,
+  "row_count": 405,
+  "first_ts": "2025-05-15T20:14:00Z",
+  "last_ts": "2025-05-15T13:30:00Z",
+  "min_ts": "2025-05-15T13:30:00Z",
+  "max_ts": "2025-05-15T20:14:00Z",
+  "elapsed_ms": 449,
+  "top": null,
+  "extra": {
+   "total_volume": 614367,
+   "total_premium": 38948569.0,
+   "close_min": 0.12,
+   "close_max": 1.48,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_historic_SPY250515C00590000",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250515C00590000/historic",
+  "params": {
+   "limit": 3
+  },
+  "status": 200,
+  "row_count": 3,
+  "first_ts": "2025-05-15",
+  "last_ts": "2025-05-13",
+  "min_ts": "2025-05-13",
+  "max_ts": "2025-05-15",
+  "elapsed_ms": 268,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "multi_leg_volume": "33007",
+    "nbbo_ask_size": "51",
+    "avg_price": "0.63396258262569441393",
+    "low_price": "0.07",
+    "last_tape_time": "2025-05-15T21:45:08Z",
+    "date": "2025-05-15",
+    "trades": "67832",
+    "open_price": "0.30",
+    "volume": "614367",
+    "underlying_close": "590.46",
+    "implied_volatility": "0.01011478860862328",
+    "high_price": "1.56",
+    "sweep_volume": "38118",
+    "open_interest": "10370"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_intraday_SPY250515C00588000_2025-05-15",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250515C00588000/intraday",
+  "params": {
+   "date": "2025-05-15"
+  },
+  "status": 200,
+  "row_count": 404,
+  "first_ts": "2025-05-15T20:14:00Z",
+  "last_ts": "2025-05-15T13:30:00Z",
+  "min_ts": "2025-05-15T13:30:00Z",
+  "max_ts": "2025-05-15T20:14:00Z",
+  "elapsed_ms": 364,
+  "top": null,
+  "extra": {
+   "total_volume": 291466,
+   "total_premium": 32289585.0,
+   "close_min": 0.35,
+   "close_max": 3.11,
+   "iv_fields_present": true
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw02_historic_SPY250515C00588000",
+  "provider": "unusualwhales",
+  "url_path": "/api/option-contract/SPY250515C00588000/historic",
+  "params": {
+   "limit": 3
+  },
+  "status": 200,
+  "row_count": 3,
+  "first_ts": "2025-05-15",
+  "last_ts": "2025-05-13",
+  "min_ts": "2025-05-13",
+  "max_ts": "2025-05-15",
+  "elapsed_ms": 297,
+  "top": null,
+  "extra": {
+   "first_row_sample": {
+    "underlying_close": "590.46",
+    "high_price": "3.15",
+    "nbbo_ask_size": "7",
+    "nbbo_bid": "2.14",
+    "cross_volume": "3",
+    "neutral_volume": "14679",
+    "date": "2025-05-15",
+    "last_price": "2.56",
+    "ask_volume": "144712",
+    "last_tape_time": "2025-05-15T21:45:08Z",
+    "implied_volatility": "0.03938919076448725",
+    "stock_multi_leg_volume": "6",
+    "floor_volume": "350",
+    "iv_low": "0.003848254339797312"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw06_option-contracts_SPY_date_2025-05-15_limit3",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/option-contracts",
+  "params": {
+   "date": "2025-05-15",
+   "limit": 3
+  },
+  "status": 200,
+  "row_count": 3,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 2371,
+  "top": null,
+  "extra": {
+   "expiry_min": "20250515",
+   "expiry_max": "20250515",
+   "n_expiries": 1,
+   "first_row_sample": {
+    "delta": "0.810064884986368",
+    "theta": "-0.0500501897162045",
+    "gamma": "0.566787486240402",
+    "open_interest": "10370",
+    "volume": "614367",
+    "last_price": "0.42",
+    "option_symbol": "SPY250515C00590000",
+    "ask_volume": "314275",
+    "bid_volume": "278992",
+    "nbbo_bid": "0.37",
+    "nbbo_ask": "0.43",
+    "implied_volatility": "0.01011478860862328",
+    "rho": "4.37991087603704e-06",
+    "vega": "0.001533662747820279",
+    "avg_price": "0.63396258262569441393",
+    "prev_oi": "4425"
+   }
+  },
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw01_ohlc_SPY_1m_2022-01-03",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/ohlc/1m",
+  "params": {
+   "date": "2022-01-03",
+   "limit": 2500
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 275,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw01_ohlc_SPY_1m_2021-11-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/ohlc/1m",
+  "params": {
+   "date": "2021-11-01",
+   "limit": 2500
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 292,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ },
+ {
+  "check_id": "uw01_ohlc_SPY_1m_2022-06-01",
+  "provider": "unusualwhales",
+  "url_path": "/api/stock/SPY/ohlc/1m",
+  "params": {
+   "date": "2022-06-01",
+   "limit": 2500
+  },
+  "status": 200,
+  "row_count": 0,
+  "first_ts": null,
+  "last_ts": null,
+  "min_ts": null,
+  "max_ts": null,
+  "elapsed_ms": 244,
+  "top": null,
+  "extra": null,
+  "error": null,
+  "host": null
+ }
+]

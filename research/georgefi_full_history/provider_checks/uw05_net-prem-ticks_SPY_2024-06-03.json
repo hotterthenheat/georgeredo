@@ -1,0 +1,56 @@
+{
+ "check_id": "uw05_net-prem-ticks_SPY_2024-06-03",
+ "provider": "unusualwhales",
+ "url_path": "/api/stock/SPY/net-prem-ticks",
+ "params": {
+  "date": "2024-06-03"
+ },
+ "status": 200,
+ "elapsed_ms": 317,
+ "ran_at_utc": "2026-10-13T18:59:44.689895+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4r6cdMZbdJlfcDQ2qF",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 139719,
+ "body_head": "{\"data\":[{\"date\":\"2024-06-03\",\"call_volume\":38226,\"put_volume\":38392,\"call_volume_ask_side\":17564,\"call_volume_bid_side\":18825,\"put_volume_ask_side\":24384,\"put_volume_bid_side\":12835,\"tape_time\":\"2024-06-03T13:30:00.000000Z\",\"net_call_premium\":\"-1702684\",\"net_call_volume\":-1261,\"net_put_premium\":\"11",
+ "row_count": 406,
+ "rows_container": "data",
+ "first_ts": "2024-06-03T13:30:00.000000Z",
+ "last_ts": "2024-06-03T20:15:00.000000Z",
+ "min_ts": "2024-06-03T13:30:00.000000Z",
+ "max_ts": "2024-06-03T20:15:00.000000Z",
+ "row_keys": [
+  "call_volume",
+  "call_volume_ask_side",
+  "call_volume_bid_side",
+  "date",
+  "net_call_premium",
+  "net_call_volume",
+  "net_delta",
+  "net_put_premium",
+  "net_put_volume",
+  "put_volume",
+  "put_volume_ask_side",
+  "put_volume_bid_side",
+  "tape_time"
+ ],
+ "extra": {
+  "first_row_sample": {
+   "date": "2024-06-03",
+   "call_volume": "38226",
+   "put_volume": "38392",
+   "call_volume_ask_side": "17564",
+   "call_volume_bid_side": "18825",
+   "put_volume_ask_side": "24384",
+   "put_volume_bid_side": "12835",
+   "tape_time": "2024-06-03T13:30:00.000000Z",
+   "net_call_premium": "-1702684",
+   "net_call_volume": "-1261",
+   "net_put_premium": "1145775",
+   "net_put_volume": "11549",
+   "net_delta": "-4393.72984152303"
+  }
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "check_id": "uw01_ohlc_SPY_1m_2022-01-03",
+ "provider": "unusualwhales",
+ "url_path": "/api/stock/SPY/ohlc/1m",
+ "params": {
+  "date": "2022-01-03",
+  "limit": 2500
+ },
+ "status": 200,
+ "elapsed_ms": 275,
+ "ran_at_utc": "2026-10-13T19:00:42.397824+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4r9zo5NBloX4sDV6mC",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 11,
+ "body_head": "{\"data\":[]}",
+ "row_count": 0,
+ "rows_container": "data"
+}

@@ -10,7 +10,7 @@ def _memo_option_bars(cid, date):
     return _obc[k]
 data.option_bars = _memo_option_bars
 HERE = os.path.dirname(os.path.abspath(__file__))
-days = json.load(open(HERE + '/probe/trading_days.json'))
+days = json.load(open(HERE + '/trading_days.json'))
 START, END, TICKERS, OUT = sys.argv[1], sys.argv[2], sys.argv[3].split(','), sys.argv[4]
 random.seed(42)
 sel = [d for d in days if START <= d <= END]

@@ -195,3 +195,12 @@ Across all published books the aggregate is negative before costs. The only posi
 
 ### 8.6 Refresh stability, extended (T7)
 Five snapshots over 47 minutes (14:16–15:03 UTC), core six tickers: direction changed on 25 % of 5-minute steps, action 38 %, confidence 50 %, grade 38 %, contract 54 %, GEX regime 4 %, crowd mood 0 %. ^NDX went BULLISH/65/B → BULLISH/100/A → BEARISH/82/A in 47 minutes. Actions seen across snapshots: WATCHING 34, WATCHING (Pending Entry) 14, DO NOTHING 13, BLOCKED (various) 32, WAITING FOR TRIGGER 2, BUY_CALLS 2. The raw lane is a state machine that re-evaluates every minute; consumers must treat each object as a point-in-time read.
+
+## Errata from the 2026-10-13 reproduction audit (`audit/phase1/validation_reproduction.md`)
+
+The text above is preserved as written; the following corrections apply.
+
+- §5 refresh-stability counts (4/37 direction, 19/37 action, …) were recomputed from the committed snapshots and match, but the 37 ticker-pairs come from all 20 decision tickers across three snapshots (three tickers absent in one snapshot), not from "6 core tickers" (the six index tickers give 12 pairs).
+- §8.6 action histogram over five snapshots: BLOCKED (all variants) is 33, not 32, and the list omits "WATCHING (Sweep Retest) 2"; the recomputed total is 100 (5 snapshots × 20 tickers), the text's total 97. The percentage rates in §8.6 reproduce exactly.
+- T5 (`validation_T5_gates.txt`): point estimates, n and the pre-registered claims reproduce exactly, but the bootstrap confidence bounds and p-values in that file are not reproducible because the script iterated tag families from an unordered set, so the seeded random stream was consumed in a hash-dependent order. The script now iterates in sorted order; the deterministic re-run is `evidence/analysis/validation_T5_gates_v2.txt` (same conclusions: no family survives BH correction). The original file is kept unchanged.
+- `trades_breakdown.txt` is a truncated output: the script crashed on an empty `entryDelta` list, so the drawdown/equity sections were never produced. A guarded re-run is `evidence/analysis/trades_breakdown_v2.txt`.

@@ -1,0 +1,499 @@
+{
+ "generated": "2026-10-13T18:59:23.641216+00:00",
+ "n": 30,
+ "counts": {
+  "identical": 30
+ },
+ "by_kind": {
+  "ohlc1m|identical": 10,
+  "gex|identical": 6,
+  "iv|identical": 4,
+  "optbars|identical": 10
+ },
+ "stats": {
+  "hits": 0,
+  "misses": 30,
+  "errors": 0
+ },
+ "elapsed_s": 7.7,
+ "requests": [
+  {
+   "kind": "ohlc1m",
+   "path": "stock/SPY/ohlc/1m",
+   "params": {
+    "date": "2026-01-26",
+    "limit": 2000
+   },
+   "key": "fd2ad2a44e3eaa7bd28eb1bc_stock_SPY_ohlc_1m_date-2026-01-26_limit-2000",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:47:51.939362+00:00",
+   "live_seconds": 1.21,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 774,
+   "warm_rows": 774
+  },
+  {
+   "kind": "ohlc1m",
+   "path": "stock/IWM/ohlc/1m",
+   "params": {
+    "date": "2026-06-17",
+    "limit": 2000
+   },
+   "key": "497c546336987c1dfe442233_stock_IWM_ohlc_1m_date-2026-06-17_limit-2000",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:53:47.555364+00:00",
+   "live_seconds": 1.05,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 649,
+   "warm_rows": 649
+  },
+  {
+   "kind": "ohlc1m",
+   "path": "stock/IWM/ohlc/1m",
+   "params": {
+    "date": "2025-08-15",
+    "limit": 2000
+   },
+   "key": "2c572a5437558d4fee803b58_stock_IWM_ohlc_1m_date-2025-08-15_limit-2000",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:52:34.651363+00:00",
+   "live_seconds": 1.19,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 561,
+   "warm_rows": 561
+  },
+  {
+   "kind": "ohlc1m",
+   "path": "stock/SPY/ohlc/1m",
+   "params": {
+    "date": "2026-08-21",
+    "limit": 2000
+   },
+   "key": "09121730473a6409d40d7864_stock_SPY_ohlc_1m_date-2026-08-21_limit-2000",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:49:23.127362+00:00",
+   "live_seconds": 0.51,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 793,
+   "warm_rows": 793
+  },
+  {
+   "kind": "ohlc1m",
+   "path": "stock/IWM/ohlc/1m",
+   "params": {
+    "date": "2026-07-21",
+    "limit": 2000
+   },
+   "key": "7d8569a5e40033f8dec60b8a_stock_IWM_ohlc_1m_date-2026-07-21_limit-2000",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:53:58.251364+00:00",
+   "live_seconds": 0.43,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 587,
+   "warm_rows": 587
+  },
+  {
+   "kind": "ohlc1m",
+   "path": "stock/QQQ/ohlc/1m",
+   "params": {
+    "date": "2026-08-03",
+    "limit": 2000
+   },
+   "key": "e049a4bf9f909e541e5d6dbd_stock_QQQ_ohlc_1m_date-2026-08-03_limit-2000",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:51:52.591363+00:00",
+   "live_seconds": 0.49,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 928,
+   "warm_rows": 928
+  },
+  {
+   "kind": "ohlc1m",
+   "path": "stock/IWM/ohlc/1m",
+   "params": {
+    "date": "2026-06-02",
+    "limit": 2000
+   },
+   "key": "aceb184aa334fbf20d4b9a51_stock_IWM_ohlc_1m_date-2026-06-02_limit-2000",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:53:43.051364+00:00",
+   "live_seconds": 0.52,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 598,
+   "warm_rows": 598
+  },
+  {
+   "kind": "ohlc1m",
+   "path": "stock/IWM/ohlc/1m",
+   "params": {
+    "date": "2026-04-24",
+    "limit": 2000
+   },
+   "key": "382a6cec1cb85e704eba2d83_stock_IWM_ohlc_1m_date-2026-04-24_limit-2000",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:53:31.119364+00:00",
+   "live_seconds": 0.61,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 626,
+   "warm_rows": 626
+  },
+  {
+   "kind": "ohlc1m",
+   "path": "stock/SPY/ohlc/1m",
+   "params": {
+    "date": "2025-06-03",
+    "limit": 2000
+   },
+   "key": "a71774d0e339150e1c07570f_stock_SPY_ohlc_1m_date-2025-06-03_limit-2000",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:46:59.459361+00:00",
+   "live_seconds": 0.39,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 705,
+   "warm_rows": 705
+  },
+  {
+   "kind": "ohlc1m",
+   "path": "stock/IWM/ohlc/1m",
+   "params": {
+    "date": "2025-07-31",
+    "limit": 2000
+   },
+   "key": "2d7c32bf50d5935be85911a1_stock_IWM_ohlc_1m_date-2025-07-31_limit-2000",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:52:32.951363+00:00",
+   "live_seconds": 0.54,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 655,
+   "warm_rows": 655
+  },
+  {
+   "kind": "gex",
+   "path": "stock/SPY/gex-levels",
+   "params": {
+    "date": "2025-12-31"
+   },
+   "key": "ad542a84582296c2b8616aae_stock_SPY_gex-levels_date-2025-12-31",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:47:44.055418+00:00",
+   "live_seconds": 1.41,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical"
+  },
+  {
+   "kind": "gex",
+   "path": "stock/SPY/gex-levels",
+   "params": {
+    "date": "2026-05-01"
+   },
+   "key": "4a9413a0c9bf87de822a76bb_stock_SPY_gex-levels_date-2026-05-01",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:48:36.110378+00:00",
+   "live_seconds": 1.52,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical"
+  },
+  {
+   "kind": "gex",
+   "path": "stock/SPY/gex-levels",
+   "params": {
+    "date": "2026-06-02"
+   },
+   "key": "24c43a1b7fd4fe64f2bbca9b_stock_SPY_gex-levels_date-2026-06-02",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:48:46.978922+00:00",
+   "live_seconds": 1.28,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical"
+  },
+  {
+   "kind": "gex",
+   "path": "stock/IWM/gex-levels",
+   "params": {
+    "date": "2026-01-21"
+   },
+   "key": "7a92aa54168c6284b8dbc6b7_stock_IWM_gex-levels_date-2026-01-21",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:53:07.392291+00:00",
+   "live_seconds": 0.54,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical"
+  },
+  {
+   "kind": "gex",
+   "path": "stock/SPY/gex-levels",
+   "params": {
+    "date": "2026-03-24"
+   },
+   "key": "1a361df93a836fc9412e0ad6_stock_SPY_gex-levels_date-2026-03-24",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:48:16.722878+00:00",
+   "live_seconds": 1.95,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical"
+  },
+  {
+   "kind": "gex",
+   "path": "stock/QQQ/gex-levels",
+   "params": {
+    "date": "2026-02-17"
+   },
+   "key": "41534372c331f3ce9896ff8b_stock_QQQ_gex-levels_date-2026-02-17",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:50:51.347669+00:00",
+   "live_seconds": 0.47,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical"
+  },
+  {
+   "kind": "iv",
+   "path": "stock/QQQ/interpolated-iv",
+   "params": {
+    "date": "2026-03-09"
+   },
+   "key": "b50bd5c7b6ed431e9f6f8fd8_stock_QQQ_interpolated-iv_date-2026-03-09",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:50:57.155002+00:00",
+   "live_seconds": 0.24,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 9,
+   "warm_rows": 9
+  },
+  {
+   "kind": "iv",
+   "path": "stock/IWM/interpolated-iv",
+   "params": {
+    "date": "2026-06-17"
+   },
+   "key": "1fffffc990cc4ee330e2a258_stock_IWM_interpolated-iv_date-2026-06-17",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:53:48.888612+00:00",
+   "live_seconds": 0.23,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 9,
+   "warm_rows": 9
+  },
+  {
+   "kind": "iv",
+   "path": "stock/IWM/interpolated-iv",
+   "params": {
+    "date": "2025-07-29"
+   },
+   "key": "574b7cb894c38674527b7536_stock_IWM_interpolated-iv_date-2025-07-29",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:52:32.776537+00:00",
+   "live_seconds": 0.18,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 9,
+   "warm_rows": 9
+  },
+  {
+   "kind": "iv",
+   "path": "stock/IWM/interpolated-iv",
+   "params": {
+    "date": "2026-02-10"
+   },
+   "key": "875b520c35cb2a53ae6416c5_stock_IWM_interpolated-iv_date-2026-02-10",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:53:13.088716+00:00",
+   "live_seconds": 0.3,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 9,
+   "warm_rows": 9
+  },
+  {
+   "kind": "optbars",
+   "path": "option-contract/IWM251118C00231000/intraday",
+   "params": {
+    "date": "2025-11-18"
+   },
+   "key": "1a182b9bb780d124afafac66_option-contract_IWM251118C00231000_intraday_date-2025-11-18",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:56:08.507365+00:00",
+   "live_seconds": 0.36,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 200,
+   "warm_rows": 200
+  },
+  {
+   "kind": "optbars",
+   "path": "option-contract/QQQ260729P00675000/intraday",
+   "params": {
+    "date": "2026-07-29"
+   },
+   "key": "684f2ac6565c17f254f8672a_option-contract_QQQ260729P00675000_intraday_date-2026-07-29",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T16:00:41.955366+00:00",
+   "live_seconds": 0.67,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 373,
+   "warm_rows": 373
+  },
+  {
+   "kind": "optbars",
+   "path": "option-contract/QQQ260707C00712000/intraday",
+   "params": {
+    "date": "2026-07-07"
+   },
+   "key": "f167c56acb25994a88dab03a_option-contract_QQQ260707C00712000_intraday_date-2026-07-07",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T16:00:30.947366+00:00",
+   "live_seconds": 0.63,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 405,
+   "warm_rows": 405
+  },
+  {
+   "kind": "optbars",
+   "path": "option-contract/QQQ250625C00540000/intraday",
+   "params": {
+    "date": "2025-06-25"
+   },
+   "key": "8e21484b23484b03ea5d9574_option-contract_QQQ250625C00540000_intraday_date-2025-06-25",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:57:59.795365+00:00",
+   "live_seconds": 0.76,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 405,
+   "warm_rows": 405
+  },
+  {
+   "kind": "optbars",
+   "path": "option-contract/QQQ250618P00528000/intraday",
+   "params": {
+    "date": "2025-06-18"
+   },
+   "key": "0c509d6734f08de3d98bd116_option-contract_QQQ250618P00528000_intraday_date-2025-06-18",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:57:58.239365+00:00",
+   "live_seconds": 0.49,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 405,
+   "warm_rows": 405
+  },
+  {
+   "kind": "optbars",
+   "path": "option-contract/QQQ260316C00600000/intraday",
+   "params": {
+    "date": "2026-03-16"
+   },
+   "key": "fe3fc016a4d45a2ae557a247_option-contract_QQQ260316C00600000_intraday_date-2026-03-16",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:59:34.655366+00:00",
+   "live_seconds": 0.7,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 405,
+   "warm_rows": 405
+  },
+  {
+   "kind": "optbars",
+   "path": "option-contract/IWM260227C00261000/intraday",
+   "params": {
+    "date": "2026-02-27"
+   },
+   "key": "109335fdd8df11744b008151_option-contract_IWM260227C00261000_intraday_date-2026-02-27",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T15:56:37.119365+00:00",
+   "live_seconds": 0.94,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 404,
+   "warm_rows": 404
+  },
+  {
+   "kind": "optbars",
+   "path": "option-contract/SPY260729C00735000/intraday",
+   "params": {
+    "date": "2026-07-29"
+   },
+   "key": "597f8d1358a950f2c6bc1c0d_option-contract_SPY260729C00735000_intraday_date-2026-07-29",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T16:05:09.671368+00:00",
+   "live_seconds": 1.05,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 399,
+   "warm_rows": 399
+  },
+  {
+   "kind": "optbars",
+   "path": "option-contract/SPY250805P00631000/intraday",
+   "params": {
+    "date": "2025-08-05"
+   },
+   "key": "8025cb532b1157020e7ff4c5_option-contract_SPY250805P00631000_intraday_date-2025-08-05",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T16:01:37.475367+00:00",
+   "live_seconds": 1.04,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 394,
+   "warm_rows": 394
+  },
+  {
+   "kind": "optbars",
+   "path": "option-contract/SPY251031C00683000/intraday",
+   "params": {
+    "date": "2025-10-31"
+   },
+   "key": "59daecb646498089bed38476_option-contract_SPY251031C00683000_intraday_date-2025-10-31",
+   "warm_exists": true,
+   "warm_mtime": "2026-10-13T16:02:47.847367+00:00",
+   "live_seconds": 0.62,
+   "live_error": null,
+   "warm_error": null,
+   "status": "identical",
+   "live_rows": 405,
+   "warm_rows": 405
+  }
+ ]
+}

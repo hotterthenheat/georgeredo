@@ -2,7 +2,7 @@
 import os, sys, json, concurrent.futures, datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import data
-days = json.load(open(os.path.dirname(os.path.abspath(__file__)) + '/probe/trading_days.json'))
+days = json.load(open(os.path.dirname(os.path.abspath(__file__)) + '/trading_days.json'))
 START, END = sys.argv[1], sys.argv[2]; TICKERS = sys.argv[3].split(',')
 sel = [d for d in days if START <= d <= END]
 # include 6 prior sessions for prior-week levels

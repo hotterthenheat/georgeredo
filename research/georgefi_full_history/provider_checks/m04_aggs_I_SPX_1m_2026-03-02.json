@@ -1,0 +1,30 @@
+{
+ "check_id": "m04_aggs_I_SPX_1m_2026-03-02",
+ "provider": "massive",
+ "url_path": "/v2/aggs/ticker/I:SPX/range/1/minute/2026-03-02/2026-03-02",
+ "params": {
+  "sort": "asc",
+  "limit": 50000
+ },
+ "status": 403,
+ "elapsed_ms": 464,
+ "ran_at_utc": "2026-10-13T18:57:06.537421+00:00",
+ "headers": {
+  "content-type": "application/json",
+  "x-request-id": "41b6e24787f381de2761446bca349846"
+ },
+ "body_bytes": 178,
+ "body_head": "{\"status\":\"NOT_AUTHORIZED\",\"request_id\":\"41b6e24787f381de2761446bca349846\",\"message\":\"You are not entitled to this data. Please upgrade your plan at https://massive.com/pricing\"}",
+ "error": {
+  "status": "NOT_AUTHORIZED",
+  "request_id": "41b6e24787f381de2761446bca349846",
+  "message": "You are not entitled to this data. Please upgrade your plan at https://massive.com/pricing"
+ },
+ "row_count": null,
+ "rows_container": null,
+ "top": {
+  "status": "NOT_AUTHORIZED",
+  "message": "You are not entitled to this data. Please upgrade your plan at https://massive.com/pricing"
+ },
+ "host": "https://api.massive.com"
+}

@@ -1,0 +1,29 @@
+{
+ "check_id": "uw02_intraday_SPX260304C06815000_2026-03-04",
+ "provider": "unusualwhales",
+ "url_path": "/api/option-contract/SPX260304C06815000/intraday",
+ "params": {
+  "date": "2026-03-04"
+ },
+ "status": 422,
+ "elapsed_ms": 205,
+ "ran_at_utc": "2026-10-13T18:56:22.608793+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4rurzHAOlqqhwDOKaC",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 224,
+ "body_head": "{\"path\":\"/api/option-contract/SPX260304C06815000/intraday\",\"msg\":\"SPX260304C06815000 does not exist\",\"query\":\"date=2026-03-04\",\"url\":\"api.unusualwhales.com:80/api/option-contract/SPX260304C06815000/intraday?date=2026-03-04\"}",
+ "error": {
+  "path": "/api/option-contract/SPX260304C06815000/intraday",
+  "msg": "SPX260304C06815000 does not exist",
+  "query": "date=2026-03-04",
+  "url": "api.unusualwhales.com:80/api/option-contract/SPX260304C06815000/intraday?date=2026-03-04"
+ },
+ "row_count": null,
+ "rows_container": null,
+ "top": {
+  "msg": "SPX260304C06815000 does not exist"
+ }
+}

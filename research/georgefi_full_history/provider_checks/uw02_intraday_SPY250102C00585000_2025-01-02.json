@@ -1,0 +1,20 @@
+{
+ "check_id": "uw02_intraday_SPY250102C00585000_2025-01-02",
+ "provider": "unusualwhales",
+ "url_path": "/api/option-contract/SPY250102C00585000/intraday",
+ "params": {
+  "date": "2025-01-02"
+ },
+ "status": 200,
+ "elapsed_ms": 330,
+ "ran_at_utc": "2026-10-13T18:59:43.156327+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4r6W3xcGPjecQCw2LI",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 11,
+ "body_head": "{\"data\":[]}",
+ "row_count": 0,
+ "rows_container": "data"
+}

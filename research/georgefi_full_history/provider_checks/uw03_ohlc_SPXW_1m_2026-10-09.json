@@ -1,0 +1,32 @@
+{
+ "check_id": "uw03_ohlc_SPXW_1m_2026-10-09",
+ "provider": "unusualwhales",
+ "url_path": "/api/stock/SPXW/ohlc/1m",
+ "params": {
+  "date": "2026-10-09",
+  "limit": 5
+ },
+ "status": 422,
+ "elapsed_ms": 268,
+ "ran_at_utc": "2026-10-13T18:56:23.978626+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4ruw1UF6xpt-cDUlpC",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 386,
+ "body_head": "{\"code\":\"cboe_index_access_missing\",\"path\":\"/api/stock/SPXW/ohlc/1m\",\"msg\":\"Prices for the CBOE index SPXW require provisioned access and CBOE approval. Contact oskar@unusualwhales.com, enterprise@unusualwhales.com or nastja.petrovic@unusualwhales.com to request access.\",\"query\":\"date=2026-10-09&lim",
+ "error": {
+  "code": "cboe_index_access_missing",
+  "path": "/api/stock/SPXW/ohlc/1m",
+  "msg": "Prices for the CBOE index SPXW require provisioned access and CBOE approval. Contact oskar@unusualwhales.com, enterprise@unusualwhales.com or nastja.petrovic@unusualwhales.com to request access.",
+  "query": "date=2026-10-09&limit=5",
+  "url": "api.unusualwhales.com:80/api/stock/SPXW/ohlc/1m?date=2026-10-09&limit=5"
+ },
+ "row_count": null,
+ "rows_container": null,
+ "top": {
+  "code": "cboe_index_access_missing",
+  "msg": "Prices for the CBOE index SPXW require provisioned access and CBOE approval. Contact oskar@unusualwhales.com, enterprise@unusualwhales.com or nastja.petrovic@unusualwhales.com to request access."
+ }
+}

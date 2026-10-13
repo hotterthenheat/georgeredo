@@ -1,0 +1,179 @@
+START 2026-10-13T18:55:27.270130724Z
+raw signals 18386 Counter({('sweep', 'ict+gex'): 6368, ('sweep', 'ict'): 5309, ('continuation', 'ict+gex'): 3647, ('continuation', 'ict'): 3062})
+contract-days to fetch 4279
+bars 0 / 4279 {'hits': 2069, 'misses': 0, 'errors': 0}
+bars 300 / 4279 {'hits': 2366, 'misses': 0, 'errors': 0}
+bars 600 / 4279 {'hits': 2666, 'misses': 0, 'errors': 0}
+bars 900 / 4279 {'hits': 2966, 'misses': 0, 'errors': 0}
+bars 1200 / 4279 {'hits': 3274, 'misses': 0, 'errors': 0}
+bars 1500 / 4279 {'hits': 3566, 'misses': 0, 'errors': 0}
+bars 1800 / 4279 {'hits': 3868, 'misses': 0, 'errors': 0}
+bars 2100 / 4279 {'hits': 4169, 'misses': 0, 'errors': 0}
+bars 2400 / 4279 {'hits': 4465, 'misses': 0, 'errors': 0}
+bars 2700 / 4279 {'hits': 4766, 'misses': 0, 'errors': 0}
+bars 3000 / 4279 {'hits': 5068, 'misses': 0, 'errors': 0}
+bars 3300 / 4279 {'hits': 5366, 'misses': 0, 'errors': 0}
+bars 3600 / 4279 {'hits': 5668, 'misses': 0, 'errors': 0}
+bars 3900 / 4279 {'hits': 5965, 'misses': 0, 'errors': 0}
+bars 4200 / 4279 {'hits': 6265, 'misses': 0, 'errors': 0}
+variant done all none sweep ict ladder 2686
+variant done all none sweep ict trail 2686
+variant done all none sweep ict bracket 2670
+variant done all none sweep ict hold 921
+variant done all none sweep ict+gex ladder 2979
+variant done all none sweep ict+gex trail 2979
+variant done all none sweep ict+gex bracket 2964
+variant done all none sweep ict+gex hold 941
+variant done all none continuation ict ladder 1996
+variant done all none continuation ict trail 1995
+variant done all none continuation ict bracket 1986
+variant done all none continuation ict hold 879
+variant done all none continuation ict+gex ladder 2236
+variant done all none continuation ict+gex trail 2235
+variant done all none continuation ict+gex bracket 2224
+variant done all none continuation ict+gex hold 910
+variant done all posgamma_fade sweep ict ladder 1405
+variant done all posgamma_fade sweep ict trail 1405
+variant done all posgamma_fade sweep ict bracket 1397
+variant done all posgamma_fade sweep ict hold 581
+variant done all posgamma_fade sweep ict+gex ladder 1593
+variant done all posgamma_fade sweep ict+gex trail 1593
+variant done all posgamma_fade sweep ict+gex bracket 1585
+variant done all posgamma_fade sweep ict+gex hold 623
+variant done all posgamma_fade continuation ict ladder 1076
+variant done all posgamma_fade continuation ict trail 1076
+variant done all posgamma_fade continuation ict bracket 1070
+variant done all posgamma_fade continuation ict hold 521
+variant done all posgamma_fade continuation ict+gex ladder 1219
+variant done all posgamma_fade continuation ict+gex trail 1219
+variant done all posgamma_fade continuation ict+gex bracket 1213
+variant done all posgamma_fade continuation ict+gex hold 553
+variant done all avoid_pin sweep ict ladder 2397
+variant done all avoid_pin sweep ict trail 2397
+variant done all avoid_pin sweep ict bracket 2379
+variant done all avoid_pin sweep ict hold 884
+variant done all avoid_pin sweep ict+gex ladder 2640
+variant done all avoid_pin sweep ict+gex trail 2639
+variant done all avoid_pin sweep ict+gex bracket 2621
+variant done all avoid_pin sweep ict+gex hold 910
+variant done all avoid_pin continuation ict ladder 1807
+variant done all avoid_pin continuation ict trail 1806
+variant done all avoid_pin continuation ict bracket 1798
+variant done all avoid_pin continuation ict hold 845
+variant done all avoid_pin continuation ict+gex ladder 2001
+variant done all avoid_pin continuation ict+gex trail 2000
+variant done all avoid_pin continuation ict+gex bracket 1990
+variant done all avoid_pin continuation ict+gex hold 877
+variant done morning none sweep ict ladder 1400
+variant done morning none sweep ict trail 1400
+variant done morning none sweep ict bracket 1387
+variant done morning none sweep ict hold 818
+variant done morning none sweep ict+gex ladder 1549
+variant done morning none sweep ict+gex trail 1548
+variant done morning none sweep ict+gex bracket 1534
+variant done morning none sweep ict+gex hold 854
+variant done morning none continuation ict ladder 1094
+variant done morning none continuation ict trail 1094
+variant done morning none continuation ict bracket 1089
+variant done morning none continuation ict hold 753
+variant done morning none continuation ict+gex ladder 1206
+variant done morning none continuation ict+gex trail 1206
+variant done morning none continuation ict+gex bracket 1200
+variant done morning none continuation ict+gex hold 790
+variant done morning posgamma_fade sweep ict ladder 747
+variant done morning posgamma_fade sweep ict trail 747
+variant done morning posgamma_fade sweep ict bracket 742
+variant done morning posgamma_fade sweep ict hold 479
+variant done morning posgamma_fade sweep ict+gex ladder 834
+variant done morning posgamma_fade sweep ict+gex trail 834
+variant done morning posgamma_fade sweep ict+gex bracket 829
+variant done morning posgamma_fade sweep ict+gex hold 516
+variant done morning posgamma_fade continuation ict ladder 562
+variant done morning posgamma_fade continuation ict trail 562
+variant done morning posgamma_fade continuation ict bracket 560
+variant done morning posgamma_fade continuation ict hold 405
+variant done morning posgamma_fade continuation ict+gex ladder 625
+variant done morning posgamma_fade continuation ict+gex trail 625
+variant done morning posgamma_fade continuation ict+gex bracket 623
+variant done morning posgamma_fade continuation ict+gex hold 435
+variant done morning avoid_pin sweep ict ladder 1226
+variant done morning avoid_pin sweep ict trail 1226
+variant done morning avoid_pin sweep ict bracket 1215
+variant done morning avoid_pin sweep ict hold 760
+variant done morning avoid_pin sweep ict+gex ladder 1350
+variant done morning avoid_pin sweep ict+gex trail 1349
+variant done morning avoid_pin sweep ict+gex bracket 1337
+variant done morning avoid_pin sweep ict+gex hold 799
+variant done morning avoid_pin continuation ict ladder 992
+variant done morning avoid_pin continuation ict trail 992
+variant done morning avoid_pin continuation ict bracket 987
+variant done morning avoid_pin continuation ict hold 705
+variant done morning avoid_pin continuation ict+gex ladder 1080
+variant done morning avoid_pin continuation ict+gex trail 1080
+variant done morning avoid_pin continuation ict+gex bracket 1074
+variant done morning avoid_pin continuation ict+gex hold 742
+variant done no_lunch none sweep ict ladder 2116
+variant done no_lunch none sweep ict trail 2116
+variant done no_lunch none sweep ict bracket 2098
+variant done no_lunch none sweep ict hold 900
+variant done no_lunch none sweep ict+gex ladder 2370
+variant done no_lunch none sweep ict+gex trail 2369
+variant done no_lunch none sweep ict+gex bracket 2350
+variant done no_lunch none sweep ict+gex hold 922
+variant done no_lunch none continuation ict ladder 1563
+variant done no_lunch none continuation ict trail 1562
+variant done no_lunch none continuation ict bracket 1558
+variant done no_lunch none continuation ict hold 837
+variant done no_lunch none continuation ict+gex ladder 1755
+variant done no_lunch none continuation ict+gex trail 1754
+variant done no_lunch none continuation ict+gex bracket 1749
+variant done no_lunch none continuation ict+gex hold 875
+variant done no_lunch posgamma_fade sweep ict ladder 1116
+variant done no_lunch posgamma_fade sweep ict trail 1116
+variant done no_lunch posgamma_fade sweep ict bracket 1110
+variant done no_lunch posgamma_fade sweep ict hold 555
+variant done no_lunch posgamma_fade sweep ict+gex ladder 1263
+variant done no_lunch posgamma_fade sweep ict+gex trail 1263
+variant done no_lunch posgamma_fade sweep ict+gex bracket 1255
+variant done no_lunch posgamma_fade sweep ict+gex hold 597
+variant done no_lunch posgamma_fade continuation ict ladder 824
+variant done no_lunch posgamma_fade continuation ict trail 824
+variant done no_lunch posgamma_fade continuation ict bracket 822
+variant done no_lunch posgamma_fade continuation ict hold 478
+variant done no_lunch posgamma_fade continuation ict+gex ladder 943
+variant done no_lunch posgamma_fade continuation ict+gex trail 943
+variant done no_lunch posgamma_fade continuation ict+gex bracket 941
+variant done no_lunch posgamma_fade continuation ict+gex hold 516
+variant done no_lunch avoid_pin sweep ict ladder 1865
+variant done no_lunch avoid_pin sweep ict trail 1865
+variant done no_lunch avoid_pin sweep ict bracket 1848
+variant done no_lunch avoid_pin sweep ict hold 850
+variant done no_lunch avoid_pin sweep ict+gex ladder 2064
+variant done no_lunch avoid_pin sweep ict+gex trail 2063
+variant done no_lunch avoid_pin sweep ict+gex bracket 2045
+variant done no_lunch avoid_pin sweep ict+gex hold 879
+variant done no_lunch avoid_pin continuation ict ladder 1418
+variant done no_lunch avoid_pin continuation ict trail 1417
+variant done no_lunch avoid_pin continuation ict bracket 1413
+variant done no_lunch avoid_pin continuation ict hold 796
+variant done no_lunch avoid_pin continuation ict+gex ladder 1573
+variant done no_lunch avoid_pin continuation ict+gex trail 1572
+variant done no_lunch avoid_pin continuation ict+gex bracket 1567
+variant done no_lunch avoid_pin continuation ict+gex hold 837
+variants 144 trades 192900
+main results written
+baseline draws 9897 contract-days 5020
+baseline bars 0 / 5020 {'hits': 6382, 'misses': 0, 'errors': 0}
+baseline bars 500 / 5020 {'hits': 6548, 'misses': 0, 'errors': 0}
+baseline bars 1000 / 5020 {'hits': 6758, 'misses': 0, 'errors': 0}
+baseline bars 1500 / 5020 {'hits': 6946, 'misses': 0, 'errors': 0}
+baseline bars 2000 / 5020 {'hits': 7203, 'misses': 0, 'errors': 0}
+baseline bars 2500 / 5020 {'hits': 7485, 'misses': 0, 'errors': 0}
+baseline bars 3000 / 5020 {'hits': 7788, 'misses': 0, 'errors': 0}
+baseline bars 3500 / 5020 {'hits': 8032, 'misses': 0, 'errors': 0}
+baseline bars 4000 / 5020 {'hits': 8277, 'misses': 0, 'errors': 0}
+baseline bars 4500 / 5020 {'hits': 8547, 'misses': 0, 'errors': 0}
+baseline bars 5000 / 5020 {'hits': 8796, 'misses': 0, 'errors': 0}
+baseline trades 9896 {'hits': 8799, 'misses': 0, 'errors': 0}
+written /home/user/georgeredo/audit/phase1/backtest/rerun
+EXIT=0 END 2026-10-13T18:57:58.437238204Z

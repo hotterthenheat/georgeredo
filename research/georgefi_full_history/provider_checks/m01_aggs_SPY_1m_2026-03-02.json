@@ -1,0 +1,66 @@
+{
+ "check_id": "m01_aggs_SPY_1m_2026-03-02",
+ "provider": "massive",
+ "url_path": "/v2/aggs/ticker/SPY/range/1/minute/2026-03-02/2026-03-02",
+ "params": {
+  "adjusted": "true",
+  "sort": "asc",
+  "limit": 50000
+ },
+ "status": 200,
+ "elapsed_ms": 230,
+ "ran_at_utc": "2026-10-13T18:56:25.648984+00:00",
+ "headers": {
+  "content-type": "application/json",
+  "x-request-id": "a5c302cd5c2f20cb72b50c5c696067e3"
+ },
+ "body_bytes": 94201,
+ "body_head": "{\"ticker\":\"SPY\",\"queryCount\":935,\"resultsCount\":935,\"adjusted\":true,\"results\":[{\"v\":8485,\"vw\":676.9578,\"o\":677.66,\"c\":677,\"h\":677.66,\"l\":676.54,\"t\":1772442000000,\"n\":281},{\"v\":24153,\"vw\":676.9773,\"o\":676.91,\"c\":677.45,\"h\":677.45,\"l\":676.74,\"t\":1772442060000,\"n\":267},{\"v\":11541,\"vw\":677.2444,\"o\":677.",
+ "row_count": 935,
+ "rows_container": "results",
+ "first_ts": "2026-03-02T09:00:00Z",
+ "last_ts": "2026-03-03T00:59:00Z",
+ "min_ts": "2026-03-02T09:00:00Z",
+ "max_ts": "2026-03-03T00:59:00Z",
+ "row_keys": [
+  "c",
+  "h",
+  "l",
+  "n",
+  "o",
+  "t",
+  "v",
+  "vw"
+ ],
+ "top": {
+  "resultsCount": "935",
+  "queryCount": "935",
+  "status": "OK"
+ },
+ "extra": {
+  "resultsCount": 935,
+  "queryCount": 935,
+  "first": {
+   "v": 8485,
+   "vw": 676.9578,
+   "o": 677.66,
+   "c": 677,
+   "h": 677.66,
+   "l": 676.54,
+   "t": 1772442000000,
+   "n": 281
+  },
+  "last": {
+   "v": 1055.7072,
+   "vw": 684.837,
+   "o": 684.34,
+   "c": 684.4208,
+   "h": 684.4208,
+   "l": 684.31,
+   "t": 1772499540000,
+   "n": 36
+  },
+  "total_v": 85698191.51946
+ },
+ "host": "https://api.massive.com"
+}

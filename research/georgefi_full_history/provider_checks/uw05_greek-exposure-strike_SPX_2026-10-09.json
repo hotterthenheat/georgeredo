@@ -1,0 +1,50 @@
+{
+ "check_id": "uw05_greek-exposure-strike_SPX_2026-10-09",
+ "provider": "unusualwhales",
+ "url_path": "/api/stock/SPX/greek-exposure/strike",
+ "params": {
+  "date": "2026-10-09"
+ },
+ "status": 200,
+ "elapsed_ms": 420,
+ "ran_at_utc": "2026-10-13T18:59:44.624238+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4r6cCZAyqU6mMDUXaC",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 203497,
+ "body_head": "{\"data\":[{\"date\":\"2026-10-09\",\"strike\":\"200\",\"call_gex\":\"0.0001\",\"put_gex\":\"0.0000\",\"call_delta\":\"1373097.5569\",\"put_delta\":\"-0.0663\",\"call_charm\":\"347.0495\",\"put_charm\":\"2701.7484\",\"call_vanna\":\"-2062.0627\",\"put_vanna\":\"-15856.7083\"},{\"date\":\"2026-10-09\",\"strike\":\"400\",\"call_gex\":\"0.0161\",\"put_gex\"",
+ "row_count": 890,
+ "rows_container": "data",
+ "first_ts": "2026-10-09",
+ "last_ts": "2026-10-09",
+ "min_ts": "2026-10-09",
+ "max_ts": "2026-10-09",
+ "row_keys": [
+  "call_charm",
+  "call_delta",
+  "call_gex",
+  "call_vanna",
+  "date",
+  "put_charm",
+  "put_delta",
+  "put_gex",
+  "put_vanna",
+  "strike"
+ ],
+ "extra": {
+  "first_row_sample": {
+   "date": "2026-10-09",
+   "strike": "200",
+   "call_gex": "0.0001",
+   "put_gex": "0.0000",
+   "call_delta": "1373097.5569",
+   "put_delta": "-0.0663",
+   "call_charm": "347.0495",
+   "put_charm": "2701.7484",
+   "call_vanna": "-2062.0627",
+   "put_vanna": "-15856.7083"
+  }
+ }
+}

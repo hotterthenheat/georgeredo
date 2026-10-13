@@ -1,0 +1,52 @@
+{
+ "check_id": "uw02_intraday_SPXW260304C06815000_2026-03-04",
+ "provider": "unusualwhales",
+ "url_path": "/api/option-contract/SPXW260304C06815000/intraday",
+ "params": {
+  "date": "2026-03-04"
+ },
+ "status": 200,
+ "elapsed_ms": 355,
+ "ran_at_utc": "2026-10-13T18:56:22.738190+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4rur7fnaaUjTwDR81D",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 63268,
+ "body_head": "{\"data\":[{\"close\":\"55.95\",\"high\":\"55.95\",\"low\":\"55.95\",\"open\":\"55.95\",\"start_time\":\"2026-03-04T20:59:00Z\",\"trading_hours\":null,\"avg_price\":\"55.95\",\"iv_high\":\"4.5144\",\"iv_low\":\"4.5144\",\"premium_ask_side\":0,\"premium_bid_side\":0,\"premium_mid_side\":55950,\"premium_no_side\":0,\"volume_ask_side\":0,\"volume_b",
+ "row_count": 164,
+ "rows_container": "data",
+ "first_ts": "2026-03-04T20:59:00Z",
+ "last_ts": "2026-03-04T14:30:00Z",
+ "min_ts": "2026-03-04T14:30:00Z",
+ "max_ts": "2026-03-04T20:59:00Z",
+ "row_keys": [
+  "avg_price",
+  "close",
+  "high",
+  "iv_high",
+  "iv_low",
+  "low",
+  "open",
+  "premium_ask_side",
+  "premium_bid_side",
+  "premium_mid_side",
+  "premium_no_side",
+  "start_time",
+  "trading_hours",
+  "volume_ask_side",
+  "volume_bid_side",
+  "volume_mid_side",
+  "volume_multi",
+  "volume_no_side",
+  "volume_stock_multi"
+ ],
+ "extra": {
+  "total_volume": 3169,
+  "total_premium": 11857352.0,
+  "close_min": 23.3,
+  "close_max": 69.0,
+  "iv_fields_present": true
+ }
+}

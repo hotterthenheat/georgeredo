@@ -1,0 +1,31 @@
+{
+ "check_id": "m02_aggs_SPY_1m_2024-06-03",
+ "provider": "massive",
+ "url_path": "/v2/aggs/ticker/SPY/range/1/minute/2024-06-03/2024-06-03",
+ "params": {
+  "adjusted": "true",
+  "sort": "asc",
+  "limit": 50000
+ },
+ "status": 403,
+ "elapsed_ms": 398,
+ "ran_at_utc": "2026-10-13T18:56:39.052521+00:00",
+ "headers": {
+  "content-type": "application/json",
+  "x-request-id": "15bbd296a10140fc3a848ebb0727c670"
+ },
+ "body_bytes": 189,
+ "body_head": "{\"status\":\"NOT_AUTHORIZED\",\"request_id\":\"15bbd296a10140fc3a848ebb0727c670\",\"message\":\"Your plan doesn't include this data timeframe. Please upgrade your plan at https://polygon.io/pricing\"}",
+ "error": {
+  "status": "NOT_AUTHORIZED",
+  "request_id": "15bbd296a10140fc3a848ebb0727c670",
+  "message": "Your plan doesn't include this data timeframe. Please upgrade your plan at https://polygon.io/pricing"
+ },
+ "row_count": null,
+ "rows_container": null,
+ "top": {
+  "status": "NOT_AUTHORIZED",
+  "message": "Your plan doesn't include this data timeframe. Please upgrade your plan at https://polygon.io/pricing"
+ },
+ "host": "https://api.massive.com"
+}

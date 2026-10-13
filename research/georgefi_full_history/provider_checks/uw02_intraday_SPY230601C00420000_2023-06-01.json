@@ -1,0 +1,28 @@
+{
+ "check_id": "uw02_intraday_SPY230601C00420000_2023-06-01",
+ "provider": "unusualwhales",
+ "url_path": "/api/option-contract/SPY230601C00420000/intraday",
+ "params": {
+  "date": "2023-06-01"
+ },
+ "status": 403,
+ "elapsed_ms": 225,
+ "ran_at_utc": "2026-10-13T18:56:23.633731+00:00",
+ "headers": {
+  "content-type": "application/json",
+  "x-request-id": "GN4ruvmTBVoFuu8Cjr2I",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 787,
+ "body_head": "{\"code\":\"historic_data_access_missing\",\"message\":\"The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2023-06-01 in query param date will not return historical data.\\n\\nAPI Basic and API Advanced subscriptions include up to 730 trading days of historical data. Vi",
+ "error": {
+  "code": "historic_data_access_missing",
+  "message": "The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2023-06-01 in query param date will not return historical data.\n\nAPI Basic and API Advanced subscriptions include up to 730 trading days of historical data. View API plans at https://unusualwhales.com/pricing?product=api.\n\nFor access beyond standard plan limits, email dev@unusualwhales.com with your use case.\n\nNote: For the endpoints /api/institution, /api/stock/:ticker/ohlc/:candle_size, /api/insider/transactions, /api/insider/:sector/sector-flow, /api/insider/:ticker, /api/insider/:ticker/ticker-flow, /api/stock/:ticker/insider-buy-sells, /api/market/correlations, /api/alerts there is no limitations on accessing historical data.\n"
+ },
+ "row_count": null,
+ "rows_container": null,
+ "top": {
+  "code": "historic_data_access_missing",
+  "message": "The earliest date currently available to this token is 2023-11-13 (730 trading days), so 2023-06-01 in query param date will not return historical data.\n\nAPI Basic and API Advanced subscriptions inclu"
+ }
+}

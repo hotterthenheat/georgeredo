@@ -20,4 +20,6 @@ python3 -I run.py 2025-06-02 2026-10-09 SPY,QQQ,IWM results/v1
 python3 -I report.py results/v1 2026-03-02 > results/v1/report.txt
 python3 -I match_georgefi.py results/v1 ../evidence/public_api/trades_all.json.gz
 ```
+`signals.json.gz` (the raw signal list `match_georgefi.py` reads; gunzip it first) was added to `results/v1/` after the reproduction audit, which also fixed the `trading_days.json` path in `run.py`/`prefetch.py` (the original run read it from a `probe/` subfolder). See `../audit/phase1/backtest_reproduction.md`.
+
 Results of the run performed on 2026-10-13 are in `results/v1/` (`report.txt`, `summary.json`, `georgefi_match.txt`, `trades.csv.gz`, `baseline.csv.gz`).

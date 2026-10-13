@@ -34,7 +34,7 @@ Conclusion: the Massive plan is an **aggregates-only options + stocks** plan wit
 | Endpoint | Purpose | Result | Granularity / history | Notes |
 |---|---|---|---|---|
 | `GET /api/stock/{t}/info`, `/quote`, `/stock-state` | reference, live quote, session OHLC | 200 | | |
-| `GET /api/stock/{t}/ohlc/{1m}` | underlying 1-minute OHLC incl. pre/post (`market_time: po`) | 200 | 1 m; `date` + `limit` paging | works for `SPX` (index) as well as ETFs |
+| `GET /api/stock/{t}/ohlc/{1m}` | underlying 1-minute OHLC incl. pre/post (`market_time: po`) | 200 | 1 m; `date` + `limit` paging | works for ETFs; the earlier "works for `SPX`" observation is **superseded**: the 2026-10-13 live re-audit (§6) returns 422 `cboe_index_access_missing` for SPX/NDX/RUT |
 | `GET /api/stock/{t}/greek-exposure` (+`/strike`, `/expiry`, `/strike-expiry`) | **dealer GEX / delta / charm / vanna by strike (EOD snapshot per date)** | 200 for `SPY`, `SPX`, `SPXW` | daily; 890 strikes for SPX | sign convention: `call_gex` ≥ 0, `put_gex` ≤ 0 (dealer long calls / short puts assumption); values are *estimates from OI*, not observed dealer inventory |
 | `GET /api/stock/{t}/spot-exposures` | gamma/vanna/charm per 1 % move, **1-minute** series (`_oi`, `_vol`, `_dir` variants) | 200 | 1 m; 516 rows/day | the closest analogue to a live "GEX regime" input |
 | `GET /api/stock/{t}/spot-exposures/strike`, `/expiry-strike` | per-strike exposures (OI/vol/ask/bid decomposition) | 200 | | |
@@ -66,7 +66,7 @@ Conclusion: UW is the **primary** source for everything options-flow and dealer-
 | Research need | Chosen source | Endpoint | Granularity | History | Timestamps | Limitations |
 |---|---|---|---|---|---|---|
 | Option contract price path around a GeorgeFi entry/exit | UW (primary), Massive (cross-check) | `option-contract/{id}/intraday`, `v2/aggs/ticker/O:…/range/1/minute` | 1 m | UW: historical OK; Massive: ≥ Mar 2026 verified, ~2 y plan window | UW `start_time` ISO UTC; Massive `t` epoch ms (bar open) | neither gives NBBO history → spread must be estimated (see §4) |
-| Underlying price / levels (PDH, PDL, ORB, VWAP) | UW `stock/{t}/ohlc/1m` (works for `SPX`); Massive stock aggs for ETFs | 1 m | UW unknown depth (tested 2026-10-12); Massive ~2 y | | Massive has **no index bars**; use UW for `^SPX/^NDX/^RUT` or ETF proxies (SPY≈SPX/10, document basis drift) |
+| Underlying price / levels (PDH, PDL, ORB, VWAP) | UW `stock/{t}/ohlc/1m` (ETFs; SPX **not** available on this entitlement, see §6); Massive stock aggs for ETFs | 1 m | UW unknown depth (tested 2026-10-12); Massive ~2 y | | Massive has **no index bars**; use UW for `^SPX/^NDX/^RUT` or ETF proxies (SPY≈SPX/10, document basis drift) |
 | Dealer GEX regime, gamma flip, walls | UW `greek-exposure/strike`, `gex-levels`, `spot-exposures` | daily snapshot + 1 m spot series | daily back-fill available (`date=`) | `date` field | estimates based on OI and a dealer-position assumption; not observable dealer inventory |
 | Per-strike flow anomalies ("sus-strike") | UW `flow-per-strike-intraday`, `option-trades` (live), `full-tape` (history) | 1 m / tick | live day + daily archives | `executed_at` ISO UTC µs | historical ticks require downloading daily zips |
 | Implied volatility, IV rank, RV | UW `volatility/*`, contract `intraday.iv_high/low` | daily / 1 m | | | no per-contract Greeks history |
@@ -79,7 +79,7 @@ Conclusion: UW is the **primary** source for everything options-flow and dealer-
 
 Substitution rules used in this research (documented differences):
 
-- **Index levels**: Massive cannot supply `I:SPX`; UW `stock/SPX/ohlc/1m` is used. Where SPY is used as a proxy, remember SPY ≈ SPX/10 minus dividend/basis drift (GeorgeFi's own glossary makes the same approximation).
+- **Index levels**: Massive cannot supply `I:SPX`, and UW `stock/SPX/ohlc/1m` answers 422 on this key (§6; the earlier statement that it is used is superseded). The per-minute `price` field of UW `stock/SPX/spot-exposures` is the only index price series this key can retrieve. Where SPY is used as a proxy, remember SPY ≈ SPX/10 minus dividend/basis drift (GeorgeFi's own glossary makes the same approximation).
 - **Dealer positioning**: all "dealer" numbers are model estimates (UW assumes dealers are long calls / short puts from OI). Nothing in either API observes dealer inventory or hedging intent.
 - **Spread/slippage**: no historical NBBO on either plan; validation uses conservative fills (buy at bar high or at mid + half of a typical spread observed in GeorgeFi's own `quoteQuality` records: median `spreadPct` 6–13 %, `maxSpreadPct` policy 25–30 %).
 
@@ -118,3 +118,14 @@ ET conversion in all scripts uses UTC-4 (EDT) for the observed period (March–O
 - UW OpenAPI YAML: `https://api.unusualwhales.com/api/openapi` (1.25 MB, fetched 2026-10-13); websocket docs `https://api.unusualwhales.com/docs/websocket`.
 - Massive OpenAPI JSON: `https://api.massive.com/openapi` (1.17 MB); same document at `api.polygon.io/openapi`.
 - Both catalogs are flattened in `evidence/provider_docs/`.
+
+## 6. Live re-audit on 2026-10-13 (later the same day; added, nothing above rewritten except the three superseded notes)
+
+Full call table (109 calls) and evidence: `research/georgefi_full_history/provider_audit_2026-10-13.md` and `research/georgefi_full_history/provider_checks/`. What changed or was new:
+
+- **Index 1-minute bars are not available on UW** (`stock/SPX|NDX|RUT|SPXW/ohlc/1m` → 422 `cboe_index_access_missing`), consistent with `BACKTEST_RESULTS.md` and contradicting §1.2/§2 above; Massive `I:SPX` stays 403. 184 of the 489 Epoch 2 main-book trades are index contracts whose *underlying* path therefore cannot be replayed; their *contract* bars can (SPXW/NDXP/RUTW roots).
+- **UW concurrency cap is 3 in-flight requests** (429 `concurrent_limit_exceeded`); per-minute quota unchanged.
+- **History floors**: UW historical option endpoints 403 before 2023-11-13 (730 trading days); UW contract 1-minute bars are empty for every date ≤ 2025-03-03 and present from 2025-04-01; UW stock 1-minute bars reach back to 2022-09-28. Massive 1-minute stock bars refuse 2024-06-03 (plan timeframe); trades/quotes remain 403.
+- **Index option roots**: SPXW/NDXP/RUTW work on UW and Massive; plain SPX/NDX/RUT weekly roots are rejected; the 3rd-Friday `SPX…` root returns 0 bars where its `SPXW…` twin returns bars.
+- **Works better than documented**: `gex-levels` and `spot-exposures` work for the SPX index (per-minute `price` included) and for old dates (no 90-day limit); `stock/{t}/option-contracts?date=` returns the historical chain with OI, NBBO and Greeks (undocumented); `net-prem-ticks` and `flow-per-strike-intraday` work for SPX; `flow-alerts` ignores `date` but honours `newer_than`/`older_than`; ticker-level `greek-exposure` series starts 2025-10-14 regardless of `date`.
+

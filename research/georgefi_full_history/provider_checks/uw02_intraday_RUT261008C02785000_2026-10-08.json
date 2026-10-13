@@ -1,0 +1,29 @@
+{
+ "check_id": "uw02_intraday_RUT261008C02785000_2026-10-08",
+ "provider": "unusualwhales",
+ "url_path": "/api/option-contract/RUT261008C02785000/intraday",
+ "params": {
+  "date": "2026-10-08"
+ },
+ "status": 422,
+ "elapsed_ms": 221,
+ "ran_at_utc": "2026-10-13T18:56:23.216185+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4ruuC_4q_oly0Dh98B",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 224,
+ "body_head": "{\"path\":\"/api/option-contract/RUT261008C02785000/intraday\",\"msg\":\"RUT261008C02785000 does not exist\",\"query\":\"date=2026-10-08\",\"url\":\"api.unusualwhales.com:80/api/option-contract/RUT261008C02785000/intraday?date=2026-10-08\"}",
+ "error": {
+  "path": "/api/option-contract/RUT261008C02785000/intraday",
+  "msg": "RUT261008C02785000 does not exist",
+  "query": "date=2026-10-08",
+  "url": "api.unusualwhales.com:80/api/option-contract/RUT261008C02785000/intraday?date=2026-10-08"
+ },
+ "row_count": null,
+ "rows_container": null,
+ "top": {
+  "msg": "RUT261008C02785000 does not exist"
+ }
+}

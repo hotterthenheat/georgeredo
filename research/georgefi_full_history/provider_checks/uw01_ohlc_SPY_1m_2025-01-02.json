@@ -1,0 +1,54 @@
+{
+ "check_id": "uw01_ohlc_SPY_1m_2025-01-02",
+ "provider": "unusualwhales",
+ "url_path": "/api/stock/SPY/ohlc/1m",
+ "params": {
+  "date": "2025-01-02",
+  "limit": 2500
+ },
+ "status": 200,
+ "elapsed_ms": 1033,
+ "ran_at_utc": "2026-10-13T18:56:22.114543+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4rupp8DFttgWcDhKeB",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 126787,
+ "body_head": "{\"data\":[{\"close\":\"585.86\",\"end_time\":\"2025-01-03T01:00:00Z\",\"high\":\"585.86\",\"low\":\"585.86\",\"market_time\":\"po\",\"open\":\"585.86\",\"start_time\":\"2025-01-03T00:59:00Z\",\"total_volume\":50203680,\"volume\":3516},{\"close\":\"585.84\",\"end_time\":\"2025-01-03T00:55:00Z\",\"high\":\"585.84\",\"low\":\"585.84\",\"market_time\":\"",
+ "row_count": 655,
+ "rows_container": "data",
+ "first_ts": "2025-01-03T00:59:00Z",
+ "last_ts": "2025-01-02T09:00:00Z",
+ "min_ts": "2025-01-02T09:00:00Z",
+ "max_ts": "2025-01-03T00:59:00Z",
+ "row_keys": [
+  "close",
+  "end_time",
+  "high",
+  "low",
+  "market_time",
+  "open",
+  "start_time",
+  "total_volume",
+  "volume"
+ ],
+ "extra": {
+  "by_market_time": {
+   "po": 112,
+   "r": 390,
+   "pr": 153
+  },
+  "rth_rows": 390,
+  "rth_min": "2025-01-02T14:30:00Z",
+  "rth_max": "2025-01-02T20:59:00Z",
+  "sample": {
+   "open": "585.86",
+   "high": "585.86",
+   "low": "585.86",
+   "close": "585.86",
+   "volume": 3516,
+   "total_volume": 50203680
+  }
+ }
+}

@@ -1,0 +1,58 @@
+{
+ "check_id": "uw04_spot-exposures_SPY_2024-06-03",
+ "provider": "unusualwhales",
+ "url_path": "/api/stock/SPY/spot-exposures",
+ "params": {
+  "date": "2024-06-03"
+ },
+ "status": 200,
+ "elapsed_ms": 409,
+ "ran_at_utc": "2026-10-13T18:59:45.937695+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4r6g5cjqAqz0YDIoxH",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 303581,
+ "body_head": "{\"data\":[{\"time\":\"2024-06-03T10:30:43.779000Z\",\"ticker\":\"SPY\",\"start_time\":\"2024-06-03T10:30:00.000000Z\",\"price\":\"528.13\",\"ticker_id\":2447,\"charm_per_one_percent_move_dir\":\"0\",\"charm_per_one_percent_move_oi\":\"-2701721004440.29\",\"charm_per_one_percent_move_vol\":\"0\",\"gamma_per_one_percent_move_dir\":\"0",
+ "row_count": 545,
+ "rows_container": "data",
+ "first_ts": "2024-06-03T10:30:00.000000Z",
+ "last_ts": "2024-06-03T20:00:00.000000Z",
+ "min_ts": "2024-06-03T10:30:00.000000Z",
+ "max_ts": "2024-06-03T20:00:00.000000Z",
+ "row_keys": [
+  "charm_per_one_percent_move_dir",
+  "charm_per_one_percent_move_oi",
+  "charm_per_one_percent_move_vol",
+  "gamma_per_one_percent_move_dir",
+  "gamma_per_one_percent_move_oi",
+  "gamma_per_one_percent_move_vol",
+  "price",
+  "start_time",
+  "ticker",
+  "ticker_id",
+  "time",
+  "vanna_per_one_percent_move_dir",
+  "vanna_per_one_percent_move_oi",
+  "vanna_per_one_percent_move_vol"
+ ],
+ "extra": {
+  "first_row_sample": {
+   "time": "2024-06-03T10:30:43.779000Z",
+   "ticker": "SPY",
+   "start_time": "2024-06-03T10:30:00.000000Z",
+   "price": "528.13",
+   "ticker_id": "2447",
+   "charm_per_one_percent_move_dir": "0",
+   "charm_per_one_percent_move_oi": "-2701721004440.29",
+   "charm_per_one_percent_move_vol": "0",
+   "gamma_per_one_percent_move_dir": "0",
+   "gamma_per_one_percent_move_oi": "-2260403765.45",
+   "gamma_per_one_percent_move_vol": "0",
+   "vanna_per_one_percent_move_dir": "0.00",
+   "vanna_per_one_percent_move_oi": "498608722.58",
+   "vanna_per_one_percent_move_vol": "0.00"
+  }
+ }
+}

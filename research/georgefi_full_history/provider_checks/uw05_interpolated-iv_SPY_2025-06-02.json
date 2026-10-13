@@ -1,0 +1,40 @@
+{
+ "check_id": "uw05_interpolated-iv_SPY_2025-06-02",
+ "provider": "unusualwhales",
+ "url_path": "/api/stock/SPY/interpolated-iv",
+ "params": {
+  "date": "2025-06-02"
+ },
+ "status": 200,
+ "elapsed_ms": 241,
+ "ran_at_utc": "2026-10-13T18:56:25.009759+00:00",
+ "headers": {
+  "content-type": "application/json; charset=utf-8",
+  "x-request-id": "GN4ru0uyiFS9CUQDUnuC",
+  "x-uw-req-per-minute-remaining": "1000000"
+ },
+ "body_bytes": 922,
+ "body_head": "{\"data\":[{\"date\":\"2025-06-02\",\"days\":1,\"percentile\":\"0.344\",\"volatility\":\"0.146\",\"implied_move_perc\":\"0.005\"},{\"date\":\"2025-06-02\",\"days\":5,\"percentile\":\"0.664\",\"volatility\":\"0.17\",\"implied_move_perc\":\"0.013\"},{\"date\":\"2025-06-02\",\"days\":7,\"percentile\":\"0.558\",\"volatility\":\"0.152\",\"implied_move_perc",
+ "row_count": 9,
+ "rows_container": "data",
+ "first_ts": "2025-06-02",
+ "last_ts": "2025-06-02",
+ "min_ts": "2025-06-02",
+ "max_ts": "2025-06-02",
+ "row_keys": [
+  "date",
+  "days",
+  "implied_move_perc",
+  "percentile",
+  "volatility"
+ ],
+ "extra": {
+  "first_row_sample": {
+   "date": "2025-06-02",
+   "days": "1",
+   "percentile": "0.344",
+   "volatility": "0.146",
+   "implied_move_perc": "0.005"
+  }
+ }
+}
