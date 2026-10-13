@@ -44,7 +44,7 @@ def load_ledger():
     out = []
     for r in rows:
         d = dict(r)
-        d['group'] = 'ledger'
+        d['group'] = 'ledger'; d['size_implied'] = False
         d['epoch'] = r['epoch_number']
         d['entry_dt'] = parse_utc(r['entry_utc']).astimezone(ET)
         d['exit_dt'] = parse_utc(r['exit_utc']).astimezone(ET) if r['exit_utc'] else None
@@ -89,8 +89,13 @@ def load_paper():
                  data_error=str('DATA ERROR' in r['exitReason'].upper() or 'INVALID' in r['exitReason'].upper()), pnl_mismatch='False',
                  pricing_source=r.get('pricingSource', ''))
         ep = float(r['entryPremium'] or 0); xp = float(r['exitPremium'] or 0); sz = float(r['size'] or 0); pnl = float(r['pnl'] or 0)
+        # 17 paper rows are reported with size 0 (post-close size); imply the lot from pnl / ((exit - entry) x 100) when it is a whole number
+        d['size_implied'] = False
+        if sz == 0 and xp != ep:
+            s_ = pnl / ((xp - ep) * 100)
+            if abs(s_ - round(s_)) < 0.01 and round(s_) > 0: sz = float(round(s_)); d['size_implied'] = True; d['size'] = str(int(sz))
         d['pnl_recomputed'] = f'{(xp - ep) * 100 * sz:.2f}'
-        d['pnl_mismatch'] = str(abs((xp - ep) * 100 * sz - pnl) > 1.0)
+        d['pnl_mismatch'] = str(abs((xp - ep) * 100 * sz - pnl) > 1.0)  # remaining mismatches = partial exits (T1 PARTIAL) on 2-lot entries
         d['entry_dt'] = e; d['exit_dt'] = x; d['entry_date'] = e.strftime('%Y-%m-%d'); d['exit_date'] = x.strftime('%Y-%m-%d')
         d['cid'] = cid; d['root'] = occ_root(occ); d['size_n'] = sz; d['entry_px'] = ep; d['exit_px'] = xp; d['pnl'] = pnl
         d['is_option'] = True; d['is_shares'] = False; d['dte0'] = d['is_0dte'] == 'True'; d['data_err'] = d['data_error'] == 'True'

@@ -8,7 +8,7 @@ entry_minute_bar_zero_volume,0,bar exists at the entry minute but UW volume fiel
 entry_minute_no_bar_(no_prints),138,entry-day bars exist but no bar printed in the entry minute
 duplicate_trade_ids,0,
 same_contract_same_entry_minute_pairs,327,distinct ids sharing contract+entry minute (scale-ins / duplicates)
-pnl_mismatch_rows,49,reported 14111 vs recomputed 5576
+pnl_mismatch_rows,32,reported 12148 vs recomputed 5576
 data_error_rows,24,reported pnl -2251
 E1_reported_total_all,43248.26,n=546
 E1_reported_total_excl_mismatch,34627.26,n=530
@@ -25,9 +25,9 @@ E2_B_mid_total_excl_mismatch,-3614.0,"n=499 (all rows: -3098, n=501)"
 E2_B_spread_total_excl_mismatch,-15376.45,all rows: -14913
 E2_B_recomputed_vs_reported_excl_mismatch,0.0,should be ~0
 paper_reported_total_all,-3632.5,n=84
-paper_reported_total_excl_mismatch,-8282.5,n=56
+paper_reported_total_excl_mismatch,-6320.0,n=73
 paper_reported_total_excl_dataerr,-3632.5,n=84
-paper_reported_total_excl_both,-8282.5,n=56
-paper_B_mid_total_excl_mismatch,-7981.0,"n=56 (all rows: -4702, n=84)"
-paper_B_spread_total_excl_mismatch,-9107.67,all rows: -6217
+paper_reported_total_excl_both,-6320.0,n=73
+paper_B_mid_total_excl_mismatch,-6030.0,"n=73 (all rows: -4702, n=84)"
+paper_B_spread_total_excl_mismatch,-7369.01,all rows: -6217
 paper_B_recomputed_vs_reported_excl_mismatch,-0.0,should be ~0

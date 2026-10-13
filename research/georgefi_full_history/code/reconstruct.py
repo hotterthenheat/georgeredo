@@ -37,6 +37,16 @@ def boot_ci(vals, n=BOOT_N, seed=BOOT_SEED):
     means = v[idx].mean(axis=1)
     return (float(np.percentile(means, 2.5)), float(np.percentile(means, 97.5)))
 
+def boot_ci_cluster(vals, clusters, n=BOOT_N, seed=BOOT_SEED):
+    """Cluster bootstrap of the per-trade mean: resample clusters (contract + entry minute) with replacement."""
+    sums = collections.defaultdict(float); cnts = collections.defaultdict(int)
+    for v, c in zip(vals, clusters): sums[c] += float(v); cnts[c] += 1
+    keys = list(sums); S = np.array([sums[k] for k in keys]); N = np.array([cnts[k] for k in keys], dtype=float)
+    if len(keys) == 0: return (float('nan'), float('nan'), 0)
+    rng = np.random.default_rng(seed); idx = rng.integers(0, len(keys), size=(n, len(keys)))
+    means = S[idx].sum(axis=1) / N[idx].sum(axis=1)
+    return (float(np.percentile(means, 2.5)), float(np.percentile(means, 97.5)), len(keys))
+
 def max_dd(vals):
     peak = cum = 0.0; dd = 0.0
     for x in vals:
@@ -76,11 +86,7 @@ for r in rows:
     r['bar_entry_min'] = c['bar_at_entry_minute'] == 'True'
     r['bar_exit_min'] = c['bar_at_exit_minute'] == 'True'
     r['label'] = f"E{r['epoch']}" if r['group'] == 'ledger' else 'paper'
-    # paper rows closed with size 0: GeorgeFi reports the post-close size; imply the lot from pnl / (exit-entry) / 100
-    r['size_implied'] = False
-    if r['group'] == 'paper' and r['size_n'] == 0 and r['entry_px'] and r['exit_px'] and r['exit_px'] != r['entry_px']:
-        s = r['pnl'] / ((r['exit_px'] - r['entry_px']) * 100)
-        if abs(s - round(s)) < 0.01 and round(s) > 0: r['size_n'] = float(round(s)); r['size_implied'] = True
+    r['cluster'] = (r['cid'] or r['ticker']) + '|' + r['entry_dt'].strftime('%Y-%m-%d %H:%M')  # same contract + same entry minute (scale-ins / duplicates)
 MD = []  # RESULTS.md lines
 def H(s): MD.append(s); MD.append('')
 def T(lines): MD.extend(lines); MD.append('')
@@ -108,7 +114,9 @@ def a_table(rs, keyf, keynames, extra_filters=True):
         pn = [r['pnl'] for r in v]; m = metrics(pn, pn)
         clean = [r['pnl'] for r in v if not r['data_err'] and not r['mismatch']]
         rec = dict(zip(keynames, k if isinstance(k, tuple) else (k,)))
-        rec.update(n=m['n'], sum_pnl_reported=round(m['total'], 2), win_rate=round(m['win_rate'], 4), mean=round(m['mean'], 2), ci_lo=round(m['ci_lo'], 2), ci_hi=round(m['ci_hi'], 2),
+        clo, chi, ncl = boot_ci_cluster(pn, [r['cluster'] for r in v])
+        rec.update(n=m['n'], n_clusters=ncl, sum_pnl_reported=round(m['total'], 2), win_rate=round(m['win_rate'], 4), mean=round(m['mean'], 2), ci_lo=round(m['ci_lo'], 2), ci_hi=round(m['ci_hi'], 2),
+                   ci_cluster_lo=round(clo, 2), ci_cluster_hi=round(chi, 2),
                    max_drawdown=round(m['max_dd'], 2), pf=round(m['pf'], 3) if m['pf'] != float('inf') else 'inf',
                    median_hold_min=round(statistics.median([r['hold'] for r in v if r['hold'] is not None]), 1) if any(r['hold'] is not None for r in v) else '',
                    median_size=statistics.median([r['size_n'] for r in v]), median_entry_premium=round(statistics.median([r['entry_px'] for r in v if r['entry_px']]), 3),
@@ -147,7 +155,8 @@ for r in rows:
                entry_inside=(eb['l'] - 1e-9 <= ep <= eb['h'] + 1e-9), exit_inside=(xb['l'] - 1e-9 <= xp <= xb['h'] + 1e-9),
                entry_pos_in_bar=((ep - eb['l']) / (eb['h'] - eb['l'])) if eb['h'] > eb['l'] else 0.5,
                exit_pos_in_bar=((xp - xb['l']) / (xb['h'] - xb['l'])) if xb['h'] > xb['l'] else 0.5,
-               entry_below_vwap=ep < ve, exit_above_vwap=xp > vx, entry_hour_et=r['entry_dt'].hour + r['entry_dt'].minute / 60)
+               entry_below_vwap=ep < ve, exit_above_vwap=xp > vx, entry_hour_et=r['entry_dt'].hour + r['entry_dt'].minute / 60,
+               entry_below_low=ep < eb['l'] - 1e-9, entry_above_high=ep > eb['h'] + 1e-9, exit_above_high=xp > xb['h'] + 1e-9, exit_below_low=xp < xb['l'] - 1e-9, cluster=r['cluster'])
     B.append(rec)
 write_csv(C.RES + '/B_trades.csv', B)
 
@@ -163,6 +172,10 @@ def b_table(bs, keyf, keynames):
             rec[f'{mdl}_win_rate'] = round(m['win_rate'], 4); rec[f'{mdl}_pf'] = round(m['pf'], 3) if m['pf'] != float('inf') else 'inf'
         d = [x['diff_reported_minus_mid'] for x in v]; md_ = metrics(d)
         rec['diff_rep_minus_mid_mean'] = round(md_['mean'], 2); rec['diff_ci_lo'] = round(md_['ci_lo'], 2); rec['diff_ci_hi'] = round(md_['ci_hi'], 2)
+        cl = [x['cluster'] for x in v]; rec['n_clusters'] = len(set(cl))
+        for mdl in ['mid', 'spread']:
+            lo, hi, _ = boot_ci_cluster([x[f'pnl_{mdl}'] for x in v], cl); rec[f'{mdl}_ci_cluster_lo'] = round(lo, 2); rec[f'{mdl}_ci_cluster_hi'] = round(hi, 2)
+        lo, hi, _ = boot_ci_cluster(d, cl); rec['diff_ci_cluster_lo'] = round(lo, 2); rec['diff_ci_cluster_hi'] = round(hi, 2)
         out.append(rec)
     return out
 B1 = b_table(B, lambda x: (x['epoch'], 'ALL', 'ALL'), ['epoch', 'book', 'account_type']) + b_table(B, lambda x: (x['epoch'], x['book'], 'ALL'), ['epoch', 'book', 'account_type']) + b_table(B, lambda x: (x['epoch'], x['book'], x['account_type']), ['epoch', 'book', 'account_type'])
@@ -180,7 +193,9 @@ def realism(bs, keyf, keynames):
                    entry_below_vwap_share=round(sum(1 for x in v if x['entry_below_vwap']) / len(v), 4), exit_above_vwap_share=round(sum(1 for x in v if x['exit_above_vwap']) / len(v), 4),
                    both_inside_share=round(sum(1 for x in v if x['entry_inside'] and x['exit_inside']) / len(v), 4),
                    sum_reported=round(sum(x['pnl_reported'] for x in v), 2), sum_reported_outside_range=round(sum(x['pnl_reported'] for x in v if not (x['entry_inside'] and x['exit_inside'])), 2),
-                   n_outside_range=sum(1 for x in v if not (x['entry_inside'] and x['exit_inside'])), median_entry_bar_vol=statistics.median(x['entry_bar_vol'] for x in v))
+                   n_outside_range=sum(1 for x in v if not (x['entry_inside'] and x['exit_inside'])), median_entry_bar_vol=statistics.median(x['entry_bar_vol'] for x in v),
+                   entry_below_low_share=round(sum(1 for x in v if x['entry_below_low']) / len(v), 4), entry_above_high_share=round(sum(1 for x in v if x['entry_above_high']) / len(v), 4),
+                   exit_above_high_share=round(sum(1 for x in v if x['exit_above_high']) / len(v), 4), exit_below_low_share=round(sum(1 for x in v if x['exit_below_low']) / len(v), 4))
         out.append(rec)
     return out
 B3 = realism(B, lambda x: (x['epoch'], 'ALL', 'ALL'), ['epoch', 'book', 'account_type']) + realism(B, lambda x: (x['epoch'], x['book'], x['account_type']), ['epoch', 'book', 'account_type'])
@@ -263,6 +278,7 @@ for r in rows:
         if rr is None: continue
         for eng in ENGINES:
             for mdl in CMODELS: accm[(eng, mdl)].append(rr[0][(eng, mdl)][1])
+    mfe_rt = []
     for k in range(K_MFE):
         for _ in range(50):
             m = day + datetime.timedelta(minutes=rng.randint(0, 383))
@@ -270,6 +286,12 @@ for r in rows:
             if feasible(bars, j):
                 mm, _a = mfe_mae(bars, j, C.vwap(b))
                 if mm is not None: mfe_r.append(mm); break
+        for _ in range(50):  # time-matched: random minute within +-30 min of the actual entry
+            m = day + datetime.timedelta(minutes=rng.randint(max(0, int(em) - 30), min(383, int(em) + 30)))
+            j, b = C.first_bar_after(bars, m - datetime.timedelta(minutes=1))
+            if feasible(bars, j):
+                mm, _a = mfe_mae(bars, j, C.vwap(b))
+                if mm is not None: mfe_rt.append(mm); break
     rec['n_random'] = nrand
     for eng in ENGINES:
         for mdl in CMODELS:
@@ -277,7 +299,8 @@ for r in rows:
             rec[f'rand_{eng}_{mdl}_ret'] = statistics.mean(acc[(eng, mdl, 'ret')]) if acc[(eng, mdl, 'ret')] else None
             rec[f'randtm_{eng}_{mdl}_usd'] = statistics.mean(accm[(eng, mdl)]) if accm[(eng, mdl)] else None
     rec['mfe_pctile'] = ((sum(1 for v in mfe_r if v < mfe) + 0.5 * sum(1 for v in mfe_r if v == mfe)) / len(mfe_r)) if (mfe_r and mfe is not None) else None
-    rec['n_mfe_random'] = len(mfe_r)
+    rec['mfe_pctile_tm'] = ((sum(1 for v in mfe_rt if v < mfe) + 0.5 * sum(1 for v in mfe_rt if v == mfe)) / len(mfe_rt)) if (mfe_rt and mfe is not None) else None
+    rec['n_mfe_random'] = len(mfe_r); rec['cluster'] = r['cluster']
     Crows.append(rec)
 write_csv(C.RES + '/C_trades.csv', Crows)
 write_csv(C.RES + '/C_random_draws.csv', Crand)
@@ -307,6 +330,22 @@ def c_table(cs, keyf, keynames):
         rec['mfe_pctile_median'] = round(100 * statistics.median(pcs), 1) if pcs else None; rec['mfe_pctile_mean'] = round(100 * statistics.mean(pcs), 1) if pcs else None
         if pcs:
             lo, hi = boot_ci(pcs); rec['mfe_pctile_mean_ci_lo'] = round(100 * lo, 1); rec['mfe_pctile_mean_ci_hi'] = round(100 * hi, 1)
+        pct_ = [x['mfe_pctile_tm'] for x in v if x['mfe_pctile_tm'] is not None]
+        rec['mfe_pctile_tm_median'] = round(100 * statistics.median(pct_), 1) if pct_ else None; rec['mfe_pctile_tm_mean'] = round(100 * statistics.mean(pct_), 1) if pct_ else None
+        if pct_:
+            lo, hi = boot_ci(pct_); rec['mfe_pctile_tm_mean_ci_lo'] = round(100 * lo, 1); rec['mfe_pctile_tm_mean_ci_hi'] = round(100 * hi, 1)
+        cl = [x['cluster'] for x in v]; rec['n_clusters'] = len(set(cl))
+        for eng in ENGINES:
+            for mdl in CMODELS:
+                lo, hi, _ = boot_ci_cluster([x[f'{eng}_{mdl}_usd'] for x in v], cl); rec[f'{eng}_{mdl}_ci_cluster_lo'] = round(lo, 2); rec[f'{eng}_{mdl}_ci_cluster_hi'] = round(hi, 2)
+                dd = [(x[f'{eng}_{mdl}_usd'] - x[f'rand_{eng}_{mdl}_usd'], x['cluster']) for x in v if x[f'rand_{eng}_{mdl}_usd'] is not None]
+                lo, hi, _ = boot_ci_cluster([a for a, _ in dd], [c for _, c in dd]); rec[f'{eng}_{mdl}_minus_random_ci_cluster_lo'] = round(lo, 2); rec[f'{eng}_{mdl}_minus_random_ci_cluster_hi'] = round(hi, 2)
+                dd = [(x[f'{eng}_{mdl}_usd'] - x[f'randtm_{eng}_{mdl}_usd'], x['cluster']) for x in v if x[f'randtm_{eng}_{mdl}_usd'] is not None]
+                lo, hi, _ = boot_ci_cluster([a for a, _ in dd], [c for _, c in dd]); rec[f'{eng}_{mdl}_minus_random_tm_ci_cluster_lo'] = round(lo, 2); rec[f'{eng}_{mdl}_minus_random_tm_ci_cluster_hi'] = round(hi, 2)
+        if pcs:
+            lo, hi, _ = boot_ci_cluster(pcs, [x['cluster'] for x in v if x['mfe_pctile'] is not None]); rec['mfe_pctile_mean_ci_cluster_lo'] = round(100 * lo, 1); rec['mfe_pctile_mean_ci_cluster_hi'] = round(100 * hi, 1)
+        if pct_:
+            lo, hi, _ = boot_ci_cluster(pct_, [x['cluster'] for x in v if x['mfe_pctile_tm'] is not None]); rec['mfe_pctile_tm_mean_ci_cluster_lo'] = round(100 * lo, 1); rec['mfe_pctile_tm_mean_ci_cluster_hi'] = round(100 * hi, 1)
         rec['median_entry_minute_after_open'] = statistics.median((int(x['entry_bar_t'][:2]) * 60 + int(x['entry_bar_t'][3:]) - 570) for x in v)
         out.append(rec)
     return out
@@ -348,7 +387,10 @@ for ep in ['E1', 'E2', 'paper']:
                sum_mid=round(sum(x['pnl_mid'] for x in bb), 2), sum_spread=round(sum(x['pnl_spread'] for x in bb), 2), sum_adverse=round(sum(x['pnl_adverse'] for x in bb), 2),
                n_outside_bar_range=sum(1 for x in bb if not (x['entry_inside'] and x['exit_inside'])), sum_reported_outside_bar_range=round(sum(x['pnl_reported'] for x in bb if not (x['entry_inside'] and x['exit_inside'])), 2),
                sum_reported_outside_or_dataerr=round(sum(x['pnl_reported'] for x in bb if (not (x['entry_inside'] and x['exit_inside'])) or x['data_error']), 2),
-               n_entry_outside=sum(1 for x in bb if not x['entry_inside']), n_exit_outside=sum(1 for x in bb if not x['exit_inside']))
+               n_entry_outside=sum(1 for x in bb if not x['entry_inside']), n_exit_outside=sum(1 for x in bb if not x['exit_inside']),
+               n_clusters_contract_entry_minute=len(set(r['cluster'] for r in v)), n_rows_in_multi_row_clusters=sum(1 for r in v if sum(1 for q in v if q['cluster'] == r['cluster']) > 1),
+               sum_pnl_rows_in_multi_row_clusters=round(sum(r['pnl'] for r in v if sum(1 for q in v if q['cluster'] == r['cluster']) > 1), 2),
+               n_entries_before_0930=sum(1 for r in v if (r['entry_dt'].hour, r['entry_dt'].minute) < (9, 30)), n_size_implied=sum(1 for r in v if r['size_implied']))
     for f_ in ['profit-take/trail', 'stop', 'time/eod', 'data_error', 'other']: rec[f'exit_{f_}_share'] = round(fam[f_] / len(v), 4)
     Drows.append(rec)
 write_csv(C.RES + '/D_era_comparison.csv', Drows)
@@ -400,8 +442,8 @@ MD.append('')
 H('## 0. Coverage')
 MD.append(open(C.RES + '/bar_coverage_summary.md').read().split('\n', 2)[2])
 H('## A. Reported by GeorgeFi (operator\'s own numbers, not independent)')
-T(['| epoch | book | account | n | sum P&L | win rate | mean/trade | 95 % CI of mean | max DD | PF | median hold (min) | median size | n data-error | n P&L-mismatch | sum excl. both (n) |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|'] +
-  [f"| {a['epoch']} | {a['book']} | {a['account_type']} | {a['n']} | {f0(a['sum_pnl_reported'])} | {pct(a['win_rate'])} | {f1(a['mean'])} | [{f1(a['ci_lo'])}, {f1(a['ci_hi'])}] | {f0(a['max_drawdown'])} | {a['pf']} | {a['median_hold_min']} | {a['median_size']} | {a['n_data_error']} | {a['n_pnl_mismatch']} | {f0(a['sum_pnl_excl_dataerr_mismatch'])} ({a['n_excl']}) |" for a in A1e + A1b + A1])
+T(['| epoch | book | account | n | n clusters (contract+entry minute) | sum P&L | win rate | mean/trade | 95 % CI of mean | cluster-bootstrap CI | max DD | PF | median hold (min) | median size | n data-error | n P&L-mismatch | sum excl. both (n) |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|'] +
+  [f"| {a['epoch']} | {a['book']} | {a['account_type']} | {a['n']} | {a['n_clusters']} | {f0(a['sum_pnl_reported'])} | {pct(a['win_rate'])} | {f1(a['mean'])} | [{f1(a['ci_lo'])}, {f1(a['ci_hi'])}] | [{f1(a['ci_cluster_lo'])}, {f1(a['ci_cluster_hi'])}] | {f0(a['max_drawdown'])} | {a['pf']} | {a['median_hold_min']} | {a['median_size']} | {a['n_data_error']} | {a['n_pnl_mismatch']} | {f0(a['sum_pnl_excl_dataerr_mismatch'])} ({a['n_excl']}) |" for a in A1e + A1b + A1])
 H('### A by month (Reported by GeorgeFi)')
 T(['| epoch | month | n | sum P&L | win rate | mean | 95 % CI | max DD |', '|---|---|---|---|---|---|---|---|'] + [f"| {a['epoch']} | {a['month']} | {a['n']} | {f0(a['sum_pnl_reported'])} | {pct(a['win_rate'])} | {f1(a['mean'])} | [{f1(a['ci_lo'])}, {f1(a['ci_hi'])}] | {f0(a['max_drawdown'])} |" for a in A2])
 H('### A by ticker root, n >= 10 (Reported by GeorgeFi)')
@@ -409,13 +451,13 @@ T(['| epoch | root | n | sum P&L | win rate | mean | 95 % CI |', '|---|---|---|-
 H('## B. Simulated fills at the reported times (ours; rows with a UW bar in both the entry and the exit minute)')
 MD.append('Entry at the entry-minute bar VWAP, exit at the exit-minute bar VWAP, reported size. `mid` = no cost; `spread` = half-spread per side (1 % SPY/QQQ, 2 % IWM, 1.5 % SPXW/NDXP/RUTW, 2 % single names) + $0.70/contract/side; `adverse` = buy entry-bar high, sell exit-bar low + fees. Shares: ×1, no fees, no spread (reported for completeness; $-magnitude is negligible). "reported" is GeorgeFi\'s P&L on the same rows.')
 MD.append('')
-T(['| epoch | book | account | n | reported total | mid total | spread total | adverse total | mid mean [CI] | spread mean [CI] | adverse mean [CI] | WR rep/mid/spread/adv | PF rep/mid/spread/adv | reported − mid mean [CI] |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|'] +
-  [f"| {b['epoch']} | {b['book']} | {b['account_type']} | {b['n']} | {f0(b['reported_total'])} | {f0(b['mid_total'])} | {f0(b['spread_total'])} | {f0(b['adverse_total'])} | {f1(b['mid_mean'])} [{f1(b['mid_ci_lo'])}, {f1(b['mid_ci_hi'])}] | {f1(b['spread_mean'])} [{f1(b['spread_ci_lo'])}, {f1(b['spread_ci_hi'])}] | {f1(b['adverse_mean'])} [{f1(b['adverse_ci_lo'])}, {f1(b['adverse_ci_hi'])}] | {pct(b['reported_win_rate'])}/{pct(b['mid_win_rate'])}/{pct(b['spread_win_rate'])}/{pct(b['adverse_win_rate'])} | {b['reported_pf']}/{b['mid_pf']}/{b['spread_pf']}/{b['adverse_pf']} | {f1(b['diff_rep_minus_mid_mean'])} [{f1(b['diff_ci_lo'])}, {f1(b['diff_ci_hi'])}] |" for b in B1])
+T(['| epoch | book | account | n | n clusters | reported total | mid total | spread total | adverse total | mid mean [CI] (cluster CI) | spread mean [CI] (cluster CI) | adverse mean [CI] | WR rep/mid/spread/adv | PF rep/mid/spread/adv | reported − mid mean [CI] (cluster CI) |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|'] +
+  [f"| {b['epoch']} | {b['book']} | {b['account_type']} | {b['n']} | {b['n_clusters']} | {f0(b['reported_total'])} | {f0(b['mid_total'])} | {f0(b['spread_total'])} | {f0(b['adverse_total'])} | {f1(b['mid_mean'])} [{f1(b['mid_ci_lo'])}, {f1(b['mid_ci_hi'])}] ([{f1(b['mid_ci_cluster_lo'])}, {f1(b['mid_ci_cluster_hi'])}]) | {f1(b['spread_mean'])} [{f1(b['spread_ci_lo'])}, {f1(b['spread_ci_hi'])}] ([{f1(b['spread_ci_cluster_lo'])}, {f1(b['spread_ci_cluster_hi'])}]) | {f1(b['adverse_mean'])} [{f1(b['adverse_ci_lo'])}, {f1(b['adverse_ci_hi'])}] | {pct(b['reported_win_rate'])}/{pct(b['mid_win_rate'])}/{pct(b['spread_win_rate'])}/{pct(b['adverse_win_rate'])} | {b['reported_pf']}/{b['mid_pf']}/{b['spread_pf']}/{b['adverse_pf']} | {f1(b['diff_rep_minus_mid_mean'])} [{f1(b['diff_ci_lo'])}, {f1(b['diff_ci_hi'])}] ([{f1(b['diff_ci_cluster_lo'])}, {f1(b['diff_ci_cluster_hi'])}]) |" for b in B1])
 H('### B by month (Simulated fills, ours)')
 T(['| epoch | month | n | reported | mid | spread | adverse | mid mean [CI] | spread mean [CI] |', '|---|---|---|---|---|---|---|---|---|'] + [f"| {b['epoch']} | {b['month']} | {b['n']} | {f0(b['reported_total'])} | {f0(b['mid_total'])} | {f0(b['spread_total'])} | {f0(b['adverse_total'])} | {f1(b['mid_mean'])} [{f1(b['mid_ci_lo'])}, {f1(b['mid_ci_hi'])}] | {f1(b['spread_mean'])} [{f1(b['spread_ci_lo'])}, {f1(b['spread_ci_hi'])}] |" for b in B2])
 H('### B fill realism (reported premiums vs the traded range of the same minute)')
-T(['| epoch | book | account | n | entry inside bar | exit inside bar | both inside | median entry pos (0=low,1=high) | median exit pos | entries below bar VWAP | exits above bar VWAP | n outside | reported P&L of outside rows | median entry-bar volume |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|'] +
-  [f"| {b['epoch']} | {b['book']} | {b['account_type']} | {b['n']} | {pct(b['entry_inside_share'])} | {pct(b['exit_inside_share'])} | {pct(b['both_inside_share'])} | {b['median_entry_pos_in_bar']} | {b['median_exit_pos_in_bar']} | {pct(b['entry_below_vwap_share'])} | {pct(b['exit_above_vwap_share'])} | {b['n_outside_range']} | {f0(b['sum_reported_outside_range'])} | {b['median_entry_bar_vol']} |" for b in B3])
+T(['| epoch | book | account | n | entry inside bar | entry below bar low | entry above bar high | exit inside bar | exit above bar high | exit below bar low | both inside | median entry pos (0=low,1=high) | median exit pos | entries below bar VWAP | exits above bar VWAP | n outside | reported P&L of outside rows | median entry-bar volume |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|'] +
+  [f"| {b['epoch']} | {b['book']} | {b['account_type']} | {b['n']} | {pct(b['entry_inside_share'])} | {pct(b['entry_below_low_share'])} | {pct(b['entry_above_high_share'])} | {pct(b['exit_inside_share'])} | {pct(b['exit_above_high_share'])} | {pct(b['exit_below_low_share'])} | {pct(b['both_inside_share'])} | {b['median_entry_pos_in_bar']} | {b['median_exit_pos_in_bar']} | {pct(b['entry_below_vwap_share'])} | {pct(b['exit_above_vwap_share'])} | {b['n_outside_range']} | {f0(b['sum_reported_outside_range'])} | {b['median_entry_bar_vol']} |" for b in B3])
 fb = collections.defaultdict(list)
 for x in Bfb: fb[x['epoch']].append(x)
 T(['Sensitivity (next-bar fallback as in evidence/scripts/validate_trades.py, i.e. the first bar at/after the entry or exit minute when the exact minute has no print):', '', '| epoch | n (fallback) | n exact | reported total | mid total | mid total exact-only |', '|---|---|---|---|---|---|'] +
@@ -424,11 +466,11 @@ H('## C. Independent reconstruction from the reported entry minute (ours; 0DTE o
 MD.append(f'Entry = VWAP of the first bar strictly after the entry minute; exits by backtest/exits.py engines (trail: stop −25 %, breakeven arm +6 %, guardian +15 %/35 % give-back, 30-min time stop, 15:55 close; ladder adds T1 +25 % half / T2 +45 %; bracket ±25 %; hold = 15:55 close), settled with backtest/costs.py (1 contract). Random baseline: for each trade, {K_RANDOM} uniformly random RTH entry minutes (09:30–15:53) on the same contract-day with the same engine/costs; "− random" = paired difference (strategy − mean of its random draws), bootstrap CI; "time-matched" = random minutes within ±30 min of the actual entry. $ figures are per contract (1 lot); "sized" multiplies by the reported size.')
 MD.append('')
 for eng in ENGINES:
-    T([f'### C engine `{eng}` (Independent reconstruction, ours)', '', '| epoch | book | n | reported mean ret | model | mean $/contract [CI] | total $ 1-lot | total $ sized | WR | PF | mean ret | random mean $ | strategy − random [CI] | − random time-matched [CI] |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|'] +
-      [f"| {c['epoch']} | {c['book']} | {c['n']} | {pct(c['reported_mean_ret'])} | {mdl} | {f1(c[f'{eng}_{mdl}_mean_usd'])} [{f1(c[f'{eng}_{mdl}_ci_lo'])}, {f1(c[f'{eng}_{mdl}_ci_hi'])}] | {f0(c[f'{eng}_{mdl}_total_usd_1lot'])} | {f0(c[f'{eng}_{mdl}_total_usd_sized'])} | {pct(c[f'{eng}_{mdl}_win_rate'])} | {c[f'{eng}_{mdl}_pf']} | {pct(c[f'{eng}_{mdl}_mean_ret'])} | {f1(c[f'{eng}_{mdl}_random_mean_usd'])} | {f1(c[f'{eng}_{mdl}_minus_random_mean'])} [{f1(c[f'{eng}_{mdl}_minus_random_ci_lo'])}, {f1(c[f'{eng}_{mdl}_minus_random_ci_hi'])}] | {f1(c[f'{eng}_{mdl}_minus_random_timematched_mean'])} [{f1(c[f'{eng}_{mdl}_minus_random_tm_ci_lo'])}, {f1(c[f'{eng}_{mdl}_minus_random_tm_ci_hi'])}] |" for c in C1 for mdl in CMODELS])
+    T([f'### C engine `{eng}` (Independent reconstruction, ours)', '', '| epoch | book | n | n clusters | reported mean ret | model | mean $/contract [CI] (cluster CI) | total $ 1-lot | total $ sized | WR | PF | mean ret | random mean $ | strategy − random [CI] (cluster CI) | − random time-matched [CI] (cluster CI) |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|'] +
+      [f"| {c['epoch']} | {c['book']} | {c['n']} | {c['n_clusters']} | {pct(c['reported_mean_ret'])} | {mdl} | {f1(c[f'{eng}_{mdl}_mean_usd'])} [{f1(c[f'{eng}_{mdl}_ci_lo'])}, {f1(c[f'{eng}_{mdl}_ci_hi'])}] ([{f1(c[f'{eng}_{mdl}_ci_cluster_lo'])}, {f1(c[f'{eng}_{mdl}_ci_cluster_hi'])}]) | {f0(c[f'{eng}_{mdl}_total_usd_1lot'])} | {f0(c[f'{eng}_{mdl}_total_usd_sized'])} | {pct(c[f'{eng}_{mdl}_win_rate'])} | {c[f'{eng}_{mdl}_pf']} | {pct(c[f'{eng}_{mdl}_mean_ret'])} | {f1(c[f'{eng}_{mdl}_random_mean_usd'])} | {f1(c[f'{eng}_{mdl}_minus_random_mean'])} [{f1(c[f'{eng}_{mdl}_minus_random_ci_lo'])}, {f1(c[f'{eng}_{mdl}_minus_random_ci_hi'])}] ([{f1(c[f'{eng}_{mdl}_minus_random_ci_cluster_lo'])}, {f1(c[f'{eng}_{mdl}_minus_random_ci_cluster_hi'])}]) | {f1(c[f'{eng}_{mdl}_minus_random_timematched_mean'])} [{f1(c[f'{eng}_{mdl}_minus_random_tm_ci_lo'])}, {f1(c[f'{eng}_{mdl}_minus_random_tm_ci_hi'])}] ([{f1(c[f'{eng}_{mdl}_minus_random_tm_ci_cluster_lo'])}, {f1(c[f'{eng}_{mdl}_minus_random_tm_ci_cluster_hi'])}]) |" for c in C1 for mdl in CMODELS])
 H('### C MFE / MAE and entry-timing percentile (ours)')
-T(['| epoch | book | n | median MFE | median MAE | MFE ≥ +25 % | MAE ≤ −25 % | MFE percentile vs 50 random minutes: median | mean [CI] | median entry (min after open) |', '|---|---|---|---|---|---|---|---|---|---|'] +
-  [f"| {c['epoch']} | {c['book']} | {c['n']} | {pct(c['mfe_median'])} | {pct(c['mae_median'])} | {pct(c['mfe_ge_25_share'])} | {pct(c['mae_le_m25_share'])} | {c['mfe_pctile_median']} | {c['mfe_pctile_mean']} [{c.get('mfe_pctile_mean_ci_lo')}, {c.get('mfe_pctile_mean_ci_hi')}] | {c['median_entry_minute_after_open']} |" for c in C1])
+T(['| epoch | book | n | n clusters | median MFE | median MAE | MFE ≥ +25 % | MAE ≤ −25 % | MFE pctile vs 50 uniform random minutes: median | mean [CI] (cluster CI) | MFE pctile vs 50 time-matched (±30 min) minutes: median | mean [CI] (cluster CI) | median entry (min after open) |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|'] +
+  [f"| {c['epoch']} | {c['book']} | {c['n']} | {c['n_clusters']} | {pct(c['mfe_median'])} | {pct(c['mae_median'])} | {pct(c['mfe_ge_25_share'])} | {pct(c['mae_le_m25_share'])} | {c['mfe_pctile_median']} | {c['mfe_pctile_mean']} [{c.get('mfe_pctile_mean_ci_lo')}, {c.get('mfe_pctile_mean_ci_hi')}] ([{c.get('mfe_pctile_mean_ci_cluster_lo')}, {c.get('mfe_pctile_mean_ci_cluster_hi')}]) | {c['mfe_pctile_tm_median']} | {c['mfe_pctile_tm_mean']} [{c.get('mfe_pctile_tm_mean_ci_lo')}, {c.get('mfe_pctile_tm_mean_ci_hi')}] ([{c.get('mfe_pctile_tm_mean_ci_cluster_lo')}, {c.get('mfe_pctile_tm_mean_ci_cluster_hi')}]) | {c['median_entry_minute_after_open']} |" for c in C1])
 H('### C by month, trail engine (Independent reconstruction, ours)')
 T(['| epoch | month | n | trail mid mean [CI] | trail spread mean [CI] | − random (mid) [CI] | MFE pctile median |', '|---|---|---|---|---|---|---|'] +
   [f"| {c['epoch']} | {c['month']} | {c['n']} | {f1(c['trail_mid_mean_usd'])} [{f1(c['trail_mid_ci_lo'])}, {f1(c['trail_mid_ci_hi'])}] | {f1(c['trail_spread_mean_usd'])} [{f1(c['trail_spread_ci_lo'])}, {f1(c['trail_spread_ci_hi'])}] | {f1(c['trail_mid_minus_random_mean'])} [{f1(c['trail_mid_minus_random_ci_lo'])}, {f1(c['trail_mid_minus_random_ci_hi'])}] | {c['mfe_pctile_median']} |" for c in C2])

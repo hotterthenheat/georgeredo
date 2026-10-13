@@ -18,6 +18,11 @@ for f in glob.glob(os.environ.get('BT_CACHE', BT + '/cache') + '/*option-contrac
 print('cached contract-days', len(avail), flush=True)
 rng = random.Random(2026); rand = []; tries = 0; day_bars = {}
 days_ok = {t: [d for d in DAYS] for t in TICKERS}
+# 2026-10-13 audit follow-up: the draw below accepts only contract-days already present in the (uncommitted) cache, so the control set changed whenever other studies filled the cache; reuse the committed draw unless Q4_REDRAW=1.
+if os.path.exists(OUT + '/q4_random_entries.csv') and not os.environ.get('Q4_REDRAW'):
+    rand = list(csv.DictReader(open(OUT + '/q4_random_entries.csv'))); print('random entries loaded from out/q4_random_entries.csv', len(rand), flush=True)
+    for r in rand:
+        if (r['contract'], r['date']) not in cache: cache[(r['contract'], r['date'])] = data.option_bars(r['contract'], r['date'])
 while len(rand) < 3000 and tries < 200000:
     tries += 1
     tk = rng.choice(TICKERS); d = rng.choice(days_ok[tk])
