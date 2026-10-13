@@ -71,12 +71,10 @@ for sub_name, mask in (('all', np.ones(len(S), bool)), ('train', S['train'].valu
             ok = sub[[p, t]].notna().all(axis=1).values; x = sub[p].values[ok]; y = sub[t].values[ok]; n = len(x)
             if n < 50 or np.nanstd(x) == 0: continue
             r = stats.spearmanr(x, y).correlation
-            idx = block_idx(n, B_IC); bs = []
-            rx = x; ry = y
-            for i in range(B_IC):
-                xi = rx[idx[i]]; yi = ry[idx[i]]
-                if np.std(xi) == 0: continue
-                bs.append(stats.spearmanr(xi, yi).correlation)
+            idx = block_idx(n, B_IC)
+            RX = stats.rankdata(x[idx], axis=1); RY = stats.rankdata(y[idx], axis=1)
+            RX = RX - RX.mean(1, keepdims=True); RY = RY - RY.mean(1, keepdims=True)
+            den = np.sqrt((RX * RX).sum(1) * (RY * RY).sum(1)); bs = np.where(den > 0, (RX * RY).sum(1) / den, np.nan)
             lo, hi = ci(bs)
             ic_rows.append(dict(sample=sub_name, predictor=p, predictor_label=plab, target=t, target_label=tlab, n=n, spearman=r, ci_lo=lo, ci_hi=hi, mean_x1=(y[x == 1].mean() if set(np.unique(x)) <= {0, 1} else np.nan), mean_x0=(y[x == 0].mean() if set(np.unique(x)) <= {0, 1} else np.nan)))
 IC = pd.DataFrame(ic_rows); IC.to_csv(os.path.join(OUT, 'ic_spearman.csv'), index=False, float_format='%.4f')
@@ -243,5 +241,5 @@ g = S[S['neg_gamma_prev'].notna()]
 if len(g) > 50:
     a = g[g['neg_gamma_prev'] == 1]; b = g[g['neg_gamma_prev'] == 0]
     print(f'\n=== UW prior-day gamma sign (>= {GEX_START}): n_neg {len(a)} n_pos {len(b)}; mean ratio neg {a["ratio"].mean():.4f} pos {b["ratio"].mean():.4f}; hit(kfair) neg {(a["ratio"] < k_fair).mean():.3f} pos {(b["ratio"] < k_fair).mean():.3f}; mean |pm move| neg {a["absmove_pm"].mean()*100:.3f}% pos {b["absmove_pm"].mean()*100:.3f}%')
-S.to_csv(os.path.join(OUT, 'sample.csv'), index=False, float_format='%.8g')
+S[['date', 'year', 'dow', 'train', 'p_open', 'p_1300', 'p_close', 'range_0930_1030', 'rv_0930_1030', 'range_0930_1300', 'rv_0930_1300', 'absmove_am', 'eff_am', 'range_pm', 'absmove_pm', 'move_pm', 'ratio', 'range_day', 'vix_0931', 'vix_1300', 'vix_chg_open_1300', 'vix_hi_60d', 'prev_range', 'prev_rv5', 'prev_rv20', 'absgap', 'amrange_rel20', 'fomc', 'cpi', 'nfp', 'opex', 'quad_opex', 'month_end', 'holiday_adj', 'pre_holiday', 'post_holiday', 'neg_gamma_prev']].to_csv(os.path.join(OUT, 'sample.csv'), index=False, float_format='%.6g')
 print('\nDONE')

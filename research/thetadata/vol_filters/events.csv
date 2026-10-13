@@ -1,0 +1,301 @@
+date,event,note,source
+2017-06-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2017-06-14,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2017-06-14,FOMC,scheduled; 2017 June 13-14,federalreserve.gov/monetarypolicy/fomchistorical2017.htm
+2017-07-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2017-07-14,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2017-07-26,FOMC,scheduled; 2017 July 25-26,federalreserve.gov/monetarypolicy/fomchistorical2017.htm
+2017-08-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2017-08-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2017-09-01,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2017-09-14,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2017-09-20,FOMC,scheduled; 2017 September 19-20,federalreserve.gov/monetarypolicy/fomchistorical2017.htm
+2017-10-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2017-10-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2017-11-01,FOMC,scheduled; 2017 Oct/Nov 31-1,federalreserve.gov/monetarypolicy/fomchistorical2017.htm
+2017-11-03,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2017-11-15,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2017-12-08,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2017-12-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2017-12-13,FOMC,scheduled; 2017 December 12-13,federalreserve.gov/monetarypolicy/fomchistorical2017.htm
+2018-01-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2018-01-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2018-01-31,FOMC,scheduled; 2018 January 30-31,federalreserve.gov/monetarypolicy/fomchistorical2018.htm
+2018-02-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2018-02-14,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2018-03-09,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2018-03-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2018-03-21,FOMC,scheduled; 2018 March 20-21,federalreserve.gov/monetarypolicy/fomchistorical2018.htm
+2018-04-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2018-04-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2018-05-02,FOMC,scheduled; 2018 May 1-2,federalreserve.gov/monetarypolicy/fomchistorical2018.htm
+2018-05-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2018-05-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2018-06-01,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2018-06-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2018-06-13,FOMC,scheduled; 2018 June 12-13,federalreserve.gov/monetarypolicy/fomchistorical2018.htm
+2018-07-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2018-07-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2018-08-01,FOMC,scheduled; 2018 Jul/Aug 31-1,federalreserve.gov/monetarypolicy/fomchistorical2018.htm
+2018-08-03,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2018-08-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2018-09-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2018-09-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2018-09-26,FOMC,scheduled; 2018 September 25-26,federalreserve.gov/monetarypolicy/fomchistorical2018.htm
+2018-10-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2018-10-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2018-11-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2018-11-08,FOMC,scheduled; 2018 November 7-8,federalreserve.gov/monetarypolicy/fomchistorical2018.htm
+2018-11-14,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2018-12-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2018-12-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2018-12-19,FOMC,scheduled; 2018 December 18-19,federalreserve.gov/monetarypolicy/fomchistorical2018.htm
+2019-01-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2019-01-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2019-01-30,FOMC,scheduled; 2019 January 29-30,federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-02-01,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2019-02-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2019-03-08,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2019-03-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2019-03-20,FOMC,scheduled; 2019 March 19-20,federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-04-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2019-04-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2019-05-01,FOMC,scheduled; 2019 April/May 30-1,federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-05-03,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2019-05-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2019-06-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2019-06-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2019-06-19,FOMC,scheduled; 2019 June 18-19,federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-07-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2019-07-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2019-07-31,FOMC,scheduled; 2019 July 30-31,federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-08-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2019-08-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2019-09-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2019-09-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2019-09-18,FOMC,scheduled; 2019 September 17-18,federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-10-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2019-10-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2019-10-30,FOMC,scheduled; 2019 October 29-30,federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2019-11-01,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2019-11-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2019-12-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2019-12-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2019-12-11,FOMC,scheduled; 2019 December 10-11,federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+2020-01-10,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2020-01-14,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2020-01-29,FOMC,scheduled; 2020 January 28-29,federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-02-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2020-02-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2020-03-03,FOMC,unscheduled (statement released 10:00 ET); 2020 March 2,federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-03-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2020-03-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2020-03-16,FOMC,"unscheduled (Sunday decision, first session after); 2020 March 15",federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-03-18,FOMC,scheduled; 2020 March 17-18,federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-04-03,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2020-04-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2020-04-29,FOMC,scheduled; 2020 April 28-29,federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-05-08,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2020-05-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2020-06-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2020-06-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2020-06-10,FOMC,scheduled; 2020 June 9-10,federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-07-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2020-07-14,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2020-07-29,FOMC,scheduled; 2020 July 28-29,federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-08-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2020-08-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2020-09-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2020-09-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2020-09-16,FOMC,scheduled; 2020 September 15-16,federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-10-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2020-10-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2020-11-05,FOMC,scheduled; 2020 November 4-5,federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2020-11-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2020-11-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2020-12-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2020-12-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2020-12-16,FOMC,scheduled; 2020 December 15-16,federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+2021-01-08,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2021-01-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2021-01-27,FOMC,scheduled; 2021 January 26-27,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-02-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2021-02-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2021-03-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2021-03-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2021-03-17,FOMC,scheduled; 2021 March 16-17,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-04-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2021-04-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2021-04-28,FOMC,scheduled; 2021 April 27-28,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-05-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2021-05-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2021-06-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2021-06-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2021-06-16,FOMC,scheduled; 2021 June 15-16,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-07-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2021-07-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2021-07-28,FOMC,scheduled; 2021 July 27-28,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-08-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2021-08-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2021-09-03,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2021-09-14,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2021-09-22,FOMC,scheduled; 2021 September 21-22,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-10-08,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2021-10-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2021-11-03,FOMC,scheduled; 2021 November 2-3,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2021-11-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2021-11-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2021-12-03,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2021-12-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2021-12-15,FOMC,scheduled; 2021 December 14-15,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-01-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2022-01-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2022-01-26,FOMC,scheduled; 2022 January 25-26,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-02-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2022-02-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2022-03-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2022-03-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2022-03-16,FOMC,scheduled; 2022 March 15-16,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-04-01,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2022-04-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2022-05-04,FOMC,scheduled; 2022 May 3-4,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-05-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2022-05-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2022-06-03,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2022-06-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2022-06-15,FOMC,scheduled; 2022 June 14-15,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-07-08,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2022-07-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2022-07-27,FOMC,scheduled; 2022 July 26-27,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-08-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2022-08-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2022-09-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2022-09-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2022-09-21,FOMC,scheduled; 2022 September 20-21,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-10-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2022-10-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2022-11-02,FOMC,scheduled; 2022 November 1-2,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2022-11-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2022-11-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2022-12-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2022-12-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2022-12-14,FOMC,scheduled; 2022 December 13-14,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-01-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2023-01-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2023-02-01,FOMC,scheduled; 2023 Jan/Feb 31-1,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-02-03,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2023-02-14,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2023-03-10,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2023-03-14,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2023-03-22,FOMC,scheduled; 2023 March 21-22,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-04-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2023-04-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2023-05-03,FOMC,scheduled; 2023 May 2-3,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-05-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2023-05-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2023-06-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2023-06-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2023-06-14,FOMC,scheduled; 2023 June 13-14,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-07-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2023-07-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2023-07-26,FOMC,scheduled; 2023 July 25-26,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-08-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2023-08-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2023-09-01,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2023-09-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2023-09-20,FOMC,scheduled; 2023 September 19-20,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-10-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2023-10-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2023-11-01,FOMC,scheduled; 2023 Oct/Nov 31-1,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2023-11-03,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2023-11-14,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2023-12-08,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2023-12-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2023-12-13,FOMC,scheduled; 2023 December 12-13,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-01-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2024-01-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2024-01-31,FOMC,scheduled; 2024 January 30-31,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-02-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2024-02-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2024-03-08,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2024-03-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2024-03-20,FOMC,scheduled; 2024 March 19-20,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-04-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2024-04-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2024-05-01,FOMC,scheduled; 2024 Apr/May 30-1,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-05-03,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2024-05-15,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2024-06-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2024-06-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2024-06-12,FOMC,scheduled; 2024 June 11-12,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-07-05,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2024-07-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2024-07-31,FOMC,scheduled; 2024 July 30-31,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-08-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2024-08-14,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2024-09-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2024-09-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2024-09-18,FOMC,scheduled; 2024 September 17-18,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-10-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2024-10-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2024-11-01,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2024-11-07,FOMC,scheduled; 2024 November 6-7,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2024-11-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2024-12-06,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2024-12-11,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2024-12-18,FOMC,scheduled; 2024 December 17-18,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-01-10,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2025-01-15,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2025-01-29,FOMC,scheduled; 2025 January 28-29,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-02-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2025-02-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2025-03-07,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2025-03-12,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2025-03-19,FOMC,scheduled; 2025 March 18-19,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-04-04,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2025-04-10,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2025-05-02,NFP,Employment Situation 08:30 ET,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_MMDDYYYY; cross-checked against the reference-week rule)
+2025-05-07,FOMC,scheduled; 2025 May 6-7,federalreserve.gov/monetarypolicy/fomccalendars.htm
+2025-05-13,CPI,CPI release 08:30 ET,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_MMDDYYYY; cross-checked against ALFRED CPIAUCSL vintage dates)
+2025-06-06,NFP,Employment Situation May 2025,https://www.bls.gov/bls/news-release/empsit.htm (archive file empsit_06062025) [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-06-11,CPI,CPI May 2025,https://www.bls.gov/bls/news-release/cpi.htm (archive file cpi_06112025) [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-06-18,FOMC,decision day of the June 17-18 2025 meeting,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-07-03,NFP,Employment Situation June 2025,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-07-15,CPI,CPI June 2025,https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-07-30,FOMC,decision day of the July 29-30 2025 meeting,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-08-01,NFP,Employment Situation July 2025,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-08-12,CPI,CPI July 2025,https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-09-05,NFP,Employment Situation August 2025,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-09-11,CPI,CPI August 2025,https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-09-17,FOMC,decision day of the September 16-17 2025 meeting,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-10-24,CPI,CPI September 2025 (delayed by the appropriations lapse),https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-10-29,FOMC,decision day of the October 28-29 2025 meeting,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-11-20,NFP,Employment Situation September 2025 (delayed by the appropriations lapse),https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-12-10,FOMC,decision day of the December 9-10 2025 meeting,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-12-16,NFP,Employment Situation November 2025 (October 2025 release not published),https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2025-12-18,CPI,CPI November 2025 (October 2025 release not published),https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-01-09,NFP,Employment Situation December 2025,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-01-13,CPI,CPI December 2025,https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-01-28,FOMC,decision day of the January 27-28 2026 meeting,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-02-11,NFP,Employment Situation January 2026,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-02-13,CPI,CPI January 2026,https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-03-06,NFP,Employment Situation February 2026,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-03-11,CPI,CPI February 2026,https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-03-18,FOMC,decision day of the March 17-18 2026 meeting,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-04-03,NFP,Employment Situation March 2026,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-04-10,CPI,CPI March 2026,https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-04-29,FOMC,decision day of the April 28-29 2026 meeting,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-05-08,NFP,Employment Situation April 2026,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-05-12,CPI,CPI April 2026,https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-06-05,NFP,Employment Situation May 2026,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-06-10,CPI,CPI May 2026,https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-06-17,FOMC,decision day of the June 16-17 2026 meeting,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-07-02,NFP,Employment Situation June 2026,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-07-14,CPI,CPI June 2026,https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-07-29,FOMC,decision day of the July 28-29 2026 meeting,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-08-07,NFP,Employment Situation July 2026,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-08-12,CPI,CPI July 2026,https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-09-04,NFP,Employment Situation August 2026,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-09-11,CPI,CPI August 2026,https://www.bls.gov/bls/news-release/cpi.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-09-16,FOMC,decision day of the September 15-16 2026 meeting,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm [via research/thetadata/straddle_nbbo/event_days.csv]
+2026-10-02,NFP,Employment Situation September 2026,https://www.bls.gov/bls/news-release/empsit.htm [via research/thetadata/straddle_nbbo/event_days.csv]
