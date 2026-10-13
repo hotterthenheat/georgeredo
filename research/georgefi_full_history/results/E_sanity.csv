@@ -1,0 +1,33 @@
+check,value,note
+entry_before_exit_violations,0,rows with exit <= entry (all groups)
+rows_without_exit_time,3,open positions in the pull; reported pnl 0; excluded from B
+exit_at_or_after_1600_ET,6,E1/v2.0.0-ict/^SPX/2026-02-06 16:00/pnl 4020; E2/v2.0.0-ict/GLD/2026-03-26 16:16/pnl 24; E2/v2.0.0-ict/IWM/2026-05-15 16:01/pnl -35; E2/trade_now_v1/^SPX/2026-08-28 16:10/pnl -2185; E2/singles_today_v1/AVGO/2026-10-10 16:00/pnl -104; E2/singles_today_v1/GLD/2026-10-10 16:00/pnl -118
+entry_before_0930_ET,3,E1/SPY/2026-02-10 06:52; E1/IWM/2026-02-10 08:00; E1/SPY/2026-02-10 09:20
+exit_after_1555_ET_0DTE,8,0DTE options closed after 15:55 (paper lane hard close)
+entry_minute_bar_zero_volume,0,bar exists at the entry minute but UW volume fields sum to 0
+entry_minute_no_bar_(no_prints),138,entry-day bars exist but no bar printed in the entry minute
+duplicate_trade_ids,0,
+same_contract_same_entry_minute_pairs,327,distinct ids sharing contract+entry minute (scale-ins / duplicates)
+pnl_mismatch_rows,49,reported 14111 vs recomputed 5576
+data_error_rows,24,reported pnl -2251
+E1_reported_total_all,43248.26,n=546
+E1_reported_total_excl_mismatch,34627.26,n=530
+E1_reported_total_excl_dataerr,45277.26,n=528
+E1_reported_total_excl_both,36741.76,n=513
+E1_B_mid_total_excl_mismatch,19001.74,"n=440 (all rows: 21567, n=452)"
+E1_B_spread_total_excl_mismatch,6205.91,all rows: 7914
+E1_B_recomputed_vs_reported_excl_mismatch,0.0,should be ~0
+E2_reported_total_all,-3756.7,n=603
+E2_reported_total_excl_mismatch,-4596.7,n=598
+E2_reported_total_excl_dataerr,-3534.7,n=597
+E2_reported_total_excl_both,-4374.7,n=592
+E2_B_mid_total_excl_mismatch,-3614.0,"n=499 (all rows: -3098, n=501)"
+E2_B_spread_total_excl_mismatch,-15376.45,all rows: -14913
+E2_B_recomputed_vs_reported_excl_mismatch,0.0,should be ~0
+paper_reported_total_all,-3632.5,n=84
+paper_reported_total_excl_mismatch,-8282.5,n=56
+paper_reported_total_excl_dataerr,-3632.5,n=84
+paper_reported_total_excl_both,-8282.5,n=56
+paper_B_mid_total_excl_mismatch,-7981.0,"n=56 (all rows: -4702, n=84)"
+paper_B_spread_total_excl_mismatch,-9107.67,all rows: -6217
+paper_B_recomputed_vs_reported_excl_mismatch,-0.0,should be ~0

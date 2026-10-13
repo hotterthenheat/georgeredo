@@ -1,0 +1,37 @@
+epoch,exit_reason,n
+E1,profit-take/trail | ICT: Take profit at MAJOR liquidity pool,37
+E1,profit-take/trail | TIER A +10% (1/5),26
+E1,time/eod | EOD AUTO-CLOSE (3:58 PM),25
+E1,profit-take/trail | ICT TIER 1 PROFIT +11% (PARTIAL),20
+E1,profit-take/trail | ICT TIER 1 PROFIT +12% (PARTIAL),18
+E1,profit-take/trail | ICT TIER 1 PROFIT +13% (PARTIAL),16
+E1,profit-take/trail | TIER A +10% (1/4),16
+E1,profit-take/trail | TIER A +10% (2/8),14
+E1,profit-take/trail | TIER A +10% (3/11),14
+E1,profit-take/trail | TIER A +10% (2/7),13
+E1,profit-take/trail | ICT TIER 1 PROFIT +14% (PARTIAL),13
+E1,data_error | 📉 SHADOW STOP: Chart invalidated (CLOSE),12
+E2,profit-take/trail | ICT: Take profit at MAJOR liquidity pool,34
+E2,profit-take/trail | SINGLES_TODAY_TRAIL,26
+E2,stop | STOP LOSS (-12%),25
+E2,other | GEX EXIT: Accelerator reversed against B,23
+E2,stop | SINGLES_TODAY_STOP,14
+E2,stop | STOP LOSS (0%),12
+E2,other | GEX REGIME SHIFT: NEG→POS while losing (,11
+E2,profit-take/trail | SWING PROFIT_TARGET PARTIAL EXIT (25%): ,11
+E2,other | CLOSE_GUARDIAN_BREAKEVEN,10
+E2,time/eod | CLOSE_TIME_STOP,9
+E2,"profit-take/trail | TRAILING PROFIT (+12% locked, exited at ",8
+E2,"profit-take/trail | TRAILING PROFIT (+8% locked, exited at +",8
+paper,stop | SPX STOP LOSS (-32%),4
+paper,stop | SPX STOP LOSS (-33%),4
+paper,stop | SPX STOP LOSS (-29%),4
+paper,profit-take/trail | SPX QUICK SCALP at +21%,3
+paper,stop | SPX STOP LOSS (-27%),3
+paper,stop | SPX STOP LOSS (-31%),3
+paper,stop | SPX STOP LOSS (-26%),3
+paper,stop | SPX STOP LOSS (-25%),3
+paper,time/eod | SPX OTM at 3:50 PM -- closing (worthless,3
+paper,profit-take/trail | SPX QUICK SCALP at +26%,2
+paper,stop | SPX STOP LOSS (-41%),2
+paper,stop | GEX MAGNET STOP -- concentration 14.2% <,2
