@@ -85,6 +85,14 @@ Substitution rules used in this research (documented differences):
 
 ---
 
+## 2b. GeorgeFi's own provider usage, as observed on the member surface
+
+- `/api/flow-proxy` (the member Options Flow Scanner) forwards the user's filters (`min_premium`, `order`, `limit`, `min_ask_perc`, `is_otm`, `vol_greater_oi`, `max_dte`, …) and returns records with `days_of_oi_increases`, `days_of_vol_greater_than_oi`, `ask_side_perc_7_day`, `bid_side_perc_7_day`, `chain_prev_close`, `vol_pctile_15d`, `total_ask_changes`, `roc`, `floor_volume`, `multileg_volume`, `prev_oi`, `iv_change` — the field set of Unusual Whales' `GET /api/screener/option-contracts` ("Hottest Chains"), whose parameters (`is_otm`, `min_premium`, `min_volume_oi_ratio`, `max_dte`, …) match the proxied query. **Observed pass-through of UW's screener.**
+- `/api/indices/*/gex` and `/api/gex/by-expiry` report `source: "websocket"` with `sourceOldestTimestamp`, and SSE `gex` events carry `dataSource`/`dataAgeMs`: a server-side websocket cache of per-strike gamma/vanna/charm, consistent with UW's `gex_strike_expiry` websocket channel (the only allowed host offering per-strike Greeks streams). [inferred provider; observed mechanism]
+- `/api/indices/*/dark-pool` uses `methodology: "NBBO_TAGGED"` on SPY as a proxy, consistent with UW `darkpool/{ticker}` fields (`nbbo_bid`, `nbbo_ask`, `market_center`).
+- Option symbols everywhere are Massive/Polygon OCC strings (`O:SPXW…`), mark prices come from an NBBO source (`pricingSource: "nbbo"`, `CACHED_NBBO`), and the trades' `quoteQuality.source` is `websocket` with `maxAgeMs 2000`: consistent with Massive's options quotes websocket feeding fills.
+- `/api/market-data/bars?ticker=^SPX&timeframe=1M` serves index minute bars that this research's Massive plan cannot access; GeorgeFi therefore holds an indices entitlement or sources index bars elsewhere (UW `stock/SPX/ohlc/1m` is one candidate).
+
 ## 3. Costs and usage constraints
 
 - **Massive**: 5 req/min on this key. A full replay of 489 contracts needs ~100 min single-threaded; the fetcher (`evidence/scripts/fetch_bars_mt.py`) backs off on 429. Upgrading to a plan with trades/quotes/snapshots/indices would be needed for tick-level spread analysis and index bars.

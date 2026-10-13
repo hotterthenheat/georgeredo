@@ -3,6 +3,8 @@
 const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 const http = require('http'); const fs = require('fs'); const url = require('url');
 const SP = process.env.SP; const PROFILE = SP + '/browser/profile';
+const redactUrl = (u) => { try { const x = new URL(u); if (!x.hostname.endsWith('georgefi.trade')) { x.search = x.search ? '?REDACTED' : ''; } else { for (const k of ['auth','token','access_token','apiKey','api_key']) { if (x.searchParams.has(k)) x.searchParams.set(k, 'REDACTED'); } } return x.toString(); } catch { return u; } };
+const safeHead = (p) => { const s = String(p || ''); return /auth|token|apikey|api_key|password|bearer/i.test(s) ? '[REDACTED auth-like frame]' : s.slice(0, 200); };
 (async () => {
   const ctx = await chromium.launchPersistentContext(PROFILE, {
     headless: true, viewport: { width: 1440, height: 900 },
@@ -12,12 +14,12 @@ const SP = process.env.SP; const PROFILE = SP + '/browser/profile';
   let page = ctx.pages()[0] || await ctx.newPage();
   const net = []; const ws = []; const consoleLog = [];
   const attach = (p) => {
-    p.on('request', r => net.push({ t: Date.now(), ev: 'req', m: r.method(), u: r.url(), type: r.resourceType() }));
-    p.on('response', async r => { let ct = ''; try { ct = r.headers()['content-type'] || ''; } catch {} net.push({ t: Date.now(), ev: 'res', s: r.status(), u: r.url(), ct }); });
-    p.on('websocket', w => { ws.push({ t: Date.now(), ev: 'open', u: w.url() });
-      w.on('framereceived', f => ws.push({ t: Date.now(), ev: 'in', u: w.url(), n: (f.payload || '').length, head: String(f.payload || '').slice(0, 200) }));
-      w.on('framesent', f => ws.push({ t: Date.now(), ev: 'out', u: w.url(), n: (f.payload || '').length, head: String(f.payload || '').slice(0, 200) }));
-      w.on('close', () => ws.push({ t: Date.now(), ev: 'close', u: w.url() })); });
+    p.on('request', r => net.push({ t: Date.now(), ev: 'req', m: r.method(), u: redactUrl(r.url()), type: r.resourceType() }));
+    p.on('response', async r => { let ct = ''; try { ct = r.headers()['content-type'] || ''; } catch {} net.push({ t: Date.now(), ev: 'res', s: r.status(), u: redactUrl(r.url()), ct }); });
+    p.on('websocket', w => { ws.push({ t: Date.now(), ev: 'open', u: redactUrl(w.url()) });
+      w.on('framereceived', f => ws.push({ t: Date.now(), ev: 'in', u: redactUrl(w.url()), n: (f.payload || '').length, head: safeHead(f.payload) }));
+      w.on('framesent', f => ws.push({ t: Date.now(), ev: 'out', u: redactUrl(w.url()), n: (f.payload || '').length, head: safeHead(f.payload) }));
+      w.on('close', () => ws.push({ t: Date.now(), ev: 'close', u: redactUrl(w.url()) })); });
     p.on('console', m => consoleLog.push({ t: Date.now(), type: m.type(), text: m.text().slice(0, 300) }));
   };
   attach(page);

@@ -23,10 +23,10 @@ Observation vs inference is marked explicitly. Anything labelled *inferred* was 
 |---|---|
 | Public (logged-out) pages | Mapped completely (sitemap + nav + footer + bundle route literals) |
 | Documented public REST API | Called once per endpoint; responses saved |
-| Member-only pages (`/dealer-flow`, `/gex`, `/pulse`, `/playbook`, `/earnings`, `/indices/spx`, ...) | **Not opened.** Each returns `302 → /login?redirect=<path>` for an anonymous session `[E-shot:pub_dealer-flow]` |
-| Login flow | Email + password form at `/login`; "Forgot password?"; "Create an account" `[E-html:login]` `[E-shot:pub_login]` |
+| Member-only pages (`/dealer-flow`, `/gex`, `/pulse`, `/playbook`, `/earnings`, `/indices/*`, ...) | **Opened and inventoried** on 2026-10-13 15:10–15:40 UTC with the user's own account (plan "The Bob", monthly, trial started 2026-10-13 11:09 ET, ends 2026-10-14 11:09 ET; MCP access disabled on the account). Anonymous requests return `302 → /login?redirect=<path>` `[E-shot:pub_dealer-flow]` |
+| Login flow | Email + password form at `/login` → `POST /api/auth/login`; the session is a PocketBase auth token kept in `localStorage.pocketbase_auth` and cookies `pb_auth`, `pb_session_hint`; the SSE stream re-opens with `?auth=<token>` `[E-net:_login_net]` `[E-shot:auth_after_login]` |
 
-Why the authenticated surface is unmapped: this session runs in a cloud container with a headless research browser. No browser connected to the user's own machine (Claude in Chrome / built-in browser) was available in the session, so the user could not perform the login themselves, and the user asked that no password be pasted into chat. The safe path is to put `GEORGEFI_EMAIL` and `GEORGEFI_PASSWORD` into the environment's secret store and re-run the authenticated inventory; the research browser already has a `/login` routine that reads those variables and never logs them (`evidence/scripts/browser_daemon.js`).
+Authenticated evidence lives in `evidence/auth_pages/` (page text, sanitized network logs, control lists), `evidence/auth_api/` (103 sanitized API bodies the pages themselves requested, replayed inside the user's own page session), `evidence/auth_interactions/` (network logs after each control click), `evidence/screenshots/auth_*.png` and `ix_*.png`, and `evidence/auth_pages/_sse_capture.json` (100-second sample of the authenticated event stream). All auth tokens, the account e-mail and webhook URLs were redacted before copying.
 
 ---
 
@@ -71,24 +71,35 @@ Pages that return 404 as anonymous: `/signals`, `/dashboard` (the dashboard is t
 
 ---
 
-## 4. Member-only route inventory (recovered, not opened)
+## 4. Member-only page inventory (opened with the user's account)
 
-Observed as redirecting to login: `/playbook`, `/dealer-flow`, `/gex`, `/pulse`, `/earnings`, `/indices/spx`.
+Member shell: top nav buttons **0DTE / Dealer / Swings / Plan / Trades / Open**, command palette (Ctrl-K), notifications bell, tier badge ("BOB"), a "Link your Discord account" banner, browser/audio notification toggles. Home (`/`) for a member is the dashboard: "Live signals · 20 active · Updated hh:mm ET", the INDEX READ card for ^SPX (direction, play, conviction, volume multiple, day read, dealer playbook line), family filter chips (Smart money, Opening, Flow, Big prints, Momentum, Blocks, Accumulation, Whale, Gap fill, Near-dated, Anchors, Crescendo), theme chips (Technology Rotation, Energy Rotation, Oil, Memory and Storage), "Levels to watch". `[E-auth:home controls]`
 
-Route literals present in the public JS bundle (command-palette labels, `[E-bundle]`, chunk `DEdQQlOZ.js`): `/zero-dte`, `/weeklies`, `/week-ahead`, `/trades`, `/swings`, `/spx-swings`, `/situation-room`, `/rotation`, `/pulse`, `/portfolio`, `/playbook`, `/lottos`, `/indices/spx`, `/hold`, `/gex`, `/flow-alerts`, `/flow`, `/dealer-flow`, `/account`. The guide also names `/spx` (SPX cockpit), `/account/mcp`, and index cockpits for `^NDX` and `^RUT`.
+| Route (title) | Content observed | Data calls specific to the page (beyond the shell set) | Controls observed |
+|---|---|---|---|
+| `/indices/spx` "SPX 0DTE Cockpit" (also `/spx`; `/indices/ndx`, `/indices/rut`) | Header: live spot, M/BEAR % read, ENGINE ON, "Replay GEX history", ALERT TAPE counters (SIZE/BUY & FORGET/EXIT/ALIGNED SURGE/VOL SURGE/SUS WRITE, "show quiet"), SESSION CHART with level ladder (call/put walls with % of book, σ rungs, ADR ±60, OPEN, burst strikes), EVENTS list (BUY NOW / SWITCH TO PUTS / FULL SIZE / GET OUT / PROTECT PROFIT with HELD BASE, PRESS SIDE CALL, SURGE READ GET OUT lanes) | `/api/indices/{spx,ndx,rut}/{gex,dealer-read,dealer-flow,delta-flow,watch-levels,timing,reversal-clock,physics,market-tide,dark-pool,dp-levels,sigma-ladder,displacement-signal}`, `/api/gex/expected-moves?ticker=`, `/api/commander/flips?ticker=&since=&limit=50`, `/api/spx/paper-trades?days=30&ticker=` (+`&strategy=spx_displacement_sniper`), `/api/plays/today`, `/api/singles-surge/today`, `/api/dealer-chart/{ticker}/history`, `/api/dealer-chart/cockpit-config`, `/api/day-type/today`, `/api/spx/config`, `/api/spx/vix`, `/api/spx/market-calendar`, `/api/market/vol-index?ticker=`, `/api/health/hybrid`, `/api/market-data/bars?ticker=^SPX&timeframe=5M&limit=156`, `/api/analysis/{alert-tape,imbalances,index-read-veto,positioning-heatmap,playbook/^SPX,smart-money/^SPX,reactivity-read,spx-sniper/current,spx-forward-context,chop-rotation}` | Index tabs SPX/NDX/RUT (navigate to the sibling cockpit and re-fetch the whole set, 33 calls `[E-ix:cockpit_NDX]`); Chart / Cockpit layout toggle (`?layout=command`, no fetch); Live / Recap / Next day (Recap re-fetches `singles-surge/today`); "Replay GEX history" (fetches `analysis/reactivity-read`); quiet-alert toggle (client) |
+| `/gex` "GEX" | Grid of ~60 tickers with total GEX and accelerator score; detail panel: regime (NEGATIVE/POSITIVE GAMMA), total GEX, lean ("Volatile — No Lean", "Short Pops · Counter-trend"), ENTRY/TARGET/OUT lines, Pin, Flip, Walls, PIN RISK %, BREAKOUT %, ACCEL, BASE PATH with confidence, EXPECTED MOVE σ position, STRUCTURE, DESK STATE, session brief | `/api/gex/history?ticker=`, `/api/gex/by-expiry?ticker=` (2 calls per tile click `[E-ix:gex_SPX]`), `/api/gex/events`, `/api/gex/expected-moves-batch?tickers=…` | Ticker tiles (`?ticker=`), "Compare … with" selector |
+| `/dealer-flow` "Dealer hedging flow" | Per index: DEALER HEDGING FLOW read, IV · VANNA PLAYBOOK (IV ↓, Vanna ○, Dealer Δ ○, Σvanna, DEX); at observation all three read "No hedging-flow read yet"; footer states E-mini counts are modeled estimates | `/api/market-data/bars?ticker=…&timeframe=1M&limit=60` | none |
+| `/pulse` "Pulse" (also `/zero-dte` → redirects here) | THE BOARD: 44 names, "6 live · 38 watch", sort by score, HOT / Sus-strike / Reaction chips, per-tile % change, score, DEAD/fresh flow label, rVol; THE DETAIL: chart with TF (1M 3M 5M 15M 30M 1H 4H 1D), MODE (ORBS / HEATMAP), LAYER (GEX / VEX / CHARM / TRINITY / DERIVED), EXP (CURRENT / +1 / +3), CONFLUENCE STANDBY | `/api/pulse/universe`, `/api/zero-dte/heat-board`, ~44 × `/api/market-data/bars?ticker=X&timeframe=1M&limit=60`, `/api/gex/expected-moves?ticker=`, `/api/indices/spx/dp-levels`, `/api/dealer-chart/^SPX/history` | TF buttons re-fetch bars (`1D` → `timeframe=1D&limit=200` `[E-ix:pulse_1D]`); layer/expiry chips are client-side over the loaded heat-map data |
+| `/hold` "Hold Advisor" | "0 tracked · No live plays yet — the advisor arms when an alert fires"; verdict legend; "Reads use closed 1-min bars; protective exits still take priority" | none (fed by SSE `hold_advisor` / `hold_advisor_snapshot`) | none |
+| `/trades` "Trade History" | FILTERS: Date, Asset, Option type, Account, **Strategy** (ICT Main / Singles TODAY / SPX Plans / Trade Now), Epoch; LAST 30D scorecards per book; DAILY P&L; positions table (date, ticker, type, action, size, entry @time, avg exit @time, P&L, status, View) | `/api/trades?book=<version>` (confirmed by bundle `K3w5eocJ.js`; works unauthenticated too) | strategy filter (custom dropdown, `?book=` query) |
+| `/swings` "Swings" | "Your tickers" list (up to 50, read 3× a day), Swing scanner (EMA · RSI · MACD), Sniper Swings, ICT Scanner (Highest confidence / All / Calls / Puts), Ticker Licker (1DTE lottos post Thursdays 15:00 ET), Export CSV | `/api/tactical-hub-layout`, `/api/user/tickers` | filters, CSV export |
+| `/spx-swings` "SPX Swings" | 250-row table of SPX option size (34 outright / 216 multi-leg), biggest outright block, filters (observed date, horizon, side, min size, structure), per-row bell "watch" | `/api/analysis/swings`, `/api/analysis/earnings`, `/api/user/contract-watches` | filters, watch bells |
+| `/playbook` "Dealer positioning playbook" | Week-of card per index/ETF: spot, refresh times, "what changed", regime narrative, RESISTANCE · CALL WALLS / SUPPORT · PUT WALLS with % of book and roles, day-by-day path | `/api/analysis/positioning-heatmap?ticker=`, `/api/analysis/spx-forward-context`, `/api/two-sided/desk` | ALL / ^SPX / ^NDX / ^RUT / SPY / QQQ / IWM tabs, Refresh |
+| `/week-ahead` "Week Ahead Analysis" | Bias, key levels and trade plan for every ticker (230 KB of text); category tabs (Indices, Big Tech, Focus, Community, Commodities, Retail, Bull/Bear ETFs, Finance, Healthcare, Meme, Mining, China, Space, Crypto, Energy); BULLISH/BEARISH/NEUTRAL filter; "Your tickers" | `/api/analysis/week-ahead`, `/api/user/tickers` | category and bias filters, CSV export |
+| `/weeklies` "Weeklies" | Intraday board / Open interest tabs, PAPER book (0 open), "Awaiting first capture", rotation ledger; disclaimer "OI is delayed positioning, not an entry" | (loading at observation) | tabs, Refresh |
+| `/flow` "Options Flow Scanner" | Filter form (date, tickers, type, min premium, min ask %, OTM only, vol>OI, max multi-leg %, max DTE, min volume, order by, limit, sector) and a table of large prints with UNUSUAL tag, ask/bid %, Greeks | `/api/flow-proxy?date=&min_premium=500000&order=premium&limit=150&min_ask_perc=0.8&is_otm=true&vol_greater_oi=true…` — the response fields (`days_of_oi_increases`, `ask_side_perc_7_day`, `chain_prev_close`, `vol_pctile_15d`, `total_ask_changes`) are Unusual Whales screener fields | filters + Apply |
+| `/flow-alerts` "Flow alerts" | Live / History tabs, Delivery settings, filters (Tickers, Type, Severity, Long/Short), PRIORITY ALERTS list (EXTREME/STRONG/MODERATE sus-flow cards with premium-in-window, baseline multiple, prints, trades, distance from spot, CONV %, VOL ×, ASK %, NOTIONAL) | `/api/analysis/alert-coverage` (+ SSE `sus_strike*`) | filters, delivery settings |
+| `/earnings` "Earnings" | Calendar (next ~7 trading days, 106 upcoming, 8 in universe, 11 whale flow, 49 with a read), "Predicted 430 / 984 · 44 %", per-name implied move, AM/PM, George's universe / Whale flow / Has read chips | `/api/analysis/earnings/prediction-stats` | chips, sort |
+| `/situation-room` "Situation Room" | TRENDING topics with scores, GLOBAL HOTSPOTS, REDDIT WSB, STOCKTWITS per-ticker bull/bear %, news, institutional flow notes | (shell only; SSE `feed_headline`) | none |
+| `/rotation` "Stock rotation" | Latest rotation (RISK OFF, FROM SPY → TO SECTOR XLV, top picks), "Where the money is moving", Accumulation desk table (shares phase since date, protection cheapness, contracts to watch) | `/api/rotation/preview`, `/api/rotation/waitlist/status`, `/api/two-sided/desk` | Refresh |
+| `/lottos` "Rigged 30 lottos" | Countdown to 15:30 ET; primary/secondary lists empty before the window; MOC imbalance | `/api/lottos` | Discord notify |
+| `/todays-signals` (member view) | Same tape as public plus paper-book marks | `/api/public/todays-signals?date=` | same chips |
+| `/account` "Account Settings" | Subscription block (plan, trial dates, rate, change/cancel), AGENT ACCESS (MCP) "NO PLAN", profile (e-mail, display name, Discord ID), SMS alerts, security, member since, user id, sign out, data-deletion request | `/api/stripe/subscription-info`, `/api/mcp/usage`, `/api/analysis/alert-coverage` | buttons |
+| `/account/mcp` "MCP Access" | "MCP access is disabled on this account… HTTP 403 mcp_access_disabled", key creation UI (0 keys) | `/api/account/mcp/keys`, `/api/mcp/usage`, `/api/mcp/credits` | Create key |
+| `/portfolio` → redirects to `/account`; `/dashboard` → 404 ("Back to George") | | | |
 
-What each one is *described* to contain (from `/guide`, `/welcome`, `/how`, `/mcp` — descriptions only, not verified):
-
-- **SPX cockpit** (`/spx`, `/indices/spx`): live committed read, alert tape, dealer levels, GEX walls, pin gravity, game plan.
-- **Hold** (`/hold`): every open play George called and its position on the hold ladder (STAY IN / LOCK HALF / LOCK MOST / GET OUT).
-- **Weeklies** (`/weeklies`): weekly open-interest desk; per-name plan with one invalidation level.
-- **Pulse** (`/pulse`): every ticker ranked by relative volume, loaded strikes, flow.
-- **Playbook** (`/playbook`), **Rotation** (`/rotation`): weekly dealer positioning plan; sector / cross-ticker rotation and SMT divergences.
-- **Dealer flow / GEX** (`/dealer-flow`, `/gex`): gamma, charm, vanna ladders and dealer read.
-- **Flow / Flow alerts** (`/flow`, `/flow-alerts`): institutional tape, sus-strike events.
-- **Trades / Portfolio** (`/trades`, `/portfolio`): live and paper books.
-- **Zero-DTE, Lottos, Swings, SPX swings, Situation room, Earnings, Week-ahead**: self-descriptive from MCP tool catalog (`get_zero_dte_scan`, `get_ticker_licker`, `get_swing_scan`, `get_sniper_swings`, `get_situation_room`, `get_earnings_calendar`).
-- **Account** (`/account`, `/account/mcp`): Discord link, SMS verification, MCP keys (up to 10, shown once, stored hashed).
+Websockets: **none opened on any member page** (Playwright and REA both recorded zero websocket connections across 27 page loads). All live updates arrive over the single SSE connection `GET /api/realtime/stream?types=<111 types>&auth=<token>`; the type list is in `evidence/auth_pages/_sse_types.txt` and sample payloads per type in `evidence/auth_pages/_sse_capture.json`.
 
 ---
 
@@ -127,7 +138,7 @@ What each one is *described* to contain (from `/guide`, `/welcome`, `/how`, `/mc
 | `/pricing` | monthly vs other intervals | Stripe prices array has 4 intervals per product |
 | Landing | 16:9 / 9:16 film variants | Poster/video assets on DigitalOcean Spaces |
 
-No public control changes any server-side analytical parameter (timeframe, instrument, threshold). Those controls, if any, live behind login and were not observed.
+No public control changes any server-side analytical parameter. Behind login the controls that do change server requests are: the index tabs on the cockpit (`ticker`), the GEX tiles (`?ticker=`), the Pulse timeframe buttons (`timeframe=1M…1D`, `limit`), the trades Strategy filter (`?book=`), the flow scanner filters (`/api/flow-proxy` query), and the "Replay GEX history" / "Recap" buttons. Layer (GEX/VEX/CHARM/TRINITY/DERIVED), expiry (CURRENT/+1/+3), heat-map mode, alert-family chips and quiet toggles are client-side over already-loaded data `[E-ix:*]`.
 
 ---
 
@@ -166,6 +177,22 @@ anonymous browser
   ├─ /pricing ─── /api/tier-availability
   ├─ /docs/api ─── documents: analysis, portfolio, performance, ict-analysis, signals, ict-summaries, market-prep, trades, strategy, plans, volume-status, health, nerve/calibration
   └─ gated route ─── 302 /login?redirect=<route>
+```
+
+Member interaction map (observed, `evidence/auth_pages/*.net.json`, `evidence/auth_interactions/`):
+
+```
+member browser (PocketBase token in localStorage + pb_auth cookie)
+  ├─ every page: shell set + /api/user/notifications?perPage=10 + /api/signals (now populated) + /api/portfolio + /api/plans/post-market + /api/analysis/smart-money + /api/epochs
+  ├─ SSE: /api/realtime/stream?types=<111 types>&auth=… (one connection per tab; 'connected' event reports tier=premium)
+  ├─ /indices/{spx|ndx|rut} ── ~45–57 calls (list in §4) ── tab click re-fetches the sibling set
+  ├─ /gex ── gex/history + gex/by-expiry per ticker click; gex/events; expected-moves-batch
+  ├─ /pulse ── pulse/universe, zero-dte/heat-board, market-data/bars × universe, TF click → bars?timeframe=
+  ├─ /trades ── trades?book=<version>
+  ├─ /flow ── flow-proxy?<UW screener params>
+  ├─ /playbook ── analysis/positioning-heatmap?ticker=, analysis/spx-forward-context, two-sided/desk
+  ├─ /week-ahead, /swings ── analysis/week-ahead, analysis/swings, user/tickers, tactical-hub-layout
+  └─ /account, /account/mcp ── stripe/subscription-info, mcp/usage, mcp/credits, account/mcp/keys
 ```
 
 Observed-but-not-called endpoints in the bundle (admin or member scope, deliberately not probed): `/api/scheduler/*` (morning-analysis, opening-bell-prep, premarket-bias, ticker-licker, daily-recap), `/api/backups/*`, `/api/sql`, `/api/crons`, `/api/logs`, `/api/settings/*`, `/api/user/notifications`, `/api/stripe/*`, `/api/auth/*`, `/api/analysis/smart-money`, `/api/analysis/opening-participation`, `/api/analysis/contract-convexity-radar`, `/api/featured-trade`, `/api/public/recent-wins`, `/api/public/equity-curve`, `/api/epochs`, `/api/strategies`, `/api/challenges`, `/api/recaps`, `/api/plans/post-market`, `/api/waitlist/*`, `/api/files/token`, `/api/batch`.

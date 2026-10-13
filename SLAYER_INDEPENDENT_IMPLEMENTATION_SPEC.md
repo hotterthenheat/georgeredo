@@ -74,6 +74,8 @@ Each lane produces `Signal{lane, ticker, occ, side, t, inputs{}, conviction∈[0
 
 Lanes never combine into a single additive "confidence" score. GeorgeFi's 60–100-tag additive ledger produced grades that did not separate outcomes out of sample (T5); Slayer keeps lanes separate and grades each lane's paper book independently.
 
+If a combined directional read is wanted for display, use the structure GeorgeFi's own committed lane turned out to have (Signal Research §8.2): a handful of named contributors (price-vs-VWAP, dealer regime, GEX position, flow bias, structure) each casting a signed vote in [−1, 1], a published weight vector, and a tier threshold. Keep the votes visible on the card so a user can see *why*, and log the vector with every alert so the weights can be fitted and tested rather than hand-tuned.
+
 ---
 
 ## 5. Paper execution and exit engine (Infrastructure + Validated finding)

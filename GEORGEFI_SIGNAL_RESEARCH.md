@@ -160,3 +160,38 @@ The recorded expectancy is not distinguishable from zero; with any realistic bid
 - **Calculated**: Epoch-2 record ≈ zero expectancy before costs, negative after; exits (not entries) explain the positive record; no entry-timing edge vs random; no OOS grade/confidence separation; tape alerts carry no stand-alone direction.
 - **Inferred**: inversion is framing for sweep-reclaim fades; grade = banding of post-cap score with conflict-count adjustment; AT_PIN outperformance is ticker-confounded.
 - **Unknown**: exact scoring constants and band edges; committed-read lane; member-cockpit inputs; detector thresholds for sus strikes; which exits were manual.
+
+---
+
+## 8. Addendum: what the member surface adds (observed 2026-10-13, trial account)
+
+Sources: `evidence/auth_api/*.json`, `evidence/auth_pages/_sse_capture.json`, `evidence/public_api/trades_book_*.json.gz`.
+
+### 8.1 Inputs at alert time are now observable
+Every cockpit input is published as a timestamped object with lineage: per-strike GEX ladder and totals, gamma flip, walls, accelerator, pin/breakout risk; dealer read (regime, playbook mode, invalidation, hedge flow per 1 %); delta flow (ask/bid-side premium, NOPE); watch levels with sweeps; timing (gamma/charm/vanna pressure, velocity phase, hedging windows); reversal clock; market tide; dark pool (SPY proxy, NBBO-tagged); σ ladder; expected moves (straddle-implied). For ^SPX at 15:25 UTC: spot 7795, totalGEX $81.8 B, flip 7790.7, maxGEX 8000, regime POSITIVE_GAMMA, pinRisk 70, accelerator +7; dealer read "DEALERS LONG GAMMA — FADE BREAKOUTS ($3.7 B net GEX)", action WAIT, confidence 31; delta flow put-heavy 68 %, bias BEARISH 55; timing "WAIT CALLS | velocity STALLING | gamma pressure 93 %". These snapshots (and the per-minute `dealer-chart/^SPX/history` series of 67 snapshots that day) are exactly the input vector needed for T8 of the validation plan.
+
+### 8.2 The committed read is a five-contributor vote (Observed)
+`index_read` events carry `contributors` {price, dealer, gex, flow, ict} with signed votes and a `conviction` 0–100 (19–26 during the sample, labelled "WATCH"/"SMALL SIZE OR SKIP"). The loud FULL SIZE lane and the `commander/flips` log ("flips capped per day", 0 flips by 15:25) sit on top of this. This is a much simpler structure than the ICT Main ledger: five inputs, a weighted vote, a tier threshold. [Observed structure; weights unknown.]
+
+### 8.3 Sus-strike detector parameters (Observed in event payloads)
+Window = 2 minutes (`windowEndMs − windowStartMs = 120 000`), triggers PREMIUM_BURST / VELOCITY_SPIKE / NOTIONAL_SPIKE / SWEEP_CLUSTER / STEALTH_ACCUMULATION, `baselineMultiple` (observed 2.3×–100×+), `severity` MODERATE/STRONG/EXTREME, `conviction` 0–100, ask/bid side counts, `promotedFromStealth`. Velocity bursts use a 90-second window of lots vs an `ambientPerMin` rate (`relMult`). The stealth lane (`STEALTH LIGHT/BUILDING/HEAVY`) is the slow-accumulation channel described on `/how`. Notional thresholds are low in practice ($4.6 K premium can fire a MODERATE VELOCITY_SPIKE on SPY), which explains the 160 sus-strike events in 100 seconds and the null forward returns in T6.
+
+### 8.4 Exit engine rules now partly visible
+- Trade Now: "full close at +50 % or hard stop at −40 %; otherwise flat before the bell" (event text); exits in the book: CLOSE_GUARDIAN_BREAKEVEN, CLOSE_TIME_STOP, CLOSE_GUARDIAN_TRAIL, CLOSE_TRAIL, CLOSE_WICK_STOP, CLOSE_THEIR_EXIT, CLOSE_FORCE, CLOSE_STOP.
+- Hold advisor: ratchet floor after a peak ("gave back 34 % of the +59 % peak"), verdict ladder HOLDING STRONG → TRIM → EXHAUSTING → GET OUT → EXPIRED HOLD, reads on closed 1-minute bars, premium vs fast EMA and volume fade as reasons.
+- Index-read plays: target 2× entry premium or 15:55 ET (`plays/today`: entry 7.55, target 15.10, bell 15:55).
+- `spx_gex_engine`: stop at −26 % (`SPX STOP LOSS (-26%)`), max 3 trades/day, paper only (`spx/config`).
+
+### 8.5 Book results beyond the main ledger (Calculated)
+| Book | n | Period | Total P&L | Win rate | PF | Note |
+|---|---|---|---|---|---|---|
+| ICT Main (`v2.0.0-ict`) | 489 | Mar 2 – Oct 8 | +$3,974 | 51.7 % | 1.14 | see §6 |
+| Trade Now (`trade_now_v1`) | 52 | Jul 9 – Oct 12 | **−$8,953** | 26.9 % | 0.66 | 30-day scorecard shows +$5,080; sizes up to 25 contracts; top-5 trades = +$12,058, bottom-5 = −$11,575 |
+| Singles TODAY (`singles_today_v1`) | 44 | Oct 5 – Oct 13 | −$867 | 34.1 % | 0.44 | 2-contract paper lots, $500 max debit |
+| SPX Plans (`spx_plan_v1`) | 9 | Oct 5 – Oct 13 | +$370 | 33.3 % | 1.15 | one +$1,750 trade carries the book |
+| spx_gex_engine (paper) | 21 | last 30 d | n/a (per-trade only) | — | — | REGIME_BREAKOUT entries, −26 % stops |
+
+Across all published books the aggregate is negative before costs. The only positive, non-trivial book remains ICT Main, whose expectancy is within noise (§6 T2).
+
+### 8.6 Refresh stability, extended (T7)
+Five snapshots over 47 minutes (14:16–15:03 UTC), core six tickers: direction changed on 25 % of 5-minute steps, action 38 %, confidence 50 %, grade 38 %, contract 54 %, GEX regime 4 %, crowd mood 0 %. ^NDX went BULLISH/65/B → BULLISH/100/A → BEARISH/82/A in 47 minutes. Actions seen across snapshots: WATCHING 34, WATCHING (Pending Entry) 14, DO NOTHING 13, BLOCKED (various) 32, WAITING FOR TRIGGER 2, BUY_CALLS 2. The raw lane is a state machine that re-evaluates every minute; consumers must treat each object as a point-in-time read.
