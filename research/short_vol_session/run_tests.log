@@ -18,3 +18,4 @@ options 3000 / 11355 {'hits': 2792, 'misses': 1322, 'errors': 0}
 options 4000 / 11355 {'hits': 3378, 'misses': 1717, 'errors': 0}
 options 5000 / 11355 {'hits': 3880, 'misses': 2174, 'errors': 0}
 options 6000 / 11355 {'hits': 4387, 'misses': 2686, 'errors': 0}
+options 7000 / 11355 {'hits': 4851, 'misses': 3217, 'errors': 0}

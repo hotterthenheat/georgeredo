@@ -15,12 +15,18 @@ def analyse(Z, sel, label, seed=7):
     def day_boot(Umat, mask=None):
         m = np.ones(N, bool) if mask is None else mask
         Sd = Umat[:, m] @ onehot[m]; cd = onehot[m].sum(0)
-        pick = rng.integers(0, D, size=(NB, D))
-        return (Sd[:, pick].sum(2) / np.maximum(cd[pick].sum(1), 1)[None, :])  # C x NB
+        out = np.empty((Sd.shape[0], NB))
+        for a in range(0, NB, 50):
+            pick = rng.integers(0, D, size=(min(50, NB - a), D))
+            out[:, a:a + len(pick)] = Sd[:, pick].sum(2) / np.maximum(cd[pick].sum(1), 1)[None, :]
+        return out  # C x NB
     B = day_boot(U); obs = U.mean(1)
     lo, hi = np.percentile(B, 2.5, axis=1), np.percentile(B, 97.5, axis=1)
     # trade-level bootstrap (as report.py)
-    idx = rng.integers(0, N, size=(1000, N)); Bt = U[:, idx].mean(2); tlo, thi = np.percentile(Bt, 2.5, axis=1), np.percentile(Bt, 97.5, axis=1)
+    Bt = np.empty((C, 1000))
+    for a in range(0, 1000, 10):
+        idx = rng.integers(0, N, size=(10, N)); Bt[:, a:a + 10] = U[:, idx].mean(2)
+    tlo, thi = np.percentile(Bt, 2.5, axis=1), np.percentile(Bt, 97.5, axis=1)
     # White reality check across configurations: max_c mean_c vs bootstrap max_c (mean*_c - mean_c)
     centred = B - obs[:, None]; rc_stat = obs.max(); rc_p = float((centred.max(0) >= rc_stat).mean())
     order = np.argsort(Z['entry_t'][sel]); cs = np.cumsum(U[:, order], axis=1); peak = np.maximum.accumulate(np.concatenate([np.zeros((C, 1)), cs], 1), axis=1)[:, 1:]; mdd = (cs - peak).min(1)
@@ -56,8 +62,10 @@ def align(ud_src, Smat, cvec):
     for j, d in enumerate(ud_src): out[:, pos[d]] = Smat[:, j]; cnt[pos[d]] = cvec[j]
     return out, cnt
 SSa, cSa = align(udS, SS, cS); SRa, cRa = align(udR, SR, cR)
-pick = rng.integers(0, len(ud), size=(NB, len(ud)))
-dS = SSa[:, pick].sum(2) / np.maximum(cSa[pick].sum(1), 1); dR = SRa[:, pick].sum(2) / np.maximum(cRa[pick].sum(1), 1); diff = dS - dR
+diff = np.empty((C, NB))
+for a in range(0, NB, 50):
+    pick = rng.integers(0, len(ud), size=(50, len(ud)))
+    diff[:, a:a + 50] = SSa[:, pick].sum(2) / np.maximum(cSa[pick].sum(1), 1) - SRa[:, pick].sum(2) / np.maximum(cRa[pick].sum(1), 1)
 obs_diff = S['usd_spread'].mean(1) - Rn['usd_spread'].mean(1)
 drows = [dict(cfg=cfg[i], strategy_exp=S['usd_spread'][i].mean(), random_exp=Rn['usd_spread'][i].mean(), diff=obs_diff[i], diff_lo=np.percentile(diff[i], 2.5), diff_hi=np.percentile(diff[i], 97.5),
               strategy_mid=S['usd_mid'][i].mean(), random_mid=Rn['usd_mid'][i].mean()) for i in range(C)]
