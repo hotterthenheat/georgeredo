@@ -1,0 +1,16 @@
+{
+ "generated": "2026-10-13T16:04:59.571421-04:00",
+ "rows": 1233,
+ "contract_days": 761,
+ "requests": 1699,
+ "request_status": {
+  "ok": 611,
+  "error": 1084,
+  "nodata": 4
+ },
+ "boot_n": 1000,
+ "seed": 7,
+ "tol": 0.004,
+ "mid_tol": 0.01,
+ "runtime_s": 3
+}
