@@ -11,7 +11,12 @@ Research workspace produced on 2026-10-13. Read the deliverables in this order:
 7. `UNKNOWNS_AND_NEXT_STEPS.md` — blockers, open questions, next steps.
 8. `BACKTEST_RESULTS.md` — independent backtest of the reconstructed strategy (144 variants, SPY/QQQ/IWM 0DTE, Jun 2025 – Oct 2026) with cost models, baselines and IS/OOS.
 9. `STRATEGY_SPEC.md` — the strategy as reconstructed and tested: exact rules, parameters, verdict, and the paper-only configuration recommended for Slayer Terminal.
-10. `reports/Finding a 0DTE options edge.md` — deep-research report on where a tradeable 0DTE edge could come from (per-strike bursts, dealer gamma/charm/vanna, dark pool, market tide, session effects, exit engineering): published evidence plus our own tests on 339 sessions. Verdict: no long-premium edge after costs; the only real premium is short vol, one spread wide.
+10. `reports/Finding a 0DTE options edge.md` (errata appended after the reproduction audit) — deep-research report on where a tradeable 0DTE edge could come from (per-strike bursts, dealer gamma/charm/vanna, dark pool, market tide, session effects, exit engineering): published evidence plus our own tests on 339 sessions. Verdict: no long-premium edge after costs; the only real premium is short vol, one spread wide.
+
+11. `audit/phase1/` — reproduction audit of everything above (backtest, validation tests, the three studies): what reproduces exactly, what needed a fix, and the fixes applied as additions.
+12. `research/georgefi_full_history/` — the complete GeorgeFi trade history accessible on the account (both epochs, all books, paper book; 1,149 + 84 records), raw exports with hashes, normalized tables, the live provider re-audit, and the reconstruction of every trade against independent bars (`results/RESULTS.md`).
+13. `COMPASS_RESEARCH_PLAN.md` — the Compass research plan: promotion criteria, preservation rules, hypothesis register with verdicts, pre-registered next tests.
+14. `AUDIT_AND_FULL_HISTORY_REPORT.md` — completion report for the audit and full-history phases.
 
 `backtest/` holds the reproducible backtest code and the run outputs.
 

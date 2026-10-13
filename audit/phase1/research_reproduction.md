@@ -165,3 +165,19 @@ Console outputs (not committed, compared against the original run's logs kept in
 - Copies with regenerated outputs: `audit/phase1/research/{short_vol_session,gex_regime_and_exits,flow_predictors}/` (the identical files are duplicates of the committed ones and could be dropped before committing; `q4_bars.pkl` and the `.npz` grids are gitignored). The sibling backtest audit's directory `audit/phase1/backtest/` is untouched by this audit.
 - Scratchpad (`audit_run/`): `compare.py`, per-study JSON/MD comparison outputs (`svs_all`, `gex_all`, `fp_all`), the flow_predictors step logs (`fp_logs/`), timing files, the token-less runner scripts, `cache_before.txt`/`cache_after.txt` listings and the q4 diagnostic (`q4_random_diag.py`, `.log`).
 - `git status` at the end of the audit: no modifications under `backtest/`, `research/`, `evidence/`, `reports/`, `research_notes/` or the top-level `*.md` files from this audit; `audit/phase1/research/` is untracked (not committed — the coordinator commits). Modifications to `backtest/*.py`, `evidence/scripts/*.py`, `DATA_PROVIDER_AUDIT.md` and `GEORGEFI_SIGNAL_RESEARCH.md` that appeared in `git status` during the audit were made and committed by the parallel sessions (commit `5ed66df`, 19:09), not by this audit, whose only writes were to the copies and the scratchpad.
+
+## Follow-up (2026-10-13, 19:14–19:18 UTC): making the gex q4 random control reproducible
+
+At the coordinator's request one additive change was made to the original `research/gex_regime_and_exits/q4_load.py` (5 inserted lines after `days_ok = ...`, dated comment included): if `out/q4_random_entries.csv` exists and `Q4_REDRAW` is not set, the random control set is loaded from that committed file (and the option bars for its 3,000 contract-days are loaded from the cache) instead of being redrawn from the cache listing; `Q4_REDRAW=1` keeps the original redraw path intact. No other original file was touched. The same patched `q4_load.py` was placed in the audit copy, the committed `q4_random_entries.csv` was copied into the copy's `out/`, the previous q4 outputs of the copy were moved to `out/pre_followup/` for the record, and `python3 -s q4_load.py && q4_grid.py && q4_report.py` was re-run with `BT_CACHE` set and no token (q4_load 41 s, q4_grid 105 s, q4_report 74 s; 220 s total; `cached contract-days 14054`; load path taken: `random entries loaded from out/q4_random_entries.csv 3000`, `tries 0`, ticker counts IWM 1014 / QQQ 1008 / SPY 978 as in the committed log).
+
+| file | result |
+|---|---|
+| q4_grid_summary.csv (2304 × 33) | **byte-identical** (1,130,043 bytes) |
+| q4_group_heads.csv | **byte-identical** — random head restored to best −$1.335 [−2.228, −0.459] |
+| q4_strategy_minus_random.csv (576 × 8) | **byte-identical** — `0 configs with diff CI above zero, 51 below` restored |
+| q4_breakdowns.csv (60 × 11) | **byte-identical** |
+| q4_report.log | 109 of 109 content lines identical (all `HEAD`, `ORIGINAL`, `BEST`, `BR`, `RTOP`, strategy-minus-random lines); the only difference is the 4-line `real/user/sys` footer that the committed log carries from having been run under `time` |
+| q4_random_entries.csv | byte-identical after `write_csv`'s round-trip of the loaded rows |
+| q4_load.log / q4_grid.log | differ only in the new `loaded from` line, `tries 4242` → `0`, `cached contract-days`, and elapsed seconds |
+
+Conclusion: with the committed draw treated as an input, the whole gex study — including the random-control comparison — reproduces byte-for-byte from committed artefacts plus the warm cache; the gex status moves from "partially reproduced" to "reproduced exactly (given the committed control set)". The redraw path remains available for anyone who wants a fresh control set, with the caveat documented above that it depends on the cache's contents.

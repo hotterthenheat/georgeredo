@@ -16,3 +16,9 @@ Files over 200 KB whose content (decompressed for .gz) was byte-identical to the
 - out/q4_grid_strategy.npz (16493 KB)
 - out/q2_minute_obs.csv (5032 KB)
 - out/q3_events.csv (2793 KB)
+
+Second pass after the q4 follow-up:
+- gex_regime_and_exits/out/q4_random_entries.csv (324 KB)
+- gex_regime_and_exits/out/q4_grid_summary.csv (1103 KB)
+- gex_regime_and_exits/out/q4_grid_strategy.npz (16493 KB)
+- gex_regime_and_exits/out/q4_grid_random.npz (9002 KB)
