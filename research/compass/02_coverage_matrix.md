@@ -33,7 +33,7 @@ Every date below was discovered by a request against the owner's keys (scripts a
 | Contract 1-minute bars | **2025-04-01** (empty ≤ 2025-03-03) | |
 | Ticker-level `greek-exposure` series | 2025-10-14 regardless of date | pulled for 7,762 optionable tickers |
 | `iv-rank` (1y), realized vol, variance risk premium | ~1 year | pulled |
-| Earnings | ~1 year (5,805 tickers with rows) | the only earnings-date source on hand; limits the Earnings/Events family to 2025-10 → 2026-10 |
+| Earnings (`data_lake/unusualwhales/earnings.parquet`) | **report dates 1996 → 2026-12 (scheduled)**; quarterly rows with reported EPS, estimate, surprise and pre/post-market time: 10.6 k (2015), 11.7 k (2017), 15.9 k (2022), 16.4 k (2024), 17.5 k (2025) per year, 2,700–4,600 tickers per year; 384 k rows, 5,805 tickers | the earnings-date source for the Earnings/Events family at daily resolution over the whole stock EOD lake (an earlier version of this row said "~1 year": that was the pull window, not the content) |
 | Index 1-minute bars (SPX/NDX/RUT) | 422 (`cboe_index_access_missing`) | use ThetaData |
 | Full company listings, optionable-tickers | 403 / 422 (tier) | universe built from sector lists + screener instead |
 
@@ -45,7 +45,7 @@ Every date below was discovered by a request against the owner's keys (scripts a
 | Option fills, spreads, delta, liquidity filters | 2012-06 → (NBBO, OHLC, OI) | 0DTE on SPY/QQQ only from 2022-11-11, SPXW from 2022-05-13, IWM from 2024-04-19 (daily expiries did not exist earlier); weekly expirations exist throughout |
 | Index regime variables (SPX, VIX) | 2017-01 → | before 2017 use SPY/QQQ realized volatility as the regime proxy, stated as such |
 | Point-in-time universe | 2012 → | expirations per root (all history) + daily bars (tape-dependent floor) |
-| Earnings/events | 2025-10 → 2026-10 | one year only unless another calendar source is added |
+| Earnings/events | 2015 → (calendar); limited by the daily-bar lake years on hand (2023 → 2026 now, extending as years land) and by option chains per name on demand | the calendar carries report time (pre/post market), reported and estimated EPS and the surprise |
 | Flow / dealer-exposure features | 2023-11 → (daily), 2025-04 → (contract minutes) | evaluated on their own window against a matched baseline over the same dates |
 | Vendor Greeks | 2020 → | not used |
 

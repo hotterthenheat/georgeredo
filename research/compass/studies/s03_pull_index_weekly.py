@@ -17,7 +17,7 @@ exps = {}
 for line in open(os.path.join(SP, 'universe', 'expirations.jsonl')):
     r = json.loads(line)
     if r['root'] in syms: exps[r['root']] = [dt.date.fromisoformat(x) for x in r['expirations']]
-log = lambda *a: print(dt.datetime.utcnow().strftime('%H:%M:%S'), *a, flush=True)
+log = lambda *a: print(dt.datetime.now(dt.timezone.utc).strftime('%H:%M:%S'), *a, flush=True)
 f = ThetaFetcher(CACHE, nw=8, log=log)
 choice_path = os.path.join(CACHE, 'weekly_choice.jsonl')
 chosen = {}
@@ -31,18 +31,17 @@ for sym in syms:
         c = [e for e in exps[sym] if cal.expiry_category(d, cal.last_trading_day(e, cal.is_spx_am_settled(sym, e))) == 'weekly']
         if c: cands[d] = c
     log(sym, 'sessions', len(sessions), 'with weekly candidates', len(cands), 'candidate expirations', sum(len(v) for v in cands.values()))
-    jobs = [('open_interest', sym, d, e) for d, c in cands.items() if (sym, str(d)) not in chosen for e in c]
-    f.run_jobs(jobs, f'{sym} OI')
+    # deterministic, point-in-time choice: the nearest Friday expiration in the weekly category (1-7 calendar days),
+    # else the nearest weekly candidate. (An earlier version chose the most-open-interest candidate, which cost one OI
+    # request per candidate per session - about 3.7 per session - before any chain could be pulled.)
     with open(choice_path, 'a') as fh:
         for d, c in cands.items():
             if (sym, str(d)) in chosen: continue
-            best, best_oi = None, -1
-            for e in c:
-                p = os.path.join(CACHE, 'oi', sym, f'{d}__{e}.parquet')
-                oi = int(pl.read_parquet(p)['open_interest'].sum()) if os.path.exists(p) else 0
-                if oi > best_oi: best, best_oi = e, oi
-            if best is None: best = min(c)
-            chosen[(sym, str(d))] = str(best); fh.write(json.dumps({'root': sym, 'session': str(d), 'expiration': str(best), 'oi': best_oi, 'candidates': [str(x) for x in c]}) + '\n')
+            fri = [e for e in c if e.weekday() == 4]
+            best = min(fri) if fri else min(c)
+            chosen[(sym, str(d))] = str(best); fh.write(json.dumps({'root': sym, 'session': str(d), 'expiration': str(best), 'rule': 'nearest_friday', 'candidates': [str(x) for x in c]}) + '\n')
+    jobs = [('open_interest', sym, d, dt.date.fromisoformat(chosen[(sym, str(d))])) for d in cands]
+    f.run_jobs(jobs, f'{sym} OI (chosen expiration)')
     jobs = []
     for d in cands:
         e = dt.date.fromisoformat(chosen[(sym, str(d))])
