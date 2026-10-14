@@ -36,8 +36,13 @@ def simulate(event: dict, short_q: pl.DataFrame, long_q: pl.DataFrame | None, pa
         lb_al = np.where(m, lb[pc] if lts.size else np.nan, np.nan); la_al = np.where(m, la[pc] if lts.size else np.nan, np.nan)
     else:
         lb_al = np.zeros(ts.size); la_al = np.zeros(ts.size)
-    valid = np.isfinite(sb) & np.isfinite(sa) & (sb > 0) & (sa >= sb) & np.isfinite(lb_al) & np.isfinite(la_al) & ((long_q is None) | ((lb_al > 0) & (la_al >= lb_al)))
-    vi = np.flatnonzero(valid)
+    # entry needs a bid to sell the short leg into (and an ask to buy the long leg); an exit needs an ask to buy the short
+    # leg back (near expiry an OTM contract is bid 0 / ask 0.01: that is a real $0.01 buy-back, not a dead quote) and a
+    # finite bid for the long leg (which may be 0: the leg is abandoned)
+    fin = np.isfinite(sb) & np.isfinite(sa) & (sa >= sb) & np.isfinite(lb_al) & np.isfinite(la_al) & ((long_q is None) | (la_al >= lb_al))
+    valid_entry = fin & (sb > 0) & ((long_q is None) | (la_al > 0))
+    valid = fin & (sa > 0)
+    vi = np.flatnonzero(valid_entry)
     if vi.size == 0: return {'status': 'no_fill', 'reason': 'no_valid_quote'}
     i0 = int(vi[0]); entry_ts = ts[i0]
     if entry_ts > t0 + np.timedelta64(5, 'm'): return {'status': 'no_fill', 'reason': 'stale_quote'}

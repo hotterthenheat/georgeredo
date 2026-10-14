@@ -15,8 +15,8 @@ log = lambda *a: print(dt.datetime.now(dt.timezone.utc).strftime('%H:%M:%S'), *a
 EXIT_SETS = {'cutoff_stop2': dict(stop_mult=2.0, max_hold_min=None), 'hold60_stop2': dict(stop_mult=2.0, max_hold_min=60), 'cutoff_nostop': dict(stop_mult=None, max_hold_min=None)}
 STRUCTURES = ('single', 'vertical')
 st = store.CacheStore(f'{SP}/theta/data/underlying', f'{SP}/theta/data_full/chains', f'{SP}/theta/data/index', f'{SP}/universe/expirations.jsonl')
-sig = pl.read_parquet(os.path.join(S01, 'trades.parquet')).filter(pl.col('status') == 'filled').select(['symbol', 'session', 'close_ts', 'direction', 'spot', 'strike', 'right', 'delta']).with_columns(pl.lit(0).alias('seed'))
-rnd = pl.concat([pl.read_parquet(os.path.join(S01, f'baseline_{s}.parquet')).filter(pl.col('status') == 'filled').select(['symbol', 'session', 'close_ts', 'direction', 'spot', 'strike', 'right', 'delta', 'seed']) for s in (11, 12, 13, 14, 15)])
+sig = pl.read_parquet(os.path.join(S01, 'trades.parquet')).filter(pl.col('status') == 'filled').select(['symbol', 'session', 'close_ts', 'direction', 'spot', 'strike', 'right', 'delta']).with_columns(pl.lit(0, dtype=pl.Int64).alias('seed'))
+rnd = pl.concat([pl.read_parquet(os.path.join(S01, f'baseline_{s}.parquet')).filter(pl.col('status') == 'filled').select(['symbol', 'session', 'close_ts', 'direction', 'spot', 'strike', 'right', 'delta', 'seed']).with_columns(pl.col('seed').cast(pl.Int64)) for s in (11, 12, 13, 14, 15)])
 ev = pl.concat([sig, rnd]).sort(['symbol', 'session', 'close_ts'])
 log(f'signal minutes {sig.height}, random minutes {rnd.height} (5 seeds)')
 rows = []; t0 = time.time(); n_sess = 0
