@@ -134,3 +134,21 @@ def report(rows: list[dict], out_dir: str, title: str, hurdle_bp: float = 30.0) 
     json.dump(rows, open(os.path.join(out_dir, 'rows.json'), 'w'), indent=1, default=str)
     json.dump({'hurdle_bp': hurdle_bp, 'promoted': prom, 'rows': len(rows)}, open(os.path.join(out_dir, 'summary.json'), 'w'), indent=1)
     return '\n'.join(L)
+
+def event_stats(ev: pl.DataFrame, direction: np.ndarray, horizons=HORIZONS, ret_prefix: str = 'r', bench_prefix: str = 'b') -> dict:
+    """Signed absolute and benchmark-adjusted forward returns (bp) for an event table carrying r{h}/b{h} columns,
+    CIs clustered by event date, year-by-year adjusted 10-session mean."""
+    days = ev['date'].cast(pl.Utf8).to_numpy()
+    rec = {'n': int(ev.height), 'days': int(np.unique(days).size), 'symbols': int(ev['symbol'].n_unique()), 'calls_share': float((direction > 0).mean())}
+    for h in horizons:
+        r = ev[f'{ret_prefix}{h}'].to_numpy() * direction * 1e4; bm = ev[f'{bench_prefix}{h}'].to_numpy() * direction * 1e4
+        ok = np.isfinite(r) & np.isfinite(bm)
+        m, lo, hi = stats.cluster_bootstrap_ci(r[ok], days[ok], n_boot=1000); rec.update({f'abs_{h}d_bp': m, f'abs_{h}d_lo': lo, f'abs_{h}d_hi': hi})
+        m, lo, hi = stats.cluster_bootstrap_ci(r[ok] - bm[ok], days[ok], n_boot=1000); rec.update({f'adj_{h}d_bp': m, f'adj_{h}d_lo': lo, f'adj_{h}d_hi': hi})
+        if h == 10: rec['hit_10d'] = float((r[ok] > 0).mean())
+    h10 = 10 if 10 in horizons else horizons[-1]
+    r10 = ev[f'{ret_prefix}{h10}'].to_numpy() * direction * 1e4; b10 = ev[f'{bench_prefix}{h10}'].to_numpy() * direction * 1e4
+    yrs = ev['date'].dt.year().to_numpy()
+    rec['by_year_adj_10d'] = {int(y): round(float(np.nanmean((r10 - b10)[yrs == y])), 1) for y in np.unique(yrs)}
+    rec['by_side_adj_10d'] = {'calls': round(float(np.nanmean((r10 - b10)[direction > 0])), 1) if (direction > 0).any() else None, 'puts': round(float(np.nanmean((r10 - b10)[direction < 0])), 1) if (direction < 0).any() else None}
+    return rec
