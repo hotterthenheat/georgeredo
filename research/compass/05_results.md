@@ -231,3 +231,17 @@ Walk-forward (train on all prior years with a 5-session embargo and ≥ 150 trai
 | short vertical, one adverse tick | all / large-open | 2,455 / 909 | −6.76 [−8.85, −4.67] / −5.94 [−9.82, −2.01] | 48 % | 0.68 / 0.74 | | +2.26 / +4.69 | |
 
 **Reading.** The first-half-hour direction is worth $2.5–5 per contract relative to a coin flip — the S12 rest-of-day effect, priced through an option — and both structures lose more than that to spread and theta: the long loses the day's theta, the short vertical loses the two spreads plus the stop-outs on the days the direction is wrong. Nothing clears zero; the only positive symbol cell (SPY short vertical on large-open days, +$1.08) is inside the noise. The A5 batch is now complete except for the single-name intraday screen (S06 on Tier A, bars pulling) and the S11 event verticals.
+
+## S11 (preliminary) — single-name short verticals into breakouts and beats; pre-earnings longs (NOTHING PROMOTED; 12 % of the chains)
+
+`studies/s11_event_verticals.py` → `results/v1/s11_event_verticals/`, registry `S11-prelim`, amendments A4, A5.2, A6. The vendor throttled the per-event option-EOD pull to ~0.17 requests/s, so 876 of the 7,166 event and control chains arrived in the first window (a hash-ordered, therefore uniform, 12 % sample); the remainder is queued. The pre-registered 2 × credit stop proved defective on end-of-day marks for single-name spreads (A6), so three exit sets are reported.
+
+| cell | n | mean $/spread [CI] | win | control (random dates) | event − control [CI] | by year |
+|---|---|---|---|---|---|---|
+| breakout fade, short 0.30/0.15 vertical, 21-session hold | 173 | **−193 [−285, −111]** | 40 % | −187 | +87 [−66, +244] | 2024 −72, 2025 −219, 2026 −333 |
+| … cap at credit + ½ width | 173 | −184 [−254, −120] | 36 % | −192 | +55 [−64, +168] | |
+| … 2 × credit stop (A4 design) | 173 | −169 [−205, −133] | 16 % | −159 | +22 [−34, +75] | |
+| beats, short call vertical | 10 | (n too small) | | | | |
+| pre-earnings long call / straddle / debit vertical, 10 sessions | 18–20 | (n too small; debit vertical −327 [−594, −122]) | | | | |
+
+**Reading so far.** Selling a 0.30-delta call spread on these names and holding three weeks lost about $190 per spread in 2024–2026 whether or not the name had just broken out: the loss belongs to the period (single names rallied) and to the structure, not to the trigger, and the random-date control says so. The breakout-minus-control difference is positive but inside a ±$150 interval. The beat and pre-earnings cells cannot be read at n ≤ 20. Nothing is promoted; the study re-runs when the pull completes.
