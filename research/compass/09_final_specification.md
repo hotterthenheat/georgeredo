@@ -1,4 +1,4 @@
-# Final parameter specification — Compass (DRAFT, pending S02 walk-forward, S03 weekly expirations, S06 on Tier A)
+# Final parameter specification — Compass (DRAFT, pending S06 on Tier A and S11)
 
 The brief asked for the exact recommended parameters, entry and exit logic, contract rules, expiration- and setup-specific settings and the ranking formula, with after-cost, out-of-sample, year-by-year, regime and baseline results, and the failed configurations — and, if no configuration meets the standard, to say so. This document is the answer as the evidence stands; the sections marked *pending* are filled when the three running studies finish. Every number is in `registry.jsonl` and `05_results.md`; the machine-readable form is `config/compass_config.v1.json`.
 
@@ -44,6 +44,12 @@ S04 and S06 measure the entry on the underlying alone, 2017 → 2026, about 450,
 | Breakouts, Trend Plays, Bounces (daily triggers) | Weekly / Swing / Position (underlying screen) | ~1,100–1,500 liquid names per year | 2024 → 2026 | S07: nothing promoted; breakouts −81 bp and pullbacks −97 bp adjusted at 21 sessions | **not promoted** |
 | Earnings/Events (daily) | Weekly / Swing / Position (underlying screen) | same, 10,439 reports | 2024 → 2026 | S08: nothing promoted; beats underperform after the gap | **not promoted** |
 | Cheap Options | any | — | — | not run: no entry with a positive underlying expectation exists to attach it to (protocol §13) | **not run** |
+| Short premium: fade of the owner's signal (single, vertical) | 0DTE | SPY, QQQ, IWM | 2022 → 2026 | S10: single +$0.52 [−6.11, +7.47] (breakeven); vertical −$5.65 [−10.09, −1.10] | **not promoted** |
+| Short premium: 10:00 ATM straddle, VRP-conditioned | 0DTE | SPY, QQQ | 2022 → 2026 | S15: −$15.46 [−32.68, +0.29]; rich-implied days −$41 [−86, −2] | **not promoted** |
+| Intraday momentum (first half hour → rest of day / last hour) | underlying; 0DTE expressions at 15:00 and 10:00 | SPY, QQQ, IWM | 2017 → 2026 / 2022 → 2026 | S12: QQQ-only +9 bp (10/10 years) but not batch-robust; S12b long −$4.87 [−14.18, +4.87], short vertical −$2.56 [−4.72, −0.33] | **not promoted** |
+| Pre-earnings run-up (long 10 sessions before the report) | Swing (underlying) | S07 universe, 10,445 reports | 2024 → 2026 | S13: +97 bp [+62, +133], adjusted +20 [+4, +36]; tail- and Q2-concentrated (S13-R: −7 bp without the top 1 %) | **underlying-level candidate; option test S11 pending** |
+| Cross-sectional momentum / reversal, month-end deciles | Position (underlying) | S07 universe | 2024 → 2026 | S14: 20–34 rebalances, intervals hundreds of bp wide | **not promoted** |
+| Overnight gap / prior-day fade | underlying; weekly expression | SPY, QQQ, IWM | 2017 → 2026 | S16a 6 of 108 cells positive vs 2.7 by chance; S16b −$9.91 [−19.31, −0.26] | **not promoted** |
 | Long-Dated, LEAPS | 91–364, ≥ 365 days | — | — | no family in the catalogue has an entry whose horizon justifies them; nothing to test until one does | **not run** |
 
 ## 5. Failed configurations
@@ -52,6 +58,7 @@ S04 and S06 measure the entry on the underlying alone, 2017 → 2026, about 450,
 2. Every single-factor variant of the baseline (S02): 41 variants, none with a positive lower bound or better than its random control; walk-forward out of sample −$3.81 [−5.23, −2.35] (lower-bound objective) and −$2.49 [−7.32, +2.46] (expected profit ÷ worst drawdown) — `results/v1/s02_walkforward/REPORT.md`.
 3. The baseline entry rule and its ablations on the underlying (S04); the seven intraday triggers × four filter sets on index ETFs (S06).
 4. Five daily triggers × two filter sets on the single-name universe (S07); nine earnings cells × two entries (S08).
+5. Short premium at the owner's minutes (S10, singles and verticals) and the 10:00 ATM straddle with and without volatility-risk-premium timing (S15); the intraday-momentum expressions (S12, S12b); the weekly prior-day fade (S16b); the cross-sectional deciles (S14).
 
 ## 6. Exploratory leads (not recommendations)
 
@@ -63,6 +70,6 @@ Do not ship a Compass recommendation. Ship the measurement: the engine (`engine/
 
 ## 8. What would change the verdict
 
-A cell in S02's walk-forward with a positive out-of-sample lower bound in every test year; a weekly-expiration cell in S03 with a positive lower bound and a positive paired difference against random; or a single-name intraday trigger in S06 (Tier A) with an absolute lower bound ≥ +3 bp at 30–60 minutes *and* a positive paired difference. Each would then need the adverse-fill scenarios and three-month trade counts before the config's status could move to `research_candidate`.
+A single-name intraday trigger in S06 (Tier A), or an S11 event vertical / pre-earnings long, with an absolute lower bound ≥ +3 bp at 30–60 minutes *and* a positive paired difference. Each would then need the adverse-fill scenarios and three-month trade counts before the config's status could move to `research_candidate`.
 
-*Pending sections are completed and this header removed when S02, S03 and S06-Tier A are recorded.*
+*Pending sections are completed and this header removed when S06-Tier A and S11 are recorded.*
