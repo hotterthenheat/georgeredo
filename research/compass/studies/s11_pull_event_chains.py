@@ -12,7 +12,7 @@ SP = os.environ.get('SP', '/tmp/claude-0/-home-user-georgeredo/c2861f8a-c5af-5ae
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = os.path.join(SP, 'theta', 'fetch_cache')
-N = int(sys.argv[1]) if len(sys.argv) > 1 else 400
+N = int(sys.argv[1]) if len(sys.argv) > 1 else 200
 log = lambda *a: print(dt.datetime.now(dt.timezone.utc).strftime('%H:%M:%S'), *a, flush=True)
 # events
 import importlib.util
@@ -47,12 +47,32 @@ def choose(sym, d):
     c = [e for e in exps.get(sym, []) if 30 <= (e - d).days <= 45]
     if not c: c = [e for e in exps.get(sym, []) if 25 <= (e - d).days <= 60]
     return min(c, key=lambda e: abs((e - d).days - 37)) if c else None
+# matched control: a random session of the same symbol and year at least 15 sessions from any report date of that symbol
+rd_all = s08.select(['symbol', 'date']).rename({'date': 'rd'})
+near = set()
+for r in rd_all.iter_rows(named=True):
+    d = r['rd']
+    for k in range(-15, 16):
+        near.add((r['symbol'], d + dt.timedelta(days=k)))
+sym_dates = f.select(['symbol', 'date', 'year']).filter(pl.col('date') <= dt.date(2026, 9, 1))
+ctrl_rows = []
+for r in ev.iter_rows(named=True):
+    cand = sym_dates.filter((pl.col('symbol') == r['symbol']) & (pl.col('year') == r['year']))['date'].to_list()
+    cand = [c for c in cand if (r['symbol'], c) not in near and abs((c - r['date']).days) > 15]
+    if not cand: continue
+    seed = int(hashlib.sha256(f"ctrl|{r['symbol']}|{r['date']}".encode()).hexdigest()[:8], 16)
+    c = cand[seed % len(cand)]
+    ctrl_rows.append({'symbol': r['symbol'], 'date': c, 'year': r['year'], 'direction': r['direction'], 'close': None, 'group': r['group'] + '_control', 'h': r['h'], 'event_date': r['date']})
+ctrl = pl.DataFrame(ctrl_rows, infer_schema_length=None).join(f.select(['symbol', 'date', 'close']), on=['symbol', 'date'], how='left', suffix='_f').with_columns(pl.col('close_f').alias('close')).drop('close_f')
+ev = ev.with_columns(pl.col('date').alias('event_date'))
+ev = pl.concat([ev, ctrl], how='diagonal_relaxed')
 ev = ev.with_columns(pl.struct(['symbol', 'date']).map_elements(lambda s: choose(s['symbol'], s['date']), return_dtype=pl.Date).alias('expiration'))
-ev = ev.filter(pl.col('expiration').is_not_null())
+ev = ev.filter(pl.col('expiration').is_not_null()).sort(['h', 'event_date', 'group'])  # event and its control adjacent
 ev.write_parquet(os.path.join(CACHE, 's11_events.parquet'))
 log('events with an expiration', ev.height, 'roots', ev['symbol'].n_unique())
 fch = ThetaFetcher(CACHE, nw=6, log=log)
 def eod_exp(root, d, exp, group='breakout20'):
+    group = group.replace('_control', '')
     p = fch._p('eod_exp', root, d, exp)
     if fch._done(p): fch.stats['skipped'] += 1; return p
     start = d
