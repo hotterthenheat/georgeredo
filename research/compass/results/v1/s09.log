@@ -1,0 +1,8 @@
+16:48:44 SPXW: bars 441414 events 2324
+16:49:56 SPXW: 2023-03-14 days 100 filled 234 (83s)
+16:51:19 SPXW: 2024-03-14 days 200 filled 521 (166s)
+16:52:39 SPXW: 2025-02-26 days 300 filled 771 (246s)
+16:54:00 SPXW: 2026-01-14 days 400 filled 1021 (328s)
+16:55:05 SPXW: filled 1229 (392s)
+16:55:06 done 393s {'signals': 2324, 'filled': 1229, 'status_counts': {'filled': 1229, 'in_position': 1094, 'no_eligible_contract': 1}} -46.18437754271765 -63.1922004649797 -30.022164783243632
+16:55:16 S09 DONE
