@@ -1,6 +1,6 @@
 {
- "version": "1.2.0-no-validated-configuration",
- "generated_utc": "2026-10-14T19:03:37Z",
+ "version": "1.3.0-no-validated-configuration",
+ "generated_utc": "2026-10-14T19:20:23Z",
  "status": "no_validated_configuration",
  "evidence": {
   "source": "research/compass/registry.jsonl (S01, S04, S06-S10, S12-S16a; S02, S03, S06-Tier A, S11, S12b pending at this version)",
@@ -372,12 +372,21 @@
    "window": "2022-11-11..2026-10-09",
    "result": "-$5.65 [-10.09, -1.10] (cutoff, 2x stop); negative every year",
    "verdict": "nothing promoted"
+  },
+  {
+   "study": "S12b",
+   "kind": "backtest",
+   "family": "10:00 expressions of the first-half-hour direction (long to 15:00; short opposite-side vertical to 15:50)",
+   "expiration_category": "0dte",
+   "instruments": "SPY, QQQ, IWM",
+   "window": "2022-11-11..2026-10-09",
+   "result": "long -$4.87 [-14.18, +4.87]; short vertical -$2.56 [-4.72, -0.33]; direction worth +$2.5-5 vs a coin flip, structures lose more",
+   "verdict": "nothing promoted"
   }
  ],
  "pending": [
   "S06 on the Tier A single-name universe (bars pulling)",
-  "S11 single-name short verticals on breakouts/beats and the S13 pre-earnings long call/straddle/vertical (chains pulling)",
-  "S12b 10:00 expressions re-run (running)"
+  "S11 single-name short verticals on breakouts/beats and the S13 pre-earnings long call/straddle/vertical (chains pulling)"
  ],
  "candidates_underlying_level": [
   {

@@ -217,3 +217,17 @@ Walk-forward (train on all prior years with a 5-session embargo and ≥ 150 trai
 | expected profit ÷ expected worst drawdown (the brief's ranking) | invalidation_only → -4.58 | invalidation_only → -6.32 | invalidation_only → +4.94 | 1499 | **-2.49 [-7.32, +2.46]** | 39.8 % | 0.91 |
 
 **Reading.** The grid is the answer to "can any parameter fix it": no. The ranking objective of the brief (expected profit ÷ expected worst drawdown) selects the invalidation-only exit set every year and produces the least-bad out-of-sample record, −$2.49 [−7.32, +2.46], with one positive fold (2026, +$4.94 [−6.11, +16.27] on 432 trades) whose interval includes zero. The sign is set by the entry (S04, S06); exits and contract rules move the mean by a dollar or two and the drawdown by thousands, never the sign.
+
+## S12b — 10:00 option expressions of the first-half-hour direction (NOTHING PROMOTED)
+
+`studies/s12b_first_half_hour_expressions.py` → `results/v1/s12b_first_half_hour_expressions/`, registry `S12b`, amendment A5.1 (re-run with both vertical sides filled). SPY/QQQ/IWM 0DTE, 2022-11 → 2026-10; controls = the same structures in a random direction (5 seeds).
+
+| structure | cell | n | mean $/contract [CI] | win | PF | random direction | strategy − random [CI] | by symbol |
+|---|---|---|---|---|---|---|---|---|
+| long 0.45-delta, 10:00 → 15:00 | all days | 2,499 | −4.87 [−14.18, +4.87] | 33 % | 0.92 | −11.99 | +6.94 [−2.00, +15.65] | SPY −3.8, QQQ −6.0, IWM −4.8 |
+| long | \|first 30 m\| ≥ 0.3 % | 936 | −6.25 [−23.84, +14.87] | 33 % | 0.91 | −15.01 | +8.48 [−6.98, +25.70] | SPY −9.4, QQQ −2.4, IWM −9.7 |
+| short opposite-side vertical (0.30/0.15), 10:00 → 15:50, stop 2 × | all days | 2,455 | **−2.56 [−4.72, −0.33]** | 54 % | 0.87 | −5.15 | +2.48 [+0.25, +4.73] | SPY −2.3, QQQ −2.1, IWM −3.8 |
+| short vertical | \|first 30 m\| ≥ 0.3 % | 909 | −1.48 [−5.61, +2.63] | 54 % | 0.93 | −6.87 | **+5.26 [+1.02, +9.52]** | SPY +1.1, QQQ −1.0, IWM −4.0 |
+| short vertical, one adverse tick | all / large-open | 2,455 / 909 | −6.76 [−8.85, −4.67] / −5.94 [−9.82, −2.01] | 48 % | 0.68 / 0.74 | | +2.26 / +4.69 | |
+
+**Reading.** The first-half-hour direction is worth $2.5–5 per contract relative to a coin flip — the S12 rest-of-day effect, priced through an option — and both structures lose more than that to spread and theta: the long loses the day's theta, the short vertical loses the two spreads plus the stop-outs on the days the direction is wrong. Nothing clears zero; the only positive symbol cell (SPY short vertical on large-open days, +$1.08) is inside the noise. The A5 batch is now complete except for the single-name intraday screen (S06 on Tier A, bars pulling) and the S11 event verticals.
