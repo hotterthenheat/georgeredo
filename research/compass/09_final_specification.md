@@ -37,8 +37,8 @@ S04 and S06 measure the entry on the underlying alone, 2017 → 2026, about 450,
 | family | category | instruments | window | result | status |
 |---|---|---|---|---|---|
 | Quick Scalps | 0DTE | SPY, QQQ, IWM, SPXW | 2022 → 2026 | S01, S09 above | **rejected** |
-| Quick Scalps | 0DTE, 41 single-factor variants | SPY, QQQ, IWM | 2022 → 2026 | S02 grid + walk-forward | *pending (running)* |
-| Quick Scalps (owner rule, weekly expirations 1–7 days, OI/volume filters) | Weekly | SPY, QQQ, IWM | 2017 → 2026 (stratified sample of sessions) | S03 | *pending (chains pulling)* |
+| Quick Scalps | 0DTE, 41 single-factor variants | SPY, QQQ, IWM | 2022 → 2026 | S02: no variant positive or better than random; walk-forward OOS -3.81 [-5.23, -2.35] | **rejected** |
+| Quick Scalps (owner rule, weekly expirations 1–7 days, OI/volume filters) | Weekly | SPY, QQQ, IWM | 2017 → 2026 (stratified sample of sessions) | S03: +$1.27 [−3.69, +6.25] = random | **rejected (zero, not negative)** |
 | Trend Plays, Breakouts, Bounces (intraday triggers) | — (underlying screen) | SPY, QQQ, IWM | 2017 → 2026 | S06: nothing promoted | **not promoted** |
 | Trend Plays, Breakouts, Bounces, Earnings/Events (intraday) | — | Tier A single names | 2017 → 2026 | S06 on Tier A | *pending (bars pulling)* |
 | Breakouts, Trend Plays, Bounces (daily triggers) | Weekly / Swing / Position (underlying screen) | ~1,100–1,500 liquid names per year | 2024 → 2026 | S07: nothing promoted; breakouts −81 bp and pullbacks −97 bp adjusted at 21 sessions | **not promoted** |
@@ -49,7 +49,7 @@ S04 and S06 measure the entry on the underlying alone, 2017 → 2026, about 450,
 ## 5. Failed configurations
 
 1. The owner's baseline on SPY/QQQ/IWM 0DTE (S01) and on SPXW 0DTE (S09) — §2.
-2. Every single-factor variant of the baseline (S02) — *pending; the grid table and the walk-forward selection are written to `results/v1/s02_walkforward/REPORT.md` when the run completes.*
+2. Every single-factor variant of the baseline (S02): 41 variants, none with a positive lower bound or better than its random control; walk-forward out of sample −$3.81 [−5.23, −2.35] (lower-bound objective) and −$2.49 [−7.32, +2.46] (expected profit ÷ worst drawdown) — `results/v1/s02_walkforward/REPORT.md`.
 3. The baseline entry rule and its ablations on the underlying (S04); the seven intraday triggers × four filter sets on index ETFs (S06).
 4. Five daily triggers × two filter sets on the single-name universe (S07); nine earnings cells × two entries (S08).
 

@@ -1,6 +1,6 @@
 {
- "version": "1.1.0-no-validated-configuration",
- "generated_utc": "2026-10-14T18:30:12Z",
+ "version": "1.2.0-no-validated-configuration",
+ "generated_utc": "2026-10-14T19:03:37Z",
  "status": "no_validated_configuration",
  "evidence": {
   "source": "research/compass/registry.jsonl (S01, S04, S06-S10, S12-S16a; S02, S03, S06-Tier A, S11, S12b pending at this version)",
@@ -332,15 +332,52 @@
    "window": "2017-06..2026-10",
    "result": "6 of 108 cells with a positive lower bound vs 2.7 by chance; largest QQQ fade-the-prior-day +17.8 bp [+4.7, +30.2] (below a weekly option round trip)",
    "verdict": "nothing promoted"
+  },
+  {
+   "study": "S02",
+   "kind": "grid",
+   "family": "quick_scalps, 41 single-factor variants + walk-forward",
+   "expiration_category": "0dte",
+   "instruments": "SPY, QQQ, IWM",
+   "window": "2022-11-11..2026-10-09",
+   "result": "no variant with a positive lower bound or beating random; walk-forward OOS -3.81 [-5.23, -2.35] (lower bound), -2.49 [-7.32, +2.46] (EP/EWD)",
+   "verdict": "nothing promoted"
+  },
+  {
+   "study": "S03",
+   "kind": "backtest",
+   "family": "quick_scalps on weekly expirations (OI/volume filters)",
+   "expiration_category": "weekly",
+   "instruments": "SPY, QQQ, IWM (stratified sessions 2017-2026)",
+   "window": "2017-06-01..2026-10-09",
+   "result": "+$1.27/contract [-3.69, +6.25] = matched random (+$1.25); year signs flip",
+   "verdict": "nothing promoted"
+  },
+  {
+   "study": "S16b",
+   "kind": "backtest",
+   "family": "fade the prior-day move with a weekly contract",
+   "expiration_category": "weekly",
+   "instruments": "SPY, QQQ, IWM",
+   "window": "2017-06..2026-10",
+   "result": "-$9.91 [-19.31, -0.26] all days; +$1.83 [-16.40, +21.02] on big-gap days",
+   "verdict": "nothing promoted"
+  },
+  {
+   "study": "S10-rerun",
+   "kind": "backtest",
+   "family": "short verticals fading the quick_scalps signal (both sides)",
+   "expiration_category": "0dte",
+   "instruments": "SPY, QQQ, IWM",
+   "window": "2022-11-11..2026-10-09",
+   "result": "-$5.65 [-10.09, -1.10] (cutoff, 2x stop); negative every year",
+   "verdict": "nothing promoted"
   }
  ],
  "pending": [
-  "S02 single-factor grid with walk-forward (0DTE, running)",
-  "S03 owner baseline on weekly expirations SPY/QQQ/IWM 2017-2026 (chains pulling)",
   "S06 on the Tier A single-name universe (bars pulling)",
   "S11 single-name short verticals on breakouts/beats and the S13 pre-earnings long call/straddle/vertical (chains pulling)",
-  "S12b 10:00 expressions of the first-half-hour direction (running)",
-  "S16b weekly-option expression of the prior-day fade (after S03 chains)"
+  "S12b 10:00 expressions re-run (running)"
  ],
  "candidates_underlying_level": [
   {

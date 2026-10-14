@@ -22,8 +22,6 @@ Negative in every year (2023 −4.87 [−6.88, −2.85]; 2024 −3.22 [−5.75, 
 
 ## Pending
 
-- S02: single-factor grid and ablations around S01 (41 variants) with walk-forward selection by year (running).
-- S03: baseline on Weekly-category expirations, SPY/QQQ/IWM 2017-06 → 2026-10, OI > 250 and intraday volume > 100 applied (chains being pulled).
 - S06 on the Tier A single-name universe once its minute bars are cached (S05).
 
 ## S04 — does the baseline signal predict the underlying at all? (NO)
@@ -203,3 +201,19 @@ By year: −3.3 / +2.3 / −7.0 / +2.3 / −4.6 / −2.8 / +1.8 / +7.9 / +26.1 [
 ## S10 re-run — verticals with both sides filled (NOTHING PROMOTED)
 
 After the protective-leg fix (`06_implementation_record.md`, 18:40) the vertical cells of S10 are re-measured on 2,857 fills: −$5.65 per contract [−10.09, −1.10] at the 15:50 cutoff with a 2 × credit stop, −$6.01 [−8.32, −3.66] at 60 minutes, −$11.49 [−19.69, −3.88] with no stop; +$4.0 to +$4.9 better than random-minute verticals, which lose −$10 to −$16. Negative in every year and exit set. The single-contract rows of S10 are unchanged (+$0.52 [−6.11, +7.47], breakeven).
+
+## S02 — the single-factor grid around the baseline, 41 variants, with walk-forward selection (NOTHING PROMOTED)
+
+`studies/s02_quick_scalps_grid.py` + `studies/s02_walkforward.py` → `results/v1/s02_walkforward/REPORT.md` (full table), registry `S02`. Every variant of protocol §8 — RSI 7/9/21, lead EMA 3/5/8/13, mid EMA 21/34, slow EMA 100/200, relative volume off/1.25/1.5/2.0, no 15-minute alignment, daily trend on, no structure, no 5-minute confirmation, RSI 60/40 and 50/50; delta bands 0.20–0.40 / 0.30–0.50 / 0.40–0.60, spread 5/8/10/15 %, tightest-spread pick; stops 20/30/40 %, no VWAP loss, no invalidation, no EMA target, no partial, +100 % target, +50/+100, holds 30/120 min, invalidation-only — on SPY/QQQ/IWM same-day expirations 2022-11 → 2026-10, each with its own matched random control.
+
+**No variant has a positive full-sample lower bound, and none beats its matched random control.** The best lower bound is `delta20_40` at -3.76 per contract [-4.60, -2.94], -1.18 against random; the range across the grid is about −$2.7 to −$4.6 per contract, every cell negative in 2023, 2024, 2025 and 2026.
+
+Walk-forward (train on all prior years with a 5-session embargo and ≥ 150 training trades, select the best variant, test on the next year):
+
+| objective | 2024 (selected → OOS) | 2025 | 2026 | pooled OOS n | pooled OOS mean [CI] | win | PF |
+|---|---|---|---|---|---|---|---|
+| lower bound | delta20_40 → -2.97 | no_15m → -3.21 | no_15m → -5.19 | 3200 | **-3.81 [-5.23, -2.35]** | 34.8 % | 0.74 |
+| mean | invalidation_only → -4.58 | no_15m → -3.21 | daily_trend → -6.07 | 2206 | **-3.94 [-6.11, -1.80]** | 37.3 % | 0.77 |
+| expected profit ÷ expected worst drawdown (the brief's ranking) | invalidation_only → -4.58 | invalidation_only → -6.32 | invalidation_only → +4.94 | 1499 | **-2.49 [-7.32, +2.46]** | 39.8 % | 0.91 |
+
+**Reading.** The grid is the answer to "can any parameter fix it": no. The ranking objective of the brief (expected profit ÷ expected worst drawdown) selects the invalidation-only exit set every year and produces the least-bad out-of-sample record, −$2.49 [−7.32, +2.46], with one positive fold (2026, +$4.94 [−6.11, +16.27] on 432 trades) whose interval includes zero. The sign is set by the entry (S04, S06); exits and contract rules move the mean by a dollar or two and the drawdown by thousands, never the sign.
