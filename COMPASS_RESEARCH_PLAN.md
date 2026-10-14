@@ -126,3 +126,5 @@ Question asked: can a lane reach a 70 %+ win rate without negative expectancy? E
 
 **Data notes.** The chain dataset stores strikes within ±2 % of the 09:31 price; trades whose strikes fell outside that band were skipped and counted, which removes some of the largest-move days (documented in both grid notes). Option OHLC was only partially fetched (about 3 minutes per session; resumable with `research/thetadata/dataset/fetch.py ohlc`); no test depends on it.
 
+**Decision needed from the user (raised by round 2).** The §1 gate requires every lane to beat its random-entry baseline by more than one round trip. A premium-harvesting ("carry") lane makes no timing claim, so a version defined as "sell at any minute 10:00–14:30" cannot pass that item in principle, and S2 failed it (lane − random −$92.8). Either (a) keep the gate as written, which means no premium-harvesting lane can ever be promoted, or (b) add a carry-lane variant of the gate that drops the timing item but requires the forward T-G record, the max-loss sizing above, and a stress test on large-move days re-pulled with a wider strike band. Until the user decides, H15 stays a forward paper lane only.
+

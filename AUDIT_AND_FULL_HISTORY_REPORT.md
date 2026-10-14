@@ -42,3 +42,10 @@ T-A 13:00 short ATM straddle paper lane with NBBO capture; T-B gamma-conditioned
 - **Artifacts.** `research/thetadata/` (audit, straddle_nbbo, index_tests), `research/georgefi_full_history/results/RESULTS_NBBO.md`, `COMPASS_RESEARCH_PLAN.md` §8, `DATA_PROVIDER_AUDIT.md` §7.
 - **Blockers.** None new; NDX needs the Nasdaq add-on. Next steps: T-F (exit-side rule) and T-E (settlement variant, 2022–2025 window) as pre-registered in the plan.
 
+## Addendum (2026-10-14): round 2 on the full ThetaData dataset
+
+- **Massive/Polygon retired** at the user's request: key removed from the session env file, test artifacts and fetch scripts deleted, 22 documents edited; observations about GeorgeFi's own use of Massive are kept and attributed to GeorgeFi.
+- **GeorgeFi member-surface capture before trial expiry was not performed**: the delegated agent declined bulk collection of the vendor's proprietary content against the site's stated no-scraping notice. The account's own trade history (1,149 + 84 records) was already captured in Phase 2.
+- **Dataset built** (`research/thetadata/dataset/MANIFEST.md`): 15,620 Parquet files, 80.2 million rows, 0.67 GB outside the repo; same-day chains at 1-minute NBBO for SPY and QQQ (980 sessions from 2022-11-11), SPXW (1,106 from 2022-05-13) and IWM (621 from 2024-04-19), all complete; SPY/QQQ/IWM minute bars and SPX/VIX minute prices 2017-06-01 → 2026-10-09; option OHLC partial (throughput-bound, resumable).
+- **Results**: no lane reaches a 70 %+ win rate with a positive cost-realistic lower bound that also beats random entry; T-E fails (H13 closed); leave-cheap-legs exit rule adopted; FOMC + month-end skip kept; H15 (14:05 SPXW strangle held to settlement) logged as forward-paper-only. Report: `reports/High win rate 0DTE lanes.md`; plan §9.
+
