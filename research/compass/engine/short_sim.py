@@ -12,8 +12,8 @@ EXITS = dict(stop_mult=2.0, max_hold_min=None, session_cutoff_minute=380, commis
 
 def pick_long_leg(snap: pl.DataFrame, short_row: dict, direction: int, target_delta: float = 0.20, lo: float = 0.08, hi: float = 0.32) -> dict | None:
     """The protective leg: same right, further out of the money than the short strike, |delta| nearest target."""
-    right = short_row['right']; K = float(short_row['strike'])
-    c = snap.filter((pl.col('right') == right) & ((pl.col('strike') > K) if right == 'C' else (pl.col('strike') < K)))
+    right = short_row['right']; K = float(short_row['strike']); is_call = str(right).upper().startswith('C')  # chains carry 'CALL'/'PUT' or 'C'/'P'
+    c = snap.filter((pl.col('right') == right) & ((pl.col('strike') > K) if is_call else (pl.col('strike') < K)))
     c = c.filter(pl.col('delta_abs').is_between(lo, hi) & (pl.col('bid') > 0) & (pl.col('ask') >= pl.col('bid')))
     if c.height == 0: return None
     return c.with_columns((pl.col('delta_abs') - target_delta).abs().alias('_d')).sort('_d').row(0, named=True)
