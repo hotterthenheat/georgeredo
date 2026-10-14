@@ -1,0 +1,3 @@
+selection,cid,test_n,test_mean,test_ci_lo,test_ci_hi,test_win_rate,test_months,test_mean_rt_cost,lane_minus_random,test_mean_adverse,C1_lb_gt0,C2_n150_3m,C2_beats_random_by_rt,C3_adverse_mean_gt0,WR70,PASS_all,PASS_all_and_WR70
+S1,N0.0|14:05|tp0|st1|E2|F3|P,407,99.1253,-33.9671,225.953,0.589681,21.2,23.0651,22.6314,87.7002,False,True,False,True,False,False,False
+S2,N0.5|14:05|tp0|st0|E2|F3|P,397,162.003,63.1559,258.439,0.715365,21.2,12.7431,-92.8164,152.003,True,True,False,True,True,False,False
