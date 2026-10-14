@@ -1,0 +1,2 @@
+data coverage per symbol (sessions with cached files): {"SPY": {"sessions_chosen": 2353, "chains": 468, "ohlc": 471, "oi": 1525}, "QQQ": {"sessions_chosen": 2347, "chains": 294, "ohlc": 294, "oi": 0}, "IWM": {"sessions_chosen": 2347, "chains": 294, "ohlc": 294, "oi": 0}}
+SPY: bars 914003 events 6080
