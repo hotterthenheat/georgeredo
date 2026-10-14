@@ -26,7 +26,11 @@ brk = f[idx].with_columns(pl.Series('direction', d[idx])).select(['symbol', 'dat
 s08 = pl.read_parquet(os.path.join(HERE, '..', 'results', 'v1', 's08_earnings_daily', 'events.parquet'))
 beats = s08.filter(pl.col('tercile') == 3).select(['symbol', 'date', 'year']).with_columns(pl.lit(1).alias('direction'), pl.lit(None).cast(pl.Float64).alias('close'), pl.lit('beat_top_tercile').alias('group'))
 beats = beats.join(f.select(['symbol', 'date', 'close']), on=['symbol', 'date'], how='left', suffix='_f').with_columns(pl.col('close_f').alias('close')).drop('close_f')
-ev = pl.concat([brk, beats], how='diagonal_relaxed').filter(pl.col('date') <= dt.date(2026, 9, 1))  # need 25 sessions of marks after the event
+# pre-earnings group (A5.2): every quarterly report in the universe with a report time, regardless of surprise; the pull
+# window for these starts 11 sessions before the event session so that the 10-session pre-event trade is priced
+pre = s08.select(['symbol', 'date', 'year']).with_columns(pl.lit(1).alias('direction'), pl.lit(None).cast(pl.Float64).alias('close'), pl.lit('pre_earnings').alias('group'))
+pre = pre.join(f.select(['symbol', 'date', 'close']), on=['symbol', 'date'], how='left', suffix='_f').with_columns(pl.col('close_f').alias('close')).drop('close_f')
+ev = pl.concat([brk, beats, pre], how='diagonal_relaxed').filter(pl.col('date') <= dt.date(2026, 9, 1))  # need 25 sessions of marks after the event
 # deterministic stratified subsample: N per group per year, ordered by a hash of (symbol, date)
 import hashlib
 ev = ev.with_columns(pl.struct(['symbol', 'date']).map_elements(lambda s: int(hashlib.sha256(f"{s['symbol']}|{s['date']}".encode()).hexdigest()[:8], 16), return_dtype=pl.Int64).alias('h'))
@@ -48,15 +52,18 @@ ev = ev.filter(pl.col('expiration').is_not_null())
 ev.write_parquet(os.path.join(CACHE, 's11_events.parquet'))
 log('events with an expiration', ev.height, 'roots', ev['symbol'].n_unique())
 fch = ThetaFetcher(CACHE, nw=6, log=log)
-def eod_exp(root, d, exp):
+def eod_exp(root, d, exp, group='breakout20'):
     p = fch._p('eod_exp', root, d, exp)
     if fch._done(p): fch.stats['skipped'] += 1; return p
+    start = d
+    if group == 'pre_earnings':
+        for _ in range(11): start = cal.prev_session(start, 1)
     end = cal.next_session(d)
     for _ in range(25): end = cal.next_session(end)
     end = min(end, exp)
-    df, err = fch.call('option_history_eod', symbol=root, expiration=exp, start_date=d, end_date=end)
+    df, err = fch.call('option_history_eod', symbol=root, expiration=exp, start_date=start, end_date=end)
     return fch._finish(df, err, p, None)
 fch.eod_exp = eod_exp
-jobs = [('eod_exp', r['symbol'], r['date'], r['expiration']) for r in ev.iter_rows(named=True)]
+jobs = [('eod_exp', r['symbol'], r['date'], r['expiration'], r['group']) for r in ev.iter_rows(named=True)]
 fch.run_jobs(jobs, 'S11 event chains')
 log('S11 PULL DONE', fch.stats)

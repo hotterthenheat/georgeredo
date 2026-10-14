@@ -117,3 +117,19 @@ The relative-volume ≥ 1.5 variants (REPORT.md) change nothing in sign and wide
 Puts −68.28 [−94.68, −42.13], calls −20.89 [−40.39, −1.64]. Exits: the −25 % stop ends 648 trades (−$222 each), the +50 % target 322 (+$386), the VWAP-loss rule 188, the 60-minute time exit 41 (+$108), the swing-level invalidation 30 (−$81).
 
 **Reading.** Per contract the numbers are about ten times SPY's (SPX notional), and as a fraction of premium they are the same: the rule loses roughly the same share on SPXW as on SPY, QQQ and IWM, and it loses it *relative to random entries on the same days* by a margin larger than the whole round-trip cost. Moving the owner's 0DTE scalps to the cheapest index product does not change the sign, because the entry has no directional information (S04, S06). Quick Scalps is rejected on SPXW as on the ETFs.
+
+## S13 / S14 — pre-earnings run-up (PROMOTED AT THE UNDERLYING LEVEL); cross-sectional momentum and reversal (nothing promoted)
+
+`studies/s13_s14_daily_batch.py` → `results/v1/s13_s14_daily_batch/REPORT.md`, registry `S13`, `S14`, amendment A5. S07 universe, 2024 → 2026.
+
+**S13.** Long the stock from the close N sessions before a quarterly report, out at the close of the session before the event session (the report is never held through):
+
+| N sessions before | n | abs (bp) [CI] | universe-adjusted [CI] | adjusted by year 2024 / 2025 / 2026 | A2 hurdle |
+|---|---|---|---|---|---|
+| 3 | 10,471 | +33 [+9, +53] | +15 [+7, +25] | +35 / +1 / +13 | adjusted only |
+| 5 | 10,465 | +53 [+22, +82] | +23 [+10, +35] | +36 / +5 / +30 | adjusted only |
+| **10** | 10,445 | **+97 [+62, +133]** | **+20 [+4, +36]** | +23 / +10 / +28 | **both parts** |
+
+This is the documented earnings-announcement premium. It is the first cell in this research to clear the underlying hurdle, and it should be read exactly: three-quarters of the absolute 10-session return is the 2024–2026 market drift (an unconditional long over the same dates earned ≈ +77 bp); the part specific to the pre-earnings window is +20 bp [+4, +36], consistent in sign across the three years. For a long option a 10-session hold costs theta that a 97-bp move alone does not cover (port spec §5 arithmetic); what makes the window different from any other 10 sessions is the rise in implied volatility into the report, which a long call or straddle sold at the pre-event close collects. That is the pre-registered option test (A5.2), run on per-event chains with S11.
+
+**S14.** Month-end deciles held 21 sessions have only 20–34 rebalance dates in the window; every interval is hundreds of bp wide. The 1-month reversal long leg is +398 bp absolute [+59, +737] but +247 [−38, +598] against the universe with year signs that flip; 12-1 momentum is indistinguishable from the universe; shorting the 12-1 bottom decile would have lost −576 bp [−1,120, −140] (small caps rallied). Nothing promoted; revisit when the 2012–2022 daily years land.
