@@ -1,15 +1,18 @@
 /home/user/georgeredo/research/compass/studies/s04_signal_underlying_validity.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   log = lambda *a: print(dt.datetime.utcnow().strftime('%H:%M:%S'), *a, flush=True)
-16:13:23 SPY bars 914003
-16:13:28 SPY baseline n 5375 fwd30 bp 5.25
-16:13:29 SPY no_relvol n 11209 fwd30 bp -0.37
-16:13:30 SPY no_structure n 9953 fwd30 bp 0.06
-16:13:30 SPY no_15m n 8088 fwd30 bp -0.67
-16:13:31 SPY no_5m n 6246 fwd30 bp -1.38
-Traceback (most recent call last):
-  File "/home/user/georgeredo/research/compass/studies/s04_signal_underlying_validity.py", line 42, in <module>
-    fr = forward_returns(feat, idx, direction)
-  File "/home/user/georgeredo/research/compass/studies/s04_signal_underlying_validity.py", line 24, in forward_returns
-    j = np.maximum(idx - h, 0); same = sess[j] == sess[idx]
-                                       ~~~~^^^
-IndexError: index 4294967282 is out of bounds for axis 0 with size 914003
+16:14:20 SPY bars 914003
+16:14:26 SPY baseline n 5375 fwd30 bp 5.25
+16:14:27 SPY no_relvol n 11209 fwd30 bp -0.37
+16:14:27 SPY no_structure n 9953 fwd30 bp 0.06
+16:14:28 SPY no_15m n 8088 fwd30 bp -0.67
+16:14:29 SPY no_5m n 6246 fwd30 bp -1.38
+16:14:30 SPY cross_only n 73175 fwd30 bp -0.03
+16:14:31 SPY daily_trend n 2819 fwd30 bp -1.19
+16:14:50 QQQ bars 914012
+16:14:55 QQQ baseline n 5040 fwd30 bp 7.36
+16:14:56 QQQ no_relvol n 11043 fwd30 bp -0.15
+16:14:57 QQQ no_structure n 9529 fwd30 bp 0.13
+16:14:58 QQQ no_15m n 7735 fwd30 bp -0.43
+16:14:58 QQQ no_5m n 5835 fwd30 bp -0.83
+16:15:00 QQQ cross_only n 72255 fwd30 bp -0.1
+16:15:01 QQQ daily_trend n 2582 fwd30 bp -0.17

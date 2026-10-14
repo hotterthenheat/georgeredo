@@ -38,7 +38,7 @@ for sym in ['SPY', 'QQQ', 'IWM']:
     for name, p in VARIANTS.items():
         ev = signals.baseline_events(feat, {**p, 'entry_end_minute': 320})
         if ev.height == 0: continue
-        idx = ev['idx'].to_numpy(); direction = ev['direction'].to_numpy()
+        idx = ev['idx'].to_numpy().astype(np.int64); direction = ev['direction'].to_numpy().astype(np.int64)
         fr = forward_returns(feat, idx, direction)
         days = ev['session'].cast(pl.Utf8).to_numpy()
         rec = {'symbol': sym, 'variant': name, 'n': int(ev.height), 'days': int(np.unique(days).size), 'calls_share': float((direction > 0).mean())}

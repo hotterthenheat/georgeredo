@@ -31,7 +31,7 @@ FEATURE_COLS = ['rsi', 'ema_fast', 'ema_lead', 'ema_mid', 'ema_slow', 'ema_long'
                 'close_d', 'ema_mid_d', 'ema_slow_d', 'ema_long_d', 'f_confirm_5m', 'f_align_15m', 'f_daily', 'f_relvol', 'f_structure']
 
 def trade_one(store, root: str, chain: pl.DataFrame, e: dict, last_trading_day: dt.date, feat: pl.DataFrame, select_params: dict, exit_params: dict,
-              oi: pl.DataFrame | None = None, ohlc: pl.DataFrame | None = None) -> dict:
+              oi: pl.DataFrame | None = None, ohlc: pl.DataFrame | None = None, later_chains: list | None = None) -> dict:
     base = {k: e.get(k) for k in ['session', 'close_ts', 'minute', 'direction', 'spot', 'invalidation_level'] + FEATURE_COLS}
     base.update({'symbol': root, 'expiration': last_trading_day})
     snap = _snapshot_at(chain, e['close_ts'])
@@ -46,6 +46,8 @@ def trade_one(store, root: str, chain: pl.DataFrame, e: dict, last_trading_day: 
     if row is None: return {**base, 'status': 'no_eligible_contract'}
     base.update({'strike': row['strike'], 'right': row['right'], 'delta': row['delta_abs'], 'iv': row['iv'], 'spread_pct': row['spread_pct'], 'bid0': row['bid'], 'ask0': row['ask'], 'ask_size0': row.get('ask_size')})
     quotes = _quotes_for(chain, row['strike'], row['right'])
+    if later_chains:  # multi-session holds: the same contract's quotes on the following sessions
+        quotes = pl.concat([quotes] + [_quotes_for(c, row['strike'], row['right']) for c in later_chains if c is not None]).sort('timestamp')
     tr = sim.simulate(e, {**row, 'last_trading_day': last_trading_day}, quotes, feat, exit_params)
     if tr is None: return {**base, 'status': 'no_quotes'}
     if tr['status'] != 'filled': return {**base, 'status': tr['status'], 'reason': tr.get('reason')}
@@ -87,12 +89,21 @@ def run_family(store, family: str, symbols: list[str], start: dt.date, end: dt.d
                 for e in day.iter_rows(named=True): rows.append({**{k: e.get(k) for k in ['session', 'close_ts', 'minute', 'direction', 'spot']}, 'symbol': sym, 'expiration': exp, 'status': 'no_chain_data'})
                 continue
             fday = feat.filter(pl.col('session') == d)
+            # multi-session holds: features and the contract's chains for the sessions the hold may span (never past expiry)
+            hold_sessions = max(1, int(np.ceil(xp['max_hold_min'] / 390.0)))
+            later = []; fwin = fday
+            if hold_sessions > 1:
+                win_end = min(cal.next_session(d, hold_sessions - 1), ltd)
+                fwin = feat.filter((pl.col('session') >= d) & (pl.col('session') <= win_end))
+                s = d
+                while s < win_end:
+                    s = cal.next_session(s); later.append(store.chain_minutes(sym, s, exp))
             oi = store.open_interest(sym, d, exp) if (cp.get('min_oi') is not None) else None
             ohlc = store.chain_ohlc(sym, d, exp) if (cp.get('min_volume') is not None) else None
             for e in day.sort('close_ts').iter_rows(named=True):
                 if one_position and open_until is not None and e['close_ts'] < open_until:
                     rows.append({**{k: e.get(k) for k in ['session', 'close_ts', 'minute', 'direction', 'spot']}, 'symbol': sym, 'expiration': exp, 'status': 'in_position'}); continue
-                r = trade_one(store, sym, chain, e, ltd, fday, cp, xp, oi, ohlc)
+                r = trade_one(store, sym, chain, e, ltd, fwin, cp, xp, oi, ohlc, later)
                 rows.append(r)
                 if r['status'] == 'filled':
                     n_tr += 1
@@ -106,7 +117,7 @@ def run_family(store, family: str, symbols: list[str], start: dt.date, end: dt.d
                         if fr.height == 0: continue
                         fe = fr.row(0, named=True)
                         be = {**fe, 'direction': e['direction'], 'spot': fe['close'], 'invalidation_level': fe['swing_lo_5m'] if e['direction'] > 0 else fe['swing_hi_5m']}
-                        br = trade_one(store, sym, chain, be, ltd, fday, cp, xp, oi, ohlc)
+                        br = trade_one(store, sym, chain, be, ltd, fwin, cp, xp, oi, ohlc, later)
                         base_rows[seed].append({**br, 'matched_minute': int(e['minute']), 'seed': seed})
         log(f'{sym}: filled {n_tr} ({time.time() - t0:.0f}s)')
     trades = pl.DataFrame(rows, infer_schema_length=None) if rows else pl.DataFrame()
