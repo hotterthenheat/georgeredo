@@ -163,3 +163,19 @@ Rich minus cheap: −$29 [−69, +9]. **Reading.** A 58 % win rate and a losing 
 | vertical | 60-min hold | 1,530 | −5.17 [−8.97, −1.29] | 50 % | 0.74 | −$7,992 | −10.72 | +5.58 [+3.99, +7.27] | all negative |
 
 **Reading.** The mirror of S01 holds exactly as the arithmetic predicts: the owner's signal marks a minute at which selling the option is about $6 better than selling at a random minute — and selling at a random minute loses $6–9 after the round trip, so the fade is breakeven (+$0.52 ± 7) and goes negative with one adverse tick. Defined-risk verticals pay two spreads and are worse; holding without a stop adds a −$18,000 drawdown for no mean. There is no sellable premium at these minutes either; the signal's information is real but smaller than the cost of trading it in either direction. 2026 is negative in every cell.
+
+## S12 — intraday momentum (NOTHING PROMOTED; a QQQ-only rest-of-day effect that does not survive the batch adjustment)
+
+`studies/s12_intraday_momentum.py` → `results/v1/s12_intraday_momentum/`, registry `S12`, amendment A5. Direction = the sign of the 09:30 → 10:00 return; signed returns in bp, CIs clustered by date, 2017-06 → 2026-10.
+
+| cell | SPY all days | QQQ all days | IWM all days | SPY ≥ 0.3 % | QQQ ≥ 0.3 % | IWM ≥ 0.3 % |
+|---|---|---|---|---|---|---|
+| 10:00 → 15:00 | +2.2 [−0.6, +4.8] | **+4.3 [+0.8, +7.8]** | +2.6 [−1.2, +6.4] | +1.8 [−6.3, +10.2] | **+9.0 [+2.8, +15.3]** (hit 56 %) | +1.3 [−4.6, +7.2] |
+| 15:00 → 15:50 | −0.2 [−1.4, +1.1] | +0.9 [−0.5, +2.3] | +1.5 [+0.0, +2.9] | +0.1 [−3.3, +3.4] | +0.7 [−1.7, +3.0] | +2.0 [−0.2, +4.3] |
+| 15:30 → 16:00 | −0.8 [−2.2, +0.5] | −0.5 [−2.0, +1.0] | +0.1 [−1.3, +1.4] | −1.8 [−6.0, +2.4] | −1.2 [−4.0, +1.7] | +0.0 [−2.2, +2.2] |
+
+The last-half-hour momentum of the literature (first half hour → last half hour) is absent on all three ETFs over nine years. The first half hour does predict the rest of the day on QQQ — by year {'2017': 10.8, '2018': 15.0, '2019': 10.4, '2020': 4.1, '2021': 10.9, '2022': 13.8, '2023': 7.6, '2024': 3.0, '2025': 10.6, '2026': 3.0} on the large-move days — but not on SPY or IWM, and the QQQ cell's Bonferroni-adjusted lower bound across the 163 primary cells of the A5 batch is -2.5 bp. The 15:00 option expression (long the baseline-rule 0DTE contract in the first-half-hour direction, exit 15:50, all three ETFs): −$4.36 per contract [−8.48, +0.21] all days, +$0.79 [−7.41, +10.40] on large-move days; against the same contract in a random direction +$1.11 [−2.51, +4.92] and +$3.90 [−2.78, +11.17]. The 10:00 expressions (long to 15:00; short opposite-side vertical to 15:50) are S12b.
+
+## S16a — overnight gaps and the prior day's move as open-time signals (NOTHING PROMOTED)
+
+`studies/s16a_overnight_gaps_underlying.py` → `results/v1/s16a_overnight_gaps_underlying/rows.json`, registry `S16a`. 108 cells (3 ETFs × 2 signals × 3 filters × continuation/fade × 3 horizons), 2017-06 → 2026-10. Gap continuation and gap fade are indistinguishable from zero everywhere. Fading the prior session's close-to-close move has 6 cells with a positive 95 % lower bound against 2.7 expected by chance; the largest, QQQ on |gap| ≥ 0.5 % days held to the next close, is +17.8 bp [+4.7, +30.2] (hit 52 %, negative only in 2017); the rest are +5 to +12 bp with one to five negative years. A one-day reversal of that size is below a weekly option's round trip (≈ 25–40 bp of spot for a 0.45-delta 1–7 DTE contract once the C1 half-spread and a day of theta are paid) and does not survive the batch adjustment. The weekly-option expression (S16b) runs on the S03 chains for the record.
