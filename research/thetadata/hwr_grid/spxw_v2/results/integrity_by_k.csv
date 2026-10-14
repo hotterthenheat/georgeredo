@@ -1,0 +1,9 @@
+kind,k,entries,no_spot,atm_k0_not_listed,atm_k0_not_usable,atm_k0_outside_band_v1,sc_beyond_listed,sc_not_usable,sc_bid0,sc_outside_band_v1,sc_gap_gt5,sc_gap_max,sp_beyond_listed,sp_not_usable,sp_bid0,sp_outside_band_v1,sp_gap_gt5,sp_gap_max,wc_beyond_listed,wc_not_usable,wc_bid0,wc_outside_band_v1,wc_gap_gt5,wc_gap_max,wp_beyond_listed,wp_not_usable,wp_bid0,wp_outside_band_v1,wp_gap_gt5,wp_gap_max,naked_ok,naked_not_ok,naked_reasons,winged_ok,winged_not_ok,winged_reasons
+fixed,0,4388,0,2,4,27,0,0,0,25,0,4.97,0,0,0,25,0,4.97,0,1,0,67,7,9.69,0,3,0,90,6,9.98,4388,0,{},4384,4,"{""no_quote"": 4}"
+fixed,0.5,4388,0,2,4,27,0,1,0,38,3,7.97,0,5,0,42,2,8.18,0,0,0,135,7,9.47,0,2,0,178,6,15.94,4383,5,"{""no_quote"": 5}",4383,5,"{""no_quote"": 5}"
+fixed,1,4388,0,2,4,27,0,1,0,67,7,9.69,0,3,0,90,6,9.98,0,1,0,236,12,9.49,0,1,0,320,9,8.66,4384,4,"{""no_quote"": 4}",4382,6,"{""no_quote"": 5, ""no_credit"": 1}"
+fixed,1.5,4388,0,2,4,27,0,0,0,135,7,9.47,0,2,0,178,6,15.94,0,1,6,441,21,15.71,0,3,0,511,10,23.35,4386,2,"{""no_quote"": 2}",4382,6,"{""no_quote"": 5, ""no_credit"": 1}"
+random,0,5485,0,0,3,44,0,0,0,44,0,4.96,0,0,0,44,0,4.96,0,2,0,89,5,8.43,0,3,0,120,4,9.77,5485,0,{},5481,4,"{""no_quote"": 4}"
+random,0.5,5485,0,0,3,44,0,1,0,51,3,9.96,0,3,0,68,4,9.34,0,1,0,166,7,9.95,0,4,0,231,7,18.42,5481,4,"{""no_quote"": 4}",5478,7,"{""no_quote"": 7}"
+random,1,5485,0,0,3,44,0,2,0,89,5,8.43,0,3,0,120,4,9.77,0,0,0,288,8,9.31,0,2,0,372,7,9.76,5481,4,"{""no_quote"": 4}",5480,5,"{""no_quote"": 5}"
+random,1.5,5485,0,0,3,44,0,1,0,166,7,9.95,0,4,0,231,7,18.42,0,3,13,490,15,9.7,0,3,0,582,13,17.42,5480,5,"{""no_quote"": 5}",5478,7,"{""no_quote"": 7}"

@@ -1,0 +1,6 @@
+selection,cid,test_n,test_mean,test_ci_lo,test_ci_hi,test_win_rate,test_months,test_mean_rt_cost,lane_minus_random,test_mean_adverse,C1_lb_gt0,C2_n150_3m,C2_beats_random_by_rt,C3_adverse_mean_gt0,WR70,PASS_all,PASS_all_and_WR70,test_ci_lo_bonf2,CARRY_stat_items
+S1,N0.0|14:05|tp0|st1|E2|F3|P,407,122.781,-2.99287,246.448,0.587224,21.2,22.8747,29.4378,111.356,False,True,True,True,False,False,False,-22.9365,False
+S2,N1.0|14:05|tp0|st2|E2|F3|P,407,52.5356,-22.2393,122.487,0.732187,21.2,14.898,-11.9307,40.6683,False,True,False,True,True,False,False,-33.5941,False
+orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,407,122.781,-2.99287,246.448,0.587224,21.2,22.8747,29.4378,111.356,False,True,True,True,False,False,False,-22.9365,False
+orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,407,151.167,42.1542,251.731,0.707617,21.2,13.2039,22.5985,141.167,True,True,True,True,True,True,True,26.2279,True
+TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,388,85.5567,-171.503,291.515,0.670103,21.2,17.4897,17.584,75.5567,False,True,True,True,False,False,False,-213.926,False

@@ -1,0 +1,17 @@
+9acbb38cbf9ed230aee26952d14eddef645d2a8bb30ae2701a729a09c6670ccb  README.md
+2b7c7282b2d4168f8273e8a07f6dc471a4385bbc9955aa8101ba25a67672ce0b  sim.py
+c4e5edd0d6920834b2c159fd97813d69857e8697ace14c4b95f4fe53fe0f027e  run_grid.py
+adb048aead3e970679f772c102765a931617061ed75a9bd3d2aef44c35561d5a  analyze.py
+c6720ae339892d1732a65fa0a194cc00ec0373dc12b4d5fa33b2467886b459a7  te.py
+51cf900691ef4ce7edfe322aa6d230fe981a2cde9211d5d4d4a63fadebbf09ca  random_minutes.csv
+written_utc 2026-10-14T01:43:21Z (protocol section of README.md and the v2 code, before any v2 run on the complete chains; the only prior v2 computation was a code test on 2022-05-13 -> 2023-06-30 sessions in a scratch folder, never used for results)
+amendment_1_utc 2026-10-14T02:20:22Z (band-file fallback for 2024-06-21, whose complete chain was not delivered; recorded before any v2 TRAIN/TEST statistic; hashes of the amended files below)
+2e4cf667f498027a52d25c34d2f532e2a254672334d22a97b9ddced96ded0293  README.md
+25a5bff80c8d0c6828611f322c89dd15133b85b9cf7b8c92b6d95c82c9d3a854  sim.py
+071d79e09780230036bf05d7451af489a4d4fca9018d00e0e37f221b21f5183a  run_grid.py
+4007632de229c273b5b6f7ccc6ea3d375c7d23a41d41dbd62c22c1f0d2cc09b1  integrity.py
+3f8fef38f0dfd65f35a614c44da79424537aa291a5f773377dca6d5d1158c840  results/selection_train.json
+33596acf0ca8ea86589181ba6f80a683f79e6e239b7929ea0af8548592d84a2a  results/train_metrics.csv.gz
+00e6a644b63b093a9a1a3a2913951fc5c2cbf9789f31eb05310bafa9fd97b2b9  analyze.py
+selection_written_before_TEST_sessions_simulated_utc 2026-10-14T02:27:31Z (trade files present: 656, last 2024-12-31.parquet)
+readme_appended_utc 2026-10-14T02:45:32Z: Outcome section appended after the runs; the first 7557 bytes of README.md are the amended protocol text (sha256 2e4cf667... above; check with: head -c 7557 README.md | sha256sum)
