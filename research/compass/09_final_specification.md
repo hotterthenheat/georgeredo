@@ -1,4 +1,4 @@
-# Final parameter specification — Compass (DRAFT, pending S06 on Tier A and S11)
+# Final parameter specification — Compass (DRAFT, pending S11 completion and the external research register)
 
 The brief asked for the exact recommended parameters, entry and exit logic, contract rules, expiration- and setup-specific settings and the ranking formula, with after-cost, out-of-sample, year-by-year, regime and baseline results, and the failed configurations — and, if no configuration meets the standard, to say so. This document is the answer as the evidence stands; the sections marked *pending* are filled when the three running studies finish. Every number is in `registry.jsonl` and `05_results.md`; the machine-readable form is `config/compass_config.v1.json`.
 
@@ -40,7 +40,7 @@ S04 and S06 measure the entry on the underlying alone, 2017 → 2026, about 450,
 | Quick Scalps | 0DTE, 41 single-factor variants | SPY, QQQ, IWM | 2022 → 2026 | S02: no variant positive or better than random; walk-forward OOS -3.81 [-5.23, -2.35] | **rejected** |
 | Quick Scalps (owner rule, weekly expirations 1–7 days, OI/volume filters) | Weekly | SPY, QQQ, IWM | 2017 → 2026 (stratified sample of sessions) | S03: +$1.27 [−3.69, +6.25] = random | **rejected (zero, not negative)** |
 | Trend Plays, Breakouts, Bounces (intraday triggers) | — (underlying screen) | SPY, QQQ, IWM | 2017 → 2026 | S06: nothing promoted | **not promoted** |
-| Trend Plays, Breakouts, Bounces, Earnings/Events (intraday) | — | Tier A single names | 2017 → 2026 | S06 on Tier A | *pending (bars pulling)* |
+| Trend Plays, Breakouts, Bounces, Earnings/Events (intraday) | — | 34 Tier A single names and ETFs | 2017 → 2026 | S06-TierA: 0 of 808 well-sampled cells clear the hurdle | **not promoted** |
 | Breakouts, Trend Plays, Bounces (daily triggers) | Weekly / Swing / Position (underlying screen) | ~1,100–1,500 liquid names per year | 2024 → 2026 | S07: nothing promoted; breakouts −81 bp and pullbacks −97 bp adjusted at 21 sessions | **not promoted** |
 | Earnings/Events (daily) | Weekly / Swing / Position (underlying screen) | same, 10,439 reports | 2024 → 2026 | S08: nothing promoted; beats underperform after the gap | **not promoted** |
 | Cheap Options | any | — | — | not run: no entry with a positive underlying expectation exists to attach it to (protocol §13) | **not run** |
@@ -70,6 +70,6 @@ Do not ship a Compass recommendation. Ship the measurement: the engine (`engine/
 
 ## 8. What would change the verdict
 
-A single-name intraday trigger in S06 (Tier A), or an S11 event vertical / pre-earnings long, with an absolute lower bound ≥ +3 bp at 30–60 minutes *and* a positive paired difference. Each would then need the adverse-fill scenarios and three-month trade counts before the config's status could move to `research_candidate`.
+An S11 event vertical or pre-earnings long on the full chain sample, or a hypothesis from the external research register (`10_external_research.md`), with an absolute lower bound ≥ +3 bp at 30–60 minutes *and* a positive paired difference. Each would then need the adverse-fill scenarios and three-month trade counts before the config's status could move to `research_candidate`.
 
-*Pending sections are completed and this header removed when S06-Tier A and S11 are recorded.*
+*Pending sections are completed and this header removed when S11 and the external research register are recorded.*

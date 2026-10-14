@@ -1,6 +1,6 @@
 {
- "version": "1.3.0-no-validated-configuration",
- "generated_utc": "2026-10-14T19:20:23Z",
+ "version": "1.4.0-no-validated-configuration",
+ "generated_utc": "2026-10-14T23:45:57Z",
  "status": "no_validated_configuration",
  "evidence": {
   "source": "research/compass/registry.jsonl (S01, S04, S06-S10, S12-S16a; S02, S03, S06-Tier A, S11, S12b pending at this version)",
@@ -382,11 +382,30 @@
    "window": "2022-11-11..2026-10-09",
    "result": "long -$4.87 [-14.18, +4.87]; short vertical -$2.56 [-4.72, -0.33]; direction worth +$2.5-5 vs a coin flip, structures lose more",
    "verdict": "nothing promoted"
+  },
+  {
+   "study": "S06-TierA",
+   "kind": "screen",
+   "family": "seven intraday triggers x four filter sets on Tier A single names",
+   "instruments": "34 names",
+   "window": "2017-06-01..2026-10-09",
+   "result": "0 of 808 well-sampled cells with an absolute lower bound >= +3 bp; median absolute 30-min effect within +/-1.1 bp for every trigger",
+   "verdict": "nothing promoted"
+  },
+  {
+   "study": "S11-prelim",
+   "kind": "backtest",
+   "family": "single-name short verticals into 20-day breakouts (fade)",
+   "expiration_category": "swing",
+   "instruments": "S07 universe",
+   "window": "2024-2026 events (12 % of chains)",
+   "result": "-$193 per spread [-285, -111], equal to random-date controls (-$187)",
+   "verdict": "nothing promoted (preliminary)"
   }
  ],
  "pending": [
-  "S06 on the Tier A single-name universe (bars pulling)",
-  "S11 single-name short verticals on breakouts/beats and the S13 pre-earnings long call/straddle/vertical (chains pulling)"
+  "S11 completion (beat and pre-earnings cells; chains pulling)",
+  "external research register (10_external_research.md)"
  ],
  "candidates_underlying_level": [
   {

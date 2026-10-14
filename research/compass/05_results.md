@@ -22,7 +22,6 @@ Negative in every year (2023 −4.87 [−6.88, −2.85]; 2024 −3.22 [−5.75, 
 
 ## Pending
 
-- S06 on the Tier A single-name universe once its minute bars are cached (S05).
 
 ## S04 — does the baseline signal predict the underlying at all? (NO)
 
@@ -245,3 +244,11 @@ Walk-forward (train on all prior years with a 5-session embargo and ≥ 150 trai
 | pre-earnings long call / straddle / debit vertical, 10 sessions | 18–20 | (n too small; debit vertical −327 [−594, −122]) | | | | |
 
 **Reading so far.** Selling a 0.30-delta call spread on these names and holding three weeks lost about $190 per spread in 2024–2026 whether or not the name had just broken out: the loss belongs to the period (single names rallied) and to the structure, not to the trigger, and the random-date control says so. The breakout-minus-control difference is positive but inside a ±$150 interval. The beat and pre-earnings cells cannot be read at n ≤ 20. Nothing is promoted; the study re-runs when the pull completes.
+
+## S06 on Tier A — the intraday triggers on 34 single names and ETFs, 2017 → 2026 (NOTHING PROMOTED)
+
+`studies/s06_signal_screen.py` → `results/v1/s06_signal_screen_tierA/REPORT.md`, registry `S06-TierA`. The same seven triggers and four filter sets as S06, on the Tier A names whose 1-minute bars were pulled in full (AAPL, ADBE, AMD, AMZN, AVGO, COIN, COST, CRM, DIA, GOOG, GOOGL, HYG, IVV, JPM, LLY, LQD, META, MSFT, MSTR, MU, NFLX, NVDA, SMCI, SMH, SOXL, TLT, TQQQ, TSLA, TSM, UNH, V, VOO, XLF, XOM), 8,257,109 trigger events. Promotion needs ≥ 100 trading days and ≥ 500 events per cell, an absolute day-clustered lower bound ≥ +3 bp at 30 or 60 minutes, and a positive paired lower bound against random minutes (A1). A first pass was invalid — NaN prices on no-trade minutes poisoned the recursive indicators (`06_implementation_record.md` 22:50) — and is archived in `results/v1/superseded/`.
+
+**808 well-sampled cells; none clears the absolute hurdle; none clears both parts.** Medians across the 34 names, by trigger (raw): RSI cross −0.2 bp at 30 minutes, VWAP reclaim −0.1, 5-minute EMA cross −0.1, breakout +0.1, retest −0.0, trend pullback −0.2, bounce −0.4. Breakouts and retests fire after +37 to +50 bp of movement in the prior 30 minutes and trail random minutes in the same direction by −8 to −15 bp at 60 minutes; bounces fire after −57 to −66 bp and "beat" random by +7 to +13 bp — the control artefact of A1, with absolute returns of zero. 60 cells beat their random control against 40 expected by chance; the best absolute cell (AMD breakout with 15-minute alignment, +4.7 bp [+2.0, +6.9] after a +93 bp run-up) is −24 bp against random, negative in all ten years.
+
+**Reading.** The single-name universe adds nothing the index ETFs did not show: the catalogue's triggers fire after the move on every product and carry no forward information. This closes the intraday entry question for the Compass setup families on the data available.
