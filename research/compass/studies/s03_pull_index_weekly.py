@@ -40,8 +40,9 @@ for sym in syms:
             fri = [e for e in c if e.weekday() == 4]
             best = min(fri) if fri else min(c)
             chosen[(sym, str(d))] = str(best); fh.write(json.dumps({'root': sym, 'session': str(d), 'expiration': str(best), 'rule': 'nearest_friday', 'candidates': [str(x) for x in c]}) + '\n')
-    jobs = [('open_interest', sym, d, dt.date.fromisoformat(chosen[(sym, str(d))])) for d in cands]
-    f.run_jobs(jobs, f'{sym} OI (chosen expiration)')
+    if os.environ.get('S03_OI', '1') != '0':  # S03_OI=0 skips the OI phase (the study applies the OI filter only where OI is cached)
+        jobs = [('open_interest', sym, d, dt.date.fromisoformat(chosen[(sym, str(d))])) for d in cands]
+        f.run_jobs(jobs, f'{sym} OI (chosen expiration)')
     jobs = []
     for d in cands:
         e = dt.date.fromisoformat(chosen[(sym, str(d))])

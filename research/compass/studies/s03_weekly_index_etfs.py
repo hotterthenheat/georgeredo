@@ -41,5 +41,13 @@ if __name__ == '__main__':
         e = st.choice.get((root, str(decision_date)))
         return e if e is not None else orig(expirations, decision_date, category, root, oi_by_exp)
     contracts.pick_expiration = pick
+    cov = {}
+    for sym in SYMS:
+        sess = [k[1] for k in st.choice if k[0] == sym]
+        have = lambda kind: sum(os.path.exists(os.path.join(CACHE, kind, sym, f"{d}__{st.choice[(sym, d)]}.parquet")) for d in sess)
+        cov[sym] = {'sessions_chosen': len(sess), 'chains': have('chains_exp'), 'ohlc': have('ohlc_exp'), 'oi': have('oi')}
+    print('data coverage per symbol (sessions with cached files):', json.dumps(cov), flush=True)
     summ = run.run_family(st, 'weekly_index', SYMS, dt.date(2017, 6, 1), dt.date(2026, 10, 9), OUT, select_params={'min_oi': 250, 'min_volume': 100}, log=lambda *a: print(*a, flush=True))
+    summ['data_coverage'] = cov
+    json.dump(summ, open(os.path.join(OUT, 'summary.json'), 'w'), indent=1, default=str)
     print(json.dumps({k: summ[k] for k in summ if k in ('signals', 'status_counts', 'filled', 'all', 'baseline_pooled', 'strategy_minus_baseline')}, indent=1, default=str))
