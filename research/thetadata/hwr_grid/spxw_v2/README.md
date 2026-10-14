@@ -92,9 +92,9 @@ No network access and no ThetaData login are needed.
 
 ## Outcome (appended after the runs, 2026-10-14; numbers from `results/`, details in `RESULTS.md`)
 
-* **Amendment 1 resolved (03:11 UTC).**  The complete 2024-06-21 file arrived at 03:03 UTC; its band-fallback trade/skip files
+* **Amendment 1 resolved (resolution logged 03:09 UTC, TRAIN selection re-hashed 03:11 UTC; `resolution_diff.py` compares every result file against the pre-resolution snapshot).**  The complete 2024-06-21 file arrived at 03:03 UTC; its band-fallback trade/skip files
   were deleted and the whole pipeline re-run.  No TEST-period figure changed; the S1/S2 selections are unchanged; TRAIN,
-  T-E-window-baseline and whole-sample figures moved slightly (every changed cell, before → after: `results/resolution_changes.csv`,
+  T-E-window-baseline and whole-sample figures moved slightly (every changed cell, before → after: `results/resolution_changes.csv.gz`,
   `resolution_diff.py`; summary in `RESULTS.md` §0).  The earlier (fallback) figures are kept in this list as "was".
 * **Data integrity.** Complete chains for all 1,097 regular sessions (was 1,096, with 2024-06-21 on the band file).  No needed
   short or wing strike lies beyond the listed range at any fixed or committed random entry.  Residual gaps are vendor quote gaps

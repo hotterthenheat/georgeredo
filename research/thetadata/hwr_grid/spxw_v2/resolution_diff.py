@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Amendment 1 resolution: compare every result file before (2024-06-21 on the band-file fallback; snapshot in
-$SP/hwr_grid/spxw_v2/results_amend1) and after (2024-06-21 on its complete chain).  Writes results/resolution_changes.csv:
+$SP/hwr_grid/spxw_v2/results_amend1) and after (2024-06-21 on its complete chain).  Writes results/resolution_changes.csv.gz:
 one row per changed numeric cell (file, row key, column, before, after)."""
 import os, sys, json, glob
 import numpy as np, pandas as pd
@@ -45,5 +45,5 @@ for nm in ('multiplicity.json', 'te_summary.json', 'integrity_summary.json', 'se
         va, vb = A.get(k), B.get(k)
         same = (isinstance(va, float) and isinstance(vb, float) and np.isclose(va, vb, rtol=1e-9)) or va == vb
         if not same: rows.append(dict(file=nm, key=k, column='', before=str(va)[:300], after=str(vb)[:300]))
-D = pd.DataFrame(rows); D.to_csv(os.path.join(NEW, 'resolution_changes.csv'), index=False)
+D = pd.DataFrame(rows); D.to_csv(os.path.join(NEW, 'resolution_changes.csv.gz'), index=False)
 print(D.groupby('file').size().to_string())

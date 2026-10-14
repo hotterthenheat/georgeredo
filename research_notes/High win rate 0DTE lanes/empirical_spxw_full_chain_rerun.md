@@ -5,42 +5,51 @@ Scope and provenance. This note answers the developer review of the round-2 repo
 Design. The pre-registration ([../spxw/PREREGISTRATION.md](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw/PREREGISTRATION.md)) is used unchanged: same T-E rule, window and holdout; the same 2,736 distinct grid configurations; TRAIN 2022-05-13 → 2024-12-31 and TEST 2025-01-02 → 2026-10-09; the same S1/S2 selection rules; the same seeds (7, 8, 11–15) and committed random-entry minutes; the same fills (sell at the NBBO bid, buy at the ask) and fees ($1.00 per contract per side). Only two inputs change. (a) Quotes come from the complete same-day chain (every listed strike). (b) Every settlement value is the Cboe SPX close from [settlement_reconciliation.csv](file:///home/user/georgeredo/research/thetadata/settlement_audit/settlement_reconciliation.csv). The protocol, an amendment, and the TRAIN-selection hash were each written before the statistics they govern; times and hashes are in [protocol_sha256.txt](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/protocol_sha256.txt):
 - protocol at 01:43 UTC;
 - Amendment 1 at 02:20 UTC;
-- TRAIN selection hashed at 02:27 UTC, before any TEST session was simulated.
+- TRAIN selection hashed at 02:27 UTC, before any TEST session was simulated;
+- Amendment 1 resolved at 03:11 UTC, with the TRAIN selection re-hashed at 03:11 UTC.
 
-Amendment 1: the complete-chain fetch never delivered 2024-06-21. That session uses the v1 band file, and its out-of-band legs count as missing.
+**Amendment 1 (resolved).** At first the complete-chain fetch did not deliver 2024-06-21, and that session ran from the v1 band file. The complete file arrived at 03:03 UTC. The fallback trade and skip files were then deleted and the whole pipeline re-run. **No TEST-period figure changed** and the S1/S2 selections are unchanged. TRAIN, T-E-window-baseline and whole-sample figures moved slightly. Changed numbers below show the earlier fallback value as "was …". Every changed cell, before → after, is in [resolution_changes.csv.gz](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/resolution_changes.csv.gz) (`resolution_diff.py`), summarised in [RESULTS.md §0](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/RESULTS.md).
 
 Conventions: P&L in $ per 1-lot (one contract per leg, ×100); 95 % intervals are day-clustered percentile bootstraps (5,000 draws, seed 7); "LB" is the lower bound of that interval.
 
 ## Q1. Data integrity: does the complete chain contain every strike the grid needs?
 
 ### Takeaway
-Yes, on every TEST session. Coverage is complete for 1,096 of 1,097 regular sessions; the exception is 2024-06-21 in TRAIN, which was not delivered and is run from the band file. At every fixed entry and every committed random-entry minute, no needed short or wing strike lies beyond the listed range. The complete files agree row for row with the band files where the two overlap. A handful of cases are still missing. They come from quote gaps on two sessions, 2022-06-02 and 2024-06-21, plus two no-credit wing cases; they do not come from storage. The complete chain supplies 528 naked and 1,734 winged fixed-entry trades whose strikes the v1 band could not hold, including every April 2025 day.
+Yes, on every TEST session. Coverage is now complete for all 1,097 regular sessions (was 1,096 before 2024-06-21 arrived). At every fixed entry and every committed random-entry minute, no needed short or wing strike lies beyond the listed range. The complete files agree row for row with the band files where the two overlap, except on 2024-06-21: that day's delivered complete file is itself partial. A handful of cases are still missing. They come from quote gaps on two sessions, 2022-06-02 and 2024-06-21, plus two no-credit wing cases; they do not come from storage. The complete chain supplies 531 naked and 1,739 winged fixed-entry trades whose strikes the v1 band could not hold (was 528 / 1,734), including every April 2025 day.
 
 ### Cited Findings
-- **Sessions.** Complete chains exist for 1,096 of 1,097 regular sessions 2022-05-13 → 2026-10-09. The missing one is 2024-06-21, run from the band file. Settlement is the Cboe close on all 1,097 — [integrity_summary.json](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_summary.json), [run_status.json](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/run_status.json)
-- **Consistency and size.** All 37,315,085 rows of the v1 band files are present in the complete files with identical bid and ask; 0 band strikes are missing. The complete files hold 194,416,539 rows, with a median of 207 strikes per session (range 34–644). The SHA-256 of every file is listed — [integrity_summary.json](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_summary.json), [integrity_sessions.csv.gz](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_sessions.csv.gz)
+- **Sessions.** Complete chains exist for all 1,097 regular sessions 2022-05-13 → 2026-10-09 (was 1,096, with 2024-06-21 run from the band file). Settlement is the Cboe close on all 1,097 — [integrity_summary.json](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_summary.json), [run_status.json](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/run_status.json)
+- **Consistency and size.** Of the 37,315,085 v1 band-file rows, 37,307,656 are present in the complete files with identical bid and ask. The other 7,429 all belong to 2024-06-21 and are absent from that day's delivered complete file: 6 band strikes are missing entirely there, and other strikes lack one side (before the file arrived, the check was 37,315,085 of 37,315,085). That file has 333 strikes, 127 of them with only a call or only a put. The complete files hold 194,604,219 rows, with a median of 207 strikes per session (range 90–644; was 194,416,539 and 34–644). The SHA-256 of every file is listed — [integrity_summary.json](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_summary.json), [integrity_sessions.csv.gz](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_sessions.csv.gz)
 - **Needed legs.** The check covers 4,388 fixed-entry cases and 5,485 random-minute cases per k, with k ∈ {0, 0.5, 1.0, 1.5}:
   - "Needed strike beyond the listed range": 0 for every leg (short call, short put, call wing, put wing), every k, fixed and random.
   - Listed strike without a usable quote at the entry minute: 0–5 per leg and k.
   - The ATM strike round(S/5)×5 was not listed twice (14:05 on 2025-05-12 and 2026-04-09; the nearest listed strike was used).
 
   Source: [integrity_by_k.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_by_k.csv), [diagnostics.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/diagnostics.csv)
-- **Still missing (fixed entries and committed random minutes).** 44 entry × k cases could not be built:
-  - 2022-06-02: `no_quote`. The complete file has 5,802 null bids that morning.
-  - 2024-06-21: `no_quote`. In the band file used for this session, 9 of 34 strikes carry only a call or only a put.
+- **Still missing (fixed entries and committed random minutes).** 34 entry × k cases could not be built (was 44):
+  - 2022-06-02: 15 cases, `no_quote`. The complete file has 5,802 null bids that morning.
+  - 2024-06-21: 17 cases, `no_quote` (was 27 from the band file, in which 9 of 34 strikes carried only one side).
   - 2024-08-05: two winged cases at 10:00 (k = 1.0 and 1.5) with `no_credit`.
 
   The list is in [integrity_summary.json](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_summary.json).
-- **Every minute 10:00–14:30 × 8 structure cells.** 2,376,148 cases are buildable. The rest: 2,133 `no_quote`, of which 1,169 fall on 2024-06-21, 948 on 2022-06-02, 8 on 2025-07-30 and 8 on 2025-04-09; 8 `zero_bid`; 7 `no_credit` — [integrity_minutes_nonok.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_minutes_nonok.csv), [integrity_summary.json](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_summary.json)
-- **What the band hid.** Fixed-entry trades that the v1 band could not hold but the complete chain prices: 528 naked and 1,734 winged. For the k = 0.5 strangle at 14:05 these are 30 dates; at 13:00 they include 2025-04-02, 04-04, 04-07, 04-08, 04-09, 04-10, 04-11, 04-21 and 04-24 — [integrity_summary.json](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_summary.json)
-- **Coverage now.** TEST: 441/441 sessions for the straddle and the k = 0.5 and k = 1.0 strangles at 13:00 and 14:05. TRAIN: 656/656 for the straddle and 655/656 for the strangles; 2024-06-21 is `no_quote` — [coverage.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/coverage.csv)
+- **Every minute 10:00–14:30 × 8 structure cells.** 2,376,562 cases are buildable (was 2,376,148). The rest: 1,719 `no_quote` (was 2,133), of which 948 fall on 2022-06-02, 755 on 2024-06-21 (was 1,169), 8 on 2025-07-30 and 8 on 2025-04-09; 8 `zero_bid`; 7 `no_credit` — [integrity_minutes_nonok.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_minutes_nonok.csv), [integrity_summary.json](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_summary.json)
+- **What the band hid.** Fixed-entry trades that the v1 band could not hold but the complete chain prices: 531 naked and 1,739 winged (was 528 / 1,734). For the k = 0.5 strangle at 14:05 these are 30 dates; at 13:00 they include 2025-04-02, 04-04, 04-07, 04-08, 04-09, 04-10, 04-11, 04-21 and 04-24 — [integrity_summary.json](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_summary.json)
+- **Coverage now.** TEST: 441/441 sessions for the straddle and the k = 0.5 and k = 1.0 strangles at 13:00 and 14:05. TRAIN: 656/656 for the straddle at both times and for the strangles at 14:05; 654/656 for the k = 0.5 strangle at 13:00 (`no_quote` on 2022-06-02 and 2024-06-21). Before the file arrived, 655/656 for the strangles. [coverage.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/coverage.csv)
 - **Exit rows and settlement.** Exit rows were forward-filled for 0 trades. Settlement source "not Cboe close": 0 sessions. Cboe close minus 16:00 print: up to 18.32 points in TEST and 3.85 points in TRAIN — [diagnostics.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/diagnostics.csv)
+
+- **2024-06-21 trades on the delivered complete file.**
+  - The 14:05 k = 0.5 strangle (round-2 S2) now trades, at +$328.
+  - The re-selected S2 also trades: the same strikes, 5475/5445, at +$328.
+  - The 13:00 straddle is unchanged at +$1,480.
+  - The file's gaps still move the strikes. At 14:05 the rounded ATM strike 5460 had no usable call/put pair, and the k = 0.5 short strikes lie 8.37 and 7.63 points beyond their targets.
+
+  Source: [stress_trades.csv.gz](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/stress_trades.csv.gz), [integrity_legs.csv.gz](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_legs.csv.gz), [diagnostics.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/diagnostics.csv)
 
 ### Inferences
 - The storage band was the only reason large-move days were skipped. With complete chains the residual gaps are vendor quote gaps on two TRAIN sessions; none falls in TEST. The §10 data-integrity item ("full-chain coverage on every test date") is therefore met for TEST.
 
 ### Gaps
-- 2024-06-21 is still not on complete data. When the file arrives, the documented procedure re-runs it. Its effect is bounded by one missing trade in each of the three studied rules.
+- 2024-06-21's delivered complete file is itself partial. A further re-request, or a union with the band file (identical where both have a row), would be needed for a fully complete day. Neither was done; the protocol uses the complete file as delivered.
 - The quote gaps on 2022-06-02 were not investigated with the vendor.
 
 ## Q2. T-C and T-E on complete data with the official close
@@ -55,7 +64,7 @@ The T-C reproduction is now exact on all 339 sessions. **T-E still FAILS**, with
   - 16:00-print settlement: +$27.06 [−134.89, +171.05].
   - One tick worse per leg: +$16.94.
   - 15:55 buy-back: −$11.71.
-  - Lane minus random entry: −$24.03 [−91.47, +41.50], against a round trip of $20.02.
+  - Lane minus random entry: −$24.42 [−91.79, +40.67] (was −$24.03 [−91.47, +41.50]), against a round trip of $20.02. The lane itself is unchanged.
 
   Source: [te_results.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/te_results.csv)
 - **Holdout (2025-06-02 → 2026-10-09).** n = 299, **+$138.97 [−19.69, +288.50]**, verdict "does not confirm". v1 gave +$152.93 [+1.91, +294.08], "confirms". In v2 the 16:00 print gives +$141.99 [−16.44, +287.36], so the chain change costs $10.94 and the settlement change $3.02. Lane minus random: −$23.41 [−158.08, +106.06] — [cmp_te.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/cmp_te.csv), [te_results.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/te_results.csv)
@@ -77,9 +86,9 @@ Re-selection on complete TRAIN data keeps S1 but changes S2: it becomes a k = 1.
 
   | Rule | TRAIN mean [95 % CI], win rate | TEST mean [95 % CI], win rate | Other TEST figures |
   |---|---|---|---|
-  | S1 `N0.0\|14:05\|tp0\|st1\|E2\|F3` (unchanged) | +$165.25 [+93.38, +237.01], 62.4 % | +$122.78 [−2.99, +246.45], 58.7 % | v1 TEST +$99.13 [−33.97, +225.95] |
-  | Re-selected S2 `N1.0\|14:05\|tp0\|st2\|E2\|F3` | +$94.61 [+58.68, +130.08], 74.9 % | +$52.54 [−22.24, +122.49], 73.2 % | Bonferroni(2) bound −$33.59 |
-  | **Round-2 S2 definition** `N0.5\|14:05\|tp0\|st0\|E2\|F3` | +$123.64 [+51.13, +194.44] (v1 +$124.52 [+51.97, +193.75]) | **n = 407, +$151.17 [+42.15, +251.73], 70.8 %** | PF 1.49, max drawdown −$13,022, worst day −$7,131 (2026-03-09); coverage 100 %; one-tick-worse mean +$141.17; round trip $13.20; **Bonferroni(2) bound +$26.23**. v1 TEST: n = 397, +$162.00 [+63.16, +258.44] |
+  | S1 `N0.0\|14:05\|tp0\|st1\|E2\|F3` (unchanged) | +$164.59 [+92.72, +236.58], 62.4 % (was +$165.25 [+93.38, +237.01]) | +$122.78 [−2.99, +246.45], 58.7 % | v1 TEST +$99.13 [−33.97, +225.95] |
+  | Re-selected S2 `N1.0\|14:05\|tp0\|st2\|E2\|F3` | +$94.99 [+58.50, +130.72], 74.9 %, n = 606 (was +$94.61 [+58.68, +130.08], n = 605) | +$52.54 [−22.24, +122.49], 73.2 % | Bonferroni(2) bound −$33.59 |
+  | **Round-2 S2 definition** `N0.5\|14:05\|tp0\|st0\|E2\|F3` | +$123.98 [+49.62, +192.92], 72.1 %, n = 606 (was +$123.64 [+51.13, +194.44], n = 605; v1 +$124.52 [+51.97, +193.75]) | **n = 407, +$151.17 [+42.15, +251.73], 70.8 %** | PF 1.49, max drawdown −$13,022, worst day −$7,131 (2026-03-09); coverage 100 %; one-tick-worse mean +$141.17; round trip $13.20; **Bonferroni(2) bound +$26.23**. v1 TEST: n = 397, +$162.00 [+63.16, +258.44] |
   | T-E's rule as a grid cell (13:00, F4) | — | +$85.56 [−171.50, +291.52] | — |
 - **v1 → v2 decomposition for the round-2 S2 on TEST.**
   - v1: +$162.00 (n = 397).
@@ -104,7 +113,7 @@ Re-selection on complete TRAIN data keeps S1 but changes S2: it becomes a k = 1.
 
   Source: [grid_configs.csv.gz](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/grid_configs.csv.gz), [v1 grid_configs.csv.gz](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw/results/grid_configs.csv.gz)
 - **TRAIN top 10 on TEST.** 2 of 10 keep LB > 0 (v1: 6 of 10) — [selected_test.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/selected_test.csv)
-- **Chance count (seed 8, 5,000 draws).** TEST: 61 configurations with LB > 0, against 39.8 expected under the global null (95th percentile 196, 99th 394), P = 0.187. v1 had 135 against 50.6 (95th percentile 232). TRAIN: 225 against 54.0 (95th percentile 262), P = 0.064.
+- **Chance count (seed 8, 5,000 draws).** TEST: 61 configurations with LB > 0, against 39.8 expected under the global null (95th percentile 196, 99th 394), P = 0.187. v1 had 135 against 50.6 (95th percentile 232). TRAIN: 227 against 54.3 (95th percentile 265; was 225 against 54.0, 95th percentile 262).
 - **Reality check and Romano–Wolf.** With a fixed s.e., TEST max t is 5.22, p = 0.000, with 11 Romano–Wolf rejections: the 10:00 k = 1.5 TP-25 % family and 14:05 k = 1.5 F3. The round-2 S2 is not among them. With within-draw studentisation, p = 0.235 and there are 0 rejections.
 
   Source for these two items: [cmp_multiplicity.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/cmp_multiplicity.csv), [multiplicity.json](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/multiplicity.json)
@@ -147,8 +156,8 @@ In v1 the round-2 S2 trailed random entry by $92.82. In v2 it leads by $22.60. B
   Source: [cmp_random_explain.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/cmp_random_explain.csv)
 - **2025-04-09 minute path.** SPX was 5,013.84 at 13:19 and 5,143.92 at 13:20, a one-minute move of +2.59 %; it was 5,380.10 at 14:05; the Cboe close was 5,456.90. The five committed random minutes were 10:15, 10:22, 10:27, 10:32 and 12:39 — [spx_2025-04-09_path.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/spx_2025-04-09_path.csv)
 - **TRAIN and other rules.**
-  - Round-2 S2, TRAIN: lane − random +$26.40 [−36.85, +90.00]; without the most influential day +$16.32.
-  - T-E rule in the grid: TRAIN −$54.81 [−114.45, +5.37]; TEST +$17.58 [−107.16, +138.49].
+  - Round-2 S2, TRAIN: lane − random +$25.66 [−37.98, +88.73]; without the most influential day +$15.60 (was +$26.40 [−36.85, +90.00] and +$16.32).
+  - T-E rule in the grid: TRAIN −$55.26 [−114.75, +5.08] (was −$54.81 [−114.45, +5.37]); TEST +$17.58 [−107.16, +138.49].
   - Re-selected S2: TEST −$11.93 [−103.79, +95.36].
 
   Source: [cmp_random_explain.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/cmp_random_explain.csv), [selected_random_baseline.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/selected_random_baseline.csv)
@@ -192,7 +201,7 @@ For a naked 0DTE SPXW strangle or straddle, the settlement loss under a large mo
   - The T-E rule gives Reg-T $102,752 and portfolio margin $51,788.
 - **Capital per lot** (±shock loss ≤ 25 % of capital) and annualized return — [margin_summary.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/margin_summary.csv), [capital_returns.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/capital_returns.csv)
   - **Round-2 S2, TEST medians:** $261,570 (10 % rule) and $396,198 (15 % rule). At the last trade: $308,578 and $464,744. Reg-T is a median 0.38 and 0.25 of that capital.
-  - **Annualized return** = TEST mean $151.17 × 232.6 trades a year ÷ median capital: **13.44 % (10 % rule) and 8.87 % (15 % rule)**. The per-trade return-ratio version gives 15.27 % and 9.93 %; the full 2022–2026 sample gives 14.93 % and 9.83 %.
+  - **Annualized return** = TEST mean $151.17 × 232.6 trades a year ÷ median capital: **13.44 % (10 % rule) and 8.87 % (15 % rule)**. The per-trade return-ratio version gives 15.27 % and 9.93 %; the full 2022–2026 sample gives 14.96 % and 9.85 % (was 14.93 % and 9.83 %).
   - Re-selected S2: 4.70 % and 3.10 %. T-E rule: 7.25 % and 4.79 %.
   - The worst TEST day of the round-2 S2 cost 2.75 % (10 % rule) and 1.81 % (15 % rule) of capital. The T-E rule's 2025-04-09 cost 20.42 % and 12.73 %.
 - **Drawdowns at that sizing** (circular block bootstrap of the complete-data daily series 2022-05-13 → 2026-10-09, block 20 sessions, 3,000 paths, seed 7, one-year horizon of 252 sessions) — [drawdown_bootstrap.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/drawdown_bootstrap.csv)
@@ -218,7 +227,7 @@ For a naked 0DTE SPXW strangle or straddle, the settlement loss under a large mo
 **Nothing is promotable yet. Forward validation has not started.** Of the three rules, only the round-2 S2 definition (14:05 ±0.5·EM short strangle, held to the Cboe close, skipping FOMC and month-end) meets every gate item that can be computed from history. The re-selected S2 and T-E's rule fail the statistical-validity item. The round-2 S2 is a reasonable candidate for T-G forward paper trading as a carry lane, sized by the stress capital above. Its historical evidence carries three caveats: selection instability, dependence on 2025, and a TEST period that is not unseen.
 
 ### Cited Findings (item by item; [carry_gate.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/carry_gate.csv))
-- **Data integrity.** TEST: 0 of 441 sessions are missing a needed strike or quote at 14:05 (k = 0.5), and complete chains exist for every TEST session. The same holds at 14:05 (k = 1.0) and 13:00 (k = 0) → **met on TEST**. Whole sample: 1,096/1,097 complete chains (2024-06-21 on band fallback, one missing trade). Every file is hashed — [carry_gate.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/carry_gate.csv), [integrity_sessions.csv.gz](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_sessions.csv.gz)
+- **Data integrity.** TEST: 0 of 441 sessions are missing a needed strike or quote at 14:05 (k = 0.5), and complete chains exist for every TEST session. The same holds at 14:05 (k = 1.0) and 13:00 (k = 0) → **met on TEST**. Whole sample: 1,097/1,097 complete chains (was 1,096/1,097 with 2024-06-21 on the band fallback); 2024-06-21's delivered file is partial (Q1). Every file is hashed — [carry_gate.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/carry_gate.csv), [integrity_sessions.csv.gz](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/integrity_sessions.csv.gz)
 - **Execution realism.** Bid/ask fills at the entry-minute NBBO, $1 per contract per side, settlement at the Cboe close on all sessions, and a one-tick-worse sensitivity (round-2 S2 TEST mean +$141.17). Size and queue are not modelled → **met as modelled**, not yet verified live — [gate.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/gate.csv), [diagnostics.csv](file:///home/user/georgeredo/research/thetadata/hwr_grid/spxw_v2/results/diagnostics.csv)
 - **Statistical validity (complete data, out of sample, multiplicity).**
   - Round-2 S2: TEST LB +$42.15, Bonferroni(2) bound +$26.23, n = 407, 21.2 months → **met as specified**. Caveats from Q3: 2026 alone is not significant; the LB depends on the best 5 days; TEST was seen in v1; and the grid-wide TEST count of 61 is within chance.

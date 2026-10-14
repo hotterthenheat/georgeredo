@@ -26,11 +26,11 @@ def main():
     st = json.load(open(os.path.join(RES, 'run_status.json'))) if os.path.exists(os.path.join(RES, 'run_status.json')) else {}
     if st: L.append(f"Sessions: {st.get('simulated')} of {st.get('sessions')} regular sessions simulated; missing chain files: {st.get('missing_chain')}; errors: {st.get('errors')}.\n")
     # 0 Amendment 1 resolution
-    if os.path.exists(os.path.join(RES, 'resolution_changes.csv')):
-        D = pd.read_csv(os.path.join(RES, 'resolution_changes.csv'), low_memory=False)
+    if os.path.exists(os.path.join(RES, 'resolution_changes.csv.gz')):
+        D = pd.read_csv(os.path.join(RES, 'resolution_changes.csv.gz'), low_memory=False)
         L.append('## 0. Amendment 1 resolved: 2024-06-21 now on its complete chain\n')
         L.append('The complete 2024-06-21 file arrived at 03:03 UTC (fetch retry).  Its band-fallback trade/skip files were deleted and the whole pipeline re-run '
-                 '(`protocol_sha256.txt`).  Every changed cell, before → after, is in `results/resolution_changes.csv` (written by `resolution_diff.py` against the '
+                 '(`protocol_sha256.txt`).  Every changed cell, before → after, is in `results/resolution_changes.csv.gz` (written by `resolution_diff.py` against the '
                  'pre-resolution snapshot).  **No TEST-period figure changed** (0 changed TEST rows or `test_*` columns in any table; `gate.csv` identical); '
                  'the S1/S2 selections and the TRAIN top 10 are unchanged.  Changes are confined to TRAIN, the T-E window baseline and whole-sample figures:\n')
         pick = []
