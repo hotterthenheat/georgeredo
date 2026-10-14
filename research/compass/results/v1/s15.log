@@ -1,0 +1,41 @@
+18:17:25 SPY 2022-11-11 0/980 (3s)
+18:17:38 SPY 2024-01-25 300/980 (16s)
+18:17:50 SPY 2025-04-07 600/980 (28s)
+18:18:10 SPY 2026-06-17 900/980 (48s)
+18:18:16 QQQ 2022-11-11 0/980 (53s)
+18:18:26 QQQ 2024-01-25 300/980 (64s)
+18:18:39 QQQ 2025-04-07 600/980 (77s)
+18:18:51 QQQ 2026-06-17 900/980 (89s)
+18:18:57 straddles 1941 (95s)
+18:19:00 SPY unconditional, all days                             n  970 mean  -15.70 [ -31.97,   -0.17] win 58% PF 0.82 DD -17307 by year {'2022': -15.86, '2023': -10.36, '2024': -2.22, '2025': -33.25, '2026': -17.38}
+18:19:00 SPY rich (implied >= 1.25x trailing realized), all days n  287 mean  -40.71 [ -87.37,   -0.90] win 56% PF 0.68 DD -12827 by year {'2022': -16.47, '2023': -6.71, '2024': -35.29, '2025': -106.01, '2026': -7.43}
+18:19:00 SPY cheap (implied <= 0.8x trailing realized), all days n  177 mean  -10.88 [ -37.70,  +13.43] win 59% PF 0.84 DD -2348 by year {'2022': -198.8, '2023': -6.3, '2024': 4.17, '2025': -0.64, '2026': -31.71}
+18:19:00 SPY middle, all days                                    n  486 mean   -3.03 [ -20.42,  +13.28] win 59% PF 0.96 DD -4147 by year {'2022': 7.95, '2023': -12.25, '2024': 27.79, '2025': -9.13, '2026': -17.58}
+18:19:00 SPY unconditional, skip FOMC/CPI/NFP/month-end          n  809 mean  -11.27 [ -29.55,   +4.92] win 58% PF 0.86 DD -11018 by year {'2022': 11.91, '2023': -8.6, '2024': 1.49, '2025': -27.31, '2026': -14.59}
+18:19:00 SPY rich (implied >= 1.25x trailing realized), skip FOMC/CPI/NFP/month-end n  208 mean  -34.18 [ -86.90,  +11.31] win 56% PF 0.71 DD -10789 by year {'2022': 165.2, '2023': 26.65, '2024': -31.67, '2025': -107.24, '2026': -5.61}
+18:19:00 SPY cheap (implied <= 0.8x trailing realized), skip FOMC/CPI/NFP/month-end n  159 mean  -12.69 [ -38.06,  +10.70] win 57% PF 0.81 DD -2215 by year {'2022': -198.8, '2023': -14.57, '2024': 2.2, '2025': -5.73, '2026': -22.85}
+18:19:01 SPY middle, skip FOMC/CPI/NFP/month-end                 n  424 mean   -1.34 [ -20.26,  +16.41] win 60% PF 0.98 DD -3162 by year {'2022': -1.23, '2023': -14.95, '2024': 27.14, '2025': 0.3, '2026': -15.96}
+18:19:02 SPY unconditional, all days, adverse one tick per leg   n  970 mean  -19.70 [ -35.97,   -4.17] win 57% PF 0.78 DD -20967 by year {}
+18:19:02 SPY rich, skip events, adverse one tick per leg         n  208 mean  -38.18 [ -90.90,   +7.31] win 56% PF 0.68 DD -11277 by year {}
+18:19:03 QQQ unconditional, all days                             n  971 mean  -15.22 [ -34.44,   +2.12] win 58% PF 0.85 DD -19527 by year {'2022': -40.22, '2023': -24.15, '2024': 3.55, '2025': -32.12, '2026': -2.09}
+18:19:03 QQQ rich (implied >= 1.25x trailing realized), all days n  299 mean  -41.46 [ -88.39,   +0.11] win 54% PF 0.69 DD -13149 by year {'2022': -115.8, '2023': -37.33, '2024': -27.25, '2025': -107.83, '2026': 9.74}
+18:19:03 QQQ cheap (implied <= 0.8x trailing realized), all days n  127 mean  -13.14 [ -59.21,  +28.92] win 61% PF 0.86 DD -3887 by year {'2022': -27.8, '2023': -14.96, '2024': 5.41, '2025': 24.85, '2026': -75.96}
+18:19:03 QQQ middle, all days                                    n  525 mean   -0.28 [ -20.75,  +18.60] win 60% PF 1.00 DD -5457 by year {'2022': -43.24, '2023': -23.16, '2024': 30.44, '2025': -5.92, '2026': 14.71}
+18:19:03 QQQ unconditional, skip FOMC/CPI/NFP/month-end          n  810 mean  -12.29 [ -31.54,   +5.63] win 58% PF 0.87 DD -13367 by year {'2022': -11.59, '2023': -26.72, '2024': 4.39, '2025': -24.88, '2026': 0.5}
+18:19:03 QQQ rich (implied >= 1.25x trailing realized), skip FOMC/CPI/NFP/month-end n  223 mean  -37.35 [ -90.04,   +6.89] win 53% PF 0.70 DD -10726 by year {'2022': 0.2, '2023': -19.97, '2024': -22.24, '2025': -101.18, '2026': 1.64}
+18:19:03 QQQ cheap (implied <= 0.8x trailing realized), skip FOMC/CPI/NFP/month-end n  113 mean   -8.07 [ -46.74,  +29.38] win 59% PF 0.90 DD -3003 by year {'2022': -27.8, '2023': -18.09, '2024': 5.41, '2025': 20.56, '2026': -47.05}
+18:19:03 QQQ middle, skip FOMC/CPI/NFP/month-end                 n  456 mean   -1.93 [ -24.37,  +18.50] win 60% PF 0.98 DD -6103 by year {'2022': -58.05, '2023': -29.36, '2024': 24.42, '2025': 0.54, '2026': 16.58}
+18:19:04 QQQ unconditional, all days, adverse one tick per leg   n  971 mean  -19.22 [ -38.44,   -1.88] win 57% PF 0.81 DD -23107 by year {}
+18:19:04 QQQ rich, skip events, adverse one tick per leg         n  223 mean  -41.35 [ -94.04,   +2.89] win 52% PF 0.67 DD -11266 by year {}
+18:19:04 ALL unconditional, all days                             n 1941 mean  -15.46 [ -32.68,   +0.29] win 58% PF 0.83 DD -35674 by year {'2022': -28.04, '2023': -17.26, '2024': 0.67, '2025': -32.68, '2026': -9.74}
+18:19:04 ALL rich (implied >= 1.25x trailing realized), all days n  586 mean  -41.10 [ -86.33,   -2.39] win 55% PF 0.69 DD -25789 by year {'2022': -66.13, '2023': -20.15, '2024': -31.19, '2025': -106.99, '2026': 1.59}
+18:19:04 ALL cheap (implied <= 0.8x trailing realized), all days n  304 mean  -11.83 [ -43.11,  +17.35] win 60% PF 0.85 DD -5630 by year {'2022': -141.8, '2023': -10.37, '2024': 4.55, '2025': 10.38, '2026': -50.34}
+18:19:04 ALL middle, all days                                    n 1011 mean   -1.60 [ -19.69,  +15.23] win 60% PF 0.98 DD -7940 by year {'2022': -19.15, '2023': -17.92, '2024': 29.2, '2025': -7.5, '2026': -0.97}
+18:19:04 ALL unconditional, skip FOMC/CPI/NFP/month-end          n 1619 mean  -11.78 [ -29.64,   +4.68] win 58% PF 0.86 DD -23805 by year {'2022': 0.16, '2023': -17.66, '2024': 2.94, '2025': -26.09, '2026': -7.04}
+18:19:04 ALL rich (implied >= 1.25x trailing realized), skip FOMC/CPI/NFP/month-end n  431 mean  -35.82 [ -86.40,   +8.02] win 55% PF 0.70 DD -21320 by year {'2022': 82.7, '2023': 6.31, '2024': -26.78, '2025': -103.94, '2026': -1.77}
+18:19:04 ALL cheap (implied <= 0.8x trailing realized), skip FOMC/CPI/NFP/month-end n  272 mean  -10.77 [ -37.79,  +15.12] win 58% PF 0.85 DD -4286 by year {'2022': -141.8, '2023': -16.24, '2024': 3.22, '2025': 5.54, '2026': -32.81}
+18:19:04 ALL middle, skip FOMC/CPI/NFP/month-end                 n  880 mean   -1.64 [ -21.26,  +16.36] win 60% PF 0.98 DD -7640 by year {'2022': -31.53, '2023': -22.4, '2024': 25.71, '2025': 0.42, '2026': 0.95}
+18:19:05 ALL unconditional, all days, adverse one tick per leg   n 1941 mean  -19.46 [ -36.68,   -3.71] win 57% PF 0.79 DD -42830 by year {}
+18:19:05 ALL rich, skip events, adverse one tick per leg         n  431 mean  -39.82 [ -90.40,   +4.02] win 54% PF 0.68 DD -22340 by year {}
+18:19:05 rich minus cheap: -29.27 [-69.25, +8.67]
+18:19:05 S15 DONE (103s)

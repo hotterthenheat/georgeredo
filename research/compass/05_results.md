@@ -133,3 +133,18 @@ Puts −68.28 [−94.68, −42.13], calls −20.89 [−40.39, −1.64]. Exits: t
 This is the documented earnings-announcement premium. It is the first cell in this research to clear the underlying hurdle, and it should be read exactly: three-quarters of the absolute 10-session return is the 2024–2026 market drift (an unconditional long over the same dates earned ≈ +77 bp); the part specific to the pre-earnings window is +20 bp [+4, +36], consistent in sign across the three years. For a long option a 10-session hold costs theta that a 97-bp move alone does not cover (port spec §5 arithmetic); what makes the window different from any other 10 sessions is the rise in implied volatility into the report, which a long call or straddle sold at the pre-event close collects. That is the pre-registered option test (A5.2), run on per-event chains with S11.
 
 **S14.** Month-end deciles held 21 sessions have only 20–34 rebalance dates in the window; every interval is hundreds of bp wide. The 1-month reversal long leg is +398 bp absolute [+59, +737] but +247 [−38, +598] against the universe with year signs that flip; 12-1 momentum is indistinguishable from the universe; shorting the 12-1 bottom decile would have lost −576 bp [−1,120, −140] (small caps rallied). Nothing promoted; revisit when the 2012–2022 daily years land.
+
+## S15 — 0DTE short ATM straddle at 10:00, conditioned on the volatility risk premium (NOTHING PROMOTED; the condition has the wrong sign)
+
+`studies/s15_vrp_short_straddle.py` → `results/v1/s15_vrp_short_straddle/`, registry `S15`, amendment A5. SPY and QQQ, every session 2022-11-11 → 2026-10-09 (1,941 straddles): sell the at-the-money call and put at 10:00 at the bid, buy both back at 15:50 at the ask, $0.70 per contract per side per leg. Condition = the straddle's implied move (credit ÷ spot) relative to the trailing 20-session realized 10:00 → 15:50 move.
+
+| cell (SPY + QQQ) | n | mean $/straddle [95 % CI] | win | PF | max DD | by year |
+|---|---|---|---|---|---|---|
+| unconditional, all days | 1,941 | **−15.46 [−32.68, +0.29]** | 58 % | 0.83 | −$35,674 | −28 / −17 / +1 / −33 / −10 |
+| … one adverse tick per leg | 1,941 | −19.46 [−36.68, −3.71] | 57 % | 0.79 | −$42,830 | |
+| … skip FOMC / CPI / NFP / month-end | 1,619 | −11.78 [−29.64, +4.68] | 58 % | 0.86 | −$23,805 | 0 / −18 / +3 / −26 / −7 |
+| implied ≥ 1.25 × trailing realized ("rich") | 586 | **−41.10 [−86.33, −2.39]** | 55 % | 0.69 | −$25,789 | −66 / −20 / −31 / −107 / +2 |
+| implied ≤ 0.8 × trailing realized ("cheap") | 304 | −11.83 [−43.11, +17.35] | 60 % | 0.85 | −$5,630 | −142 / −10 / +5 / +10 / −50 |
+| middle | 1,011 | −1.60 [−19.69, +15.23] | 60 % | 0.98 | −$7,940 | −19 / −18 / +29 / −8 / −1 |
+
+Rich minus cheap: −$29 [−69, +9]. **Reading.** A 58 % win rate and a losing expectancy, as H16 said it would be. The conditioning hypothesis — sell when implied is rich relative to recent realized — is wrong in sign: a rich implied move is the market correctly anticipating a large realized move (event days, vol clustering), and those are the days the straddle loses most. The nearest-to-flat cell (middle, −$1.60 ± 18) is not a lane. Together with H9/H11/H13 this closes unconditional and VRP-timed short ATM 0DTE straddles on these products at the measured round trip.
