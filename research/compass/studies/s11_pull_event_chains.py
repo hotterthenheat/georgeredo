@@ -70,6 +70,7 @@ ev = ev.with_columns(pl.struct(['symbol', 'date']).map_elements(lambda s: choose
 ev = ev.filter(pl.col('expiration').is_not_null()).sort(['h', 'event_date', 'group'])  # event and its control adjacent
 ev.write_parquet(os.path.join(CACHE, 's11_events.parquet'))
 log('events with an expiration', ev.height, 'roots', ev['symbol'].n_unique())
+if os.environ.get('S11_DRY'): log('dry run: events written, no pull'); sys.exit(0)
 fch = ThetaFetcher(CACHE, nw=6, log=log)
 def eod_exp(root, d, exp, group='breakout20'):
     group = group.replace('_control', '')
