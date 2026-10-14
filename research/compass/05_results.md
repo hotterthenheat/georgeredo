@@ -25,3 +25,21 @@ Negative in every year (2023 −4.87 [−6.88, −2.85]; 2024 −3.22 [−5.75, 
 - S02: single-factor grid and ablations around S01 (42 variants) with walk-forward selection by year.
 - S03: baseline on Weekly-category expirations, SPY/QQQ/IWM 2017-06 → 2026-10, OI > 250 and intraday volume > 100 applied.
 - S04: signal validity on the underlying (forward and backward returns around signals vs random minutes), 2017-06 → 2026-10.
+
+## S04 — does the baseline signal predict the underlying at all? (NO)
+
+`studies/s04_signal_underlying_validity.py`, SPY/QQQ/IWM 1-minute bars 2017-06-01 → 2026-10-09 (2,353 sessions; 5,000–5,400 baseline signals per symbol), no options. Signed return = direction × underlying return in basis points; random controls = minutes drawn uniformly in the entry window on the same symbol and date with the same direction (5 seeds); day-clustered 95 % CIs. Table: `results/v1/s04_signal_underlying_validity/table.csv`.
+
+| | prior 30 min | next 5 min | next 15 min | next 30 min [95 % CI] | next 60 min | to close | 30-min hit rate |
+|---|---|---|---|---|---|---|---|
+| SPY baseline (n 5,375) | +9.6 | −0.5 | −0.8 | **−1.3 [−2.4, −0.2]** | −1.2 | +0.2 | 50 % |
+| SPY random minutes, same days/direction | +5.3 … +6.0 | +0.8 … +1.1 | +2.5 … +2.8 | **+4.6 … +5.3** | +8.4 … +9.2 | +19 … +20 | 60–62 % |
+| QQQ baseline (n 5,040) | +12.0 | −0.8 | −0.7 | **−0.7 [−1.9, +0.5]** | +0.2 | +1.7 | 51 % |
+| QQQ random | +7.7 … +8.5 | +1.1 … +1.4 | +3.3 … +4.0 | **+6.1 … +7.7** | +11.8 … +12.5 | +26 … +28 | 60–63 % |
+| IWM baseline (n 5,398) | +13.6 | −0.5 | −0.7 | **−1.6 [−3.0, −0.2]** | −2.9 | −4.7 | 51 % |
+| IWM random | +7.2 … +8.6 | +0.9 … +1.5 | +2.4 … +3.8 | **+5.2 … +6.8** | +10.4 … +12.2 | +20 … +22 | 59–61 % |
+| RSI cross alone, no filters (n ≈ 73,000 per symbol) | +6.5 … +9.5 | 0.0 | 0.0 | **−0.03 … −0.10 [−0.3, +0.2]** | ≈ 0 | +0.6 | 50 % |
+
+Ablations (next 30 min, SPY / QQQ / IWM): no structure +0.06 / +0.13 / −0.49; no relative volume −0.37 / −0.15 / −0.78; no 15-minute alignment −0.67 / −0.43 / −1.43; no 5-minute confirmation −1.38 / −0.83 / −1.39; with the daily trend −1.19 / −0.17 / −1.82. None is positive with a positive lower bound.
+
+**Reading.** The rule fires after the move: the prior 30 minutes carry +10 to +14 bp in the signal's direction, and what follows is flat to slightly negative. Random minutes on the same days and sides collect the day's drift (+5 to +8 bp over 30 minutes) that the signal's minutes miss; the signal is therefore about 6–8 bp *worse* than chance at 30 minutes, which is the −$2 per contract measured in S01 once an option, its spread and theta are attached. The RSI-cross trigger itself carries zero information at every horizon; the filters only shrink the sample. This closes the question for the baseline as specified: **no exit rule, delta band, spread filter or expiration can make a long option profitable on an entry whose underlying expectation is negative.** The cost hurdle in underlying terms is about 2–3 bp per round trip on SPY (a $2.80 round trip on a ~$1, 0.45-delta contract) plus theta over the hold, so a Compass entry trigger must show a day-clustered lower bound of at least +3 bp over 30–60 minutes against the matched random control before any option test is worth running. That screen (S06) is the next step, run across the liquid universe on 2017 → 2026 minute bars.

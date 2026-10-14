@@ -31,9 +31,13 @@ def _nan(x):
 
 def _targets(event: dict, direction: int):
     spot0 = float(event['spot'])
-    levels = [float(x) for x in (event.get('ema_mid_15m'), event.get('ema_slow_15m')) if not _nan(x)]
-    ahead = [x for x in levels if (x > spot0 if direction > 0 else x < spot0)]
-    ema_target = (min(ahead) if direction > 0 else max(ahead)) if ahead else None
+    tp = event.get('target_price')
+    if not _nan(tp) and ((float(tp) > spot0) if direction > 0 else (float(tp) < spot0)):
+        ema_target = float(tp)  # a family's own level target (breakouts: range projection; bounces: level + alpha*ATR)
+    else:
+        levels = [float(x) for x in (event.get('ema_mid_15m'), event.get('ema_slow_15m')) if not _nan(x)]
+        ahead = [x for x in levels if (x > spot0 if direction > 0 else x < spot0)]
+        ema_target = (min(ahead) if direction > 0 else max(ahead)) if ahead else None
     inval = event.get('invalidation_level'); inval = None if _nan(inval) else float(inval)
     return ema_target, inval
 

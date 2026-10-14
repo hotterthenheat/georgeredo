@@ -22,6 +22,8 @@ Every entry: what was done, the exact command or file, its verified outcome. New
 | 16:10 | S03 pull chain armed: after the 2023 daily bars finish, pause the stock job, pull the weekly-category chains for SPY/QQQ/IWM 2017→2026 (OI for every candidate expiration, then NBBO + OHLC of the most-OI expiration), restart the job | Background task `be4tsjpfo` |
 | 16:11 | S01 finished (SPY 341 s, QQQ 673 s, IWM 882 s cumulative); `engine.report.write` → `results/v1/s01_quick_scalps_0dte_baseline/REPORT.md`; registry entry `S01` | 2,886 trades, −$4.19/contract [−5.68, −2.81], below the matched random baseline by −$2.03 [−3.18, −0.90]; rejected (see `05_results.md`) |
 | 16:14 | S04 launched: `studies/s04_signal_underlying_validity.py` (signal validity on SPY/QQQ/IWM minute bars 2017→2026, random-minute controls, component ablations) | Running |
+| 16:22 | S04 finished (3 symbols × 7 variants + 5 random seeds, 2017→2026) → `results/v1/s04_signal_underlying_validity/table.csv`; registry `S04`; `05_results.md` §S04 | Baseline signal has no forward predictive value on the underlying (−0.7 to −1.6 bp at 30 min vs +5 to +8 bp for random minutes on the same days); the RSI cross alone is 0.0 bp; diagnosis of S01 = late entry, not costs |
+| 16:24 | Family triggers (Trend Plays, Breakouts, Bounces) in `signals.family_events`; level targets in `sim`; `tests/test_families.py` | 24 tests pass; on SPY Mar–Jun 2024: trend 49, breakouts 7, bounces 0 of 139 baseline events |
 
 ## Known defects and open items
 - Event flags (FOMC/CPI/NFP) exist only from 2017-02; earlier sessions report `unknown`.
