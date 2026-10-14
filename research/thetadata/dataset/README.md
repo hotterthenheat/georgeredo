@@ -81,3 +81,16 @@ each request carries a 420 s deadline.  Exception text is redacted (`td1_prod_â€
 `expirations/expirations_{SPY,QQQ,IWM,SPXW}.csv` are the raw `option_list_expirations` responses (2026-10-13);
 `first_daily.py` walks the NYSE sessions backwards from 2026-10-09 and reports the first session after the last one without an
 expiration (2025-01-09, the Carter day of mourning, is listed as an expiration but was not a session).
+
+## Full-chain variant (`data_full`, added 2026-10-14)
+
+The developer review of the round-2 report found that the Â±2 % strike band dropped the extreme-move days (April 2025). `fetch.py` now takes `THETA_DS_BAND` (default `0.02`; `0` keeps every listed strike) and `THETA_DS_SYMS` (symbol order). The full chains were re-pulled into a separate root, leaving the band dataset and its manifest untouched:
+
+```
+set -a; . "$SP/secrets/research.env"; set +a
+THETA_DS_ROOT="$SP/theta/data_full" THETA_DS_BAND=0 THETA_DS_SYMS=SPXW,SPY,QQQ,IWM THETA_DS_MAX_SECS=14400 \
+  setsid nohup python3 -I fetch.py chains > "$SP/theta/ds/logs/full_chains_run1.log" 2>&1 < /dev/null &
+```
+
+`data_full/underlying` and `data_full/index` are symbolic links to the band dataset's folders. Manifest: `MANIFEST_full_chains.md` and `manifest_full_chains.csv.gz` (3,687 chain files, 460 million rows; 2.4 GB including the linked folders). Use `THETA_DS_ROOT=$SP/theta/data_full` with `load.py` to read it. Spot-check of the band dataset (`verify.py 5 7`, 2026-10-14): 5/5 files, 1,955 minute rows, 0 mismatches against fresh 1-second pulls.
+

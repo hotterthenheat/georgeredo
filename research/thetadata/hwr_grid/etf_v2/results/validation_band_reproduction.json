@@ -1,0 +1,51 @@
+{
+ "SPY_TRAIN": {
+  "rows_orig": 695718,
+  "rows_v2_band": 695718,
+  "trades_identical": true,
+  "skips_identical": true
+ },
+ "SPY_TEST": {
+  "rows_orig": 577080,
+  "rows_v2_band": 577080,
+  "trades_identical": true,
+  "skips_identical": true
+ },
+ "QQQ_TRAIN": {
+  "rows_orig": 618714,
+  "rows_v2_band": 618714,
+  "trades_identical": true,
+  "skips_identical": true
+ },
+ "QQQ_TEST": {
+  "rows_orig": 522909,
+  "rows_v2_band": 522909,
+  "trades_identical": true,
+  "skips_identical": true
+ },
+ "IWM_TRAIN": {
+  "rows_orig": 164556,
+  "rows_v2_band": 164556,
+  "trades_identical": true,
+  "skips_identical": true
+ },
+ "IWM_TEST": {
+  "rows_orig": 443718,
+  "rows_v2_band": 443718,
+  "trades_identical": true,
+  "skips_identical": true
+ },
+ "selections_identical": {
+  "SPY": true,
+  "QQQ": true,
+  "IWM": true,
+  "SPY+QQQ": true
+ },
+ "selected_test_rows_compared": 16,
+ "selected_test_max_abs_diff": {
+  "test_n": 0.0,
+  "test_mean": 0.0,
+  "test_lo": 0.0,
+  "lane_minus_base": 0.0
+ }
+}

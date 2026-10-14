@@ -1,0 +1,112 @@
+{
+ "SPY_TRAIN_orig_band_skips_fixed": 712,
+ "SPY_TRAIN_orig_band_skips_fixed_now_traded": 703,
+ "SPY_TRAIN_orig_spot_outside_band_fixed": 56,
+ "SPY_TRAIN_orig_spot_outside_band_fixed_now_traded": 56,
+ "SPY_TRAIN_orig_spot_outside_band_fixed_sessions": 6,
+ "SPY_TRAIN_days": {
+  "early_close": 6,
+  "ok": 530
+ },
+ "SPY_TEST_orig_band_skips_fixed": 694,
+ "SPY_TEST_orig_band_skips_fixed_now_traded": 694,
+ "SPY_TEST_orig_spot_outside_band_fixed": 98,
+ "SPY_TEST_orig_spot_outside_band_fixed_now_traded": 98,
+ "SPY_TEST_orig_spot_outside_band_fixed_sessions": 9,
+ "SPY_TEST_days": {
+  "early_close": 3,
+  "ok": 441
+ },
+ "QQQ_TRAIN_orig_band_skips_fixed": 2309,
+ "QQQ_TRAIN_orig_band_skips_fixed_now_traded": 2278,
+ "QQQ_TRAIN_orig_spot_outside_band_fixed": 294,
+ "QQQ_TRAIN_orig_spot_outside_band_fixed_now_traded": 293,
+ "QQQ_TRAIN_orig_spot_outside_band_fixed_sessions": 26,
+ "QQQ_TRAIN_days": {
+  "ok": 530,
+  "early_close": 6
+ },
+ "QQQ_TEST_orig_band_skips_fixed": 1778,
+ "QQQ_TEST_orig_band_skips_fixed_now_traded": 1768,
+ "QQQ_TEST_orig_spot_outside_band_fixed": 259,
+ "QQQ_TEST_orig_spot_outside_band_fixed_now_traded": 259,
+ "QQQ_TEST_orig_spot_outside_band_fixed_sessions": 24,
+ "QQQ_TEST_days": {
+  "early_close": 3,
+  "ok": 441
+ },
+ "IWM_TRAIN_orig_band_skips_fixed": 1121,
+ "IWM_TRAIN_orig_band_skips_fixed_now_traded": 932,
+ "IWM_TRAIN_orig_spot_outside_band_fixed": 168,
+ "IWM_TRAIN_orig_spot_outside_band_fixed_now_traded": 154,
+ "IWM_TRAIN_orig_spot_outside_band_fixed_sessions": 13,
+ "IWM_TRAIN_days": {
+  "early_close": 3,
+  "ok": 174
+ },
+ "IWM_TEST_orig_band_skips_fixed": 2633,
+ "IWM_TEST_orig_band_skips_fixed_now_traded": 2356,
+ "IWM_TEST_orig_spot_outside_band_fixed": 399,
+ "IWM_TEST_orig_spot_outside_band_fixed_now_traded": 375,
+ "IWM_TEST_orig_spot_outside_band_fixed_sessions": 33,
+ "IWM_TEST_days": {
+  "ok": 441,
+  "early_close": 3
+ },
+ "IWM_manifest": {
+  "sessions": 621,
+  "full_files": 621,
+  "nodata": 0,
+  "early_close": 6,
+  "strikes_median": 79,
+  "strikes_min": 30,
+  "covers_day_range": 621,
+  "covers_2x_day_range": 621,
+  "band_subset_all": true,
+  "overlap_rows": 4735010,
+  "overlap_quote_diff_rows": 1564,
+  "band_rows_missing_in_full": 1564,
+  "sessions_with_quote_diffs": 1
+ },
+ "IWM_band_data_covers_day_range": "520 of 621",
+ "QQQ_manifest": {
+  "sessions": 980,
+  "full_files": 980,
+  "nodata": 0,
+  "early_close": 9,
+  "strikes_median": 131,
+  "strikes_min": 38,
+  "covers_day_range": 980,
+  "covers_2x_day_range": 980,
+  "band_subset_all": false,
+  "overlap_rows": 15310387,
+  "overlap_quote_diff_rows": 3910,
+  "band_rows_missing_in_full": 3910,
+  "sessions_with_quote_diffs": 1
+ },
+ "QQQ_band_data_covers_day_range": "881 of 980",
+ "SPY_manifest": {
+  "sessions": 980,
+  "full_files": 980,
+  "nodata": 0,
+  "early_close": 9,
+  "strikes_median": 139,
+  "strikes_min": 40,
+  "covers_day_range": 980,
+  "covers_2x_day_range": 980,
+  "band_subset_all": false,
+  "overlap_rows": 17335767,
+  "overlap_quote_diff_rows": 2346,
+  "band_rows_missing_in_full": 2346,
+  "sessions_with_quote_diffs": 1
+ },
+ "SPY_band_data_covers_day_range": "938 of 980",
+ "missing_fixed_or_random_entries": 125,
+ "missing_by_reason": {
+  "out_of_band": 0,
+  "out_of_band_spot": 0,
+  "no_quote": 125,
+  "no_spot": 0,
+  "no_em": 0
+ }
+}

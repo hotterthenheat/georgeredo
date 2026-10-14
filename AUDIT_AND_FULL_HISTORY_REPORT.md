@@ -49,3 +49,10 @@ T-A 13:00 short ATM straddle paper lane with NBBO capture; T-B gamma-conditioned
 - **Dataset built** (`research/thetadata/dataset/MANIFEST.md`): 15,620 Parquet files, 80.2 million rows, 0.67 GB outside the repo; same-day chains at 1-minute NBBO for SPY and QQQ (980 sessions from 2022-11-11), SPXW (1,106 from 2022-05-13) and IWM (621 from 2024-04-19), all complete; SPY/QQQ/IWM minute bars and SPX/VIX minute prices 2017-06-01 → 2026-10-09; option OHLC partial (throughput-bound, resumable).
 - **Results**: no lane reaches a 70 %+ win rate with a positive cost-realistic lower bound that also beats random entry; T-E fails (H13 closed); leave-cheap-legs exit rule adopted; FOMC + month-end skip kept; H15 (14:05 SPXW strangle held to settlement) logged as forward-paper-only. Report: `reports/High win rate 0DTE lanes.md`; plan §9.
 
+## Addendum (2026-10-14, later): developer review fixes
+
+- **Full chains re-pulled**: 3,687 sessions with every listed strike (460 million rows, `MANIFEST_full_chains.md`); dataset spot-check 5/5 PASS (1,955 minute rows, 0 mismatches).
+- **Settlement audit**: ThetaData EOD close = Cboe SPX close on 1,105/1,105 sessions; the 16:00 print differs by up to 18.3 pts; all settlement now uses the Cboe close.
+- **Results on complete data**: H13/T-E still fail; SPXW S2 +$151.17 [+42.15, +251.73], 70.8 % win, carry not signal, ≈ $400k capital per lot for ±15 % shock survival; ETF lanes fail. Gate revised to separate carry and signal lanes (plan §10); H15 awaits forward paper trading (plan §11).
+- **GeorgeFi member-surface bulk capture**: not performed. The session's safety controls blocked it after the user supplied an unsigned screenshot of owner approval; the user was told how to change permissions themselves and chose to proceed with the existing data.
+

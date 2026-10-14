@@ -69,15 +69,17 @@ def main():
         # ---- forward validation and classification
         g_fwd = False; d_fwd = '0 forward paper sessions with live NBBO logging (needs >= 150 sessions and >= 7 calendar months)'
         g_cls = True; d_cls = 'carry: sells same-day premium, claims no timing skill (signal version requires beating random entry)'
-        g_rand = bool(r['gate_beats_random_matched'])
+        g_rand = bool(r['gate_beats_random_matched'])                     # §1 item 2 as written: point estimate of the paired difference > round trip
+        g_rand_ci = bool(r['paired_lo'] > 0)                               # stricter reading: paired 95 % CI excludes zero
         d_rand = (f"matched days: lane {r['matched_lane_mean']:+.2f} vs random {r['matched_base_mean']:+.2f}, paired diff {r['paired_diff']:+.2f} "
-                  f"[{r['paired_lo']:+.2f}, {r['paired_hi']:+.2f}] vs round trip {r['test_cost']:.2f}; pre-registered unpaired diff {r['lane_minus_base']:+.2f}")
+                  f"[{r['paired_lo']:+.2f}, {r['paired_hi']:+.2f}] vs round trip {r['test_cost']:.2f} (CI {'excludes' if g_rand_ci else 'includes'} zero); "
+                f"pre-registered unpaired diff {r['lane_minus_base']:+.2f}; baseline trades on days without a lane trade: {r['base_only_trades']}")
         carry = all([g_data, g_exec, g_stat, g_tail, g_fwd, g_cls])
         rows.append(dict(scope=scope, selection=tag, post_hoc=posthoc, cfg=cfg, desc=r['desc'],
                          data_integrity=g_data, data_integrity_detail=d_data, execution_realism=g_exec, execution_realism_detail=d_exec,
                          statistical_validity=g_stat, statistical_validity_detail=d_stat, tail_survival=g_tail, tail_survival_detail=d_tail,
                          forward_validation=g_fwd, forward_validation_detail=d_fwd, classification=g_cls, classification_detail=d_cls,
-                         beats_random_matched=g_rand, beats_random_detail=d_rand,
+                         beats_random_matched=g_rand, random_paired_ci_excludes_zero=g_rand_ci, beats_random_detail=d_rand,
                          carry_verdict='PASS' if carry and not posthoc else 'FAIL', signal_verdict='PASS' if carry and g_rand and not posthoc else 'FAIL',
                          items_passed_carry=sum([g_data, g_exec, g_stat, g_tail, g_fwd, g_cls])))
     G = pl.DataFrame(rows); G.write_csv(os.path.join(C.OUT, 'gates.csv'))

@@ -94,7 +94,22 @@ def main():
         w('|---|---|---|---|---|---|')
         for r in IM.head(40).iter_rows(named=True): w(f"| {r['ticker']} | {r['period']} | {r['date']} | {r['entry']} | {r['sk']} | {r['reason']} |")
         if IM.height > 40: w(f'\n({IM.height - 40} more rows in `results/integrity_missing.csv`.)')
-    w('\nEntries the original band-data run skipped, and what they are on the full chains (`results/integrity_recovered.csv`):\n')
+    MF = pl.read_csv(os.path.join(R, 'data_manifest.csv'), infer_schema_length=10000)
+    bad = MF.filter((pl.col('band_rows_missing_in_full') > 0) | (pl.col('overlap_quote_diff_rows') > 0))
+    w('\nSessions where the full pull does not contain every quote row of the original band pull: ' + ('; '.join(
+        f"{r['tk']} {r['date']} ({r['band_rows_missing_in_full']:,} of {r['band_rows']:,} band rows absent, {r['band_strikes']} band strikes vs {r['strikes']} listed)" for r in bad.iter_rows(named=True)) or 'none') +
+      '.  On every other session the overlapping quotes are identical row for row.\n')
+    rs = IR.filter(pl.col('orig_reason').is_in(['out_of_band', 'out_of_band_spot']))
+    w('Entry slots (entry × structure-k) that the original run skipped because a strike or spot lay outside the ±2 % band, and their status on the full chains:\n')
+    w('| ticker | period | entries | band-skipped slots | now traded | now zero_bid | now no_credit | now no_quote |')
+    w('|---|---|---|---|---|---|---|---|')
+    for (tk, per, es), g in sorted(rs.group_by(['ticker', 'period', 'entries']), key=lambda x: (C.TICKERS.index(x[0][0]), x[0][1] != 'TRAIN', x[0][2])):
+        cnt = lambda k: int(g.filter(pl.col('now') == k)['n'].sum())
+        w(f"| {tk} | {per} | {es} | {int(g['n'].sum()):,} | {cnt('traded'):,} | {cnt('zero_bid')} | {cnt('no_credit')} | {cnt('no_quote')} |")
+    tot = rs.group_by('entries').agg(pl.col('n').sum().alias('a'), pl.col('n').filter(pl.col('now') == 'traded').sum().alias('b'))
+    w('\nTotal: ' + '; '.join(f"{r['entries']} entries {r['b']:,} of {r['a']:,} band-skipped slots now traded" for r in tot.sort('entries').iter_rows(named=True)) +
+      ' (the rest are pre-registered skips: a zero bid on a leg or wing or no net credit, which are market facts, or no usable quote at the entry minute, a data gap).\n')
+    w('\nEntries the original band-data run skipped, by original reason, and what they are on the full chains (`results/integrity_recovered.csv`):\n')
     w('| ticker | period | entries | original skip reason | now | entry × structure-k slots | sessions |')
     w('|---|---|---|---|---|---|---|')
     for r in IR.iter_rows(named=True):
@@ -252,11 +267,11 @@ def main():
     w('\n## 8. COMPASS §10 gate verdicts\n')
     w('Carry lane = data integrity, execution realism, statistical validity (complete data, out of sample, Bonferroni over the 8 pre-registered selections), tail survival, '
       'forward validation, classification.  Signal lane = the same plus beating random entry on the same days by more than one round trip.  `results/gates.csv` has the detail text.\n')
-    w('| scope | sel | config | data integrity | execution realism | statistical validity | tail survival | forward validation | classification | beats random (matched) | carry verdict | signal verdict |')
-    w('|---|---|---|---|---|---|---|---|---|---|---|---|')
+    w('| scope | sel | config | data integrity | execution realism | statistical validity | tail survival | forward validation | classification | beats random by > cost (matched, point) | paired CI excludes 0 | carry verdict | signal verdict |')
+    w('|---|---|---|---|---|---|---|---|---|---|---|---|---|')
     for r in GT.iter_rows(named=True):
         w(f"| {r['scope']} | {r['selection']}{' (post-hoc)' if r['post_hoc'] else ''} | `{r['cfg']}` | {ck(r['data_integrity'])} | {ck(r['execution_realism'])} | {ck(r['statistical_validity'])} | "
-          f"{ck(r['tail_survival'])} | {ck(r['forward_validation'])} | carry | {ck(r['beats_random_matched'])} | **{r['carry_verdict']}** | **{r['signal_verdict']}** |")
+          f"{ck(r['tail_survival'])} | {ck(r['forward_validation'])} | carry | {ck(r['beats_random_matched'])} | {ck(r['random_paired_ci_excludes_zero'])} | **{r['carry_verdict']}** | **{r['signal_verdict']}** |")
     w('\nItem detail for the full-chain TRAIN selections:\n')
     for r in GT.filter(pl.col('selection').is_in(['S1', 'S2'])).iter_rows(named=True):
         w(f"- **{r['scope']} {r['selection']} `{r['cfg']}`** — data: {r['data_integrity_detail']}. Execution: {r['execution_realism_detail']}. Statistics: {r['statistical_validity_detail']}. "

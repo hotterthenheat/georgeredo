@@ -47,4 +47,18 @@ HWR_CHAIN_ROOT=<scratchpad>/theta/data HWR_WORK=<scratchpad>/hwr_grid_v2_bandche
 
 ## Run record (2026-10-14 UTC)
 
-RUN_RECORD_PLACEHOLDER
+* 01:30–01:45 code copied from `../etf/` and edited (no rule changed).  Code validation on the ORIGINAL band data
+  (`<scratchpad>/hwr_grid_v2_bandcheck`): 01:32 SPY TEST, 01:40–01:42 the other five ticker-periods, then `analyze.py train/test`,
+  `settlement.py`, `stress.py`, `gates.py`, `report.py` on that copy — per-trade and skip files, TRAIN selections, selected-TEST rows and
+  the SPY settlement re-valuation all identical to the original study (`results/validation_band_reproduction.json`).
+* The full chains were written by the fetch job after SPXW; this study only read them when a ticker's count was complete
+  (`*.parquet` files, no `.tmp`, no `.nodata`; fetch `progress.json` final: SPY 980 ok, QQQ 980 ok, IWM 621 ok, 0 errors).
+* SPY complete 02:32 → `run_stage.sh SPY` 02:32:41–02:35:52; `selection_train.json` (SPY scope) sha256 74db493a… at 02:34:47, before
+  `engine.py SPY TEST` started.
+* QQQ complete 02:53 → `run_stage.sh QQQ` 02:53:11–02:56:27; selection adds QQQ and SPY+QQQ (SPY asserted unchanged), sha256 9dc7d131… at 02:55:27.
+* IWM complete 02:59:52 → `run_stage.sh IWM` 02:59:58–03:01:34; selection adds IWM, final sha256 b3d83a32… at 03:00:50.
+* `run_final.sh` 03:01:34–03:02:39 (TEST stage, integrity summary, validation, settlement, stress, gates, report).
+* ~03:05 `gates.py` and `report.py` re-run after adding the paired-CI column, the band-skipped summary table and the 2024-06-21 note
+  (formatting only; no computed number changed).
+* Data finding: on 2024-06-21 (June quad-witching, TRAIN) the full pull lacks 2,346 (SPY), 3,910 (QQQ) and 1,564 (IWM) quote rows that
+  the band pull had, and both pulls are irregular that day; every other session's overlapping quotes are identical row for row.

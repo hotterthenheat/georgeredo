@@ -15,3 +15,7 @@ amendment_1_utc 2026-10-14T02:20:22Z (band-file fallback for 2024-06-21, whose c
 00e6a644b63b093a9a1a3a2913951fc5c2cbf9789f31eb05310bafa9fd97b2b9  analyze.py
 selection_written_before_TEST_sessions_simulated_utc 2026-10-14T02:27:31Z (trade files present: 656, last 2024-12-31.parquet)
 readme_appended_utc 2026-10-14T02:45:32Z: Outcome section appended after the runs; the first 7557 bytes of README.md are the amended protocol text (sha256 2e4cf667... above; check with: head -c 7557 README.md | sha256sum)
+amendment_1_resolved_utc 2026-10-14T03:09:30Z: complete chain for 2024-06-21 delivered 03:03 UTC (sha256 08ad7590081c77c4ee50e7d00982f861fef1dfbfdf79c6b15ea285d59bcd272f); its band-fallback trade/skip files deleted and the whole pipeline re-run; pre-resolution results kept as v2-amend1 snapshot (figures quoted in RESULTS.md/README/note)
+a3f41308f324d17de8c6ee6b430a3373d488ec7e397697c91fff969d99b7ef82  results/selection_train.json
+ad2fec86ac8541b3aa1563b72367d648b06317a05cd1f28859f021aa959d6db1  results/train_metrics.csv.gz
+selection_rewritten_after_resolution_utc 2026-10-14T03:11:32Z (TRAIN stage reads only dates <= 2024-12-31)
