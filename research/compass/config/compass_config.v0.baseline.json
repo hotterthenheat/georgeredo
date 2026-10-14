@@ -1,0 +1,31 @@
+{
+  "version": "0.0.0-baseline",
+  "generated_utc": "2026-10-14T16:20:00Z",
+  "status": "baseline_unvalidated",
+  "evidence": {"source": "owner's specification as recorded in research/compass/04_protocol.md §4; no evidence yet — this is the configuration under test, not a recommendation"},
+  "common": {
+    "indicators": {"rsi_period": 14, "ema_periods": [5, 9, 20, 50, 200], "ema_seed": "first_close", "vwap": "session_typical_price", "timeframes_min": [1, 5, 15, 30, 60, 390]},
+    "signal": {"lead_timeframe_min": 1, "rsi_up": 55, "rsi_down": 45, "lead_ema": 9, "confirm_timeframe_min": 5, "confirm_ema": 20, "confirm_vwap": true, "align_timeframe_min": 15, "align_fast_ema": 20, "align_slow_ema": 50, "daily_trend": false, "relvol_min": 1.0, "structure": true, "entry_window": ["09:45", "14:30"]},
+    "contract": {"delta_min": 0.30, "delta_max": 0.60, "delta_target": 0.45, "min_open_interest": 250, "min_intraday_volume": 100, "max_spread_pct_of_mid": 0.12, "min_ask": 0.05, "expiration_choice": "most_open_interest_in_category", "pick": "delta_nearest"},
+    "exits": {"invalidation": "5-minute close through the signal's swing level", "vwap_loss": true, "premium_stop_pct": 0.25, "target_1_pct": 0.25, "target_1_fraction": 0.5, "target_2_pct": 0.50, "ema_target": true, "max_hold": "60 minutes", "session_cutoff": "15:50"},
+    "execution": {"entry": "marketable_ask", "exit": "marketable_bid", "fees_per_contract_per_side": 0.70, "max_order_vs_displayed_size": 1.0}
+  },
+  "families": {
+    "quick_scalps": {"enabled": true, "status": "not_tested", "symbols_rule": "index products only (SPY, QQQ, IWM, SPXW, RUTW)", "expiration_categories": ["0dte", "weekly"], "evidence": [], "note": "under test: S01 baseline, S02 grid"},
+    "trend_plays": {"enabled": true, "status": "not_tested", "expiration_categories": ["weekly", "swing"], "overrides": {"exits": {"premium_stop_pct": 0.30, "max_hold": "5 sessions", "invalidation": "15-minute close through EMA 50"}}, "evidence": []},
+    "breakouts": {"enabled": true, "status": "not_tested", "expiration_categories": ["weekly", "swing"], "overrides": {"signal": {"relvol_min": 1.5}, "exits": {"premium_stop_pct": 0.30, "max_hold": "3 sessions", "invalidation": "5-minute close back inside the range"}}, "evidence": []},
+    "bounces": {"enabled": true, "status": "not_tested", "expiration_categories": ["weekly", "swing"], "overrides": {"exits": {"invalidation": "level - 0.5 ATR (session close through)", "max_hold": "3 sessions"}}, "evidence": [], "note": "target = level + 1.5 ATR (partner ruling)"},
+    "earnings_events": {"enabled": false, "status": "not_tested", "expiration_categories": ["weekly"], "evidence": [], "note": "earnings dates only 2025-10 → 2026-10 on hand"},
+    "cheap_options": {"enabled": true, "status": "not_tested", "expiration_categories": ["weekly", "swing", "position"], "evidence": [], "note": "Edge = E_P[exit value] − ask − costs > 0 with a regime-matched historical simulation"}
+  },
+  "expiration_categories": [
+    {"key": "0dte", "min_calendar_days": 0, "max_calendar_days": 0, "note": "last trading day is the decision date; AM-settled SPX monthlies stop trading the session before"},
+    {"key": "weekly", "min_calendar_days": 1, "max_calendar_days": 7},
+    {"key": "swing", "min_calendar_days": 8, "max_calendar_days": 30},
+    {"key": "position", "min_calendar_days": 31, "max_calendar_days": 90},
+    {"key": "long_dated", "min_calendar_days": 91, "max_calendar_days": 364},
+    {"key": "leaps", "min_calendar_days": 365, "max_calendar_days": 100000}
+  ],
+  "ranking": {"method": "expected_profit_over_expected_worst_drawdown", "definition": "mean net P&L per contract of the family's training trades in the same (expiration category, delta band, liquidity class, regime) cell, divided by the mean maximum adverse excursion (entry ask − lowest bid before exit) of those trades; dollars per contract over the hold; cells with fewer than 100 trades show 'unavailable'", "min_cell_trades": 100, "unavailable_label": "unavailable"},
+  "data_quality": {"max_quote_age_s": 60, "require_bid_gt_0": true, "require_ask_ge_bid": true, "min_bars_for_indicators": 200, "relvol_lookback_sessions": 20}
+}

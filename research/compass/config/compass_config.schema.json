@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Compass production configuration",
+  "description": "Machine-readable configuration consumed by Slayer Terminal's Compass (deliverable 9). Values are set by the research in research/compass/ and every number carries the registry id of the evidence behind it. Families inherit `common` and override only what differs; expiration categories may override per family.",
+  "type": "object",
+  "required": ["version", "generated_utc", "evidence", "common", "families", "expiration_categories", "ranking", "data_quality"],
+  "properties": {
+    "version": {"type": "string"},
+    "generated_utc": {"type": "string"},
+    "evidence": {"type": "object", "description": "registry ids (research/compass/registry.jsonl) that justify this configuration", "additionalProperties": {"type": "string"}},
+    "status": {"type": "string", "enum": ["baseline_unvalidated", "research_candidate", "forward_paper", "validated"]},
+    "common": {"$ref": "#/$defs/rules"},
+    "families": {"type": "object", "additionalProperties": {"$ref": "#/$defs/family"}},
+    "expiration_categories": {"type": "array", "items": {"type": "object", "required": ["key", "min_calendar_days", "max_calendar_days"], "properties": {"key": {"type": "string"}, "min_calendar_days": {"type": "integer"}, "max_calendar_days": {"type": "integer"}, "note": {"type": "string"}}}},
+    "ranking": {"type": "object", "required": ["method", "definition"], "properties": {"method": {"type": "string", "enum": ["expected_profit_over_expected_worst_drawdown", "expected_profit", "lower_confidence_bound", "utility_ev_minus_es95"]}, "definition": {"type": "string"}, "min_cell_trades": {"type": "integer"}, "unavailable_label": {"type": "string"}}},
+    "data_quality": {"type": "object", "properties": {"max_quote_age_s": {"type": "number"}, "require_bid_gt_0": {"type": "boolean"}, "require_ask_ge_bid": {"type": "boolean"}, "min_bars_for_indicators": {"type": "integer"}, "relvol_lookback_sessions": {"type": "integer"}}}
+  },
+  "$defs": {
+    "rules": {
+      "type": "object",
+      "properties": {
+        "indicators": {"type": "object", "properties": {"rsi_period": {"type": "integer"}, "ema_periods": {"type": "array", "items": {"type": "integer"}}, "ema_seed": {"type": "string", "enum": ["first_close"]}, "vwap": {"type": "string", "enum": ["session_typical_price"]}, "timeframes_min": {"type": "array", "items": {"type": "integer"}}}},
+        "signal": {"type": "object", "properties": {"lead_timeframe_min": {"type": "integer"}, "rsi_up": {"type": "number"}, "rsi_down": {"type": "number"}, "lead_ema": {"type": "integer"}, "confirm_timeframe_min": {"type": "integer"}, "confirm_ema": {"type": "integer"}, "confirm_vwap": {"type": "boolean"}, "align_timeframe_min": {"type": "integer"}, "align_fast_ema": {"type": "integer"}, "align_slow_ema": {"type": "integer"}, "daily_trend": {"type": "boolean"}, "relvol_min": {"type": ["number", "null"]}, "structure": {"type": "boolean"}, "entry_window": {"type": "array", "items": {"type": "string"}}}},
+        "contract": {"type": "object", "properties": {"delta_min": {"type": "number"}, "delta_max": {"type": "number"}, "delta_target": {"type": "number"}, "min_open_interest": {"type": "integer"}, "min_intraday_volume": {"type": "integer"}, "max_spread_pct_of_mid": {"type": "number"}, "min_ask": {"type": "number"}, "expiration_choice": {"type": "string", "enum": ["most_open_interest_in_category", "nearest_in_category"]}, "pick": {"type": "string", "enum": ["delta_nearest", "highest_oi", "tightest_spread"]}}},
+        "exits": {"type": "object", "properties": {"invalidation": {"type": "string"}, "vwap_loss": {"type": "boolean"}, "premium_stop_pct": {"type": "number"}, "target_1_pct": {"type": ["number", "null"]}, "target_1_fraction": {"type": "number"}, "target_2_pct": {"type": ["number", "null"]}, "ema_target": {"type": "boolean"}, "max_hold": {"type": "string"}, "session_cutoff": {"type": "string"}}},
+        "execution": {"type": "object", "properties": {"entry": {"type": "string", "enum": ["marketable_ask"]}, "exit": {"type": "string", "enum": ["marketable_bid"]}, "fees_per_contract_per_side": {"type": "number"}, "max_order_vs_displayed_size": {"type": "number"}}}
+      }
+    },
+    "family": {
+      "type": "object",
+      "required": ["enabled", "status", "expiration_categories"],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "status": {"type": "string", "enum": ["not_tested", "rejected", "experimental", "forward_paper", "recommended"]},
+        "symbols_rule": {"type": "string"},
+        "expiration_categories": {"type": "array", "items": {"type": "string"}},
+        "overrides": {"$ref": "#/$defs/rules"},
+        "evidence": {"type": "array", "items": {"type": "string"}},
+        "note": {"type": "string"}
+      }
+    }
+  }
+}
