@@ -26,3 +26,5 @@ Every entry: what was done, the exact command or file, its verified outcome. New
 - Interest rate r is a stated constant (0.04); the ThetaData rate series is not wired.
 - Settlement for physically settled ETF contracts held to expiry is modelled at intrinsic on the 16:00 close (after-hours exercise caveat from the prior studies applies; the long-option families never hold to expiry by design).
 - Open interest and intraday option volume are not in the 0DTE cache, so S01/S02 run without the OI > 250 / volume > 100 filters; S03 onwards applies them (pulled with the chains).
+| 16:11 | S01 finished (SPY 341 s, QQQ 673 s, IWM 882 s cumulative); `engine.report.write` → `results/v1/s01_quick_scalps_0dte_baseline/REPORT.md`; registry entry `S01` | 2,886 trades, −$4.19/contract [−5.68, −2.81], below the matched random baseline by −$2.03 [−3.18, −0.90]; rejected (see `05_results.md`) |
+| 16:14 | S04 launched: `studies/s04_signal_underlying_validity.py` (signal validity on SPY/QQQ/IWM minute bars 2017→2026, random-minute controls, component ablations) | Running |
