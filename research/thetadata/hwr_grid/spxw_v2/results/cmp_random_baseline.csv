@@ -29,16 +29,16 @@ v1,S2,N0.5|14:05|tp0|st0|E2|F3|P,TEST,five draws pooled (trade-level),2005,165.1
 v1,S2,N0.5|14:05|tp0|st0|E2|F3|P,TEST,lane minus per-date mean of the five draws,397,-92.8164,-184.478,1.1084,,,
 v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R1 (seed 11),606,110.061,4.5804,217.02,0.587459,1.22338,-12989
 v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R2 (seed 12),606,142.152,44.0421,239.22,0.607261,1.3299,-11403
-v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R3 (seed 13),606,112.109,7.29369,213.255,0.590759,1.23929,-16481
-v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R4 (seed 14),606,63.7657,-42.9607,164.992,0.574257,1.12889,-23728
-v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R5 (seed 15),606,104.068,-0.256106,205.229,0.585809,1.22297,-17641
-v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,five draws pooled (trade-level),3030,106.431,,,0.589109,,
-v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,matched days: lane,606,165.252,93.381,237.006,0.623762,,-5838
-v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,matched days: per-date mean of the five draws,606,106.431,23.8837,188.768,,,-10134
+v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R3 (seed 13),606,113,8.07092,214.644,0.590759,1.24119,-16481
+v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R4 (seed 14),606,64.4158,-42.8763,165.361,0.574257,1.1302,-23728
+v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R5 (seed 15),606,104.668,0.341749,205.931,0.585809,1.22426,-17641
+v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,five draws pooled (trade-level),3030,106.859,,,0.589109,,
+v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,matched days: lane,606,164.592,92.7209,236.583,0.623762,,-5838
+v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,matched days: per-date mean of the five draws,606,106.859,24.5989,188.95,,,-10134
 v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,lane days with no random trade,0,,,,,,
 v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random days with no lane trade (per-date mean),0,,,,,,
 v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,matched days: draws present per day (mean / min),606,5,5,,,,
-v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,lane minus per-date mean of the five draws,606,58.8215,-14.4535,131.173,,,
+v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,lane minus per-date mean of the five draws,606,57.733,-15.4785,130.507,,,
 v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TEST,random draw R1 (seed 11),407,142.349,-38.3687,317.52,0.60688,1.237,-24345
 v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TEST,random draw R2 (seed 12),407,-72.2506,-253.659,100.5,0.570025,0.899059,-44797
 v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TEST,random draw R3 (seed 13),407,264.796,79.4912,440.305,0.641278,1.46617,-33312
@@ -51,18 +51,18 @@ v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TEST,lane days with no random trade,0,,,,,,
 v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TEST,random days with no lane trade (per-date mean),0,,,,,,
 v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TEST,matched days: draws present per day (mean / min),407,5,5,,,,
 v2,S1,N0.0|14:05|tp0|st1|E2|F3|P,TEST,lane minus per-date mean of the five draws,407,29.4378,-118.574,197.876,,,
-v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,random draw R1 (seed 11),605,64.6182,11.6526,117.204,0.694215,1.25716,-6703
-v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,random draw R2 (seed 12),606,91.2063,39.8759,140.203,0.726073,1.39586,-5540
-v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,random draw R3 (seed 13),605,75.6529,20.6725,129.289,0.72562,1.31398,-5740
+v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,random draw R1 (seed 11),604,63.9503,11.2429,114.584,0.693709,1.25408,-6703
+v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,random draw R2 (seed 12),605,90.7322,37.0124,141.817,0.72562,1.39315,-5918
+v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,random draw R3 (seed 13),606,76.1023,21.6788,128.763,0.726073,1.31637,-5740
 v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,random draw R4 (seed 14),605,52.9223,-2.21884,106.605,0.700826,1.20802,-8153
-v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,random draw R5 (seed 15),605,76.9124,24.5336,127.63,0.71405,1.32729,-6334
-v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,five draws pooled (trade-level),3026,72.2687,,,0.712161,,
-v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,matched days: lane,605,94.6083,58.6786,130.076,0.74876,,-3886
-v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,matched days: per-date mean of the five draws,605,71.7718,30.8663,112.237,,,-4561.6
+v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,random draw R5 (seed 15),605,77.3091,24.6027,127.847,0.71405,1.32898,-6334
+v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,five draws pooled (trade-level),3025,72.2073,,,0.712066,,
+v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,matched days: lane,606,94.9934,58.5022,130.721,0.749175,,-3886
+v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,matched days: per-date mean of the five draws,606,72.5081,31.4863,113.259,,,-4561.6
 v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,lane days with no random trade,0,,,,,,
-v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,random days with no lane trade (per-date mean),1,431.333,,,,,
-v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,matched days: draws present per day (mean / min),605,4.99669,3,,,,
-v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,lane minus per-date mean of the five draws,605,22.8365,-12.9471,58.5417,,,
+v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,random days with no lane trade (per-date mean),0,,,,,,
+v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,matched days: draws present per day (mean / min),606,4.99175,2,,,,
+v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TRAIN,lane minus per-date mean of the five draws,606,22.4853,-13.8025,57.9547,,,
 v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TEST,random draw R1 (seed 11),407,92.8231,-14.9647,192.972,0.72973,1.27405,-15208
 v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TEST,random draw R2 (seed 12),407,6.68059,-102.609,109.598,0.695332,1.01765,-25278
 v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TEST,random draw R3 (seed 13),407,149.607,35.377,251.242,0.751843,1.47719,-21067
@@ -77,16 +77,16 @@ v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TEST,matched days: draws present per day (mean 
 v2,S2,N1.0|14:05|tp0|st2|E2|F3|P,TEST,lane minus per-date mean of the five draws,407,-11.9307,-103.786,95.3624,,,
 v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R1 (seed 11),606,110.061,4.5804,217.02,0.587459,1.22338,-12989
 v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R2 (seed 12),606,142.152,44.0421,239.22,0.607261,1.3299,-11403
-v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R3 (seed 13),606,112.109,7.29369,213.255,0.590759,1.23929,-16481
-v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R4 (seed 14),606,63.7657,-42.9607,164.992,0.574257,1.12889,-23728
-v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R5 (seed 15),606,104.068,-0.256106,205.229,0.585809,1.22297,-17641
-v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,five draws pooled (trade-level),3030,106.431,,,0.589109,,
-v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,matched days: lane,606,165.252,93.381,237.006,0.623762,,-5838
-v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,matched days: per-date mean of the five draws,606,106.431,23.8837,188.768,,,-10134
+v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R3 (seed 13),606,113,8.07092,214.644,0.590759,1.24119,-16481
+v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R4 (seed 14),606,64.4158,-42.8763,165.361,0.574257,1.1302,-23728
+v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random draw R5 (seed 15),606,104.668,0.341749,205.931,0.585809,1.22426,-17641
+v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,five draws pooled (trade-level),3030,106.859,,,0.589109,,
+v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,matched days: lane,606,164.592,92.7209,236.583,0.623762,,-5838
+v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,matched days: per-date mean of the five draws,606,106.859,24.5989,188.95,,,-10134
 v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,lane days with no random trade,0,,,,,,
 v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,random days with no lane trade (per-date mean),0,,,,,,
 v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,matched days: draws present per day (mean / min),606,5,5,,,,
-v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,lane minus per-date mean of the five draws,606,58.8215,-14.4535,131.173,,,
+v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TRAIN,lane minus per-date mean of the five draws,606,57.733,-15.4785,130.507,,,
 v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TEST,random draw R1 (seed 11),407,142.349,-38.3687,317.52,0.60688,1.237,-24345
 v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TEST,random draw R2 (seed 12),407,-72.2506,-253.659,100.5,0.570025,0.899059,-44797
 v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TEST,random draw R3 (seed 13),407,264.796,79.4912,440.305,0.641278,1.46617,-33312
@@ -101,16 +101,16 @@ v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TEST,matched days: draws present per day (
 v2,orig_S1,N0.0|14:05|tp0|st1|E2|F3|P,TEST,lane minus per-date mean of the five draws,407,29.4378,-118.574,197.876,,,
 v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,random draw R1 (seed 11),606,97.066,-1.72768,195.2,0.669967,1.23914,-13356
 v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,random draw R2 (seed 12),605,103.446,7.9345,201.128,0.710744,1.26462,-19578
-v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,random draw R3 (seed 13),606,116.743,15.6143,210.897,0.69802,1.31172,-14703
-v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,random draw R4 (seed 14),605,73.6826,-35.4806,173.082,0.669421,1.18244,-20510
-v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,random draw R5 (seed 15),604,104.967,9.07177,198.227,0.675497,1.2736,-12337
-v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,five draws pooled (trade-level),3026,99.1841,,,0.684732,,
-v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,matched days: lane,605,123.638,51.1254,194.439,0.720661,,-10092
-v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,matched days: per-date mean of the five draws,605,97.2347,10.9892,178.811,,,-11108.8
+v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,random draw R3 (seed 13),605,115.517,17.7921,209.293,0.697521,1.30794,-14703
+v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,random draw R4 (seed 14),606,74.2591,-29.7144,170.684,0.669967,1.18417,-20510
+v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,random draw R5 (seed 15),605,106.559,6.80306,203.295,0.676033,1.27821,-12337
+v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,five draws pooled (trade-level),3027,99.3604,,,0.684836,,
+v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,matched days: lane,606,123.975,49.6185,192.921,0.721122,,-10092
+v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,matched days: per-date mean of the five draws,606,98.3123,14.0869,179.53,,,-11108.8
 v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,lane days with no random trade,0,,,,,,
-v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,random days with no lane trade (per-date mean),1,789.333,,,,,
-v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,matched days: draws present per day (mean / min),605,4.99669,3,,,,
-v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,lane minus per-date mean of the five draws,605,26.4033,-36.8485,89.995,,,
+v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,random days with no lane trade (per-date mean),0,,,,,,
+v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,matched days: draws present per day (mean / min),606,4.99505,3,,,,
+v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TRAIN,lane minus per-date mean of the five draws,606,25.663,-37.9831,88.7307,,,
 v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TEST,random draw R1 (seed 11),407,110.948,-147.043,314.315,0.692875,1.20496,-37467
 v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TEST,random draw R2 (seed 12),407,23.4373,-217.423,228.667,0.673219,1.04125,-39577
 v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TEST,random draw R3 (seed 13),407,261.683,10.3243,474.777,0.739558,1.55264,-50147
@@ -125,16 +125,16 @@ v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TEST,matched days: draws present per day (
 v2,orig_S2,N0.5|14:05|tp0|st0|E2|F3|P,TEST,lane minus per-date mean of the five draws,407,22.5985,-147.607,261.121,,,
 v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,random draw R1 (seed 11),575,92.6661,-28.8569,214.087,0.603478,1.17965,-18601
 v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,random draw R2 (seed 12),575,102.35,-23.2716,222.299,0.617391,1.20874,-37463
-v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,random draw R3 (seed 13),575,108.506,-5.60561,221.528,0.605217,1.23377,-17780
-v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,random draw R4 (seed 14),575,78.4591,-45.7788,196.195,0.591304,1.15956,-26562
-v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,random draw R5 (seed 15),575,96.8365,-22.2503,206.267,0.598261,1.20364,-21050
-v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,five draws pooled (trade-level),2875,95.7635,,,0.60313,,
+v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,random draw R3 (seed 13),575,109.445,-4.48009,222.485,0.605217,1.23579,-17240
+v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,random draw R4 (seed 14),575,79.1443,-44.8402,196.878,0.591304,1.16095,-26168
+v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,random draw R5 (seed 15),575,97.4696,-21.9179,207.339,0.598261,1.20497,-20686
+v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,five draws pooled (trade-level),2875,96.215,,,0.60313,,
 v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,matched days: lane,575,40.953,-74.7785,154.459,0.601739,,-22411
-v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,matched days: per-date mean of the five draws,575,95.7635,-6.11513,195.235,,,-20253.4
+v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,matched days: per-date mean of the five draws,575,96.215,-5.62634,195.655,,,-19993.8
 v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,lane days with no random trade,0,,,,,,
 v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,random days with no lane trade (per-date mean),0,,,,,,
 v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,matched days: draws present per day (mean / min),575,5,5,,,,
-v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,lane minus per-date mean of the five draws,575,-54.8104,-114.446,5.37348,,,
+v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TRAIN,lane minus per-date mean of the five draws,575,-55.2619,-114.752,5.07536,,,
 v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TEST,random draw R1 (seed 11),388,53.9381,-225.378,288.208,0.621134,1.0789,-41745
 v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TEST,random draw R2 (seed 12),388,-120.941,-385.695,112.14,0.582474,0.840355,-69000
 v2,TE_rule,N0.0|13:00|tp0|st0|E2|F4|P,TEST,random draw R3 (seed 13),388,229.49,-50.436,469.997,0.659794,1.38366,-51797
