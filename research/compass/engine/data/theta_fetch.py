@@ -71,7 +71,11 @@ class ThetaFetcher:
             except grpc.RpcError as e:
                 code = e.code()
                 if code == grpc.StatusCode.UNAUTHENTICATED: self.client(g); continue
-                if code in (grpc.StatusCode.RESOURCE_EXHAUSTED, grpc.StatusCode.UNAVAILABLE, grpc.StatusCode.DEADLINE_EXCEEDED, grpc.StatusCode.INTERNAL, grpc.StatusCode.UNKNOWN): time.sleep(2 + 3 * attempt); continue
+                if code in (grpc.StatusCode.RESOURCE_EXHAUSTED, grpc.StatusCode.UNAVAILABLE, grpc.StatusCode.DEADLINE_EXCEEDED, grpc.StatusCode.INTERNAL, grpc.StatusCode.UNKNOWN):
+                    # count throttling so a slow run is diagnosable from the log (first few occurrences are printed)
+                    k = f'retry_{code.name}'; self.stats[k] = self.stats.get(k, 0) + 1
+                    if self.stats[k] <= 3: self.log(f'retry {code.name} on {fn} attempt {attempt}: {_red(e.details())[:120]}')
+                    time.sleep(2 + 3 * attempt); continue
                 return None, f'{code} {_red(e.details())[:160]}'
             except Exception as e: return None, f'{type(e).__name__} {_red(e)[:160]}'
         return None, 'retries exhausted'
