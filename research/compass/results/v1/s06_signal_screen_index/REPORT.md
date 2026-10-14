@@ -89,7 +89,7 @@ Absolute = direction × underlying return; random = minutes drawn uniformly in t
 | IWM | bounce | confirm_5m | 12 | | | | | | | | | | | | |
 | IWM | bounce | align_15m | 868 | 426 | -55.5 | +1.1 | +0.1 | **-1.6** [-7.7, +4.2] | -3.7 [-11.5, +3.3] | -0.6 | 50 % | -5.5 | +3.9 [-1.7, +9.4] | +4.7 [-2.4, +11.2] | no |
 
-Promotion rule: absolute lower bound at 30 or 60 min ≥ +3 bp AND paired lower bound vs random > 0. Promoted: none.
+Promotion rule: ≥ 100 trading days and ≥ 500 events, absolute lower bound at 30 or 60 min ≥ +3 bp AND paired lower bound vs random > 0. Promoted: none.
 
 ## vs random, 30 min, by year (rows with n ≥ 500)
 

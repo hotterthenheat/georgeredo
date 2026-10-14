@@ -48,3 +48,17 @@ def test_spy_quick_scalp_day():
     assert n_filled > 0
     s = stats.summary(pl.DataFrame(trades))
     assert s['n'] == n_filled and np.isfinite(s['mean'])
+
+
+def test_load_minutes_drops_nan_rows(tmp_path):
+    """A NaN close on a no-trade minute must be dropped, or the recursive indicators go NaN for the rest of the history."""
+    import datetime as dt, numpy as np, polars as pl
+    from engine import bars, indicators as ind
+    d = dt.date(2024, 3, 4); n = 391
+    ts = [dt.datetime(2024, 3, 4, 9, 30) + dt.timedelta(minutes=i) for i in range(n)]
+    close = np.linspace(100, 101, n); close[100] = np.nan
+    df = pl.DataFrame({'timestamp': ts, 'open': close, 'high': close, 'low': close, 'close': close, 'volume': [1000.0] * n, 'count': [10] * n, 'vwap': close}).with_columns(pl.col('timestamp').dt.replace_time_zone('America/New_York'))
+    (tmp_path / 'XYZ').mkdir(); df.write_parquet(tmp_path / 'XYZ' / f'{d}.parquet')
+    out = bars.load_minutes('XYZ', str(tmp_path), d, d)
+    assert out.height == 389 and not np.isnan(out['close'].to_numpy()).any()
+    assert np.isnan(ind.rsi(out['close'].to_numpy(), 14)[20:]).sum() == 0

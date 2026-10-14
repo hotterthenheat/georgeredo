@@ -16,12 +16,14 @@ L = [f'# {name}: entry triggers on the underlying, signed return after the decis
 prom = []
 for r in rows:
     if not r.get('days'): L.append(f"| {r['symbol']} | {r['trigger']} | {r['filters']} | {r.get('n', 0)} | | | | | | | | | | | | |"); continue
-    abs_ok = (r.get('fwd_30m_bp_lo') or -1e9) >= hurdle or (r.get('fwd_60m_bp_lo') or -1e9) >= hurdle
+    # a promotable cell needs a multi-year sample: at least 100 trading days and 500 events (protocol gates: >= 150 trades per three months, three test years)
+    enough = (r.get('days') or 0) >= 100 and (r.get('n') or 0) >= 500
+    abs_ok = enough and ((r.get('fwd_30m_bp_lo') or -1e9) >= hurdle or (r.get('fwd_60m_bp_lo') or -1e9) >= hurdle)
     rel_ok = (r.get('vs_random_30m_lo') or -1e9) > 0 or (r.get('vs_random_60m_lo') or -1e9) > 0
     p = 'YES' if abs_ok and rel_ok else ('abs only' if abs_ok else ('vs-random only' if rel_ok else 'no'))
     if abs_ok and rel_ok: prom.append((r['symbol'], r['trigger'], r['filters']))
     L.append(f"| {r['symbol']} | {r['trigger']} | {r['filters']} | {r['n']} | {r['days']} | {f(r['pre_30m_bp'])} | {f(r['fwd_5m_bp'])} | {f(r['fwd_15m_bp'])} | **{f(r['fwd_30m_bp'])}** [{f(r['fwd_30m_bp_lo'])}, {f(r['fwd_30m_bp_hi'])}] | {f(r['fwd_60m_bp'])} [{f(r['fwd_60m_bp_lo'])}, {f(r['fwd_60m_bp_hi'])}] | {f(r['fwd_close_bp'])} | {r['hit_30m'] * 100:.0f} % | {f(r.get('random_30m_bp'))} | {f(r.get('vs_random_30m_bp'))} [{f(r.get('vs_random_30m_lo'))}, {f(r.get('vs_random_30m_hi'))}] | {f(r.get('vs_random_60m_bp'))} [{f(r.get('vs_random_60m_lo'))}, {f(r.get('vs_random_60m_hi'))}] | {p} |")
-L += ['', f'Promotion rule: absolute lower bound at 30 or 60 min ≥ +{hurdle:g} bp AND paired lower bound vs random > 0. Promoted: {prom or "none"}.', '']
+L += ['', f'Promotion rule: ≥ 100 trading days and ≥ 500 events, absolute lower bound at 30 or 60 min ≥ +{hurdle:g} bp AND paired lower bound vs random > 0. Promoted: {prom or "none"}.', '']
 # year-by-year of the vs-random 30m for rows with n >= 500
 L += ['## vs random, 30 min, by year (rows with n ≥ 500)', '']
 years = sorted({y for r in rows for y in (r.get('by_year_vs_random_30m') or {})})
