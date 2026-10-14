@@ -1,9 +1,9 @@
 {
- "version": "1.0.0-no-validated-configuration",
- "generated_utc": "2026-10-14T17:03:53Z",
+ "version": "1.1.0-no-validated-configuration",
+ "generated_utc": "2026-10-14T18:30:12Z",
  "status": "no_validated_configuration",
  "evidence": {
-  "source": "research/compass/registry.jsonl (S01, S04, S06, S07, S08, S09; S02, S03 and S06-Tier A pending at this version)",
+  "source": "research/compass/registry.jsonl (S01, S04, S06-S10, S12-S16a; S02, S03, S06-Tier A, S11, S12b pending at this version)",
   "results_document": "research/compass/05_results.md",
   "protocol": "research/compass/04_protocol.md (amendments A1-A3)",
   "gates": "registry GATE-v2"
@@ -285,11 +285,71 @@
    "window": "2024-01-02..2026-10-13",
    "result": "nothing promoted; surprise direction underperforms the universe after the gap (-25 bp adjusted at 10 sessions [-39, -9]); event-day move predicts nothing",
    "verdict": "nothing promoted"
+  },
+  {
+   "study": "S10",
+   "kind": "backtest",
+   "family": "short premium: fade of the quick_scalps signal (short single / short vertical)",
+   "expiration_category": "0dte",
+   "instruments": "SPY, QQQ, IWM",
+   "window": "2022-11-11..2026-10-09",
+   "result": "best cell +$0.52/contract [-6.11, +7.47] (breakeven; -$1.34 with one adverse tick); verticals and 60-min holds negative",
+   "verdict": "nothing promoted"
+  },
+  {
+   "study": "S12",
+   "kind": "screen",
+   "family": "intraday momentum (first half hour -> rest of day / last hour); 15:00 0DTE long expression",
+   "instruments": "SPY, QQQ, IWM",
+   "window": "2017-06..2026-10 / 2022-11..2026-10",
+   "result": "last-half-hour momentum absent; QQQ-only rest-of-day +9.0 bp [+2.8, +15.3] on large-move days (10/10 years positive) but Bonferroni lower bound -2.5 across the A5 batch; option cell -$4.36 [-8.48, +0.21]",
+   "verdict": "nothing promoted (S12b 10:00 expressions pending)"
+  },
+  {
+   "study": "S14",
+   "kind": "screen",
+   "family": "cross-sectional momentum / reversal long legs, month-end deciles",
+   "instruments": "S07 universe",
+   "window": "2024-01..2026-10",
+   "result": "20-34 rebalance dates; intervals hundreds of bp wide; reversal +247 bp adjusted [-38, +598] with flipping year signs",
+   "verdict": "nothing promoted"
+  },
+  {
+   "study": "S15",
+   "kind": "backtest",
+   "family": "short premium: 10:00 ATM 0DTE straddle, VRP-conditioned",
+   "expiration_category": "0dte",
+   "instruments": "SPY, QQQ",
+   "window": "2022-11-11..2026-10-09",
+   "result": "unconditional -$15.46 [-32.68, +0.29]; rich-implied days -$41.10 [-86.33, -2.39] (wrong sign); middle -$1.60 [-19.69, +15.23]",
+   "verdict": "nothing promoted"
+  },
+  {
+   "study": "S16a",
+   "kind": "screen",
+   "family": "overnight gap / prior-day move continuation and fade at the open",
+   "instruments": "SPY, QQQ, IWM",
+   "window": "2017-06..2026-10",
+   "result": "6 of 108 cells with a positive lower bound vs 2.7 by chance; largest QQQ fade-the-prior-day +17.8 bp [+4.7, +30.2] (below a weekly option round trip)",
+   "verdict": "nothing promoted"
   }
  ],
  "pending": [
   "S02 single-factor grid with walk-forward (0DTE, running)",
   "S03 owner baseline on weekly expirations SPY/QQQ/IWM 2017-2026 (chains pulling)",
-  "S06 on the Tier A single-name universe (bars pulling)"
+  "S06 on the Tier A single-name universe (bars pulling)",
+  "S11 single-name short verticals on breakouts/beats and the S13 pre-earnings long call/straddle/vertical (chains pulling)",
+  "S12b 10:00 expressions of the first-half-hour direction (running)",
+  "S16b weekly-option expression of the prior-day fade (after S03 chains)"
+ ],
+ "candidates_underlying_level": [
+  {
+   "study": "S13",
+   "family": "earnings_events: pre-earnings run-up (long 10 sessions before a quarterly report, out at the pre-event close)",
+   "instruments": "S07 universe, 10,445 reports",
+   "window": "2024-01-02..2026-10-13",
+   "result": "abs +96.9 bp [+61.9, +133.4]; universe-adjusted +20.1 [+3.6, +36.1]; adjusted by year +23.0 / +9.8 / +28.3",
+   "status": "clears the underlying hurdle (A2); option expression pre-registered (A5.2) and pending the S11 chains; not a configuration until it passes GATE-v2 on an option expression"
+  }
  ]
 }
