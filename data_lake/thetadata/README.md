@@ -16,3 +16,8 @@ Sessions: 2026-10-06, 10-07, 10-08, 10-09, 10-12 (202 MB in total).
 
 ## `stock_eod/` — daily bars for every stock symbol (26,855 in `../../research/data_inventory/thetadata_stocks.txt`)
 One request per symbol per calendar year (the API allows at most 365 days per request), 500 symbols per Parquet part, a `symbol` column added. Years run newest first (2026, 2025, …, 2022); about 45 % of symbols return no data in a given year (delisted or not yet listed). Parts are added to the repository as each year completes; see `manifest.json`.
+
+| Year | Parts | Rows | Symbols with data | Size | Dates |
+|---|---|---|---|---|---|
+| 2026 | 54 | 2,544,420 | 14,922 | 71.2 MB | 2026-01-02 → 2026-10-13 |
+| 2025 | 54 | 2,970,981 | 13,958 | 81.7 MB | 2025-01-02 → 2025-12-31 |
