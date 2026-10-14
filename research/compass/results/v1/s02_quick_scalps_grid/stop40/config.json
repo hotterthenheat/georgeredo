@@ -1,0 +1,68 @@
+{
+ "family": "quick_scalps",
+ "symbols": [
+  "SPY",
+  "QQQ",
+  "IWM"
+ ],
+ "start": "2022-11-11",
+ "end": "2026-10-09",
+ "signal": {
+  "rsi_period": 14,
+  "rsi_up": 55.0,
+  "rsi_down": 45.0,
+  "ema_fast": 5,
+  "ema_lead": 9,
+  "ema_mid": 20,
+  "ema_slow": 50,
+  "ema_long": 200,
+  "relvol_lookback": 20,
+  "relvol_min": 1.0,
+  "pivot_left": 3,
+  "pivot_right": 3,
+  "atr_period": 14,
+  "use_confirm_5m": true,
+  "use_align_15m": true,
+  "use_daily_trend": false,
+  "use_structure": true,
+  "use_relvol": true,
+  "entry_start_minute": 15,
+  "entry_end_minute": 320
+ },
+ "select": {
+  "delta_lo": 0.3,
+  "delta_hi": 0.6,
+  "delta_target": 0.45,
+  "min_oi": null,
+  "min_volume": null,
+  "max_spread_pct": 0.12,
+  "min_ask": 0.05,
+  "r": 0.04,
+  "q": 0.0,
+  "pick": "delta_nearest"
+ },
+ "exits": {
+  "stop_pct": 0.4,
+  "tp1_pct": 0.25,
+  "tp1_frac": 0.5,
+  "tp2_pct": 0.5,
+  "max_hold_min": 60,
+  "session_cutoff_minute": 380,
+  "use_invalidation": true,
+  "use_vwap_loss": true,
+  "use_ema_target": true,
+  "commission": 0.7,
+  "multiplier": 100,
+  "settle_intrinsic": true
+ },
+ "one_position": true,
+ "baseline_seeds": [
+  11,
+  12,
+  13,
+  14,
+  15
+ ],
+ "baseline_window_min": 45,
+ "engine_version": "0.1.0"
+}
