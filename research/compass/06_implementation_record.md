@@ -35,6 +35,7 @@ Every entry: what was done, the exact command or file, its verified outcome. New
 | 16:41 | Coverage matrix corrected: the Unusual Whales earnings table holds report dates 1996 → 2026 with EPS, estimate, surprise and report time (10–17 k quarterly rows per year since 2015), not "~1 year" | `02_coverage_matrix.md` |
 | 16:42 | S08 (earnings family at daily resolution, amendment A3) run (46 s; 10,439 reports) → `results/v1/s08_earnings_daily/`; registry `S08`; `05_results.md` §S08 | Nothing promoted; the surprise direction underperforms the universe after the gap in every year |
 | 16:45 | `07_coverage_report.md` (history used vs available per dataset and study; limits) and `08_port_spec_3abida.md` (interim: keep / replace / add / not-port / acceptance) written | Updated when S02, S03 and S06-Tier A finish |
+| 16:55 | S09 finished (393 s; 2,324 signals, 1,229 fills) → `results/v1/s09_spxw_0dte_baseline/REPORT.md`; registry `S09`; `05_results.md` §S09 | Rejected: −$46.18/contract [−63.19, −30.02], −$24.09 vs matched random [−39.45, −9.28] |
 
 ## Known defects and open items
 - Event flags (FOMC/CPI/NFP) exist only from 2017-02; earlier sessions report `unknown`.

@@ -103,3 +103,17 @@ The relative-volume ≥ 1.5 variants (REPORT.md) change nothing in sign and wide
 | … move against the surprise | 4,318 | 19 % | +524 | −36 [−71, +1] | −72 [−115, −32] | +21 [−6, +49] | +39 [−1, +73] |
 
 **Reading.** Three of four reports beat the estimate, so "direction = surprise sign" is mostly long, and its positive absolute returns are the 2024–2026 market drift: against the same-date universe the surprise direction *underperforms*, at both entries, in each year (adjusted 10-session: −29 / −16 / −7 bp for the gap entry; −11 / −27 / −35 for the drift entry), and worst for the strongest beats held three weeks (−86 bp [−136, −39]). Post-market reports are worse than pre-market. The event-day move itself predicts nothing at 1–21 sessions (−5 bp adjusted at 10, CI straddling zero), and a move that disagrees with the surprise reverses only weakly (+19 [+2, +36] at 5 sessions adjusted, absolute negative). There is no post-earnings drift to buy in this universe and window; what there is runs the other way ("sell the beat"), is small, and sits with the S07 breakout fade in the short-premium/spread scope the owner has not opened. Nothing earns an option test.
+
+## S09 — the owner's baseline on SPXW same-day expirations, 2022-05-13 → 2026-10-09 (REJECTED)
+
+`studies/s09_spxw_0dte_baseline.py` → `results/v1/s09_spxw_0dte_baseline/REPORT.md`, registry `S09`. The same rule as S01 on the index product with the lowest relative cost (SPXW half-spread 0.9 % of mid, C1; a 0.45-delta same-day contract is ≈ $10–30, so the $1.40 of fees is ≈ 0.1 % of premium). The signal is computed on the SPX index value per minute (open and close; an index series has no intrabar range, so high/low = max/min of the two) with SPY's minute volume as the relative-volume and VWAP weight proxy (`engine.store.IndexProxyStore`, tested); spot, strikes and deltas are the index's own; fills at the SPXW 1-minute NBBO (1,106 sessions, full strikes, every session covered).
+
+| | trades | days | mean $/contract | 95 % CI | win | PF | max DD | by year (mean) |
+|---|---|---|---|---|---|---|---|---|
+| Strategy | 1,229 | 481 | **−46.18** | [−63.19, −30.02] | 33.8 % | 0.70 | −$57,412 | 2022 −91.6; 2023 −29.2; 2024 −15.8 [−42.5, +10.0]; 2025 −58.9; 2026 −59.3 |
+| Matched random (5 seeds) | 6,139 | | −22.15 | [−32.52, −11.03] | 37.6 % | 0.83 | | |
+| Strategy − random, paired | 1,229 | | **−24.09** | [−39.45, −9.28] | | | | round-trip cost $18.79 |
+
+Puts −68.28 [−94.68, −42.13], calls −20.89 [−40.39, −1.64]. Exits: the −25 % stop ends 648 trades (−$222 each), the +50 % target 322 (+$386), the VWAP-loss rule 188, the 60-minute time exit 41 (+$108), the swing-level invalidation 30 (−$81).
+
+**Reading.** Per contract the numbers are about ten times SPY's (SPX notional), and as a fraction of premium they are the same: the rule loses roughly the same share on SPXW as on SPY, QQQ and IWM, and it loses it *relative to random entries on the same days* by a margin larger than the whole round-trip cost. Moving the owner's 0DTE scalps to the cheapest index product does not change the sign, because the entry has no directional information (S04, S06). Quick Scalps is rejected on SPXW as on the ETFs.
