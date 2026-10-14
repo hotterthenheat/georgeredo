@@ -1,8 +1,11 @@
 """All-ticker daily data from ThetaData (PRO), within what the account allows and the container can hold.
 Phase A: bulk daily files for every allowed date (stocks EOD, every option contract's EOD, option open interest, indices EOD).
 Phase B: stock daily bars for every symbol in thetadata_stocks.txt, one request per symbol-year (365-day request limit).
+Phase C: index daily values for every symbol in thetadata_indices.txt, same scheme.
+Phase D: option daily bars (every expiration and strike) for every root in thetadata_option_roots.txt, same scheme.
+Phase E: option open interest for every root, same scheme. D and E need LAKE on large storage (tens of GB).
 ONE login; worker threads share it; resumable (existing outputs skipped). Key from THETADATA_KEY only; exceptions redacted.
-Usage: set -a; . "$SP/secrets/research.env"; set +a; python3 -I bulk_fetch.py [A] [B]"""
+Usage: set -a; . "$SP/secrets/research.env"; set +a; python3 -I bulk_fetch.py [A] [B] [C] [D] [E]"""
 import os, re, sys, time, json, threading, logging, datetime as dt
 from concurrent.futures import ThreadPoolExecutor, as_completed
 logging.getLogger('thetadata').setLevel(logging.ERROR)
@@ -47,29 +50,37 @@ def phase_a():
             t0 = time.time(); df = call(fn, date=dt.date.fromisoformat(d))
             if isinstance(df, tuple) or df is None: log('A', k, d, 'no data', df); continue
             write(df, p); log('A', k, d, df.height, 'rows', round(time.time() - t0, 1), 's', round(os.path.getsize(p) / 1e6, 1), 'MB')
-def phase_b():
-    syms = [s for s in open(HERE + '/thetadata_stocks.txt').read().split() if s]
-    stats = {}
+def per_symbol_year(tag, kind, listfile, fn, part, **extra):
+    """One request per symbol per calendar year (365-day limit); `part` symbols per Parquet file; resumable.
+    Symbols whose request was denied or failed are listed in {LAKE}/{kind}/failed.jsonl for a retry pass."""
+    syms = [s for s in open(HERE + '/' + listfile).read().split() if s]
     for y in YEARS:
         a, b = dt.date(y, 1, 1), min(dt.date(y, 12, 31), YEAR_END)
-        for i in range(0, len(syms), 500):
-            p = f'{LAKE}/stock_eod/year={y}/part-{i // 500:03d}.parquet'
+        for i in range(0, len(syms), part):
+            p = f'{LAKE}/{kind}/year={y}/part-{i // part:03d}.parquet'
             if os.path.exists(p): continue
-            batch = syms[i:i + 500]; t0 = time.time(); frames = []; nd = 0; den = 0
+            batch = syms[i:i + part]; t0 = time.time(); frames = []; nd = 0; bad = []
             with ThreadPoolExecutor(NW) as ex:
-                futs = {ex.submit(call, 'stock_history_eod', symbol=s, start_date=a, end_date=b): s for s in batch}
+                futs = {ex.submit(call, fn, symbol=s, start_date=a, end_date=b, **extra): s for s in batch}
                 for f in as_completed(futs):
                     s = futs[f]
                     try: df = f.result()
-                    except Exception as e: log('B err', s, y, type(e).__name__, red(e)[:120]); den += 1; continue
+                    except Exception as e: bad.append((s, type(e).__name__ + ' ' + red(e)[:120])); continue
                     if df is None: nd += 1; continue
-                    if isinstance(df, tuple): den += 1; continue
+                    if isinstance(df, tuple): bad.append((s, ' '.join(df))); continue
                     if df.height: frames.append(df.with_columns(pl.lit(s).alias('symbol')))
             out = pl.concat(frames, how='diagonal_relaxed') if frames else pl.DataFrame({'symbol': []})
-            write(out, p); stats[(y, i)] = (len(frames), nd, den)
-            log('B', y, f'part {i // 500:03d}', 'symbols with data', len(frames), 'nodata', nd, 'denied/err', den, 'rows', out.height, round(time.time() - t0, 1), 's')
+            write(out, p)
+            if bad:
+                with open(f'{LAKE}/{kind}/failed.jsonl', 'a') as fh:
+                    for s, why in bad: fh.write(json.dumps({'year': y, 'part': i // part, 'symbol': s, 'error': why}) + '\n')
+            log(tag, y, f'part {i // part:03d}', 'symbols with data', len(frames), 'nodata', nd, 'denied/err', len(bad), 'rows', out.height, round(time.time() - t0, 1), 's')
+def phase_b(): per_symbol_year('B', 'stock_eod', 'thetadata_stocks.txt', 'stock_history_eod', 500)
+def phase_c(): per_symbol_year('C', 'index_eod', 'thetadata_indices.txt', 'index_history_eod', 500)
+def phase_d(): per_symbol_year('D', 'option_eod', 'thetadata_option_roots.txt', 'option_history_eod', int(os.environ.get('OPT_PART', '100')), expiration='*')
+def phase_e(): per_symbol_year('E', 'option_oi', 'thetadata_option_roots.txt', 'option_history_open_interest', int(os.environ.get('OPT_PART', '100')), expiration='*')
 if __name__ == '__main__':
     ph = sys.argv[1:] or ['A', 'B']
-    if 'A' in ph: phase_a()
-    if 'B' in ph: phase_b()
+    for k, f in [('A', phase_a), ('B', phase_b), ('C', phase_c), ('D', phase_d), ('E', phase_e)]:
+        if k in ph: f()
     log('DONE')
