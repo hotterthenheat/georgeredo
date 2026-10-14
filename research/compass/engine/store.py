@@ -94,3 +94,27 @@ class FetchStore(CacheStore):
         df = self._read('ohlc_exp', root, session, expiration, 'chain_ohlc')
         if df is None: return None
         return df.with_columns(pl.col('timestamp').dt.replace_time_zone(None))
+
+
+class IndexProxyStore(CacheStore):
+    """Index-option roots whose underlying has no volume (SPXW on SPX): the signal bars are the proxy ETF's minute bars
+    (volume, count, VWAP weights) with open/close replaced by the index value at the bar's start and end, high/low =
+    max/min(open, close) (an index price series has no intrabar range: pivots and structure use these proxies, stated in
+    the study), so that the spot, strikes and deltas are the index's own. Chains and expirations are the index root's."""
+    PROXY = {'SPXW': ('SPY', 'SPX')}
+
+    def bars(self, symbol: str, start: dt.date, end: dt.date) -> pl.DataFrame:
+        if symbol not in self.PROXY: return super().bars(symbol, start, end)
+        etf, idx = self.PROXY[symbol]
+        b = super().bars(etf, start, end)
+        ix = self.index_minutes(idx, start, end).filter(pl.col('price').is_not_null()).select(pl.col('timestamp').dt.replace_time_zone(None).alias('ts'), 'price')
+        b = b.with_columns(pl.col('timestamp').dt.replace_time_zone(None).alias('_ts')).join(ix.rename({'ts': '_ts', 'price': 'idx_open'}), on='_ts', how='left').drop('_ts')
+        b = b.join(ix.rename({'ts': 'close_ts', 'price': 'idx_close'}), on='close_ts', how='left')
+        b = b.with_columns([pl.col('idx_close').fill_null(strategy='forward').over('session').alias('idx_close')])
+        b = b.with_columns([pl.col('idx_open').fill_null(pl.col('idx_close').shift(1).over('session')).fill_null(pl.col('idx_close')).alias('idx_open')])
+        b = b.filter(pl.col('idx_close').is_not_null())
+        return b.with_columns([pl.col('idx_open').alias('open'), pl.col('idx_close').alias('close'),
+                               pl.max_horizontal('idx_open', 'idx_close').alias('high'), pl.min_horizontal('idx_open', 'idx_close').alias('low')]).drop(['idx_open', 'idx_close'])
+
+    def has_bars(self, symbol: str) -> bool:
+        return symbol in self.PROXY or super().has_bars(symbol)
