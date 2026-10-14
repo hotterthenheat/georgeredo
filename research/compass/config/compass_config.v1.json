@@ -1,0 +1,295 @@
+{
+ "version": "1.0.0-no-validated-configuration",
+ "generated_utc": "2026-10-14T17:03:53Z",
+ "status": "no_validated_configuration",
+ "evidence": {
+  "source": "research/compass/registry.jsonl (S01, S04, S06, S07, S08, S09; S02, S03 and S06-Tier A pending at this version)",
+  "results_document": "research/compass/05_results.md",
+  "protocol": "research/compass/04_protocol.md (amendments A1-A3)",
+  "gates": "registry GATE-v2"
+ },
+ "common": {
+  "indicators": {
+   "rsi_period": 14,
+   "ema_periods": [
+    5,
+    9,
+    20,
+    50,
+    200
+   ],
+   "ema_seed": "first_close",
+   "vwap": "session_typical_price",
+   "timeframes_min": [
+    1,
+    5,
+    15,
+    30,
+    60,
+    390
+   ]
+  },
+  "signal": {
+   "lead_timeframe_min": 1,
+   "rsi_up": 55,
+   "rsi_down": 45,
+   "lead_ema": 9,
+   "confirm_timeframe_min": 5,
+   "confirm_ema": 20,
+   "confirm_vwap": true,
+   "align_timeframe_min": 15,
+   "align_fast_ema": 20,
+   "align_slow_ema": 50,
+   "daily_trend": false,
+   "relvol_min": 1.0,
+   "structure": true,
+   "entry_window": [
+    "09:45",
+    "14:30"
+   ]
+  },
+  "contract": {
+   "delta_min": 0.3,
+   "delta_max": 0.6,
+   "delta_target": 0.45,
+   "min_open_interest": 250,
+   "min_intraday_volume": 100,
+   "max_spread_pct_of_mid": 0.12,
+   "min_ask": 0.05,
+   "expiration_choice": "most_open_interest_in_category",
+   "pick": "delta_nearest"
+  },
+  "exits": {
+   "invalidation": "5-minute close through the signal's swing level",
+   "vwap_loss": true,
+   "premium_stop_pct": 0.25,
+   "target_1_pct": 0.25,
+   "target_1_fraction": 0.5,
+   "target_2_pct": 0.5,
+   "ema_target": true,
+   "max_hold": "60 minutes",
+   "session_cutoff": "15:50"
+  },
+  "execution": {
+   "entry": "marketable_ask",
+   "exit": "marketable_bid",
+   "fees_per_contract_per_side": 0.7,
+   "max_order_vs_displayed_size": 1.0
+  }
+ },
+ "families": {
+  "quick_scalps": {
+   "enabled": false,
+   "status": "not_tested",
+   "symbols_rule": "index products only (SPY, QQQ, IWM, SPXW, RUTW)",
+   "expiration_categories": [
+    "0dte",
+    "weekly"
+   ],
+   "evidence": [
+    "S01",
+    "S09",
+    "S04",
+    "S06"
+   ],
+   "note": "rejected on SPY/QQQ/IWM 0DTE (S01: -$4.19/contract [-5.68, -2.81], -$2.03 vs matched random) and on SPXW 0DTE (S09: -$46.18 [-63.19, -30.02], -$24.09 vs random); the entry rule has no forward information on the underlying (S04, S06)"
+  },
+  "trend_plays": {
+   "enabled": false,
+   "status": "not_tested",
+   "expiration_categories": [
+    "weekly",
+    "swing"
+   ],
+   "overrides": {
+    "exits": {
+     "premium_stop_pct": 0.3,
+     "max_hold": "5 sessions",
+     "invalidation": "15-minute close through EMA 50"
+    }
+   },
+   "evidence": [
+    "S06",
+    "S07"
+   ],
+   "note": "no forward move after the trigger on index ETFs intraday (S06); at daily resolution single-name trend pullbacks underperform the universe for 1-4 weeks (S07: -97 bp adjusted at 21 sessions [-141, -55])"
+  },
+  "breakouts": {
+   "enabled": false,
+   "status": "not_tested",
+   "expiration_categories": [
+    "weekly",
+    "swing"
+   ],
+   "overrides": {
+    "signal": {
+     "relvol_min": 1.5
+    },
+    "exits": {
+     "premium_stop_pct": 0.3,
+     "max_hold": "3 sessions",
+     "invalidation": "5-minute close back inside the range"
+    }
+   },
+   "evidence": [
+    "S06",
+    "S07"
+   ],
+   "note": "no forward move after 5-minute breakouts/retests on index ETFs (S06, -8 to -12 bp vs random at 60 min); daily 20-day breakouts underperform (S07: -81 bp at 21 sessions [-133, -33])"
+  },
+  "bounces": {
+   "enabled": false,
+   "status": "not_tested",
+   "expiration_categories": [
+    "weekly",
+    "swing"
+   ],
+   "overrides": {
+    "exits": {
+     "invalidation": "level - 0.5 ATR (session close through)",
+     "max_hold": "3 sessions"
+    }
+   },
+   "evidence": [
+    "S06"
+   ],
+   "note": "absolute forward return zero on index ETFs (S06); the apparent advantage over matched random was a control artefact (amendment A1)"
+  },
+  "earnings_events": {
+   "enabled": false,
+   "status": "not_tested",
+   "expiration_categories": [
+    "weekly"
+   ],
+   "evidence": [
+    "S08"
+   ],
+   "note": "no post-earnings drift in the surprise direction on 10,439 reports 2024-2026; beats underperform the universe after the gap (S08)"
+  },
+  "cheap_options": {
+   "enabled": false,
+   "status": "not_tested",
+   "expiration_categories": [
+    "weekly",
+    "swing",
+    "position"
+   ],
+   "evidence": [
+    "S04",
+    "S06",
+    "S07",
+    "S08"
+   ],
+   "note": "not run as an option test: every entry trigger available to it has zero or negative underlying expectation, and a cheap long option on such an entry loses its full cost (protocol \u00a713)"
+  }
+ },
+ "expiration_categories": [
+  {
+   "key": "0dte",
+   "min_calendar_days": 0,
+   "max_calendar_days": 0,
+   "note": "last trading day is the decision date; AM-settled SPX monthlies stop trading the session before"
+  },
+  {
+   "key": "weekly",
+   "min_calendar_days": 1,
+   "max_calendar_days": 7
+  },
+  {
+   "key": "swing",
+   "min_calendar_days": 8,
+   "max_calendar_days": 30
+  },
+  {
+   "key": "position",
+   "min_calendar_days": 31,
+   "max_calendar_days": 90
+  },
+  {
+   "key": "long_dated",
+   "min_calendar_days": 91,
+   "max_calendar_days": 364
+  },
+  {
+   "key": "leaps",
+   "min_calendar_days": 365,
+   "max_calendar_days": 100000
+  }
+ ],
+ "ranking": {
+  "method": "expected_profit_over_expected_worst_drawdown",
+  "definition": "mean net P&L per contract of the family's training trades in the same (expiration category, delta band, liquidity class, regime) cell, divided by the mean maximum adverse excursion (entry ask \u2212 lowest bid before exit) of those trades; dollars per contract over the hold; cells with fewer than 100 trades show 'unavailable'",
+  "min_cell_trades": 100,
+  "unavailable_label": "no validated configuration: ranking has no inputs"
+ },
+ "data_quality": {
+  "max_quote_age_s": 60,
+  "require_bid_gt_0": true,
+  "require_ask_ge_bid": true,
+  "min_bars_for_indicators": 200,
+  "relvol_lookback_sessions": 20
+ },
+ "rejected": [
+  {
+   "study": "S01",
+   "kind": "backtest",
+   "family": "quick_scalps",
+   "expiration_category": "0dte",
+   "instruments": "SPY, QQQ, IWM",
+   "window": "2022-11-11..2026-10-09",
+   "result": "2,886 fills; -$4.19/contract [-5.68, -2.81]; win 34.3 %; PF 0.73; strategy minus matched random -$2.03 [-3.18, -0.90]; negative every year",
+   "verdict": "rejected"
+  },
+  {
+   "study": "S09",
+   "kind": "backtest",
+   "family": "quick_scalps",
+   "expiration_category": "0dte",
+   "instruments": "SPXW (SPX signal, SPY volume proxy)",
+   "window": "2022-05-13..2026-10-09",
+   "result": "1,229 fills; -$46.18/contract [-63.19, -30.02]; win 33.8 %; PF 0.70; minus matched random -$24.09 [-39.45, -9.28]",
+   "verdict": "rejected"
+  },
+  {
+   "study": "S04",
+   "kind": "screen",
+   "family": "quick_scalps (baseline entry rule, underlying only)",
+   "instruments": "SPY, QQQ, IWM 1-minute bars",
+   "window": "2017-06-01..2026-10-09",
+   "result": "forward 30-min signed return -0.7 to -1.6 bp vs +4.6 to +7.7 bp for random minutes on the same days; RSI cross alone 0.0 bp; no ablation positive",
+   "verdict": "no forward information; fires after the move"
+  },
+  {
+   "study": "S06",
+   "kind": "screen",
+   "family": "all intraday triggers (rsi_cross, vwap_reclaim, ema_cross_5m, breakout_5m, retest_5m, trend_pullback, bounce) x filter sets",
+   "instruments": "SPY, QQQ, IWM 1-minute bars",
+   "window": "2017-06-01..2026-10-09",
+   "result": "84 cells; every raw trigger within +/-1 bp of zero at 30/60 min; the baseline filter stack lowers every trigger vs random; nothing promoted under the two-part rule",
+   "verdict": "nothing promoted"
+  },
+  {
+   "study": "S07",
+   "kind": "screen",
+   "family": "daily triggers (gap_cont, breakout20, reversal5, trend_pullback, event_shock)",
+   "instruments": "optionable roots >= $50M prior-year median $ volume (1,119-1,510 per year)",
+   "window": "2024-01-02..2026-10-13",
+   "result": "nothing promoted; breakout20 -81 bp at 21 sessions [-133, -33], trend_pullback -97 bp adjusted [-141, -55]; others straddle zero",
+   "verdict": "nothing promoted; the two frequent continuation triggers predict the opposite sign"
+  },
+  {
+   "study": "S08",
+   "kind": "screen",
+   "family": "earnings_events (surprise sign / event-day move, gap and drift entries)",
+   "instruments": "same universe; 10,439 quarterly reports",
+   "window": "2024-01-02..2026-10-13",
+   "result": "nothing promoted; surprise direction underperforms the universe after the gap (-25 bp adjusted at 10 sessions [-39, -9]); event-day move predicts nothing",
+   "verdict": "nothing promoted"
+  }
+ ],
+ "pending": [
+  "S02 single-factor grid with walk-forward (0DTE, running)",
+  "S03 owner baseline on weekly expirations SPY/QQQ/IWM 2017-2026 (chains pulling)",
+  "S06 on the Tier A single-name universe (bars pulling)"
+ ]
+}
