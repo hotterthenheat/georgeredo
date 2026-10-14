@@ -1,4 +1,4 @@
-# Final parameter specification — Compass (DRAFT, pending S11 completion and the external research register)
+# Final parameter specification — Compass (2026-10-15; S11 completes in the background)
 
 The brief asked for the exact recommended parameters, entry and exit logic, contract rules, expiration- and setup-specific settings and the ranking formula, with after-cost, out-of-sample, year-by-year, regime and baseline results, and the failed configurations — and, if no configuration meets the standard, to say so. This document is the answer as the evidence stands; the sections marked *pending* are filled when the three running studies finish. Every number is in `registry.jsonl` and `05_results.md`; the machine-readable form is `config/compass_config.v1.json`.
 
@@ -72,4 +72,8 @@ Do not ship a Compass recommendation. Ship the measurement: the engine (`engine/
 
 An S11 event vertical or pre-earnings long on the full chain sample, or a hypothesis from the external research register (`10_external_research.md`), with an absolute lower bound ≥ +3 bp at 30–60 minutes *and* a positive paired difference. Each would then need the adverse-fill scenarios and three-month trade counts before the config's status could move to `research_candidate`.
 
-*Pending sections are completed and this header removed when S11 and the external research register are recorded.*
+
+
+## 9. After the external research (`10_external_research.md`)
+
+The literature and practitioner sweep agrees with the measurements here: directional option signals do not survive a retail account's costs, and what is documented as positive for retail is premium harvesting with bounded tails (SPY put-writing, liquid-name earnings straddle selling, the H15 SPXW carry lane) plus better execution (midpoint limit orders halve the spread cost). The next pre-registered tests are S17 (SPY put-write / call-overwrite, 2012 → 2026), S18 (liquid-name earnings iron flies), S19 (execution overlay on existing fills) and the H15 forward paper test. Until one passes the gates the production state remains no-trade (`config/compass_config.v1.json`).

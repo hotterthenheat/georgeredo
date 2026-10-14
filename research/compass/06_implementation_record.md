@@ -51,6 +51,7 @@ Every entry: what was done, the exact command or file, its verified outcome. New
 | 22:50 | Defect: the Tier A minute files carry NaN (not null) OHLC on no-trade minutes (TSM 374 rows, NVDA 67 of 914k); `bars.load_minutes` dropped null placeholders only, and the recursive EMA/RSI propagate a NaN to every later bar (TSM: 913k of 914k RSI values NaN), so the first S06 Tier A pass ran on near-empty features for most names — its two "promoted" cells were n ≤ 165 artefacts. Loader fixed to drop NaN rows too; regression test; screen re-run. The SPY/QQQ/IWM research cache has no NaN closes (S01–S16 unaffected) | `results/v1/s06_signal_screen_tierA` re-generated |
 | 23:50 | S06 Tier A re-run on clean features (34 names, 8,257,109 events) → registry `S06-TierA`; `05_results.md` §S06 on Tier A | Nothing promoted: 0 of 808 well-sampled cells clear the absolute hurdle |
 | 23:45 | Session model switched to Opus 5.5 by the owner (the Fable usage limit had stopped the research sweep's verification stage); sweep resumed from its cached lenses | Workflow `wf_f11868f4-718` |
+| 00:05 | Owner at 20 % of the session budget: the resumed sweep (111 skeptic checks + report) stopped; `10_external_research.md` written directly from the 42 captured hypotheses and 15 completed verdicts, all unverified rows marked as candidates; final spec §9 added | S11 pull continues in the background (`pull_chain3.sh`, until ~04:10 UTC) |
 
 ## Known defects and open items
 - Event flags (FOMC/CPI/NFP) exist only from 2017-02; earlier sessions report `unknown`.
