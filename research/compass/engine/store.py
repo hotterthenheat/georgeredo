@@ -52,3 +52,45 @@ class CacheStore:
 
     def chain_sessions(self, root: str) -> list[dt.date]:
         return [dt.date.fromisoformat(os.path.basename(f)[:10]) for f in sorted(glob.glob(os.path.join(self.chains, root, '*.parquet')))]
+
+    def open_interest(self, root: str, session: dt.date, expiration: dt.date) -> pl.DataFrame | None:
+        return None
+
+    def chain_ohlc(self, root: str, session: dt.date, expiration: dt.date) -> pl.DataFrame | None:
+        return None
+
+
+class FetchStore(CacheStore):
+    """CacheStore plus the fetcher's caches (chains_exp/ohlc_exp/oi/underlying under `fetch_cache`), fetching on a miss when
+    a ThetaFetcher is attached; without one, misses return None (recorded as no_chain_data by the runner)."""
+    def __init__(self, underlying_root: str, chains_root: str, index_root: str | None, expirations_file: str | None, fetch_cache: str, fetcher=None):
+        super().__init__(underlying_root, chains_root, index_root, expirations_file)
+        self.fc = fetch_cache; self.fetcher = fetcher
+
+    def _read(self, kind: str, root: str, session: dt.date, expiration: dt.date, method: str | None):
+        p = os.path.join(self.fc, kind, root, f'{session}__{expiration}.parquet')
+        if not os.path.exists(p) and not os.path.exists(p[:-8] + '.nodata') and self.fetcher is not None and method:
+            getattr(self.fetcher, method)(root, session, expiration)
+        if not os.path.exists(p): return None
+        return pl.read_parquet(p)
+
+    def bars(self, symbol: str, start: dt.date, end: dt.date) -> pl.DataFrame:
+        a = super().bars(symbol, start, end)
+        if a.height: return a
+        if self.fetcher is not None and not os.path.isdir(os.path.join(self.fc, 'underlying', symbol)): self.fetcher.stock_minutes(symbol, start, end)
+        return bars.load_minutes(symbol, os.path.join(self.fc, 'underlying'), start, end)
+
+    def chain_minutes(self, root: str, session: dt.date, expiration: dt.date) -> pl.DataFrame | None:
+        c = super().chain_minutes(root, session, expiration)
+        if c is not None: return c
+        df = self._read('chains_exp', root, session, expiration, 'chain_quotes')
+        if df is None: return None
+        return df.select(['timestamp', 'strike', 'right', 'bid', 'ask', 'bid_size', 'ask_size']).with_columns(pl.col('timestamp').dt.replace_time_zone(None))
+
+    def open_interest(self, root: str, session: dt.date, expiration: dt.date) -> pl.DataFrame | None:
+        return self._read('oi', root, session, expiration, 'open_interest')
+
+    def chain_ohlc(self, root: str, session: dt.date, expiration: dt.date) -> pl.DataFrame | None:
+        df = self._read('ohlc_exp', root, session, expiration, 'chain_ohlc')
+        if df is None: return None
+        return df.with_columns(pl.col('timestamp').dt.replace_time_zone(None))

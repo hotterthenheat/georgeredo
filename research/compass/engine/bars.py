@@ -29,6 +29,7 @@ def load_minutes(symbol: str, root: str, start: dt.date | None = None, end: dt.d
         d = dt.date.fromisoformat(os.path.basename(f)[:10])
         if start and d < start: continue
         if end and d > end: continue
+        if not cal.is_session(d): continue  # a file on a holiday is a vendor artefact, never a session
         df = pl.read_parquet(f, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
         # one schema whatever a file holds (a session with no bars may have been written with null/string columns)
         df = df.with_columns([pl.col(c).cast(pl.Float64, strict=False) for c in ('open', 'high', 'low', 'close', 'volume')])
