@@ -1,2 +1,246 @@
 /home/user/georgeredo/research/compass/studies/../engine/screen.py:170: RuntimeWarning: Mean of empty slice
   d30 = np.nanmean(np.vstack(diffs30), axis=0); d60 = np.nanmean(np.vstack(diffs60), axis=0)
+20:52:15 AAPL: 28 rows; raw rsi_cross vs random 30m = -1.0244807010787482
+20:52:44 ADBE: 28 rows; raw rsi_cross vs random 30m = 0.4049506192762116
+20:53:36 AMD: 28 rows; raw rsi_cross vs random 30m = -1.9729921431747166
+20:54:09 AMZN: 28 rows; raw rsi_cross vs random 30m = 3.0895765294113127
+20:54:40 AVGO: 28 rows; raw rsi_cross vs random 30m = -0.8221762352118794
+20:55:06 COIN: 28 rows; raw rsi_cross vs random 30m = None
+20:55:33 COST: 28 rows; raw rsi_cross vs random 30m = None
+20:56:06 CRM: 28 rows; raw rsi_cross vs random 30m = -2.402433390247708
+20:56:31 DIA: 28 rows; raw rsi_cross vs random 30m = None
+20:56:59 GOOG: 28 rows; raw rsi_cross vs random 30m = None
+20:57:26 GOOGL: 28 rows; raw rsi_cross vs random 30m = None
+20:57:57 HYG: 28 rows; raw rsi_cross vs random 30m = -0.3367252625811219
+20:58:24 IVV: 28 rows; raw rsi_cross vs random 30m = None
+20:59:17 JPM: 28 rows; raw rsi_cross vs random 30m = -1.6182011887691672
+20:59:43 LLY: 28 rows; raw rsi_cross vs random 30m = None
+21:00:12 LQD: 28 rows; raw rsi_cross vs random 30m = None
+21:00:40 META: 28 rows; raw rsi_cross vs random 30m = None
+21:01:38 MSFT: 28 rows; raw rsi_cross vs random 30m = -1.081111103187718
+/home/user/georgeredo/research/compass/studies/../engine/screen.py:174: RuntimeWarning: Mean of empty slice
+  years = np.array([int(x[:4]) for x in days]); rec['by_year_vs_random_30m'] = {int(y): round(float(np.nanmean(d30[years == y])), 2) for y in np.unique(years)}
+21:02:06 MSTR: 28 rows; raw rsi_cross vs random 30m = None
+21:02:58 MU: 28 rows; raw rsi_cross vs random 30m = -1.5005470783553652
+21:03:36 NFLX: 28 rows; raw rsi_cross vs random 30m = -1.0373461948408784
+21:04:27 NVDA: 28 rows; raw rsi_cross vs random 30m = -1.1510989775942864
+21:04:53 SMCI: 28 rows; raw rsi_cross vs random 30m = None
+21:05:22 SMH: 28 rows; raw rsi_cross vs random 30m = 0.6516650854292203
+21:05:47 SOXL: 28 rows; raw rsi_cross vs random 30m = None
+21:06:13 TLT: 28 rows; raw rsi_cross vs random 30m = None
+21:06:40 TQQQ: 28 rows; raw rsi_cross vs random 30m = None
+21:07:27 TSLA: 28 rows; raw rsi_cross vs random 30m = 0.7965098286893386
+21:07:55 TSM: 28 rows; raw rsi_cross vs random 30m = 0.5797820503974584
+21:08:24 UNH: 28 rows; raw rsi_cross vs random 30m = 0.5933625715290806
+21:09:14 V: 28 rows; raw rsi_cross vs random 30m = -0.963963939486643
+21:09:41 VOO: 28 rows; raw rsi_cross vs random 30m = None
+21:10:32 XLF: 28 rows; raw rsi_cross vs random 30m = -1.3396993818115979
+21:11:20 XOM: 28 rows; raw rsi_cross vs random 30m = -1.3161491593888126
+shape: (952, 12)
+┌────────┬────────────────┬──────────────────┬───────┬───┬──────────────────┬──────────────────┬──────────────────┬─────────┐
+│ symbol ┆ trigger        ┆ filters          ┆ n     ┆ … ┆ vs_random_30m_hi ┆ vs_random_60m_bp ┆ vs_random_60m_lo ┆ hit_30m │
+│ ---    ┆ ---            ┆ ---              ┆ ---   ┆   ┆ ---              ┆ ---              ┆ ---              ┆ ---     │
+│ str    ┆ str            ┆ str              ┆ i64   ┆   ┆ f64              ┆ f64              ┆ f64              ┆ f64     │
+╞════════╪════════════════╪══════════════════╪═══════╪═══╪══════════════════╪══════════════════╪══════════════════╪═════════╡
+│ AAPL   ┆ rsi_cross      ┆ raw              ┆ 21953 ┆ … ┆ -0.54            ┆ -1.62            ┆ -2.25            ┆ 0.49    │
+│ AAPL   ┆ rsi_cross      ┆ baseline_filters ┆ 1405  ┆ … ┆ -4.55            ┆ -13.97           ┆ -17.87           ┆ 0.52    │
+│ AAPL   ┆ rsi_cross      ┆ confirm_5m       ┆ 10779 ┆ … ┆ -3.53            ┆ -7.28            ┆ -8.33            ┆ 0.48    │
+│ AAPL   ┆ rsi_cross      ┆ align_15m        ┆ 8328  ┆ … ┆ -2.87            ┆ -5.82            ┆ -7.02            ┆ 0.49    │
+│ AAPL   ┆ vwap_reclaim   ┆ raw              ┆ 26451 ┆ … ┆ -0.04            ┆ -0.72            ┆ -1.01            ┆ 0.49    │
+│ AAPL   ┆ vwap_reclaim   ┆ baseline_filters ┆ 329   ┆ … ┆ 4.6              ┆ 1.73             ┆ -7.85            ┆ 0.5     │
+│ AAPL   ┆ vwap_reclaim   ┆ confirm_5m       ┆ 3986  ┆ … ┆ 2.49             ┆ 1.4              ┆ -0.49            ┆ 0.49    │
+│ AAPL   ┆ vwap_reclaim   ┆ align_15m        ┆ 2832  ┆ … ┆ 0.93             ┆ -0.53            ┆ -2.61            ┆ 0.5     │
+│ AAPL   ┆ ema_cross_5m   ┆ raw              ┆ 1660  ┆ … ┆ 0.85             ┆ -1.3             ┆ -3.09            ┆ 0.47    │
+│ AAPL   ┆ ema_cross_5m   ┆ baseline_filters ┆ 22    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AAPL   ┆ ema_cross_5m   ┆ confirm_5m       ┆ 1197  ┆ … ┆ -0.03            ┆ -3.72            ┆ -5.79            ┆ 0.49    │
+│ AAPL   ┆ ema_cross_5m   ┆ align_15m        ┆ 586   ┆ … ┆ 2.34             ┆ -1.56            ┆ -4.73            ┆ 0.48    │
+│ AAPL   ┆ breakout_5m    ┆ raw              ┆ 4682  ┆ … ┆ -7.52            ┆ -14.8            ┆ -16.37           ┆ 0.49    │
+│ AAPL   ┆ breakout_5m    ┆ baseline_filters ┆ 338   ┆ … ┆ -5.61            ┆ -18.85           ┆ -24.98           ┆ 0.47    │
+│ AAPL   ┆ breakout_5m    ┆ confirm_5m       ┆ 1316  ┆ … ┆ -4.64            ┆ -11.07           ┆ -13.64           ┆ 0.5     │
+│ AAPL   ┆ breakout_5m    ┆ align_15m        ┆ 1127  ┆ … ┆ -4.04            ┆ -10.97           ┆ -13.6            ┆ 0.51    │
+│ AAPL   ┆ retest_5m      ┆ raw              ┆ 3910  ┆ … ┆ -6.98            ┆ -13.78           ┆ -15.49           ┆ 0.49    │
+│ AAPL   ┆ retest_5m      ┆ baseline_filters ┆ 313   ┆ … ┆ -5.12            ┆ -15.91           ┆ -22.69           ┆ 0.5     │
+│ AAPL   ┆ retest_5m      ┆ confirm_5m       ┆ 1098  ┆ … ┆ -4.9             ┆ -10.44           ┆ -13.18           ┆ 0.49    │
+│ AAPL   ┆ retest_5m      ┆ align_15m        ┆ 958   ┆ … ┆ -4.85            ┆ -10.63           ┆ -13.1            ┆ 0.5     │
+│ AAPL   ┆ trend_pullback ┆ raw              ┆ 1821  ┆ … ┆ 0.55             ┆ -0.39            ┆ -2.15            ┆ 0.51    │
+│ AAPL   ┆ trend_pullback ┆ baseline_filters ┆ 113   ┆ … ┆ -4.79            ┆ -6.8             ┆ -14.81           ┆ 0.4     │
+│ AAPL   ┆ trend_pullback ┆ confirm_5m       ┆ 1101  ┆ … ┆ -1.3             ┆ -4.96            ┆ -7.34            ┆ 0.52    │
+│ AAPL   ┆ trend_pullback ┆ align_15m        ┆ 1168  ┆ … ┆ -0.97            ┆ -1.38            ┆ -3.9             ┆ 0.51    │
+│ AAPL   ┆ bounce         ┆ raw              ┆ 9681  ┆ … ┆ 7.02             ┆ 11.35            ┆ 9.66             ┆ 0.5     │
+│ AAPL   ┆ bounce         ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AAPL   ┆ bounce         ┆ confirm_5m       ┆ 1     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AAPL   ┆ bounce         ┆ align_15m        ┆ 230   ┆ … ┆ 11.52            ┆ 12.62            ┆ 2.96             ┆ 0.56    │
+│ ADBE   ┆ rsi_cross      ┆ raw              ┆ 105   ┆ … ┆ 4.68             ┆ -0.24            ┆ -4.52            ┆ 0.48    │
+│ ADBE   ┆ rsi_cross      ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ rsi_cross      ┆ confirm_5m       ┆ 54    ┆ … ┆ -0.58            ┆ -5.36            ┆ -7.57            ┆ 0.43    │
+│ ADBE   ┆ rsi_cross      ┆ align_15m        ┆ 47    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ vwap_reclaim   ┆ raw              ┆ 21094 ┆ … ┆ -0.3             ┆ -0.89            ┆ -1.32            ┆ 0.5     │
+│ ADBE   ┆ vwap_reclaim   ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ vwap_reclaim   ┆ confirm_5m       ┆ 27    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ vwap_reclaim   ┆ align_15m        ┆ 22    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ ema_cross_5m   ┆ raw              ┆ 18    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ ema_cross_5m   ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ ema_cross_5m   ┆ confirm_5m       ┆ 12    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ ema_cross_5m   ┆ align_15m        ┆ 7     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ breakout_5m    ┆ raw              ┆ 4652  ┆ … ┆ -8.94            ┆ -17.09           ┆ -18.93           ┆ 0.49    │
+│ ADBE   ┆ breakout_5m    ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ breakout_5m    ┆ confirm_5m       ┆ 5     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ breakout_5m    ┆ align_15m        ┆ 6     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ retest_5m      ┆ raw              ┆ 3791  ┆ … ┆ -9.12            ┆ -18.89           ┆ -20.92           ┆ 0.49    │
+│ ADBE   ┆ retest_5m      ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ retest_5m      ┆ confirm_5m       ┆ 8     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ retest_5m      ┆ align_15m        ┆ 7     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ trend_pullback ┆ raw              ┆ 12    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ trend_pullback ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ trend_pullback ┆ confirm_5m       ┆ 5     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ trend_pullback ┆ align_15m        ┆ 10    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ bounce         ┆ raw              ┆ 6320  ┆ … ┆ 10.56            ┆ 15.2             ┆ 12.73            ┆ 0.5     │
+│ ADBE   ┆ bounce         ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ bounce         ┆ confirm_5m       ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ ADBE   ┆ bounce         ┆ align_15m        ┆ 3     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMD    ┆ rsi_cross      ┆ raw              ┆ 22613 ┆ … ┆ -0.95            ┆ -4.08            ┆ -5.16            ┆ 0.49    │
+│ AMD    ┆ rsi_cross      ┆ baseline_filters ┆ 1393  ┆ … ┆ -9.42            ┆ -26.39           ┆ -33.23           ┆ 0.5     │
+│ AMD    ┆ rsi_cross      ┆ confirm_5m       ┆ 11369 ┆ … ┆ -7.13            ┆ -16.6            ┆ -18.8            ┆ 0.49    │
+│ AMD    ┆ rsi_cross      ┆ align_15m        ┆ 8522  ┆ … ┆ -6.91            ┆ -14.6            ┆ -17.08           ┆ 0.49    │
+│ AMD    ┆ vwap_reclaim   ┆ raw              ┆ 25132 ┆ … ┆ -0.07            ┆ -0.55            ┆ -1.14            ┆ 0.49    │
+│ AMD    ┆ vwap_reclaim   ┆ baseline_filters ┆ 300   ┆ … ┆ 4.55             ┆ 1.09             ┆ -13.46           ┆ 0.41    │
+│ AMD    ┆ vwap_reclaim   ┆ confirm_5m       ┆ 3700  ┆ … ┆ 1.29             ┆ -2.11            ┆ -6.13            ┆ 0.47    │
+│ AMD    ┆ vwap_reclaim   ┆ align_15m        ┆ 2619  ┆ … ┆ -1.82            ┆ -5.5             ┆ -10.8            ┆ 0.45    │
+│ AMD    ┆ ema_cross_5m   ┆ raw              ┆ 1633  ┆ … ┆ 4.66             ┆ 0.3              ┆ -3.04            ┆ 0.48    │
+│ AMD    ┆ ema_cross_5m   ┆ baseline_filters ┆ 27    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMD    ┆ ema_cross_5m   ┆ confirm_5m       ┆ 1164  ┆ … ┆ 3.22             ┆ -4.78            ┆ -9.37            ┆ 0.5     │
+│ AMD    ┆ ema_cross_5m   ┆ align_15m        ┆ 557   ┆ … ┆ 5.51             ┆ -3.9             ┆ -11.7            ┆ 0.49    │
+│ AMD    ┆ breakout_5m    ┆ raw              ┆ 4640  ┆ … ┆ -11.02           ┆ -25.22           ┆ -27.93           ┆ 0.5     │
+│ AMD    ┆ breakout_5m    ┆ baseline_filters ┆ 268   ┆ … ┆ -7.21            ┆ -41.81           ┆ -59.85           ┆ 0.51    │
+│ AMD    ┆ breakout_5m    ┆ confirm_5m       ┆ 1256  ┆ … ┆ -5.05            ┆ -22.84           ┆ -28.52           ┆ 0.51    │
+│ AMD    ┆ breakout_5m    ┆ align_15m        ┆ 1080  ┆ … ┆ -1.87            ┆ -22.58           ┆ -29.38           ┆ 0.51    │
+│ AMD    ┆ retest_5m      ┆ raw              ┆ 3581  ┆ … ┆ -10.85           ┆ -25.08           ┆ -28.02           ┆ 0.5     │
+│ AMD    ┆ retest_5m      ┆ baseline_filters ┆ 242   ┆ … ┆ -10.96           ┆ -42.82           ┆ -58.12           ┆ 0.47    │
+│ AMD    ┆ retest_5m      ┆ confirm_5m       ┆ 952   ┆ … ┆ -5.97            ┆ -26.9            ┆ -33.35           ┆ 0.52    │
+│ AMD    ┆ retest_5m      ┆ align_15m        ┆ 848   ┆ … ┆ -7.04            ┆ -25.64           ┆ -31.88           ┆ 0.51    │
+│ AMD    ┆ trend_pullback ┆ raw              ┆ 1627  ┆ … ┆ 0.29             ┆ -2.83            ┆ -7.07            ┆ 0.48    │
+│ AMD    ┆ trend_pullback ┆ baseline_filters ┆ 93    ┆ … ┆ -2.31            ┆ -32.07           ┆ -50.17           ┆ 0.49    │
+│ AMD    ┆ trend_pullback ┆ confirm_5m       ┆ 1005  ┆ … ┆ -3.19            ┆ -10.34           ┆ -15.84           ┆ 0.48    │
+│ AMD    ┆ trend_pullback ┆ align_15m        ┆ 1051  ┆ … ┆ -1.35            ┆ -6.91            ┆ -12.42           ┆ 0.48    │
+│ AMD    ┆ bounce         ┆ raw              ┆ 8712  ┆ … ┆ 14.65            ┆ 23.5             ┆ 20.3             ┆ 0.5     │
+│ AMD    ┆ bounce         ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMD    ┆ bounce         ┆ confirm_5m       ┆ 3     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMD    ┆ bounce         ┆ align_15m        ┆ 147   ┆ … ┆ 18.73            ┆ -1.52            ┆ -23.18           ┆ 0.47    │
+│ AMZN   ┆ rsi_cross      ┆ raw              ┆ 74    ┆ … ┆ 4.38             ┆ 4.13             ┆ 1.51             ┆ 0.59    │
+│ AMZN   ┆ rsi_cross      ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMZN   ┆ rsi_cross      ┆ confirm_5m       ┆ 40    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMZN   ┆ rsi_cross      ┆ align_15m        ┆ 32    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMZN   ┆ vwap_reclaim   ┆ raw              ┆ 25044 ┆ … ┆ -0.32            ┆ -0.87            ┆ -1.25            ┆ 0.49    │
+│ AMZN   ┆ vwap_reclaim   ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMZN   ┆ vwap_reclaim   ┆ confirm_5m       ┆ 145   ┆ … ┆ 5.29             ┆ 0.96             ┆ -4.93            ┆ 0.42    │
+│ AMZN   ┆ vwap_reclaim   ┆ align_15m        ┆ 286   ┆ … ┆ 4.11             ┆ 0.52             ┆ -4.97            ┆ 0.49    │
+│ AMZN   ┆ ema_cross_5m   ┆ raw              ┆ 60    ┆ … ┆ 5.62             ┆ -1.62            ┆ -4.17            ┆ 0.47    │
+│ AMZN   ┆ ema_cross_5m   ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMZN   ┆ ema_cross_5m   ┆ confirm_5m       ┆ 46    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMZN   ┆ ema_cross_5m   ┆ align_15m        ┆ 20    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMZN   ┆ breakout_5m    ┆ raw              ┆ 4788  ┆ … ┆ -6.42            ┆ -13.65           ┆ -15.37           ┆ 0.5     │
+│ AMZN   ┆ breakout_5m    ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMZN   ┆ breakout_5m    ┆ confirm_5m       ┆ 25    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ AMZN   ┆ breakout_5m    ┆ align_15m        ┆ 111   ┆ … ┆ -0.99            ┆ -10.98           ┆ -19.48           ┆ 0.52    │
+│ …      ┆ …              ┆ …                ┆ …     ┆ … ┆ …                ┆ …                ┆ …                ┆ …       │
+│ V      ┆ breakout_5m    ┆ raw              ┆ 4461  ┆ … ┆ -5.27            ┆ -11.24           ┆ -12.62           ┆ 0.48    │
+│ V      ┆ breakout_5m    ┆ baseline_filters ┆ 251   ┆ … ┆ 0.0              ┆ -12.16           ┆ -17.96           ┆ 0.52    │
+│ V      ┆ breakout_5m    ┆ confirm_5m       ┆ 1060  ┆ … ┆ -2.76            ┆ -9.34            ┆ -11.5            ┆ 0.49    │
+│ V      ┆ breakout_5m    ┆ align_15m        ┆ 926   ┆ … ┆ -3.84            ┆ -10.3            ┆ -12.52           ┆ 0.48    │
+│ V      ┆ retest_5m      ┆ raw              ┆ 3707  ┆ … ┆ -4.7             ┆ -10.58           ┆ -12.04           ┆ 0.5     │
+│ V      ┆ retest_5m      ┆ baseline_filters ┆ 227   ┆ … ┆ 2.6              ┆ -11.32           ┆ -17.58           ┆ 0.58    │
+│ V      ┆ retest_5m      ┆ confirm_5m       ┆ 897   ┆ … ┆ -1.85            ┆ -8.31            ┆ -10.94           ┆ 0.51    │
+│ V      ┆ retest_5m      ┆ align_15m        ┆ 797   ┆ … ┆ -1.11            ┆ -7.89            ┆ -10.35           ┆ 0.52    │
+│ V      ┆ trend_pullback ┆ raw              ┆ 1379  ┆ … ┆ -0.36            ┆ -1.35            ┆ -3.14            ┆ 0.51    │
+│ V      ┆ trend_pullback ┆ baseline_filters ┆ 76    ┆ … ┆ -3.22            ┆ -0.86            ┆ -12.17           ┆ 0.46    │
+│ V      ┆ trend_pullback ┆ confirm_5m       ┆ 828   ┆ … ┆ -1.5             ┆ -5.92            ┆ -8.37            ┆ 0.51    │
+│ V      ┆ trend_pullback ┆ align_15m        ┆ 873   ┆ … ┆ 1.01             ┆ -0.44            ┆ -2.73            ┆ 0.52    │
+│ V      ┆ bounce         ┆ raw              ┆ 8122  ┆ … ┆ 7.19             ┆ 10.79            ┆ 9.4              ┆ 0.5     │
+│ V      ┆ bounce         ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ V      ┆ bounce         ┆ confirm_5m       ┆ 2     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ V      ┆ bounce         ┆ align_15m        ┆ 159   ┆ … ┆ 9.67             ┆ 6.63             ┆ -0.23            ┆ 0.55    │
+│ VOO    ┆ rsi_cross      ┆ raw              ┆ 34    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ rsi_cross      ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ rsi_cross      ┆ confirm_5m       ┆ 20    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ rsi_cross      ┆ align_15m        ┆ 13    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ vwap_reclaim   ┆ raw              ┆ 23709 ┆ … ┆ -0.14            ┆ -0.36            ┆ -0.57            ┆ 0.5     │
+│ VOO    ┆ vwap_reclaim   ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ vwap_reclaim   ┆ confirm_5m       ┆ 8     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ vwap_reclaim   ┆ align_15m        ┆ 11    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ ema_cross_5m   ┆ raw              ┆ 2     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ ema_cross_5m   ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ ema_cross_5m   ┆ confirm_5m       ┆ 2     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ ema_cross_5m   ┆ align_15m        ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ breakout_5m    ┆ raw              ┆ 5733  ┆ … ┆ -3.78            ┆ -7.98            ┆ -8.85            ┆ 0.52    │
+│ VOO    ┆ breakout_5m    ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ breakout_5m    ┆ confirm_5m       ┆ 8     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ breakout_5m    ┆ align_15m        ┆ 13    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ retest_5m      ┆ raw              ┆ 4920  ┆ … ┆ -4.21            ┆ -8.56            ┆ -9.48            ┆ 0.51    │
+│ VOO    ┆ retest_5m      ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ retest_5m      ┆ confirm_5m       ┆ 6     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ retest_5m      ┆ align_15m        ┆ 10    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ trend_pullback ┆ raw              ┆ 2     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ trend_pullback ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ trend_pullback ┆ confirm_5m       ┆ 2     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ trend_pullback ┆ align_15m        ┆ 1     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ bounce         ┆ raw              ┆ 8335  ┆ … ┆ 4.56             ┆ 7.0              ┆ 5.94             ┆ 0.49    │
+│ VOO    ┆ bounce         ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ bounce         ┆ confirm_5m       ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ VOO    ┆ bounce         ┆ align_15m        ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ XLF    ┆ rsi_cross      ┆ raw              ┆ 20757 ┆ … ┆ -1.01            ┆ -1.86            ┆ -2.35            ┆ 0.46    │
+│ XLF    ┆ rsi_cross      ┆ baseline_filters ┆ 1335  ┆ … ┆ -4.63            ┆ -11.36           ┆ -14.05           ┆ 0.46    │
+│ XLF    ┆ rsi_cross      ┆ confirm_5m       ┆ 10575 ┆ … ┆ -3.12            ┆ -5.91            ┆ -6.7             ┆ 0.46    │
+│ XLF    ┆ rsi_cross      ┆ align_15m        ┆ 7695  ┆ … ┆ -3.02            ┆ -5.4             ┆ -6.27            ┆ 0.45    │
+│ XLF    ┆ vwap_reclaim   ┆ raw              ┆ 29152 ┆ … ┆ -0.26            ┆ -0.48            ┆ -0.72            ┆ 0.48    │
+│ XLF    ┆ vwap_reclaim   ┆ baseline_filters ┆ 370   ┆ … ┆ 1.15             ┆ -0.85            ┆ -6.49            ┆ 0.46    │
+│ XLF    ┆ vwap_reclaim   ┆ confirm_5m       ┆ 4466  ┆ … ┆ -0.11            ┆ -1.06            ┆ -2.36            ┆ 0.46    │
+│ XLF    ┆ vwap_reclaim   ┆ align_15m        ┆ 3178  ┆ … ┆ 0.04             ┆ -1.3             ┆ -2.83            ┆ 0.45    │
+│ XLF    ┆ ema_cross_5m   ┆ raw              ┆ 1681  ┆ … ┆ -0.47            ┆ -2.21            ┆ -3.33            ┆ 0.48    │
+│ XLF    ┆ ema_cross_5m   ┆ baseline_filters ┆ 27    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ XLF    ┆ ema_cross_5m   ┆ confirm_5m       ┆ 1253  ┆ … ┆ -1.19            ┆ -4.45            ┆ -6.04            ┆ 0.48    │
+│ XLF    ┆ ema_cross_5m   ┆ align_15m        ┆ 574   ┆ … ┆ 0.31             ┆ -3.04            ┆ -5.52            ┆ 0.46    │
+│ XLF    ┆ breakout_5m    ┆ raw              ┆ 4540  ┆ … ┆ -4.53            ┆ -9.99            ┆ -11.05           ┆ 0.48    │
+│ XLF    ┆ breakout_5m    ┆ baseline_filters ┆ 285   ┆ … ┆ -5.8             ┆ -17.96           ┆ -23.46           ┆ 0.44    │
+│ XLF    ┆ breakout_5m    ┆ confirm_5m       ┆ 1246  ┆ … ┆ -5.23            ┆ -11.63           ┆ -13.63           ┆ 0.46    │
+│ XLF    ┆ breakout_5m    ┆ align_15m        ┆ 1071  ┆ … ┆ -4.83            ┆ -11.53           ┆ -13.86           ┆ 0.46    │
+│ XLF    ┆ retest_5m      ┆ raw              ┆ 3810  ┆ … ┆ -5.55            ┆ -10.9            ┆ -12.05           ┆ 0.47    │
+│ XLF    ┆ retest_5m      ┆ baseline_filters ┆ 232   ┆ … ┆ -0.92            ┆ -17.41           ┆ -22.5            ┆ 0.43    │
+│ XLF    ┆ retest_5m      ┆ confirm_5m       ┆ 1045  ┆ … ┆ -4.58            ┆ -10.84           ┆ -13.13           ┆ 0.45    │
+│ XLF    ┆ retest_5m      ┆ align_15m        ┆ 921   ┆ … ┆ -3.42            ┆ -10.18           ┆ -12.36           ┆ 0.45    │
+│ XLF    ┆ trend_pullback ┆ raw              ┆ 1695  ┆ … ┆ -0.14            ┆ -2.06            ┆ -3.67            ┆ 0.45    │
+│ XLF    ┆ trend_pullback ┆ baseline_filters ┆ 119   ┆ … ┆ -2.99            ┆ -9.41            ┆ -15.06           ┆ 0.47    │
+│ XLF    ┆ trend_pullback ┆ confirm_5m       ┆ 1040  ┆ … ┆ -2.01            ┆ -5.77            ┆ -7.87            ┆ 0.46    │
+│ XLF    ┆ trend_pullback ┆ align_15m        ┆ 1092  ┆ … ┆ 0.13             ┆ -2.27            ┆ -4.16            ┆ 0.47    │
+│ XLF    ┆ bounce         ┆ raw              ┆ 6653  ┆ … ┆ 5.11             ┆ 8.36             ┆ 6.97             ┆ 0.49    │
+│ XLF    ┆ bounce         ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ XLF    ┆ bounce         ┆ confirm_5m       ┆ 1     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ XLF    ┆ bounce         ┆ align_15m        ┆ 181   ┆ … ┆ 10.31            ┆ 5.25             ┆ -1.34            ┆ 0.49    │
+│ XOM    ┆ rsi_cross      ┆ raw              ┆ 10127 ┆ … ┆ -0.91            ┆ -2.1             ┆ -2.64            ┆ 0.47    │
+│ XOM    ┆ rsi_cross      ┆ baseline_filters ┆ 608   ┆ … ┆ -4.55            ┆ -9.75            ┆ -13.68           ┆ 0.44    │
+│ XOM    ┆ rsi_cross      ┆ confirm_5m       ┆ 5031  ┆ … ┆ -2.7             ┆ -6.04            ┆ -7.16            ┆ 0.47    │
+│ XOM    ┆ rsi_cross      ┆ align_15m        ┆ 3717  ┆ … ┆ -2.41            ┆ -5.26            ┆ -6.39            ┆ 0.47    │
+│ XOM    ┆ vwap_reclaim   ┆ raw              ┆ 27118 ┆ … ┆ -0.11            ┆ -0.69            ┆ -0.99            ┆ 0.49    │
+│ XOM    ┆ vwap_reclaim   ┆ baseline_filters ┆ 312   ┆ … ┆ 7.17             ┆ 2.4              ┆ -3.65            ┆ 0.51    │
+│ XOM    ┆ vwap_reclaim   ┆ confirm_5m       ┆ 3407  ┆ … ┆ 0.8              ┆ -0.1             ┆ -1.61            ┆ 0.48    │
+│ XOM    ┆ vwap_reclaim   ┆ align_15m        ┆ 2455  ┆ … ┆ 1.06             ┆ -1.08            ┆ -2.99            ┆ 0.49    │
+│ XOM    ┆ ema_cross_5m   ┆ raw              ┆ 1336  ┆ … ┆ -0.42            ┆ -1.5             ┆ -2.79            ┆ 0.47    │
+│ XOM    ┆ ema_cross_5m   ┆ baseline_filters ┆ 23    ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ XOM    ┆ ema_cross_5m   ┆ confirm_5m       ┆ 993   ┆ … ┆ -0.87            ┆ -2.81            ┆ -4.25            ┆ 0.47    │
+│ XOM    ┆ ema_cross_5m   ┆ align_15m        ┆ 453   ┆ … ┆ 1.42             ┆ -0.68            ┆ -2.76            ┆ 0.5     │
+│ XOM    ┆ breakout_5m    ┆ raw              ┆ 4891  ┆ … ┆ -6.78            ┆ -14.9            ┆ -16.39           ┆ 0.5     │
+│ XOM    ┆ breakout_5m    ┆ baseline_filters ┆ 254   ┆ … ┆ -2.26            ┆ -11.77           ┆ -16.98           ┆ 0.5     │
+│ XOM    ┆ breakout_5m    ┆ confirm_5m       ┆ 1067  ┆ … ┆ -5.21            ┆ -10.83           ┆ -12.88           ┆ 0.47    │
+│ XOM    ┆ breakout_5m    ┆ align_15m        ┆ 936   ┆ … ┆ -4.29            ┆ -11.41           ┆ -13.84           ┆ 0.47    │
+│ XOM    ┆ retest_5m      ┆ raw              ┆ 3961  ┆ … ┆ -6.05            ┆ -13.78           ┆ -15.4            ┆ 0.5     │
+│ XOM    ┆ retest_5m      ┆ baseline_filters ┆ 230   ┆ … ┆ -1.48            ┆ -9.61            ┆ -14.64           ┆ 0.51    │
+│ XOM    ┆ retest_5m      ┆ confirm_5m       ┆ 869   ┆ … ┆ -3.95            ┆ -10.3            ┆ -12.66           ┆ 0.48    │
+│ XOM    ┆ retest_5m      ┆ align_15m        ┆ 781   ┆ … ┆ -3.08            ┆ -9.45            ┆ -11.88           ┆ 0.5     │
+│ XOM    ┆ trend_pullback ┆ raw              ┆ 1433  ┆ … ┆ 0.56             ┆ -1.11            ┆ -2.39            ┆ 0.48    │
+│ XOM    ┆ trend_pullback ┆ baseline_filters ┆ 98    ┆ … ┆ 6.64             ┆ -0.61            ┆ -7.84            ┆ 0.6     │
+│ XOM    ┆ trend_pullback ┆ confirm_5m       ┆ 839   ┆ … ┆ -0.1             ┆ -3.8             ┆ -5.74            ┆ 0.48    │
+│ XOM    ┆ trend_pullback ┆ align_15m        ┆ 930   ┆ … ┆ 1.1              ┆ -1.21            ┆ -3.04            ┆ 0.49    │
+│ XOM    ┆ bounce         ┆ raw              ┆ 7923  ┆ … ┆ 7.9              ┆ 12.51            ┆ 10.81            ┆ 0.5     │
+│ XOM    ┆ bounce         ┆ baseline_filters ┆ 0     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ XOM    ┆ bounce         ┆ confirm_5m       ┆ 1     ┆ … ┆ null             ┆ null             ┆ null             ┆ null    │
+│ XOM    ┆ bounce         ┆ align_15m        ┆ 136   ┆ … ┆ 10.34            ┆ 7.35             ┆ 0.04             ┆ 0.59    │
+└────────┴────────────────┴──────────────────┴───────┴───┴──────────────────┴──────────────────┴──────────────────┴─────────┘
