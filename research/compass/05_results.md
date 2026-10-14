@@ -148,3 +148,18 @@ This is the documented earnings-announcement premium. It is the first cell in th
 | middle | 1,011 | −1.60 [−19.69, +15.23] | 60 % | 0.98 | −$7,940 | −19 / −18 / +29 / −8 / −1 |
 
 Rich minus cheap: −$29 [−69, +9]. **Reading.** A 58 % win rate and a losing expectancy, as H16 said it would be. The conditioning hypothesis — sell when implied is rich relative to recent realized — is wrong in sign: a rich implied move is the market correctly anticipating a large realized move (event days, vol clustering), and those are the days the straddle loses most. The nearest-to-flat cell (middle, −$1.60 ± 18) is not a lane. Together with H9/H11/H13 this closes unconditional and VRP-timed short ATM 0DTE straddles on these products at the measured round trip.
+
+## S10 — short premium on index 0DTE, fading the owner's signal (NOTHING PROMOTED; breakeven at best)
+
+`studies/s10_short_premium_0dte.py` → `results/v1/s10_short_premium_0dte/`, registry `S10`, amendment A4. At each of the 2,886 S01 signal minutes, sell the contract the rule would have bought (single) or sell it against the nearest-0.20-delta contract further out (vertical); legs at the NBBO, $0.70 per contract per side per leg; controls = the same structures at the 14,218 matched random minutes.
+
+| structure | exit | n | mean $/contract [95 % CI] | win | PF | max DD | random-minute shorts | strategy − random [CI] | by year 2022 … 2026 |
+|---|---|---|---|---|---|---|---|---|---|
+| single | 15:50 cutoff, stop 2 × credit | 2,886 | **+0.52 [−6.11, +7.47]** | 55 % | 1.01 | −$9,276 | −5.71 | +6.44 [+4.36, +8.51] | +3.0 / +2.4 / +1.5 / +2.7 / **−5.0** |
+| single | same, one adverse tick | 2,886 | −1.34 [−7.83, +5.48] | 54 % | 0.97 | −$9,791 | −7.47 | +6.35 [+4.27, +8.46] | |
+| single | 60-min hold, stop 2 × | 2,886 | −2.59 [−6.06, +1.11] | 55 % | 0.90 | −$9,518 | −8.84 | +6.33 [+4.73, +7.93] | all negative |
+| single | cutoff, no stop | 2,886 | −2.80 [−16.40, +9.78] | 65 % | 0.94 | −$18,468 | −9.42 | +6.78 [+5.20, +8.33] | +19 / −1 / −1 / −1 / −11 |
+| vertical | cutoff, stop 2 × | 1,530 | −2.92 [−10.00, +4.60] | 53 % | 0.91 | −$8,143 | −8.05 | +5.17 [+3.08, +7.25] | −2 / −0 / +1 / −3 / −9 |
+| vertical | 60-min hold | 1,530 | −5.17 [−8.97, −1.29] | 50 % | 0.74 | −$7,992 | −10.72 | +5.58 [+3.99, +7.27] | all negative |
+
+**Reading.** The mirror of S01 holds exactly as the arithmetic predicts: the owner's signal marks a minute at which selling the option is about $6 better than selling at a random minute — and selling at a random minute loses $6–9 after the round trip, so the fade is breakeven (+$0.52 ± 7) and goes negative with one adverse tick. Defined-risk verticals pay two spreads and are worse; holding without a stop adds a −$18,000 drawdown for no mean. There is no sellable premium at these minutes either; the signal's information is real but smaller than the cost of trading it in either direction. 2026 is negative in every cell.
