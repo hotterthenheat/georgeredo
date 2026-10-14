@@ -92,17 +92,23 @@ No network access and no ThetaData login are needed.
 
 ## Outcome (appended after the runs, 2026-10-14; numbers from `results/`, details in `RESULTS.md`)
 
-* **Data integrity.** Complete chains for 1,096 of 1,097 regular sessions (all 441 TEST sessions); 2024-06-21 was not delivered and
-  uses the band file (Amendment 1).  Every one of the 37,315,085 band-file rows is present in the complete files with identical
-  bid/ask.  No needed short or wing strike lies beyond the listed range at any fixed or committed random entry; residual gaps are
-  quote gaps on 2022-06-02 and 2024-06-21 (44 entry × k cases) and two no-credit wing cases on 2024-08-05.  The complete chain
-  supplies 528 naked and 1,734 winged fixed-entry trades whose strikes the round-2 band could not hold.
+* **Amendment 1 resolved (03:11 UTC).**  The complete 2024-06-21 file arrived at 03:03 UTC; its band-fallback trade/skip files
+  were deleted and the whole pipeline re-run.  No TEST-period figure changed; the S1/S2 selections are unchanged; TRAIN,
+  T-E-window-baseline and whole-sample figures moved slightly (every changed cell, before → after: `results/resolution_changes.csv`,
+  `resolution_diff.py`; summary in `RESULTS.md` §0).  The earlier (fallback) figures are kept in this list as "was".
+* **Data integrity.** Complete chains for all 1,097 regular sessions (was 1,096, with 2024-06-21 on the band file).  No needed
+  short or wing strike lies beyond the listed range at any fixed or committed random entry.  Residual gaps are vendor quote gaps
+  on 2022-06-02 and 2024-06-21 (32 entry × k cases; was 42) and two no-credit wing cases on 2024-08-05.  The complete 2024-06-21
+  file is itself partial: 127 of 333 strikes have one side only, and 7,429 of its band-file rows are absent from it.  All other
+  37,307,656 band-file rows are present with identical bid/ask (was 37,315,085 of 37,315,085 before the file was replaced).  The
+  complete chain supplies 531 naked and 1,739 winged fixed-entry trades the round-2 band could not hold (was 528 / 1,734).
 * **T-C** reproduces exactly on 339/339 sessions.  **T-E still FAILS**: +$26.94 [−136.73, +170.75], n = 663; the holdout no
   longer "confirms" (+$138.97 [−19.69, +288.50]; round 2: +$152.93 [+1.91, +294.08]).
-* **Grid.**  S1 is unchanged (`N0.0|14:05|tp0|st1|E2|F3`), TEST +$122.78 [−2.99, +246.45].  S2 re-selected on complete TRAIN data is
+* **Grid.**  S1 is unchanged (`N0.0|14:05|tp0|st1|E2|F3`), TRAIN +$164.59 [+92.72, +236.58] (was +$165.25 [+93.38, +237.01]), TEST +$122.78 [−2.99, +246.45].  S2 re-selected on complete TRAIN data is
   `N1.0|14:05|tp0|st2|E2|F3`, TEST +$52.54 [−22.24, +122.49].  The round-2 S2 definition (`N0.5|14:05|tp0|st0|E2|F3`) on complete
-  data: TEST n = 407 (100 % coverage), +$151.17 [+42.15, +251.73], win 70.8 %, Bonferroni(2) bound +$26.23.  TEST lower bounds
-  > 0: 61 of 2,736 vs 39.8 expected by chance (95th percentile 196).
+  data: TEST n = 407 (100 % coverage), +$151.17 [+42.15, +251.73], win 70.8 %, Bonferroni(2) bound +$26.23; TRAIN n = 606,
+  +$123.98 [+49.62, +192.92] (was n = 605, +$123.64 [+51.13, +194.44]).  TEST lower bounds > 0: 61 of 2,736 vs 39.8 expected by
+  chance (95th percentile 196); TRAIN 227 (was 225) vs 54.3.
 * **Random entry.**  Round-2 S2 lane − random is now +$22.60 [−147.61, +261.12] (round 2: −$92.82); the change is entirely the ten
   band-skipped days, above all 2025-04-09 (all five random minutes fell 10:15–12:39, before SPX jumped 2.6 % between 13:19 and
   13:20; their mean was −$32,554, while the 14:05 lane, entered at SPX 5,380.10, made +$2,778); without that day −$64.37 [−168.56, +45.84].  No timing skill is shown; the lane is carry.

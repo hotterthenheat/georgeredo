@@ -25,6 +25,27 @@ def main():
          '"v1" = the round-2 study (`../spxw/results`, ±2 % band chains, 16:00 print).\n']
     st = json.load(open(os.path.join(RES, 'run_status.json'))) if os.path.exists(os.path.join(RES, 'run_status.json')) else {}
     if st: L.append(f"Sessions: {st.get('simulated')} of {st.get('sessions')} regular sessions simulated; missing chain files: {st.get('missing_chain')}; errors: {st.get('errors')}.\n")
+    # 0 Amendment 1 resolution
+    if os.path.exists(os.path.join(RES, 'resolution_changes.csv')):
+        D = pd.read_csv(os.path.join(RES, 'resolution_changes.csv'), low_memory=False)
+        L.append('## 0. Amendment 1 resolved: 2024-06-21 now on its complete chain\n')
+        L.append('The complete 2024-06-21 file arrived at 03:03 UTC (fetch retry).  Its band-fallback trade/skip files were deleted and the whole pipeline re-run '
+                 '(`protocol_sha256.txt`).  Every changed cell, before → after, is in `results/resolution_changes.csv` (written by `resolution_diff.py` against the '
+                 'pre-resolution snapshot).  **No TEST-period figure changed** (0 changed TEST rows or `test_*` columns in any table; `gate.csv` identical); '
+                 'the S1/S2 selections and the TRAIN top 10 are unchanged.  Changes are confined to TRAIN, the T-E window baseline and whole-sample figures:\n')
+        pick = []
+        sel = D[(D['file'] == 'selected_test.csv') & D['key'].str.match(r'^(S1|S2|orig_S2|TE_rule) ') & D['column'].isin(['train_n', 'train_mean', 'train_ci_lo', 'train_ci_hi'])]
+        te = D[(D['file'] == 'te_results.csv') & D['column'].isin(['mean', 'ci_lo', 'ci_hi']) & D['key'].str.contains('lane minus')]
+        mu = D[(D['file'] == 'multiplicity.json') & D['key'].str.match(r'^\[0\]\.(observed_lb_gt0|chance_mean|chance_p95|fixed_se_romano_wolf_rejections|within_draw_se_reality_check_p)$')]
+        ig = D[(D['file'] == 'integrity_summary.json') & ~D['key'].isin(['fixed_and_random_not_ok_list']) & ~D['key'].str.startswith('allmin_nonok_by_reason_cell')]
+        cr = D[(D['file'] == 'capital_returns.csv') & D['column'].isin(['ann_return_on_median_capital_pct'])]
+        rx = D[(D['file'] == 'cmp_random_explain.csv') & D['key'].str.contains('lane minus random \\(all') & (D['column'] == 'mean')]
+        cg = D[(D['file'] == 'carry_gate.csv') & (D['column'] != 'data_integrity')]
+        for x in (ig, sel, te, rx, mu, cr, cg): pick.append(x)
+        L.append(md(pd.concat(pick)[['file', 'key', 'column', 'before', 'after']], fmt='{:.6g}'))
+        L.append('\nNote: the complete 2024-06-21 file is itself partial (127 of 333 strikes carry one side only; 7,429 rows of the band file are absent from it; '
+                 'at 14:05 the rounded ATM strike had no usable call/put pair and the k = 0.5 short strikes landed 8.37 / 7.63 points beyond their targets).  '
+                 'Pre-resolution RESULTS.md is kept as `$SP/hwr_grid/spxw_v2/results_amend1/RESULTS_amend1.md` (scratchpad).\n')
     # 1 integrity
     I = json.load(open(os.path.join(RES, 'integrity_summary.json')))
     L.append('## 1. Data integrity of the complete chains (`integrity.py`)\n')
