@@ -1,0 +1,86 @@
+[
+ {
+  "file": "earnings.parquet",
+  "rows": 384036,
+  "tickers": 5805,
+  "mb": 3.1,
+  "sha256": "3b3a2cc00ba10ea14358349fd2efb25854a4f6828a4bf57d2255aed5b7bff098"
+ },
+ {
+  "file": "greek-exposure.part01.parquet",
+  "rows": 713137,
+  "tickers": 3008,
+  "mb": 31.3,
+  "sha256": "a6d39ed81fc3fae11aa4ba7fcf4bf3c0d8de39bce7f8702a8f07d65543f8d3c2"
+ },
+ {
+  "file": "greek-exposure.part02.parquet",
+  "rows": 706518,
+  "tickers": 3006,
+  "mb": 31.8,
+  "sha256": "97e4fd970299aff934adb82c9c40e2f5c7e2953072e3db8f9462abd6e9f81245"
+ },
+ {
+  "file": "info.parquet",
+  "rows": 15676,
+  "tickers": 15676,
+  "mb": 1.0,
+  "sha256": "6245e8863b6f8c02250f49e6e1ca29f4524f4fb9abbc8af76a3fc6828e4c49ea"
+ },
+ {
+  "file": "iv-rank.parquet",
+  "rows": 29962,
+  "tickers": 6006,
+  "mb": 0.5,
+  "sha256": "dc409796b8c78ca0998253d3b934173c7c7aacc9259701f92aa623c6145344c7"
+ },
+ {
+  "file": "iv-rank__1y.parquet",
+  "rows": 1464332,
+  "tickers": 6365,
+  "mb": 18.9,
+  "sha256": "7ef3dc47ec0c67f85ee5e6c388ed6b5a5d16bc79de888c2096210f881b45bfe6"
+ },
+ {
+  "file": "max-pain.parquet",
+  "rows": 36110,
+  "tickers": 5994,
+  "mb": 0.3,
+  "sha256": "0d9b5682c293343df10113f371ca199b178ddecda116108d4257677f210e8705"
+ },
+ {
+  "file": "ohlc__1d.part01.parquet",
+  "rows": 1487953,
+  "tickers": 3204,
+  "mb": 30.1,
+  "sha256": "4b6f317645ff81d22629e138392439a9bd0ecfcd44913797dff641aaa467d142"
+ },
+ {
+  "file": "ohlc__1d.part02.parquet",
+  "rows": 1467193,
+  "tickers": 3204,
+  "mb": 29.6,
+  "sha256": "1579be4157a7a952d134407853af9fa6df298ed3ba58bfb87dd3fdf278226185"
+ },
+ {
+  "file": "ohlc__1d.part03.parquet",
+  "rows": 1529762,
+  "tickers": 3202,
+  "mb": 31.1,
+  "sha256": "ca51ff054556cdee9f342c9b924aae5bb311709ed23c31e86abedaa2c72adce5"
+ },
+ {
+  "file": "volatility__realized.parquet",
+  "rows": 1415033,
+  "tickers": 6276,
+  "mb": 11.3,
+  "sha256": "d84bf69f7371677e866a4968f02224c3b698ccfbc0e4bbebe43405443312cb98"
+ },
+ {
+  "file": "volatility__variance-risk-premium.parquet",
+  "rows": 1265331,
+  "tickers": 5941,
+  "mb": 14.5,
+  "sha256": "ad5194fcf04eb3967b26c540c8cf6ed066d2c3b81723fa5bd27c876e8893e060"
+ }
+]
