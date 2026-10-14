@@ -72,9 +72,11 @@ def run_family(store, family: str, symbols: list[str], start: dt.date, end: dt.d
         ev = signals.baseline_events(feat, sp).filter(pl.col('session') >= start)
         log(f'{sym}: bars {df1.height} events {ev.height}')
         exps = store.expirations(sym)
-        open_until = None; n_tr = 0
+        open_until = None; n_tr = 0; n_days = 0
         for d, day in ev.group_by('session', maintain_order=True):
             d = d[0] if isinstance(d, tuple) else d
+            n_days += 1
+            if n_days % 100 == 0: log(f'{sym}: {d} days {n_days} filled {n_tr} ({time.time() - t0:.0f}s)')
             exp = contracts.pick_expiration(exps, d, fam['category'], sym)
             if exp is None:
                 for e in day.iter_rows(named=True): rows.append({**{k: e.get(k) for k in ['session', 'close_ts', 'minute', 'direction', 'spot']}, 'symbol': sym, 'status': 'no_expiration_in_category'})
