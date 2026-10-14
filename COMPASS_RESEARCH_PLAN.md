@@ -99,3 +99,30 @@ Post-hoc observation, not a result: holding the SPXW straddle to the 16:00 cash 
 
 **Infrastructure notes from this round.** ThetaData enforces one live login per key (a second process invalidates the first; run one fetch process per key). Cost assumptions in `backtest/costs.py` should be replaced by measured half-spreads per root (0.5 % SPY/QQQ, 0.9 % SPXW, 4.5 % RUTW, 7.5 % NDXP, 3.5–4 % single names) before any further option backtest; the T-D calibration step in §5 is therefore done by measurement rather than by the daily chain.
 
+## 9. Update, 2026-10-14: round 2 on the full ThetaData chain dataset
+
+Question asked: can a lane reach a 70 %+ win rate without negative expectancy? Evidence: three literature notes, an SPX intraday-volatility filter study (2017–2026), and two pre-registered grids on the complete same-day chain dataset (`research/thetadata/dataset/`: SPY/QQQ 980 sessions from 2022-11-11, SPXW 1,106 from 2022-05-13, IWM 621 from 2024-04-19; 1-minute NBBO; 80.2 million rows). Report: `reports/High win rate 0DTE lanes.md`; notes in `research_notes/High win rate 0DTE lanes/`; code and pre-registrations in `research/thetadata/hwr_grid/{etf,spxw}/` and `research/thetadata/vol_filters/`.
+
+**Verdicts**
+
+| Item | Result (TEST = 2025-01-02 → 2026-10-09 unless noted; day-clustered 95 % CIs; bid/ask fills) | Verdict |
+|---|---|---|
+| T-E / H13: 13:00 SPXW ATM straddle held to settlement, FOMC/CPI/NFP excluded, 2022-05-13 → 2025-05-29 | +$26.37 per day [−138.17, +169.77], win 61.5 %, PF 1.05, max drawdown −$41.4k, worst day 2025-04-09 −$33.7k; holdout +$152.93 [+1.91, +294.08] but it is the window H13 was found in and the lane trails random entry in both windows | **FAIL; H13 closed** |
+| ETF grid (SPY/QQQ/IWM, 1,890 distinct configs per scope) | median config wins 71–73 % with negative mean; no TRAIN-selected config meets both ≥ 70 % TEST win rate and the full gate; SPY k = 0.5 strangle held to expiry wins 76.3 % with +$20.69 [+12.19, +29.03] but fails the random-baseline item; hold-to-expiry gains on SPY/QQQ are mostly the after-hours exercise premium (SPY S1 re-valued at 17:15: +$23.59 rational, +$2.58 [−10.03, +15.13] pessimistic) | **FAIL** |
+| SPXW grid (2,736 distinct configs) | S2 (14:05 strangle at ±0.5 × expected move, hold to settlement, skip FOMC and month-end) TEST win 71.5 %, +$162.0 [+63.2, +258.4], n = 397, but lane − random entry −$92.8 [−184.5, +1.1]; the ±2 % storage band skipped the worst days for 13:00 entries | **FAIL** (premium is generic, timing adds nothing) |
+| H14 exit-side rule (leave legs with ask ≤ $0.05 ETF / ≤ $0.10 SPXW to expire) | +$0.3 (ETF) and +$2.7 (SPXW) per trade in TRAIN and TEST | **Adopt as an execution rule; not a lane** |
+| Take-profits (25 %/50 %) | win rate +5 to +17 points, mean −$5.6 to −$45 per trade | **Reject as an expectancy tool** (they buy win rate with expectancy) |
+| Stops (1×/2× credit) | win rate −4 to −13 points; mean flat in TRAIN, negative in TEST | **Risk tool only** |
+| Filters | skip FOMC and skip month-end are the only rules positive under both yardsticks (SPX study) and in both grid periods; VIX, morning-range, CPI/NFP/opex and weekday skips hurt out of sample | **Keep FOMC + month-end skip as the default filter** |
+| Sizing | configs with positive TEST bounds need about $73–89k of capital per SPXW lot at quarter-Kelly or an 8 % max-loss budget; the TEST window lacks the band-skipped tail days, so this is optimistic | **Size by max-loss budget, never by win rate** |
+
+**What "70 %+ win rate" means on this evidence.** A 70 %+ win rate is a property of the payoff shape and of take-profit rules, not of skill: the median configuration already wins 71–73 % while losing money. The only configurations with positive cost-realistic bounds are naked short premium held to settlement/expiry entered in the afternoon, they win 59–76 %, they carry single-day losses of $30k+ per SPXW lot (2025-04-09), and none of them beats a random entry time by more than one round trip. The data therefore supports a *volatility-risk-premium harvesting* lane with strict tail sizing, not a high-win-rate signal.
+
+**Register changes.** H13 closed (rejected). H14 adopted as an execution rule. New candidate:
+
+| # | Hypothesis | Status | Test |
+|---|---|---|---|
+| H15 | Afternoon (14:05) SPXW short strangle at ±0.5 × the 14:05 expected move, held to cash settlement, skip FOMC and month-end days, sized at ≤ 8 % max-loss budget with a stress move ≥ 8.5 % of SPX | Open; all historical data has now been used for selection | **T-G: forward paper only** from 2026-10-14, ≥ 150 sessions and ≥ 6 months, NBBO fills logged live, gate as §1 including the random-time baseline computed on the same days; no further historical re-selection allowed |
+
+**Data notes.** The chain dataset stores strikes within ±2 % of the 09:31 price; trades whose strikes fell outside that band were skipped and counted, which removes some of the largest-move days (documented in both grid notes). Option OHLC was only partially fetched (about 3 minutes per session; resumable with `research/thetadata/dataset/fetch.py ohlc`); no test depends on it.
+

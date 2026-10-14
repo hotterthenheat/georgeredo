@@ -18,6 +18,7 @@ Research workspace produced on 2026-10-13. Read the deliverables in this order:
 13. `COMPASS_RESEARCH_PLAN.md` — the Compass research plan: promotion criteria, preservation rules, hypothesis register with verdicts, pre-registered next tests.
 14. `AUDIT_AND_FULL_HISTORY_REPORT.md` — completion report for the audit and full-history phases (with the ThetaData addendum).
 15. `research/thetadata/` — ThetaData entitlement audit (PRO) and the measured-quote studies: `straddle_nbbo/` (T-A at real bid/ask), `index_tests/` (T-B momentum, T-C SPXW straddle); GeorgeFi's fills at the NBBO are in `research/georgefi_full_history/results/RESULTS_NBBO.md`. Verdicts are in `COMPASS_RESEARCH_PLAN.md` §8.
+16. `reports/High win rate 0DTE lanes.md` — round-2 deep research: can a lane win 70 %+ without negative expectancy? Literature on short-premium management, structures, filters and sizing, plus pre-registered grids on the full ThetaData chain dataset (`research/thetadata/dataset/` manifest and loader, `research/thetadata/hwr_grid/`, `research/thetadata/vol_filters/`). Verdicts in `COMPASS_RESEARCH_PLAN.md` §9.
 
 `backtest/` holds the reproducible backtest code and the run outputs.
 
