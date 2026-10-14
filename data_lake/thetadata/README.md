@@ -15,7 +15,7 @@ Your account's bulk ("flat file") access starts on **2026-10-06** (earlier dates
 Sessions: 2026-10-06, 10-07, 10-08, 10-09, 10-12 (202 MB in total).
 
 ## `stock_eod/` — daily bars for every stock symbol (26,855 in `../../research/data_inventory/thetadata_stocks.txt`)
-One request per symbol per calendar year (the API allows at most 365 days per request), 500 symbols per Parquet part, a `symbol` column added. Years run newest first (2026, 2025, …, 2022); about 45 % of symbols return no data in a given year (delisted or not yet listed). Parts are added to the repository as each year completes; see `manifest.json`.
+One request per symbol per calendar year (the API allows at most 365 days per request), 500 symbols per Parquet part, a `symbol` column added. Years run newest first, 2026 back to 2012 (the PRO stock history starts on 2012-06-01, so 2012 covers June–December); about 45 % of symbols return no data in a given year (delisted or not yet listed). Parts are added to the repository as each year completes; see `manifest.json`.
 
 | Year | Parts | Rows | Symbols with data | Size | Dates |
 |---|---|---|---|---|---|

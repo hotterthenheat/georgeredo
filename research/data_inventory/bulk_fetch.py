@@ -14,7 +14,7 @@ SP = '/tmp/claude-0/-home-user-georgeredo/c2861f8a-c5af-5ae3-9258-5ee40d17d74a/s
 LAKE = os.environ.get('LAKE', SP + '/lake'); os.makedirs(LAKE + '/logs', exist_ok=True)
 NW = int(os.environ.get('NW', '6'))
 FLAT_DATES = os.environ.get('FLAT_DATES', '2026-10-06,2026-10-07,2026-10-08,2026-10-09,2026-10-12,2026-10-13').split(',')
-YEARS = [int(y) for y in os.environ.get('YEARS', '2026,2025,2024,2023,2022').split(',')]
+YEARS = [int(y) for y in os.environ.get('YEARS', '2026,2025,2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012').split(',')]
 YEAR_END = dt.date(2026, 10, 13)
 def red(s): return re.sub(r'td1_prod_[A-Za-z0-9]+', 'REDACTED', str(s))
 def log(*a): print(dt.datetime.now(dt.timezone.utc).strftime('%H:%M:%S'), *[red(x) for x in a], flush=True)
