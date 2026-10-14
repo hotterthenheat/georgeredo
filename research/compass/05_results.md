@@ -183,3 +183,23 @@ The last-half-hour momentum of the literature (first half hour → last half hou
 ### S13 robustness (registry `S13-R`): the run-up is a tail, Q2-concentrated mean
 
 Cuts of the 10-session cell (adjusted bp): liquidity $50–200 M +19 [−0, +39], $200 M–1 B +18 [−10, +46], ≥ $1 B (the names with tradeable chains, n 459) +45 [−29, +117]; pre-market +13 [−6, +31], post-market +29 [−1, +57]; calendar Q1 +26 [−4, +54], **Q2 +64 [+30, +100]**, Q3 −14 [−45, +15], Q4 −7 [−43, +32]; 2024 +23 [−6, +50], 2025 +10 [−13, +30], 2026 +28 [−12, +60]. Concentration: without the top 1 % of events the adjusted mean is **−7 bp**; the median event is +8 bp; 50.8 % of events and 55.8 % of symbols are positive. The pre-registered cell stands as a candidate at the underlying level, but what it describes is a small number of large pre-earnings run-ups in April–June reports, not a broad drift — the option expression (S11, A5.2) is run as pre-registered, with the implied-volatility change recorded so that a result can be attributed.
+
+## S03 — the owner's rule on weekly expirations, SPY/QQQ/IWM 2017 → 2026 (NOTHING PROMOTED; zero, not negative)
+
+`studies/s03_weekly_index_etfs.py` → `results/v1/s03_weekly_index_etfs_baseline/REPORT.md`, registry `S03`. Same signal as S01; contract = the nearest-Friday weekly expiration (1–7 days), delta 0.30–0.60 nearest 0.45, spread < 12 %, open interest > 250 where cached (SPY 2017-06 → ≈ 2023-05), intraday volume > 100 from the option OHLC; holds up to three sessions with a 30 % stop. Chains were pulled for a year-stratified sample of sessions (SPY 468, QQQ 294, IWM 294) because the vendor throttled the pull; signals on the other sessions are excluded, not counted.
+
+| | trades | days | mean $/contract [CI] | win | PF | max DD | by symbol | by direction |
+|---|---|---|---|---|---|---|---|---|
+| Strategy | 818 | 376 | **+1.27 [−3.69, +6.25]** | 38 % | 1.06 | −$1,214 | SPY +2.8, QQQ −2.1, IWM +2.1 | puts +3.1, calls −0.9 |
+| Matched random | 4,089 | | +1.25 [−3.05, +5.71] | | | | | |
+| Strategy − random | 818 | | **+0.02 [−2.11, +2.15]** | | | | | |
+
+By year: −3.3 / +2.3 / −7.0 / +2.3 / −4.6 / −2.8 / +1.8 / +7.9 / +26.1 [−4.2, +57.6] / −6.7 (2017 → 2026). **Reading.** With a weekly contract the owner's rule is not negative, it is nothing: the same as random entries to the cent, with a sign that flips year to year. The 0DTE loss in S01/S09 was the same-day contract's theta and spread on an entry with no information; a longer contract removes the theta and leaves the nothing. 144 of the 818 trades closed at the last cached quote because the following session's chain was outside the sample (`data_end`), which truncates holds and slightly understates the costs of the full rule.
+
+## S16b — fading the prior day's move with a weekly contract (NOTHING PROMOTED)
+
+`studies/s16b_prior_day_fade_weekly.py` → `results/v1/s16b_prior_day_fade_weekly/summary.json`, registry `S16b`. The option expression of the S16a effect: at the 09:31 close buy the baseline-rule weekly contract against the prior session's close-to-close direction, exit at the next session's 15:50 or at −50 %. All days: −$9.91 per contract [−19.31, −0.26] (time exit), −$7.50 [−16.57, +1.67] with the stop — the same as a random direction (−$9.80). On |gap| ≥ 0.5 % days: +$1.83 [−16.40, +21.02] and +$2.73 [−14.80, +21.19], about +$12 [−7, +31] better than random: the +18 bp underlying reversal buys back the option's round trip and nothing more; year signs alternate (2022 +31, 2023 −4, 2024 −10, 2025 +1).
+
+## S10 re-run — verticals with both sides filled (NOTHING PROMOTED)
+
+After the protective-leg fix (`06_implementation_record.md`, 18:40) the vertical cells of S10 are re-measured on 2,857 fills: −$5.65 per contract [−10.09, −1.10] at the 15:50 cutoff with a 2 × credit stop, −$6.01 [−8.32, −3.66] at 60 minutes, −$11.49 [−19.69, −3.88] with no stop; +$4.0 to +$4.9 better than random-minute verticals, which lose −$10 to −$16. Negative in every year and exit set. The single-contract rows of S10 are unchanged (+$0.52 [−6.11, +7.47], breakeven).
