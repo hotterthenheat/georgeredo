@@ -1,0 +1,2 @@
+/home/user/georgeredo/research/compass/studies/../engine/screen.py:170: RuntimeWarning: Mean of empty slice
+  d30 = np.nanmean(np.vstack(diffs30), axis=0); d60 = np.nanmean(np.vstack(diffs60), axis=0)
