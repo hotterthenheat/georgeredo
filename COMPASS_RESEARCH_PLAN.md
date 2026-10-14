@@ -128,3 +128,24 @@ Question asked: can a lane reach a 70 %+ win rate without negative expectancy? E
 
 **Decision needed from the user (raised by round 2).** The §1 gate requires every lane to beat its random-entry baseline by more than one round trip. A premium-harvesting ("carry") lane makes no timing claim, so a version defined as "sell at any minute 10:00–14:30" cannot pass that item in principle, and S2 failed it (lane − random −$92.8). Either (a) keep the gate as written, which means no premium-harvesting lane can ever be promoted, or (b) add a carry-lane variant of the gate that drops the timing item but requires the forward T-G record, the max-loss sizing above, and a stress test on large-move days re-pulled with a wider strike band. Until the user decides, H15 stays a forward paper lane only.
 
+## 10. Gate revision, 2026-10-14 (adopted from the developer review of the round-2 report)
+
+The user forwarded a developer review of `reports/High win rate 0DTE lanes.md`. Its recommendations are adopted here and supersede §1's single gate; §1 is kept above as the record of the original rule. This also resolves the "decision needed" at the end of §9.
+
+**Two kinds of lane, judged differently.**
+- **Signal lane**: claims that its entry rule (time, level, flow, regime) selects better trades. It must pass every gate below *and* beat a random-entry baseline on the same days by more than one round-trip cost (§1 item 2 kept).
+- **Carry lane**: harvests a premium (e.g., selling 0DTE options) and claims no timing skill. It does not have to beat random entry. It must pass every gate below, and the product must label it as carry, never as a signal.
+
+| Gate | What must be demonstrated |
+|---|---|
+| Data integrity | Full-chain coverage on every test date, including extreme-move days (no strike-band truncation); data hashed and reproducible |
+| Execution realism | Bid/ask fills at measured NBBO, fees, official settlement values (Cboe SPX close for SPXW; no 16:00-print proxy), every fill assumption stated |
+| Statistical validity | Positive net expectancy with a day-clustered 95 % lower bound above zero on complete data, out of sample, after multiplicity accounting |
+| Tail survival | Stated loss under severe shocks (at least the worst historical intraday move in the full SPX record available, 2025-04-09's 8.4 % 13:00→16:00, and hypothetical ±10 % and ±15 % moves from entry to settlement), capital per lot such that the stress loss stays within the stated budget, and realistic margin (Reg-T and portfolio margin) |
+| Forward validation | At least 150 trading sessions **and** at least 7 calendar months of forward paper trading with live NBBO logging (150 sessions take about 7 months; both minimums apply) |
+| Product classification | Carry vs signal stated, with the matching gate set |
+
+A lane is promotable only when every applicable gate passes. Win rate is reported but is never a gate.
+
+**Consequences for the register.** H15 is reclassified as a **carry lane**: its random-entry result no longer disqualifies it, but it now needs the full-chain re-test (data integrity), the official-settlement re-test (execution realism), the stress and margin analysis (tail survival), and T-G forward paper trading for ≥ 150 sessions and ≥ 7 months. T-G's minimum in §9 is amended accordingly. Work on the first three started 2026-10-14 (`research/thetadata/settlement_audit/`, full-chain dataset `data_full`, results to follow in §11).
+

@@ -16,7 +16,7 @@ ROOT = os.environ.get('THETA_DS_ROOT', SP + '/theta/data')
 CAL = '/home/user/georgeredo/research/thetadata/index_tests/code/calendar_2017_2026.csv'
 IDX_CACHE = SP + '/theta/cache/index_tests'
 EXP_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'expirations')
-BAND = 0.02
+BAND = float(os.environ.get('THETA_DS_BAND', '0.02'))   # 0 = keep every listed strike (full chain); added 2026-10-14 for the full-chain re-pull
 NWORK = int(os.environ.get('THETA_DS_NWORK', '6'))
 MAX_SECS = float(os.environ.get('THETA_DS_MAX_SECS', '13200'))
 LIMIT = int(os.environ.get('THETA_DS_LIMIT', '0'))
@@ -117,7 +117,7 @@ def process(job, df):
         lo, hi = ref * (1 - BAND) - 1e-9, ref * (1 + BAND) + 1e-9
         ks = df['strike'].unique()
         st.update(raw_strikes=len(ks), raw_kmin=float(ks.min()), raw_kmax=float(ks.max()), band_lo=round(lo, 4), band_hi=round(hi, 4))
-        out = df.filter((pl.col('strike') >= lo) & (pl.col('strike') <= hi))
+        out = df.filter((pl.col('strike') >= lo) & (pl.col('strike') <= hi)) if BAND > 0 else df
         if kind == 'chain':
             out = out.with_columns(((pl.col('bid') + pl.col('ask')) / 2).alias('mid'))
             out = out.select(CHAIN_COLS).with_columns(pl.col('bid_size').cast(pl.Int32), pl.col('ask_size').cast(pl.Int32))
@@ -216,7 +216,7 @@ def build_jobs(phases):
             if miss: log('underlying gaps', sym, len(miss), miss[:5])
     for kind in ('chain', 'ohlc'):
         if kind + 's' not in phases and kind not in phases: continue
-        for sym in ('SPY', 'QQQ', 'SPXW', 'IWM'):
+        for sym in [x for x in os.environ.get('THETA_DS_SYMS', 'SPY,QQQ,SPXW,IWM').split(',') if x]:   # order configurable (2026-10-14)
             ses = sessions(dt.date.fromisoformat(FIRST_DAILY[sym]), END)
             if LIMIT: ses = ses[:LIMIT]
             jobs += [dict(kind=kind, sym=sym, date=d) for d in ses if not done(kind, sym, d)]
