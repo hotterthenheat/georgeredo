@@ -9,3 +9,17 @@
 18:31:26 QQQ 2025-04-07 600/980 trades 23358 (743s)
 18:33:04 QQQ 2026-01-23 800/980 trades 26292 (842s)
 18:34:40 IWM 2024-04-19 0/621 trades 28946 (937s)
+18:36:05 IWM 2025-02-06 200/621 trades 31753 (1022s)
+18:37:32 IWM 2025-11-21 400/621 trades 34669 (1110s)
+18:38:56 IWM 2026-09-11 600/621 trades 37603 (1193s)
+/home/user/georgeredo/research/compass/studies/../engine/stats.py:41: RuntimeWarning: Mean of empty slice
+  out[f'{c}_mean'] = float(np.nanmean(v)); out[f'{c}_p95'] = float(np.nanpercentile(v, 95))
+/usr/local/lib/python3.13/dist-packages/numpy/lib/_nanfunctions_impl.py:1396: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+18:39:05 long           adv None all days               n  2499 mean   -4.87 [ -14.18,   +4.87] win 33% PF 0.92 DD -13595 | random -11.99 [-17.89, -5.70] | minus random +6.94 [-2.00, +15.65] | by year {'2022': 0.37, '2023': -8.4, '2024': -4.28, '2025': 4.34, '2026': -14.55} | by symbol {'SPY': -3.84, 'QQQ': -5.96, 'IWM': -4.81}
+18:39:06 long           adv None |first 30m| >= 0.3%    n   936 mean   -6.25 [ -23.84,  +14.87] win 33% PF 0.91 DD -9152 | random -15.01 [-24.86, -4.69] | minus random +8.48 [-6.98, +25.70] | by year {'2022': -14.83, '2023': -3.08, '2024': -17.42, '2025': 4.79, '2026': -11.71} | by symbol {'SPY': -9.42, 'QQQ': -2.36, 'IWM': -9.74}
+18:39:06 short_vertical adv 0.0 all days               n  1303 mean   -2.39 [  -5.69,   +0.92] win 54% PF 0.88 DD -3896 | random -4.39 [-7.10, -1.59] | minus random -0.00 [-0.00, -0.00] | by year {'2022': -9.83, '2023': -1.51, '2024': -0.5, '2025': 0.45, '2026': -7.65} | by symbol {'SPY': -2.05, 'QQQ': -1.52, 'IWM': -4.63}
+18:39:06 short_vertical adv 0.0 |first 30m| >= 0.3%    n   453 mean   -0.52 [  -6.54,   +5.46] win 55% PF 0.98 DD -1631 | random -5.36 [-10.15, -0.71] | minus random -0.00 [-0.00, -0.00] | by year {'2022': -20.22, '2023': 2.5, '2024': -2.73, '2025': 7.12, '2026': -7.78} | by symbol {'SPY': 5.92, 'QQQ': -1.04, 'IWM': -4.0}
+18:39:06 short_vertical adv 0.01 all days               n  1303 mean   -6.86 [  -9.87,   -3.71] win 47% PF 0.68 DD -9101 | random -8.44 [-10.95, -5.81] | minus random -0.00 [-0.00, -0.00] | by year {'2022': -13.48, '2023': -6.83, '2024': -5.0, '2025': -4.56, '2026': -10.75} | by symbol {'SPY': -6.85, 'QQQ': -6.5, 'IWM': -7.53}
+18:39:07 short_vertical adv 0.01 |first 30m| >= 0.3%    n   453 mean   -4.99 [ -10.62,   +0.78] win 49% PF 0.77 DD -2466 | random -9.56 [-13.90, -5.21] | minus random -0.00 [-0.00, +0.00] | by year {'2022': -27.05, '2023': 0.34, '2024': -6.04, '2025': 0.45, '2026': -11.79} | by symbol {'SPY': 1.55, 'QQQ': -6.65, 'IWM': -6.77}
+18:39:07 S12b DONE (1204s)
