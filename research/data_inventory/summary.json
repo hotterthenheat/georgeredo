@@ -1,0 +1,63 @@
+{
+ "generated_utc": "2026-10-14T03:24:43+00:00",
+ "thetadata_stocks.txt": {
+  "count": 26855,
+  "note": "ThetaData stock_list_symbols"
+ },
+ "thetadata_option_roots.txt": {
+  "count": 15817,
+  "note": "ThetaData option_list_symbols (option roots)"
+ },
+ "thetadata_indices.txt": {
+  "count": 24305,
+  "note": "ThetaData index_list_symbols (includes Nasdaq GIDS symbols the plan cannot read)"
+ },
+ "thetadata_flat_file_probe": {
+  "stock_flat_file_eod": {
+   "date": "2026-10-09",
+   "error": "ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\nA suitable version of pyarrow or fastparquet is required for parquet support.\nTrying to import the above resulted in these errors:\n - `Import pyarrow` failed. pyarrow is required for parquet support. Use pip or conda",
+   "secs": 0.7
+  },
+  "option_flat_file_eod": {
+   "date": "2026-10-09",
+   "error": "ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\nA suitable version of pyarrow or fastparquet is required for parquet support.\nTrying to import the above resulted in these errors:\n - `Import pyarrow` failed. pyarrow is required for parquet support. Use pip or conda",
+   "secs": 69.7
+  },
+  "option_flat_file_open_interest": {
+   "date": "2026-10-09",
+   "error": "ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\nA suitable version of pyarrow or fastparquet is required for parquet support.\nTrying to import the above resulted in these errors:\n - `Import pyarrow` failed. pyarrow is required for parquet support. Use pip or conda",
+   "secs": 25.3
+  },
+  "index_flat_file_eod": {
+   "date": "2026-10-09",
+   "error": "ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\nA suitable version of pyarrow or fastparquet is required for parquet support.\nTrying to import the above resulted in these errors:\n - `Import pyarrow` failed. pyarrow is required for parquet support. Use pip or conda",
+   "secs": 0.7
+  }
+ },
+ "unusualwhales_probe": {
+  "optionable-tickers": {
+   "status": "error 422",
+   "n": null,
+   "sample": "{'error': 422}"
+  },
+  "companies/listings": {
+   "status": "error HTTP Error 403: Forbidden",
+   "n": null,
+   "sample": "{'error': 'HTTP Error 403: Forbidden'}"
+  }
+ },
+ "unusualwhales_tickers.txt": {
+  "count": 15757,
+  "by_type": {
+   "company": 13549,
+   "ETF": 2154,
+   "ADR": 1,
+   "index": 53
+  },
+  "note": "UW sector lists (stock/{sector}/tickers, 11 sectors) + screener by issue type (ETF via 15 market-cap-band queries, ADR, Index); /api/companies/listings and /api/option-trades/optionable-tickers are not included in this UW tier (403/422)"
+ },
+ "all_tickers.txt": {
+  "count": 35180,
+  "note": "union of ThetaData stock symbols, ThetaData option roots and UW tickers, with membership flags"
+ }
+}
