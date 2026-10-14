@@ -22,9 +22,9 @@ Negative in every year (2023 −4.87 [−6.88, −2.85]; 2024 −3.22 [−5.75, 
 
 ## Pending
 
-- S02: single-factor grid and ablations around S01 (42 variants) with walk-forward selection by year.
-- S03: baseline on Weekly-category expirations, SPY/QQQ/IWM 2017-06 → 2026-10, OI > 250 and intraday volume > 100 applied.
-- S04: signal validity on the underlying (forward and backward returns around signals vs random minutes), 2017-06 → 2026-10.
+- S02: single-factor grid and ablations around S01 (41 variants) with walk-forward selection by year (running).
+- S03: baseline on Weekly-category expirations, SPY/QQQ/IWM 2017-06 → 2026-10, OI > 250 and intraday volume > 100 applied (chains being pulled).
+- S06 on the Tier A single-name universe once its minute bars are cached (S05).
 
 ## S04 — does the baseline signal predict the underlying at all? (NO)
 
@@ -43,3 +43,24 @@ Negative in every year (2023 −4.87 [−6.88, −2.85]; 2024 −3.22 [−5.75, 
 Ablations (next 30 min, SPY / QQQ / IWM): no structure +0.06 / +0.13 / −0.49; no relative volume −0.37 / −0.15 / −0.78; no 15-minute alignment −0.67 / −0.43 / −1.43; no 5-minute confirmation −1.38 / −0.83 / −1.39; with the daily trend −1.19 / −0.17 / −1.82. None is positive with a positive lower bound.
 
 **Reading.** The rule fires after the move: the prior 30 minutes carry +10 to +14 bp in the signal's direction, and what follows is flat to slightly negative. Random minutes on the same days and sides collect the day's drift (+5 to +8 bp over 30 minutes) that the signal's minutes miss; the signal is therefore about 6–8 bp *worse* than chance at 30 minutes, which is the −$2 per contract measured in S01 once an option, its spread and theta are attached. The RSI-cross trigger itself carries zero information at every horizon; the filters only shrink the sample. This closes the question for the baseline as specified: **no exit rule, delta band, spread filter or expiration can make a long option profitable on an entry whose underlying expectation is negative.** The cost hurdle in underlying terms is about 2–3 bp per round trip on SPY (a $2.80 round trip on a ~$1, 0.45-delta contract) plus theta over the hold, so a Compass entry trigger must show a day-clustered lower bound of at least +3 bp over 30–60 minutes against the matched random control before any option test is worth running. That screen (S06) is the next step, run across the liquid universe on 2017 → 2026 minute bars.
+
+## S06 — do any entry triggers predict the underlying on the index ETFs? (NO)
+
+`studies/s06_signal_screen.py` → `results/v1/s06_signal_screen_index/REPORT.md` (84 rows), registry `S06`. SPY/QQQ/IWM 1-minute bars 2017-06-01 → 2026-10-09, decisions at the close of the 1-minute bar in the 09:45–14:50 window, seven triggers in both directions, each raw and under the baseline's filter stack (and the 5-minute confirmation and 15-minute alignment alone): the owner's RSI lead; a 1-minute VWAP reclaim; a 5-minute EMA 9/20 cross; a 5-minute close through the prior day's high/low or the 20-bar range (Breakouts); the retest of that level within 12 bars (Breakouts, retest variant); a 15-minute EMA 20 > 50 > 200 stack with a pullback to the EMA 9/20 band and a 5-minute close back through EMA 20 (Trend Plays); and a displacement of ≥ 2σ over 60 bars into a support/resistance level (prior-day extreme, 20-day extreme or VWAP ± 2σ) with a reversal bar (Bounces). Signed return = direction × underlying return in basis points; matched random = minutes drawn uniformly in the entry window on the same symbol, date and direction (5 seeds); day-clustered 95 % CIs.
+
+| trigger (raw, no filters) | n per symbol | prior 30 min | +30 min absolute (SPY / QQQ / IWM) | +60 min absolute | vs matched random, 60 min |
+|---|---|---|---|---|---|
+| rsi_cross (owner's lead) | 72–73k | +6.5 … +9.5 | −0.0 / −0.1 / −0.0 | +0.1 / +0.1 / −0.1 | −1.2 / −1.5 / −1.6 |
+| vwap_reclaim | 27–29k | +3.1 … +4.7 | +0.0 / +0.2 / +0.1 | +0.1 / +0.3 / +0.1 | −0.2 / −0.0 / −0.2 |
+| ema_cross_5m | 5.4–5.6k | +18 … +27 | +0.1 / +0.1 / −0.0 | +0.4 / +0.0 / +0.3 | −1.1 / −2.0 / −1.4 |
+| breakout_5m | 5.3–5.6k | +25 … +38 | −0.1 / +0.1 / −0.6 | −0.4 / +0.3 / −2.0 | −8.7 / −10.8 / −12.5 |
+| retest_5m | 4.4–4.8k | +21 … +30 | −0.4 / −0.5 / −0.2 | −0.7 / −0.0 / −1.3 | −8.6 / −10.6 / −12.4 |
+| trend_pullback | 5.6–5.7k | +5 … +7 | +0.1 / +0.7 / −0.2 | +0.6 / +1.1 / −0.4 | −0.5 / +0.0 / −1.0 |
+| bounce | 8.8–11k | **−28 … −44** | −0.3 / −0.5 / +0.6 | −0.7 / −0.9 / +0.2 | **+7.1 / +9.6 / +10.7** |
+| any trigger + the baseline filter stack | 0–5.4k | | −0.8 … −3.3 (every cell ≤ 0 except n ≤ 112) | −0.3 … −6.5 | −2.7 … −21.0 |
+
+Every absolute 30- and 60-minute CI for a raw trigger includes zero and none has a lower bound above +0.1 bp (the only positive lower bounds are QQQ VWAP reclaim +0.1 and QQQ trend pullback +0.0, both economically nil). The widest effects in the table are the *pre-signal* columns: breakouts and retests fire after +25 to +38 bp of movement, EMA crosses after +18 to +27 bp, bounces after −28 to −44 bp. What follows is flat. Year-by-year (REPORT.md, second table) shows the same picture in each of the ten years: no trigger has a run of positive years.
+
+**Why the bounce is not promoted.** Against the matched random control the bounce is the only trigger with a strongly positive difference (+6 to +11 bp at 60 min, lower bound ≥ +5 bp, positive in all ten years for the raw form). But its absolute forward return is zero. The difference comes from the control: random minutes on the same day *in the same direction* as a counter-trend signal collect the day's drift against that direction (the control's 30-minute return is −4 to −6 bp), so the comparison rewards the bounce for having picked the days on which the drift was adverse. A long option pays its spread and theta on the absolute move, not on the move relative to a control; a trigger whose absolute expectation is zero loses the full cost. The promotion rule is therefore stated with two parts — an absolute day-clustered lower bound ≥ +3 bp at 30 or 60 minutes **and** a positive paired lower bound against the matched random control — and `s06_report.py` applies both. The second part alone was the hurdle stated in the S04 reading; the first part was added after this screen exposed the control artefact. This tightening cannot manufacture a positive: it only removes a false one.
+
+**Reading.** On the three index ETFs, over nine years and about 450,000 trigger events, none of the Compass setup-family triggers — the owner's RSI lead, VWAP reclaims, EMA crosses, breakouts, retests, trend pullbacks or bounces — carries a forward move after its decision bar. Every one fires after the move it is designed to catch. The baseline filter stack (5-minute confirmation, 15-minute alignment, relative volume, structure) makes each trigger *later*, not better: it lowers every row against random. This is consistent with S01 and S04 and with the well-documented absence of short-horizon intraday momentum in liquid index products. The screen now moves to the Tier A single-name universe (S05 bars), where cross-sectional dispersion and event-driven moves give an intraday trigger a chance that index ETFs do not; S03 (weekly expirations) still runs because its purpose — whether a longer-dated contract changes the *cost* side — is independent of this finding, but with the entries measured here its expectation is already known to be non-positive.
