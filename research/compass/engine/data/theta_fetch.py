@@ -31,7 +31,9 @@ def _red(s: str) -> str:
 def bulk_job_running() -> bool:
     try:
         out = subprocess.run(['ps', '-eo', 'args'], capture_output=True, text=True).stdout
-        return any(line.startswith('python3 -I bulk_fetch.py') or 'bulk_fetch.py' in line and 'python3' in line for line in out.splitlines())
+        # only a real interpreter process counts: a shell whose command text mentions the script (a chain that pauses
+        # and restarts it) must not trip the guard
+        return any(line.strip().startswith(('python3 -I bulk_fetch.py', 'python3 bulk_fetch.py', 'python3 -I -u bulk_fetch.py')) for line in out.splitlines())
     except Exception:
         return False
 
