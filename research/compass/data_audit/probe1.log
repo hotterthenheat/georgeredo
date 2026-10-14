@@ -1,0 +1,155 @@
+15:29:00 stock_list_dates SPY EOD StatusCode.INVALID_ARGUMENT Unsupported request type: EOD
+15:29:00 stock_list_dates SPY OHLC StatusCode.INVALID_ARGUMENT Unsupported request type: OHLC
+15:29:00 stock_list_dates SPY QUOTE {'rows': 2464, 'columns': ['date'], 'first': '2017-01-03', 'last': '2026-10-13'}
+15:29:00 stock_list_dates SPY TRADE {'rows': 2464, 'columns': ['date'], 'first': '2017-01-03', 'last': '2026-10-13'}
+15:29:00 stock_list_dates SPY TRADE_QUOTE StatusCode.INVALID_ARGUMENT Unsupported request type: TRADE_QUOTE
+15:29:00 stock_list_dates SPY OPEN_INTEREST StatusCode.INVALID_ARGUMENT Unsupported request type: OPEN_INTEREST
+15:29:00 stock_list_dates SPY IMPLIED_VOLATILITY StatusCode.INVALID_ARGUMENT Unsupported request type: IMPLIED_VOLATILITY
+15:29:00 stock_list_dates SPY GREEKS StatusCode.INVALID_ARGUMENT Unsupported request type: GREEKS
+15:29:00 stock_list_dates SPY PRICE StatusCode.INVALID_ARGUMENT Unsupported request type: PRICE
+15:29:00 stock_list_dates AAPL EOD StatusCode.INVALID_ARGUMENT Unsupported request type: EOD
+15:29:00 stock_list_dates AAPL OHLC StatusCode.INVALID_ARGUMENT Unsupported request type: OHLC
+15:29:01 stock_list_dates AAPL QUOTE {'rows': 3619, 'columns': ['date'], 'first': '2012-06-01', 'last': '2026-10-13'}
+15:29:01 stock_list_dates AAPL TRADE {'rows': 3619, 'columns': ['date'], 'first': '2012-06-01', 'last': '2026-10-13'}
+15:29:01 stock_list_dates AAPL TRADE_QUOTE StatusCode.INVALID_ARGUMENT Unsupported request type: TRADE_QUOTE
+15:29:01 stock_list_dates AAPL OPEN_INTEREST StatusCode.INVALID_ARGUMENT Unsupported request type: OPEN_INTEREST
+15:29:01 stock_list_dates AAPL IMPLIED_VOLATILITY StatusCode.INVALID_ARGUMENT Unsupported request type: IMPLIED_VOLATILITY
+15:29:01 stock_list_dates AAPL GREEKS StatusCode.INVALID_ARGUMENT Unsupported request type: GREEKS
+15:29:01 stock_list_dates AAPL PRICE StatusCode.INVALID_ARGUMENT Unsupported request type: PRICE
+15:29:01 stock_list_dates MSFT EOD StatusCode.INVALID_ARGUMENT Unsupported request type: EOD
+15:29:01 stock_list_dates MSFT OHLC StatusCode.INVALID_ARGUMENT Unsupported request type: OHLC
+15:29:01 stock_list_dates MSFT QUOTE {'rows': 3619, 'columns': ['date'], 'first': '2012-06-01', 'last': '2026-10-13'}
+15:29:01 stock_list_dates MSFT TRADE {'rows': 3619, 'columns': ['date'], 'first': '2012-06-01', 'last': '2026-10-13'}
+15:29:01 stock_list_dates MSFT TRADE_QUOTE StatusCode.INVALID_ARGUMENT Unsupported request type: TRADE_QUOTE
+15:29:01 stock_list_dates MSFT OPEN_INTEREST StatusCode.INVALID_ARGUMENT Unsupported request type: OPEN_INTEREST
+15:29:01 stock_list_dates MSFT IMPLIED_VOLATILITY StatusCode.INVALID_ARGUMENT Unsupported request type: IMPLIED_VOLATILITY
+15:29:02 stock_list_dates MSFT GREEKS StatusCode.INVALID_ARGUMENT Unsupported request type: GREEKS
+15:29:02 stock_list_dates MSFT PRICE StatusCode.INVALID_ARGUMENT Unsupported request type: PRICE
+15:29:02 stock_list_dates IWM EOD StatusCode.INVALID_ARGUMENT Unsupported request type: EOD
+15:29:02 stock_list_dates IWM OHLC StatusCode.INVALID_ARGUMENT Unsupported request type: OHLC
+15:29:02 stock_list_dates IWM QUOTE {'rows': 2464, 'columns': ['date'], 'first': '2017-01-03', 'last': '2026-10-13'}
+15:29:02 stock_list_dates IWM TRADE {'rows': 2464, 'columns': ['date'], 'first': '2017-01-03', 'last': '2026-10-13'}
+15:29:02 stock_list_dates IWM TRADE_QUOTE StatusCode.INVALID_ARGUMENT Unsupported request type: TRADE_QUOTE
+15:29:02 stock_list_dates IWM OPEN_INTEREST StatusCode.INVALID_ARGUMENT Unsupported request type: OPEN_INTEREST
+15:29:02 stock_list_dates IWM IMPLIED_VOLATILITY StatusCode.INVALID_ARGUMENT Unsupported request type: IMPLIED_VOLATILITY
+15:29:02 stock_list_dates IWM GREEKS StatusCode.INVALID_ARGUMENT Unsupported request type: GREEKS
+15:29:02 stock_list_dates IWM PRICE StatusCode.INVALID_ARGUMENT Unsupported request type: PRICE
+15:29:02 stock_list_dates GME EOD StatusCode.INVALID_ARGUMENT Unsupported request type: EOD
+15:29:02 stock_list_dates GME OHLC StatusCode.INVALID_ARGUMENT Unsupported request type: OHLC
+15:29:02 stock_list_dates GME QUOTE {'rows': 2465, 'columns': ['date'], 'first': '2017-01-03', 'last': '2026-10-13'}
+15:29:02 stock_list_dates GME TRADE {'rows': 2465, 'columns': ['date'], 'first': '2017-01-03', 'last': '2026-10-13'}
+15:29:03 stock_list_dates GME TRADE_QUOTE StatusCode.INVALID_ARGUMENT Unsupported request type: TRADE_QUOTE
+15:29:03 stock_list_dates GME OPEN_INTEREST StatusCode.INVALID_ARGUMENT Unsupported request type: OPEN_INTEREST
+15:29:03 stock_list_dates GME IMPLIED_VOLATILITY StatusCode.INVALID_ARGUMENT Unsupported request type: IMPLIED_VOLATILITY
+15:29:03 stock_list_dates GME GREEKS StatusCode.INVALID_ARGUMENT Unsupported request type: GREEKS
+15:29:03 stock_list_dates GME PRICE StatusCode.INVALID_ARGUMENT Unsupported request type: PRICE
+15:29:03 index_list_dates SPX {'rows': 2458, 'columns': ['date'], 'first': '2017-01-03', 'last': '2026-10-13'}
+15:29:03 index_list_dates VIX {'rows': 2491, 'columns': ['date'], 'first': '2017-01-03', 'last': '2026-10-13'}
+15:29:03 index_list_dates RUT {'rows': 1972, 'columns': ['date'], 'first': '2018-12-01', 'last': '2026-10-13'}
+15:29:03 index_list_dates NDX {'rows': 109, 'columns': ['date'], 'first': '2026-05-08', 'last': '2026-10-13'}
+15:29:03 index_list_dates DJI {'rows': 502, 'columns': ['date'], 'first': '2017-01-03', 'last': '2018-12-31'}
+15:29:03 index_list_dates VIX1D {'rows': 872, 'columns': ['date'], 'first': '2023-04-24', 'last': '2026-10-13'}
+15:29:03 option_list_expirations SPY {'rows': 2148, 'columns': ['symbol', 'expiration'], 'first': 'SPY', 'last': 'SPY'}
+15:29:03 option_list_dates SPY EOD SPY AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates SPY QUOTE SPY AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates SPY TRADE SPY AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates SPY OHLC SPY AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates SPY OPEN_INTEREST SPY AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates SPY IMPLIED_VOLATILITY SPY AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates SPY GREEKS SPY AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_expirations AAPL {'rows': 846, 'columns': ['symbol', 'expiration'], 'first': 'AAPL', 'last': 'AAPL'}
+15:29:03 option_list_dates AAPL EOD AAPL AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates AAPL QUOTE AAPL AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates AAPL TRADE AAPL AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates AAPL OHLC AAPL AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates AAPL OPEN_INTEREST AAPL AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates AAPL IMPLIED_VOLATILITY AAPL AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates AAPL GREEKS AAPL AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_expirations SPXW {'rows': 2279, 'columns': ['symbol', 'expiration'], 'first': 'SPXW', 'last': 'SPXW'}
+15:29:03 option_list_dates SPXW EOD SPXW AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates SPXW QUOTE SPXW AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates SPXW TRADE SPXW AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates SPXW OHLC SPXW AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates SPXW OPEN_INTEREST SPXW AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates SPXW IMPLIED_VOLATILITY SPXW AttributeError 'str' object has no attribute 'strftime'
+15:29:03 option_list_dates SPXW GREEKS SPXW AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_expirations SPX {'rows': 206, 'columns': ['symbol', 'expiration'], 'first': 'SPX', 'last': 'SPX'}
+15:29:04 option_list_dates SPX EOD SPX AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates SPX QUOTE SPX AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates SPX TRADE SPX AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates SPX OHLC SPX AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates SPX OPEN_INTEREST SPX AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates SPX IMPLIED_VOLATILITY SPX AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates SPX GREEKS SPX AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_expirations TSLA {'rows': 805, 'columns': ['symbol', 'expiration'], 'first': 'TSLA', 'last': 'TSLA'}
+15:29:04 option_list_dates TSLA EOD TSLA AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates TSLA QUOTE TSLA AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates TSLA TRADE TSLA AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates TSLA OHLC TSLA AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates TSLA OPEN_INTEREST TSLA AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates TSLA IMPLIED_VOLATILITY TSLA AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates TSLA GREEKS TSLA AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_expirations GME {'rows': 734, 'columns': ['symbol', 'expiration'], 'first': 'GME', 'last': 'GME'}
+15:29:04 option_list_dates GME EOD GME AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates GME QUOTE GME AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates GME TRADE GME AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates GME OHLC GME AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates GME OPEN_INTEREST GME AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates GME IMPLIED_VOLATILITY GME AttributeError 'str' object has no attribute 'strftime'
+15:29:04 option_list_dates GME GREEKS GME AttributeError 'str' object has no attribute 'strftime'
+15:29:07 stock_history_eod SPY 2012-01-01  NO_DATA
+15:29:08 stock_history_eod SPY 2011-01-01  NO_DATA
+15:29:08 stock_history_ohlc SPY 2014-06-02 1m {'rows': 391, 'first': '2014-06-02', 'last': '2014-06-02'}
+15:29:08 stock_history_ohlc SPY 2012-06-04 1m {'rows': 391, 'first': '2012-06-04', 'last': '2012-06-04'}
+15:29:08 stock_history_quote SPY 2014-06-02 1m NO_DATA
+15:29:08 stock_history_trade SPY 2012-06-04  NO_DATA
+15:29:10 index_history_eod SPX 2013-01-01  NO_DATA
+15:29:11 index_history_eod SPX 2016-01-01  NO_DATA
+15:29:11 index_history_eod SPX 2019-01-01  {'rows': 252, 'first': '2019-01-02', 'last': '2019-12-31'}
+15:29:11 index_history_price SPX 2017-06-01 1m {'rows': 391, 'first': '2017-06-01', 'last': '2017-06-01'}
+15:29:11 index_history_price SPX 2016-06-01 1m NO_DATA
+15:29:26 option_history_eod SPY 2012-06-04  {'rows': 15034, 'first': '2012-06-04', 'last': '2012-06-08'}
+15:29:30 option_history_eod SPY 2013-06-03  {'rows': 13530, 'first': '2013-06-03', 'last': '2013-06-07'}
+15:29:33 option_history_open_interest SPY 2013-06-03  {'rows': 11542, 'first': 'SPY', 'last': 'SPY'}
+15:29:36 option_history_open_interest SPY 2012-06-04  {'rows': 10752, 'first': 'SPY', 'last': 'SPY'}
+15:29:36 option_history_binomial_greeks_all SPY 2013-06-03  AttributeError 'str' object has no attribute 'strftime'
+15:29:36 option_history_binomial_greeks_all SPY 2016-06-01  AttributeError 'str' object has no attribute 'strftime'
+15:29:36 option_history_binomial_greeks_eod SPY 2013-06-03  NO_DATA
+15:29:36 option_history_binomial_greeks_eod SPY 2016-06-01  NO_DATA
+15:29:36 option_history_binomial_greeks_first_order SPY 2013-06-03  AttributeError 'str' object has no attribute 'strftime'
+15:29:36 option_history_binomial_greeks_first_order SPY 2016-06-01  AttributeError 'str' object has no attribute 'strftime'
+15:29:36 option_history_binomial_greeks_second_order SPY 2013-06-03  AttributeError 'str' object has no attribute 'strftime'
+15:29:36 option_history_binomial_greeks_second_order SPY 2016-06-01  AttributeError 'str' object has no attribute 'strftime'
+15:29:36 option_history_binomial_greeks_third_order SPY 2013-06-03  AttributeError 'str' object has no attribute 'strftime'
+15:29:36 option_history_binomial_greeks_third_order SPY 2016-06-01  AttributeError 'str' object has no attribute 'strftime'
+15:29:36 option_history_binomial_trade_greeks_all SPY 2013-06-03  NO_DATA
+15:29:38 option_history_binomial_trade_greeks_all SPY 2016-06-01  NO_DATA
+15:29:38 option_history_binomial_trade_greeks_first_order SPY 2013-06-03  NO_DATA
+15:29:39 option_history_binomial_trade_greeks_first_order SPY 2016-06-01  NO_DATA
+15:29:39 option_history_binomial_trade_greeks_second_order SPY 2013-06-03  NO_DATA
+15:29:39 option_history_binomial_trade_greeks_second_order SPY 2016-06-01  NO_DATA
+15:29:40 option_history_binomial_trade_greeks_third_order SPY 2013-06-03  NO_DATA
+15:29:44 option_history_binomial_trade_greeks_third_order SPY 2016-06-01  NO_DATA
+15:29:44 option_history_greeks_all SPY 2013-06-03  AttributeError 'str' object has no attribute 'strftime'
+15:29:44 option_history_greeks_all SPY 2016-06-01  AttributeError 'str' object has no attribute 'strftime'
+15:29:45 option_history_greeks_eod SPY 2013-06-03  NO_DATA
+15:29:45 option_history_greeks_eod SPY 2016-06-01  NO_DATA
+15:29:45 option_history_greeks_first_order SPY 2013-06-03  AttributeError 'str' object has no attribute 'strftime'
+15:29:45 option_history_greeks_first_order SPY 2016-06-01  AttributeError 'str' object has no attribute 'strftime'
+15:29:45 option_history_greeks_implied_volatility SPY 2013-06-03  AttributeError 'str' object has no attribute 'strftime'
+15:29:45 option_history_greeks_implied_volatility SPY 2016-06-01  AttributeError 'str' object has no attribute 'strftime'
+15:29:45 option_history_greeks_second_order SPY 2013-06-03  AttributeError 'str' object has no attribute 'strftime'
+15:29:45 option_history_greeks_second_order SPY 2016-06-01  AttributeError 'str' object has no attribute 'strftime'
+15:29:45 option_history_greeks_third_order SPY 2013-06-03  AttributeError 'str' object has no attribute 'strftime'
+15:29:45 option_history_greeks_third_order SPY 2016-06-01  AttributeError 'str' object has no attribute 'strftime'
+15:29:45 option_history_trade_greeks_all SPY 2013-06-03  NO_DATA
+15:29:45 option_history_trade_greeks_all SPY 2016-06-01  NO_DATA
+15:29:46 option_history_trade_greeks_first_order SPY 2013-06-03  NO_DATA
+15:29:46 option_history_trade_greeks_first_order SPY 2016-06-01  NO_DATA
+15:29:46 option_history_trade_greeks_implied_volatility SPY 2013-06-03  NO_DATA
+15:29:47 option_history_trade_greeks_implied_volatility SPY 2016-06-01  NO_DATA
+15:29:47 option_history_trade_greeks_second_order SPY 2013-06-03  NO_DATA
+15:29:47 option_history_trade_greeks_second_order SPY 2016-06-01  NO_DATA
+15:29:47 option_history_trade_greeks_third_order SPY 2013-06-03  NO_DATA
+15:29:48 option_history_trade_greeks_third_order SPY 2016-06-01  NO_DATA
+15:29:48 PROBE DONE

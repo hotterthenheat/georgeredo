@@ -1,0 +1,96 @@
+15:35:57 stock_eod/SPY/2012 NO_DATA 3.9s
+15:36:02 stock_eod/SPY/2013 NO_DATA 5.3s
+15:36:05 stock_eod/SPY/2014 NO_DATA 3.1s
+15:36:09 stock_eod/SPY/2015 NO_DATA 4.3s
+15:36:12 stock_eod/SPY/2016 NO_DATA 2.6s
+15:36:15 stock_eod/SPY/2017 {'rows': 251, 'first': '2017-01-03 17:37:29', 'last': '2017-12-29 18:30:00'} 2.8s
+15:36:20 stock_eod/SPY/2018 {'rows': 251, 'first': '2018-01-02 17:17:09', 'last': '2018-12-31 17:17:22'} 4.9s
+15:36:24 stock_eod/SPY/2019 {'rows': 252, 'first': '2019-01-02 17:30:20', 'last': '2019-12-31 17:17:10'} 4.7s
+15:36:29 stock_eod/AAPL/2012 {'rows': 146, 'first': '2012-06-01 20:00:00', 'last': '2012-12-31 17:35:03'} 4.2s
+15:36:40 stock_eod/AAPL/2013 {'rows': 252, 'first': '2013-01-02 18:02:59', 'last': '2013-12-31 18:00:03'} 11.5s
+15:36:44 stock_eod/AAPL/2014 {'rows': 252, 'first': '2014-01-02 18:20:56', 'last': '2014-12-31 17:30:08'} 4.2s
+15:36:49 stock_eod/AAPL/2015 {'rows': 252, 'first': '2015-01-02 17:20:01', 'last': '2015-12-31 18:32:34'} 4.4s
+15:36:52 stock_eod/AAPL/2016 {'rows': 252, 'first': '2016-01-04 17:50:57', 'last': '2016-12-30 19:01:17'} 3.2s
+15:36:55 stock_eod/AAPL/2017 {'rows': 251, 'first': '2017-01-03 17:37:29', 'last': '2017-12-29 18:30:00'} 2.7s
+15:36:58 stock_eod/AAPL/2018 {'rows': 251, 'first': '2018-01-02 17:17:09', 'last': '2018-12-31 17:17:22'} 3.4s
+15:37:02 stock_eod/AAPL/2019 {'rows': 252, 'first': '2019-01-02 17:30:20', 'last': '2019-12-31 17:17:10'} 3.9s
+15:37:02 stock_quote_1m/SPY/2012 NO_DATA 0.1s
+15:37:02 stock_trade/SPY/2012 NO_DATA 0.1s
+15:37:02 stock_quote_1m/SPY/2014 NO_DATA 0.1s
+15:37:02 stock_trade/SPY/2014 NO_DATA 0.1s
+15:37:02 stock_quote_1m/SPY/2016 NO_DATA 0.3s
+15:37:03 stock_trade/SPY/2016 NO_DATA 0.1s
+15:37:03 stock_quote_1m/SPY/2018 NO_DATA 0.1s
+15:37:03 stock_trade/SPY/2018 NO_DATA 0.1s
+15:37:03 stock_quote_1m/SPY/2020 {'rows': 391, 'first': '2020-06-02 09:30:00', 'last': '2020-06-02 16:00:00'} 0.1s
+15:37:12 stock_trade/SPY/2020 {'rows': 369510, 'first': '2020-06-02 09:30:00', 'last': '2020-06-02 15:59:59'} 8.7s
+15:37:12 stock_quote_1m/SPY/2024 {'rows': 391, 'first': '2024-06-03 09:30:00', 'last': '2024-06-03 16:00:00'} 0.3s
+15:37:22 stock_trade/SPY/2024 {'rows': 450688, 'first': '2024-06-03 09:30:00', 'last': '2024-06-03 15:59:59'} 9.8s
+15:37:27 index_eod/SPX/2017 {'rows': 251, 'first': '2017-01-03 17:59:45', 'last': '2017-12-29 17:38:21'} 5.1s
+15:37:31 index_eod/SPX/2018 {'rows': 251, 'first': '2018-01-02 18:14:28', 'last': '2018-12-31 17:40:50'} 4.4s
+15:37:36 index_eod/VIX/2017 {'rows': 251, 'first': '2017-01-03 17:59:45', 'last': '2017-12-29 17:38:21'} 4.8s
+15:37:40 index_eod/VIX/2018 {'rows': 251, 'first': '2018-01-02 18:14:28', 'last': '2018-12-31 17:40:50'} 4.1s
+15:37:45 index_eod/VIX/2019 {'rows': 252, 'first': '2019-01-02 18:05:56', 'last': '2019-12-31 17:23:01'} 5.0s
+15:37:48 index_eod/VIX/2020 {'rows': 253, 'first': '2020-01-02 17:25:10', 'last': '2020-12-31 17:22:58'} 3.4s
+15:37:49 index_price_1m/VIX/2017-06-01 {'rows': 391, 'first': '2017-06-01 09:30:00', 'last': '2017-06-01 16:00:00'} 0.1s
+15:37:49 index_price_1m/RUT/2017-06-01 NO_DATA 0.1s
+15:37:54 option_quote_1m/SPY/2012/exp=2012-06-16 {'rows': 99314, 'first': '2012-06-04 09:30:00', 'last': '2012-06-04 16:00:00'} 5.1s
+15:37:56 option_trade/SPY/2012/exp=2012-06-16 {'rows': 21552, 'first': '2012-06-04 09:30:00', 'last': '2012-06-04 15:59:59'} 1.7s
+15:37:58 option_ohlc_1m/SPY/2012/exp=2012-06-16 {'rows': 32844, 'first': '2012-06-04 09:30:00', 'last': '2012-06-04 16:00:00'} 2.7s
+15:38:01 option_trade_quote/SPY/2012/exp=2012-06-16 {'rows': 21552, 'first': 'SPY', 'last': 'SPY'} 2.6s
+15:38:04 option_greeks_all/SPY/2012/exp=2012-06-16 NO_DATA 2.8s
+15:38:07 option_greeks_implied_volatility/SPY/2012/exp=2012-06-16 NO_DATA 3.1s
+15:38:08 option_greeks_first_order/SPY/2012/exp=2012-06-16 NO_DATA 1.7s
+15:38:11 option_binomial_greeks_all/SPY/2012/exp=2012-06-16 NO_DATA 2.4s
+15:38:11 option_greeks_eod/SPY/2012/exp=2012-06-16 NO_DATA 0.1s
+15:38:14 option_quote_1m/SPY/2013/exp=2013-06-14 {'rows': 29716, 'first': '2013-06-04 09:30:00', 'last': '2013-06-04 16:00:00'} 2.7s
+15:38:16 option_trade/SPY/2013/exp=2013-06-14 {'rows': 10807, 'first': '2013-06-04 09:30:00', 'last': '2013-06-04 15:59:58'} 1.9s
+15:38:17 option_ohlc_1m/SPY/2013/exp=2013-06-14 {'rows': 23851, 'first': '2013-06-04 09:30:00', 'last': '2013-06-04 16:00:00'} 1.0s
+15:38:18 option_trade_quote/SPY/2013/exp=2013-06-14 {'rows': 10807, 'first': 'SPY', 'last': 'SPY'} 1.0s
+15:38:18 option_greeks_all/SPY/2013/exp=2013-06-14 NO_DATA 0.6s
+15:38:19 option_greeks_implied_volatility/SPY/2013/exp=2013-06-14 NO_DATA 0.7s
+15:38:19 option_greeks_first_order/SPY/2013/exp=2013-06-14 NO_DATA 0.5s
+15:38:21 option_binomial_greeks_all/SPY/2013/exp=2013-06-14 NO_DATA 1.1s
+15:38:21 option_greeks_eod/SPY/2013/exp=2013-06-14 NO_DATA 0.1s
+15:38:26 option_quote_1m/SPY/2014/exp=2014-06-21 {'rows': 107134, 'first': '2014-06-04 09:30:00', 'last': '2014-06-04 16:00:00'} 5.3s
+15:38:27 option_trade/SPY/2014/exp=2014-06-21 {'rows': 8174, 'first': '2014-06-04 09:30:00', 'last': '2014-06-04 15:59:59'} 1.5s
+15:38:31 option_ohlc_1m/SPY/2014/exp=2014-06-21 {'rows': 32062, 'first': '2014-06-04 09:30:00', 'last': '2014-06-04 16:00:00'} 3.2s
+15:38:33 option_trade_quote/SPY/2014/exp=2014-06-21 {'rows': 8174, 'first': 'SPY', 'last': 'SPY'} 2.0s
+15:38:35 option_greeks_all/SPY/2014/exp=2014-06-21 NO_DATA 2.3s
+15:38:37 option_greeks_implied_volatility/SPY/2014/exp=2014-06-21 NO_DATA 1.6s
+15:38:41 option_greeks_first_order/SPY/2014/exp=2014-06-21 NO_DATA 3.9s
+15:38:43 option_binomial_greeks_all/SPY/2014/exp=2014-06-21 NO_DATA 2.5s
+15:38:43 option_greeks_eod/SPY/2014/exp=2014-06-21 NO_DATA 0.1s
+15:38:46 option_quote_1m/SPY/2016/exp=2016-06-17 NO_DATA 3.2s
+15:38:48 option_trade/SPY/2016/exp=2016-06-17 NO_DATA 1.4s
+15:38:52 option_ohlc_1m/SPY/2016/exp=2016-06-17 NO_DATA 4.5s
+15:38:56 option_trade_quote/SPY/2016/exp=2016-06-17 NO_DATA 3.9s
+15:38:58 option_greeks_all/SPY/2016/exp=2016-06-17 NO_DATA 1.8s
+15:38:59 option_greeks_implied_volatility/SPY/2016/exp=2016-06-17 NO_DATA 0.7s
+15:39:00 option_greeks_first_order/SPY/2016/exp=2016-06-17 NO_DATA 1.5s
+15:39:01 option_binomial_greeks_all/SPY/2016/exp=2016-06-17 NO_DATA 1.2s
+15:39:01 option_greeks_eod/SPY/2016/exp=2016-06-17 NO_DATA 0.1s
+15:39:06 option_quote_1m/SPY/2020/exp=2020-06-15 {'rows': 92276, 'first': '2020-06-04 09:30:00', 'last': '2020-06-04 16:00:00'} 4.8s
+15:39:09 option_trade/SPY/2020/exp=2020-06-15 {'rows': 5807, 'first': '2020-06-04 09:30:00', 'last': '2020-06-04 15:59:59'} 3.0s
+15:39:14 option_ohlc_1m/SPY/2020/exp=2020-06-15 {'rows': 56695, 'first': '2020-06-04 09:30:00', 'last': '2020-06-04 16:00:00'} 4.8s
+15:39:17 option_trade_quote/SPY/2020/exp=2020-06-15 {'rows': 5806, 'first': 'SPY', 'last': 'SPY'} 3.1s
+15:39:27 option_greeks_all/SPY/2020/exp=2020-06-15 {'rows': 92276, 'first': '2020-06-04 09:30:00', 'last': '2020-06-04 16:00:00'} 10.0s
+15:39:36 option_greeks_implied_volatility/SPY/2020/exp=2020-06-15 {'rows': 92276, 'first': '2020-06-04 09:30:00', 'last': '2020-06-04 16:00:00'} 9.3s
+15:39:44 option_greeks_first_order/SPY/2020/exp=2020-06-15 {'rows': 92276, 'first': '2020-06-04 09:30:00', 'last': '2020-06-04 16:00:00'} 7.2s
+15:42:33 option_binomial_greeks_all/SPY/2020/exp=2020-06-15 {'rows': 92276, 'first': '2020-06-04 09:30:00', 'last': '2020-06-04 16:00:00'} 168.8s
+15:42:36 option_greeks_eod/SPY/2020/exp=2020-06-15 {'rows': 236, 'first': '2020-06-04 00:00:00', 'last': '2020-06-04 16:14:49'} 3.1s
+15:42:41 option_quote_1m/SPY/2024/exp=2024-06-14 {'rows': 110262, 'first': '2024-06-04 09:30:00', 'last': '2024-06-04 16:00:00'} 5.6s
+15:42:44 option_trade/SPY/2024/exp=2024-06-14 {'rows': 13962, 'first': '2024-06-04 09:30:00', 'last': '2024-06-04 15:59:57'} 2.9s
+15:42:50 option_ohlc_1m/SPY/2024/exp=2024-06-14 {'rows': 66861, 'first': '2024-06-04 09:30:00', 'last': '2024-06-04 16:00:00'} 6.0s
+15:42:56 option_trade_quote/SPY/2024/exp=2024-06-14 {'rows': 13962, 'first': 'SPY', 'last': 'SPY'} 5.5s
+15:43:08 option_greeks_all/SPY/2024/exp=2024-06-14 {'rows': 110262, 'first': '2024-06-04 09:30:00', 'last': '2024-06-04 16:00:00'} 12.2s
+15:43:23 option_greeks_implied_volatility/SPY/2024/exp=2024-06-14 {'rows': 110262, 'first': '2024-06-04 09:30:00', 'last': '2024-06-04 16:00:00'} 15.5s
+15:43:34 option_greeks_first_order/SPY/2024/exp=2024-06-14 {'rows': 110262, 'first': '2024-06-04 09:30:00', 'last': '2024-06-04 16:00:00'} 10.3s
+15:47:07 option_binomial_greeks_all/SPY/2024/exp=2024-06-14 {'rows': 110262, 'first': '2024-06-04 09:30:00', 'last': '2024-06-04 16:00:00'} 213.6s
+15:47:10 option_greeks_eod/SPY/2024/exp=2024-06-14 {'rows': 282, 'first': '2024-06-04 00:00:00', 'last': '2024-06-04 16:14:59'} 2.2s
+15:47:10 option_list_dates/SPY/EOD/exp=2013-06-14 StatusCode.INVALID_ARGUMENT Unsupported request type: EOD 0.1s
+15:47:16 option_list_dates/SPY/QUOTE/exp=2013-06-14 {'rows': 21, 'first': '2013-05-16', 'last': '2013-06-14'} 6.4s
+15:47:19 option_list_dates/SPY/TRADE/exp=2013-06-14 {'rows': 21, 'first': '2013-05-16', 'last': '2013-06-14'} 2.9s
+15:47:19 option_list_dates/SPY/OHLC/exp=2013-06-14 StatusCode.INVALID_ARGUMENT Unsupported request type: OHLC 0.1s
+15:47:19 option_list_dates/SPY/OPEN_INTEREST/exp=2013-06-14 StatusCode.INVALID_ARGUMENT Unsupported request type: OPEN_INTEREST 0.1s
+15:47:19 PROBE2 DONE

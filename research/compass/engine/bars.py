@@ -30,6 +30,8 @@ def load_minutes(symbol: str, root: str, start: dt.date | None = None, end: dt.d
         if start and d < start: continue
         if end and d > end: continue
         df = pl.read_parquet(f, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
+        # one schema whatever a file holds (a session with no bars may have been written with null/string columns)
+        df = df.with_columns([pl.col(c).cast(pl.Float64, strict=False) for c in ('open', 'high', 'low', 'close', 'volume')])
         df = df.filter(pl.col('open').is_not_null() & pl.col('close').is_not_null())  # the vendor's 16:00 placeholder row has nulls
         if df.height == 0: continue
         frames.append(df.with_columns(pl.lit(d).alias('session')))

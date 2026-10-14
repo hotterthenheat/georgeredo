@@ -1,0 +1,2332 @@
+{
+ "generated_utc": "2026-10-14T15:35:53.308909+00:00",
+ "probes": {
+  "stock_eod/SPY/2012": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2012-01-01",
+    "end_date": "2012-12-31"
+   },
+   "secs": 3.9,
+   "error": "NO_DATA"
+  },
+  "stock_eod/SPY/2013": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2013-01-01",
+    "end_date": "2013-12-31"
+   },
+   "secs": 5.3,
+   "error": "NO_DATA"
+  },
+  "stock_eod/SPY/2014": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2014-01-01",
+    "end_date": "2014-12-31"
+   },
+   "secs": 3.1,
+   "error": "NO_DATA"
+  },
+  "stock_eod/SPY/2015": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2015-01-01",
+    "end_date": "2015-12-31"
+   },
+   "secs": 4.3,
+   "error": "NO_DATA"
+  },
+  "stock_eod/SPY/2016": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2016-01-01",
+    "end_date": "2016-12-31"
+   },
+   "secs": 2.6,
+   "error": "NO_DATA"
+  },
+  "stock_eod/SPY/2017": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2017-01-01",
+    "end_date": "2017-12-31"
+   },
+   "secs": 2.8,
+   "error": null,
+   "rows": 251,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2017-01-03 17:37:29",
+   "last": "2017-12-29 18:30:00"
+  },
+  "stock_eod/SPY/2018": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2018-01-01",
+    "end_date": "2018-12-31"
+   },
+   "secs": 4.9,
+   "error": null,
+   "rows": 251,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2018-01-02 17:17:09",
+   "last": "2018-12-31 17:17:22"
+  },
+  "stock_eod/SPY/2019": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2019-01-01",
+    "end_date": "2019-12-31"
+   },
+   "secs": 4.7,
+   "error": null,
+   "rows": 252,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2019-01-02 17:30:20",
+   "last": "2019-12-31 17:17:10"
+  },
+  "stock_eod/AAPL/2012": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "AAPL",
+    "start_date": "2012-01-01",
+    "end_date": "2012-12-31"
+   },
+   "secs": 4.2,
+   "error": null,
+   "rows": 146,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2012-06-01 20:00:00",
+   "last": "2012-12-31 17:35:03"
+  },
+  "stock_eod/AAPL/2013": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "AAPL",
+    "start_date": "2013-01-01",
+    "end_date": "2013-12-31"
+   },
+   "secs": 11.5,
+   "error": null,
+   "rows": 252,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2013-01-02 18:02:59",
+   "last": "2013-12-31 18:00:03"
+  },
+  "stock_eod/AAPL/2014": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "AAPL",
+    "start_date": "2014-01-01",
+    "end_date": "2014-12-31"
+   },
+   "secs": 4.2,
+   "error": null,
+   "rows": 252,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2014-01-02 18:20:56",
+   "last": "2014-12-31 17:30:08"
+  },
+  "stock_eod/AAPL/2015": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "AAPL",
+    "start_date": "2015-01-01",
+    "end_date": "2015-12-31"
+   },
+   "secs": 4.4,
+   "error": null,
+   "rows": 252,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2015-01-02 17:20:01",
+   "last": "2015-12-31 18:32:34"
+  },
+  "stock_eod/AAPL/2016": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "AAPL",
+    "start_date": "2016-01-01",
+    "end_date": "2016-12-31"
+   },
+   "secs": 3.2,
+   "error": null,
+   "rows": 252,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2016-01-04 17:50:57",
+   "last": "2016-12-30 19:01:17"
+  },
+  "stock_eod/AAPL/2017": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "AAPL",
+    "start_date": "2017-01-01",
+    "end_date": "2017-12-31"
+   },
+   "secs": 2.7,
+   "error": null,
+   "rows": 251,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2017-01-03 17:37:29",
+   "last": "2017-12-29 18:30:00"
+  },
+  "stock_eod/AAPL/2018": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "AAPL",
+    "start_date": "2018-01-01",
+    "end_date": "2018-12-31"
+   },
+   "secs": 3.4,
+   "error": null,
+   "rows": 251,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2018-01-02 17:17:09",
+   "last": "2018-12-31 17:17:22"
+  },
+  "stock_eod/AAPL/2019": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "AAPL",
+    "start_date": "2019-01-01",
+    "end_date": "2019-12-31"
+   },
+   "secs": 3.9,
+   "error": null,
+   "rows": 252,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2019-01-02 17:30:20",
+   "last": "2019-12-31 17:17:10"
+  },
+  "stock_quote_1m/SPY/2012": {
+   "method": "stock_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2012-06-03",
+    "end_date": "2012-06-03",
+    "interval": "1m"
+   },
+   "secs": 0.1,
+   "error": "NO_DATA"
+  },
+  "stock_trade/SPY/2012": {
+   "method": "stock_history_trade",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2012-06-03",
+    "end_date": "2012-06-03"
+   },
+   "secs": 0.1,
+   "error": "NO_DATA"
+  },
+  "stock_quote_1m/SPY/2014": {
+   "method": "stock_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2014-06-02",
+    "end_date": "2014-06-02",
+    "interval": "1m"
+   },
+   "secs": 0.1,
+   "error": "NO_DATA"
+  },
+  "stock_trade/SPY/2014": {
+   "method": "stock_history_trade",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2014-06-02",
+    "end_date": "2014-06-02"
+   },
+   "secs": 0.1,
+   "error": "NO_DATA"
+  },
+  "stock_quote_1m/SPY/2016": {
+   "method": "stock_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2016-06-02",
+    "end_date": "2016-06-02",
+    "interval": "1m"
+   },
+   "secs": 0.3,
+   "error": "NO_DATA"
+  },
+  "stock_trade/SPY/2016": {
+   "method": "stock_history_trade",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2016-06-02",
+    "end_date": "2016-06-02"
+   },
+   "secs": 0.1,
+   "error": "NO_DATA"
+  },
+  "stock_quote_1m/SPY/2018": {
+   "method": "stock_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2018-06-03",
+    "end_date": "2018-06-03",
+    "interval": "1m"
+   },
+   "secs": 0.1,
+   "error": "NO_DATA"
+  },
+  "stock_trade/SPY/2018": {
+   "method": "stock_history_trade",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2018-06-03",
+    "end_date": "2018-06-03"
+   },
+   "secs": 0.1,
+   "error": "NO_DATA"
+  },
+  "stock_quote_1m/SPY/2020": {
+   "method": "stock_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2020-06-02",
+    "end_date": "2020-06-02",
+    "interval": "1m"
+   },
+   "secs": 0.1,
+   "error": null,
+   "rows": 391,
+   "columns": [
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2020-06-02 09:30:00",
+   "last": "2020-06-02 16:00:00"
+  },
+  "stock_trade/SPY/2020": {
+   "method": "stock_history_trade",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2020-06-02",
+    "end_date": "2020-06-02"
+   },
+   "secs": 8.7,
+   "error": null,
+   "rows": 369510,
+   "columns": [
+    "timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price"
+   ],
+   "first": "2020-06-02 09:30:00",
+   "last": "2020-06-02 15:59:59"
+  },
+  "stock_quote_1m/SPY/2024": {
+   "method": "stock_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2024-06-03",
+    "end_date": "2024-06-03",
+    "interval": "1m"
+   },
+   "secs": 0.3,
+   "error": null,
+   "rows": 391,
+   "columns": [
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2024-06-03 09:30:00",
+   "last": "2024-06-03 16:00:00"
+  },
+  "stock_trade/SPY/2024": {
+   "method": "stock_history_trade",
+   "args": {
+    "symbol": "SPY",
+    "start_date": "2024-06-03",
+    "end_date": "2024-06-03"
+   },
+   "secs": 9.8,
+   "error": null,
+   "rows": 450688,
+   "columns": [
+    "timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price"
+   ],
+   "first": "2024-06-03 09:30:00",
+   "last": "2024-06-03 15:59:59"
+  },
+  "index_eod/SPX/2017": {
+   "method": "index_history_eod",
+   "args": {
+    "symbol": "SPX",
+    "start_date": "2017-01-01",
+    "end_date": "2017-12-31"
+   },
+   "secs": 5.1,
+   "error": null,
+   "rows": 251,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2017-01-03 17:59:45",
+   "last": "2017-12-29 17:38:21"
+  },
+  "index_eod/SPX/2018": {
+   "method": "index_history_eod",
+   "args": {
+    "symbol": "SPX",
+    "start_date": "2018-01-01",
+    "end_date": "2018-12-31"
+   },
+   "secs": 4.4,
+   "error": null,
+   "rows": 251,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2018-01-02 18:14:28",
+   "last": "2018-12-31 17:40:50"
+  },
+  "index_eod/VIX/2017": {
+   "method": "index_history_eod",
+   "args": {
+    "symbol": "VIX",
+    "start_date": "2017-01-01",
+    "end_date": "2017-12-31"
+   },
+   "secs": 4.8,
+   "error": null,
+   "rows": 251,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2017-01-03 17:59:45",
+   "last": "2017-12-29 17:38:21"
+  },
+  "index_eod/VIX/2018": {
+   "method": "index_history_eod",
+   "args": {
+    "symbol": "VIX",
+    "start_date": "2018-01-01",
+    "end_date": "2018-12-31"
+   },
+   "secs": 4.1,
+   "error": null,
+   "rows": 251,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2018-01-02 18:14:28",
+   "last": "2018-12-31 17:40:50"
+  },
+  "index_eod/VIX/2019": {
+   "method": "index_history_eod",
+   "args": {
+    "symbol": "VIX",
+    "start_date": "2019-01-01",
+    "end_date": "2019-12-31"
+   },
+   "secs": 5.0,
+   "error": null,
+   "rows": 252,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2019-01-02 18:05:56",
+   "last": "2019-12-31 17:23:01"
+  },
+  "index_eod/VIX/2020": {
+   "method": "index_history_eod",
+   "args": {
+    "symbol": "VIX",
+    "start_date": "2020-01-01",
+    "end_date": "2020-12-31"
+   },
+   "secs": 3.4,
+   "error": null,
+   "rows": 253,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2020-01-02 17:25:10",
+   "last": "2020-12-31 17:22:58"
+  },
+  "index_price_1m/VIX/2017-06-01": {
+   "method": "index_history_price",
+   "args": {
+    "symbol": "VIX",
+    "start_date": "2017-06-01",
+    "end_date": "2017-06-01",
+    "interval": "1m"
+   },
+   "secs": 0.1,
+   "error": null,
+   "rows": 391,
+   "columns": [
+    "timestamp",
+    "price"
+   ],
+   "first": "2017-06-01 09:30:00",
+   "last": "2017-06-01 16:00:00"
+  },
+  "index_price_1m/RUT/2017-06-01": {
+   "method": "index_history_price",
+   "args": {
+    "symbol": "RUT",
+    "start_date": "2017-06-01",
+    "end_date": "2017-06-01",
+    "interval": "1m"
+   },
+   "secs": 0.1,
+   "error": "NO_DATA"
+  },
+  "option_quote_1m/SPY/2012/exp=2012-06-16": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2012-06-16",
+    "start_date": "2012-06-04",
+    "end_date": "2012-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 5.1,
+   "error": null,
+   "rows": 99314,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2012-06-04 09:30:00",
+   "last": "2012-06-04 16:00:00"
+  },
+  "option_trade/SPY/2012/exp=2012-06-16": {
+   "method": "option_history_trade",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2012-06-16",
+    "start_date": "2012-06-04",
+    "end_date": "2012-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 1.7,
+   "error": null,
+   "rows": 21552,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price"
+   ],
+   "first": "2012-06-04 09:30:00",
+   "last": "2012-06-04 15:59:59"
+  },
+  "option_ohlc_1m/SPY/2012/exp=2012-06-16": {
+   "method": "option_history_ohlc",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2012-06-16",
+    "start_date": "2012-06-04",
+    "end_date": "2012-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 2.7,
+   "error": null,
+   "rows": 32844,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "vwap"
+   ],
+   "first": "2012-06-04 09:30:00",
+   "last": "2012-06-04 16:00:00"
+  },
+  "option_trade_quote/SPY/2012/exp=2012-06-16": {
+   "method": "option_history_trade_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2012-06-16",
+    "start_date": "2012-06-04",
+    "end_date": "2012-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 2.6,
+   "error": null,
+   "rows": 21552,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "trade_timestamp",
+    "quote_timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "SPY",
+   "last": "SPY"
+  },
+  "option_greeks_all/SPY/2012/exp=2012-06-16": {
+   "method": "option_history_greeks_all",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2012-06-16",
+    "start_date": "2012-06-04",
+    "end_date": "2012-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 2.8,
+   "error": "NO_DATA"
+  },
+  "option_greeks_implied_volatility/SPY/2012/exp=2012-06-16": {
+   "method": "option_history_greeks_implied_volatility",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2012-06-16",
+    "start_date": "2012-06-04",
+    "end_date": "2012-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 3.1,
+   "error": "NO_DATA"
+  },
+  "option_greeks_first_order/SPY/2012/exp=2012-06-16": {
+   "method": "option_history_greeks_first_order",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2012-06-16",
+    "start_date": "2012-06-04",
+    "end_date": "2012-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 1.7,
+   "error": "NO_DATA"
+  },
+  "option_binomial_greeks_all/SPY/2012/exp=2012-06-16": {
+   "method": "option_history_binomial_greeks_all",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2012-06-16",
+    "start_date": "2012-06-04",
+    "end_date": "2012-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 2.4,
+   "error": "NO_DATA"
+  },
+  "option_greeks_eod/SPY/2012/exp=2012-06-16": {
+   "method": "option_history_greeks_eod",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2012-06-16",
+    "start_date": "2012-06-04",
+    "end_date": "2012-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 0.1,
+   "error": "NO_DATA"
+  },
+  "option_quote_1m/SPY/2013/exp=2013-06-14": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2013-06-14",
+    "start_date": "2013-06-04",
+    "end_date": "2013-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 2.7,
+   "error": null,
+   "rows": 29716,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2013-06-04 09:30:00",
+   "last": "2013-06-04 16:00:00"
+  },
+  "option_trade/SPY/2013/exp=2013-06-14": {
+   "method": "option_history_trade",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2013-06-14",
+    "start_date": "2013-06-04",
+    "end_date": "2013-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 1.9,
+   "error": null,
+   "rows": 10807,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price"
+   ],
+   "first": "2013-06-04 09:30:00",
+   "last": "2013-06-04 15:59:58"
+  },
+  "option_ohlc_1m/SPY/2013/exp=2013-06-14": {
+   "method": "option_history_ohlc",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2013-06-14",
+    "start_date": "2013-06-04",
+    "end_date": "2013-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 1.0,
+   "error": null,
+   "rows": 23851,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "vwap"
+   ],
+   "first": "2013-06-04 09:30:00",
+   "last": "2013-06-04 16:00:00"
+  },
+  "option_trade_quote/SPY/2013/exp=2013-06-14": {
+   "method": "option_history_trade_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2013-06-14",
+    "start_date": "2013-06-04",
+    "end_date": "2013-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 1.0,
+   "error": null,
+   "rows": 10807,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "trade_timestamp",
+    "quote_timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "SPY",
+   "last": "SPY"
+  },
+  "option_greeks_all/SPY/2013/exp=2013-06-14": {
+   "method": "option_history_greeks_all",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2013-06-14",
+    "start_date": "2013-06-04",
+    "end_date": "2013-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 0.6,
+   "error": "NO_DATA"
+  },
+  "option_greeks_implied_volatility/SPY/2013/exp=2013-06-14": {
+   "method": "option_history_greeks_implied_volatility",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2013-06-14",
+    "start_date": "2013-06-04",
+    "end_date": "2013-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 0.7,
+   "error": "NO_DATA"
+  },
+  "option_greeks_first_order/SPY/2013/exp=2013-06-14": {
+   "method": "option_history_greeks_first_order",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2013-06-14",
+    "start_date": "2013-06-04",
+    "end_date": "2013-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 0.5,
+   "error": "NO_DATA"
+  },
+  "option_binomial_greeks_all/SPY/2013/exp=2013-06-14": {
+   "method": "option_history_binomial_greeks_all",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2013-06-14",
+    "start_date": "2013-06-04",
+    "end_date": "2013-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 1.1,
+   "error": "NO_DATA"
+  },
+  "option_greeks_eod/SPY/2013/exp=2013-06-14": {
+   "method": "option_history_greeks_eod",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2013-06-14",
+    "start_date": "2013-06-04",
+    "end_date": "2013-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 0.1,
+   "error": "NO_DATA"
+  },
+  "option_quote_1m/SPY/2014/exp=2014-06-21": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2014-06-21",
+    "start_date": "2014-06-04",
+    "end_date": "2014-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 5.3,
+   "error": null,
+   "rows": 107134,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2014-06-04 09:30:00",
+   "last": "2014-06-04 16:00:00"
+  },
+  "option_trade/SPY/2014/exp=2014-06-21": {
+   "method": "option_history_trade",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2014-06-21",
+    "start_date": "2014-06-04",
+    "end_date": "2014-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 1.5,
+   "error": null,
+   "rows": 8174,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price"
+   ],
+   "first": "2014-06-04 09:30:00",
+   "last": "2014-06-04 15:59:59"
+  },
+  "option_ohlc_1m/SPY/2014/exp=2014-06-21": {
+   "method": "option_history_ohlc",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2014-06-21",
+    "start_date": "2014-06-04",
+    "end_date": "2014-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 3.2,
+   "error": null,
+   "rows": 32062,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "vwap"
+   ],
+   "first": "2014-06-04 09:30:00",
+   "last": "2014-06-04 16:00:00"
+  },
+  "option_trade_quote/SPY/2014/exp=2014-06-21": {
+   "method": "option_history_trade_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2014-06-21",
+    "start_date": "2014-06-04",
+    "end_date": "2014-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 2.0,
+   "error": null,
+   "rows": 8174,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "trade_timestamp",
+    "quote_timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "SPY",
+   "last": "SPY"
+  },
+  "option_greeks_all/SPY/2014/exp=2014-06-21": {
+   "method": "option_history_greeks_all",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2014-06-21",
+    "start_date": "2014-06-04",
+    "end_date": "2014-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 2.3,
+   "error": "NO_DATA"
+  },
+  "option_greeks_implied_volatility/SPY/2014/exp=2014-06-21": {
+   "method": "option_history_greeks_implied_volatility",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2014-06-21",
+    "start_date": "2014-06-04",
+    "end_date": "2014-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 1.6,
+   "error": "NO_DATA"
+  },
+  "option_greeks_first_order/SPY/2014/exp=2014-06-21": {
+   "method": "option_history_greeks_first_order",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2014-06-21",
+    "start_date": "2014-06-04",
+    "end_date": "2014-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 3.9,
+   "error": "NO_DATA"
+  },
+  "option_binomial_greeks_all/SPY/2014/exp=2014-06-21": {
+   "method": "option_history_binomial_greeks_all",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2014-06-21",
+    "start_date": "2014-06-04",
+    "end_date": "2014-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 2.5,
+   "error": "NO_DATA"
+  },
+  "option_greeks_eod/SPY/2014/exp=2014-06-21": {
+   "method": "option_history_greeks_eod",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2014-06-21",
+    "start_date": "2014-06-04",
+    "end_date": "2014-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 0.1,
+   "error": "NO_DATA"
+  },
+  "option_quote_1m/SPY/2016/exp=2016-06-17": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2016-06-17",
+    "start_date": "2016-06-05",
+    "end_date": "2016-06-05",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 3.2,
+   "error": "NO_DATA"
+  },
+  "option_trade/SPY/2016/exp=2016-06-17": {
+   "method": "option_history_trade",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2016-06-17",
+    "start_date": "2016-06-05",
+    "end_date": "2016-06-05",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 1.4,
+   "error": "NO_DATA"
+  },
+  "option_ohlc_1m/SPY/2016/exp=2016-06-17": {
+   "method": "option_history_ohlc",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2016-06-17",
+    "start_date": "2016-06-05",
+    "end_date": "2016-06-05",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 4.5,
+   "error": "NO_DATA"
+  },
+  "option_trade_quote/SPY/2016/exp=2016-06-17": {
+   "method": "option_history_trade_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2016-06-17",
+    "start_date": "2016-06-05",
+    "end_date": "2016-06-05",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 3.9,
+   "error": "NO_DATA"
+  },
+  "option_greeks_all/SPY/2016/exp=2016-06-17": {
+   "method": "option_history_greeks_all",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2016-06-17",
+    "start_date": "2016-06-05",
+    "end_date": "2016-06-05",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 1.8,
+   "error": "NO_DATA"
+  },
+  "option_greeks_implied_volatility/SPY/2016/exp=2016-06-17": {
+   "method": "option_history_greeks_implied_volatility",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2016-06-17",
+    "start_date": "2016-06-05",
+    "end_date": "2016-06-05",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 0.7,
+   "error": "NO_DATA"
+  },
+  "option_greeks_first_order/SPY/2016/exp=2016-06-17": {
+   "method": "option_history_greeks_first_order",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2016-06-17",
+    "start_date": "2016-06-05",
+    "end_date": "2016-06-05",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 1.5,
+   "error": "NO_DATA"
+  },
+  "option_binomial_greeks_all/SPY/2016/exp=2016-06-17": {
+   "method": "option_history_binomial_greeks_all",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2016-06-17",
+    "start_date": "2016-06-05",
+    "end_date": "2016-06-05",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 1.2,
+   "error": "NO_DATA"
+  },
+  "option_greeks_eod/SPY/2016/exp=2016-06-17": {
+   "method": "option_history_greeks_eod",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2016-06-17",
+    "start_date": "2016-06-05",
+    "end_date": "2016-06-05",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 0.1,
+   "error": "NO_DATA"
+  },
+  "option_quote_1m/SPY/2020/exp=2020-06-15": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2020-06-15",
+    "start_date": "2020-06-04",
+    "end_date": "2020-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 4.8,
+   "error": null,
+   "rows": 92276,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2020-06-04 09:30:00",
+   "last": "2020-06-04 16:00:00"
+  },
+  "option_trade/SPY/2020/exp=2020-06-15": {
+   "method": "option_history_trade",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2020-06-15",
+    "start_date": "2020-06-04",
+    "end_date": "2020-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 3.0,
+   "error": null,
+   "rows": 5807,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price"
+   ],
+   "first": "2020-06-04 09:30:00",
+   "last": "2020-06-04 15:59:59"
+  },
+  "option_ohlc_1m/SPY/2020/exp=2020-06-15": {
+   "method": "option_history_ohlc",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2020-06-15",
+    "start_date": "2020-06-04",
+    "end_date": "2020-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 4.8,
+   "error": null,
+   "rows": 56695,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "vwap"
+   ],
+   "first": "2020-06-04 09:30:00",
+   "last": "2020-06-04 16:00:00"
+  },
+  "option_trade_quote/SPY/2020/exp=2020-06-15": {
+   "method": "option_history_trade_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2020-06-15",
+    "start_date": "2020-06-04",
+    "end_date": "2020-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 3.1,
+   "error": null,
+   "rows": 5806,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "trade_timestamp",
+    "quote_timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "SPY",
+   "last": "SPY"
+  },
+  "option_greeks_all/SPY/2020/exp=2020-06-15": {
+   "method": "option_history_greeks_all",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2020-06-15",
+    "start_date": "2020-06-04",
+    "end_date": "2020-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 10.0,
+   "error": null,
+   "rows": 92276,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid",
+    "ask",
+    "delta",
+    "theta",
+    "vega",
+    "rho",
+    "epsilon",
+    "lambda",
+    "gamma",
+    "vanna",
+    "charm",
+    "vomma",
+    "veta",
+    "vera",
+    "speed",
+    "zomma",
+    "color",
+    "ultima",
+    "d1",
+    "d2",
+    "dual_delta",
+    "dual_gamma",
+    "implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "first": "2020-06-04 09:30:00",
+   "last": "2020-06-04 16:00:00"
+  },
+  "option_greeks_implied_volatility/SPY/2020/exp=2020-06-15": {
+   "method": "option_history_greeks_implied_volatility",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2020-06-15",
+    "start_date": "2020-06-04",
+    "end_date": "2020-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 9.3,
+   "error": null,
+   "rows": 92276,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid",
+    "bid_implied_vol",
+    "midpoint",
+    "implied_vol",
+    "ask",
+    "ask_implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "first": "2020-06-04 09:30:00",
+   "last": "2020-06-04 16:00:00"
+  },
+  "option_greeks_first_order/SPY/2020/exp=2020-06-15": {
+   "method": "option_history_greeks_first_order",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2020-06-15",
+    "start_date": "2020-06-04",
+    "end_date": "2020-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 7.2,
+   "error": null,
+   "rows": 92276,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid",
+    "ask",
+    "delta",
+    "theta",
+    "vega",
+    "rho",
+    "epsilon",
+    "lambda",
+    "implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "first": "2020-06-04 09:30:00",
+   "last": "2020-06-04 16:00:00"
+  },
+  "option_binomial_greeks_all/SPY/2020/exp=2020-06-15": {
+   "method": "option_history_binomial_greeks_all",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2020-06-15",
+    "start_date": "2020-06-04",
+    "end_date": "2020-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 168.8,
+   "error": null,
+   "rows": 92276,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid",
+    "ask",
+    "delta",
+    "theta",
+    "vega",
+    "rho",
+    "epsilon",
+    "lambda",
+    "gamma",
+    "vanna",
+    "charm",
+    "vomma",
+    "veta",
+    "vera",
+    "speed",
+    "zomma",
+    "color",
+    "ultima",
+    "d1",
+    "d2",
+    "dual_delta",
+    "dual_gamma",
+    "implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "first": "2020-06-04 09:30:00",
+   "last": "2020-06-04 16:00:00"
+  },
+  "option_greeks_eod/SPY/2020/exp=2020-06-15": {
+   "method": "option_history_greeks_eod",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2020-06-15",
+    "start_date": "2020-06-04",
+    "end_date": "2020-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 3.1,
+   "error": null,
+   "rows": 236,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition",
+    "delta",
+    "theta",
+    "vega",
+    "rho",
+    "epsilon",
+    "lambda",
+    "gamma",
+    "vanna",
+    "charm",
+    "vomma",
+    "veta",
+    "vera",
+    "speed",
+    "zomma",
+    "color",
+    "ultima",
+    "d1",
+    "d2",
+    "dual_delta",
+    "dual_gamma",
+    "implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "first": "2020-06-04 00:00:00",
+   "last": "2020-06-04 16:14:49"
+  },
+  "option_quote_1m/SPY/2024/exp=2024-06-14": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 5.6,
+   "error": null,
+   "rows": 110262,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "option_trade/SPY/2024/exp=2024-06-14": {
+   "method": "option_history_trade",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 2.9,
+   "error": null,
+   "rows": 13962,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price"
+   ],
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 15:59:57"
+  },
+  "option_ohlc_1m/SPY/2024/exp=2024-06-14": {
+   "method": "option_history_ohlc",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 6.0,
+   "error": null,
+   "rows": 66861,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "vwap"
+   ],
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "option_trade_quote/SPY/2024/exp=2024-06-14": {
+   "method": "option_history_trade_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 5.5,
+   "error": null,
+   "rows": 13962,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "trade_timestamp",
+    "quote_timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "first": "SPY",
+   "last": "SPY"
+  },
+  "option_greeks_all/SPY/2024/exp=2024-06-14": {
+   "method": "option_history_greeks_all",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 12.2,
+   "error": null,
+   "rows": 110262,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid",
+    "ask",
+    "delta",
+    "theta",
+    "vega",
+    "rho",
+    "epsilon",
+    "lambda",
+    "gamma",
+    "vanna",
+    "charm",
+    "vomma",
+    "veta",
+    "vera",
+    "speed",
+    "zomma",
+    "color",
+    "ultima",
+    "d1",
+    "d2",
+    "dual_delta",
+    "dual_gamma",
+    "implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "option_greeks_implied_volatility/SPY/2024/exp=2024-06-14": {
+   "method": "option_history_greeks_implied_volatility",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 15.5,
+   "error": null,
+   "rows": 110262,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid",
+    "bid_implied_vol",
+    "midpoint",
+    "implied_vol",
+    "ask",
+    "ask_implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "option_greeks_first_order/SPY/2024/exp=2024-06-14": {
+   "method": "option_history_greeks_first_order",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 10.3,
+   "error": null,
+   "rows": 110262,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid",
+    "ask",
+    "delta",
+    "theta",
+    "vega",
+    "rho",
+    "epsilon",
+    "lambda",
+    "implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "option_binomial_greeks_all/SPY/2024/exp=2024-06-14": {
+   "method": "option_history_binomial_greeks_all",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 213.6,
+   "error": null,
+   "rows": 110262,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid",
+    "ask",
+    "delta",
+    "theta",
+    "vega",
+    "rho",
+    "epsilon",
+    "lambda",
+    "gamma",
+    "vanna",
+    "charm",
+    "vomma",
+    "veta",
+    "vera",
+    "speed",
+    "zomma",
+    "color",
+    "ultima",
+    "d1",
+    "d2",
+    "dual_delta",
+    "dual_gamma",
+    "implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "option_greeks_eod/SPY/2024/exp=2024-06-14": {
+   "method": "option_history_greeks_eod",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 2.2,
+   "error": null,
+   "rows": 282,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition",
+    "delta",
+    "theta",
+    "vega",
+    "rho",
+    "epsilon",
+    "lambda",
+    "gamma",
+    "vanna",
+    "charm",
+    "vomma",
+    "veta",
+    "vera",
+    "speed",
+    "zomma",
+    "color",
+    "ultima",
+    "d1",
+    "d2",
+    "dual_delta",
+    "dual_gamma",
+    "implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "first": "2024-06-04 00:00:00",
+   "last": "2024-06-04 16:14:59"
+  },
+  "option_list_dates/SPY/EOD/exp=2013-06-14": {
+   "method": "option_list_dates",
+   "args": {
+    "request_type": "EOD",
+    "symbol": "SPY",
+    "expiration": "2013-06-14"
+   },
+   "secs": 0.1,
+   "error": "StatusCode.INVALID_ARGUMENT Unsupported request type: EOD"
+  },
+  "option_list_dates/SPY/QUOTE/exp=2013-06-14": {
+   "method": "option_list_dates",
+   "args": {
+    "request_type": "QUOTE",
+    "symbol": "SPY",
+    "expiration": "2013-06-14"
+   },
+   "secs": 6.4,
+   "error": null,
+   "rows": 21,
+   "columns": [
+    "date"
+   ],
+   "first": "2013-05-16",
+   "last": "2013-06-14"
+  },
+  "option_list_dates/SPY/TRADE/exp=2013-06-14": {
+   "method": "option_list_dates",
+   "args": {
+    "request_type": "TRADE",
+    "symbol": "SPY",
+    "expiration": "2013-06-14"
+   },
+   "secs": 2.9,
+   "error": null,
+   "rows": 21,
+   "columns": [
+    "date"
+   ],
+   "first": "2013-05-16",
+   "last": "2013-06-14"
+  },
+  "option_list_dates/SPY/OHLC/exp=2013-06-14": {
+   "method": "option_list_dates",
+   "args": {
+    "request_type": "OHLC",
+    "symbol": "SPY",
+    "expiration": "2013-06-14"
+   },
+   "secs": 0.1,
+   "error": "StatusCode.INVALID_ARGUMENT Unsupported request type: OHLC"
+  },
+  "option_list_dates/SPY/OPEN_INTEREST/exp=2013-06-14": {
+   "method": "option_list_dates",
+   "args": {
+    "request_type": "OPEN_INTEREST",
+    "symbol": "SPY",
+    "expiration": "2013-06-14"
+   },
+   "secs": 0.1,
+   "error": "StatusCode.INVALID_ARGUMENT Unsupported request type: OPEN_INTEREST"
+  }
+ },
+ "spy_expirations": {
+  "count": 2148,
+  "first": "2012-06-01",
+  "last": "2029-01-19"
+ }
+}
