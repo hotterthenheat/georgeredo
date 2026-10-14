@@ -36,6 +36,7 @@ Every entry: what was done, the exact command or file, its verified outcome. New
 | 16:42 | S08 (earnings family at daily resolution, amendment A3) run (46 s; 10,439 reports) → `results/v1/s08_earnings_daily/`; registry `S08`; `05_results.md` §S08 | Nothing promoted; the surprise direction underperforms the universe after the gap in every year |
 | 16:45 | `07_coverage_report.md` (history used vs available per dataset and study; limits) and `08_port_spec_3abida.md` (interim: keep / replace / add / not-port / acceptance) written | Updated when S02, S03 and S06-Tier A finish |
 | 16:55 | S09 finished (393 s; 2,324 signals, 1,229 fills) → `results/v1/s09_spxw_0dte_baseline/REPORT.md`; registry `S09`; `05_results.md` §S09 | Rejected: −$46.18/contract [−63.19, −30.02], −$24.09 vs matched random [−39.45, −9.28] |
+| 17:00 | S03 pull's open-interest phase collapsed from 2.2 to 0.1 requests/s after ~1,400 requests (vendor-side throttling of that endpoint: raising the fetcher's CPU priority changed nothing; S09 and the grid were sharing the CPUs). Fetcher now counts and logs gRPC throttling retries. Pull relaunched with `S03_OI=0` (chains + OHLC only; the OI filter applies where OI is cached: SPY 2017-06 → ≈ 2023-05, none for QQQ/IWM; the study reports the coverage) | `s03_pull.log`, `pull_chain.log` |
 
 ## Known defects and open items
 - Event flags (FOMC/CPI/NFP) exist only from 2017-02; earlier sessions report `unknown`.
