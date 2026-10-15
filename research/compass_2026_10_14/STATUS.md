@@ -1,18 +1,18 @@
-# Compass Research Status — 2026-10-14
+# Compass Research Status — 2026-10-14 (continued)
 
-Session started after connecting Theta Data Pro key. Environment: Python 3.12 + thetadata 1.0.15 client (direct API key auth, no Terminal required).
+## Progress
+- Expanded short-dated density inventory across 27 liquid symbols.
+- SPY ATM straddle sample: 16 days (Sep 15 – Oct 9), median mid $4.05.
+- QQQ ATM sample: 5 days, median mid $5.51.
+- One outlier day (2026-09-15, $0.33) flagged for ATM selection review.
 
-## Inventory
-- 15,817 option symbols available.
-- Short-dated density classification saved for liquid names (see inventory/short_dated_density.csv).
-- True daily 0DTE concentrated on SPX/SPY/QQQ/IWM/XSP/NDX; mega-caps have Mon/Wed expansions.
+## Alignment with prior research
+Existing COMPASS_RESEARCH_PLAN.md closed most 0DTE lanes after realistic NBBO costs. This session is building the executable measurement layer (real bid/ask mids, volume filters) required by the promotion criteria before any new rule tests.
 
-## Sample pulls
-- SPY max_dte=1 EOD for early October 2026: 4,176 rows.
-- Liquid filter (volume > 100, positive bid): 749 contracts.
-- Sample ATM-style straddle mids saved (needs tighter ATM selection in next pass).
+## Next
+- Refine ATM selection to remove outliers.
+- Pull matching underlying prices for expected-move %.
+- First rule-based executable comparison (simple credit/debit structures) against random baseline on the longer window.
+- Expand to IWM and mega-cap short-dated days.
 
-## Alignment with existing research
-Prior work in this repo (COMPASS_RESEARCH_PLAN.md, BACKTEST_RESULTS.md, thetadata studies) closed most tested 0DTE lanes after realistic NBBO costs. This session continues from that baseline: new inventory, executable samples, and incremental tests that respect the promotion criteria in the plan.
-
-No new validated edges claimed yet. Next: refined ATM construction, first rule-based executable tests on liquid 0DTE products with bid/ask fills, chronological splits, and comparison to baselines.
+No validated edges claimed. All numbers are preliminary measurements only.
