@@ -125,3 +125,52 @@ All at the closing quotes of the entry session, settled at the expiration close;
 | SMCI | 2024-05-20 → 06-21 | 903.94 | 905 | 74.10 / 75.30 | 71.30 / 72.70 | 905.26 | +$14,513 | the best: pinned at the strike |
 
 The losers are single months on single names that moved 30–150 %. They are what the short side collects its premium against, and they decide the average.
+
+## V2 — the earnings volatility cycle
+
+**Setup.**
+- **Events:** 11,836 quarterly reports (pre- or post-market), from 2023-11-27 to 2026-09-30.
+- **Names:** 1,587, meeting the liquidity rule at five sessions before the report.
+- **Expiration:** the first Friday expiration on or after the report session that was listed five sessions before. 5,236 expire within the report week; 1,107 on the report session itself, settled at its close.
+- **Excluded:** 34 events (28 with no listed expiration within 35 days, 3 missing closes, 3 corporate actions).
+- **Trades:**
+  - **V2a:** sell the ATM straddle at the close before the report session and buy it back at the report session's close (or settle that day);
+  - **V2b:** buy the ATM straddle five sessions earlier and sell the same strike at the close before the report.
+- **Interval:** 95 %, by resampling event weeks.
+
+| Trade | Development (2023-11 → 2024-12) | Validation (2025) | Dev + val | Hold-out (2026-01 → 09) |
+|---|---|---|---|---|
+| V2a: sell across the report, % of premium | −23.9 % [−26.4, −20.9] (3,558) | −27.9 % [−31.4, −23.7] (4,244) | **−26.1 %** [−28.5, −23.3] (7,802) | **−34.2 %** [−37.1, −29.8] (3,682) |
+| … one tick worse | | | −27.8 % | −35.9 % |
+| V2b: buy into the report | −12.7 % [−14.5, −10.1] (3,485) | −28.0 % [−30.6, −24.4] (4,100) | **−20.9 %** [−23.9, −17.6] (7,585) | **−29.3 %** [−32.5, −25.4] (3,543) |
+| … one tick worse | | | −22.7 % | −31.0 % |
+
+Both fail their promotion rule in every sample. Neither holds a positive interval in any cut:
+
+| Cut (development + validation) | V2a | V2b |
+|---|---|---|
+| Pre-market reports | −28.0 % | −21.6 % |
+| Post-market reports | −23.8 % | −20.1 % |
+| Implied move, lowest third / middle / highest | −31.8 % / −28.5 % / −17.8 % | |
+| Straddle spread, tightest third / middle / widest | −11.9 % / −20.7 % / −45.5 % | −6.7 % / −16.0 % / −40.1 % |
+
+**Why the report looks overpriced and still loses (development + validation):**
+- **Reports usually move less than implied.** The median report moved 0.59 of the implied move (interquartile 0.26–1.07), and only 28 % moved more.
+- **At the midpoint, sellers do earn something.** On the 782 reports whose expiration was the report session (no buy-back), selling at the mid and settling at the close earned **+6.9 %** of premium on average: median +21.6 %, won 60 % of the time.
+- **The spread takes all of it.** Selling at the bid instead turns that into **−4.5 %** after fees, because half the 12.9 % median spread is larger than the premium.
+- **Where trading is cheap, the premium is gone.** In the tightest-spread third (5.5 %), the premium is negative even at the mid (−4.0 %).
+- **Net:** the earnings "overpricing" sits in the names whose spreads are too wide to capture it.
+- **V2b:** the run-up in implied volatility into the report does not pay for five days of time decay plus a round trip of spread.
+
+This last comparison is exploratory, not pre-registered. It explains the result and changes no verdict.
+
+## Verdicts (pre-registered rules)
+
+| Test | Verdict |
+|---|---|
+| V1 T0, single-name monthly straddles overpriced net of costs | No: negative in every sample |
+| V1 T1, IV ÷ RV sort | No edge. The signal ranks forward volatility correctly but does not make selling pay, and adds nothing in the hold-out |
+| V1 T2, term slope | Pending (chains being pulled) |
+| V1 T3, skew | No edge |
+| V2a, sell earnings straddles across the report | No: −26 % (dev + val), −34 % (hold-out) |
+| V2b, buy earnings straddles into the report | No: −21 % (dev + val), −29 % (hold-out) |
