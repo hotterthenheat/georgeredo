@@ -55,7 +55,7 @@ The ranked conclusions follow, strongest evidence first. Every number is per uni
 
 - **Calendars, diagonals, iron condors and iron flies:** out of scope (the brief's "later" structures).
 - **Unusual-options-activity setups:** they need per-chain trade or volume history the vendor serves only per request (about 4,000 requests for the 0DTE chains); not pulled (`02_protocol.md` §9).
-- **Dark-pool setups:** no history on the current plans.
+- **Dark-pool and flow setups inside these lifecycles:** Unusual Whales serves flow, dark-pool prints and the full option tape only for its last 730 trading days (rolling; 2023-11-15 on 2026-10-15), so not across this study's periods. The separate index-ETF study on 339 of those sessions found no intraday edge in net premium, market tide, dark pool or per-strike bursts (`reports/Finding a 0DTE options edge.md`, `research/flow_predictors/`).
 - **Dealer positioning before 2025-10-15:** UW's daily greek exposure begins then, so H-FLO could only be tested on one year.
 - **Single names at any resolution:** only FB was pulled. The 40-name option EOD pull (about 19 hours) could not run in a session whose container is reclaimed when idle; it is resumable (`scripts/pull_tier_d.py`).
 - **Bounce setups on index ETFs before 2017 and on FB:** those closes come from put-call parity (the vendor has no stock bars there), so there is no daily open, and the bounce rules need one.
