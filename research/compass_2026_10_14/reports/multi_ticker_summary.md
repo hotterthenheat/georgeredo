@@ -4,11 +4,11 @@ Executable mid measurements only. Not strategy results.
 
 | Ticker | Days | Median Mid | Median % of Spot | Notes |
 |--------|------|------------|------------------|-------|
-| SPY    | 15   | $4.10     | 0.54%           | Clean sample |
-| QQQ    | 15   | $5.93     | 0.80%           | Longer, outlier filtered |
+| SPY    | 15   | $4.10     | 0.54%           | Clean |
+| QQQ    | 15   | $5.93     | 0.80%           | Longer |
 | IWM    | 15   | $2.31     | 0.83%           | Longer |
-| AAPL   | 3    | ~$4.50    | —               | Short sample |
-| NVDA   | 3    | ~$6.70    | —               | Short sample |
+| AAPL   | 8    | $6.40     | —               | Short-dated |
+| NVDA   | 8    | $5.34     | —               | Short-dated |
 
 All use high-volume strike proxy + positive bid filter.
 
