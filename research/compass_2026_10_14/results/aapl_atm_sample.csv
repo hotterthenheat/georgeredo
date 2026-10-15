@@ -1,0 +1,4 @@
+symbol,expiration,strike,straddle_mid
+AAPL,2026-10-02,330.0,3.775
+AAPL,2026-10-07,332.5,4.665
+AAPL,2026-10-09,335.0,5.035
