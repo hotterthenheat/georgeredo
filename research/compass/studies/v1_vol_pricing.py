@@ -355,10 +355,11 @@ def add_term():
 
 # ---------------------------------------------------------------- analyze
 RNG = np.random.default_rng(8)
-def boot(x: np.ndarray, B=10000):
+def boot(x: np.ndarray, B=10000, seed=8):
+    """its own seeded generator, so an interval never depends on how many draws other calls made before it"""
     x = x[np.isfinite(x)]
     if x.size < 3: return float('nan'), float('nan'), float('nan'), float('nan')
-    b = RNG.choice(x, size=(B, x.size), replace=True).mean(1)
+    b = np.random.default_rng(seed).choice(x, size=(B, x.size), replace=True).mean(1)
     p = 2 * min((b <= 0).mean(), (b >= 0).mean())
     return float(x.mean()), float(np.quantile(b, 0.025)), float(np.quantile(b, 0.975)), float(max(p, 1 / B))
 
@@ -393,7 +394,7 @@ def analyze(holdout=False):
         lines.append({'test': 'T0 short every ATM straddle', 'split': sp, 'cycles': s.height, 'name_cycles': int(s['n'].sum()), 'mean': m, 'lo': lo, 'hi': hi, 'p': p})
     for lab, f in (('stocks and ADRs', pl.col('issue_type').is_in(['Common Stock', 'ADR'])), ('ETFs', pl.col('issue_type') == 'ETF'),
                    ('other or unclassified', ~pl.col('issue_type').is_in(['Common Stock', 'ADR', 'ETF']) | pl.col('issue_type').is_null()), ('earnings in window', pl.col('earnings_in')), ('no earnings in window', ~pl.col('earnings_in'))):
-        c = N.filter(f).group_by(['D', 'split']).agg(pl.col('r_short').mean(), pl.len().alias('n'))
+        c = N.filter(f).group_by(['D', 'split']).agg(pl.col('r_short').mean(), pl.len().alias('n')).sort('D')   # a fixed order
         s = c.filter(pl.col('split') != 'holdout')
         m, lo, hi, p = boot(s['r_short'].to_numpy())
         lines.append({'test': f'T0 short every ATM straddle, {lab}', 'split': 'devval', 'cycles': s.height, 'name_cycles': int(s['n'].sum()), 'mean': m, 'lo': lo, 'hi': hi, 'p': p})

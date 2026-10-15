@@ -87,6 +87,10 @@ def price_at(day, m, stale=5):
     x = day.filter((pl.col('minute') <= m) & (pl.col('minute') >= m - stale)).sort('minute')
     return float(x['close'][-1]) if x.height else None
 
+def snap(ch, ts):
+    """the chain's quotes at one minute stamp (run._snapshot_at without the size columns)"""
+    return ch.filter(pl.col('timestamp') == ts).select('strike', 'right', 'bid', 'ask')
+
 def tick(p): return 0.01 if p < 3 else 0.05
 
 def two_sided(r): return r is not None and np.isfinite(r['bid']) and np.isfinite(r['ask']) and r['bid'] > 0 and r['ask'] >= r['bid']
@@ -144,7 +148,7 @@ def build():
             f = os.path.join(CACHE, 'chains_exp', base['root'], f'{d}__{d}.parquet')
             if not os.path.exists(f): ex('no same-day chain (vendor returned none)' if os.path.exists(f[:-8] + '.nodata') else 'chain not pulled'); continue
             ch = pl.read_parquet(f, columns=['timestamp', 'strike', 'right', 'bid', 'ask']).with_columns(pl.col('timestamp').dt.replace_time_zone(None))
-            s_in = R._snapshot_at(ch, dt.datetime.combine(d, dt.time(10, 0))); s_out = R._snapshot_at(ch, dt.datetime.combine(d, dt.time(15, 50)))
+            s_in = snap(ch, dt.datetime.combine(d, dt.time(10, 0))); s_out = snap(ch, dt.datetime.combine(d, dt.time(15, 50)))
             if s_in.height == 0 or s_out.height == 0: ex('no 10:00 or 15:50 chain snapshot'); continue
             q_in = {(k, r): dict(bid=bd, ask=ak) for k, r, bd, ak in s_in.select('strike', 'right', 'bid', 'ask').iter_rows()}
             q_out = {(k, r): dict(bid=bd, ask=ak) for k, r, bd, ak in s_out.select('strike', 'right', 'bid', 'ask').iter_rows()}
@@ -186,7 +190,7 @@ def cboot(df, col, B=10000, seed=9):
     """mean per trade, 95 % interval resampling sessions (every name on a date together); as V2's cboot"""
     d = df.filter(pl.col(col).is_not_null() & pl.col(col).is_finite())
     if d.height < 10: return d.height, float('nan'), float('nan'), float('nan'), float('nan')
-    g = d.group_by('session').agg(pl.col(col).sum().alias('s'), pl.len().alias('n'))
+    g = d.group_by('session').agg(pl.col(col).sum().alias('s'), pl.len().alias('n')).sort('session')   # a fixed order: the same seed, the same draws
     s, n = g['s'].to_numpy(), g['n'].to_numpy(); rng = np.random.default_rng(seed)
     idx = rng.integers(0, len(s), size=(B, len(s)))
     b = s[idx].sum(1) / n[idx].sum(1)

@@ -277,7 +277,7 @@ Walk-forward (train on all prior years with a 5-session embargo and ≥ 150 trai
 
 `studies/v1_vol_pricing.py`, `studies/v2_earnings_vol.py` → `results/v1/v1_vol_pricing/`, `results/v1/v2_earnings_vol/`; amendments A8–A8.3c, A9; full write-up `intel/02_volatility_pricing.md`. Unusual Whales closing chains (equal to ThetaData's closing NBBO on 638/638 contracts), ThetaData raw closes, corporate actions read from the options market itself.
 
-- **V1:** 44,447 ATM monthly straddles over 34 months. Shorting every one at the bid lost −13.2 % of premium a month in development + validation [−22.3, −5.2] and −23.6 % in the hold-out. Sorting on IV ÷ RV21 ranks forward volatility correctly (the richest quintile realised 2.3 vol points under implied) but selling it still lost, and it improved on shorting everything by +2.7 % [−2.4, +8.7] (dev + val) and −0.03 % (hold-out). Skew: no edge. Term slope (30,481 name-cycles): long-short −22.2 % (dev + val), −16.5 % (hold-out), no improvement over shorting everything.
+- **V1:** 44,447 ATM monthly straddles over 34 months. Shorting every one at the bid lost −13.2 % of premium a month in development + validation [−22.4, −5.0] and −23.6 % in the hold-out. Sorting on IV ÷ RV21 ranks forward volatility correctly (the richest quintile realised 2.3 vol points under implied) but selling it still lost, and it improved on shorting everything by +2.7 % [−2.5, +8.6] (dev + val) and −0.03 % (hold-out). Skew: no edge. Term slope (30,481 name-cycles): long-short −22.2 % (dev + val), −16.5 % (hold-out), no improvement over shorting everything.
 - **V2:** 11,802 reports. Selling the straddle across the report lost −26.1 % (dev + val) and −34.2 % (hold-out); buying it into the report lost −20.9 % and −29.3 %. Reports moved 0.59 of the implied move (median), but the premium sellers earn at the mid (+6.9 % on same-day settlements) is smaller than half the straddle's spread (12.9 % median), and in the tightest-spread names it is negative even at the mid.
 - **Reading:** single-name option prices are not mispriced in a way that can be traded after the bid/ask, monthly or around earnings, on this window. The volatility premium that pays is the index one (S17).
 
@@ -296,10 +296,10 @@ Walk-forward (train on all prior years with a 5-session embargo and ≥ 150 trai
 
 | SPXW, 0.5–1.5 implied moves, dev+val | price | realised | edge at mid [95 %] | Holm p | seller after bid/ask [95 %] | buyer after bid/ask [95 %] |
 |---|---|---|---|---|---|---|
-| 10:00 puts (836 sessions) | 0.207 | 0.196 | −0.008 [−0.032, +0.017] | 1.0 | −0.039 [−0.064, −0.016] | −0.055 [−0.077, −0.030] |
-| 10:00 calls (835) | 0.215 | 0.219 | +0.007 [−0.016, +0.031] | 1.0 | −0.047 [−0.072, −0.023] | −0.032 [−0.056, −0.009] |
-| 13:00 puts (841) | 0.202 | 0.174 | −0.025 [−0.047, −0.002] | 0.14 | −0.001 [−0.025, +0.021] | −0.051 [−0.073, −0.028] |
-| 13:00 calls (841) | 0.214 | 0.209 | −0.002 [−0.024, +0.022] | 1.0 | −0.022 [−0.046, +0.002] | −0.026 [−0.049, −0.001] |
+| 10:00 puts (836 sessions) | 0.207 | 0.196 | −0.008 [−0.031, +0.017] | 1.0 | −0.039 [−0.064, −0.016] | −0.055 [−0.078, −0.030] |
+| 10:00 calls (835) | 0.215 | 0.219 | +0.007 [−0.016, +0.031] | 1.0 | −0.047 [−0.070, −0.023] | −0.032 [−0.056, −0.008] |
+| 13:00 puts (841) | 0.202 | 0.174 | −0.025 [−0.047, −0.001] | 0.15 | −0.001 [−0.025, +0.021] | −0.051 [−0.074, −0.027] |
+| 13:00 calls (841) | 0.214 | 0.209 | −0.002 [−0.025, +0.022] | 1.0 | −0.022 [−0.046, +0.001] | −0.026 [−0.049, −0.001] |
 
 Units are fractions of the vertical's width (0.01 = 1 % of width).
 
@@ -311,6 +311,33 @@ Units are fractions of the vertical's width (0.01 = 1 % of width).
 
 **Outside the tested family (descriptive; the forward hold-out decides).**
 - On SPY, QQQ and IWM, 13:00 out-of-the-money puts realised less than their price: −0.034, −0.044 and −0.065 of width, each interval below zero.
-- Sellers of 13:00 one-strike verticals came out near break-even or slightly positive after the bid/ask. Only IWM's lower bounds touch or clear zero: puts +0.038 [0.000, +0.074], calls +0.049 [+0.004, +0.090], on 257 and 189 sessions from 2024-04 only.
+- Sellers of 13:00 one-strike verticals came out near break-even or slightly positive after the bid/ask. Only IWM's lower bounds touch or clear zero: puts +0.038 [+0.000, +0.072], calls +0.049 [+0.005, +0.089], on 257 and 189 sessions from 2024-04 only.
 - It agrees with the ETF grid's 13:00 strangle (positive only in its TEST window) and with H15's open 14:05 SPXW strangle lane.
 - Of 16 descriptive cells, chance alone would put a lower bound above zero in about 0.4. Two clear here, both IWM at 13:00, correlated with each other and on 189–257 sessions. It is recorded for a forward-only registration, never promoted on these sessions.
+
+## V6 — do price levels hold more often than placebo levels? (A13; NOTHING PROMOTED)
+
+`studies/v6_levels.py` → `results/v1/v6_levels/` (`tests*.csv`, `by_distance*.csv`, `by_name*.csv`), registry `V6`. The catalogue's angle O7: support and resistance.
+
+**Design.**
+- 43 names, 2017-06 → 2026-10, one-minute bars; 307,578 real levels.
+- **Real levels** at 10:00: the prior day's high (above) and low (below), and the nearest round numbers either side.
+- **Placebos:** each real level is placed on five other sessions of the same name at the same distance from 10:00, measured in that session's trailing σ.
+- **Outcome:** after a touch, whether the close stays on the near side ("held").
+- Dates resampled; two tests, Holm at α 0.0025.
+
+| Family | Window | Touched | Held: real | Held: placebo | Difference [95 %] | Holm p |
+|---|---|---|---|---|---|---|
+| Prior-day high/low | dev + val | 33,508 | 48.9 % | 49.8 % | −0.9 pp [−2.0, +0.2] | 0.95 |
+| | development | 19,853 | 50.1 % | 49.9 % | +0.3 pp [−1.2, +1.7] | |
+| | validation | 13,655 | 47.1 % | 49.8 % | −2.6 pp [−4.4, −0.9] | |
+| | hold-out (previously seen by the atlas) | 6,868 | 51.3 % | 49.6 % | +1.7 pp [−0.4, +3.7] | |
+| Round numbers | dev + val | 123,639 | 50.0 % | 49.6 % | +0.4 pp [+0.0, +0.7] | 0.036 |
+| | development | 72,721 | 50.2 % | 49.6 % | +0.6 pp [+0.1, +1.1] | |
+| | validation | 50,918 | 49.6 % | 49.5 % | +0.1 pp [−0.4, +0.6] | |
+| | hold-out | 26,959 | 50.5 % | 49.6 % | +0.9 pp [+0.2, +1.5] | |
+
+**Reading.**
+- **Prior-day highs and lows are not support or resistance.** They hold no more often than a placebo at the same distance; validation and hold-out disagree in sign. They are also touched less often than placebos (32 % against 34 %), at every distance.
+- **Round numbers show a tiny barrier, the same sign in all three windows** (+0.6, +0.1, +0.9 points of hold rate). That is consistent with orders clustering at round prices (Osler 2003). It fails the registered test (Holm p 0.036 against α 0.0025), and at under one point of hold rate it would not move a strike choice.
+- **Descriptive (by_distance):** round numbers below the price, 0.5–2σ away, are touched more often than placebos (51 % against 47 %; 25 % against 19 %) and hold more (56 % against 53 %; 55 % against 51 %), on 5,904 and 1,978 levels. This is noted for a forward-only registration.

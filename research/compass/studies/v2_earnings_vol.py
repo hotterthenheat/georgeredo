@@ -175,7 +175,7 @@ def cboot(df, col, B=10000, seed=9):
     """mean per event, 95 % interval resampling event weeks"""
     d = df.filter(pl.col(col).is_finite())
     if d.height < 10: return d.height, float('nan'), float('nan'), float('nan'), float('nan')
-    g = d.group_by('week').agg(pl.col(col).sum().alias('s'), pl.len().alias('n'))
+    g = d.group_by('week').agg(pl.col(col).sum().alias('s'), pl.len().alias('n')).sort('week')   # a fixed order: the same seed, the same draws
     s, n = g['s'].to_numpy(), g['n'].to_numpy(); rng = np.random.default_rng(seed)
     idx = rng.integers(0, len(s), size=(B, len(s)))
     b = s[idx].sum(1) / n[idx].sum(1)

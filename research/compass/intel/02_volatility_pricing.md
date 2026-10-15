@@ -45,13 +45,13 @@ These are the two option-pricing families the earlier research had not run. Both
 | Sample | Months | Straddles | Short straddle, mean per month | 95 % interval |
 |---|---|---|---|---|
 | Development (2023-11 → 2024-12) | 14 | 15,731 | −7.3 % | [−17.8, +0.5] |
-| Validation (2025) | 12 | 16,232 | −20.0 % | [−35.8, −7.1] |
-| Development + validation | 26 | 31,963 | **−13.2 %** | [−22.3, −5.2] |
-| Hold-out (2026-01 → 08) | 8 | 12,484 | **−23.6 %** | [−30.5, −16.9] |
-| … stocks and ADRs (dev + val) | 26 | 26,330 | −13.1 % | [−21.6, −5.7] |
-| … ETFs | 26 | 5,474 | −13.5 % | [−27.9, −0.7] |
-| … an earnings report inside the month | 26 | 7,652 | −14.8 % | [−21.4, −8.9] |
-| … no report inside the month | 26 | 24,311 | −12.4 % | [−23.8, −3.0] |
+| Validation (2025) | 12 | 16,232 | −20.0 % | [−36.1, −6.8] |
+| Development + validation | 26 | 31,963 | **−13.2 %** | [−22.4, −5.0] |
+| Hold-out (2026-01 → 08) | 8 | 12,484 | **−23.6 %** | [−30.4, −16.9] |
+| … stocks and ADRs (dev + val) | 26 | 26,330 | −13.0 % | [−21.5, −5.6] |
+| … ETFs | 26 | 5,474 | −13.5 % | [−27.9, −0.5] |
+| … an earnings report inside the month | 26 | 7,652 | −14.8 % | [−21.3, −8.9] |
+| … no report inside the month | 26 | 24,311 | −12.4 % | [−23.5, −2.7] |
 
 **Reading T0:**
 - **The typical straddle does fine.** It wins 51 % of the time, with a median of +3 % of premium.
@@ -79,16 +79,16 @@ By quintile of IV ÷ RV21, development + validation:
 
 | Executable test | Development | Validation | Dev + val | Hold-out |
 |---|---|---|---|---|
-| Long-short: sell quintile 5 at the bid, buy quintile 1 at the ask | −16.2 % [−25.0, −5.8] | −23.3 % [−36.9, −4.8] | −19.5 % [−27.8, −9.4] | −28.5 % [−37.8, −20.3] |
+| Long-short: sell quintile 5 at the bid, buy quintile 1 at the ask | −16.2 % [−25.1, −5.9] | −23.3 % [−37.0, −5.3] | −19.5 % [−28.1, −9.8] | −28.5 % [−37.6, −20.1] |
 | … one tick worse on every leg | | | −21.4 % | −30.3 % |
-| Sell quintile 5 only | | | −9.6 % [−15.6, −4.5] | −21.9 % [−26.5, −17.0] |
-| Quintile 5 short minus shorting every name | +1.8 % [−4.4, +9.6] | +3.7 % [−3.8, +13.7] | +2.7 % [−2.4, +8.7] | **−0.03 %** [−2.9, +2.9] |
+| Sell quintile 5 only | | | −9.6 % [−15.5, −4.5] | −21.9 % [−26.5, −17.1] |
+| Quintile 5 short minus shorting every name | +1.8 % [−4.3, +9.4] | +3.7 % [−3.8, +13.6] | +2.7 % [−2.5, +8.6] | **−0.03 %** [−2.9, +3.0] |
 
 **Reading T1:**
 - **The signal is real at the level of volatility.** Names whose implied volatility is richest relative to their recent realized volatility did see less movement than implied over the next month: 2.3 vol points, against none for the cheapest quintile. This is the published result (Goyal & Saretto).
 - **It is too small to trade.** Selling the richest quintile still lost money in every sample.
 - **It does not beat selling everything.** The improvement over shorting every name is inside zero in development and validation, and exactly zero in the hold-out.
-- **Buying the cheapest quintile at the ask also lost** (−9.9 % [−20.1, +2.1]): the spread is paid on both sides.
+- **Buying the cheapest quintile at the ask also lost** (−9.9 % [−20.0, +2.0]): the spread is paid on both sides.
 - **Verdict:** no edge. T1 fails its promotion rule.
 
 ### T2 — term slope
@@ -98,10 +98,10 @@ By quintile of IV ÷ RV21, development + validation:
 
 | Executable test | Development | Validation | Dev + val | Hold-out (7 months with enough names) |
 |---|---|---|---|---|
-| Long-short: sell the lowest-slope quintile at the bid, buy the highest at the ask | −23.7 % [−32.0, −15.4] | −20.5 % [−26.9, −13.3] | −22.2 % [−27.6, −16.8] | −16.5 % [−28.7, −2.3] |
+| Long-short: sell the lowest-slope quintile at the bid, buy the highest at the ask | −23.7 % [−32.0, −15.3] | −20.4 % [−27.0, −13.5] | −22.2 % [−27.7, −16.7] | −16.5 % [−28.7, −2.3] |
 | … one tick worse | | | −24.0 % | −18.2 % |
-| Sell the lowest-slope quintile only | | | −12.7 % [−21.5, −5.3] | −16.0 % [−25.2, −5.0] |
-| Lowest-slope short minus shorting every name | −3.8 % [−7.9, +0.3] | +2.0 % [−2.7, +6.6] | −1.1 % [−4.4, +2.2] | +4.4 % [−3.5, +13.3] |
+| Sell the lowest-slope quintile only | | | −12.7 % [−21.4, −5.3] | −16.0 % [−25.2, −5.0] |
+| Lowest-slope short minus shorting every name | −3.8 % [−7.9, +0.3] | +2.0 % [−2.8, +6.5] | −1.1 % [−4.4, +2.1] | +4.4 % [−3.5, +13.4] |
 
 No edge: T2 fails its promotion rule.
 
@@ -111,9 +111,9 @@ The direction was chosen on development: high put-over-call skew = expensive, lo
 
 | Sample | Long-short | Expensive quintile minus shorting every name |
 |---|---|---|
-| Validation | −20.2 % [−36.2, −5.0] | −0.4 % [−7.3, +6.0] |
-| Development + validation | −14.7 % [−23.5, −6.6] | +0.1 % [−3.6, +3.6] |
-| Hold-out | −24.1 % [−37.5, −11.1] | +2.4 % [−4.0, +8.2] |
+| Validation | −20.2 % [−36.5, −4.9] | −0.4 % [−7.2, +6.1] |
+| Development + validation | −14.7 % [−23.5, −6.6] | +0.1 % [−3.6, +3.5] |
+| Hold-out | −24.1 % [−37.8, −11.0] | +2.4 % [−3.9, +8.1] |
 
 No edge: T3 fails its promotion rule.
 
@@ -155,9 +155,9 @@ The losers are single months on single names that moved 30–150 %. They are wha
 
 | Trade | Development (2023-11 → 2024-12) | Validation (2025) | Dev + val | Hold-out (2026-01 → 09) |
 |---|---|---|---|---|
-| V2a: sell across the report, % of premium | −23.9 % [−26.4, −20.9] (3,558) | −27.9 % [−31.4, −23.7] (4,244) | **−26.1 %** [−28.5, −23.3] (7,802) | **−34.2 %** [−37.1, −29.8] (3,682) |
+| V2a: sell across the report, % of premium | −23.9 % [−26.4, −20.9] (3,558) | −27.9 % [−31.4, −23.7] (4,244) | **−26.1 %** [−28.5, −23.3] (7,802) | **−34.2 %** [−37.0, −29.9] (3,682) |
 | … one tick worse | | | −27.8 % | −35.9 % |
-| V2b: buy into the report | −12.7 % [−14.5, −10.1] (3,485) | −28.0 % [−30.6, −24.4] (4,100) | **−20.9 %** [−23.9, −17.6] (7,585) | **−29.3 %** [−32.5, −25.4] (3,543) |
+| V2b: buy into the report | −12.7 % [−14.5, −10.1] (3,485) | −28.0 % [−30.6, −24.5] (4,100) | **−20.9 %** [−23.8, −17.7] (7,585) | **−29.3 %** [−32.4, −25.5] (3,543) |
 | … one tick worse | | | −22.7 % | −31.0 % |
 
 Both fail their promotion rule in every sample. Neither holds a positive interval in any cut:

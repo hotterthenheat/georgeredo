@@ -76,7 +76,8 @@ def build():
     jobs = [(r, s) for r in ROOTS for s in sessions_0dte(r) if not cal.is_early_close(s)]
     print(len(jobs), 'chain-days', flush=True)
     out = []
-    with ProcessPoolExecutor(int(os.environ.get('V5_PROCS', '3'))) as ex:
+    import multiprocessing as mp                                    # spawn: never fork a process that has started polars' threads
+    with ProcessPoolExecutor(int(os.environ.get('V5_PROCS', '3')), mp_context=mp.get_context('spawn')) as ex:
         for i, r in enumerate(ex.map(one, jobs, chunksize=8)):
             out.extend(r)
             if (i + 1) % 500 == 0: print(i + 1, len(out), flush=True)
@@ -86,7 +87,7 @@ def build():
 
 def sess_level(df, col):
     """one value per session: the mean over that session's verticals"""
-    return df.group_by('session').agg(pl.col(col).mean().alias('v'))
+    return df.group_by('session').agg(pl.col(col).mean().alias('v')).sort('session')   # a fixed order: the same seed, the same draws
 
 def boot(df, col, B=10000, seed=9):
     s = sess_level(df, col)['v'].drop_nans().to_numpy()
@@ -130,5 +131,19 @@ def analyze():
     C = pl.DataFrame(cur).sort('root', 'time', 'side', 'split', 'bucket'); C.write_csv(os.path.join(OUT, 'curve.csv'))
     print(C.filter(pl.col('root') == 'SPXW').filter(pl.col('split').is_in(['dev', 'val'])))
 
+def band():
+    """the 0.5-1.5 implied-move band on every root, development + validation (descriptive outside SPXW)"""
+    P = pl.read_parquet(os.path.join(OUT, 'pairs.parquet'))
+    f = (pl.col('absd') > 0.5) & (pl.col('absd') <= 1.5) & pl.col('split').is_in(['dev', 'val'])
+    rows = []
+    for root in ROOTS:
+        for t in TIMES.values():
+            for side in ('put', 'call'):
+                d = P.filter((pl.col('root') == root) & (pl.col('time') == t) & (pl.col('side') == side) & f)
+                n, m, lo, hi, _ = boot(d, 'edge_mid'); _, sm, slo, shi, _ = boot(d, 'seller_net'); _, bm, blo, bhi, _ = boot(d, 'buyer_net')
+                rows.append(dict(root=root, time=t, side=side, sessions=n, price=float(d['price'].mean()), realised=float(d['realised'].mean()), edge=m, edge_lo=lo, edge_hi=hi,
+                                 seller=sm, seller_lo=slo, seller_hi=shi, buyer=bm, buyer_lo=blo, buyer_hi=bhi))
+    R = pl.DataFrame(rows); R.write_csv(os.path.join(OUT, 'band_all_roots_devval.csv')); print(R)
+
 if __name__ == '__main__':
-    {'build': build, 'analyze': analyze}[sys.argv[1]]()
+    {'build': build, 'analyze': analyze, 'band': band}[sys.argv[1]]()

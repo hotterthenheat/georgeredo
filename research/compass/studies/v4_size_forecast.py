@@ -98,6 +98,118 @@ def forecast():
     print(F2.group_by('name').agg(pl.len(), pl.corr(pl.col('rv').log(), pl.col('erv').log()).pow(2).alias('r2_ln_rv'),
                                   pl.col('e').mean().alias('mean_ln_err')).sort('name'))
 
+def index_trades():
+    """SPY/QQQ (2022-11-11 ->) and IWM (2024-04-19 ->) same-day ATM straddles under V3's rules (entry 10:00, exit 15:50,
+    A10.1 exit quotes, A10.4 bars), both sides. Exploratory (A11, A11.1)."""
+    from engine import run as R
+    rows = []
+    for sym, first in INDEX.items():
+        bars = B.load_minutes(sym, f'{SP}/theta/data/underlying', first, v3.END)
+        bars = {k[0]: g for k, g in bars.group_by('session')}
+        root = f'{SP}/theta/data_full/chains/{sym}'
+        for f in sorted(os.listdir(root)):
+            d = dt.date.fromisoformat(f[:10])
+            if d < first or d > v3.END or cal.is_early_close(d): continue
+            day = bars.get(d)
+            if day is None or not v3.usable(day): continue
+            spot0 = v3.price_at(day, 29)
+            if spot0 is None: continue
+            ch = pl.read_parquet(os.path.join(root, f), columns=['timestamp', 'strike', 'right', 'bid', 'ask']).with_columns(pl.col('timestamp').dt.replace_time_zone(None))
+            s_in = v3.snap(ch, dt.datetime.combine(d, dt.time(10, 0))); s_out = v3.snap(ch, dt.datetime.combine(d, dt.time(15, 50)))
+            if s_in.height == 0 or s_out.height == 0: continue
+            q_in = {(k, r): dict(bid=b, ask=a) for k, r, b, a in s_in.select('strike', 'right', 'bid', 'ask').iter_rows()}
+            q_out = {(k, r): dict(bid=b, ask=a) for k, r, b, a in s_out.select('strike', 'right', 'bid', 'ask').iter_rows()}
+            ks = sorted({k for (k, r) in q_in if v3.two_sided(q_in.get((k, 'CALL'))) and v3.two_sided(q_in.get((k, 'PUT')))})
+            if not ks: continue
+            K = min(ks, key=lambda k: (abs(k - spot0), k))
+            ci, pi, co, po = q_in[(K, 'CALL')], q_in[(K, 'PUT')], q_out.get((K, 'CALL')), q_out.get((K, 'PUT'))
+            mid = (ci['bid'] + ci['ask'] + pi['bid'] + pi['ask']) / 2
+            row = dict(symbol=sym, session=d, implied_move=mid / spot0, straddle_mid=mid)
+            ok = co is not None and po is not None and all(np.isfinite(x[k]) for x in (co, po) for k in ('bid', 'ask'))
+            if ok and co['ask'] > 0 and po['ask'] > 0:
+                row['a_r'] = ((ci['bid'] + pi['bid'] - co['ask'] - po['ask']) * 100 - 4 * v3.FEE) / (mid * 100)
+            if ok and co['bid'] >= 0 and po['bid'] >= 0:
+                row['c_r'] = ((co['bid'] + po['bid'] - ci['ask'] - pi['ask']) * 100 - 4 * v3.FEE) / (mid * 100)
+            rows.append(row)
+        log(sym, 'straddles', sum(1 for r in rows if r['symbol'] == sym))
+    T = pl.DataFrame(rows, infer_schema_length=None); T.write_parquet(os.path.join(OUT, 'index_trades.parquet'))
+
+def boot_diff(sub, base, col, B=10000, seed=9):
+    """mean over the conditional trades minus the mean over every trade, sessions resampled together"""
+    a = sub.filter(pl.col(col).is_not_null() & pl.col(col).is_finite()).group_by('session').agg(pl.col(col).sum().alias('s'), pl.len().alias('n'))
+    b = base.filter(pl.col(col).is_not_null() & pl.col(col).is_finite()).group_by('session').agg(pl.col(col).sum().alias('s2'), pl.len().alias('n2'))
+    m = b.join(a, on='session', how='left').fill_null(0).sort('session')
+    if m['n'].sum() < 10: return float('nan'), float('nan'), float('nan')
+    s, n, s2, n2 = (m[c].to_numpy() for c in ('s', 'n', 's2', 'n2')); rng = np.random.default_rng(seed)
+    idx = rng.integers(0, len(s), size=(B, len(s)))
+    ns = n[idx].sum(1); d = np.where(ns > 0, s[idx].sum(1) / np.maximum(ns, 1), np.nan) - s2[idx].sum(1) / n2[idx].sum(1)
+    return float(s.sum() / n.sum() - s2.sum() / n2.sum()), float(np.nanquantile(d, 0.025)), float(np.nanquantile(d, 0.975))
+
+def encompass(df, B=2000, seed=9):
+    """ln(max(realised move, 1 bp)) on ln m and ln m_hat; session-resampled 95 % interval on each slope"""
+    d = df.filter(pl.col('implied_move') > 0).with_columns(pl.max_horizontal(pl.col('realised_move'), pl.lit(1e-4)).log().alias('y'),
+                                                           pl.col('implied_move').log().alias('x1'), pl.col('m_hat').log().alias('x2'))
+    if d.height < 50: return {}
+    X = np.c_[np.ones(d.height), d['x1'].to_numpy(), d['x2'].to_numpy()]; y = d['y'].to_numpy()
+    beta = np.linalg.lstsq(X, y, rcond=None)[0]
+    ses = d['session'].to_numpy(); u, inv = np.unique(ses, return_inverse=True)   # np.unique sorts: a fixed order; groups = [np.where(inv == i)[0] for i in range(len(u))]
+    rng = np.random.default_rng(seed); bs = []
+    for _ in range(B):
+        pick = np.concatenate([groups[i] for i in rng.integers(0, len(groups), len(groups))])
+        bs.append(np.linalg.lstsq(X[pick], y[pick], rcond=None)[0])
+    bs = np.array(bs)
+    r2 = lambda Xm: 1 - np.sum((y - Xm @ np.linalg.lstsq(Xm, y, rcond=None)[0]) ** 2) / np.sum((y - y.mean()) ** 2)
+    return dict(n=d.height, sessions=len(u), b_implied=float(beta[1]), b_implied_lo=float(np.quantile(bs[:, 1], 0.025)), b_implied_hi=float(np.quantile(bs[:, 1], 0.975)),
+                b_forecast=float(beta[2]), b_forecast_lo=float(np.quantile(bs[:, 2], 0.025)), b_forecast_hi=float(np.quantile(bs[:, 2], 0.975)),
+                r2_implied_only=float(r2(X[:, :2])), r2_forecast_only=float(r2(X[:, [0, 2]])), r2_both=float(r2(X)))
+
+def analyze(holdout=False):
+    F = pl.read_parquet(os.path.join(OUT, 'forecasts.parquet')).select('name', 'session', 'm_hat', pl.col('realised_move').alias('rm_f'))
+    T = pl.read_parquet(os.path.join(v3.OUT, 'trades.parquet')).join(F, left_on=['symbol', 'session'], right_on=['name', 'session'], how='inner')
+    T = T.filter(~pl.col('event') & (pl.col('session') >= dt.date(2019, 6, 3)))
+    T = T.with_columns((pl.col('implied_move') / pl.col('m_hat')).alias('R'),
+                       pl.when(pl.col('session') <= v3.DEV_END).then(pl.lit('dev')).when(pl.col('session') <= v3.VAL_END).then(pl.lit('val')).otherwise(pl.lit('holdout')).alias('split'))
+    if holdout:
+        flag = os.path.join(OUT, 'holdout_opened.json')
+        if os.path.exists(flag): print('hold-out already opened:', open(flag).read())
+        else: json.dump({'opened_utc': dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds')}, open(flag, 'w'))
+    else: T = T.filter(pl.col('split') != 'holdout')
+    lo, hi = T.filter(pl.col('split') == 'dev').select(pl.col('R').quantile(1 / 3).alias('a'), pl.col('R').quantile(2 / 3).alias('b')).row(0)
+    log(f'tercile cut-offs on development R: {lo:.4f} / {hi:.4f}')
+    rows = []
+    for col, lab, f in (('a_r', 'V4s short straddle, R top tercile', pl.col('R') >= hi), ('a_r_adv', 'V4s, one tick worse', pl.col('R') >= hi),
+                        ('c_r', 'V4l long straddle, R bottom tercile', pl.col('R') <= lo), ('c_r_adv', 'V4l, one tick worse', pl.col('R') <= lo)):
+        for sp in ['dev', 'val', 'devval'] + (['holdout'] if holdout else []):
+            base = T.filter(pl.col('split') != 'holdout') if sp == 'devval' else T.filter(pl.col('split') == sp)
+            sub = base.filter(f)
+            n, m, l, h, p = v3.cboot(sub, col)
+            dm, dl, dh = boot_diff(sub, base, col)
+            rows.append(dict(test=lab, col=col, split=sp, trades=n, mean=m, lo=l, hi=h, p=p, minus_unconditional=dm, diff_lo=dl, diff_hi=dh))
+    Rz = pl.DataFrame(rows)
+    base = Rz.filter((pl.col('split') == 'devval') & pl.col('col').is_in(['a_r', 'c_r'])).sort('p'); k = base.height; holm = {}; run = 0.0
+    for i, (c, p) in enumerate(base.select('col', 'p').iter_rows()): run = max(run, min(1.0, (k - i) * p)); holm[c] = run
+    Rz = Rz.with_columns(pl.col('col').replace_strict(holm, default=None).alias('p_holm_devval'))
+    tag = '_holdout' if holdout else ''
+    Rz.write_csv(os.path.join(OUT, f'results{tag}.csv')); pl.Config.set_tbl_rows(60); pl.Config.set_tbl_cols(14); print(Rz)
+    enc = []
+    for sp in ['dev', 'val', 'devval'] + (['holdout'] if holdout else []):
+        d = T.filter(pl.col('split') != 'holdout') if sp == 'devval' else T.filter(pl.col('split') == sp)
+        enc.append(dict(family='single names', split=sp, **encompass(d)))
+    # exploratory: the index family on its whole window (A11, A11.1)
+    I = pl.read_parquet(os.path.join(OUT, 'index_trades.parquet'))
+    Fi = pl.read_parquet(os.path.join(OUT, 'forecasts.parquet')).select('name', 'session', 'm_hat', 'realised_move')
+    I = I.join(Fi, left_on=['symbol', 'session'], right_on=['name', 'session'], how='inner').with_columns((pl.col('implied_move') / pl.col('m_hat')).alias('R'))
+    enc.append(dict(family='index (exploratory)', split='2022-11 -> 2026-10', **encompass(I)))
+    E = pl.DataFrame(enc); E.write_csv(os.path.join(OUT, f'encompassing{tag}.csv')); print(E)
+    ilo, ihi = I.select(pl.col('R').quantile(1 / 3).alias('a'), pl.col('R').quantile(2 / 3).alias('b')).row(0)
+    ex = []
+    for col, lab, f in (('a_r', 'index short, R top tercile (cut-offs on the whole window: in-sample)', pl.col('R') >= ihi), ('c_r', 'index long, R bottom tercile', pl.col('R') <= ilo),
+                        ('a_r', 'index short, every session', pl.lit(True)), ('c_r', 'index long, every session', pl.lit(True))):
+        n, m, l, h, _ = v3.cboot(I.filter(f), col); ex.append(dict(cell=lab, trades=n, mean=m, lo=l, hi=h))
+    X = pl.DataFrame(ex); X.write_csv(os.path.join(OUT, f'index_exploratory{tag}.csv')); print(X)
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'forecast': forecast()
+    elif cmd == 'index': index_trades()
+    elif cmd == 'analyze': analyze('--holdout' in sys.argv)
