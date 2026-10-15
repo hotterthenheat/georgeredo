@@ -1,15 +1,16 @@
 # Independent Research — 2026-10-14
 
-## Short Straddle Credit Samples (19 days)
+## Short Straddle Credit Samples (~19 days)
 
-| Underlying | Median Credit | Mean Credit | Days > $2 |
-|------------|---------------|-------------|-----------|
-| SPY        | $5.77         | $5.20       | 15/19     |
-| QQQ        | $7.28         | $7.22       | 15/19     |
+| Underlying | Median Credit | Mean Credit |
+|------------|---------------|-------------|
+| SPY        | $5.77         | $5.20       |
+| QQQ        | $7.28         | $7.22       |
+| IWM        | $3.55         | $3.21       |
 
-Credits are executable at the bid on ATM-aligned strikes. QQQ shows higher absolute credit consistent with higher notional volatility.
+Credits are executable at the bid on ATM-aligned strikes. Absolute credit scales with notional and volatility (QQQ highest, IWM lowest in this window).
 
 ## Status
-Pricing and credit measurements are complete for the sample window. Full expectancy (pairing with settlement or exit prices, costs, chronological splits, and baseline comparisons) is the next step for both short premium and directional structures.
+Pricing measurements complete for SPY/QQQ/IWM short straddles. Full expectancy (settlement/exit pairing, costs, splits, baselines) is next for short premium, then directional and defined-risk structures.
 
-No promotion claim yet. Results remain consistent with prior research that short premium carries measurable credit but requires full cost and tail analysis before any edge is asserted.
+No promotion claim. Consistent with prior research that short premium carries measurable credit but requires full cost and tail analysis.
