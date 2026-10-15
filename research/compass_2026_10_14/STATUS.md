@@ -1,33 +1,15 @@
-# Compass Research Update — 2026-10-14 (continued)
+# Compass Research Update — 2026-10-14
 
-## Data collected this session
-- SPY short-dated EOD (max_dte=1, early Oct 2026): 4,176 rows → 460 liquid contracts after tighter filter.
-- QQQ short-dated EOD: 3,962 rows → 545 liquid.
-- Refined ATM straddle samples for SPY, QQQ, IWM (see results/).
+## Progress
+- Underlying EOD pulled for SPY (Oct 2026).
+- ATM strikes aligned to daily close.
+- Aligned straddle mids and percentage-of-spot computed (results/spy_atm_aligned.csv).
 
-## Sample ATM straddle mids (executable mid, not fills)
-SPY (refined):
-- 2026-10-02 @ 765: ~$5.09
-- 2026-10-06 @ 776: ~$3.23
-- 2026-10-08 @ 774: ~$4.57
+## Sample observations (aligned to close)
+Straddle mids vary significantly day to day (e.g., $0.70 on 10-01 vs $6.42 on 10-02). High-volume near-ATM spreads remain tight ($0.01–$0.04). Percentage of spot ranges from ~0.05% to ~0.83% in this short window.
 
-QQQ:
-- 2026-10-02 @ 742: $6.92
-- 2026-10-08 @ 753: $6.22
+## Status vs prior research
+Consistent with existing Compass findings: premiums and costs are measurable; no new rule has yet been shown to clear the promotion bar in COMPASS_RESEARCH_PLAN.md.
 
-IWM:
-- 2026-10-02 @ 280: $3.24
-- 2026-10-08 @ 277: $2.19
-
-Spreads on high-volume near-ATM contracts are frequently $0.01–$0.04.
-
-## Alignment with prior research
-These samples are consistent with the existing Compass research in the repo: short-dated ATM premiums are measurable, liquidity is high on the majors, and proportional costs matter. No new rule-based expectancy has been computed yet that passes the promotion criteria in COMPASS_RESEARCH_PLAN.md.
-
-## Next in progress
-- Underlying price alignment for true ATM selection.
-- First defined-risk and naked short-premium rule tests with bid/ask fills.
-- Chronological splits and baseline comparisons.
-- Expansion to additional liquid short-dated names.
-
-All artifacts remain under research/compass_2026_10_14/.
+## Next
+Rule-based tests (short premium and defined-risk) with bid/ask fills, chronological splits, and baseline comparisons on the liquid 0DTE universe.
