@@ -257,3 +257,11 @@ A configuration that fails is reported in the failed-hypothesis report with its 
 3. *R2 on the hold-out is re-scored against RND-after for the six finalists.*
    - This is labelled post hoc: the hold-out results were already seen when the flaw was found.
    - It cannot promote a configuration. A finalist that passes every rule under RND-after is reported as "passes only under a control chosen after the hold-out was opened" and needs a fresh hold-out (sessions after 2026-10-09) to be promoted.
+
+**L-A3 (2026-10-15, before any hold-out row of this cell was read).**
+- One long-premium cell held a lower bound above zero on development + validation: QS → debit call spread held to expiry (M0_expiry), +50.3 [+10.6, +93.7] on 2,749 trades.
+  - It was not a finalist: its walk-forward lower bound was −19.6, because the early quarters chose other policies.
+- It was chosen by looking at development + validation, so it is tested once on the untouched hold-out (2025-10-01 → 2026-10-09) as a single confirmatory test:
+  - **H-DCS-1:** its hold-out expectancy > 0, one-sided bootstrap p < 0.05;
+  - **H-DCS-2:** it beats RND-after (a random later minute, same direction, same structure and policy), paired, one-sided p < 0.05.
+- Holm across the two. Passing both makes it a candidate for the fresh hold-out (sessions after 2026-10-09), not a promoted configuration: the cell was selected from about 1,000 stage-1 cells.

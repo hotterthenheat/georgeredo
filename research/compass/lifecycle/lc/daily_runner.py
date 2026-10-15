@@ -76,6 +76,7 @@ class Chains:
     def __init__(self, root, maxsize=64):
         self.root = root; self.cache = {}; self.order = []; self.maxsize = maxsize
         self.exps = dy.expirations(root)
+        self.listed = dy.listed_ranges(root)
         self.ds = dy.daily_series(root).sort('session')
     def get(self, e):
         if e in self.cache: return self.cache[e]
@@ -94,6 +95,8 @@ class Chains:
         lo, hi, tgt = BUCKETS[bucket]
         best = None
         for e in self.exps:
+            first, last = self.listed.get(e, (None, None))
+            if first is None or not (first <= d <= last): continue      # not listed (or no longer quoted) on d
             dte = (cal.last_trading_day(e, False) - d).days
             if lo <= dte <= hi and (best is None or abs(dte - tgt) < abs(best[1] - tgt)): best = (e, dte)
         return best

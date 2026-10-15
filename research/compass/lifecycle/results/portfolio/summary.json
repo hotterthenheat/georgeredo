@@ -124,5 +124,23 @@
   "worst_day": -4642.400000000001,
   "avg_units": 5.614140978659194,
   "seconds": 267
+ },
+ "P5_pool_Steady_t30_1lot|devval": {
+  "period": "devval",
+  "sessions": 845,
+  "trades": 5254,
+  "skipped_risk_cap": 6776,
+  "skipped_size": 0,
+  "total_pnl": -99985.60000000012,
+  "end_equity": 14.399999999935968,
+  "cagr": -0.9284963481920296,
+  "max_drawdown": -0.9998576236597845,
+  "daily_sharpe": -1.9660009395335798,
+  "win_rate": 0.4158736200989722,
+  "avg_trade": -19.030376855728992,
+  "worst_trade": -2721.3999999999996,
+  "worst_day": -5559.5999999999985,
+  "avg_units": 1.0,
+  "seconds": 255
  }
 }

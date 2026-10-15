@@ -18,7 +18,7 @@ CONFIGS = {
     # the best hold-out finalist (QS -> cash-secured put, stop at 2x credit), cash-secured on SPY/QQQ/IWM (SPXW's collateral
     # is several times the account), one contract a trade, collateral capped at the account
     'P1_QS_CSP_s20': dict(roots=('SPY', 'QQQ', 'IWM'), setups=('QS',), sf=lambda s, d: 'CSP' if d > 0 else None, pol='M13_tpnone_s20',
-                          sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0),
+                          sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0, equity0=1e8),
     # credit put spreads on QS, $1,000 of maximum loss a trade, 10 % of the account at risk at most
     'P2_QS_CPS_expiry': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=('QS',), sf=lambda s, d: 'CPS' if d > 0 else None, pol='M0_expiry',
                              sizing='fixed_risk', risk_per_trade=1000.0, max_total_risk=0.10, max_bucket_risk=0.10),
@@ -40,12 +40,13 @@ CONFIGS = {
     'P4s_skip_after_loss': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=POOL, sf=lambda s, d: 'LC-S' if d > 0 else 'LP-S', pol='M1_t30', sizing='fixed_risk', risk_per_trade=1000.0, max_total_risk=0.10, max_bucket_risk=0.10, reentry='skip'),
     'P4k_cool15_after_loss': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=POOL, sf=lambda s, d: 'LC-S' if d > 0 else 'LP-S', pol='M1_t30', sizing='fixed_risk', risk_per_trade=1000.0, max_total_risk=0.10, max_bucket_risk=0.10, reentry='cool15'),
     # P4 at $1,000 a trade is ruined within the sample (equity $410), after which the caps decide every trade; the rule
-    # comparisons are made at one contract a trade, no caps, so each variant differs from P5 only by its rule
-    'P5_pool_Steady_t30_1lot': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=POOL, sf=lambda s, d: 'LC-S' if d > 0 else 'LP-S', pol='M1_t30', sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0),
-    'P5r_reverse': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=POOL, sf=lambda s, d: 'LC-S' if d > 0 else 'LP-S', pol='M1_t30', sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0, reverse='reverse'),
-    'P5c_close_on_opposite': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=POOL, sf=lambda s, d: 'LC-S' if d > 0 else 'LP-S', pol='M1_t30', sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0, reverse='close'),
-    'P5s_skip_after_loss': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=POOL, sf=lambda s, d: 'LC-S' if d > 0 else 'LP-S', pol='M1_t30', sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0, reentry='skip'),
-    'P5k_cool15_after_loss': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=POOL, sf=lambda s, d: 'LC-S' if d > 0 else 'LP-S', pol='M1_t30', sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0, reentry='cool15'),
+    # comparisons are made at one contract a trade on an account no cap can bind ($100 M), so each variant differs from
+    # P5 only by its rule (compare dollars, not CAGR)
+    'P5_pool_Steady_t30_1lot': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=POOL, sf=lambda s, d: 'LC-S' if d > 0 else 'LP-S', pol='M1_t30', sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0, equity0=1e8),
+    'P5r_reverse': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=POOL, sf=lambda s, d: 'LC-S' if d > 0 else 'LP-S', pol='M1_t30', sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0, equity0=1e8, reverse='reverse'),
+    'P5c_close_on_opposite': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=POOL, sf=lambda s, d: 'LC-S' if d > 0 else 'LP-S', pol='M1_t30', sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0, equity0=1e8, reverse='close'),
+    'P5s_skip_after_loss': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=POOL, sf=lambda s, d: 'LC-S' if d > 0 else 'LP-S', pol='M1_t30', sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0, equity0=1e8, reentry='skip'),
+    'P5k_cool15_after_loss': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=POOL, sf=lambda s, d: 'LC-S' if d > 0 else 'LP-S', pol='M1_t30', sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0, equity0=1e8, reentry='cool15'),
 }
 which = sys.argv[1].split(',') if len(sys.argv) > 1 else list(CONFIGS)
 period = sys.argv[2] if len(sys.argv) > 2 else 'devval'
@@ -62,7 +63,7 @@ for name in which:
     yrs = max(len(eq) / 252, 1e-9)
     summ[name] = {'period': period, 'sessions': days.height, 'trades': f.height, 'skipped_risk_cap': int(tr.filter(pl.col('status') == 'risk_cap').height) if tr.height else 0,
                   'skipped_size': int(tr.filter(pl.col('status') == 'size').height) if tr.height else 0,
-                  'total_pnl': float(pnl.sum()), 'end_equity': float(eq[-1]) if len(eq) else None, 'cagr': float((eq[-1] / 100000) ** (1 / yrs) - 1) if len(eq) else None,
+                  'total_pnl': float(pnl.sum()), 'end_equity': float(eq[-1]) if len(eq) else None, 'cagr': float((eq[-1] / kw.get('equity0', 100000)) ** (1 / yrs) - 1) if len(eq) else None,
                   'max_drawdown': float(days['drawdown'].min()) if days.height else None,
                   'daily_sharpe': float(np.mean(pnl) / np.std(pnl) * np.sqrt(252)) if np.std(pnl) > 0 else None,
                   'win_rate': float((f['pnl'] > 0).mean()) if f.height else None, 'avg_trade': float(f['pnl'].mean()) if f.height else None,

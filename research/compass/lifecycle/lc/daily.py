@@ -43,6 +43,28 @@ def repartition(root: str, chunk: int = 40, log=print):
     log(f'{root}: repartitioned {len(files)} weekly files')
     return out
 
+_LISTED = {}
+def listed_ranges(root: str) -> dict:
+    """expiration -> (first, last) session it was quoted, from the per-expiration-month files; cached under WORK by the
+    weekly-file stamp. An expiration is only tradeable on a session inside its range: a weekly is listed a few weeks
+    ahead, so a picker that looked only at days to expiry would choose expirations that did not exist yet."""
+    if root in _LISTED: return _LISTED[root]
+    stamp = sorted(glob.glob(f'{BYEXP}/{root}/_files_*'))
+    tag = os.path.basename(stamp[-1]) if stamp else 'none'
+    cache = f'{paths.WORK}/daily_listed/{root}__{tag}.parquet'
+    if os.path.exists(cache):
+        df = pl.read_parquet(cache)
+    else:
+        parts = []
+        for d in sorted(glob.glob(f'{BYEXP}/{root}/*-*')):
+            x = pl.read_parquet(f'{d}/*.parquet', columns=['expiration', 'date'])
+            parts.append(x.group_by('expiration').agg(pl.col('date').min().alias('first'), pl.col('date').max().alias('last')))
+        df = pl.concat(parts).group_by('expiration').agg(pl.col('first').min(), pl.col('last').max()).sort('expiration')
+        os.makedirs(os.path.dirname(cache), exist_ok=True); df.write_parquet(cache)
+    out = {e: (a, b) for e, a, b in zip(df['expiration'].to_list(), df['first'].to_list(), df['last'].to_list())}
+    _LISTED[root] = out
+    return out
+
 def expirations(root: str) -> list[dt.date]:
     out = []
     for d in sorted(glob.glob(f'{BYEXP}/{root}/*-*')):

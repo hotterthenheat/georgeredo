@@ -12,6 +12,7 @@ OUT = os.environ.get('TIERD_OUT', f'{paths.RESULTS}/tier_d'); os.makedirs(OUT, e
 roots = sys.argv[1].split(',') if len(sys.argv) > 1 else sorted(os.listdir(f'{paths.WORK}/runs/dgrid'))
 t0 = time.time()
 def log(m): print(f'{time.time() - t0:6.0f}s {m}', flush=True)
+MIN_N = 30   # a comparison is reported only when both sides have at least 30 trades (cells with 0-29 gave spurious intervals)
 names = [p[0] for p in dr.daily_policies()]; fams = {p[0]: p[1] for p in dr.daily_policies()}
 def split_of(d): return 'dev' if d <= dr.DEV_END else ('val' if d <= dr.VAL_END else 'holdout')
 fr = []
@@ -40,7 +41,7 @@ log('cells written')
 # real minus random-session control (directional setups only have controls)
 sub = daily.with_columns(pl.when(pl.col('ctrl') == 0).then(pl.lit('real')).otherwise(pl.lit('ctrl')).alias('side'))
 pr = an.paired(sub, keys, {'side': 'real'}, {'side': 'ctrl'}, boot)
-pr.filter(pl.col('n_b') > 0).write_csv(f'{OUT}/real_vs_control.csv')
+pr.filter((pl.col('n_a') >= MIN_N) & (pl.col('n_b') >= MIN_N)).write_csv(f'{OUT}/real_vs_control.csv')
 # each directional setup against the all-days control with the same bucket, structure and policy: bullish structures
 # against D_ALLL (every Monday, long), bearish against D_ALLS. The days differ, so the bootstrap resamples calendar days
 # over both sides (not a same-day pairing). This separates timing from the market's drift over the period.
@@ -63,7 +64,7 @@ for setup in ('D_TP', 'D_BO', 'D_BOF', 'D_BN', 'D_BNF'):
         sub = real.filter(pl.col('setup').is_in([setup, ref]) & pl.col('structure').is_in(list(structs)))
         if sub.filter(pl.col('setup') == setup).height == 0: continue
         vs.append(an.paired(sub, ['group', 'bucket', 'structure', 'pname'], {'setup': setup}, {'setup': ref}, boot).with_columns(pl.lit(setup).alias('setup'), pl.lit(ref).alias('ref')))
-if vs: pl.concat(vs).write_csv(f'{OUT}/setup_vs_alldays.csv')
+if vs: pl.concat(vs).filter((pl.col('n_a') >= MIN_N) & (pl.col('n_b') >= MIN_N)).write_csv(f'{OUT}/setup_vs_alldays.csv')
 log('policy pairs written')
 # dev choice -> validation
 dv = cells.filter((pl.col('side') == 'real') & (pl.col('period') == 'dev') & (pl.col('n') >= 100))

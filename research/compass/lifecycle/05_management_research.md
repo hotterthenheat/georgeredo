@@ -5,6 +5,9 @@
 - Development and validation sessions only (2022-05 → 2025-09); the hold-out is reported in `07_validation.md`.
 - 113,428 setup events from 12 setups, each entered in every structure its direction allows. Each position is managed by every applicable policy of the pre-registered grid (116 policies, families M0–M13, `02_protocol.md` §5).
 - The same positions entered at random minutes of the same sessions (5 seeds) are run through the same grid. That shows whether a policy helps because of the setup or would help any entry.
+  - That control (RND) takes the setup's direction, but its minute can fall before the event, so it partly knows the move that produced the event (amendment L-A2, `04_entry_research.md` §1.1).
+  - A policy's effect *within* each population is still measured fairly: both arms are the same positions.
+  - The levels of the random population are biased, so every "setups against random" comparison is redone with clean controls in `04_entry_research.md` §1.
 
 **Units**
 - All figures are dollars per unit after fees ($0.70 a contract a side): one contract per leg, or one SPX-sized contract for SPXW.
@@ -105,7 +108,7 @@ For the partial-and-runner policies, the exits tagged "partial" and "runner" are
 - It caps the many small wins and leaves the rare large losses in place.
 - The win rates make it look attractive: 91–93 % for take-25 %.
 
-**Holding to expiry was best, and the setups were worse than random minutes on every row.** The positive CSP numbers are the variance-risk premium of same-day index puts in a rising market. They are not a property of when a setup fires. The cash set aside is the strike × 100, about $40–60 k for one SPY contract, so a $38 expectancy is roughly 0.1 % of the capital per trade.
+**Holding to expiry was best.** On every row the setups were also worse than the original random minutes, but that control is biased toward bullish momentum setups, which make up most of these events. The clean comparison is in `04_entry_research.md` §1. Either way, the positive CSP numbers are the variance-risk premium of same-day index puts in a rising market. The random-minute rows earn it too, so it is not something the setups' timing creates. The cash set aside is the strike × 100, about $40–60 k for one SPY contract, so a $38 expectancy is roughly 0.1 % of the capital per trade.
 
 ## 7. Expiry mechanics
 
