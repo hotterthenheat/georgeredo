@@ -52,6 +52,7 @@ Every entry: what was done, the exact command or file, its verified outcome. New
 | 23:50 | S06 Tier A re-run on clean features (34 names, 8,257,109 events) → registry `S06-TierA`; `05_results.md` §S06 on Tier A | Nothing promoted: 0 of 808 well-sampled cells clear the absolute hurdle |
 | 23:45 | Session model switched to Opus 5.5 by the owner (the Fable usage limit had stopped the research sweep's verification stage); sweep resumed from its cached lenses | Workflow `wf_f11868f4-718` |
 | 00:05 | Owner at 20 % of the session budget: the resumed sweep (111 skeptic checks + report) stopped; `10_external_research.md` written directly from the 42 captured hypotheses and 15 completed verdicts, all unverified rows marked as candidates; final spec §9 added | S11 pull continues in the background (`pull_chain3.sh`, until ~04:10 UTC) |
+| 00:50 | S17 (A7): month-long EOD requests for SPY/QQQ chains hung; switched to two single-day requests per cycle (roll date and expiry), 333 cycles in 29 min; settlement on the 16:00 close (2017 →) or parity (2012–17). Result: passes A7 for QQQ ATM/0.30Δ/0.15Δ and SPY ATM puts; covered calls fail; alpha 0; Bonferroni bounds slightly negative | registry `S17`; config v1.5 `carry_lanes` |
 
 ## Known defects and open items
 - Event flags (FOMC/CPI/NFP) exist only from 2017-02; earlier sessions report `unknown`.
