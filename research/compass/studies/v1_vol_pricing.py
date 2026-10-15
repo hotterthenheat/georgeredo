@@ -343,10 +343,11 @@ def add_term():
         v = float('nan')
         if r['E2'] is not None:
             c = chain(r['symbol'], r['D'], r['E2'])
-            if c is not None and c.height:
+            if c is not None and c.height:                # A8: ATM IV at E_(k+1), defined as at E_k (the two-sided strike nearest the close)
                 s = straddle(c, r['spot_D'])
-                if s is not None and s['strike'] == r['K']: v = float(np.nanmean([s['civ'], s['piv']]))
-                elif s is not None: v = float('nan')      # term slope only at the same strike, so the skew does not leak into it
+                if s is not None:
+                    ivs = [x for x in (s['civ'], s['piv']) if x is not None and np.isfinite(x) and x > 0]
+                    if ivs: v = float(np.mean(ivs))
         iv2.append(v)
     N = N.with_columns(pl.Series('iv2', iv2)).with_columns((pl.col('iv2') - pl.col('iv')).alias('s2'))
     N.write_parquet(f'{OUT}/name_cycles.parquet')
