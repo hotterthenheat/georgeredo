@@ -3,7 +3,7 @@ structure. Nothing here is a trade signal and no hypothesis is tested: every fig
 and every one is shown for 2017-06 -> 2022-12 and 2023-01 -> 2026-10 side by side, so a reader sees whether it held.
 
 Universe: every root with cached one-minute bars (40 Tier A roots, SPY, QQQ, IWM), 2017-06-01 -> 2026-10-09, regular
-sessions with at least 385 of 390 bars, half-days left out. "Close" here is the last one-minute bar's close (15:59-16:00),
+sessions with a bar in each of the 13 half-hours (A10.4), half-days left out. "Close" here is the last one-minute bar's close (15:59-16:00),
 not the official close; "10:00" is the close of the 09:59 bar.
 
   python3 -I pa_atlas.py            # all roots -> results/price_action/
@@ -22,7 +22,7 @@ OUT = os.path.join(HERE, '..', 'results', 'price_action'); os.makedirs(OUT, exis
 START, END, CUT = dt.date(2017, 6, 1), dt.date(2026, 10, 9), dt.date(2022, 12, 31)
 HALF = list(range(30, 390, 30))          # 10:00 .. 15:30 as minute indices (bar closes at minute index - 1)
 KS = (0.5, 1.0, 1.5, 2.0)
-SPLITS = [1/2, 1/3, 1/4, 1/5, 1/10, 1/20, 1/50, 2, 3, 4, 5, 8, 10, 15, 20, 25, 30, 40, 50]   # A8.1 without 2/3
+SPLITS = [x for k in (2, 3, 4, 5, 8, 10, 15, 20, 25, 30, 40, 50) for x in (k, 1 / k)]   # forward and reverse; no 3:2
 log = lambda *a: print(dt.datetime.now(dt.timezone.utc).strftime('%H:%M:%S'), *a, flush=True)
 EV = regime.event_days()
 
@@ -41,8 +41,10 @@ def grid(sym):
     """sessions x 390 arrays of open, high, low, close, volume (NaN where a minute has no bar; closes carried forward)"""
     df = load(sym).select('session', 'minute', 'open', 'high', 'low', 'close', 'volume')
     df = df.filter((pl.col('minute') >= 0) & (pl.col('minute') < 390))
-    n = df.group_by('session').agg(pl.len().alias('n'))
-    keep = [d for d, k in n.iter_rows() if k >= 385 and not cal.is_early_close(d)]
+    # A10.4: a session is usable with at least one bar in each of its 13 half-hours (a minute with no trade has no bar;
+    # a 385-bar floor dropped most sessions of high-priced names such as GOOGL before its split)
+    n = df.group_by('session').agg((pl.col('minute') // 30).n_unique().alias('halves'))
+    keep = [d for d, k in n.iter_rows() if k >= 13 and not cal.is_early_close(d)]
     df = df.filter(pl.col('session').is_in(keep)).sort('session', 'minute')
     S = sorted(keep); idx = {d: i for i, d in enumerate(S)}
     A = {c: np.full((len(S), 390), np.nan) for c in ('open', 'high', 'low', 'close', 'volume')}

@@ -78,6 +78,15 @@ def eod(t):
     d = df.with_columns(pl.col(tcol).cast(pl.Utf8).str.slice(0, 10).str.to_date().alias('session'))
     return d.select('session', pl.col('close').cast(pl.Float64)).unique('session').sort('session')
 
+def usable(day):
+    """A10.4: at least one bar in each of the 13 half-hours"""
+    return set((m // 30) for m in day['minute'].to_list() if 0 <= m < 390) >= set(range(13))
+
+def price_at(day, m, stale=5):
+    """A10.4: the close of the last bar at or before minute m (the bar ending m+1), at most `stale` minutes earlier"""
+    x = day.filter((pl.col('minute') <= m) & (pl.col('minute') >= m - stale)).sort('minute')
+    return float(x['close'][-1]) if x.height else None
+
 def tick(p): return 0.01 if p < 3 else 0.05
 
 def two_sided(r): return r is not None and np.isfinite(r['bid']) and np.isfinite(r['ask']) and r['bid'] > 0 and r['ask'] >= r['bid']
@@ -127,10 +136,9 @@ def build():
             if cal.is_early_close(d): ex('half-day session'); continue
             if d in spl: ex('split window'); continue
             day = bars.get(d)
-            if day is None or day.height < 385: ex('fewer than 385 one-minute bars'); continue
-            a, b = day.filter(pl.col('minute') == 29)['close'], day.filter(pl.col('minute') == 379)['close']
-            if a.is_empty() or b.is_empty(): ex('no 10:00 or 15:50 bar'); continue
-            spot0, spot1 = float(a[0]), float(b[0])
+            if day is None or not usable(day): ex('a half-hour with no bar (A10.4)'); continue
+            spot0, spot1 = price_at(day, 29), price_at(day, 379)
+            if spot0 is None or spot1 is None: ex('no bar within five minutes of 10:00 or 15:50 (A10.4)'); continue
             cl = close.get(d)
             if cl is None or not np.isfinite(cl): ex('no end-of-day close'); continue
             f = os.path.join(CACHE, 'chains_exp', base['root'], f'{d}__{d}.parquet')
