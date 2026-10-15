@@ -11,7 +11,7 @@
 | NVDA   | 8    | $5.34     | Short-dated |
 | TSLA   | 8    | $10.45    | High vol |
 | MSFT   | 8    | $9.99     | Short-dated |
-| AMZN   | 1    | $6.05     | Quick |
+| AMZN   | 8    | $5.32     | Short-dated |
 | META   | 1    | $15.84    | Quick |
 
 All use high-volume strike proxy + positive bid filter.
