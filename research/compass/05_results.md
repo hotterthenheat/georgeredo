@@ -307,7 +307,7 @@ Units are fractions of the vertical's width (0.01 = 1 % of width).
 - **SPXW's same-day chain is priced within about ±3 % of width of what followed** at 0.5–1.5 implied moves. No test rejects at the registered α.
 - **After the bid/ask, neither side earns.** The seller of 13:00 out-of-the-money put verticals comes closest, at break-even.
 - **At 10:00 sharp the quotes are wider**, because economic releases land at 10:00:00 (on 2025-03-14 the SPX spreads went from 0.2–0.4 to 1.5–2 points in that minute). That cost belongs to the entry time chosen.
-- **Touches against the chain's own price come out at 0.88–1.08 × twice the price** (`curve.csv`). The reflection principle holds against the option's price as well as against realised frequencies (`intel/06_price_action_atlas.md` §3).
+- **Touches against the chain's own price come out near twice the price.** Pooled by distance (dev + val), touches ran 0.91–1.02 × twice the price on SPXW, 0.91–1.16 on SPY and QQQ, and 1.18–1.33 on IWM. ETF paths use true bar highs and lows; SPX's use minute prints, which understate its touches. The reflection principle holds against the option's price roughly as it does against realised frequencies (`intel/06_price_action_atlas.md` §3).
 
 **Outside the tested family (descriptive; the forward hold-out decides).**
 - On SPY, QQQ and IWM, 13:00 out-of-the-money puts realised less than their price: −0.034, −0.044 and −0.065 of width, each interval below zero.
