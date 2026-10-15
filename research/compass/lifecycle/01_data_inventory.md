@@ -157,3 +157,29 @@ The engine in `../engine/` (33 tests passing today) supplies:
 - the resumable, idempotent ThetaData fetcher with one-login guard (`data/theta_fetch.py`).
 
 The lifecycle work adds the contract archive, the position engine (multi-leg, every management action), the policy grid and the A/B/C result separation in `lifecycle/lc/`, on top of these.
+
+## 6. Added during the research (2026-10-15)
+
+**The daily tier's option EOD pull** (`scripts/pull_tier_d.py`; every expiration, one week a request; 4 workers):
+
+| Root | Window | Rows | Time |
+|---|---|---|---|
+| SPY | 2012-06 → 2026-10 (750 weeks) | 14.5 M | 42 min (439 weeks already cached) |
+| QQQ | 2012-06 → 2026-10 | 17.1 M | 54 min |
+| IWM | 2012-06 → 2026-10 | 13.2 M | 81 min |
+| FB | 2017-06 → 2022-06 (263 weeks) | 2.3 M | 14 min |
+| Single names | 2017-06 → 2026-10, in liquidity order | about 28 min a name | capped at 13:00 UTC 2026-10-15 (`06_daily_tier.md` §8 lists the names covered) |
+
+**The vendor's login: one session per key.**
+- The pull re-logged in every 5–10 minutes at times, 24 times by 04:10.
+- This most likely means it contended with the owner's local Theta Terminal on the same key.
+- The pull was capped to end before the US session.
+
+**The vendor's META stock history is not Meta Platforms before 2022-06-09.**
+- Its META minute bars are empty before 2021-07-01.
+- From then to 2022-06-08 they are the Roundhill Ball Metaverse ETF (about $15).
+- Meta Platforms starts 2022-06-09 (about $190).
+- FB's closes are therefore taken from put-call parity on FB's own option chain: 2019-06-03 $164.14 against the real $164.15, 2019-06-07 $173.42 against $173.35.
+- UW's earnings calendar files Facebook's reports under META from 2012.
+
+**UW's earnings calendar:** report timing (premarket / postmarket) is complete for the large names 2017–2025; 8 % missing in 2026.
