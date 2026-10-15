@@ -1,0 +1,10 @@
+{
+ "roots": [
+  "SPY",
+  "QQQ",
+  "IWM"
+ ],
+ "daily_rows": 5259256,
+ "cells": 21000,
+ "configurations": 4080
+}
