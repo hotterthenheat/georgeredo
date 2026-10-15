@@ -12,7 +12,7 @@
 | TSLA   | 8    | $10.45    | High vol |
 | MSFT   | 8    | $9.99     | Short-dated |
 | AMZN   | 8    | $5.32     | Short-dated |
-| META   | 1    | $15.84    | Quick |
+| META   | 8    | $23.86    | High absolute |
 
 All use high-volume strike proxy + positive bid filter.
 
