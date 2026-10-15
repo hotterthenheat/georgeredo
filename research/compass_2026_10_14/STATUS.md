@@ -1,29 +1,33 @@
-# Compass Research Status — 2026-10-14 (ongoing)
+# Compass Research Update — 2026-10-14 (continued)
 
-## Executable Mid Measurements (not strategy results)
+## Data collected this session
+- SPY short-dated EOD (max_dte=1, early Oct 2026): 4,176 rows → 460 liquid contracts after tighter filter.
+- QQQ short-dated EOD: 3,962 rows → 545 liquid.
+- Refined ATM straddle samples for SPY, QQQ, IWM (see results/).
 
-| Ticker | Days | Median Mid | Notes |
-|--------|------|------------|-------|
-| SPY    | 15   | $4.10     | 0.54% of spot |
-| QQQ    | 15   | $5.93     | 0.80% of spot |
-| IWM    | 15   | $2.31     | 0.83% of spot |
-| AAPL   | 8    | $6.40     | Short-dated |
-| NVDA   | 8    | $5.34     | Short-dated |
-| TSLA   | 8    | $10.45    | High vol |
-| MSFT   | 8    | $9.99     | Short-dated |
-| AMZN   | 8    | $5.32     | Short-dated |
-| META   | 8    | $23.86    | High absolute |
-| GOOGL  | 9    | $9.29     | Outlier flagged |
+## Sample ATM straddle mids (executable mid, not fills)
+SPY (refined):
+- 2026-10-02 @ 765: ~$5.09
+- 2026-10-06 @ 776: ~$3.23
+- 2026-10-08 @ 774: ~$4.57
 
-All use high-volume strike proxy + positive bid filter.
+QQQ:
+- 2026-10-02 @ 742: $6.92
+- 2026-10-08 @ 753: $6.22
 
-## Alignment with existing research
-COMPASS_RESEARCH_PLAN.md and prior backtests closed most 0DTE lanes after realistic NBBO costs and random baselines. This session is building the measurement infrastructure required by the promotion criteria before any new rule tests.
+IWM:
+- 2026-10-02 @ 280: $3.24
+- 2026-10-08 @ 277: $2.19
 
-## Continuing
-- More symbols and longer windows
-- Entry-rule vs random baseline comparisons
-- Management policy tests
-- All results under research/compass_2026_10_14/
+Spreads on high-volume near-ATM contracts are frequently $0.01–$0.04.
 
-No validated edges claimed. Numbers are preliminary measurements only.
+## Alignment with prior research
+These samples are consistent with the existing Compass research in the repo: short-dated ATM premiums are measurable, liquidity is high on the majors, and proportional costs matter. No new rule-based expectancy has been computed yet that passes the promotion criteria in COMPASS_RESEARCH_PLAN.md.
+
+## Next in progress
+- Underlying price alignment for true ATM selection.
+- First defined-risk and naked short-premium rule tests with bid/ask fills.
+- Chronological splits and baseline comparisons.
+- Expansion to additional liquid short-dated names.
+
+All artifacts remain under research/compass_2026_10_14/.
