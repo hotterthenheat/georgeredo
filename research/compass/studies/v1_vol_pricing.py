@@ -76,6 +76,7 @@ def _get(t, d, e):
     if os.path.exists(p): return 'cached'
     url = f'https://api.unusualwhales.com/api/stock/{t}/option-contracts?date={d}&expiry={e}'
     req = urllib.request.Request(url, headers={'Authorization': f"Bearer {os.environ['UW_API_TOKEN']}", 'Accept': 'application/json'})
+    last = 'rate-limited or server error on every attempt'
     for attempt in range(6):
         try:
             with urllib.request.urlopen(req, timeout=60) as r: body = r.read(); code = r.status
@@ -86,7 +87,7 @@ def _get(t, d, e):
             os.replace(tmp, p)
             return f'ok {len(data)}'
         except urllib.error.HTTPError as ex:
-            if ex.code == 429 or ex.code >= 500: time.sleep(2 * (attempt + 1)); continue
+            if ex.code == 429 or ex.code >= 500: last = f'http {ex.code}'; time.sleep(2 * (attempt + 1)); continue
             msg = ex.read()[:200].decode('utf-8', 'replace').replace(os.environ['UW_API_TOKEN'], '***')
             return f'http {ex.code} {msg}'
         except Exception as ex:
@@ -111,6 +112,58 @@ def fetch(which='E'):
             if n % 500 == 0: print(f'{n}/{len(todo)} {time.time() - t0:.0f}s', flush=True)
     with ThreadPoolExecutor(max_workers=3) as ex: list(ex.map(one, todo))
     print(f'done {n} in {time.time() - t0:.0f}s', flush=True)
+
+# ---------------------------------------------------------------- corporate actions (A8.2)
+OHLC = os.path.join(SP, 'uw_ohlc3y')
+def _ohlc_get(t):
+    p = os.path.join(OHLC, f'{t}.json.gz')
+    if os.path.exists(p): return 'cached'
+    url = f'https://api.unusualwhales.com/api/stock/{t}/ohlc/1d?timeframe=3Y'
+    req = urllib.request.Request(url, headers={'Authorization': f"Bearer {os.environ['UW_API_TOKEN']}", 'Accept': 'application/json'})
+    last = 'rate-limited or server error on every attempt'
+    for attempt in range(6):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r: data = json.loads(r.read()).get('data', [])
+            rows = [{'date': x['date'], 'close': x['close']} for x in data if x.get('market_time') == 'r']
+            os.makedirs(OHLC, exist_ok=True); tmp = p + '.tmp'
+            with gzip.open(tmp, 'wt') as f: json.dump(rows, f)
+            os.replace(tmp, p); return f'ok {len(rows)}'
+        except urllib.error.HTTPError as ex:
+            if ex.code == 429 or ex.code >= 500: last = f'http {ex.code}'; time.sleep(2 * (attempt + 1)); continue
+            return f'http {ex.code}'
+        except Exception as ex: last = str(ex)[:120]; time.sleep(2 * (attempt + 1))
+    return f'failed {last}'
+
+def fetch_ohlc(tickers):
+    todo = [t for t in sorted(set(tickers)) if not os.path.exists(os.path.join(OHLC, f'{t}.json.gz'))]
+    print(f'ohlc: {len(todo)} tickers to fetch', flush=True)
+    with ThreadPoolExecutor(max_workers=3) as ex: res = list(ex.map(_ohlc_get, todo))
+    with open(os.path.join(OUT, 'ohlc_ledger.jsonl'), 'a') as f:
+        for t, r in zip(todo, res): f.write(json.dumps({'t': t, 'res': r}) + '\n')
+
+def corp_days(symbol: str, raw: pl.DataFrame):
+    """sessions where the raw close-to-close ratio and Unusual Whales' adjusted ratio differ by 25 % or more; None when
+    Unusual Whales has no bars for the ticker"""
+    p = os.path.join(OHLC, f'{symbol}.json.gz')
+    if not os.path.exists(p): return None
+    with gzip.open(p, 'rt') as f: rows = json.load(f)
+    if not rows: return None
+    adj = pl.DataFrame(rows).with_columns(pl.col('date').str.to_date(), pl.col('close').cast(pl.Float64, strict=False)).filter(pl.col('close').is_finite() & (pl.col('close') > 0))
+    j = raw.select(['date', 'close']).join(adj.rename({'close': 'adj'}), on='date', how='inner').sort('date')
+    if j.height < 20: return None
+    j = j.with_columns((pl.col('close') / pl.col('close').shift(1)).log().alias('lr'), (pl.col('adj') / pl.col('adj').shift(1)).log().alias('la'))
+    return set(j.filter((pl.col('lr') - pl.col('la')).abs() >= np.log(1.25))['date'].to_list())
+
+def corp_hit(symbol, raw, lo, hi, cache={}):
+    """(hit, how): a corporate action in [lo, hi] by A8.2, or by A8.1's standard ratios when no adjusted bars exist"""
+    if symbol not in cache: cache[symbol] = corp_days(symbol, raw)
+    cd = cache[symbol]
+    if cd is not None:
+        h = sorted(d for d in cd if lo <= d <= hi)
+        return (f'corporate action {h[0]}' if h else None), 'A8.2'
+    win = raw.filter(pl.col('date').is_between(lo, hi))
+    hit = [x for x in win['ratio'].to_list() if x is not None and np.isfinite(x) and any(abs(x / f - 1) <= 0.015 for f in SPLIT_FACTORS)]
+    return (f'split-like ratio {hit[0]:.4f}' if hit else None), 'A8.1 fallback'
 
 # ---------------------------------------------------------------- build
 SYM = re.compile(r'^([A-Z.]+?)(\d{6})([CP])(\d{8})$')
@@ -179,10 +232,8 @@ def build():
         spot = float(g['close'][i])
         s = straddle(c, spot)
         if s is None: excl.append({**base, 'reason': 'no two-sided ATM straddle within 5%'}); continue
-        lo = max(0, i - 30); win = g.slice(lo, None).filter(pl.col('date') <= e)
-        rat = [x for x in win['ratio'].to_list() if x is not None and np.isfinite(x)]
-        hit = [x for x in rat if any(abs(x / f - 1) <= 0.015 for f in SPLIT_FACTORS)]
-        if hit: excl.append({**base, 'reason': f'split-like ratio {hit[0]:.4f}'}); continue
+        hit, how = corp_hit(t, g, dates[max(0, i - 30)], e)
+        if hit: excl.append({**base, 'reason': hit, 'rule': how}); continue
         if e not in dates: excl.append({**base, 'reason': 'no close on E (delisted, acquired or halted)', 'last_close_date': dates[-1] if dates[-1] < e else None}); continue
         j = dates.index(e); s_e = float(g['close'][j])
         if i < 21: excl.append({**base, 'reason': 'under 21 returns before D'}); continue
@@ -198,7 +249,7 @@ def build():
         rows.append({**base, 'spot_D': spot, 'spot_E': s_e, 'K': k, 'cb': s['cb'], 'ca': s['ca'], 'pb': s['pb'], 'pa': s['pa'], 'mid': mid,
                      'rel_spread': (s['ca'] + s['pa'] - s['cb'] - s['pb']) / mid, 'atm_oi': s['coi'] + s['poi'], 'atm_vol': s['cvol'] + s['pvol'],
                      'iv': float(iv), 'rv21': rv21, 'rv_fwd': rv_fwd, 'skew': skew(c), 'earnings_in': er,
-                     'dte': (e - d).days, 'payoff': payoff,
+                     'dte': (e - d).days, 'payoff': payoff, 'ca_rule': how,
                      'short_pnl': (s['cb'] + s['pb'] - payoff - fee) * 100, 'long_pnl': (payoff - s['ca'] - s['pa'] - fee) * 100,
                      'short_pnl_adv': (s['cb'] + s['pb'] - tick - payoff - fee) * 100, 'long_pnl_adv': (payoff - s['ca'] - s['pa'] - tick - fee) * 100})
     N = pl.DataFrame(rows).join(info, on='symbol', how='left')
@@ -301,3 +352,8 @@ if __name__ == '__main__':
     elif cmd == 'fetch': fetch(sys.argv[2] if len(sys.argv) > 2 else 'E')
     elif cmd == 'build': build()
     elif cmd == 'term': add_term()
+    elif cmd == 'ohlc':
+        tk = set(pl.read_parquet(f'{OUT}/plan.parquet')['symbol'].to_list())
+        ev = os.path.join(HERE, '..', 'results', 'v1', 'v2_earnings_vol', 'events.parquet')
+        if os.path.exists(ev): tk |= set(pl.read_parquet(ev)['symbol'].to_list())
+        fetch_ohlc(tk)
