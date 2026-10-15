@@ -22,6 +22,7 @@ It was tested on the vendor's historical NBBO, with realistic fills, and against
 | 9 | `09_setup_strategy_matrix.md` | Every setup × strategy cell: untested, insufficient, failed, or promising |
 | 10 | `10_failed_hypotheses.md` | Every rule that failed, with its numbers |
 | 11 | `11_conclusions.md` | Ranked conclusions |
+| 12 | `12_per_ticker_playbook.md` | Per ticker: where the day's high and low form, how far a position runs, every exit, stop and add rule (descriptive, hold-outs not read) |
 
 ## Code (`lc/`)
 
@@ -67,6 +68,7 @@ python3 scripts/run_tier_d_research.py <ROOTS>       # Tier D runs
 python3 scripts/analyze_tier_d_groups.py SPY,QQQ,IWM FB   # one bootstrap per group (index ETFs; single names)
 python3 scripts/holdout_tier_d.py                    # L-A4: the daily tier's finalists and its hold-out, once
 python3 scripts/build_matrix.py; python3 scripts/matrix_md.py   # the setup x strategy matrix (09), from the result files
+python3 scripts/per_ticker_playbook.py; python3 scripts/playbook_md.py   # the per-ticker playbook (12), from the run files
 ```
 
 **Data needed:** the 0DTE chains, underlying minutes and index minutes under `$SP/theta` (see `01_data_inventory.md`), and the vendor key for the Tier D pull. The key is read from `THETADATA_KEY` only and is never written anywhere.
