@@ -388,7 +388,8 @@ def analyze(holdout=False):
         s = sel(c0, sp) if sp != 'devval' else c0.filter(pl.col('split') != 'holdout')
         m, lo, hi, p = boot(s['r_short'].to_numpy())
         lines.append({'test': 'T0 short every ATM straddle', 'split': sp, 'cycles': s.height, 'name_cycles': int(s['n'].sum()), 'mean': m, 'lo': lo, 'hi': hi, 'p': p})
-    for lab, f in (('stocks', pl.col('issue_type') != 'ETF'), ('ETFs', pl.col('issue_type') == 'ETF'), ('earnings in window', pl.col('earnings_in')), ('no earnings in window', ~pl.col('earnings_in'))):
+    for lab, f in (('stocks and ADRs', pl.col('issue_type').is_in(['Common Stock', 'ADR'])), ('ETFs', pl.col('issue_type') == 'ETF'),
+                   ('other or unclassified', ~pl.col('issue_type').is_in(['Common Stock', 'ADR', 'ETF']) | pl.col('issue_type').is_null()), ('earnings in window', pl.col('earnings_in')), ('no earnings in window', ~pl.col('earnings_in'))):
         c = N.filter(f).group_by(['D', 'split']).agg(pl.col('r_short').mean(), pl.len().alias('n'))
         s = c.filter(pl.col('split') != 'holdout')
         m, lo, hi, p = boot(s['r_short'].to_numpy())
