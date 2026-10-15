@@ -10,7 +10,7 @@
 | AAPL   | 8    | $6.40     | Short-dated |
 | NVDA   | 8    | $5.34     | Short-dated |
 | TSLA   | 8    | $10.45    | High vol |
-| MSFT   | 2    | ~$7.58    | Quick |
+| MSFT   | 8    | $9.99     | Short-dated |
 
 All use high-volume strike proxy + positive bid filter.
 
