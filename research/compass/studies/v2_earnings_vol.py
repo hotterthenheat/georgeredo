@@ -124,7 +124,7 @@ def build():
         if g is None: excl.append({**base, 'reason': 'no stock rows'}); continue
         cl = dict(zip(g['date'].to_list(), g['close'].to_list()))
         if any(d not in cl for d in (p5, p0, ev)): excl.append({**base, 'reason': 'missing close at P-5, P0 or the event session'}); continue
-        hit, how = v1.corp_hit(t, g, p5, ev)
+        hit, how = v1.corp_hit(t, g, p5, ev, e=es, use_chains=os.environ.get('V1_A83') == '1')
         if hit: excl.append({**base, 'reason': hit, 'rule': how}); continue
         s5, s0, se = cl[p5], cl[p0], cl[ev]
         c5, c0 = v1.chain(t, p5, es), v1.chain(t, p0, es)
@@ -217,4 +217,18 @@ if __name__ == '__main__':
     if cmd == 'plan': plan()
     elif cmd == 'fetch': fetch()
     elif cmd == 'build': build()
+    elif cmd == 'jumps':                                    # A8.3 chains for the V2 windows
+        E = pl.read_parquet(f'{OUT}/events.parquet')
+        st = v1.stock_eod().filter(pl.col('symbol').is_in(E['symbol'].unique().to_list())).sort(['symbol', 'date'])
+        st = st.with_columns((pl.col('close') / pl.col('close').shift(1).over('symbol')).alias('ratio'))
+        by = {k[0]: g for k, g in st.group_by('symbol')}
+        pairs = []
+        for r in E.iter_rows(named=True):
+            es, _ = estar(r)
+            if es is None or r['symbol'] not in by: continue
+            pairs += [(r['symbol'], jd, prev, es) for jd, prev, _ in v1.jumps_in(by[r['symbol']], r['P5'], r['event'])]
+        jobs = [j for j in v1.jump_jobs(pairs) if not os.path.exists(v1._path(*j))]
+        print(f'A8.3 (V2): {len(pairs)} (event, jump) pairs, {len(jobs)} chains to fetch', flush=True)
+        with ThreadPoolExecutor(max_workers=3) as ex: list(ex.map(lambda j: v1._get(*j), jobs))
+        print('V2 jump chains done', flush=True)
     elif cmd == 'analyze': analyze('--holdout' in sys.argv)

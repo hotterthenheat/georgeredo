@@ -71,28 +71,57 @@ def plan():
 # ---------------------------------------------------------------- fetch
 _lock = threading.Lock()
 def _path(t, d, e): return os.path.join(CACHE, t, f'{d}_{e}.json.gz')
-def _get(t, d, e):
-    p = _path(t, d, e)
-    if os.path.exists(p): return 'cached'
-    url = f'https://api.unusualwhales.com/api/stock/{t}/option-contracts?date={d}&expiry={e}'
+PAGE = 500          # the endpoint returns at most 500 contracts a page; `page=` continues (QQQ 2024-03-15: 500 + 62)
+
+def _page(t, d, e, page):
+    url = f'https://api.unusualwhales.com/api/stock/{t}/option-contracts?date={d}&expiry={e}&page={page}'
     req = urllib.request.Request(url, headers={'Authorization': f"Bearer {os.environ['UW_API_TOKEN']}", 'Accept': 'application/json'})
     last = 'rate-limited or server error on every attempt'
     for attempt in range(6):
         try:
-            with urllib.request.urlopen(req, timeout=60) as r: body = r.read(); code = r.status
-            data = json.loads(body).get('data', [])
-            os.makedirs(os.path.dirname(p), exist_ok=True)
-            tmp = p + '.tmp'
-            with gzip.open(tmp, 'wt') as f: json.dump(data, f)
-            os.replace(tmp, p)
-            return f'ok {len(data)}'
+            with urllib.request.urlopen(req, timeout=60) as r: return json.loads(r.read()).get('data', []), None
         except urllib.error.HTTPError as ex:
             if ex.code == 429 or ex.code >= 500: last = f'http {ex.code}'; time.sleep(2 * (attempt + 1)); continue
             msg = ex.read()[:200].decode('utf-8', 'replace').replace(os.environ['UW_API_TOKEN'], '***')
-            return f'http {ex.code} {msg}'
+            return None, f'http {ex.code} {msg}'
         except Exception as ex:
             time.sleep(2 * (attempt + 1)); last = str(ex)[:120]
-    return f'failed {last}'
+    return None, f'failed {last}'
+
+def _write(p, data):
+    os.makedirs(os.path.dirname(p), exist_ok=True); tmp = p + '.tmp'
+    with gzip.open(tmp, 'wt') as f: json.dump(data, f)
+    os.replace(tmp, p)
+
+def _get(t, d, e):
+    p = _path(t, d, e)
+    if os.path.exists(p): return 'cached'
+    data = []
+    for page in range(20):
+        rows, err = _page(t, d, e, page)
+        if err: return err
+        data += rows
+        if len(rows) < PAGE: break
+    _write(p, data)
+    return f'ok {len(data)}'
+
+def complete_pages():
+    """re-fetch the later pages of any cached chain that stopped at exactly a full page (written before paging)"""
+    fixed = 0
+    for p in glob.glob(os.path.join(CACHE, '*', '*.json.gz')):
+        with gzip.open(p, 'rt') as f: data = json.load(f)
+        if len(data) == 0 or len(data) % PAGE: continue
+        t = os.path.basename(os.path.dirname(p)); d, e = os.path.basename(p)[:-8].split('_')
+        page = len(data) // PAGE; extra = []
+        while True:
+            rows, err = _page(t, d, e, page)
+            if err: print('page error', t, d, e, err); break
+            extra += rows; page += 1
+            if len(rows) < PAGE: break
+        seen = {r['option_symbol'] for r in data}
+        data += [r for r in extra if r['option_symbol'] not in seen]
+        _write(p, data); fixed += 1
+    print('chains completed', fixed)
 
 def fetch(which='E'):
     P = pl.read_parquet(f'{OUT}/plan.parquet')
@@ -154,20 +183,46 @@ def corp_days(symbol: str, raw: pl.DataFrame):
     j = j.with_columns((pl.col('close') / pl.col('close').shift(1)).log().alias('lr'), (pl.col('adj') / pl.col('adj').shift(1)).log().alias('la'))
     return set(j.filter((pl.col('lr') - pl.col('la')).abs() >= np.log(1.25))['date'].to_list())
 
-def corp_hit(symbol, raw, lo, hi, cache={}):
-    """(hit, how): a corporate action in [lo, hi] by A8.2, or by A8.1's standard ratios when no adjusted bars exist"""
-    if symbol not in cache: cache[symbol] = corp_days(symbol, raw)
-    cd = cache[symbol]
-    if cd is not None:
-        h = sorted(d for d in cd if lo <= d <= hi)
-        return (f'corporate action {h[0]}' if h else None), 'A8.2'
+JUMP_LO, JUMP_HI = 1 / 1.4, 1.4
+
+def jumps_in(raw, lo, hi):
+    """(date, previous session, ratio) for raw close-to-close ratios >= 1.4 or <= 1/1.4 in [lo, hi]"""
+    r = raw.with_columns(pl.col('date').shift(1).alias('prev')).filter(pl.col('date').is_between(lo, hi) & pl.col('ratio').is_finite() & ((pl.col('ratio') >= JUMP_HI) | (pl.col('ratio') <= JUMP_LO)))
+    return [(a, b, c) for a, b, c in zip(r['date'].to_list(), r['prev'].to_list(), r['ratio'].to_list()) if b is not None]
+
+def _quoted(t, d, e):
+    """contracts with a finite, positive ask at the close"""
+    c = chain(t, d, e)
+    if c is None or c.height == 0: return set()
+    c = c.filter(pl.col('ask').is_finite() & (pl.col('ask') > 0))
+    return set(zip(c['strike'].to_list(), c['right'].to_list()))
+
+def jump_verdict(t, jd, prev, e):
+    """A8.3a: share of the prior session's quoted contracts still quoted on the jump session, same expiration. After a
+    split the old series stay listed without quotes (SMCI 2024-10-01: bid and ask empty) and new strikes are listed"""
+    a, b = _quoted(t, prev, e), _quoted(t, jd, e)
+    if not a: return 'ambiguous', float('nan')
+    share = len(a & b) / len(a)
+    return ('genuine' if share >= 0.8 else 'corporate action' if share <= 0.3 else 'ambiguous'), share
+
+def jump_jobs(pairs):
+    """chain requests the A8.3 checks need, for (symbol, jump date, previous session, expiration)"""
+    return sorted({(t, d, e) for t, jd, prev, e in pairs for d in (jd, prev)})
+
+def corp_hit(symbol, raw, lo, hi, e=None, use_chains=False):
+    """(hit, how): A8.3 when its chains are cached (use_chains), else A8.1's standard ratios (interim)"""
+    if use_chains and e is not None:
+        vs = [(jd, *jump_verdict(symbol, jd, prev, e), r) for jd, prev, r in jumps_in(raw, lo, hi)]
+        bad = [v for v in vs if v[1] != 'genuine']
+        if bad: return f'{bad[0][1]} {bad[0][0]} (ratio {bad[0][3]:.3f}, strikes kept {bad[0][2]:.2f})', 'A8.3'
+        return None, 'A8.3'
     win = raw.filter(pl.col('date').is_between(lo, hi))
     hit = [x for x in win['ratio'].to_list() if x is not None and np.isfinite(x) and any(abs(x / f - 1) <= 0.015 for f in SPLIT_FACTORS)]
     return (f'split-like ratio {hit[0]:.4f}' if hit else None), 'A8.1 fallback'
 
 # ---------------------------------------------------------------- build
 SYM = re.compile(r'^([A-Z.]+?)(\d{6})([CP])(\d{8})$')
-SPLIT_FACTORS = [1/2, 1/3, 2/3, 1/4, 1/5, 1/10, 1/20, 2, 3, 4, 5, 8, 10, 15, 20, 25, 30, 40, 50]
+SPLIT_FACTORS = [1/2, 1/3, 2/3, 1/4, 1/5, 1/10, 1/20, 1/50, 2, 3, 4, 5, 8, 10, 15, 20, 25, 30, 40, 50]
 TICK = lambda p: 0.01 if p < 3 else 0.05
 
 def chain(t, d, e) -> pl.DataFrame | None:
@@ -232,7 +287,7 @@ def build():
         spot = float(g['close'][i])
         s = straddle(c, spot)
         if s is None: excl.append({**base, 'reason': 'no two-sided ATM straddle within 5%'}); continue
-        hit, how = corp_hit(t, g, dates[max(0, i - 30)], e)
+        hit, how = corp_hit(t, g, dates[max(0, i - 30)], e, e=e, use_chains=os.environ.get('V1_A83') == '1')
         if hit: excl.append({**base, 'reason': hit, 'rule': how}); continue
         if e not in dates: excl.append({**base, 'reason': 'no close on E (delisted, acquired or halted)', 'last_close_date': dates[-1] if dates[-1] < e else None}); continue
         j = dates.index(e); s_e = float(g['close'][j])
@@ -352,6 +407,19 @@ if __name__ == '__main__':
     elif cmd == 'fetch': fetch(sys.argv[2] if len(sys.argv) > 2 else 'E')
     elif cmd == 'build': build()
     elif cmd == 'term': add_term()
+    elif cmd == 'jumps':                                    # A8.3: pull the chains the jump checks need
+        P = pl.read_parquet(f'{OUT}/plan.parquet')
+        st = stock_eod().filter(pl.col('symbol').is_in(P['symbol'].unique().to_list())).sort(['symbol', 'date'])
+        st = st.with_columns((pl.col('close') / pl.col('close').shift(1).over('symbol')).alias('ratio'))
+        by = {k[0]: g for k, g in st.group_by('symbol')}
+        ss = sorted(st.filter(pl.col('symbol') == 'SPY')['date'].to_list()); ix = {d: i for i, d in enumerate(ss)}
+        pairs = [(r['symbol'], jd, prev, r['E']) for r in P.iter_rows(named=True) if r['symbol'] in by
+                 for jd, prev, _ in jumps_in(by[r['symbol']], ss[max(0, ix[r['D']] - 30)], r['E'])]
+        jobs = [j for j in jump_jobs(pairs) if not os.path.exists(_path(*j))]
+        print(f'A8.3: {len(pairs)} (cycle, jump) pairs, {len(jobs)} chains to fetch', flush=True)
+        with ThreadPoolExecutor(max_workers=3) as ex: list(ex.map(lambda j: _get(*j), jobs))
+        print('jump chains done', flush=True)
+    elif cmd == 'complete': complete_pages()
     elif cmd == 'ohlc':
         tk = set(pl.read_parquet(f'{OUT}/plan.parquet')['symbol'].to_list())
         ev = os.path.join(HERE, '..', 'results', 'v1', 'v2_earnings_vol', 'events.parquet')
