@@ -265,3 +265,21 @@ A configuration that fails is reported in the failed-hypothesis report with its 
   - **H-DCS-1:** its hold-out expectancy > 0, one-sided bootstrap p < 0.05;
   - **H-DCS-2:** it beats RND-after (a random later minute, same direction, same structure and policy), paired, one-sided p < 0.05.
 - Holm across the two. Passing both makes it a candidate for the fresh hold-out (sessions after 2026-10-09), not a promoted configuration: the cell was selected from about 1,000 stage-1 cells.
+
+**L-A4 (2026-10-15, before the daily tier's full development + validation results; only a SPY preview of development + validation had been read, and no hold-out row).** The daily tier's finalists and its one hold-out evaluation, applied mechanically.
+
+1. **Cells:** group (index ETFs; single names) × setup × bucket (W, S, P, L, X) × structure.
+   - Setups: D_TP, D_BO, D_BOF, D_BN, D_BNF, D_EARN, D_FOMC.
+   - The all-days rows (D_ALLL, D_ALLS, D_ALLV, D_ALLP, D_ALLF) are baselines. They are reported, never finalists.
+2. **Finalist:**
+   - the yearly walk-forward (2018–2023, a policy chosen per cell on all earlier years) has out-of-sample expectancy > 0 with lower bound > 0, on at least 100 trades and 60 sessions;
+   - its frozen policy is the best lower bound on development + validation with at least 100 trades.
+3. **Hold-out (2024-01-01 → 2026-10-09), opened once for the finalists.** Promotion needs all of:
+   - **R1** expectancy > 0, one-sided bootstrap p below its Holm threshold across the finalists;
+   - **R2** beats the random-day control in the same direction (controls on hold-out sessions only), paired lower bound > 0;
+   - **R2b** beats the same bucket, structure and policy on the all-days baseline (D_ALLL for bullish, D_ALLS for bearish, D_ALLV for straddles) over the hold-out, lower bound > 0. This separates timing from the market's drift.
+   - **R3** profit factor > 1;
+   - **R4** at least 100 trades on 60 sessions;
+   - **R5** still > 0 with $0.05 a contract a side of extra slippage;
+   - **R6** the same family's policies have a positive median on the cell in development.
+4. **Bookkeeping:** the hold-out is opened by `scripts/holdout_tier_d.py`, which writes a lock file and refuses a second run. The daily tier's controls are clean (random sessions from the whole sample, not tied to the event's own move).

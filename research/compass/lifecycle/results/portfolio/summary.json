@@ -128,19 +128,19 @@
  "P5_pool_Steady_t30_1lot|devval": {
   "period": "devval",
   "sessions": 845,
-  "trades": 5254,
-  "skipped_risk_cap": 6776,
+  "trades": 8260,
+  "skipped_risk_cap": 0,
   "skipped_size": 0,
-  "total_pnl": -99985.60000000012,
-  "end_equity": 14.399999999935968,
-  "cagr": -0.9284963481920296,
-  "max_drawdown": -0.9998576236597845,
-  "daily_sharpe": -1.9660009395335798,
-  "win_rate": 0.4158736200989722,
-  "avg_trade": -19.030376855728992,
-  "worst_trade": -2721.3999999999996,
+  "total_pnl": -119914.20000000016,
+  "end_equity": 99880085.80000007,
+  "cagr": -0.0003577645190827594,
+  "max_drawdown": -0.0012452247994559906,
+  "daily_sharpe": -1.8098693607332952,
+  "win_rate": 0.4194915254237288,
+  "avg_trade": -14.517457627118661,
+  "worst_trade": -5261.4,
   "worst_day": -5559.5999999999985,
   "avg_units": 1.0,
-  "seconds": 255
+  "seconds": 242
  }
 }
