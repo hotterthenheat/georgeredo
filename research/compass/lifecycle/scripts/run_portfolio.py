@@ -18,7 +18,7 @@ CONFIGS = {
     # the best hold-out finalist (QS -> cash-secured put, stop at 2x credit), cash-secured on SPY/QQQ/IWM (SPXW's collateral
     # is several times the account), one contract a trade, collateral capped at the account
     'P1_QS_CSP_s20': dict(roots=('SPY', 'QQQ', 'IWM'), setups=('QS',), sf=lambda s, d: 'CSP' if d > 0 else None, pol='M13_tpnone_s20',
-                          sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0, equity0=1e8),
+                          sizing='fixed_units', fixed_units=1, max_total_risk=1.0, max_bucket_risk=1.0),
     # credit put spreads on QS, $1,000 of maximum loss a trade, 10 % of the account at risk at most
     'P2_QS_CPS_expiry': dict(roots=('SPY', 'QQQ', 'IWM', 'SPXW'), setups=('QS',), sf=lambda s, d: 'CPS' if d > 0 else None, pol='M0_expiry',
                              sizing='fixed_risk', risk_per_trade=1000.0, max_total_risk=0.10, max_bucket_risk=0.10),

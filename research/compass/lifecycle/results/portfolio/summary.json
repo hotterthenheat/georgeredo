@@ -214,5 +214,42 @@
   "worst_day": -5559.5999999999985,
   "avg_units": 1.0,
   "seconds": 246
+ },
+ "P2_QS_CPS_expiry|holdout": {
+  "period": "holdout",
+  "sessions": 177,
+  "trades": 196,
+  "skipped_risk_cap": 0,
+  "skipped_size": 0,
+  "total_pnl": -6804.500000000031,
+  "end_equity": 93195.50000000017,
+  "cagr": -0.09546224658030777,
+  "max_drawdown": -0.1192914787908741,
+  "daily_sharpe": -0.7916792871655295,
+  "win_rate": 0.8775510204081632,
+  "avg_trade": -34.71683673469403,
+  "worst_trade": -5195.499999999996,
+  "worst_day": -7556.000000000004,
+  "avg_units": 3.943877551020408,
+  "seconds": 72
+ },
+ "P1_QS_CSP_s20|holdout_WRONG_100M_account": {
+  "period": "holdout",
+  "sessions": 172,
+  "trades": 157,
+  "skipped_risk_cap": 0,
+  "skipped_size": 0,
+  "total_pnl": 1666.1999999999998,
+  "end_equity": 100001666.19999981,
+  "cagr": 2.4411862031614717e-05,
+  "max_drawdown": -9.691992208016309e-06,
+  "daily_sharpe": 1.9284845562719226,
+  "win_rate": 0.6560509554140127,
+  "avg_trade": 10.612738853503195,
+  "worst_trade": -198.40000000000003,
+  "worst_day": -282.79999999999995,
+  "avg_units": 1.0,
+  "seconds": 47,
+  "note": "run with equity0 = $100 M by a configuration error (the P5 edit matched P1); superseded by the $100,000 rerun"
  }
 }
