@@ -1,12 +1,25 @@
-# Compass Research Status — 2026-10-14 (updated)
+# Compass Research Status — 2026-10-14 (ongoing)
 
-## Measurements
-- SPY ATM straddle (clean, n=15): median mid $4.10, median 0.54% of spot.
-- QQQ ATM (n=5): median mid $5.51.
-- Outlier day (2026-09-15, $0.33) filtered.
+## Executable Mid Measurements (not strategy results)
 
-## Status vs prior research
-These are executable mid measurements only. They do not constitute a strategy or edge. Prior work in COMPASS_RESEARCH_PLAN.md closed most 0DTE lanes after realistic costs and random baselines. Any new rule must still pass the promotion criteria (day-clustered CI > 0, OOS, beats random by >1 round trip, NBBO fills).
+| Ticker | Sample | Median ATM Mid | Notes |
+|--------|--------|----------------|-------|
+| SPY    | 15 days | $4.10 | 0.54% of spot |
+| QQQ    | 5 days | $5.51 | |
+| IWM    | 5 days | $2.23 | |
+| AAPL   | 3 days | ~$4.50 | Mon/Wed/Fri short-dated |
+| NVDA   | 3 days | ~$6.70 | Higher absolute |
 
-## Continuing
-Next: first simple rule-based comparison (e.g. short ATM straddle vs random entry time) on the clean sample with estimated costs, then expand window and universe.
+All use high-volume strike proxy + positive bid filter. Outlier days filtered where obvious.
+
+## Alignment with existing research
+COMPASS_RESEARCH_PLAN.md and prior backtests closed most 0DTE lanes after realistic NBBO costs and random baselines. This session is building the measurement infrastructure required by the promotion criteria before any new rule tests.
+
+## Continuing work
+- Longer windows for core products
+- Entry-rule vs random baseline comparisons
+- Management policy tests
+- Expansion to more mega-caps on their expiration days
+- All results organized under research/compass_2026_10_14/
+
+No validated edges claimed. Numbers above are preliminary measurements only.
