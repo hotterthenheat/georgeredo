@@ -93,7 +93,17 @@ By quintile of IV ÷ RV21, development + validation:
 
 ### T2 — term slope
 
-The second expiration's chains are still being pulled; T2 is reported when they are in.
+- **The signal:** ATM IV at the next monthly minus ATM IV at the entry monthly. "Expensive" means the near month is priced above the next (low or inverted slope).
+- **Coverage:** 30,481 of 44,447 name-cycles had a two-sided ATM quote with vendor IV in both expirations (A8.4).
+
+| Executable test | Development | Validation | Dev + val | Hold-out (7 months with enough names) |
+|---|---|---|---|---|
+| Long-short: sell the lowest-slope quintile at the bid, buy the highest at the ask | −23.7 % [−32.0, −15.4] | −20.5 % [−26.9, −13.3] | −22.2 % [−27.6, −16.8] | −16.5 % [−28.7, −2.3] |
+| … one tick worse | | | −24.0 % | −18.2 % |
+| Sell the lowest-slope quintile only | | | −12.7 % [−21.5, −5.3] | −16.0 % [−25.2, −5.0] |
+| Lowest-slope short minus shorting every name | −3.8 % [−7.9, +0.3] | +2.0 % [−2.7, +6.6] | −1.1 % [−4.4, +2.2] | +4.4 % [−3.5, +13.3] |
+
+No edge: T2 fails its promotion rule.
 
 ### T3 — skew
 
@@ -175,7 +185,7 @@ This last comparison is exploratory, not pre-registered. It explains the result 
 |---|---|
 | V1 T0, single-name monthly straddles overpriced net of costs | No: negative in every sample |
 | V1 T1, IV ÷ RV sort | No edge. The signal ranks forward volatility correctly but does not make selling pay, and adds nothing in the hold-out |
-| V1 T2, term slope | Pending (chains being pulled) |
+| V1 T2, term slope | No edge: long-short −22 % (dev + val), −17 % (hold-out); no improvement over selling everything |
 | V1 T3, skew | No edge |
 | V2a, sell earnings straddles across the report | No: −26 % (dev + val), −34 % (hold-out) |
 | V2b, buy earnings straddles into the report | No: −21 % (dev + val), −29 % (hold-out) |
