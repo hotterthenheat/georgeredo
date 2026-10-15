@@ -47,7 +47,7 @@ It was tested on the vendor's historical NBBO, with realistic fills, and against
 
 ```bash
 cd research/compass/lifecycle
-python3 -m pytest -q tests/                          # 15 tests: hand-checked trades, a real trade against raw quotes, the compiled pricer
+python3 -m pytest -q tests/                          # 19 tests: hand-checked trades, a real trade against raw quotes, the compiled pricer, the clean controls, the point-in-time picker
 python3 scripts/build_events.py SPY,QQQ,IWM,SPXW     # setup events
 python3 scripts/build_vol_events.py SPY,QQQ,IWM,SPXW # volatility and Fed-day events
 python3 scripts/run_grid.py <ROOT> both              # the 116-policy grid (daily sums) and the stage-1 set (per row), dev + val only
