@@ -1,0 +1,1098 @@
+{
+ "generated_utc": "2026-10-15T01:40:32.125806+00:00",
+ "methods_with_rate": [
+  "interest_rate_history_eod"
+ ],
+ "probes": {
+  "expirations/TWTR": {
+   "method": "option_list_expirations",
+   "args": {
+    "symbol": "TWTR"
+   },
+   "secs": 0.06,
+   "error": null,
+   "rows": 480,
+   "columns": [
+    "symbol",
+    "expiration"
+   ],
+   "est_bytes": 6720,
+   "first": "2013-11-22",
+   "last": "2025-01-17"
+  },
+  "expirations/FB": {
+   "method": "option_list_expirations",
+   "args": {
+    "symbol": "FB"
+   },
+   "secs": 0.06,
+   "error": null,
+   "rows": 539,
+   "columns": [
+    "symbol",
+    "expiration"
+   ],
+   "est_bytes": 6468,
+   "first": "2012-06-08",
+   "last": "2024-01-19",
+   "n": 539,
+   "range": [
+    "2012-06-08",
+    "2024-01-19"
+   ]
+  },
+  "expirations/META": {
+   "method": "option_list_expirations",
+   "args": {
+    "symbol": "META"
+   },
+   "secs": 0.05,
+   "error": null,
+   "rows": 330,
+   "columns": [
+    "symbol",
+    "expiration"
+   ],
+   "est_bytes": 4620,
+   "first": "2021-07-16",
+   "last": "2029-01-19",
+   "n": 330,
+   "range": [
+    "2021-07-16",
+    "2029-01-19"
+   ]
+  },
+  "expirations/BBBY": {
+   "method": "option_list_expirations",
+   "args": {
+    "symbol": "BBBY"
+   },
+   "secs": 0.07,
+   "error": null,
+   "rows": 541,
+   "columns": [
+    "symbol",
+    "expiration"
+   ],
+   "est_bytes": 7574,
+   "first": "2012-06-01",
+   "last": "2028-01-21",
+   "n": 541,
+   "range": [
+    "2012-06-01",
+    "2028-01-21"
+   ]
+  },
+  "quote_1m/TWTR/2022-10-20": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "TWTR",
+    "expiration": "2022-09-02",
+    "start_date": "2022-10-20",
+    "end_date": "2022-10-20",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 2.4,
+   "error": "NO_DATA"
+  },
+  "stock_eod/TWTR/2022": {
+   "method": "stock_history_eod",
+   "args": {
+    "symbol": "TWTR",
+    "start_date": "2022-01-01",
+    "end_date": "2022-12-31"
+   },
+   "secs": 6.41,
+   "error": null,
+   "rows": 208,
+   "columns": [
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "est_bytes": 26624,
+   "first": "2022-01-03 17:15:11",
+   "last": "2022-10-28 17:15:14"
+  },
+  "expirations/SPY": {
+   "method": "option_list_expirations",
+   "args": {
+    "symbol": "SPY"
+   },
+   "secs": 0.06,
+   "error": null,
+   "rows": 2148,
+   "columns": [
+    "symbol",
+    "expiration"
+   ],
+   "est_bytes": 27924,
+   "first": "2012-06-01",
+   "last": "2029-01-19"
+  },
+  "greeks_eod/SPY/2015": {
+   "method": "option_history_greeks_eod",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2015-06-19",
+    "start_date": "2015-06-03",
+    "end_date": "2015-06-03",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 0.2,
+   "error": "NO_DATA"
+  },
+  "greeks_iv_1m/SPY/2015": {
+   "method": "option_history_greeks_implied_volatility",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2015-06-19",
+    "start_date": "2015-06-03",
+    "end_date": "2015-06-03",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 5.61,
+   "error": "NO_DATA"
+  },
+  "greeks_eod/SPY/2016": {
+   "method": "option_history_greeks_eod",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2016-06-17",
+    "start_date": "2016-06-03",
+    "end_date": "2016-06-03",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 0.07,
+   "error": "NO_DATA"
+  },
+  "greeks_iv_1m/SPY/2016": {
+   "method": "option_history_greeks_implied_volatility",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2016-06-17",
+    "start_date": "2016-06-03",
+    "end_date": "2016-06-03",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 5.42,
+   "error": "NO_DATA"
+  },
+  "greeks_eod/SPY/2017": {
+   "method": "option_history_greeks_eod",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2017-06-16",
+    "start_date": "2017-06-05",
+    "end_date": "2017-06-05",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 7.0,
+   "error": null,
+   "rows": 328,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition",
+    "delta",
+    "theta",
+    "vega",
+    "rho",
+    "epsilon",
+    "lambda",
+    "gamma",
+    "vanna",
+    "charm",
+    "vomma",
+    "veta",
+    "vera",
+    "speed",
+    "zomma",
+    "color",
+    "ultima",
+    "d1",
+    "d2",
+    "dual_delta",
+    "dual_gamma",
+    "implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "est_bytes": 110372,
+   "first": "2017-06-05 00:00:00",
+   "last": "2017-06-05 16:14:58"
+  },
+  "greeks_iv_1m/SPY/2017": {
+   "method": "option_history_greeks_implied_volatility",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2017-06-16",
+    "start_date": "2017-06-05",
+    "end_date": "2017-06-05",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 15.03,
+   "error": null,
+   "rows": 128248,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid",
+    "bid_implied_vol",
+    "midpoint",
+    "implied_vol",
+    "ask",
+    "ask_implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "est_bytes": 13401916,
+   "first": "2017-06-05 09:30:00",
+   "last": "2017-06-05 16:00:00"
+  },
+  "greeks_eod/SPY/2018": {
+   "method": "option_history_greeks_eod",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2018-06-15",
+    "start_date": "2018-06-05",
+    "end_date": "2018-06-05",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 8.05,
+   "error": null,
+   "rows": 478,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition",
+    "delta",
+    "theta",
+    "vega",
+    "rho",
+    "epsilon",
+    "lambda",
+    "gamma",
+    "vanna",
+    "charm",
+    "vomma",
+    "veta",
+    "vera",
+    "speed",
+    "zomma",
+    "color",
+    "ultima",
+    "d1",
+    "d2",
+    "dual_delta",
+    "dual_gamma",
+    "implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "est_bytes": 160847,
+   "first": "2018-06-05 00:00:00",
+   "last": "2018-06-05 16:14:37"
+  },
+  "greeks_iv_1m/SPY/2018": {
+   "method": "option_history_greeks_implied_volatility",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2018-06-15",
+    "start_date": "2018-06-05",
+    "end_date": "2018-06-05",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 18.79,
+   "error": null,
+   "rows": 186898,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid",
+    "bid_implied_vol",
+    "midpoint",
+    "implied_vol",
+    "ask",
+    "ask_implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "est_bytes": 19530841,
+   "first": "2018-06-05 09:30:00",
+   "last": "2018-06-05 16:00:00"
+  },
+  "greeks_eod/SPY/2019": {
+   "method": "option_history_greeks_eod",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2019-06-14",
+    "start_date": "2019-06-03",
+    "end_date": "2019-06-03",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 5.62,
+   "error": null,
+   "rows": 188,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition",
+    "delta",
+    "theta",
+    "vega",
+    "rho",
+    "epsilon",
+    "lambda",
+    "gamma",
+    "vanna",
+    "charm",
+    "vomma",
+    "veta",
+    "vera",
+    "speed",
+    "zomma",
+    "color",
+    "ultima",
+    "d1",
+    "d2",
+    "dual_delta",
+    "dual_gamma",
+    "implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "est_bytes": 63262,
+   "first": "2019-06-03 00:00:00",
+   "last": "2019-06-03 16:14:58"
+  },
+  "greeks_iv_1m/SPY/2019": {
+   "method": "option_history_greeks_implied_volatility",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2019-06-14",
+    "start_date": "2019-06-03",
+    "end_date": "2019-06-03",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 7.02,
+   "error": null,
+   "rows": 73508,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid",
+    "bid_implied_vol",
+    "midpoint",
+    "implied_vol",
+    "ask",
+    "ask_implied_vol",
+    "iv_error",
+    "underlying_timestamp",
+    "underlying_price"
+   ],
+   "est_bytes": 7681586,
+   "first": "2019-06-03 09:30:00",
+   "last": "2019-06-03 16:00:00"
+  },
+  "interest_rate_history_eod/SOFR/2015-2026": {
+   "method": "interest_rate_history_eod",
+   "args": {
+    "symbol": "SOFR",
+    "start_date": "2015-01-01",
+    "end_date": "2026-10-14"
+   },
+   "secs": 0.05,
+   "error": "StatusCode.INVALID_ARGUMENT Requesting Interest Rate data before 2024-01-01 with FREE subscription.\nTo obtain access, please consider upgrading here! ( https://www.thetadata.net/subscribe "
+  },
+  "quote_1s/SPY/2024-06-04/one_contract": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-06",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "530",
+    "right": "call",
+    "interval": "1s"
+   },
+   "secs": 3.39,
+   "error": null,
+   "rows": 23401,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "est_bytes": 2269897,
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "quote_tick/SPY/2024-06-04/one_contract": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-06",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "530",
+    "right": "call",
+    "interval": "tick"
+   },
+   "secs": 23.81,
+   "error": null,
+   "rows": 824760,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "est_bytes": 80001720,
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 15:59:59"
+  },
+  "trade_quote/SPY/2024-06-04/chain": {
+   "method": "option_history_trade_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-06",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 9.65,
+   "error": null,
+   "rows": 37785,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "trade_timestamp",
+    "quote_timestamp",
+    "sequence",
+    "ext_condition1",
+    "ext_condition2",
+    "ext_condition3",
+    "ext_condition4",
+    "condition",
+    "size",
+    "exchange",
+    "price",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "est_bytes": 6669832,
+   "first": "2024-06-06",
+   "last": "2024-06-06"
+  },
+  "quote_1m/SPY/2024-06-04/chain_weekly": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "SPY",
+    "expiration": "2024-06-06",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 7.97,
+   "error": null,
+   "rows": 89148,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "est_bytes": 8602782,
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "expirations/AAPL": {
+   "method": "option_list_expirations",
+   "args": {
+    "symbol": "AAPL"
+   },
+   "secs": 0.05,
+   "error": null,
+   "rows": 846,
+   "columns": [
+    "symbol",
+    "expiration"
+   ],
+   "est_bytes": 11844,
+   "first": "2012-06-01",
+   "last": "2029-01-19"
+  },
+  "quote_1m/AAPL/2024-06-04/chain_exp=2024-06-14": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "AAPL",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 1.99,
+   "error": null,
+   "rows": 36754,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "est_bytes": 3583515,
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "ohlc_1m/AAPL/2024-06-04/chain_exp=2024-06-14": {
+   "method": "option_history_ohlc",
+   "args": {
+    "symbol": "AAPL",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 2.98,
+   "error": null,
+   "rows": 24633,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "vwap"
+   ],
+   "est_bytes": 2206413,
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "eod/AAPL/2024-06/all_exps": {
+   "method": "option_history_eod",
+   "args": {
+    "symbol": "AAPL",
+    "expiration": "*",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 1.02,
+   "error": null,
+   "rows": 2058,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "est_bytes": 315903,
+   "first": "2024-06-07",
+   "last": "2026-12-18"
+  },
+  "expirations/AMD": {
+   "method": "option_list_expirations",
+   "args": {
+    "symbol": "AMD"
+   },
+   "secs": 0.05,
+   "error": null,
+   "rows": 753,
+   "columns": [
+    "symbol",
+    "expiration"
+   ],
+   "est_bytes": 9789,
+   "first": "2012-06-16",
+   "last": "2029-01-19"
+  },
+  "quote_1m/AMD/2024-06-04/chain_exp=2024-06-14": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "AMD",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 5.25,
+   "error": null,
+   "rows": 41446,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "est_bytes": 3999539,
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "ohlc_1m/AMD/2024-06-04/chain_exp=2024-06-14": {
+   "method": "option_history_ohlc",
+   "args": {
+    "symbol": "AMD",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 4.49,
+   "error": null,
+   "rows": 21505,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "vwap"
+   ],
+   "est_bytes": 1905343,
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "eod/AMD/2024-06/all_exps": {
+   "method": "option_history_eod",
+   "args": {
+    "symbol": "AMD",
+    "expiration": "*",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 3.0,
+   "error": null,
+   "rows": 2092,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "est_bytes": 319030,
+   "first": "2024-06-07",
+   "last": "2026-12-18"
+  },
+  "expirations/CRWD": {
+   "method": "option_list_expirations",
+   "args": {
+    "symbol": "CRWD"
+   },
+   "secs": 0.05,
+   "error": null,
+   "rows": 394,
+   "columns": [
+    "symbol",
+    "expiration"
+   ],
+   "est_bytes": 5516,
+   "first": "2019-06-21",
+   "last": "2029-01-19"
+  },
+  "quote_1m/CRWD/2024-06-04/chain_exp=2024-06-14": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "CRWD",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 10.11,
+   "error": null,
+   "rows": 78982,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "est_bytes": 7700745,
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "ohlc_1m/CRWD/2024-06-04/chain_exp=2024-06-14": {
+   "method": "option_history_ohlc",
+   "args": {
+    "symbol": "CRWD",
+    "expiration": "2024-06-14",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 4.7,
+   "error": null,
+   "rows": 50830,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "timestamp",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "vwap"
+   ],
+   "est_bytes": 4550067,
+   "first": "2024-06-04 09:30:00",
+   "last": "2024-06-04 16:00:00"
+  },
+  "eod/CRWD/2024-06/all_exps": {
+   "method": "option_history_eod",
+   "args": {
+    "symbol": "CRWD",
+    "expiration": "*",
+    "start_date": "2024-06-04",
+    "end_date": "2024-06-04",
+    "strike": "*",
+    "right": "both"
+   },
+   "secs": 0.73,
+   "error": null,
+   "rows": 2124,
+   "columns": [
+    "symbol",
+    "expiration",
+    "strike",
+    "right",
+    "created",
+    "last_trade",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "count",
+    "bid_size",
+    "bid_exchange",
+    "bid",
+    "bid_condition",
+    "ask_size",
+    "ask_exchange",
+    "ask",
+    "ask_condition"
+   ],
+   "est_bytes": 326034,
+   "first": "2024-06-07",
+   "last": "2026-12-18"
+  },
+  "quote_1m/TWTR/2022-10-20/exp=2022-10-21": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "TWTR",
+    "expiration": "2022-10-21",
+    "start_date": "2022-10-20",
+    "end_date": "2022-10-20",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 3.83,
+   "error": null,
+   "rows": 53958,
+   "first": "2022-10-20 09:30:00",
+   "last": "2022-10-20 16:00:00"
+  },
+  "quote_1m/TWTR/2022-10-27/exp=2022-10-28": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "TWTR",
+    "expiration": "2022-10-28",
+    "start_date": "2022-10-27",
+    "end_date": "2022-10-27",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 3.34,
+   "error": null,
+   "rows": 35972,
+   "first": "2022-10-27 09:30:00",
+   "last": "2022-10-27 16:00:00"
+  },
+  "quote_1m/FB/2022-05-02/exp=2022-05-06": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "FB",
+    "expiration": "2022-05-06",
+    "start_date": "2022-05-02",
+    "end_date": "2022-05-02",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 8.46,
+   "error": null,
+   "rows": 72726,
+   "first": "2022-05-02 09:30:00",
+   "last": "2022-05-02 16:00:00"
+  },
+  "quote_1m/META/2022-06-10/exp=2022-06-17": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "META",
+    "expiration": "2022-06-17",
+    "start_date": "2022-06-10",
+    "end_date": "2022-06-10",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 5.11,
+   "error": null,
+   "rows": 81328,
+   "first": "2022-06-10 09:30:00",
+   "last": "2022-06-10 16:00:00"
+  },
+  "quote_1m/BBBY/2023-04-20/exp=2023-04-21": {
+   "method": "option_history_quote",
+   "args": {
+    "symbol": "BBBY",
+    "expiration": "2023-04-21",
+    "start_date": "2023-04-20",
+    "end_date": "2023-04-20",
+    "strike": "*",
+    "right": "both",
+    "interval": "1m"
+   },
+   "secs": 2.67,
+   "error": null,
+   "rows": 35972,
+   "first": "2023-04-20 09:30:00",
+   "last": "2023-04-20 16:00:00"
+  },
+  "list_dates/TWTR/QUOTE/exp=2023-01-20": {
+   "method": "option_list_dates",
+   "args": {
+    "request_type": "QUOTE",
+    "symbol": "TWTR",
+    "expiration": "2023-01-20"
+   },
+   "secs": 5.53,
+   "error": null,
+   "rows": 536
+  }
+ }
+}
