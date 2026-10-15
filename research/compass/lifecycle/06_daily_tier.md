@@ -179,4 +179,35 @@ Full table: 19 rows in the file.
 
 ## 8. Single names
 
-<!-- SINGLES: filled from results/tier_d (group 'single') as the pull and the follower (scripts/tier_d_follow.sh) finish; the single-name hold-out is opened once when they do (L-A4.1) -->
+**Coverage: one name, FB (2017-06 → 2022-06). The 40 planned single names were not completed.**
+- Their option EOD history needs about 28 minutes of pulling per name, about 19 hours in all.
+- **This session's container is reclaimed when the session sits idle,** and background jobs do not count as activity.
+- It restarted at about 06:26 and 07:22 UTC on 2026-10-15, stopping the pull both times.
+- AAPL reached 437 of its 489 weeks (cached, resumable).
+- No other name was started, and the pull was capped before the US session so it would not compete with the owner's Theta Terminal for the vendor login.
+- `scripts/pull_tier_d.py` resumes from its cache, so the remaining names can be pulled on an always-on machine with the same command (`01_data_inventory.md` §6).
+
+**What FB alone shows** (development 2017–2021, validation 2022-H1; `results/tier_d/cells.csv`, group `single`). None of it generalizes beyond one stock:
+- **Its baselines are its own path:**
+  - FB rose about 2.2× from 2017 to 2021 and fell about 50 % in 2022;
+  - a LEAPS-bucket Steady call bought every Monday made +2,303 a contract; the matching Steady put lost −4,016.
+- **The setups against the baselines:**
+  - against FB's all-days baseline, 58 of 864 cells were better and 48 worse;
+  - against random days in the same direction, 52 better and 64 worse;
+  - about as many worse as better, so no direction; the 864 cells are about 40 policies on the same trades, so the counts are not independent tests.
+- **Pre-earnings straddles (D_EARN, the 5th session before a report):**
+  - 2–20 reports a cell (15–20 held to expiry), e.g. the Swing straddle held to expiry −12 [−756, +872] on 20 reports;
+  - every cell is under the 30-trade floor used everywhere else, so no interval here is a finding, and the comparison against all-days straddles is not reported.
+- **Cash-secured put assignment:**
+  - FB's cash-secured puts were exercised and the shares sold at the next open as modelled;
+  - with one name and its 2022 fall, the assignment outcomes are one stock's path, not evidence.
+- **Walk-forward:** 7 of 60 FB cells had out-of-sample lower bounds above zero and 19 upper bounds below it.
+
+**Bootstrap per group.** Each group (index ETFs; single names) is analysed with its own day bootstrap (`scripts/analyze_tier_d_groups.py`). With one shared bootstrap, FB's 4 trading days that the index ETFs' rows lack shifted the index cells' day weights and moved borderline index intervals; per group, the index ETFs' results equal the index-only run to rounding.
+
+**No hold-out is possible:**
+- FB's data ends at the 2022 rename, before the hold-out begins in 2024.
+- The META root (2022-06-09 →) was not pulled.
+- The single-name hold-out (L-A4.1) therefore stays unopened, with no single-name finalist.
+
+**Single names, earnings and assignment are untested on a credible sample.** That is the main gap in this deliverable.

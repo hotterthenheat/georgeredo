@@ -64,7 +64,7 @@ python3 scripts/holdout_r2_after.py                  # the finalists' R2 against
 python3 scripts/run_portfolio.py <configs> devval|holdout
 ./scripts/run_tier_d.sh                              # Tier D pull (vendor key in the environment, one login)
 python3 scripts/run_tier_d_research.py <ROOTS>       # Tier D runs
-python3 scripts/analyze_tier_d.py
+python3 scripts/analyze_tier_d_groups.py SPY,QQQ,IWM FB   # one bootstrap per group (index ETFs; single names)
 python3 scripts/holdout_tier_d.py                    # L-A4: the daily tier's finalists and its hold-out, once
 python3 scripts/build_matrix.py; python3 scripts/matrix_md.py   # the setup x strategy matrix (09), from the result files
 ```

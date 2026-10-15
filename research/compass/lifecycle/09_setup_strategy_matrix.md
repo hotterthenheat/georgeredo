@@ -131,7 +131,7 @@ Counts: failed 37, failed on the hold-out 7, inconclusive 47, insufficient 5.
 
 ## 2. Daily lifecycles (daily tier: Weekly, Swing, Position, Long-Dated, LEAPS; development ≤ 2021, validation 2022–2023)
 
-Counts: carry, not setup 32, failed 60, failed on the hold-out 19, inconclusive 54, insufficient 113, promising 2.
+Counts: carry, not setup 43, failed 80, failed on the hold-out 19, inconclusive 83, insufficient 243, promising 2.
 
 ### Index ETFs (SPY, QQQ, IWM)
 
@@ -192,6 +192,51 @@ Counts: carry, not setup 32, failed 60, failed on the hold-out 19, inconclusive 
 | Trend pullback (daily) | S | H | F | ? | F | H | F | F | C | · | · |
 | Trend pullback (daily) | W | ? | ? | ? | ? | ? | F | F | ? | · | · |
 | Trend pullback (daily) | X | H | F | H | F | H | F | F | H | · | · |
+
+### Single names
+
+| setup | bucket | LC-S | LP-S | LC-B | LP-B | DCS | DPS | CPS | CSP | STR | STG |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Baseline: every Monday, long | L | ? | · | ? | · | C | · | F | F | · | · |
+| Baseline: every Monday, long | P | F | · | ? | · | ? | · | ? | ? | · | · |
+| Baseline: every Monday, long | S | F | · | ? | · | ? | · | F | ? | · | · |
+| Baseline: every Monday, long | W | F | · | ? | · | ? | · | F | ? | · | · |
+| Baseline: every Monday, long | X | C | · | C | · | C | · | C | C | · | · |
+| Baseline: every Monday, put sale | L | · | · | · | · | · | · | F | F | · | · |
+| Baseline: every Monday, put sale | P | · | · | · | · | · | · | ? | ? | · | · |
+| Baseline: every Monday, put sale | S | · | · | · | · | · | · | F | ? | · | · |
+| Baseline: every Monday, put sale | W | · | · | · | · | · | · | F | ? | · | · |
+| Baseline: every Monday, put sale | X | · | · | · | · | · | · | C | C | · | · |
+| Baseline: every Monday, short | L | · | ? | · | F | · | F | · | · | · | · |
+| Baseline: every Monday, short | P | · | ? | · | ? | · | F | · | · | · | · |
+| Baseline: every Monday, short | S | · | ? | · | ? | · | F | · | · | · | · |
+| Baseline: every Monday, short | W | · | ? | · | ? | · | ? | · | · | · | · |
+| Baseline: every Monday, short | X | · | F | · | F | · | F | · | · | · | · |
+| Baseline: every Monday, straddle | L | · | · | · | · | · | · | · | · | C | C |
+| Baseline: every Monday, straddle | P | · | · | · | · | · | · | · | · | ? | ? |
+| Baseline: every Monday, straddle | S | · | · | · | · | · | · | · | · | ? | ? |
+| Baseline: every Monday, straddle | W | · | · | · | · | · | · | · | · | ? | F |
+| Baseline: every Monday, straddle | X | · | · | · | · | · | · | · | · | C | F |
+| Breakout (daily) | L | n | n | n | n | n | n | n | n | · | · |
+| Breakout (daily) | P | n | n | n | n | n | n | n | n | · | · |
+| Breakout (daily) | S | n | n | n | n | n | n | n | n | · | · |
+| Breakout (daily) | W | n | n | n | n | n | n | n | n | · | · |
+| Breakout (daily) | X | n | n | n | n | n | n | n | n | · | · |
+| Failed breakout (daily) | L | n | n | n | n | n | n | n | n | · | · |
+| Failed breakout (daily) | P | n | n | n | n | n | n | n | n | · | · |
+| Failed breakout (daily) | S | n | n | n | n | n | n | n | n | · | · |
+| Failed breakout (daily) | W | n | n | n | n | n | n | n | n | · | · |
+| Failed breakout (daily) | X | n | n | n | n | n | n | n | n | · | · |
+| Pre-earnings (5 sessions before) | L | · | · | · | · | · | · | · | · | n | n |
+| Pre-earnings (5 sessions before) | P | · | · | · | · | · | · | · | · | n | n |
+| Pre-earnings (5 sessions before) | S | · | · | · | · | · | · | · | · | n | n |
+| Pre-earnings (5 sessions before) | W | · | · | · | · | · | · | · | · | n | n |
+| Pre-earnings (5 sessions before) | X | · | · | · | · | · | · | · | · | n | n |
+| Trend pullback (daily) | L | n | n | n | n | n | n | n | n | · | · |
+| Trend pullback (daily) | P | n | n | n | n | n | n | n | n | · | · |
+| Trend pullback (daily) | S | n | n | n | n | n | n | n | n | · | · |
+| Trend pullback (daily) | W | n | n | n | n | n | n | n | n | · | · |
+| Trend pullback (daily) | X | n | n | n | n | n | n | n | n | · | · |
 
 ### Cells that did not simply fail
 
@@ -417,4 +462,174 @@ Counts: carry, not setup 32, failed 60, failed on the hold-out 19, inconclusive 
 | index_etf | Trend pullback (daily) | X | DCS | D0_expiry | 968 | +321.9 [+245.8, +396.9] | +284.1 [+126.2, +445.7] | -127.9 [-208.9, -56.1] | finalist D0_expiry: hold-out +2144 [+1890] on 246; not promoted (fails R2, R2b) | failed on the hold-out |
 | index_etf | Trend pullback (daily) | X | LC-B | D7_dd40 | 970 | +656.8 [+537.4, +776.0] | +1031.3 [+765.0, +1309.2] | -67.2 [-189.1, +60.1] | finalist D7_dd40: hold-out +501 [+103] on 247; not promoted (fails R2, R2b) | failed on the hold-out |
 | index_etf | Trend pullback (daily) | X | LC-S | D0_ltd1 | 1,072 | +1110.0 [+908.3, +1285.3] | +1327.4 [+997.0, +1685.4] | -236.8 [-427.6, -48.5] | finalist D0_ltd1: hold-out +2638 [+2198] on 257; not promoted (fails R2, R2b) | failed on the hold-out |
+| single | Baseline: every Monday, long | L | DCS | D0_expiry | 190 | +376.8 [+151.1, +597.4] | +243.2 [-494.2, +905.1] | — [—, —] | — | carry, not setup |
+| single | Baseline: every Monday, long | L | LC-B | D2_s50_t50 | 190 | +45.7 [-4.1, +99.4] | -63.4 [-388.1, +295.9] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, long | L | LC-S | D7_dd40 | 192 | +817.8 [+189.1, +1410.0] | -69.8 [-1558.5, +1369.5] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, long | P | CPS | D0_expiry | 208 | -23.1 [-50.6, +2.6] | -36.7 [-80.5, +1.8] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, long | P | CSP | D1_t5 | 210 | -42.5 [-131.5, +30.0] | -405.6 [-967.1, +76.4] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, long | P | DCS | D0_ltd1 | 207 | +35.9 [-73.5, +150.7] | -91.1 [-325.7, +142.7] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, long | P | LC-B | D2_s50_t50 | 208 | +4.7 [-29.9, +39.2] | -27.5 [-98.0, +48.5] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, long | S | CSP | D13_tp50_dte21 | 208 | -17.0 [-118.4, +65.8] | -400.0 [-894.8, +8.7] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, long | S | DCS | D0_expiry | 208 | +0.4 [-95.3, +101.2] | -146.3 [-316.8, +44.0] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, long | S | LC-B | D2_s35_t35 | 208 | -9.4 [-31.7, +12.6] | -19.3 [-83.5, +50.4] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, long | W | CSP | D0_dte21 | 217 | -7.9 [-30.0, +12.5] | -16.8 [-69.6, +25.4] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, long | W | DCS | D0_dte21 | 209 | -25.7 [-40.8, -11.4] | -64.5 [-160.6, +39.5] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, long | W | LC-B | D0_dte21 | 217 | -11.0 [-21.6, -0.7] | -42.8 [-78.9, +5.4] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, long | X | CPS | D0_expiry | 157 | +79.5 [+70.2, +88.3] | +65.9 [+29.4, +99.2] | — [—, —] | — | carry, not setup |
+| single | Baseline: every Monday, long | X | CSP | D0_expiry | 157 | +1685.3 [+1585.8, +1782.9] | +2558.5 [+2424.3, +2708.8] | — [—, —] | — | carry, not setup |
+| single | Baseline: every Monday, long | X | DCS | D7_dd40 | 154 | +2643.3 [+2258.2, +3080.9] | +2239.8 [+1666.7, +2715.5] | — [—, —] | — | carry, not setup |
+| single | Baseline: every Monday, long | X | LC-B | D6_add1atr | 154 | +323.9 [+131.1, +523.0] | +1272.8 [+403.9, +2048.3] | — [—, —] | — | carry, not setup |
+| single | Baseline: every Monday, long | X | LC-S | D7_dd40 | 158 | +3884.2 [+3185.1, +4591.5] | +2199.5 [+1666.4, +2677.1] | — [—, —] | — | carry, not setup |
+| single | Baseline: every Monday, put sale | P | CPS | D0_expiry | 208 | -23.1 [-50.6, +2.6] | -36.7 [-80.5, +1.8] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, put sale | P | CSP | D1_t5 | 210 | -42.5 [-131.5, +30.0] | -405.6 [-967.1, +76.4] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, put sale | S | CSP | D13_tp50_dte21 | 208 | -17.0 [-118.4, +65.8] | -400.0 [-894.8, +8.7] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, put sale | W | CSP | D0_dte21 | 217 | -7.9 [-30.0, +12.5] | -16.8 [-69.6, +25.4] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, put sale | X | CPS | D0_expiry | 157 | +79.5 [+70.2, +88.3] | +65.9 [+29.4, +99.2] | — [—, —] | — | carry, not setup |
+| single | Baseline: every Monday, put sale | X | CSP | D0_expiry | 157 | +1685.3 [+1585.8, +1782.9] | +2558.5 [+2424.3, +2708.8] | — [—, —] | — | carry, not setup |
+| single | Baseline: every Monday, short | L | LP-S | D1_t5 | 192 | -120.7 [-211.1, -16.2] | -190.2 [-425.0, +29.6] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, short | P | LP-B | D2_s35_t35 | 210 | -2.6 [-46.7, +51.2] | +10.9 [-95.9, +141.3] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, short | P | LP-S | D1_t5 | 211 | -43.4 [-148.5, +89.1] | +32.2 [-226.4, +341.1] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, short | S | LP-B | D2_s35_t35 | 208 | -7.6 [-47.5, +49.2] | +21.2 [-95.6, +174.4] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, short | S | LP-S | D2_s50_t50 | 215 | -29.2 [-140.2, +110.9] | +8.2 [-232.3, +266.4] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, short | W | DPS | D0_expiry | 213 | +0.0 [-54.8, +62.7] | -28.7 [-59.8, +5.9] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, short | W | LP-B | D2_s50_t50_exp | 216 | +13.2 [-30.0, +75.6] | -10.6 [-38.4, +25.7] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, short | W | LP-S | D0_dte21 | 217 | -43.8 [-76.0, -9.6] | -21.4 [-90.6, +58.6] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, straddle | L | STG | D2_s50_t100 | 190 | +308.4 [+82.4, +559.3] | +11.5 [-665.7, +649.1] | — [—, —] | — | carry, not setup |
+| single | Baseline: every Monday, straddle | L | STR | D2_s50_t50_exp | 191 | +690.9 [+333.6, +1056.8] | +761.2 [-65.4, +1540.4] | — [—, —] | — | carry, not setup |
+| single | Baseline: every Monday, straddle | P | STG | D2_s50_t50_exp | 208 | +68.9 [-44.6, +186.9] | -112.6 [-314.7, +111.9] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, straddle | P | STR | D1_t5 | 209 | -44.5 [-107.3, +26.9] | -34.6 [-182.2, +147.9] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, straddle | S | STG | D2_s50_t50_exp | 203 | +46.1 [-51.1, +150.0] | -84.5 [-264.4, +126.6] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, straddle | S | STR | D1_t5 | 204 | -27.5 [-100.3, +57.5] | -8.3 [-172.7, +218.5] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, straddle | W | STR | D0_expiry | 214 | +56.2 [-57.1, +179.7] | +4.6 [-184.8, +238.6] | — [—, —] | — | inconclusive |
+| single | Baseline: every Monday, straddle | X | STR | D12_both_t50 | 156 | +1047.1 [+634.5, +1411.7] | +845.2 [-1700.7, +3135.2] | — [—, —] | — | carry, not setup |
+| single | Breakout (daily) | L | CPS | D1_t20 | 54 | -62.2 [-87.5, -37.8] | — [—, —] | +6.6 [-22.6, +35.0] | — | insufficient |
+| single | Breakout (daily) | L | CSP | D13_tp50_s2 | 54 | +150.6 [-125.1, +396.3] | — [—, —] | +81.8 [-208.4, +378.0] | — | insufficient |
+| single | Breakout (daily) | L | DCS | D1_t10 | 55 | -75.4 [-153.3, +0.8] | — [—, —] | +2.9 [-79.5, +80.5] | — | insufficient |
+| single | Breakout (daily) | L | DPS | D1_t5 | 28 | -164.8 [-271.0, -61.9] | — [—, —] | — [—, —] | — | insufficient |
+| single | Breakout (daily) | L | LC-B | D2_s50_t50 | 55 | +50.9 [-47.8, +144.3] | — [—, —] | -0.2 [-100.1, +94.4] | — | insufficient |
+| single | Breakout (daily) | L | LC-S | D2_s50_t50 | 55 | +343.4 [-1.3, +677.6] | — [—, —] | +49.2 [-284.4, +402.6] | — | insufficient |
+| single | Breakout (daily) | L | LP-B | D1_t5 | 28 | -83.0 [-164.1, -8.8] | — [—, —] | — [—, —] | — | insufficient |
+| single | Breakout (daily) | L | LP-S | D1_t5 | 29 | -183.1 [-390.8, +9.0] | — [—, —] | — [—, —] | — | insufficient |
+| single | Breakout (daily) | P | CPS | D1_t10 | 55 | -38.6 [-60.7, -16.6] | — [—, —] | +16.3 [-9.0, +40.7] | — | insufficient |
+| single | Breakout (daily) | P | CSP | D1_t10 | 56 | +3.3 [-135.7, +132.7] | — [—, —] | +100.2 [-59.3, +270.0] | — | insufficient |
+| single | Breakout (daily) | P | DCS | D1_t5 | 55 | -58.7 [-130.5, +12.6] | — [—, —] | +21.1 [-51.2, +101.1] | — | insufficient |
+| single | Breakout (daily) | P | DPS | D1_t10 | 35 | -20.2 [-181.2, +181.7] | — [—, —] | +81.0 [-88.1, +283.4] | — | insufficient |
+| single | Breakout (daily) | P | LC-B | D1_t5 | 55 | +9.8 [-48.3, +85.1] | — [—, —] | +45.1 [-16.1, +122.4] | — | insufficient |
+| single | Breakout (daily) | P | LC-S | D2_s50_t50_exp | 58 | +81.4 [-128.4, +285.0] | — [—, —] | +61.8 [-161.6, +266.0] | — | insufficient |
+| single | Breakout (daily) | P | LP-B | D2_s50_t50 | 36 | +12.6 [-93.3, +114.5] | — [—, —] | +0.9 [-130.3, +120.8] | — | insufficient |
+| single | Breakout (daily) | P | LP-S | D2_s35_t35 | 36 | -35.3 [-306.2, +213.1] | — [—, —] | -14.6 [-309.2, +267.5] | — | insufficient |
+| single | Breakout (daily) | S | CPS | D13_tp50 | 58 | -21.2 [-49.9, +3.7] | — [—, —] | -10.2 [-40.5, +15.5] | — | insufficient |
+| single | Breakout (daily) | S | CSP | D13_tp50 | 56 | +94.1 [-117.9, +264.2] | — [—, —] | +75.1 [-170.9, +318.9] | — | insufficient |
+| single | Breakout (daily) | S | DCS | D0_expiry | 57 | +75.4 [-114.0, +277.5] | — [—, —] | +100.8 [-90.4, +304.8] | — | insufficient |
+| single | Breakout (daily) | S | DPS | D1_t5 | 34 | -77.5 [-181.7, +11.4] | — [—, —] | +12.6 [-97.8, +111.2] | — | insufficient |
+| single | Breakout (daily) | S | LC-B | D1_t5 | 57 | +2.9 [-53.8, +73.7] | — [—, —] | +27.8 [-33.9, +99.4] | — | insufficient |
+| single | Breakout (daily) | S | LC-S | D1_t5 | 58 | -27.5 [-168.0, +121.4] | — [—, —] | +43.3 [-108.9, +211.2] | — | insufficient |
+| single | Breakout (daily) | S | LP-B | D2_s50_t50_exp | 34 | +11.8 [-89.4, +112.5] | — [—, —] | -9.4 [-133.8, +106.9] | — | insufficient |
+| single | Breakout (daily) | S | LP-S | D2_s50_t50_exp | 37 | +39.2 [-224.6, +291.6] | — [—, —] | +49.8 [-246.6, +337.2] | — | insufficient |
+| single | Breakout (daily) | W | CPS | D0_dte21 | 47 | -10.2 [-24.2, +1.7] | — [—, —] | +0.0 [-18.4, +18.5] | — | insufficient |
+| single | Breakout (daily) | W | CSP | D0_dte21 | 52 | +22.3 [-18.4, +57.8] | — [—, —] | +33.9 [-13.5, +81.7] | — | insufficient |
+| single | Breakout (daily) | W | DCS | D0_dte21 | 45 | +4.2 [-34.8, +45.6] | — [—, —] | +24.6 [-18.9, +67.7] | — | insufficient |
+| single | Breakout (daily) | W | DPS | D0_dte21 | 33 | +38.6 [-36.0, +122.1] | — [—, —] | +71.6 [-3.1, +151.9] | — | insufficient |
+| single | Breakout (daily) | W | LC-B | D0_dte21 | 54 | -0.2 [-28.7, +33.2] | — [—, —] | +4.6 [-28.9, +38.1] | — | insufficient |
+| single | Breakout (daily) | W | LC-S | D0_dte21 | 55 | +14.9 [-72.5, +112.4] | — [—, —] | +26.1 [-71.7, +124.6] | — | insufficient |
+| single | Breakout (daily) | W | LP-B | D0_dte21 | 36 | -14.2 [-59.9, +44.7] | — [—, —] | +1.8 [-49.7, +67.7] | — | insufficient |
+| single | Breakout (daily) | W | LP-S | D0_dte21 | 36 | +29.1 [-89.7, +165.1] | — [—, —] | +41.4 [-95.5, +184.0] | — | insufficient |
+| single | Breakout (daily) | X | CPS | D0_expiry | 45 | +79.3 [+63.8, +95.6] | — [—, —] | -5.6 [-22.0, +11.7] | — | insufficient |
+| single | Breakout (daily) | X | CSP | D0_expiry | 46 | +1697.1 [+1535.1, +1862.3] | — [—, —] | +36.7 [-156.5, +208.9] | — | insufficient |
+| single | Breakout (daily) | X | DCS | D7_dd40 | 44 | +1833.3 [+1330.9, +2305.8] | — [—, —] | -886.1 [-1557.2, -283.2] | — | insufficient |
+| single | Breakout (daily) | X | DPS | D1_t5 | 24 | -222.4 [-366.7, -93.7] | — [—, —] | — [—, —] | — | insufficient |
+| single | Breakout (daily) | X | LC-B | D2_s50_t50 | 44 | +140.2 [+7.2, +270.1] | — [—, —] | +86.9 [-54.1, +230.8] | — | insufficient |
+| single | Breakout (daily) | X | LC-S | D7_dd40 | 46 | +3002.3 [+2136.6, +3911.6] | — [—, —] | -1058.1 [-2144.2, +33.2] | — | insufficient |
+| single | Breakout (daily) | X | LP-B | D1_t5 | 24 | -102.0 [-212.6, -5.5] | — [—, —] | — [—, —] | — | insufficient |
+| single | Breakout (daily) | X | LP-S | D1_t5 | 25 | -179.8 [-449.7, +50.9] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | L | CPS | D5_thesis | 13 | -41.0 [-96.7, +8.5] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | L | CSP | D13_tp50 | 14 | +653.6 [+543.6, +765.3] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | L | DCS | D7_dd40 | 13 | +1112.5 [+380.2, +1792.6] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | L | DPS | D9_rsi_exit | 24 | -122.8 [-180.5, -63.3] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | L | LC-B | D9_rsi_exit | 13 | -41.4 [-76.0, -6.1] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | L | LC-S | D7_dd40 | 15 | +3690.3 [+1283.2, +6738.7] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | L | LP-B | D9_rsi_exit | 24 | -73.3 [-114.8, -35.0] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | L | LP-S | D9_rsi_exit | 25 | -143.2 [-233.2, -42.8] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | P | CPS | D13_tp50 | 17 | -26.6 [-112.0, +34.0] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | P | CSP | D13_tp50 | 17 | +94.6 [-366.6, +414.6] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | P | DCS | D9_rsi_exit | 18 | -71.2 [-135.7, -5.9] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | P | DPS | D9_rsi_exit | 22 | -100.6 [-144.9, -58.8] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | P | LC-B | D9_rsi_exit | 18 | -27.3 [-57.1, +8.0] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | P | LC-S | D9_rsi_exit | 19 | -118.0 [-284.5, +33.8] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | P | LP-B | D9_rsi_exit | 22 | -69.6 [-119.0, -24.9] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | P | LP-S | D9_rsi_exit | 25 | -165.6 [-262.6, -71.2] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | S | CPS | D13_tp50 | 17 | -26.1 [-95.5, +22.4] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | S | CSP | D13_tp50 | 17 | +156.4 [-77.3, +320.4] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | S | DCS | D9_rsi_exit | 18 | -87.7 [-190.4, +5.5] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | S | DPS | D9_rsi_exit | 25 | -113.2 [-155.5, -68.6] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | S | LC-B | D9_rsi_exit | 18 | -6.3 [-71.5, +76.5] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | S | LC-S | D9_rsi_exit | 19 | -99.0 [-342.7, +121.1] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | S | LP-B | D2_s35_t35 | 25 | -38.6 [-115.3, +39.1] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | S | LP-S | D9_rsi_exit | 25 | -157.0 [-246.6, -66.5] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | W | CPS | D0_dte21 | 15 | +57.6 [-30.6, +211.3] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | W | CSP | D0_dte21 | 15 | +105.7 [-18.8, +271.3] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | W | DCS | D0_dte21 | 15 | +18.8 [-60.3, +109.8] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | W | DPS | D0_dte21 | 20 | -28.6 [-91.9, +46.4] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | W | LC-B | D2_s50_t50_exp | 17 | +10.9 [-45.8, +86.9] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | W | LC-S | D0_dte21 | 17 | -68.8 [-312.7, +176.1] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | W | LP-B | D0_expiry | 25 | +61.5 [-61.2, +214.3] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | W | LP-S | D0_dte21 | 24 | -82.4 [-178.8, +38.0] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | X | CPS | D0_expiry | 13 | +61.7 [+14.7, +100.5] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | X | CSP | D0_expiry | 14 | +1778.2 [+1453.4, +2148.1] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | X | DCS | D7_dd40 | 13 | +2253.3 [+1409.1, +2990.4] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | X | DPS | D9_rsi_exit | 20 | -154.6 [-226.8, -77.5] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | X | LC-B | D2_s50_t100 | 13 | +331.5 [+24.1, +648.3] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | X | LC-S | D7_dd40 | 14 | +3495.9 [+1969.6, +5059.4] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | X | LP-B | D9_rsi_exit | 20 | -87.9 [-138.5, -40.1] | — [—, —] | — [—, —] | — | insufficient |
+| single | Failed breakout (daily) | X | LP-S | D9_rsi_exit | 20 | -141.6 [-262.8, -24.2] | — [—, —] | — [—, —] | — | insufficient |
+| single | Pre-earnings (5 sessions before) | L | STG | D1_t5 | 18 | +21.9 [-101.0, +158.2] | — [—, —] | — [—, —] | — | insufficient |
+| single | Pre-earnings (5 sessions before) | L | STR | D1_t5 | 18 | +41.4 [-110.9, +225.4] | — [—, —] | — [—, —] | — | insufficient |
+| single | Pre-earnings (5 sessions before) | P | STG | E_pre | 19 | +0.7 [-77.3, +85.7] | — [—, —] | — [—, —] | — | insufficient |
+| single | Pre-earnings (5 sessions before) | P | STR | E_pre | 19 | +10.5 [-79.7, +114.6] | — [—, —] | — [—, —] | — | insufficient |
+| single | Pre-earnings (5 sessions before) | S | STG | E_pre | 20 | +19.2 [-61.0, +103.9] | — [—, —] | — [—, —] | — | insufficient |
+| single | Pre-earnings (5 sessions before) | S | STR | E_pre | 20 | +1.2 [-93.6, +107.4] | — [—, —] | — [—, —] | — | insufficient |
+| single | Pre-earnings (5 sessions before) | W | STG | E_post | 13 | +74.2 [+73.5, +74.9] | — [—, —] | — [—, —] | — | insufficient |
+| single | Pre-earnings (5 sessions before) | W | STR | E_post | 19 | +371.7 [+239.9, +503.5] | — [—, —] | — [—, —] | — | insufficient |
+| single | Pre-earnings (5 sessions before) | X | STG | D1_t5 | 15 | -60.3 [-200.3, +98.0] | — [—, —] | — [—, —] | — | insufficient |
+| single | Pre-earnings (5 sessions before) | X | STR | D2_s50_t50 | 15 | +896.5 [-115.9, +1885.1] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | L | CPS | D0_dte21 | 50 | -0.0 [-42.4, +37.5] | — [—, —] | +48.1 [-6.0, +100.5] | — | insufficient |
+| single | Trend pullback (daily) | L | CSP | D0_dte21 | 50 | +854.9 [+440.8, +1196.3] | — [—, —] | +828.4 [+258.0, +1407.8] | — | insufficient |
+| single | Trend pullback (daily) | L | DCS | D1_t5 | 48 | -7.9 [-79.8, +65.4] | — [—, —] | +67.2 [-9.9, +142.8] | — | insufficient |
+| single | Trend pullback (daily) | L | DPS | D9_rsi_exit | 12 | -164.1 [-379.4, +80.4] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | L | LC-B | D1_t5 | 48 | +43.7 [-21.3, +109.2] | — [—, —] | +45.0 [-22.1, +115.0] | — | insufficient |
+| single | Trend pullback (daily) | L | LC-S | D1_t5 | 50 | +150.6 [-10.8, +318.1] | — [—, —] | +147.0 [-14.7, +316.8] | — | insufficient |
+| single | Trend pullback (daily) | L | LP-B | D2_s35_t35 | 12 | -68.6 [-249.9, +90.3] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | L | LP-S | D9_rsi_exit | 13 | -209.5 [-586.9, +244.0] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | P | CPS | D1_t5 | 49 | -32.8 [-49.6, -17.4] | — [—, —] | +25.2 [+5.4, +46.6] | — | insufficient |
+| single | Trend pullback (daily) | P | CSP | D13_tp50_s2 | 50 | +212.5 [+42.2, +364.4] | — [—, —] | +266.8 [+71.1, +454.3] | — | insufficient |
+| single | Trend pullback (daily) | P | DCS | D2_s50_t50_exp | 49 | +127.2 [-11.4, +262.5] | — [—, —] | +144.5 [-6.8, +297.3] | — | insufficient |
+| single | Trend pullback (daily) | P | DPS | D9_rsi_exit | 13 | +93.5 [-196.7, +532.9] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | P | LC-B | D2_s35_t35 | 49 | +50.4 [-13.1, +117.0] | — [—, —] | +78.3 [+15.7, +148.9] | — | insufficient |
+| single | Trend pullback (daily) | P | LC-S | D2_s50_t50_exp | 50 | +271.8 [+21.4, +501.5] | — [—, —] | +235.7 [-24.9, +477.0] | — | insufficient |
+| single | Trend pullback (daily) | P | LP-B | D2_s50_t100 | 13 | +101.8 [-104.9, +322.4] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | P | LP-S | D2_s35_t35 | 15 | -38.4 [-481.5, +404.6] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | S | CPS | D13_tp50 | 49 | -10.1 [-32.5, +9.0] | — [—, —] | +25.9 [-4.8, +53.6] | — | insufficient |
+| single | Trend pullback (daily) | S | CSP | D13_tp50_dte21 | 49 | +131.7 [+58.7, +195.7] | — [—, —] | +165.7 [+58.4, +290.8] | — | insufficient |
+| single | Trend pullback (daily) | S | DCS | D1_t5 | 49 | +0.9 [-75.3, +74.3] | — [—, —] | +61.9 [-17.1, +140.3] | — | insufficient |
+| single | Trend pullback (daily) | S | DPS | D0_ltd1 | 16 | +172.1 [-114.2, +492.2] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | S | LC-B | D2_s50_t50_exp | 49 | +58.0 [-8.0, +127.9] | — [—, —] | +66.3 [+2.2, +139.0] | — | insufficient |
+| single | Trend pullback (daily) | S | LC-S | D2_s50_t50_exp | 50 | +231.3 [+19.3, +440.9] | — [—, —] | +224.7 [+7.1, +452.2] | — | insufficient |
+| single | Trend pullback (daily) | S | LP-B | D1_t10 | 16 | +265.4 [-32.1, +610.9] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | S | LP-S | D2_s35_t35 | 19 | +73.9 [-212.9, +384.3] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | W | CPS | D0_ltd1 | 44 | +13.7 [+1.4, +27.7] | — [—, —] | +35.0 [+17.0, +53.3] | — | insufficient |
+| single | Trend pullback (daily) | W | CSP | D0_ltd1 | 46 | +98.0 [+45.8, +146.8] | — [—, —] | +127.3 [+36.9, +238.2] | — | insufficient |
+| single | Trend pullback (daily) | W | DCS | D0_ltd1 | 40 | +7.5 [-69.2, +95.2] | — [—, —] | +31.0 [-49.2, +121.2] | — | insufficient |
+| single | Trend pullback (daily) | W | DPS | D0_ltd1 | 21 | +13.0 [-105.2, +171.4] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | W | LC-B | D2_s50_t50_exp | 47 | +67.8 [-4.9, +165.3] | — [—, —] | +64.1 [-12.2, +165.7] | — | insufficient |
+| single | Trend pullback (daily) | W | LC-S | D0_expiry | 48 | +240.5 [+26.9, +472.2] | — [—, —] | +215.3 [-14.6, +471.2] | — | insufficient |
+| single | Trend pullback (daily) | W | LP-B | D0_dte21 | 22 | -15.7 [-75.0, +61.7] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | W | LP-S | D0_dte21 | 21 | -10.5 [-175.0, +179.8] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | X | CPS | D0_expiry | 38 | +104.4 [+79.3, +129.0] | — [—, —] | +24.2 [-0.8, +49.3] | — | insufficient |
+| single | Trend pullback (daily) | X | CSP | D0_expiry | 38 | +2027.3 [+1826.1, +2231.3] | — [—, —] | +351.1 [+137.4, +561.2] | — | insufficient |
+| single | Trend pullback (daily) | X | DCS | D7_dd40 | 38 | +3372.6 [+2569.2, +4232.7] | — [—, —] | +847.4 [-17.0, +1723.1] | — | insufficient |
+| single | Trend pullback (daily) | X | DPS | D9_rsi_exit | 12 | -268.6 [-536.6, +16.6] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | X | LC-B | D1_t5 | 38 | -11.2 [-74.7, +55.9] | — [—, —] | -8.2 [-73.0, +62.6] | — | insufficient |
+| single | Trend pullback (daily) | X | LC-S | D7_dd40 | 38 | +4274.2 [+3165.2, +5351.5] | — [—, —] | +199.7 [-1016.0, +1323.8] | — | insufficient |
+| single | Trend pullback (daily) | X | LP-B | D2_s35_t35 | 13 | -25.2 [-290.9, +210.0] | — [—, —] | — [—, —] | — | insufficient |
+| single | Trend pullback (daily) | X | LP-S | D9_rsi_exit | 13 | -327.2 [-757.4, +181.1] | — [—, —] | — [—, —] | — | insufficient |
 

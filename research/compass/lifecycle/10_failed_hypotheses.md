@@ -77,6 +77,7 @@ A hypothesis whose interval spans zero on a small sample is listed as **inconclu
 | F4 | A straddle the day before an FOMC statement profits from the event | **Failed.** Through the announcement (5-session hold) no difference from non-Fed weeks; held to expiry worse in S/P/L. 72 trades on 24 Fed days. | §4 |
 | F5 | A management rule improves daily positions regardless of direction | **Failed.** Every rule that helps one side hurts the other: a 5-session exit gives puts +479 and costs calls −404; doubling down helps calls (+30) and hurts puts (−180). | §5 |
 | F6 | Bounce and failed-bounce setups (z-score ≤ −2 with a reversal day) | **Insufficient.** Too few events in every cell; none before 2017 on index ETFs (close-only history). | `09_setup_strategy_matrix.md` |
+| F7 | Single-name setups and pre-earnings straddles | **Untested on a credible sample.** One name (FB, 2017–2022): setups as good as random (58 better / 48 worse of 864 cells against all-days; 52 / 64 against random days); pre-earnings straddles 2–20 trades a cell. No hold-out data. | `06_daily_tier.md` §8 |
 
 ## E. Method failures found and corrected (kept here because they changed conclusions)
 
@@ -89,3 +90,4 @@ A hypothesis whose interval spans zero on a small sample is listed as **inconclu
 | E5 | 2012–2016 SPY/QQQ/IWM 1-minute bars are empty at the vendor; 264 SPY minute files had text prices | Underlying closes | Parity closes with measured error; files re-fetched as numbers (`01_data_inventory.md`) |
 | E6 | The vendor's META stock bars before 2022-06-09 are not Meta Platforms (empty before 2021-07-01, then the Roundhill metaverse ETF at about $15) | FB/META closes; the earlier S06 Tier A screen's META cells for 2021-07 → 2022-06 | FB from parity on its own chain; META from 2022-06-09; S06 noted in the implementation record |
 | E7 | Daily positions whose expiration lies after the data's end would have settled early at intrinsic value | Late hold-out entries | Left out and counted (about 500 a root) |
+| E8 | One day bootstrap shared by every group in the daily analysis | Adding FB (4 days the index rows lack) moved borderline index intervals and matrix labels | One bootstrap per group (`scripts/analyze_tier_d_groups.py`); the index results equal the index-only run |

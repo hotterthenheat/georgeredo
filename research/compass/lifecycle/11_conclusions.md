@@ -57,7 +57,7 @@ The ranked conclusions follow, strongest evidence first. Every number is per uni
 - **Unusual-options-activity setups:** they need per-chain trade or volume history the vendor serves only per request (about 4,000 requests for the 0DTE chains); not pulled (`02_protocol.md` §9).
 - **Dark-pool setups:** no history on the current plans.
 - **Dealer positioning before 2025-10-15:** UW's daily greek exposure begins then, so H-FLO could only be tested on one year.
-- **Single-name intraday lifecycles:** single names were tested at daily resolution only.
+- **Single names at any resolution:** only FB was pulled. The 40-name option EOD pull (about 19 hours) could not run in a session whose container is reclaimed when idle; it is resumable (`scripts/pull_tier_d.py`).
 - **Bounce setups on index ETFs before 2017 and on FB:** those closes come from put-call parity (the vendor has no stock bars there), so there is no daily open, and the bounce rules need one.
 - **Tick-level fills:** fills use the 1-minute NBBO (Tier I) and the closing NBBO (daily tier); queue position and partial fills are not modelled.
 
@@ -86,7 +86,10 @@ The ranked conclusions follow, strongest evidence first. Every number is per uni
 5. **The day before the Fed carries no straddle edge either way** through the announcement (5-session hold).
 6. **One daily cell is a hypothesis for a fresh hold-out:** failed-breakout put sales in the Swing bucket. It cleared both baselines in development + validation on about 100 trades, but was not a walk-forward finalist.
 
-**Single names:** the pull and runs were in progress when this was written (`06_daily_tier.md` §8).
+**Single names, earnings and cash-secured-put assignment: untested on a credible sample.**
+- Only FB (2017-06 → 2022-06) was pulled before the session's container was reclaimed while idle.
+- On FB the setups were as good as random, and the pre-earnings straddles had 2–20 trades a cell, under the 30-trade floor (`06_daily_tier.md` §8).
+- The remaining 40 names need about 19 hours of pulling on an always-on machine.
 
 ## F. What this means for Compass
 

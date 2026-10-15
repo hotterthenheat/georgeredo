@@ -1,10 +1,16 @@
 {
- "roots": [
-  "SPY",
-  "QQQ",
-  "IWM"
+ "groups": [
+  [
+   "SPY",
+   "QQQ",
+   "IWM"
+  ],
+  [
+   "FB"
+  ]
  ],
- "daily_rows": 5259256,
- "cells": 21000,
- "configurations": 4080
+ "daily_rows": 5750644,
+ "cells": 32544,
+ "configurations": 6860,
+ "bootstrap": "one per group"
 }
