@@ -150,7 +150,7 @@ def run_root(root: str, stage: str = 'dgrid', mode: str = 'daily', include_holdo
     items.sort(key=lambda x: x['session'])
     chains = Chains(root)
     daily = {}; chunks = ([], [], [], [], [], []); pos_rows = []; out_blocks = []; out_keys = []
-    pid = 0; nruns = 0
+    pid = 0; nruns = 0; n_incomplete = 0
     for n_it, it in enumerate(items):
         d = it['session']
         for b in buckets:
@@ -159,6 +159,10 @@ def run_root(root: str, stage: str = 'dgrid', mode: str = 'daily', include_holdo
             e, dte = pk
             ch = chains.get(e)
             if ch is None or d not in ch.meta['ix']: continue
+            if ch.sessions[-1] < ch.meta['ltd']:
+                # the data ends before this expiration's last trading day (an entry near the end of the pull): its path is
+                # incomplete, so it is left out rather than settled early at intrinsic value
+                n_incomplete += 1; continue
             m = ch.meta['ix'][d]
             if m >= ch.n_min - 1: continue
             tg = t_years(ch, m)
@@ -201,7 +205,7 @@ def run_root(root: str, stage: str = 'dgrid', mode: str = 'daily', include_holdo
         from .runner import _write_rows
         _write_rows(out_dir, out_keys, out_blocks)
     meta = {'root': root, 'stage': stage, 'mode': mode, 'positions': pid, 'runs': nruns, 'policies': names, 'buckets': list(buckets),
-            'events': len(items), 'seconds': round(time.time() - t0, 1), 'holdout_included': include_holdout}
+            'events': len(items), 'incomplete_paths_left_out': n_incomplete, 'seconds': round(time.time() - t0, 1), 'holdout_included': include_holdout}
     json.dump(meta, open(f'{out_dir}/run.json', 'w'), indent=1, default=str)
     log(f'{root} {stage}: done {meta}')
     return meta
