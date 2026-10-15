@@ -160,5 +160,23 @@
   "worst_day": -18741.40000000001,
   "avg_units": 1.0,
   "seconds": 246
+ },
+ "P5c_close_on_opposite|devval": {
+  "period": "devval",
+  "sessions": 845,
+  "trades": 8839,
+  "skipped_risk_cap": 0,
+  "skipped_size": 0,
+  "total_pnl": -160353.50000000017,
+  "end_equity": 99839646.50000016,
+  "cagr": -0.00047848330530808614,
+  "max_drawdown": -0.0016463905600716533,
+  "daily_sharpe": -2.3870274604608372,
+  "win_rate": 0.41215069578006563,
+  "avg_trade": -18.141588414979083,
+  "worst_trade": -5261.4,
+  "worst_day": -12997.8,
+  "avg_units": 1.0,
+  "seconds": 246
  }
 }
