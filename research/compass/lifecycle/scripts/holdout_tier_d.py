@@ -12,7 +12,8 @@ import polars as pl
 from lc import analyze as an, daily_runner as dr, position as ps, paths
 
 D = f'{paths.RESULTS}/tier_d'
-LOCK = f'{D}/holdout_opened.json'
+GROUP = sys.argv[1] if len(sys.argv) > 1 else sys.exit('usage: holdout_tier_d.py index_etf|single  (L-A4.1: once per group)')
+LOCK = f'{D}/holdout_opened_{GROUP}.json'
 if os.path.exists(LOCK): sys.exit(f'already run: {open(LOCK).read()}')
 INDEX = ('SPY', 'QQQ', 'IWM')
 BASE = {1: 'D_ALLL', -1: 'D_ALLS', 0: 'D_ALLV'}
@@ -21,14 +22,14 @@ keys = ['group', 'setup', 'bucket', 'structure']
 
 wf = pl.read_csv(f'{D}/walkforward_oos.csv')
 cells = pl.read_csv(f'{D}/cells.csv')
-fin = wf.filter((pl.col('exp') > 0) & (pl.col('exp_lo') > 0) & (pl.col('n') >= 100) & (pl.col('days') >= 60) & ~pl.col('setup').str.starts_with('D_ALL'))
+fin = wf.filter((pl.col('group') == GROUP) & (pl.col('exp') > 0) & (pl.col('exp_lo') > 0) & (pl.col('n') >= 100) & (pl.col('days') >= 60) & ~pl.col('setup').str.starts_with('D_ALL'))
 dv = cells.filter((pl.col('side') == 'real') & (pl.col('period') == 'all') & (pl.col('n') >= 100))
 frozen = dv.sort('exp_lo', descending=True).group_by(keys, maintain_order=True).first().select(keys + [pl.col('pname').alias('policy')])
 fin = fin.select(keys + ['n', 'exp', 'exp_lo']).join(frozen, on=keys, how='inner')
-fin.write_csv(f'{D}/finalists.csv')
+fin.write_csv(f'{D}/finalists_{GROUP}.csv')
 print(f'{fin.height} finalists'); print(fin)
 if fin.height == 0:
-    json.dump({'opened_utc': None, 'finalists': 0, 'note': 'no finalist; the hold-out stays unopened'}, open(f'{D}/holdout_verdicts.json', 'w'), indent=1)
+    json.dump({'opened_utc': None, 'finalists': 0, 'note': 'no finalist; the hold-out stays unopened'}, open(f'{D}/holdout_verdicts_{GROUP}.json', 'w'), indent=1)
     sys.exit(0)
 
 # the frozen policies and their +$0.05 slippage twins
@@ -46,10 +47,7 @@ names_all = [p[0] for p in dr.daily_policies() if p[0] in run_names]
 
 setups = sorted(set(fin['setup'].to_list()) | set(BASE.values()))
 buckets = tuple(sorted(set(fin['bucket'].to_list())))
-roots = []
-for g in fin['group'].unique().to_list():
-    if g == 'index_etf': roots += list(INDEX)
-    else: roots += [os.path.basename(p) for p in glob.glob(f'{paths.WORK}/runs/dgrid/*') if os.path.basename(p) not in INDEX]
+roots = list(INDEX) if GROUP == 'index_etf' else [os.path.basename(p) for p in glob.glob(f'{paths.WORK}/runs/dgrid/*') if os.path.basename(p) not in INDEX]
 opened = dt.datetime.now(dt.timezone.utc).isoformat()
 json.dump({'opened_utc': opened, 'finalists': fin.height}, open(LOCK, 'w'))
 for r in sorted(set(roots)):
@@ -102,5 +100,5 @@ v = v.with_columns(pl.Series('R1', r1), (pl.col('ctrl_lo').fill_null(-1) > 0).al
                    (pl.col('pf') > 1).alias('R3'), ((pl.col('h_n') >= 100) & (pl.col('h_days') >= 60)).alias('R4'),
                    (pl.col('exp_slip05') > 0).alias('R5'), (pl.col('dev_family_median').fill_null(-1) > 0).alias('R6'))
 v = v.with_columns(pl.all_horizontal(['R1', 'R2', 'R2b', 'R3', 'R4', 'R5', 'R6']).alias('PROMOTED'))
-v.write_csv(f'{D}/holdout_verdicts.csv')
+v.write_csv(f'{D}/holdout_verdicts_{GROUP}.csv')
 print(v)

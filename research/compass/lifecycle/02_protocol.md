@@ -283,3 +283,11 @@ A configuration that fails is reported in the failed-hypothesis report with its 
    - **R5** still > 0 with $0.05 a contract a side of extra slippage;
    - **R6** the same family's policies have a positive median on the cell in development.
 4. **Bookkeeping:** the hold-out is opened by `scripts/holdout_tier_d.py`, which writes a lock file and refuses a second run. The daily tier's controls are clean (random sessions from the whole sample, not tied to the event's own move).
+
+**L-A4.1 (2026-10-15, before any daily-tier hold-out row was read).**
+- The daily tier's hold-out is opened once *per group*:
+  - **index ETFs** (SPY, QQQ, IWM), as soon as their runs finish;
+  - **single names**, once their pull finishes, on the names complete by then (listed in `06_daily_tier.md`).
+- Each group's finalists are chosen from that group's development + validation results alone, by the L-A4 rule.
+- Holm runs within each group.
+- `scripts/holdout_tier_d.py <group>` keeps one lock per group.
