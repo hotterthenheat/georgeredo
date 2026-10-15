@@ -85,8 +85,26 @@ The rules are therefore measured on the pooled engine and pattern setups (QS, TP
 
 ## 4. The hold-out
 
-<!-- HOLDOUT: P1 and P2 run on 2025-10-01 -> 2026-10-09, the rules frozen as above -->
+P1 and P2 use the finalists' cells with their rules frozen as above. They were run on 2025-10-01 → 2026-10-09 after the finalists' hold-out was opened.
+
+| Configuration | Period | Trades | Refused for capital | Total P&L | Annualised | Max drawdown | Win rate | Average trade | Worst trade | Worst day |
+|---|---|---|---|---|---|---|---|---|---|---|
+| P1 QS → cash-secured put, stop 2× | development + validation | 408 | 251 | +$1,437 | +0.8 % | −1.0 % | 61 % | +$3.52 | −$198 | −$330 |
+| P1 | **hold-out** | 122 | 156 | **+$987** | +1.4 % | −0.8 % | 63 % | +$8.09 | −$198 | — |
+| P2 QS → credit put spread to expiry, $1,000 risk a trade | development + validation | 604 | 0 | +$10,165 | +4.8 % | −10.1 % | 90 % | +$16.83 | −$2,161 | −$4,434 |
+| P2 | **hold-out** | 196 | 0 | **−$6,805** | −9.6 % | −11.9 % | 88 % | **−$34.72** | −$5,196 | −$7,556 |
+
+**Notes**
+- P1's first hold-out run used a $100 M account by a configuration error. The edit that gave the P5 runs their uncapped account also matched P1's settings. That run (+$1,666 on 157 trades, no collateral refusals) is kept under `results/portfolio/superseded/` and labelled in `summary.json`. The table shows the rerun at $100,000.
+- **P2 lost money on the hold-out.** An 88 % win rate, then one bad stretch: a −$5,196 trade and a −$7,556 day. That is the short-premium profile: the wins are small, and the year's losses arrive in a few days.
+- **P1 stayed slightly positive.** It is still too small to matter: one or two cash-secured puts at a time on $100,000, earning about 1 % a year.
 
 ## 5. Portfolio conclusions
 
-<!-- CONCLUSIONS -->
+1. **No portfolio of these setups is worth running.**
+   - The long-premium portfolios lose steadily and, sized at $1,000 a trade, ruin the account (P3, P4).
+   - The put-selling portfolios earn carry that a random entry earns too:
+     - P1 is about 1 % a year on $100,000, limited by collateral;
+     - P2 won 4.8 % a year in development + validation and lost 9.6 % on the hold-out.
+2. **Re-entry and reverse rules make a losing signal set lose more per trade** (§3).
+3. **Capital use decides what a short-put portfolio can be.** A cash-secured put on SPY ties up $45,000–$70,000 for a day to earn about $8–50. A credit spread frees the capital but keeps the tail: the worst trade on the hold-out was −$5,196 on $1,000 of planned risk across several units.

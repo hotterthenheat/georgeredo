@@ -101,7 +101,40 @@ The choice moved from quarter to quarter: no cell kept one policy throughout.
 
 ### 4.1 R2 against the clean control (post hoc)
 
-<!-- R2POST: filled from results/tier1/holdout_r2_after.csv once ctrl_after_holdout finishes -->
+Each finalist's hold-out trades against the same structure and frozen policy entered at a random later minute of the same session, same direction (`results/tier1/holdout_r2_after.csv`):
+
+| Finalist | Hold-out expectancy | Random later minute | Difference [95 %] | Original R2 (biased control) |
+|---|---|---|---|---|
+| BOp → CSP, stop 1.5× | +26.30 | +18.64 | +7.66 [−6.93, +20.99] | −30.52 |
+| QS → CSP, stop 2× | +51.73 | +30.76 | +20.97 [−9.79, +49.69] | −25.96 |
+| BOr → CSP, stop 1.5× | +24.67 | +20.02 | +4.66 [−9.60, +17.81] | −31.39 |
+| TPp → CSP, to expiry | +51.95 | +47.04 | +4.91 [−20.35, +26.38] | −26.78 |
+| QS → CPS, to expiry | +5.96 | +10.82 | −4.86 [−22.87, +10.14] | −17.95 |
+| MSS → CPS, take 25 % | −76.44 | −22.64 | −53.80 [−123.98, +7.62] | −45.96 |
+
+**R2 still fails for all six, now for the right reason.**
+- Selling the same put at a random later minute earned nearly as much, on the hold-out as in development.
+- The setups add nothing measurable to the put-selling carry.
+
+### 4.2 L-A3: QS → debit call spread held to expiry (one test, pre-registered before its hold-out rows were read)
+
+| Test | Result | One-sided p | Holm |
+|---|---|---|---|
+| H-DCS-1 hold-out expectancy > 0 | +64.37 a trade [−18.16, +138.67], 911 trades on 89 sessions, win rate 48 % | 0.064 | fail (≤ 0.05 needed) |
+| H-DCS-2 beats a random later minute | +45.57 [+5.29, +85.41] (cell +64.37, control +18.79) | 0.013 | pass (≤ 0.025) |
+
+**By root:** SPXW +146.19 (278 trades), QQQ +73.06 (216), SPY +12.07 (287), IWM −9.59 (130).
+
+**Verdict: not a candidate.** The pre-registered rule needed both tests, and the absolute expectancy is not significant on the hold-out.
+
+**What it does show**
+- The direction is consistent across development, validation and the hold-out: +51.7, +46.7, +64.4.
+- It beat the random later minute on the hold-out.
+- But drift-neutral, over development + validation (`04_entry_research.md` §1.0):
+  - QS's debit spreads are no better than a later minute: +1.1 [−14.8, +16.4] to expiry;
+  - nor than the opposite side: +48.0 [−9.3, +107.2].
+- **So what it earns is most likely a bullish call spread held through the rising afternoons of 2022–2026, and QS's timing adds little.**
+- It stays a hypothesis for sessions after 2026-10-09.
 
 ## 5. Flow & Positioning: the dealer-gamma regime (H-FLO-1, H-FLO-2)
 
@@ -137,7 +170,10 @@ The choice moved from quarter to quarter: no cell kept one policy throughout.
 
 ## 6. What validation says
 
-1. **No configuration is validated.** No setup, structure and management rule passed the promotion rules on the hold-out.
+1. **No configuration is validated.**
+   - No setup, structure and management rule passed the promotion rules on the hold-out.
+   - Against the clean control the finalists still fail R2.
+   - The one long-premium cell tested later (L-A3) failed its absolute test.
 2. **What survives out of sample is put-selling carry.** The variance-risk premium of same-day index puts in a rising market. It is not a property of the setups' timing. The clean-control comparison (§4.1 and `04_entry_research.md` §1) says how much, if anything, the setups add.
 3. **Long same-day premium has no out-of-sample edge in any cell:**
    - every development winner reversed in validation;
