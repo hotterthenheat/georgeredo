@@ -14,6 +14,7 @@
 | **Adding to positions loses on the added contracts**, on every ticker, in both periods. | lifecycle 05 §3, 12 §4 | A note against adds and double-downs |
 | **Single-name options are expensive to trade.** The ATM monthly straddle's median bid/ask spread is 13 % of its mid. | `02_volatility_pricing.md` V1 | Show the round-trip cost beside every single-name contract |
 | **Implied ÷ realized volatility ranks names correctly at the level of volatility, not profit.** The richest quintile saw 2.3 vol points less movement than implied, the cheapest none. | `02_volatility_pricing.md` T1 | A descriptive "options price more/less movement than recent realized" label, with the sentence that selling it did not pay after costs |
+| **Earnings implied moves overstate the typical report.** The median report moved 0.59 of the straddle-implied move; 28 % moved more. Selling at the mid earned +6.9 % of premium on same-day settlements, but half the spread is larger. | `02_volatility_pricing.md` V2 | Beside a name's next report: the implied move, this ratio, and that both sides of the trade lost after costs |
 
 ## 2. Do not use as trade signals
 
@@ -24,6 +25,7 @@
 | Earnings-surprise direction | Underperforms the same-date universe (S08) |
 | Flow aggregates, market tide, dark pool, per-strike bursts on index ETFs | Describe the move that just happened; no forward information (`../../../reports/Finding a 0DTE options edge.md`) |
 | Selling single-name straddles, or sorting names by IV ÷ RV, term slope or skew to sell or buy them | Negative in development, validation and hold-out; the sort adds nothing (V1) |
+| Selling earnings straddles across the report, or buying them into it | −26 % and −21 % of premium (development + validation), −34 % and −29 % (hold-out) (V2) |
 | Profit targets, stops, trails, partials on same-day long options | No rule's interval excludes zero on any ticker (lifecycle 12 §3) |
 
 ## 3. Build next, in order of expected value
