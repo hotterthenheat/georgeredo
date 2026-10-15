@@ -10,7 +10,7 @@ Labels (the first that applies):
   promising        positive as above AND better than its clean control (lower bound > 0)
   inconclusive     anything else (intervals span zero)
 A promising cell is still not validated: validation needs the hold-out (07_validation.md)."""
-import os, sys, json
+import os, sys, json, glob
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import polars as pl
 from lc import paths
@@ -90,9 +90,20 @@ def tier_d() -> pl.DataFrame | None:
     if os.path.exists(f'{D}/real_vs_control.csv'):
         rc = pl.read_csv(f'{D}/real_vs_control.csv').select(keys + [pl.col('pname').alias('best_policy'), pl.col('diff').alias('edge_ctrl'), pl.col('diff_lo').alias('ctrl_lo'), pl.col('diff_hi').alias('ctrl_hi')])
         t = t.join(rc, on=keys + ['best_policy'], how='left')
+    ho = {}
+    for f in glob.glob(f'{D}/holdout_verdicts_*.csv'):
+        for r in pl.read_csv(f).iter_rows(named=True):
+            fails = [k for k in ('R1', 'R2', 'R2b', 'R3', 'R4', 'R5', 'R6') if not r[k]]
+            ho[(r['group'], r['setup'], r['bucket'], r['structure'])] = (r['PROMOTED'],
+                f"finalist {r['policy']}: hold-out {r['h_exp']:+.0f} [{r['h_lo']:+.0f}] on {int(r['h_n'])}; "
+                + ('PROMOTED' if r['PROMOTED'] else 'not promoted (fails ' + ', '.join(fails) + ')'))
     rows = []
     for r in t.iter_rows(named=True):
-        rows.append({**r, 'tier': 'D (daily)', 'label': label(r['n_max'], r['days_max'], r['exp_lo'], r['hi_max'], r.get('wf_exp'), r.get('wf_hi'), r.get('ctrl_lo'))})
+        lab = label(r['n_max'], r['days_max'], r['exp_lo'], r['hi_max'], r.get('wf_exp'), r.get('wf_hi'), r.get('ctrl_lo'))
+        if r['setup'].startswith('D_ALL') and lab in ('carry, not setup', 'promising'): lab = 'carry, not setup'   # a baseline has no setup
+        h = ho.get((r['group'], r['setup'], r['bucket'], r['structure']))
+        if h is not None: lab = 'validated' if h[0] else 'failed on the hold-out'
+        rows.append({**r, 'tier': 'D (daily)', 'holdout': h[1] if h else None, 'label': lab})
     return pl.DataFrame(rows, infer_schema_length=None)
 
 if __name__ == '__main__':

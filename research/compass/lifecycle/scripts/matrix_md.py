@@ -6,7 +6,7 @@ from lc import paths
 
 M = f'{paths.RESULTS}/matrix'
 OUT = os.path.join(paths.HERE, '09_setup_strategy_matrix.md')
-SHORT = {'failed': 'F', 'failed on the hold-out': 'H', 'inconclusive': '?', 'insufficient': 'n', 'carry, not setup': 'C', 'promising': 'P'}
+SHORT = {'validated': 'V', 'failed': 'F', 'failed on the hold-out': 'H', 'inconclusive': '?', 'insufficient': 'n', 'carry, not setup': 'C', 'promising': 'P'}
 STRUCT = ['LC-S', 'LP-S', 'LC-B', 'LP-B', 'DCS', 'DPS', 'CPS', 'CSP', 'STR', 'STG']
 NAMES = {'QS': 'Quick Scalps', 'TP': 'Trend pullback', 'BO': 'Breakout', 'BOF': 'Failed breakout', 'LS': 'Liquidity sweep (ICT)',
          'MSS': 'Market-structure shift (ICT)', 'FVG': 'Fair-value gap (ICT)', 'TPp': 'Trend pullback, trigger only', 'BOp': '5m breakout, trigger only',
@@ -61,6 +61,7 @@ Every setup × structure cell tested, classified by `scripts/build_matrix.py` fr
 | C | carry, not setup | some policy's lower bound > 0 and walk-forward > 0, but no better than its clean control |
 | P | promising | as C, and better than its clean control; still not validated without a hold-out |
 | ? | inconclusive | intervals span zero |
+| V | validated | passed every promotion rule on the hold-out |
 | · | not applicable | the structure does not follow the setup's direction, or was not run |
 
 **Structures**
