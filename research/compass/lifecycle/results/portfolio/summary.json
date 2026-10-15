@@ -196,5 +196,23 @@
   "worst_day": -2733.4000000000005,
   "avg_units": 1.0,
   "seconds": 231
+ },
+ "P5k_cool15_after_loss|devval": {
+  "period": "devval",
+  "sessions": 845,
+  "trades": 7629,
+  "skipped_risk_cap": 0,
+  "skipped_size": 0,
+  "total_pnl": -119582.50000000015,
+  "end_equity": 99880417.5000001,
+  "cagr": -0.00035677447510218396,
+  "max_drawdown": -0.0012684925636979871,
+  "daily_sharpe": -1.8935282316932676,
+  "win_rate": 0.4206317997116267,
+  "avg_trade": -15.674728011534944,
+  "worst_trade": -5261.4,
+  "worst_day": -5559.5999999999985,
+  "avg_units": 1.0,
+  "seconds": 246
  }
 }
