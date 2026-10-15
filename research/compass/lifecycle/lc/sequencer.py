@@ -30,7 +30,7 @@ def max_loss_per_unit(info: dict, cost_unit: float, legs, ratio, nleg, cd) -> fl
                 w = max(w, abs(cd.strike[legs[i]] - cd.strike[legs[j]]))
     return w * 100.0 - credit
 
-def simulate(events: pl.DataFrame, structure_for: dict, pvec: np.ndarray, *, reverse: str = 'ignore', reentry: str = 'take',
+def simulate(events: pl.DataFrame, structure_for, pvec: np.ndarray, *, reverse: str = 'ignore', reentry: str = 'take',
              equity0: float = 100_000.0, sizing: str = 'fixed_risk', risk_per_trade: float = 500.0, fixed_units: int = 1,
              max_total_risk: float = 0.10, max_bucket_risk: float = 0.10, log=None) -> tuple[pl.DataFrame, pl.DataFrame]:
     """events: root, session, m, direction, setup, inv (all roots, any order). structure_for: setup -> structure code.
@@ -87,7 +87,7 @@ def simulate(events: pl.DataFrame, structure_for: dict, pvec: np.ndarray, *, rev
                 del open_pos[r]
                 if reverse == 'close': continue
                 if blocked_until.get(r, -1) > m: continue
-            code = structure_for.get(e['setup'])
+            code = structure_for(e['setup'], e['direction']) if callable(structure_for) else structure_for.get(e['setup'])
             if code is None or code not in allowed_structures(e['setup'], e['direction']): continue
             if m >= cd.n_min - 2: continue
             legs, ratio, info = stc.build(cd, m, tgs[r][m], code, e['direction'])
@@ -102,6 +102,12 @@ def simulate(events: pl.DataFrame, structure_for: dict, pvec: np.ndarray, *, rev
             disp = min(int(cd.ask_size[legs[i], m0] if ratio[i] > 0 else cd.bid_size[legs[i], m0]) for i in range(nleg))
             units = min(units, max(disp, 0))
             if units <= 0: trades.append({'root': r, 'session': session, 'm': m, 'setup': e['setup'], 'structure': code, 'status': 'size'}); continue
+            if sizing != 'fixed_units':
+                # never more units than the risk caps allow (a lot that cannot fit is shrunk, not refused)
+                room = min(max_total_risk, max_bucket_risk) * equity - risk_in_use(m)
+                units = min(units, int(max(room, 0) // max(mlu, 1e-9)))
+                if units <= 0:
+                    trades.append({'root': r, 'session': session, 'm': m, 'setup': e['setup'], 'structure': code, 'status': 'risk_cap'}); continue
             risk = units * mlu
             in_use = risk_in_use(m)
             if in_use + risk > max_total_risk * equity or in_use + risk > max_bucket_risk * equity:

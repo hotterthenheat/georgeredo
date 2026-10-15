@@ -241,3 +241,19 @@ A configuration that fails is reported in the failed-hypothesis report with its 
    - Both limits are good for 10 minutes and fill only when the package's open cost is at or below the limit − $0.01, paying the limit.
    - Entry rules run on real events only. Each is compared with E0 on the same events (paired), so no random controls are needed.
 3. *Cutoff and expiry.* The protocol's M0 is two policies: hold to the 15:50 cutoff, and hold to expiry. For physically settled ETF options, holding to expiry means exercise or assignment at the 16:00 close and the shares sold at the next 09:30 open, so overnight gap risk is included. Both are reported side by side; the cutoff is the conservative one.
+
+**L-A2 (2026-10-15, after the hold-out was opened for the finalists; before any result of the controls below was computed).**
+
+1. *The RND control has a look-ahead.*
+   - RND draws a minute uniformly from the whole entry window, but it takes the direction the setup decided at the event minute.
+   - A control that falls before the event therefore enters in a direction chosen with knowledge of the move that produced the event.
+   - The bias favours the controls of momentum setups (breakouts, QS): they enter long before the rise that triggered a long. This makes those setups look worse than random.
+   - It penalises the controls of reversal setups (bounces): they enter long before the decline that preceded the bounce. This makes those setups look better than random.
+   - The stage-1 "vs RND" figures and promotion rule R2 were computed with this control.
+2. *Two controls replace it for the setup comparisons*, each computed on development and validation:
+   - **RND-after:** a minute drawn uniformly from [event minute, end of the window], same session, same direction, 5 seeds. It uses only what the event knew.
+   - **FLIP:** the event's own minute, the opposite direction, the mirrored structure (LC-S ↔ LP-S, LC-B ↔ LP-B, DCS ↔ DPS). It tests whether the setup chose the right side at that minute. CPS and CSP have no mirror.
+   - Both are reported beside the original RND, never in place of it.
+3. *R2 on the hold-out is re-scored against RND-after for the six finalists.*
+   - This is labelled post hoc: the hold-out results were already seen when the flaw was found.
+   - It cannot promote a configuration. A finalist that passes every rule under RND-after is reported as "passes only under a control chosen after the hold-out was opened" and needs a fresh hold-out (sessions after 2026-10-09) to be promoted.

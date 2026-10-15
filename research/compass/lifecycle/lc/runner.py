@@ -6,8 +6,14 @@ session, on the Tier I chains (lifecycle protocol §3-§5). Writes, per root and
   WORK/runs/<stage>/<root>/outcomes.parquet    one row per (position, policy): the executable result (Result B inputs)
   WORK/runs/<stage>/<root>/run.json            counts, configuration, timing, configurations evaluated
 
-Resumable by root. Controls: for each real event and seed 0..4 a minute drawn uniformly from the entry window on the same
-session with the same direction; the control's invalidation sits the same distance from its spot as the event's did."""
+Resumable by root. Controls (ctrl_mode):
+  'window'  for each real event and seed 0..4 a minute drawn uniformly from the entry window on the same session with the
+            same direction (the protocol's RND). It has a look-ahead: a minute before the event takes a direction that was
+            only decided at the event, so it favours controls of momentum setups and penalises those of reversal setups.
+  'after'   (amendment L-A2) seed 0..4, a minute drawn uniformly from [event minute, end of the window], same direction:
+            uses nothing the event did not know.
+  'flip'    (L-A2) the event's own minute, the opposite direction (the mirrored structures), one control per event.
+The control's invalidation sits the same distance from its spot as the event's did, on its own side."""
 from __future__ import annotations
 import datetime as dt, json, os, sys, time, zlib
 import numpy as np
@@ -83,14 +89,20 @@ def entry_plan(cd, rule: str, m: int, direction: int, legs, ratio, nleg, atr5: f
 def _seed(root, session, i, s):
     return zlib.crc32(f'{root}|{session}|{i}|{s}'.encode())
 
-def controls(ev_day: pl.DataFrame, root: str, n_min: int, spot: np.ndarray) -> list[dict]:
+def controls(ev_day: pl.DataFrame, root: str, n_min: int, spot: np.ndarray, mode: str = 'window') -> list[dict]:
     out = []
     hi = min(WINDOW[1], n_min - 61)
     for i, r in enumerate(ev_day.iter_rows(named=True)):
         dist = abs(r['spot'] - r['inv']) if (r['inv'] is not None and r['spot'] is not None and np.isfinite(r['inv'])) else None
+        if mode == 'flip':
+            m = int(r['m']); d = -int(r['direction'])
+            inv = float(spot[m] - d * dist) if dist is not None else np.nan
+            out.append({**r, 'direction': d, 'inv': inv, 'ctrl': 0, 'event_i': i})
+            continue
         for s in SEEDS:
             rng = np.random.default_rng(_seed(root, r['session'], i, s))
-            m = int(rng.integers(WINDOW[0], hi + 1))
+            lo = WINDOW[0] if mode == 'window' else min(int(r['m']), hi)
+            m = int(rng.integers(lo, hi + 1))
             inv = float(spot[m] - r['direction'] * dist) if dist is not None else np.nan
             out.append({**r, 'm': m, 'inv': inv, 'ctrl': s, 'event_i': i})
     return out
@@ -115,7 +127,8 @@ def _agg_block(o: np.ndarray) -> np.ndarray:
 
 def run_root(root: str, stage: str, policy_set, sessions: list[dt.date] | None = None, out_root: str | None = None, log=print,
              mode: str = 'rows', include_holdout: bool = False, events_file: str | None = None, entry_rule: str = 'E0',
-             setups: tuple | None = None, structures: tuple | None = None, with_controls: bool = True):
+             setups: tuple | None = None, structures: tuple | None = None, with_controls: bool = True,
+             ctrl_mode: str = 'window'):
     """mode 'rows': one outcome row per (position, policy). mode 'daily': per (session, setup, structure, policy, real or
     control) sums (AGG) — the management grid, too large to keep per row. The hold-out (from 2025-10-01) is left out
     unless include_holdout."""
@@ -147,7 +160,7 @@ def run_root(root: str, stage: str, policy_set, sessions: list[dt.date] | None =
         tg = ax.t_years_grid(cd)
         nop = float(nxt.get(session, np.nan))
         items = [{**r, 'ctrl': -1, 'event_i': i} for i, r in enumerate(ev_day.iter_rows(named=True))]
-        if with_controls: items += controls(ev_day, root, cd.n_min, cd.spot)
+        if with_controls: items += controls(ev_day, root, cd.n_min, cd.spot, ctrl_mode)
         snaps = {}
         for it in items:
             m = int(it['m'])
@@ -212,7 +225,7 @@ def run_root(root: str, stage: str, policy_set, sessions: list[dt.date] | None =
     else:
         _write_rows(out_dir, out_keys, out_blocks)
     meta = {'root': root, 'stage': stage, 'mode': mode, 'sessions': [str(ss[0]), str(ss[-1]), len(ss)], 'positions': pid, 'runs': int(n_runs),
-            'policies': names, 'families': fams, 'seconds': round(time.time() - t0, 1), 'seeds': list(SEEDS), 'window': list(WINDOW),
+            'policies': names, 'families': fams, 'seconds': round(time.time() - t0, 1), 'seeds': list(SEEDS), 'ctrl_mode': ctrl_mode, 'window': list(WINDOW),
             'holdout_included': include_holdout, 'generated': dt.datetime.now(dt.timezone.utc).isoformat()}
     json.dump(meta, open(f'{out_dir}/run.json', 'w'), indent=1)
     log(f'{root} {stage}: done {pid} positions {n_runs} runs in {time.time() - t0:.0f}s')

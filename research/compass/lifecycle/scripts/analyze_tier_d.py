@@ -41,6 +41,11 @@ log('cells written')
 sub = daily.with_columns(pl.when(pl.col('ctrl') == 0).then(pl.lit('real')).otherwise(pl.lit('ctrl')).alias('side'))
 pr = an.paired(sub, keys, {'side': 'real'}, {'side': 'ctrl'}, boot)
 pr.filter(pl.col('n_b') > 0).write_csv(f'{OUT}/real_vs_control.csv')
+# each directional setup against the all-days control with the same bucket, structure and policy: bullish structures
+# against D_ALLL (every Monday, long), bearish against D_ALLS. The days differ, so the bootstrap resamples calendar days
+# over both sides (not a same-day pairing). This separates timing from the market's drift over the period.
+BULL = ('LC-S', 'LC-B', 'DCS', 'CPS', 'CSP'); BEAR = ('LP-S', 'LP-B', 'DPS')
+vs = []
 # each policy against holding to expiry (debit and straddle) or D13_expiry (credit), real events
 pairs = []
 real = daily.filter(pl.col('ctrl') == 0)
@@ -52,6 +57,13 @@ for pname in real['pname'].unique().to_list():
         p = an.paired(both, ['group', 'bucket', 'structure'], {'arm': 'a'}, {'arm': 'b'}, boot).with_columns(pl.lit(pname).alias('pname'), pl.lit(ref).alias('ref'))
         pairs.append(p)
 pl.concat(pairs).write_csv(f'{OUT}/policy_vs_expiry.csv')
+real = daily.filter(pl.col('ctrl') == 0)
+for setup in ('D_TP', 'D_BO', 'D_BOF', 'D_BN', 'D_BNF'):
+    for ref, structs in (('D_ALLL', BULL), ('D_ALLS', BEAR)):
+        sub = real.filter(pl.col('setup').is_in([setup, ref]) & pl.col('structure').is_in(list(structs)))
+        if sub.filter(pl.col('setup') == setup).height == 0: continue
+        vs.append(an.paired(sub, ['group', 'bucket', 'structure', 'pname'], {'setup': setup}, {'setup': ref}, boot).with_columns(pl.lit(setup).alias('setup'), pl.lit(ref).alias('ref')))
+if vs: pl.concat(vs).write_csv(f'{OUT}/setup_vs_alldays.csv')
 log('policy pairs written')
 # dev choice -> validation
 dv = cells.filter((pl.col('side') == 'real') & (pl.col('period') == 'dev') & (pl.col('n') >= 100))

@@ -1,0 +1,168 @@
+{
+ "H-FLO-1": {
+  "p_one_sided": 0.0022,
+  "by_root": [
+   {
+    "root": "IWM",
+    "regime": "neg",
+    "n": 6159,
+    "exp": -4.296411991119385,
+    "days": 229
+   },
+   {
+    "root": "IWM",
+    "regime": "pos",
+    "n": 475,
+    "exp": -3.1642110347747803,
+    "days": 18
+   },
+   {
+    "root": "QQQ",
+    "regime": "neg",
+    "n": 4547,
+    "exp": -2.6487350463867188,
+    "days": 157
+   },
+   {
+    "root": "QQQ",
+    "regime": "pos",
+    "n": 2619,
+    "exp": -5.502825736999512,
+    "days": 90
+   },
+   {
+    "root": "SPXW",
+    "regime": "neg",
+    "n": 2103,
+    "exp": -27.160823822021484,
+    "days": 65
+   },
+   {
+    "root": "SPXW",
+    "regime": "pos",
+    "n": 5794,
+    "exp": -44.353904724121094,
+    "days": 182
+   },
+   {
+    "root": "SPY",
+    "regime": "neg",
+    "n": 5196,
+    "exp": -4.2418012619018555,
+    "days": 169
+   },
+   {
+    "root": "SPY",
+    "regime": "pos",
+    "n": 2341,
+    "exp": -9.301324844360352,
+    "days": 78
+   }
+  ],
+  "by_structure": [
+   {
+    "structure": "LC-S",
+    "regime": "neg",
+    "n": 8620,
+    "exp": -0.5438522100448608
+   },
+   {
+    "structure": "LC-S",
+    "regime": "pos",
+    "n": 6115,
+    "exp": -23.458269119262695
+   },
+   {
+    "structure": "LP-S",
+    "regime": "neg",
+    "n": 9385,
+    "exp": -12.038040161132812
+   },
+   {
+    "structure": "LP-S",
+    "regime": "pos",
+    "n": 5114,
+    "exp": -29.57147216796875
+   }
+  ],
+  "holm_threshold": 0.025,
+  "holm_pass": true
+ },
+ "H-FLO-2": {
+  "p_one_sided": 0.0158,
+  "by_root": [
+   {
+    "root": "IWM",
+    "regime": "neg",
+    "n": 219,
+    "exp": -21.20639419555664,
+    "days": 219
+   },
+   {
+    "root": "IWM",
+    "regime": "pos",
+    "n": 18,
+    "exp": -40.411109924316406,
+    "days": 18
+   },
+   {
+    "root": "QQQ",
+    "regime": "neg",
+    "n": 156,
+    "exp": -53.024356842041016,
+    "days": 156
+   },
+   {
+    "root": "QQQ",
+    "regime": "pos",
+    "n": 88,
+    "exp": -62.936363220214844,
+    "days": 88
+   },
+   {
+    "root": "SPXW",
+    "regime": "neg",
+    "n": 65,
+    "exp": 250.73843383789062,
+    "days": 65
+   },
+   {
+    "root": "SPXW",
+    "regime": "pos",
+    "n": 179,
+    "exp": -341.3475036621094,
+    "days": 179
+   },
+   {
+    "root": "SPY",
+    "regime": "neg",
+    "n": 169,
+    "exp": -36.65798568725586,
+    "days": 169
+   },
+   {
+    "root": "SPY",
+    "regime": "pos",
+    "n": 76,
+    "exp": -31.273685455322266,
+    "days": 76
+   }
+  ],
+  "by_structure": [
+   {
+    "structure": "STR",
+    "regime": "neg",
+    "n": 609,
+    "exp": -4.619377613067627
+   },
+   {
+    "structure": "STR",
+    "regime": "pos",
+    "n": 361,
+    "exp": -193.19613647460938
+   }
+  ],
+  "holm_threshold": 0.05,
+  "holm_pass": true
+ }
+}

@@ -150,9 +150,15 @@ for rule in ('E1L1', 'E1L3', 'E1L3g', 'E2', 'E2g', 'E3', 'E3atr'):
         d = pl.concat([j.group_by(['structure', 'session']).agg(pl.len().alias('n'), pl.col('pnl_r').sum().alias('pnl')).with_columns(pl.lit('rule').alias('arm')),
                        j.group_by(['structure', 'session']).agg(pl.len().alias('n'), pl.col('pnl').sum()).with_columns(pl.lit('E0').alias('arm'))])
         p = an.paired(d, ['structure'], {'arm': 'rule'}, {'arm': 'E0'}, boot).with_columns(pl.lit(rule).alias('rule'), pl.lit(pname).alias('pname'), pl.lit(fill_rate).alias('taken_share'))
-        # the trades the rule actually took, compared with E0 on those same events
+        # the trades the rule actually took, against entering at the signal on those same events (paired, per structure):
+        # skipping a trade counts as 0 in the first comparison, which flatters any rule that skips losers on average
         jt = j.filter(pl.col('pname_r').is_not_null())
-        p = p.with_columns(pl.lit(float(jt['pnl_r'].mean()) if jt.height else None).alias('exp_rule_taken'), pl.lit(float(jt['pnl'].mean()) if jt.height else None).alias('exp_E0_same_events'))
+        dt_ = pl.concat([jt.group_by(['structure', 'session']).agg(pl.len().alias('n'), pl.col('pnl_r').sum().alias('pnl')).with_columns(pl.lit('rule').alias('arm')),
+                         jt.group_by(['structure', 'session']).agg(pl.len().alias('n'), pl.col('pnl').sum()).with_columns(pl.lit('E0').alias('arm'))])
+        q = an.paired(dt_, ['structure'], {'arm': 'rule'}, {'arm': 'E0'}, boot).select(['structure', pl.col('exp_a').alias('exp_rule_taken'), pl.col('exp_b').alias('exp_E0_same_events'),
+                      pl.col('diff').alias('taken_diff'), pl.col('diff_lo').alias('taken_diff_lo'), pl.col('diff_hi').alias('taken_diff_hi')])
+        tk = j.group_by('structure').agg(pl.col('pname_r').is_not_null().mean().alias('taken_share_s'))
+        p = p.join(q, on='structure', how='left').join(tk, on='structure', how='left')
         er.append(p)
 if er:
     pl.concat(er).write_csv(f'{OUT}/entry_rules_vs_E0.csv')
