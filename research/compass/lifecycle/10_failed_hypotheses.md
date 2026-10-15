@@ -48,7 +48,7 @@ A hypothesis whose interval spans zero on a small sample is listed as **inconclu
 | B8 | Warnings (RSI back through 50, IV down, spread widening, adverse move) predict losses for calls | **Failed.** Every call interval spans zero. For puts they help significantly but leave −11.58 a trade, an effect of the period's drift. | `05_management_research.md` §5 |
 | B9 | Taking profits on credit spreads and short puts raises expectancy | **Failed.** Take 25 %: −12.79 a CPS trade against +7.13 held to expiry; 91–93 % win rates that lose money. | `05_management_research.md` §6 |
 | B10 | Selling at 15:50 is as good as holding to expiry | **Failed.** Holding to expiry beat the 15:50 sale by $10–34 a trade on calls, debit spreads and short puts. That is the cost of the last spread and the last minutes; for ETFs it carries the overnight gap. | `05_management_research.md` §1 |
-| B11 | Re-entering after a loss, reversing, or closing on an opposite signal (M10, M11) | See `08_portfolio.md` §3. | — |
+| B11 | Re-entering after a loss, reversing, or closing on an opposite signal (M10, M11) improves a signal set | **Failed.** Reversing: −$17.63 a trade; closing on an opposite signal: −$18.14; base −$14.52. Skipping the session after a loss trades half as often but worse per trade (−$16.93). A 15-minute cool-down: no material change. | `08_portfolio.md` §3 |
 
 ## C. Validation (Tier I)
 

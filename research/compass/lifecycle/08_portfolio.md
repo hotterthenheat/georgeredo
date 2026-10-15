@@ -63,7 +63,25 @@
 
 The rules are therefore measured on the pooled engine and pattern setups (QS, TP, BO, BOF, LS, MSS, FVG), where both directions occur on almost every session. They are run at one contract a trade with no caps, so each variant differs from the base only by its rule (P5).
 
-<!-- P5: filled from results/portfolio/summary.json once the P5 runs finish -->
+| Configuration (pooled setups → Steady call or put, 30-minute exit, 1 contract) | Trades | Closed by an opposite signal | Total P&L | Per trade | Win rate | Daily Sharpe | Worst day |
+|---|---|---|---|---|---|---|---|
+| **P5** base: ignore opposite signals, take every signal after a loss | 8,260 | — | −$119,914 | −$14.52 | 41.9 % | −1.81 | −$5,560 |
+| **P5r** M11 reverse: close and open the other way | 10,147 | 2,246 | −$178,930 | −$17.63 | 40.9 % | −2.37 | −$18,741 |
+| **P5c** M11 close on an opposite signal, stay flat | 8,839 | 1,839 | −$160,354 | −$18.14 | 41.2 % | −2.39 | −$12,998 |
+| **P5s** M10 skip the root for the rest of the session after a loss | 4,033 | — | −$68,293 | −$16.93 | 42.8 % | −1.50 | −$2,733 |
+| **P5k** M10 wait 15 minutes after a loss | 7,629 | — | −$119,583 | −$15.67 | 42.1 % | −1.89 | −$5,560 |
+
+**Reading**
+- **Reversing or closing on an opposite signal makes every trade worse:** −$17.6 to −$18.1 a trade against −$14.5.
+  - An opposite signal arrives, on average, after the trade has already moved against it.
+  - Closing then sells at the bid and pays the spread again.
+  - Reversing also buys the other side after the move.
+- **Skipping the session after a loss loses less in total only because it trades half as often:**
+  - its trades are worse per trade (−$16.9) than the base's;
+  - the same number of trades skipped at random would lose about 4,033 × $14.52 ≈ $58,600;
+  - so the rule carries no information about which later trades will lose.
+- **A 15-minute cool-down changes nothing material.**
+- **No re-entry or reverse rule turns a negative-expectancy signal set positive, or improves it per trade.** The figures are on an account no cap can bind, so the differences are the rules alone.
 
 ## 4. The hold-out
 
