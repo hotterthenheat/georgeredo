@@ -18,7 +18,7 @@ for d in sorted(glob.glob(f'{paths.WORK}/runs/drows/*')):
     o = o.pivot(index='pos_id', on='pname', values='pnl')
     x = p.join(o, on='pos_id', how='left').with_columns(pl.lit(root).alias('root'))
     fr.append(x.select(['root', 'session', 'setup', 'bucket', 'structure', 'cost0', 'mfe_liq', 't_mfe', 'mae_liq', 'dte'] + [c for c in ('D0_expiry', 'D0_ltd1') if c in x.columns]))
-X = pl.concat(fr, how='diagonal_relaxed').filter(pl.col('cost0') > 0)          # debit structures (a credit's cost0 is negative)
+X = pl.concat(fr, how='diagonal_relaxed').filter(pl.col('cost0') >= 1.0)       # debit structures costing at least $1 (a credit's cost0 is negative)
 X = X.with_columns(pl.when(pl.col('root').is_in(list(INDEX))).then(pl.lit('index_etf')).otherwise(pl.lit('single')).alias('group'),
                    (pl.col('mfe_liq') / pl.col('cost0')).alias('best_pct'), (pl.col('D0_expiry') / pl.col('cost0')).alias('expiry_pct'),
                    (pl.col('D0_ltd1') / pl.col('cost0')).alias('ltd1_pct'))

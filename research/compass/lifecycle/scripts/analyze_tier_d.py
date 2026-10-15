@@ -64,6 +64,12 @@ for setup in ('D_TP', 'D_BO', 'D_BOF', 'D_BN', 'D_BNF'):
         sub = real.filter(pl.col('setup').is_in([setup, ref]) & pl.col('structure').is_in(list(structs)))
         if sub.filter(pl.col('setup') == setup).height == 0: continue
         vs.append(an.paired(sub, ['group', 'bucket', 'structure', 'pname'], {'setup': setup}, {'setup': ref}, boot).with_columns(pl.lit(setup).alias('setup'), pl.lit(ref).alias('ref')))
+# the day before an FOMC statement against the same weekday in non-FOMC weeks (straddles and strangles; index ETFs), and
+# the pre-earnings straddle against all-days straddles (single names)
+for setup, ref, structs in (('D_FOMC', 'D_ALLF', ('STR', 'STG')), ('D_EARN', 'D_ALLV', ('STR', 'STG'))):
+    sub = real.filter(pl.col('setup').is_in([setup, ref]) & pl.col('structure').is_in(list(structs)))
+    if sub.filter(pl.col('setup') == setup).height == 0 or sub.filter(pl.col('setup') == ref).height == 0: continue
+    vs.append(an.paired(sub, ['group', 'bucket', 'structure', 'pname'], {'setup': setup}, {'setup': ref}, boot).with_columns(pl.lit(setup).alias('setup'), pl.lit(ref).alias('ref')))
 if vs: pl.concat(vs).filter((pl.col('n_a') >= MIN_N) & (pl.col('n_b') >= MIN_N)).write_csv(f'{OUT}/setup_vs_alldays.csv')
 log('policy pairs written')
 # dev choice -> validation
