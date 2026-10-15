@@ -280,3 +280,37 @@ Walk-forward (train on all prior years with a 5-session embargo and ≥ 150 trai
 - **V1:** 44,447 ATM monthly straddles over 34 months. Shorting every one at the bid lost −13.2 % of premium a month in development + validation [−22.3, −5.2] and −23.6 % in the hold-out. Sorting on IV ÷ RV21 ranks forward volatility correctly (the richest quintile realised 2.3 vol points under implied) but selling it still lost, and it improved on shorting everything by +2.7 % [−2.4, +8.7] (dev + val) and −0.03 % (hold-out). Skew: no edge. Term slope (30,481 name-cycles): long-short −22.2 % (dev + val), −16.5 % (hold-out), no improvement over shorting everything.
 - **V2:** 11,802 reports. Selling the straddle across the report lost −26.1 % (dev + val) and −34.2 % (hold-out); buying it into the report lost −20.9 % and −29.3 %. Reports moved 0.59 of the implied move (median), but the premium sellers earn at the mid (+6.9 % on same-day settlements) is smaller than half the straddle's spread (12.9 % median), and in the tightest-spread names it is negative even at the mid.
 - **Reading:** single-name option prices are not mispriced in a way that can be traded after the bid/ask, monthly or around earnings, on this window. The volatility premium that pays is the index one (S17).
+
+## V5 — are same-day index chains priced to what follows? (A12; NO TEST REJECTS, nothing promoted)
+
+`studies/v5_chain_calibration.py` → `results/v1/v5_chain_calibration/` (`tests.csv`, `curve.csv`, `band_all_roots_devval.csv`), registry `V5`.
+
+**Design.**
+- Every one-strike vertical out of the money on each side, at 10:00 and 13:00: 112,993 verticals on 3,688 same-day chain-days.
+  - SPXW from 2022-05, SPY and QQQ from 2022-11, IWM from 2024-04.
+  - Each leg two-sided, relative spread ≤ 20 %.
+- Price per unit width at the mid against the realised payoff per unit width at the 16:00 settlement.
+- Distance is measured in implied moves (the ATM straddle).
+- Sessions weigh equally; intervals resample sessions.
+- Development + validation runs 2022 → 2025-09. Primary: SPXW, |distance| 0.5–1.5. Holm at α 0.01 across four tests.
+
+| SPXW, 0.5–1.5 implied moves, dev+val | price | realised | edge at mid [95 %] | Holm p | seller after bid/ask [95 %] | buyer after bid/ask [95 %] |
+|---|---|---|---|---|---|---|
+| 10:00 puts (836 sessions) | 0.207 | 0.196 | −0.008 [−0.032, +0.017] | 1.0 | −0.039 [−0.064, −0.016] | −0.055 [−0.077, −0.030] |
+| 10:00 calls (835) | 0.215 | 0.219 | +0.007 [−0.016, +0.031] | 1.0 | −0.047 [−0.072, −0.023] | −0.032 [−0.056, −0.009] |
+| 13:00 puts (841) | 0.202 | 0.174 | −0.025 [−0.047, −0.002] | 0.14 | −0.001 [−0.025, +0.021] | −0.051 [−0.073, −0.028] |
+| 13:00 calls (841) | 0.214 | 0.209 | −0.002 [−0.024, +0.022] | 1.0 | −0.022 [−0.046, +0.002] | −0.026 [−0.049, −0.001] |
+
+Units are fractions of the vertical's width (0.01 = 1 % of width).
+
+**Reading.**
+- **SPXW's same-day chain is priced within about ±3 % of width of what followed** at 0.5–1.5 implied moves. No test rejects at the registered α.
+- **After the bid/ask, neither side earns.** The seller of 13:00 out-of-the-money put verticals comes closest, at break-even.
+- **At 10:00 sharp the quotes are wider**, because economic releases land at 10:00:00 (on 2025-03-14 the SPX spreads went from 0.2–0.4 to 1.5–2 points in that minute). That cost belongs to the entry time chosen.
+- **Touches against the chain's own price come out at 0.88–1.08 × twice the price** (`curve.csv`). The reflection principle holds against the option's price as well as against realised frequencies (`intel/06_price_action_atlas.md` §3).
+
+**Outside the tested family (descriptive; the forward hold-out decides).**
+- On SPY, QQQ and IWM, 13:00 out-of-the-money puts realised less than their price: −0.034, −0.044 and −0.065 of width, each interval below zero.
+- Sellers of 13:00 one-strike verticals came out near break-even or slightly positive after the bid/ask. Only IWM's lower bounds touch or clear zero: puts +0.038 [0.000, +0.074], calls +0.049 [+0.004, +0.090], on 257 and 189 sessions from 2024-04 only.
+- It agrees with the ETF grid's 13:00 strangle (positive only in its TEST window) and with H15's open 14:05 SPXW strangle lane.
+- Of 16 descriptive cells, chance alone would put a lower bound above zero in about 0.4. Two clear here, both IWM at 13:00, correlated with each other and on 189–257 sessions. It is recorded for a forward-only registration, never promoted on these sessions.
