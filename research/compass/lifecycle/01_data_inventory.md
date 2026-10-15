@@ -22,7 +22,7 @@ Every figure below is something a request or a file returned. Nothing is taken f
 | Open interest | per contract-day; the prior settlement's count, reported for that date | 2012-06-04 | The vendor throttles this endpoint to about 0.1 requests a second (measured during S03). |
 | Vendor Greeks and IV | 1-minute and EOD | — | **Floor pinned between 2016-06 and 2017-06**: none on 2015-06-03 or 2016-06-03; present 2017-06-05, 2018 and 2019. Not used: the engine solves IV and Greeks from the NBBO mid with stated r and q (`../engine/greeks.py`), so 2012–2016 is treated the same as later years. |
 | Interest-rate history | daily | — | **Not entitled before 2024-01-01** ("FREE subscription" on the rate product). The research uses a stated constant r, or the rate implied by put-call parity on the chain itself. No subscription is assumed. |
-| Stock and ETF 1-minute OHLCV | 1-minute | 2012-06-04 (SPY) | Already in use. |
+| Stock and ETF 1-minute OHLCV | 1-minute | **2017 for SPY, QQQ and IWM** | **Correction (found during the Tier D pull):** for 2012-06 → 2016-12 the vendor returns 391 rows a session with every price NaN (all 1,154 SPY sessions pulled). The earlier "2012-06-04 verified" counted rows, not values. For index ETFs before 2017, Tier D uses the close implied by put-call parity on the option chain itself, flagged per session (`src = parity`). Measured against real closes on SPY 2017-06 → 12 with the period's rate: median +0.6 bp, 10th–90th percentile −10.9 to +9.9 bp. |
 | Index 1-minute (SPX, VIX; RUT from 2018-12) | 1-minute | 2017-01-03 | Already in use. NDX is refused before 2026-05 (add-on). |
 | Expirations per root | full history | 2012 | TWTR lists 480 expirations, FB 539, META 330, BBBY 541. |
 

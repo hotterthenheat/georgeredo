@@ -377,3 +377,34 @@ def run_one(cd, aux: dict, legs, ratio, nleg: int, entry_m: int, direction: int,
                  np.asarray(legs, np.int64), np.asarray(ratio, np.float64), int(nleg), int(entry_m), int(direction), float(inv),
                  float(override), float(next_open), bool(cash), float(short_strike), pvec)
     return dict(zip(O_NAMES, o.tolist()))
+
+@njit(cache=True)
+def run_policies(bid, ask, strike, is_call, spot, ema5, rsi, atr5, ativ, n_min, legs, ratio, nleg, entry_m, direction, inv,
+                 override, next_open, cash, short_strike, PM, pidx):
+    """One position under several policies (rows of PM selected by pidx): outputs [len(pidx), NO]."""
+    out = np.zeros((pidx.size, NO))
+    for k in range(pidx.size):
+        out[k] = simulate(bid, ask, strike, is_call, spot, ema5, rsi, atr5, ativ, n_min, legs, ratio, nleg, entry_m,
+                          direction, inv, override, next_open, cash, short_strike, PM[pidx[k]])
+    return out
+
+@njit(cache=True)
+def hindsight(bid, ask, legs, ratio, nleg, m0, end_m, slip):
+    """Result A for one structure bought (or sold) at the fill minute m0: the open cost, then over (m0, end_m] the best and
+    worst liquidation value and their minutes, the best mark, and the liquidation value at end_m (NaN when unquoted).
+    Retrospective: no rule could know these minutes in advance."""
+    res = np.full(8, np.nan)
+    if not _quotes_ok(bid, ask, legs, nleg, m0): return res
+    c0 = _open_cost(bid, ask, legs, ratio, nleg, m0, slip)
+    best = -1e18; worst = 1e18; tb = -1; tw = -1; bm = -1e18; last = np.nan
+    for m in range(m0 + 1, end_m + 1):
+        if not _quotes_ok(bid, ask, legs, nleg, m): continue
+        v = _liq(bid, ask, legs, ratio, nleg, m, slip)
+        if v > best: best = v; tb = m
+        if v < worst: worst = v; tw = m
+        mk = _mark(bid, ask, legs, ratio, nleg, m)
+        if mk > bm: bm = mk
+        if m == end_m: last = v
+    res[0] = c0; res[1] = best; res[2] = tb; res[3] = worst; res[4] = tw; res[5] = bm; res[6] = last
+    res[7] = _mark(bid, ask, legs, ratio, nleg, m0)
+    return res

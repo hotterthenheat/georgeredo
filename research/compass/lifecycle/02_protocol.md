@@ -98,6 +98,7 @@ Every setup emits events (session, minute, direction, invalidation level, option
 | EVF | Events, Fed | FOMC statement days; 13:30 entry, structures in §4; non-FOMC days at 13:30 as the control. Dates from the Federal Reserve's published calendar, kept in `data/fomc_dates.csv` with the source URL |
 | CHP | Cheap Options | any directional event above whose chosen Big Payoff contract has mid-IV < 0.8 × the HAR forecast |
 | FLO | Flow & Positioning | daily dealer-gamma sign from UW (2025-10-15 → 2026-10-13, on disk) as a regime filter on the events above. Unusual activity needs the option tape and is untested until pulled (§9). Dark pool is untested. |
+| TPp, BOp, BOr, BNp, VWR | trigger-only variants | the S06 screen's triggers without the baseline RSI gate (`../engine/screen.py`): trend pullback, 5m breakout, breakout retest, bounce, VWAP reclaim. Invalidation is the last confirmed 5m swing against the trade. Added before any result because the gated families are rare (BN gave 0 events on SPY in 2024-H1). |
 | RND | control | random minutes matched by session, direction and entry window (5 seeds), the same structures and policies |
 
 **Top Setups** is a ranking over the union of events:
@@ -225,4 +226,18 @@ A configuration that fails is reported in the failed-hypothesis report with its 
 
 ## Amendments
 
-(none yet)
+**L-A1 (2026-10-15, before any FLO, hold-out or entry-rule result was computed).**
+
+1. *Flow & Positioning is a hold-out-only test.* UW's daily dealer greek-exposure on disk covers 2025-10-15 → 2026-10-13 for SPY, QQQ, IWM and SPX, which is exactly the hold-out. No development is possible, so the test is fixed here and run once.
+   - The signal for session D is the sign of the prior session's net gamma (call_gamma + put_gamma, UW's sign) on the root (SPX's for SPXW). That value was published after the prior close, so it is knowable at D's open.
+   - **H-FLO-1:** directional Steady longs (LC-S and LP-S, all directional setups pooled, M1_t30) have a higher expectancy on negative-gamma days than on positive-gamma days.
+   - **H-FLO-2:** the 10:00 long straddle (ALL10V, STR, M0_cutoff) has a higher expectancy on negative-gamma days.
+   - Each is one difference with a day-clustered 95 % interval, Holm across the two.
+   - Either way it is a regime statement over one year, never a validated edge on its own.
+2. *Entry-rule mechanics (§5), as implemented before running them:*
+   - **E2** chooses the structure at the confirmation minute; **E2g** also applies the chase guard against the signal-minute mark.
+   - **E3** is a package limit at mark − ½ × (open cost − mark) per share, which is mid − ¼ spread on one leg.
+   - **E3atr** is a limit at mark − |net delta| × 0.25 × ATR(5m).
+   - Both limits are good for 10 minutes and fill only when the package's open cost is at or below the limit − $0.01, paying the limit.
+   - Entry rules run on real events only. Each is compared with E0 on the same events (paired), so no random controls are needed.
+3. *Cutoff and expiry.* The protocol's M0 is two policies: hold to the 15:50 cutoff, and hold to expiry. For physically settled ETF options, holding to expiry means exercise or assignment at the 16:00 close and the shares sold at the next 09:30 open, so overnight gap risk is included. Both are reported side by side; the cutoff is the conservative one.

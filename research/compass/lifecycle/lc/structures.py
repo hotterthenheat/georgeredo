@@ -7,7 +7,7 @@ import numpy as np
 import os, sys
 from . import paths
 sys.path.insert(0, os.path.dirname(paths.HERE))
-from engine import greeks as g  # noqa: E402
+from . import bs  # noqa: E402
 
 STRUCTURES = ('LC-S', 'LP-S', 'LC-B', 'LP-B', 'DCS', 'DPS', 'CPS', 'CSP', 'STR', 'STG')
 DIRECTIONAL_LONG = {+1: ('LC-S', 'LC-B', 'DCS', 'CPS', 'CSP'), -1: ('LP-S', 'LP-B', 'DPS')}
@@ -20,8 +20,10 @@ def snapshot(cd, m: int, t_years: float):
     mid = np.where(ok, (bid + ask) / 2.0, np.nan)
     S = cd.spot[m]
     right = np.where(cd.is_call, 1.0, -1.0)
-    iv = g.implied_vol(mid, S, cd.strike, t_years, right)
-    d = g.delta(S, cd.strike, t_years, np.where(np.isnan(iv), 0.3, iv), right)
+    n = cd.strike.size
+    tt = np.full(n, t_years); SS = np.full(n, S)
+    iv = bs.implied_vol(mid, SS, cd.strike, tt, right)
+    d = bs.delta(SS, cd.strike, tt, np.where(np.isnan(iv), 0.3, iv), right)
     d = np.where(np.isnan(iv), np.nan, d)
     with np.errstate(invalid='ignore', divide='ignore'):
         rel = np.where(mid > 0, (ask - bid) / mid, np.nan)

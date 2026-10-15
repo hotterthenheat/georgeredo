@@ -69,8 +69,10 @@ def atm_iv(cd, r=g.R_DEFAULT, q=g.Q_DEFAULT) -> np.ndarray:
     ci = np.array([calls[k] for k in kk]); pi = np.array([puts[k] for k in kk])
     mm = np.arange(n)
     cm = (cd.bid[ci, mm] + cd.ask[ci, mm]) / 2; pm = (cd.bid[pi, mm] + cd.ask[pi, mm]) / 2
-    ivc = g.implied_vol(cm, S, kk, tt, np.ones(n), r, q); ivp = g.implied_vol(pm, S, kk, tt, -np.ones(n), r, q)
-    out = np.nanmean(np.vstack([ivc, ivp]), axis=0)
+    from . import bs
+    ivc = bs.implied_vol(cm, S, kk.astype(float), tt, np.ones(n), r, q); ivp = bs.implied_vol(pm, S, kk.astype(float), tt, -np.ones(n), r, q)
+    with np.errstate(invalid='ignore'):
+        out = np.where(np.isfinite(ivc) & np.isfinite(ivp), (ivc + ivp) / 2, np.where(np.isfinite(ivc), ivc, ivp))
     return out
 
 def t_years_grid(cd) -> np.ndarray:
