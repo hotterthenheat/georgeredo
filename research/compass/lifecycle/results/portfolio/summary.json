@@ -251,5 +251,23 @@
   "avg_units": 1.0,
   "seconds": 47,
   "note": "run with equity0 = $100 M by a configuration error (the P5 edit matched P1); superseded by the $100,000 rerun"
+ },
+ "P1_QS_CSP_s20|holdout": {
+  "period": "holdout",
+  "sessions": 172,
+  "trades": 122,
+  "skipped_risk_cap": 156,
+  "skipped_size": 0,
+  "total_pnl": 987.1999999999996,
+  "end_equity": 100987.20000000026,
+  "cagr": 0.014496775479721391,
+  "max_drawdown": -0.008329303240194208,
+  "daily_sharpe": 1.5096056642033537,
+  "win_rate": 0.6311475409836066,
+  "avg_trade": 8.091803278688527,
+  "worst_trade": -198.40000000000003,
+  "worst_day": -282.79999999999995,
+  "avg_units": 1.0,
+  "seconds": 43
  }
 }

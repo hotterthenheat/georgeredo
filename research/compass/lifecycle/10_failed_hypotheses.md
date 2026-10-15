@@ -21,7 +21,7 @@ A hypothesis whose interval spans zero on a small sample is listed as **inconclu
 | A1 | Any of the 12 setups, bought as a Steady call or put, has a positive expectancy | **Failed.** 0 of 24 setup × Steady cells have a lower bound above zero at any stage-1 exit. Closest: QS Steady call held to expiry, +66.5 [−0.4, +140.0] on 3,136 trades, the same QS-calls-to-expiry pattern as A3. MSS Steady call to expiry has a higher point estimate (+119.4) on 172 trades, interval [−65.9, +332.9]. | `results/tier1/stage1_cells.csv` |
 | A2 | …as a Big Payoff call or put (0.10–0.35 Δ) | **Failed.** 0 of 24 cells have a lower bound above zero. Held to 15:50 the cells return −57 % to +12 % of premium. | same |
 | A3 | …as a debit spread | **Failed for 23 of 24 cells.** The exception is QS → debit call spread held to expiry: +50.3 [+10.6, +93.7] on 2,749 trades; development +51.7 [+1.6], validation +46.7 [−26.4, +114.3], walk-forward +16.9 [−19.6, +51.0]. It was not a finalist and is tested once on the hold-out under amendment L-A3 (`07_validation.md` §4.2). | same |
-| A4 | Bullish setups sold as credit put spreads or cash-secured puts beat the setups' own long structures | **True but not an edge.** Put selling is the only positive family, but random minutes earn it too (A15, `04_entry_research.md` §1). | `07_validation.md` §4 |
+| A4 | Bullish setups sold as credit put spreads or cash-secured puts beat the setups' own long structures | **True but not an edge.** Put selling is the only positive family, and a random later minute earns the same: CSP to expiry 38.1 against 36.4, CPS 7.1 against 8.7. | `07_validation.md` §4, `05_management_research.md` §6 |
 | A5 | Liquidity sweep (LS), market-structure shift (MSS) and fair-value gap (FVG), the ICT concepts, mark profitable entries | **Failed.** Negative in every long structure; MSS fires on 118 days in 3.4 years. | `04_entry_research.md` §4 |
 | A6 | Waiting for confirmation (E2) improves entries | **Failed.** Its gain per signal equals skipping the same share of signals at random; like for like it loses $14–60 a trade to entering at the signal. | `04_entry_research.md` §2 |
 | A7 | A chase guard (skip if the structure ran > X in favour) improves entries | **Failed.** Same as A6: indistinguishable from random skipping. | same |
@@ -32,7 +32,7 @@ A hypothesis whose interval spans zero on a small sample is listed as **inconclu
 | A12 | Implied above forecast (VOLR) makes selling puts better | **Failed.** VOLR credit put spreads are *worse* than all days: −17.5 [−38.0, 0.0] to expiry; walk-forward −23.8 [−36.4, −13.4]. | same |
 | A13 | Fed-day afternoon straddles (EVF) | **Inconclusive.** 85 trades on 27 days, intervals ±$400. | same |
 | A14 | A same-day straddle bought at 10:00 or 13:30 on any day | **Failed.** 10:00 to 15:50: −81.5 [−140.6, −18.8]; 13:30: −86.7 [−115.7, −57.1]. | same |
-| A15 | The setups' timing beats a random minute | **See `04_entry_research.md` §1.** The original control could not answer it (look-ahead, amendment L-A2). | — |
+| A15 | The setups' timing or direction carries information (they beat a random minute) | **Failed.** Against controls without look-ahead and with the period's drift netted out, every setup's trades are within noise of a random later minute and of the opposite side at the same minute. 3 positive and 4 negative intervals in 156 tests; pooled −0.6 [−3.9, +2.4] and −1.5 [−8.2, +4.4] for Steady options. | `04_entry_research.md` §1.0 |
 
 ## B. Management (Tier I)
 

@@ -16,7 +16,54 @@
 
 ## 1. Setups against random entries
 
-<!-- CONTROLS: filled from results/tier1/controls_*.csv once the L-A2 runs finish -->
+**Three comparisons, each paired by trading day, development + validation**
+- **RND-after:** the setup's trade against the same structure entered at a random later minute of the same session, in the same direction (5 seeds).
+- **FLIP:** the setup's trade against the mirrored structure at the same minute: Steady call against Steady put, Big Payoff call against put, debit call spread against debit put spread.
+- **Drift-neutral versions of both:** 2022–2025 rose. A call beats a put at any minute, and an earlier call rides more of the session's rise, so each comparison is flattered for bullish signals and penalised for bearish ones. Pooling a setup's bullish and bearish trades cancels most of that. These are the comparisons that answer "does the setup know something?".
+
+**Files:** `results/tier1/controls_summary.csv` (every setup × structure × stage-1 policy, the three controls side by side); `controls_after_drift_neutral.csv` and `controls_flip_drift_neutral.csv` (by structure family).
+
+### 1.0 Results
+
+**Drift-neutral, 30-minute exit** (dollars a trade, setup minus control [95 %]):
+
+| Setup | Steady vs a later minute | Steady vs the other side | Debit spread vs a later minute | Debit spread vs the other side |
+|---|---|---|---|---|
+| QS (Quick Scalps) | −7.0 [−19.4, +4.2] | −0.8 [−24.2, +21.5] | −4.3 [−10.4, +1.4] | −0.9 [−12.7, +10.5] |
+| TP (trend pullback) | +5.0 [−16.8, +27.7] | −18.0 [−74.7, +34.0] | +4.1 [−7.6, +15.3] | −8.2 [−36.9, +18.5] |
+| BO (breakout) | −22.2 [−54.4, +5.3] | −34.4 [−104.7, +30.0] | −9.7 [−25.3, +3.2] | −16.8 [−50.0, +15.2] |
+| BOF (failed breakout) | −5.4 [−36.6, +26.9] | −2.3 [−64.8, +59.2] | −3.6 [−19.2, +11.9] | −0.9 [−32.9, +31.3] |
+| LS (liquidity sweep) | −10.6 [−25.6, +4.7] | −19.9 [−49.9, +9.3] | −4.3 [−11.5, +3.1] | −8.3 [−23.0, +6.0] |
+| MSS (structure shift) | +5.2 [−41.9, +53.2] | −10.3 [−90.2, +69.6] | +1.0 [−21.2, +24.1] | −6.7 [−45.4, +31.5] |
+| FVG (fair-value gap) | −6.9 [−20.0, +7.1] | −2.4 [−27.9, +22.6] | −3.8 [−10.1, +2.6] | −3.1 [−15.4, +9.3] |
+| TPp (pullback, trigger only) | −2.3 [−12.4, +6.7] | +12.1 [−7.9, +29.4] | −0.9 [−6.2, +3.8] | +6.4 [−3.5, +16.0] |
+| BOp (5m breakout, trigger only) | −4.8 [−14.4, +4.8] | +13.0 [−9.1, +33.1] | −3.8 [−8.8, +0.9] | +4.6 [−6.2, +14.5] |
+| BOr (breakout retest) | −5.2 [−15.5, +4.4] | +3.4 [−17.7, +23.7] | −2.9 [−8.0, +2.1] | +0.7 [−9.6, +10.9] |
+| BNp (bounce, trigger only) | +7.6 [−3.0, +17.6] | −17.7 [−46.0, +7.2] | +4.7 [−0.5, +9.6] | −4.7 [−17.1, +6.8] |
+| VWR (VWAP reclaim) | +2.1 [−1.4, +5.6] | +1.4 [−2.7, +5.5] | **+1.5 [+0.2, +2.9]** | +0.5 [−1.7, +2.6] |
+| **All setups pooled** | −0.6 [−3.9, +2.4] | −1.5 [−8.2, +4.4] | −0.1 [−1.6, +1.2] | −0.6 [−3.7, +2.2] |
+
+**Held to expiry**, the drift-neutral cells whose interval excludes zero:
+- worse than a later minute: BO Steady −62.3 [−127.9, −5.3]; BO Big Payoff −30.4 [−60.7, −4.7]; MSS debit spread −46.4 [−88.7, −4.7];
+- better than the other side: BOp debit spread +53.7 [+5.5, +102.6]; BOr debit spread +57.8 [+9.1, +106.5];
+- worse than the other side: TP Big Payoff −76.0 [−160.6, −3.5].
+
+**Reading**
+- Across the four drift-neutral comparisons there are 156 tests: 13 setups × 3 structure families × 2 exits × 2 controls.
+- 3 intervals lie above zero and 4 below; about 8 would by chance at 5 %.
+- **Pooled over every setup, the setups' trades are within $1.50 of a random later minute and of the opposite side at the same minute, both ways.**
+- **No setup shows timing or directional information that survives a control without look-ahead.**
+- The positive cells are isolated (one structure family, one exit), not a pattern across a setup's structures and exits.
+
+**Per structure, without drift neutrality** (`controls_summary.csv`), at the 30-minute exit:
+- 8 of 104 cells beat RND-after; 5 of them are TP's bullish structures (Steady call +32.5 [+8.1, +58.1], debit call spread +19.9, cash-secured put +21.6, credit put spread +8.5, Big Payoff call +11.0);
+- the same TP signals' bearish structures are 7–18 worse than their controls (intervals spanning zero);
+- TP's drift-neutral totals are within noise (table above). Its bullish advantage is the session's rise riding with an earlier entry, not the signal.
+
+**What happened to the original comparison:**
+- under RND, 39 of 104 cells at the 30-minute exit were significantly worse than random and 9 better;
+- under the clean controls, without drift neutrality, the counts are 3 and 8;
+- with drift neutrality, they are as chance predicts.
 
 ### 1.1 The original control was biased, and by how much
 
@@ -151,7 +198,7 @@ Liquidity sweeps (LS), market-structure shifts (MSS) and fair-value gaps (FVG) a
 
 - All three lose money in every long-premium structure.
 - MSS fires too rarely to estimate anything (118 days in 3.4 years).
-- Their comparison with the corrected controls is in §1.
+- Against the clean controls (§1.0) none differs from a random minute: LS −10.6 [−25.6, +4.7], MSS +5.2 [−41.9, +53.2], FVG −6.9 [−20.0, +7.1] for Steady options, drift-neutral, 30-minute exit.
 
 ## 5. Entry conclusions
 
@@ -162,4 +209,4 @@ Liquidity sweeps (LS), market-structure shifts (MSS) and fair-value gaps (FVG) a
    - spreads above 10 % of the structure's cost.
 
    None makes a structure profitable.
-4. **Whether any setup carries timing or direction information** is answered by the corrected controls in §1, not by the original RND.
+4. **None of the 12 setups carries timing or direction information** that survives a control without look-ahead, once the period's drift is netted out (§1.0). The setups do not select better entries than a random minute in the same session.

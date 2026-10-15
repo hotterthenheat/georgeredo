@@ -108,7 +108,11 @@ For the partial-and-runner policies, the exits tagged "partial" and "runner" are
 - It caps the many small wins and leaves the rare large losses in place.
 - The win rates make it look attractive: 91–93 % for take-25 %.
 
-**Holding to expiry was best.** On every row the setups were also worse than the original random minutes, but that control is biased toward bullish momentum setups, which make up most of these events. The clean comparison is in `04_entry_research.md` §1. Either way, the positive CSP numbers are the variance-risk premium of same-day index puts in a rising market. The random-minute rows earn it too, so it is not something the setups' timing creates. The cash set aside is the strike × 100, about $40–60 k for one SPY contract, so a $38 expectancy is roughly 0.1 % of the capital per trade.
+**Holding to expiry was best.** On every row the setups were also worse than the original random minutes, but that control is biased toward bullish momentum setups, which make up most of these events. Against the clean control (a random later minute, `04_entry_research.md` §1), the setups equal random entries within a few dollars:
+- credit put spread to expiry: 7.1 against 8.7, difference −1.5 [−4.6, +1.6];
+- cash-secured put to expiry: 38.1 against 36.4, difference +1.7 [−11.2, +13.4].
+
+Either way, the positive CSP numbers are the variance-risk premium of same-day index puts in a rising market. The random-minute rows earn it too, so it is not something the setups' timing creates. The cash set aside is the strike × 100, about $40–60 k for one SPY contract, so a $38 expectancy is roughly 0.1 % of the capital per trade.
 
 ## 7. Expiry mechanics
 

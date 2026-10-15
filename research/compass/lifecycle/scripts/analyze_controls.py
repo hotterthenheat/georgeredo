@@ -27,6 +27,16 @@ for mode in ('after', 'flip'):
     t = pl.concat([t, pooled.select(t.columns)])
     t.write_csv(f'{OUT}/controls_{mode}.csv')
     res[mode] = t
+    if mode == 'after':
+        # drift-neutral: a setup's bullish and bearish trades pooled against their own later-minute controls. A later entry
+        # rides less of the session's drift, which favours an earlier call and penalises an earlier put held to the close;
+        # pooling both directions of the same setup cancels most of that
+        fam = {'LC-S': 'Steady', 'LP-S': 'Steady', 'LC-B': 'Big Payoff', 'LP-B': 'Big Payoff', 'DCS': 'Debit spread', 'DPS': 'Debit spread'}
+        dn = d.filter(pl.col('structure').is_in(list(fam))).with_columns(pl.col('structure').replace(fam).alias('family'))
+        fn = an.paired(dn, ['setup', 'family', 'pname'], {'ctrl': 0}, {'ctrl': 1}, boot)
+        fp = an.paired(dn, ['family', 'pname'], {'ctrl': 0}, {'ctrl': 1}, boot).with_columns(pl.lit('ALL').alias('setup'))
+        fn = pl.concat([fn, fp.select(fn.columns)]).rename({'exp_a': 'exp_setup', 'exp_b': 'exp_after', 'diff': 'edge_after_dn', 'diff_lo': 'after_dn_lo', 'diff_hi': 'after_dn_hi', 'n_a': 'n', 'n_b': 'n_after'})
+        fn.write_csv(f'{OUT}/controls_after_drift_neutral.csv')
     if mode == 'flip':
         # drift-neutral: a setup's bullish and bearish events together, each against its own mirror. In a rising market a
         # call beats a put at any minute, so the bullish flip is flattered and the bearish one penalised; pooling both
