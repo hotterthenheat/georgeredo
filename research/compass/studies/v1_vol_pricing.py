@@ -185,10 +185,11 @@ def corp_days(symbol: str, raw: pl.DataFrame):
 
 JUMP_LO, JUMP_HI = 1 / 1.4, 1.4
 
-def jumps_in(raw, lo, hi):
-    """(date, previous session, ratio) for raw close-to-close ratios >= 1.4 or <= 1/1.4 in [lo, hi]"""
+def jumps_in(raw, lo, hi, with_close=False):
+    """(date, previous session, ratio[, close]) for raw close-to-close ratios >= 1.4 or <= 1/1.4 in [lo, hi]"""
     r = raw.with_columns(pl.col('date').shift(1).alias('prev')).filter(pl.col('date').is_between(lo, hi) & pl.col('ratio').is_finite() & ((pl.col('ratio') >= JUMP_HI) | (pl.col('ratio') <= JUMP_LO)))
-    return [(a, b, c) for a, b, c in zip(r['date'].to_list(), r['prev'].to_list(), r['ratio'].to_list()) if b is not None]
+    out = [x for x in zip(r['date'].to_list(), r['prev'].to_list(), r['ratio'].to_list(), r['close'].to_list()) if x[1] is not None]
+    return out if with_close else [x[:3] for x in out]
 
 def _quoted(t, d, e):
     """contracts with a finite, positive ask at the close"""
@@ -197,13 +198,27 @@ def _quoted(t, d, e):
     c = c.filter(pl.col('ask').is_finite() & (pl.col('ask') > 0))
     return set(zip(c['strike'].to_list(), c['right'].to_list()))
 
-def jump_verdict(t, jd, prev, e):
+def parity_spot(c: pl.DataFrame):
+    """the underlying implied by the closing chain: K + C_mid - P_mid at the three strikes where |C - P| is smallest
+    (both legs two-sided); carry over a month is well inside the 5 % tolerance it is used with"""
+    if c is None or c.height == 0: return float('nan')
+    q = c.filter(pl.col('bid').is_finite() & pl.col('ask').is_finite() & (pl.col('ask') >= pl.col('bid')) & (pl.col('ask') > 0))
+    cc = q.filter(pl.col('right') == 'C').select(['strike', ((pl.col('bid') + pl.col('ask')) / 2).alias('cm')])
+    pp = q.filter(pl.col('right') == 'P').select(['strike', ((pl.col('bid') + pl.col('ask')) / 2).alias('pm')])
+    j = cc.join(pp, on='strike').with_columns((pl.col('cm') - pl.col('pm')).abs().alias('a')).sort('a').head(3)
+    return float((j['strike'] + j['cm'] - j['pm']).median()) if j.height else float('nan')
+
+def jump_verdict(t, jd, prev, e, close=None):
     """A8.3a: share of the prior session's quoted contracts still quoted on the jump session, same expiration. After a
     split the old series stay listed without quotes (SMCI 2024-10-01: bid and ask empty) and new strikes are listed"""
     a, b = _quoted(t, prev, e), _quoted(t, jd, e)
     if not a: return 'ambiguous', float('nan')
     share = len(a & b) / len(a)
-    return ('genuine' if share >= 0.8 else 'corporate action' if share <= 0.3 else 'ambiguous'), share
+    v = 'genuine' if share >= 0.8 else 'corporate action' if share <= 0.3 else 'ambiguous'
+    if v == 'genuine' and close is not None:                  # A8.3b: is the jump in the stock close real?
+        ps = parity_spot(chain(t, jd, e))
+        if np.isfinite(ps) and abs(close / ps - 1) > 0.05: v = 'data error (close vs chain-implied spot)'
+    return v, share
 
 def jump_jobs(pairs):
     """chain requests the A8.3 checks need, for (symbol, jump date, previous session, expiration)"""
@@ -212,7 +227,7 @@ def jump_jobs(pairs):
 def corp_hit(symbol, raw, lo, hi, e=None, use_chains=False):
     """(hit, how): A8.3 when its chains are cached (use_chains), else A8.1's standard ratios (interim)"""
     if use_chains and e is not None:
-        vs = [(jd, *jump_verdict(symbol, jd, prev, e), r) for jd, prev, r in jumps_in(raw, lo, hi)]
+        vs = [(jd, *jump_verdict(symbol, jd, prev, e, close=cl), r) for jd, prev, r, cl in jumps_in(raw, lo, hi, with_close=True)]
         bad = [v for v in vs if v[1] != 'genuine']
         if bad: return f'{bad[0][1]} {bad[0][0]} (ratio {bad[0][3]:.3f}, strikes kept {bad[0][2]:.2f})', 'A8.3'
         return None, 'A8.3'
@@ -285,6 +300,8 @@ def build():
         dates = g['date'].to_list(); i = dates.index(d) if d in dates else None
         if i is None: excl.append({**base, 'reason': 'no close on D'}); continue
         spot = float(g['close'][i])
+        ps = parity_spot(c)                                    # A8.3b: the entry close against the chain's own spot
+        if np.isfinite(ps) and abs(spot / ps - 1) > 0.05: excl.append({**base, 'reason': f'close {spot:.2f} vs chain-implied spot {ps:.2f}'}); continue
         s = straddle(c, spot)
         if s is None: excl.append({**base, 'reason': 'no two-sided ATM straddle within 5%'}); continue
         hit, how = corp_hit(t, g, dates[max(0, i - 30)], e, e=e, use_chains=os.environ.get('V1_A83') == '1')
