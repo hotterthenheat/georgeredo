@@ -59,6 +59,11 @@ These are the two option-pricing families the earlier research had not run. Both
 - **The spread is large.** The straddle's median bid/ask spread is 13 % of its mid, so selling at the bid gives up about 6 %.
 - **Net:** single-name monthly straddles were not overpriced once that is paid. It held in every sample and was worst in the 2026 hold-out.
 - **The contrast with index puts.** S17's index put-writing earned the volatility premium on SPY and QQQ; individual names do not carry it after costs. This matches the published finding that the volatility premium is mainly an index phenomenon.
+- **Premium against spread (exploratory, not pre-registered).**
+  - **At the mid, the straddles are fairly priced on average.** Selling at the mid and settling at expiration made −0.6 % [−10.0, +7.3] in development + validation and −6.8 % [−14.0, +0.5] in the hold-out.
+  - **The loss is the spread.** Half the spread is 12 % of the mid on average (16 % in the hold-out).
+  - **By liquidity third (straddle spread 5.4 % / 12.8 % / 42.5 %):** at the mid −4.8 % / −1.7 % / +4.5 %; at the bid −8.2 % / −9.9 % / −22.7 %.
+  - **What looks rich is untradeable.** The only premium at the mid is in the least liquid third, where the spread is ten times larger.
 
 ### T1 — does sorting on implied ÷ realized volatility find the overpriced ones?
 
