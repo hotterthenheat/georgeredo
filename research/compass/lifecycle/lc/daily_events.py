@@ -94,7 +94,7 @@ def earnings(root: str) -> pl.DataFrame:
     a premarket report moves the report date's open, an after-hours one the next session's open."""
     f = os.path.join(os.path.dirname(os.path.dirname(paths.HERE)), '..', 'data_lake', 'unusualwhales', 'earnings.parquet')
     f = os.path.normpath(f)
-    e = pl.read_parquet(f).filter(pl.col('ticker') == root)
+    e = pl.read_parquet(f).filter(pl.col('ticker') == dy.EARNINGS_ALIAS.get(root, root))
     if e.height == 0: return pl.DataFrame()
     d = dy.underlying_daily(root).sort('session'); s = d['session'].to_list(); idx = {x: i for i, x in enumerate(s)}
     rows = []

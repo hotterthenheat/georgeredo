@@ -74,10 +74,18 @@ def expirations(root: str) -> list[dt.date]:
 
 _UND = {}
 _USET = {}
+# The earnings calendar files Facebook's reports under META from 2012. The vendor's stock history does NOT: its META bars
+# are empty before 2021-07-01 and from then to 2022-06-08 are the Roundhill Ball Metaverse ETF (about $15), which held
+# the ticker before the rename; Meta Platforms starts 2022-06-09. So FB options (2017-06 -> 2022-06) take their closes
+# from put-call parity on their own chain, and the META root starts on 2022-06-09.
+EARNINGS_ALIAS = {'FB': 'META'}
+ROOT_START = {'META': dt.date(2022, 6, 9)}
+
 def underlying_daily(root: str) -> pl.DataFrame:
     """Daily OHLC from the 1-minute bars (open = first bar's open, close = the 15:59 bar's close) for every session cached."""
     if root in _UND: return _UND[root]
     d = f'{paths.UNDERLYING}/{root}' if os.path.isdir(f'{paths.UNDERLYING}/{root}') else f'{SINGLE_UNDERLYING}/{root}'
+    if root == 'FB': d = '/nonexistent'           # see EARNINGS_ALIAS: closes from parity alone
     files = sorted(glob.glob(f'{d}/*.parquet'))
     cache = f'{paths.WORK}/daily_bars/{root}_{len(files)}_{len(glob.glob(f"{BYEXP}/{root}/_files_*")) and os.path.basename(glob.glob(f"{BYEXP}/{root}/_files_*")[0])}.parquet'
     if os.path.exists(cache):
@@ -95,6 +103,7 @@ def underlying_daily(root: str) -> pl.DataFrame:
     if par.height:
         par = par.filter(~pl.col('session').is_in(df['session'].implode()) if df.height else pl.lit(True))
         df = pl.concat([df, par], how='diagonal_relaxed').sort('session')
+    if root in ROOT_START: df = df.filter(pl.col('session') >= ROOT_START[root])
     df = df.with_columns(_split_factor(df).alias('adj'))
     os.makedirs(os.path.dirname(cache), exist_ok=True); df.write_parquet(cache)
     _UND[root] = df
@@ -106,13 +115,15 @@ def parity_closes(root: str, r: float = 0.0025) -> pl.DataFrame:
     of the closing mids is smallest, S = K e^{-rt} + C - P. open/high/low are set to the close (close-only history),
     src = 'parity'. r = 0.25 % (fed funds were 0.1-0.7 % over 2012-2016; no rate history is entitled). Measured on SPY
     2017-06..12 against real closes with the period's ~1 % rate: median +0.6 bp, 10th-90th percentile -10.9 to +9.9 bp
-    (the option close is stamped up to 16:15, the stock's at 16:00). Cached per root."""
+    (the option close is stamped up to 16:15, the stock's at 16:00). Cached per root. FB uses it for every session (2017-06
+    to 2022-06); at the 2018-19 rates of about 2 % the constant r understates the close by up to ~5 bp on a 7-day expiry."""
     cache = f'{BYEXP}/{root}/_parity.parquet'
     if os.path.exists(cache): return pl.read_parquet(cache)
     rows = []
     for d in sorted(glob.glob(f'{BYEXP}/{root}/*-*')):
         df = pl.read_parquet(f'{d}/*.parquet', columns=['date', 'expiration', 'strike', 'right', 'bid', 'ask'])
-        df = df.filter((pl.col('bid') > 0) & (pl.col('ask') >= pl.col('bid')) & (pl.col('date') < dt.date(2017, 6, 1)))
+        until = dt.date(2100, 1, 1) if root == 'FB' else dt.date(2017, 6, 1)    # FB: every session (no stock bars; see EARNINGS_ALIAS)
+        df = df.filter((pl.col('bid') > 0) & (pl.col('ask') >= pl.col('bid')) & (pl.col('date') < until))
         if df.height == 0: continue
         df = df.with_columns(((pl.col('bid') + pl.col('ask')) / 2).alias('mid'))
         c = df.filter(pl.col('right') == 'C').select(['date', 'expiration', 'strike', pl.col('mid').alias('c')])

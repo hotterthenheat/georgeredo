@@ -61,8 +61,10 @@ Every entry: what was done, the exact command or file, its verified outcome. New
 | 10-15 03:56 | H-FLO-1/2 (dealer-gamma sign, pre-registered L-A1) run once on the hold-out | Pass pooled (p 0.0022, 0.0158; Holm). Post hoc within root: +1.7 and +8.8 points of premium, not significant (root mix) |
 | 10-15 04:05 | **Defect: the daily-tier expiration picker chose expirations not yet listed on the entry day** (weeklies a year out), silently dropping Position/Long-Dated/LEAPS entries. `daily.listed_ranges`; picker restricted to expirations quoted that day; SPY daily tier rerun | Commit `889691a` |
 | 10-15 04:06 | Amendment L-A3 pre-registered and committed before reading the cell's hold-out rows: QS → debit call spread to expiry, one test (H-DCS-1/2) | Commit `889691a` |
+| 10-15 06:14 | **Data defect: the vendor's META stock history is not Meta Platforms before 2022-06-09.** Its META minute bars are empty before 2021-07-01 and from then to 2022-06-08 are the Roundhill Ball Metaverse ETF (about $15; it held the ticker before the rename). Meta Platforms (about $190) starts 2022-06-09. The daily tier now takes FB's closes from put-call parity on FB's own chain (2019-06-03: $164.14 against the real $164.15), starts the META root on 2022-06-09 (`lc/daily.py` ROOT_START), and reads Facebook's earnings under META (UW files them there from 2012). **The earlier S06 Tier A screen read META's 2021-07 → 2022-06 bars: its META cells for that year were the ETF.** | `lc/daily.py` EARNINGS_ALIAS, ROOT_START |
 
 ## Known defects and open items
+- S06 (Tier A screen): META's minute bars for 2021-07-01 → 2022-06-08 are the Roundhill metaverse ETF, not Meta Platforms; those META events are wrong and should be dropped if S06 is rerun.
 - Event flags (FOMC/CPI/NFP) exist only from 2017-02; earlier sessions report `unknown`.
 - Interest rate r is a stated constant (0.04); the ThetaData rate series is not wired.
 - Settlement for physically settled ETF contracts held to expiry is modelled at intrinsic on the 16:00 close (after-hours exercise caveat from the prior studies applies; the long-option families never hold to expiry by design).
