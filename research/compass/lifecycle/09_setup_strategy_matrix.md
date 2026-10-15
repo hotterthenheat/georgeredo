@@ -307,7 +307,7 @@ Counts: carry, not setup 32, failed 60, failed on the hold-out 19, inconclusive 
 | index_etf | Failed bounce (daily) | S | CSP | D13_tp50_dte21 | 16 | +44.9 [-18.7, +109.2] | — [—, —] | — [—, —] | — | insufficient |
 | index_etf | Failed bounce (daily) | S | DCS | D1_t5 | 15 | -20.2 [-59.2, +22.6] | — [—, —] | — [—, —] | — | insufficient |
 | index_etf | Failed bounce (daily) | S | DPS | D7_dd40 | 4 | +74.8 [-26.6, +256.4] | — [—, —] | — [—, —] | — | insufficient |
-| index_etf | Failed bounce (daily) | S | LC-B | D2_s35_t35 | 16 | -9.6 [-42.6, +26.9] | — [—, —] | — [—, —] | — | insufficient |
+| index_etf | Failed bounce (daily) | S | LC-B | D2_s35_t35 | 16 | -9.7 [-42.6, +26.9] | — [—, —] | — [—, —] | — | insufficient |
 | index_etf | Failed bounce (daily) | S | LC-S | D2_s35_t35 | 16 | -3.9 [-111.7, +118.7] | — [—, —] | — [—, —] | — | insufficient |
 | index_etf | Failed bounce (daily) | S | LP-B | D7_dd40 | 4 | +89.8 [-2.8, +173.2] | — [—, —] | — [—, —] | — | insufficient |
 | index_etf | Failed bounce (daily) | S | LP-S | D7_dd40 | 4 | +255.4 [+33.3, +512.2] | — [—, —] | — [—, —] | — | insufficient |

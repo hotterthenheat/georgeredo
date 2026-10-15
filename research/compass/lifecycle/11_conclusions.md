@@ -58,6 +58,7 @@ The ranked conclusions follow, strongest evidence first. Every number is per uni
 - **Dark-pool setups:** no history on the current plans.
 - **Dealer positioning before 2025-10-15:** UW's daily greek exposure begins then, so H-FLO could only be tested on one year.
 - **Single-name intraday lifecycles:** single names were tested at daily resolution only.
+- **Bounce setups on index ETFs before 2017 and on FB:** those closes come from put-call parity (the vendor has no stock bars there), so there is no daily open, and the bounce rules need one.
 - **Tick-level fills:** fills use the 1-minute NBBO (Tier I) and the closing NBBO (daily tier); queue position and partial fills are not modelled.
 
 ## D. Method corrections that changed conclusions (`10_failed_hypotheses.md` §E)
@@ -71,7 +72,21 @@ The ranked conclusions follow, strongest evidence first. Every number is per uni
 
 ## E. The daily tier (Weekly, Swing, Position, Long-Dated, LEAPS; single names; earnings)
 
-_Filled when the daily tier finishes (`06_daily_tier.md`)._
+**Index ETFs, complete** (`06_daily_tier.md` §3–§7):
+
+1. **Any long-dated bullish structure bought on any Monday made money in 2013–2026.**
+   - A Steady call in the LEAPS bucket made +$1,326 a contract held to expiry.
+   - Any bearish one lost.
+   - This is the bar, and it is the market's drift, not a setup.
+2. **No daily setup beat buying the same structure on a random day in the same direction on the hold-out.**
+   - The 19 walk-forward finalists made +$500–3,500 a trade in 2024–2026.
+   - R2 failed for all 19, and the shorter-dated trend-pullback finalists lost money outright.
+3. **Bearish daily setups lost heavily against their baselines,** most of all trend-pullback shorts (LEAPS Steady puts −1,052 [−1,417, −654] against shorting every Monday).
+4. **Daily management follows the trend's sign:** hold and add on the trend side, cut after 5 sessions against it. No rule helped both sides.
+5. **The day before the Fed carries no straddle edge either way** through the announcement (5-session hold).
+6. **One daily cell is a hypothesis for a fresh hold-out:** failed-breakout put sales in the Swing bucket. It cleared both baselines in development + validation on about 100 trades, but was not a walk-forward finalist.
+
+**Single names:** the pull and runs were in progress when this was written (`06_daily_tier.md` §8).
 
 ## F. What this means for Compass
 

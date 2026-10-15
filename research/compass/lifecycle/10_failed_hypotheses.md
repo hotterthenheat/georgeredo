@@ -67,6 +67,17 @@ A hypothesis whose interval spans zero on a small sample is listed as **inconclu
 | D2 | Pooling every setup diversifies the losses away | **Failed.** Pooled Steady trades ruined the account: equity $410. | same |
 | D3 | The best finalist (QS → cash-secured put) is worth trading | **Failed on capital use.** +0.8 % a year; the collateral limits it to one or two positions. | same |
 
+## F. Daily lifecycles (daily tier, index ETFs: SPY, QQQ, IWM; development 2012–2021, validation 2022–2023, hold-out 2024 → 2026-10)
+
+| # | Hypothesis | Result | Evidence |
+|---|---|---|---|
+| F1 | Daily setups (trend pullback, breakout) select better long-dated bullish trades than buying on any day | **Failed on the hold-out.** 19 walk-forward finalists, 0 promoted: all fail R2 (random day, same direction), 17 of 19 fail R2b (all-days baseline). | `06_daily_tier.md` §6 |
+| F2 | Trend-pullback shorts (in a downtrend) | **Failed.** Worse than shorting every Monday in most cells (P Steady put −320 [−530, −59]; X −1,052 [−1,417, −654]). | `06_daily_tier.md` §4 |
+| F3 | Trend-pullback longs beat buying every Monday | **Failed.** Within noise in W–L; worse in X (debit call spread −132 [−227, −20]). Shorter-dated finalists lost on the hold-out (S Steady call −235, P debit call spread −236). | §4, §6 |
+| F4 | A straddle the day before an FOMC statement profits from the event | **Failed.** Through the announcement (5-session hold) no difference from non-Fed weeks; held to expiry worse in S/P/L. 72 trades on 24 Fed days. | §4 |
+| F5 | A management rule improves daily positions regardless of direction | **Failed.** Every rule that helps one side hurts the other: a 5-session exit gives puts +479 and costs calls −404; doubling down helps calls (+30) and hurts puts (−180). | §5 |
+| F6 | Bounce and failed-bounce setups (z-score ≤ −2 with a reversal day) | **Insufficient.** Too few events in every cell; none before 2017 on index ETFs (close-only history). | `09_setup_strategy_matrix.md` |
+
 ## E. Method failures found and corrected (kept here because they changed conclusions)
 
 | # | What was wrong | Effect | Correction |
@@ -76,3 +87,5 @@ A hypothesis whose interval spans zero on a small sample is listed as **inconclu
 | E3 | The first M10/M11 portfolio configurations could not trigger their rules | P2r, P3r and P3c equal their bases | Pooled setups at one contract on an uncapped account (`08_portfolio.md` §3) |
 | E4 | The daily tier's expiration picker chose expirations not yet listed on the entry day | Position, Long-Dated and LEAPS entries silently dropped (SPY all-days: 149, 83 and 15 of 560 Mondays) | Picks restricted to expirations quoted that day (`lc/daily.py` `listed_ranges`); daily tier rerun |
 | E5 | 2012–2016 SPY/QQQ/IWM 1-minute bars are empty at the vendor; 264 SPY minute files had text prices | Underlying closes | Parity closes with measured error; files re-fetched as numbers (`01_data_inventory.md`) |
+| E6 | The vendor's META stock bars before 2022-06-09 are not Meta Platforms (empty before 2021-07-01, then the Roundhill metaverse ETF at about $15) | FB/META closes; the earlier S06 Tier A screen's META cells for 2021-07 → 2022-06 | FB from parity on its own chain; META from 2022-06-09; S06 noted in the implementation record |
+| E7 | Daily positions whose expiration lies after the data's end would have settled early at intrinsic value | Late hold-out entries | Left out and counted (about 500 a root) |
