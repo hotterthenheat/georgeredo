@@ -13,7 +13,7 @@
 | MSFT   | 8    | $9.99     | Short-dated |
 | AMZN   | 8    | $5.32     | Short-dated |
 | META   | 8    | $23.86    | High absolute |
-| GOOGL  | 1    | $4.66     | Quick |
+| GOOGL  | 9    | $9.29     | Outlier flagged |
 
 All use high-volume strike proxy + positive bid filter.
 
