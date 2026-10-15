@@ -56,10 +56,17 @@ python3 scripts/build_archive.py SPY,QQQ,IWM,SPXW    # the lifecycle archive
 python3 scripts/analyze_tier1.py                     # tables, walk-forward, finalists (no hold-out)
 python3 scripts/holdout_tier1.py                     # opens the hold-out ONCE for the finalists (refuses a second run)
 python3 scripts/holdout_verdicts.py                  # scores the six promotion rules
+python3 scripts/run_controls.py SPY,QQQ,IWM,SPXW     # L-A2 clean controls (RND-after, FLIP); 'holdout' re-scores the finalists
+python3 scripts/analyze_controls.py                  # setups against the clean controls, drift-neutral versions
+python3 scripts/holdout_flo.py; python3 scripts/holdout_flo_stats.py   # H-FLO-1/2 (run once), p-values and within-root split
+python3 scripts/holdout_la3.py                       # L-A3, run once (refuses a second run)
+python3 scripts/holdout_r2_after.py                  # the finalists' R2 against RND-after (post hoc)
 python3 scripts/run_portfolio.py <configs> devval|holdout
 ./scripts/run_tier_d.sh                              # Tier D pull (vendor key in the environment, one login)
 python3 scripts/run_tier_d_research.py <ROOTS>       # Tier D runs
 python3 scripts/analyze_tier_d.py
+python3 scripts/holdout_tier_d.py                    # L-A4: the daily tier's finalists and its hold-out, once
+python3 scripts/build_matrix.py; python3 scripts/matrix_md.py   # the setup x strategy matrix (09), from the result files
 ```
 
 **Data needed:** the 0DTE chains, underlying minutes and index minutes under `$SP/theta` (see `01_data_inventory.md`), and the vendor key for the Tier D pull. The key is read from `THETADATA_KEY` only and is never written anywhere.
