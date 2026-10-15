@@ -1,11 +1,15 @@
 # Independent Research — 2026-10-14
 
-## SPY Short Straddle Credit Sample (19 days, Sep 15 – Oct 9 2026)
-- Median credit at bid: $5.77
-- Mean credit: $5.20
-- Range: $0.40 – $10.79
-- 15 of 19 days had credit > $2; 3 days < $1
+## Short Straddle Credit Samples (19 days)
 
-These are executable bid credits on ATM-aligned strikes. Full expectancy requires pairing with subsequent settlement or exit prices and costs, which is the next step.
+| Underlying | Median Credit | Mean Credit | Days > $2 |
+|------------|---------------|-------------|-----------|
+| SPY        | $5.77         | $5.20       | 15/19     |
+| QQQ        | $7.28         | $7.22       | 15/19     |
 
-No promotion claim. Consistent with prior research that short premium carries measurable credit but tail and cost risks must be quantified before any edge is asserted.
+Credits are executable at the bid on ATM-aligned strikes. QQQ shows higher absolute credit consistent with higher notional volatility.
+
+## Status
+Pricing and credit measurements are complete for the sample window. Full expectancy (pairing with settlement or exit prices, costs, chronological splits, and baseline comparisons) is the next step for both short premium and directional structures.
+
+No promotion claim yet. Results remain consistent with prior research that short premium carries measurable credit but requires full cost and tail analysis before any edge is asserted.
