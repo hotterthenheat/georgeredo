@@ -202,7 +202,8 @@ def parity_spot(c: pl.DataFrame):
     """the underlying implied by the closing chain: K + C_mid - P_mid at the three strikes where |C - P| is smallest
     (both legs two-sided); carry over a month is well inside the 5 % tolerance it is used with"""
     if c is None or c.height == 0: return float('nan')
-    q = c.filter(pl.col('bid').is_finite() & pl.col('ask').is_finite() & (pl.col('ask') >= pl.col('bid')) & (pl.col('ask') > 0))
+    q = c.filter(pl.col('bid').is_finite() & pl.col('ask').is_finite() & (pl.col('ask') >= pl.col('bid')) & (pl.col('ask') > 0)
+                 & ((pl.col('ask') - pl.col('bid')) <= 0.2 * (pl.col('ask') + pl.col('bid')) / 2))     # A8.3c: usable quotes only
     cc = q.filter(pl.col('right') == 'C').select(['strike', ((pl.col('bid') + pl.col('ask')) / 2).alias('cm')])
     pp = q.filter(pl.col('right') == 'P').select(['strike', ((pl.col('bid') + pl.col('ask')) / 2).alias('pm')])
     j = cc.join(pp, on='strike').with_columns((pl.col('cm') - pl.col('pm')).abs().alias('a')).sort('a').head(3)
