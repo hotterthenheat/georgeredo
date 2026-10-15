@@ -341,3 +341,35 @@ Units are fractions of the vertical's width (0.01 = 1 % of width).
 - **Prior-day highs and lows are not support or resistance.** They hold no more often than a placebo at the same distance; validation and hold-out disagree in sign. They are also touched less often than placebos (32 % against 34 %), at every distance.
 - **Round numbers show a tiny barrier, the same sign in all three windows** (+0.6, +0.1, +0.9 points of hold rate). That is consistent with orders clustering at round prices (Osler 2003). It fails the registered test (Holm p 0.036 against α 0.0025), and at under one point of hold rate it would not move a strike choice.
 - **Descriptive (by_distance):** round numbers below the price, 0.5–2σ away, are touched more often than placebos (51 % against 47 %; 25 % against 19 %) and hold more (56 % against 53 %; 55 % against 51 %), on 5,904 and 1,978 levels. This is noted for a forward-only registration.
+
+## V7 — are event afternoons priced at what they then move? (A14; NOTHING PROMOTED; month-end goes to V8)
+
+`studies/v7_event_afternoons.py` → `results/v1/v7_event_afternoons/` (`tests.csv`, `events_*.csv`), registry `V7`.
+
+**Design.**
+- At 13:00, x = ln(realised move to 16:00 ÷ the ATM straddle's implied move).
+- Each event day is compared with the median x of the 20 previous event-free sessions.
+- SPXW is primary; SPY, QQQ and IWM are descriptive.
+
+| SPXW | days | event minus control, ln [95 %] | Holm p | implied multiple (event ÷ control) | realised multiple |
+|---|---|---|---|---|---|
+| FOMC | 34 | −0.24 [−0.67, +0.17] | 0.86 | 2.33× | 2.37× |
+| Month-end (not FOMC) | 48 | +0.25 [−0.10, +0.58] | 0.15 | 1.05× | 1.61× |
+
+**Reading.**
+- **FOMC afternoons are priced:** the 13:00 straddle already costs 2.3× an ordinary afternoon's, and the afternoon moves 2.4×. The same holds on SPY, QQQ and IWM (−0.27 to −0.32 in logs, every interval spanning zero).
+- **Month-end afternoons move 1.6× an ordinary afternoon while the option is priced at about 1.05×.** The difference fails the registered α on SPXW. It has the same sign on every root (SPY +0.38 [+0.11, +0.66], QQQ +0.07, IWM +0.05, descriptive). It agrees with the VF study (month-end afternoons 1.33× as far) and with short-premium lanes doing better when they skipped month-end.
+
+**Exploratory, run after this result** (`studies/v7_monthend_explore.py`, `explore_monthend_straddles.csv`):
+
+| 13:00 straddle bought at the ask, held to 16:00 | days | mean return on mid [95 %] | median |
+|---|---|---|---|
+| SPXW, month-end | 49 | +40.5 % [+11.5, +71.9] | +6.5 % |
+| SPXW, ordinary afternoons | 183 | −6.1 % [−17.1, +6.1] | −26.0 % |
+| SPY, month-end | 43 | +31.0 % [+2.9, +62.4] | −5.6 % |
+| SPY, ordinary afternoons | 162 | −15.9 % [−26.2, −4.9] | −34.7 % |
+| QQQ, month-end | 43 | +7.2 % [−18.4, +35.9] | −9.4 % |
+
+The mean rests on a few large month-end afternoons, and this window suggested the idea. **V8 (A15) tests it on month-ends whose option quotes no study here has read** (SPXW 2017-06 → 2022-04, SPY 2017-06 → 2022-10).
+
+**O6 (a size forecast to time S17) was not run.** The smallest difference it could detect, about $365 a month, exceeds the lane's own mean (A14).
