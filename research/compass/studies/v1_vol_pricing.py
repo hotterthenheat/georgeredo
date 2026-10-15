@@ -229,7 +229,8 @@ def corp_hit(symbol, raw, lo, hi, e=None, use_chains=False):
     """(hit, how): A8.3 when its chains are cached (use_chains), else A8.1's standard ratios (interim)"""
     if use_chains and e is not None:
         vs = [(jd, *jump_verdict(symbol, jd, prev, e, close=cl), r) for jd, prev, r, cl in jumps_in(raw, lo, hi, with_close=True)]
-        bad = [v for v in vs if v[1] != 'genuine']
+        keep = {'genuine', 'ambiguous'} if os.environ.get('V1_KEEP_AMBIG') == '1' else {'genuine'}   # A8.3: sensitivity run
+        bad = [v for v in vs if v[1] not in keep]
         if bad: return f'{bad[0][1]} {bad[0][0]} (ratio {bad[0][3]:.3f}, strikes kept {bad[0][2]:.2f})', 'A8.3'
         return None, 'A8.3'
     win = raw.filter(pl.col('date').is_between(lo, hi))
@@ -280,7 +281,7 @@ def build():
     P = pl.read_parquet(f'{OUT}/plan.parquet')
     pilot = os.environ.get('V1_PILOT_D')                     # a one-cycle end-to-end check before the full build
     if pilot: P = P.filter(pl.col('D') == dt.date.fromisoformat(pilot))
-    tag = '_pilot' if pilot else ''
+    tag = '_pilot' if pilot else os.environ.get('V1_TAG', '')
     st = stock_eod().filter(pl.col('symbol').is_in(P['symbol'].unique().to_list()))
     st = st.with_columns((pl.col('close') / pl.col('close').shift(1).over('symbol')).alias('ratio'))
     by = {s: g.sort('date') for s, g in st.group_by('symbol', maintain_order=False)}
@@ -377,7 +378,8 @@ def per_cycle(N, sig, hi_is_expensive=True, q=5):
     return pl.DataFrame(out).sort('D')
 
 def analyze(holdout=False):
-    N = pl.read_parquet(f'{OUT}/name_cycles.parquet')
+    tag = os.environ.get('V1_TAG', '')
+    N = pl.read_parquet(f'{OUT}/name_cycles{tag}.parquet')
     if not holdout: N = N.filter(pl.col('split') != 'holdout')
     splits = ['dev', 'val', 'devval'] + (['holdout'] if holdout else [])
     def sel(df, sp): return df if sp == 'devval' else df.filter(pl.col('split') == sp)
@@ -409,7 +411,7 @@ def analyze(holdout=False):
                 m, lo, hi, p = boot(s[col].to_numpy())
                 lines.append({'test': f'{name} :: {col}', 'split': sp, 'cycles': s.height, 'name_cycles': int(s['n'].sum()), 'mean': m, 'lo': lo, 'hi': hi, 'p': p})
     R = pl.DataFrame(lines)
-    R.write_csv(f'{OUT}/results{"_holdout" if holdout else ""}.csv')
+    R.write_csv(f'{OUT}/results{tag}{"_holdout" if holdout else ""}.csv')
     for k, v in pcs.items(): v.write_csv(f'{OUT}/per_cycle_{k.split()[0]}_{k.split()[1]}{"_low" if "low" in k else ""}{"_holdout" if holdout else ""}.csv')
     # signal-level: forward VRP and short return by S1 quintile, development + validation
     q = N.filter(pl.col('s1').is_finite()).with_columns(((pl.col('s1').rank('ordinal').over('D') - 1) * 5 // pl.len().over('D')).alias('q1'))
