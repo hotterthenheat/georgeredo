@@ -37,7 +37,14 @@ The detailed inventory is `../lifecycle/01_data_inventory.md` and `../../../DATA
 - **Unusual Whales history is a rolling 730 trading days.** The earliest date is 2023-11-15 today; it was 2023-11-13 two days ago. Every trading day, the oldest day is lost for good.
 - **The full option tape** is a daily zip of every option print, with the NBBO at the print, side tags, IV, Greeks and open interest. 2023-11-16 is 692 MB zipped; downloads run at about 19 MB/s.
 - **The chain endpoint** takes 0.3–0.6 s per (ticker, date, expiration) and sustains 9–10 requests a second at the plan's three concurrent requests.
-- **The listed-expirations endpoint returns nothing for past dates** (CRWD, 2024-02-26). Expirations are found by requesting candidate Fridays.
+- **The listed-expirations endpoint returns nothing for past dates** (CRWD, 2024-02-26).
+  - **Correction (2026-10-15, later the same day):** this note then said past expirations "are found by requesting candidate Fridays". That assumed single names expire only on Fridays, and they do not.
+  - ThetaData's list of every expiration a name has had (`option_list_expirations`, `../studies/expiry_calendar_theta.py`) shows Monday and Wednesday expirations on:
+    - AAPL, AMZN, AVGO, GOOGL, META, MSFT, NVDA and TSLA since 2026-02-02;
+    - AMD, INTC and MU since 2026-07-13.
+  - Several ETFs list other weekdays as well; SPY, QQQ and IWM list every weekday.
+  - Unusual Whales' chains agree on 3,616 of 3,618 sampled name-dates (`../studies/expiry_calendar.py`, `../results/expiry_calendar/`).
+  - Past expirations are now read from ThetaData's list, never from a weekday rule.
 - **ThetaData allows one login per key.** Using it in market hours signs out the owner's terminal, so this pass used Unusual Whales only.
 - **Unusual Whales' sector and issue type are a current snapshot**, not point in time.
 
