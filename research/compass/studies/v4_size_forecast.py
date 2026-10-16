@@ -152,7 +152,8 @@ def encompass(df, B=2000, seed=9):
     if d.height < 50: return {}
     X = np.c_[np.ones(d.height), d['x1'].to_numpy(), d['x2'].to_numpy()]; y = d['y'].to_numpy()
     beta = np.linalg.lstsq(X, y, rcond=None)[0]
-    ses = d['session'].to_numpy(); u, inv = np.unique(ses, return_inverse=True)   # np.unique sorts: a fixed order; groups = [np.where(inv == i)[0] for i in range(len(u))]
+    ses = d['session'].to_numpy(); u, inv = np.unique(ses, return_inverse=True)   # np.unique sorts: a fixed order
+    groups = [np.where(inv == i)[0] for i in range(len(u))]
     rng = np.random.default_rng(seed); bs = []
     for _ in range(B):
         pick = np.concatenate([groups[i] for i in rng.integers(0, len(groups), len(groups))])

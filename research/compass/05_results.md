@@ -373,3 +373,64 @@ Units are fractions of the vertical's width (0.01 = 1 % of width).
 The mean rests on a few large month-end afternoons, and this window suggested the idea. **V8 (A15) tests it on month-ends whose option quotes no study here has read** (SPXW 2017-06 → 2022-04, SPY 2017-06 → 2022-10).
 
 **O6 (a size forecast to time S17) was not run.** The smallest difference it could detect, about $365 a month, exceeds the lane's own mean (A14).
+
+## V3 — same-day premium on the eleven Monday/Wednesday/Friday single names (A10–A10.4; REJECTED)
+
+`studies/v3_single_name_0dte.py` → `results/v1/v3_single_name_0dte/REPORT.md` (generated from the result files by `studies/vreport.py`), registry `V3`.
+
+**Data and sample.**
+- 6,005 same-day chains (one-minute NBBO) of AAPL, AMD, AMZN, AVGO, GOOGL, INTC, META (FB before 2022-06-09), MSFT, MU, NVDA and TSLA, 2017-06 → 2026-10, pulled from ThetaData. 5,859 sessions kept.
+- The Monday and Wednesday sessions all fall in 2026, in the hold-out.
+
+| Test (return on the entry mid) | dev + val (4,098) | Holm p (two-sided: a small p on a loss means reliably negative) | hold-out (1,596) |
+|---|---|---|---|
+| V3a sell the ATM straddle 10:00, buy back 15:50 | −19.8 % [−25.5, −14.7] | 0.0003 | −7.4 % [−15.2, −0.2] |
+| V3b sell the put one implied move below, hold to the close | +2.3 % [−23.6, +22.8] | 0.80 | −2.8 % [−48.3, +31.8] |
+| V3c buy the ATM straddle 10:00, sell 15:50 | −23.4 % [−28.1, −18.3] | 0.0003 | −19.6 % [−25.8, −12.8] |
+
+**Reading.**
+- **Single-name same-day straddles lose on both sides after the bid/ask, on every name.**
+  - The straddle over-forecasts the move: the median session moves 0.72 of the implied move (dev + val).
+  - Its spread, a median 8.3 % of the mid at 10:00 (dev + val; 7.4 % over every window), is larger than that gap. The widest-spread third loses most: −35 % short, −32 % long (dev + val).
+- **The put sale** is noise around zero (development −7.7 %, validation +29.8 %).
+- **The new Monday and Wednesday sessions** (2026, about 300 each) look the same: short straddles −3 % and −6 %, long straddles −21 % and −19 %.
+
+## V4 — does a price-action forecast of the session's move beat the same-day straddle? (A11–A11.2; REJECTED)
+
+`studies/v4_size_forecast.py` → `results/v1/v4_size_forecast/REPORT.md`, registry `V4`.
+
+**Design.**
+- HAR forecasts of the 10:00 → 15:50 realised variance from one-minute bars, refitted each year on past sessions only. Out of sample they explain 50–66 % of its log variance, by name.
+- R = the straddle's implied move ÷ the forecast move, on V3's sessions from 2019-06.
+
+| Cell | dev + val | its mean minus every session's | hold-out | minus every session's |
+|---|---|---|---|---|
+| V4s sell when R is in the top tercile (798 / 360) | −10.4 % [−19.2, −2.4] | +6.5 % [+0.2, +12.3] | −14.1 % [−27.0, −2.6] | −6.5 % [−15.0, +1.7] |
+| V4l buy when R is in the bottom tercile (982 / 682) | −24.9 % [−31.5, −18.0] | −0.4 % [−4.8, +4.2] | −20.9 % [−27.7, −13.7] | −1.5 % [−7.3, +3.8] |
+
+**V4e, the encompassing regression** (ln realised move on ln implied and ln forecast):
+- Forecast coefficient: +0.37 [−0.05, +0.77] in dev + val, −0.18 [−0.74, +0.32] in the hold-out.
+- Adding the forecast to the implied move raises the R² from 0.113 to 0.115.
+
+**Reading.**
+- **The forecastable part of price action is already in the single-name same-day straddle's price.**
+- The forecast picked slightly better days to sell in development and validation, but the improvement reversed in the hold-out, and no cell made money.
+- The index family (exploratory; the lifecycle's VOLC already failed there) shows a little information beyond the price: coefficient +0.36 [+0.09, +0.62]. No cell made money there either: short top tercile −2.6 % [−9.3, +3.8] with cut-offs fixed on the same window.
+
+## V8 — the month-end afternoon straddle on chains no study here had read (A15; REJECTED: the lead did not replicate)
+
+`studies/v8_monthend.py` → `results/v1/v8_monthend/REPORT.md`, registry `V8`.
+
+**The hypothesis and the data.**
+- V7 and an exploratory look after it suggested month-end afternoons were under-priced. On SPXW 2022–2026, buying the 13:00 straddle at the ask returned +40.5 % [+11.5, +71.9] over 49 month-ends.
+- V8 tested it once on month-ends whose option quotes no study here had read: SPXW 2017-06 → 2022-04 (56) and SPY 2017-06 → 2022-10 (49). 105 chains were pulled from ThetaData.
+
+| Root | Month-ends | Mean return on mid [95 %] | Holm p | Median | Realised ÷ implied (median) | Mean by year |
+|---|---|---|---|---|---|---|
+| SPXW | 56 | −6.6 % [−24.5, +12.6] | 1.0 | −23.6 % | 0.81 | {"2017": -0.223, "2018": 0.126, "2019": -0.213, "2020": -0.018, "2021": -0.296, "2022": 0.591} |
+| SPY | 49 | −8.4 % [−27.2, +11.3] | 1.0 | −29.3 % | 0.74 | {"2017": -0.009, "2018": 0.162, "2019": -0.509, "2020": 0.008, "2021": -0.411, "2022": 0.152} |
+
+**Reading.**
+- On earlier data, month-end afternoons moved less than their straddle priced: realised ÷ implied had a median of 0.81 on SPXW and 0.74 on SPY. That is close to what ordinary afternoons showed in V7's window (0.70 and 0.64, 2022–2026). Ordinary afternoons of 2017–2022 were not priced here.
+- The 2022–2026 result was a feature of that window, not a lasting mispricing.
+- Testing the lead on data no study here had read, before trading it, is what caught this.
