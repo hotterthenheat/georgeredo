@@ -44,7 +44,7 @@
 | Work | How it picks expirations | Affected? |
 |---|---|---|
 | V1 (single-name monthlies) | Third-Friday monthlies | No |
-| V2 (earnings straddles) | "The first **Friday** expiration on or after the report session" (A9). It probed Fridays only | **One trade of 11,802** on the 27 roots checked: AMD 2026-08-05, a Wednesday report session in the hold-out, where a same-day Wednesday expiration existed and V2 held the Friday instead. Every other 2026 report on these names fell on a Thursday or Friday, or before that name's Monday/Wednesday listings began. The other V2 names are being checked against ThetaData's list (§5) |
+| V2 (earnings straddles) | "The first **Friday** expiration on or after the event session whose chain at P−5 is non-empty" (A9). It probed Fridays only | **One trade of 11,802:** AMD 2026-08-05, a Wednesday event session in the hold-out, where a same-day Wednesday expiration existed and V2 held the Friday instead. Checked on all 1,578 of V2's names (§5) |
 | S03, S16b (index weeklies) | "Nearest Friday" chosen from the listed candidates: a stated rule, not an assumption | No |
 | S17 (SPY/QQQ monthlies) | Listed monthlies | No |
 | Lifecycle tiers (index products, Tier D) | Every listed expiration pulled | No |
@@ -80,12 +80,52 @@
     - the best 30-minute lower bound is −0.04 bp;
     - the original META cells read 22 well-sampled, none clearing, best −0.10 bp.
   - The verdict is unchanged.
-  - Facebook's 2017-06 → 2022-06 bars under FB are not yet cached; they are pulled after V3's chains, and S06 is then run on them too.
+  - **Run on Facebook's own bars too**, under FB, 2017-06-01 → 2022-06-08 (`../results/v1/s06_signal_screen_FB/`):
+    - 28 cells, 23 well-sampled, none clearing the absolute hurdle;
+    - the best lower bound is −0.23 bp at 30 minutes and −0.10 bp at 60.
+  - With both, S06 has Facebook's whole history, and no cell on it clears.
 - **V3 and the price-action atlas** use FB before 2022-06-09 and META after (A10.3).
 - **V1 and V2** start in 2023 and are unaffected.
 
-## 5. Still open (filled in as the runs finish)
+## 5. Settled after the first pass
 
-- V2: ThetaData's expiration lists for all of V2's names, to confirm no other name had a non-Friday expiration inside a V2 window.
-- AVGO 2026-03-04: ThetaData's quotes for that expiration.
-- S06 on FB, 2017-06 → 2022-06-08, once its bars are pulled.
+### V2 on all of its names
+
+**What was checked:**
+- ThetaData's list of every expiration, for all 1,578 of V2's names (`../studies/expiry_calendar_v2names.py` → `../results/expiry_calendar/v2_names_expirations.parquet`).
+- Then every V2 trade where a listed expiration fell on or after the event session and before the Friday V2 held: **21 of 11,802** (`../results/expiry_calendar/v2_affected_all_names.csv`).
+
+**What they are:**
+- **One is the Wednesday case already known:** AMD 2026-08-05.
+- **The other 20 are Friday weeklies** that V2 did probe at P−5, and Unusual Whales returned no contract for them.
+- **They did not exist yet at P−5** (`../results/expiry_calendar/v2_affected_listing_check.csv`):
+  - ThetaData has no open interest for any of the 20 at P−5, and none for 18 of them at P0 (PONY and CDE have it at P0).
+  - 19 of the 20 have open interest on their own expiration day: real weeklies, listed after V2 looked (after P0 for 18 of them). WOLF 2025-10-31 has none even then, so it may never have traded.
+- **A9's rule** ("the first Friday whose chain at P−5 is non-empty") skipped them correctly. **V2's result stands; one trade of 11,802 is affected.**
+
+**A coverage gap in Unusual Whales:**
+- Its historical chains have none of these 20 weeklies on any session, including their expiration day.
+- A study that needs late-listed weeklies cannot take them from Unusual Whales' history. ThetaData carries their open interest.
+
+### AVGO 2026-03-04, and expirations ThetaData lists but never quoted
+
+- ThetaData has no quotes for AVGO's 2026-03-04 expiration. Unusual Whales was right: no such expiration traded.
+- V3's pull found five such dates on its eleven names: AMD 2022-12-01 and 2022-12-28, NVDA 2026-02-25, AVGO 2026-03-04, TSLA 2026-04-22. Each is excluded from V3 and counted (`../results/v1/v3_single_name_0dte/exclusions.parquet`).
+- **ThetaData's expiration list therefore says what might have been listed, not what traded.** A study takes a session only where the chain has quotes.
+
+### Monday and Wednesday expirations on report days
+
+- **What was counted:** a Monday or Wednesday that was a name's report date, or the session after a post-market report. Only sessions after that name's Monday/Wednesday listings began are counted. That gives 17 sessions to 2026-10-09; every one of these reports was post-market (Unusual Whales' calendar).
+- A same-day expiration with quotes existed on only four:
+  - AMZN 2026-04-29;
+  - GOOGL 2026-07-22;
+  - AMD 2026-08-05;
+  - AVGO 2026-09-02.
+- On the other 13:
+  - 10 were never listed;
+  - three are the never-quoted dates above.
+- So on a report day the Monday/Wednesday expiration is usually absent.
+
+### S06 on Facebook's own bars
+
+Done (§4): no cell clears.

@@ -1,0 +1,22 @@
+symbol,event,split,friday_E,nearest_listed,a_status,b_status
+PONY,2025-05-20,val,2025-06-20,2025-05-23,ok,ok
+NXPI,2025-07-22,val,2025-08-15,2025-08-01,ok,ok
+SAP,2025-10-23,val,2025-11-21,2025-11-14,ok,ok
+CME,2025-10-22,val,2025-11-21,2025-10-31,ok,ok
+BSX,2024-07-24,dev,2024-08-16,2024-08-02,ok,ok
+WOLF,2025-10-30,val,2025-11-21,2025-10-31,no two-sided ATM straddle at P0,ok
+AMD,2026-08-05,holdout,2026-08-07,2026-08-05,ok,ok
+ACMR,2026-02-26,holdout,2026-03-20,2026-03-13,ok,ok
+STM,2026-04-23,holdout,2026-05-15,2026-05-08,ok,ok
+CDNS,2025-07-29,val,2025-08-15,2025-08-08,ok,ok
+GL,2024-04-23,dev,2024-05-17,2024-05-03,ok,ok
+AMKR,2026-07-28,holdout,2026-08-21,2026-08-07,ok,ok
+AEM,2025-04-25,val,2025-05-16,2025-05-02,ok,ok
+LASR,2026-02-26,holdout,2026-03-20,2026-03-13,ok,ok
+STLA,2025-02-27,val,2025-03-21,2025-03-14,ok,ok
+CDE,2025-10-30,val,2025-11-21,2025-10-31,ok,no two-sided ATM straddle at P-5
+FIGR,2026-02-27,holdout,2026-03-20,2026-03-06,ok,ok
+DKS,2026-08-25,holdout,2026-09-18,2026-09-04,ok,ok
+CLS,2024-07-24,dev,2024-08-16,2024-08-02,ok,ok
+KLAC,2026-07-29,holdout,2026-08-21,2026-08-14,ok,ok
+DAVE,2026-03-02,holdout,2026-03-20,2026-03-13,ok,ok

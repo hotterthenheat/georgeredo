@@ -14,6 +14,8 @@
 | **Adding to positions loses on the added contracts**, on every ticker, in both periods. | lifecycle 05 §3, 12 §4 | A note against adds and double-downs |
 | **Single-name options are expensive to trade.** The ATM monthly straddle's median bid/ask spread is 13 % of its mid. | `02_volatility_pricing.md` V1 | Show the round-trip cost beside every single-name contract |
 | **Implied ÷ realized volatility ranks names correctly at the level of volatility, not profit.** The richest quintile saw 2.3 vol points less movement than implied, the cheapest none. | `02_volatility_pricing.md` T1 | A descriptive "options price more/less movement than recent realized" label, with the sentence that selling it did not pay after costs |
+| **Price paths behave like a random walk, so a touch is not a finish.** A level is touched about twice as often as the close finishes beyond it, and SPXW's same-day chain prices that: touches ran 0.91–1.02 × twice the price by distance (SPY and QQQ 0.91–1.16, IWM 1.18–1.33). A touch-stop on a short option exits about twice as often as the option would have expired in the money. | `06_price_action_atlas.md` §3; `../05_results.md` V5 | Beside a short strike: the chance of a touch and the chance of finishing beyond, from the chain |
+| **Most of a day's range is set early.** The day's high or low is set in the first 30 minutes on about three sessions in four. | `06_price_action_atlas.md` §4 | A descriptive note on same-day strike distance |
 | **Earnings implied moves overstate the typical report.** The median report moved 0.59 of the straddle-implied move; 28 % moved more. Selling at the mid earned +6.9 % of premium on same-day settlements, but half the spread is larger. | `02_volatility_pricing.md` V2 | Beside a name's next report: the implied move, this ratio, and that both sides of the trade lost after costs |
 
 ## 2. Do not use as trade signals
@@ -27,6 +29,10 @@
 | Selling single-name straddles, or sorting names by IV ÷ RV, term slope or skew to sell or buy them | Negative in development, validation and hold-out; the sort adds nothing (V1) |
 | Selling earnings straddles across the report, or buying them into it | −26 % and −21 % of premium (development + validation), −34 % and −29 % (hold-out) (V2) |
 | Profit targets, stops, trails, partials on same-day long options | No rule's interval excludes zero on any ticker (lifecycle 12 §3) |
+| Selling or buying single-name same-day straddles, including the new Monday and Wednesday expirations | Both sides lose after the bid/ask in every window (V3) |
+| A forecast of the session's move, to choose days to sell or buy same-day straddles | Already in the price; the gain reversed in the hold-out (V4) |
+| Prior-day highs and lows, or round numbers, as support or resistance for strikes | Hold no better than random levels at the same distance; round numbers by under a point (V6) |
+| Buying the month-end afternoon straddle | Earned on 2022–2026 only; lost on 2017–2022 (V7, V8) |
 
 ## 3. Build next, in order of expected value
 

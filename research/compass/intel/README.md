@@ -15,17 +15,18 @@ The owner's brief, "Slayer Terminal — Complete Options Intelligence, Market Re
 | `04_price_action_angles.md` | Price action from every angle: 62 angles, the published evidence, what this repository tested, what is open, and test designs |
 | `05_expirations_and_corrections.md` | Which names list which expiration weekdays (Monday/Wednesday/Friday single names since 2026), what the old Friday-only assumption touched, and three data corrections found while checking |
 | `06_price_action_atlas.md` | The price-action atlas: size by time of day, touch against finish, where extremes form, levels, gaps, calendar and direction for 43 names, 2017–2026 (descriptive) |
+| `07_price_action_for_options.md` | The owner-facing answer to "perfect price action so we can do options better": what price action tells an options trader, angle by angle, and the tests V3–V8 |
 
 **Tests registered and run after the brief's first pass** (`../04_protocol.md` A10–A15, results in `../05_results.md`):
 
 | Test | Question | Result |
 |---|---|---|
-| V3 (A10) | Same-day premium on the eleven Monday/Wednesday/Friday single names | Chains being pulled |
-| V4 (A11) | Does a price-action forecast of the session's move beat the same-day straddle? | Waits on V3's chains |
+| V3 (A10) | Same-day premium on the eleven Monday/Wednesday/Friday single names | No. Both the short and the long straddle lose after the bid/ask, in every window |
+| V4 (A11) | Does a price-action forecast of the session's move beat the same-day straddle? | No. The forecast is already in the price; the small gain in development and validation reversed in the hold-out |
 | V5 (A12) | Are same-day index chains priced to what follows, by distance? | Yes, within ±3 % of width; no side earns after the bid/ask |
 | V6 (A13) | Do prior-day highs/lows and round numbers hold more than placebo levels? | No (round numbers: a sub-point barrier, below the registered bar) |
 | V7 (A14) | Are FOMC and month-end afternoons priced at what they move? | FOMC yes; month-end looks under-priced, not significant |
-| V8 (A15) | The month-end 13:00 long straddle on chains no study here has read (2017–2022) | Registered; chains to pull |
+| V8 (A15) | The month-end 13:00 long straddle on chains no study here has read (2017–2022) | No. SPXW −6.6 %, SPY −8.4 % of premium; the 2022–2026 lead did not replicate |
 
 **The brief's 16 deliverables:**
 

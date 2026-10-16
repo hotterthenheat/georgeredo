@@ -14,10 +14,10 @@
 ## 1. What the atlas says, in short
 
 - **Touches follow the reflection principle.** From 10:00, a level k trailing standard deviations away is touched about twice as often as the close ends beyond it: the cross-name median ratio is 2.00 (2017–22), 2.04 (2023–26) at 1σ, and between 1.9 and 2.1 at ½σ to 2σ in both periods. After a touch, the close comes back inside about half the time. Intraday paths behave like a driftless random walk: a level is not "rejected" more often than chance.
-- **The size of a day is forecastable.** A HAR model of the log daily range, fitted on 2017–22, explains a median 0.21 of its variance on 2023–26 (0.07 to 0.43 across 42 names). This is the forecastable part of price action; whether options already price it is test V4 (A11).
+- **The size of a day is forecastable.** A HAR model of the log daily range, fitted on 2017–22, explains a median 0.21 of its variance on 2023–26 (0.07 to 0.43 across 43 names). This is the forecastable part of price action; whether options already price it is test V4 (A11).
 - **The day's extreme usually comes early.** The high or the low of the day is set in the first 30 minutes on a median 74 % (2017–22) and 78 % (2023–26) of sessions; the first 30 minutes are 56 %–60 % of the day's range; the opening range holds all day on only 3 %–4 % of sessions.
 - **Prior-day highs and lows are not walls.** When the prior day's high is touched from below, the close ends above it 52 % (2017–22) and 52 % (2023–26) of the time; for the prior low, below it 50 % and 49 %. A coin flip.
-- **Direction is close to noise.** The first half hour against the last: correlation -0.022 and +0.009; one day's intraday return against the next: -0.069 and -0.061. The overnight session earns more than the day: median 4.9 and 6.8 bp a night against 1.1 and 4.4 bp a day (a known effect; it belongs to the shares, not to same-day options).
+- **Direction is close to noise.** The first half hour against the last: correlation -0.022 and +0.009; one day's intraday return against the next: -0.070 and -0.061. The overnight session earns more than the day: median 4.9 and 6.8 bp a night against 1.1 and 4.4 bp a day (a known effect; it belongs to the shares, not to same-day options).
 
 ## 2. Size: how far a name still moves from each time of day
 
@@ -31,7 +31,7 @@ Median and 90th percentile of |close ÷ price at the time − 1|, and the median
 | 2023–26 | 11:00 | 0.55 | 1.56 | 1.79 |
 | 2017–22 | 12:00 | 0.46 | 1.40 | 1.79 |
 | 2023–26 | 12:00 | 0.47 | 1.33 | 1.81 |
-| 2017–22 | 13:00 | 0.38 | 1.28 | 1.79 |
+| 2017–22 | 13:00 | 0.38 | 1.28 | 1.81 |
 | 2023–26 | 13:00 | 0.41 | 1.10 | 1.79 |
 | 2017–22 | 14:00 | 0.34 | 1.11 | 1.78 |
 | 2023–26 | 14:00 | 0.33 | 0.91 | 1.79 |
@@ -51,7 +51,7 @@ By name, from 10:00 and from 13:00, 2023–26:
 | GOOGL | 0.71 | 0.42 | 1.88 | 1.06 | 0.07 |
 | INTC | 1.19 | 0.66 | 3.10 | 1.95 | 0.32 |
 | IWM | 0.53 | 0.27 | 1.37 | 0.85 | 0.20 |
-| META | 0.80 | 0.50 | 2.22 | 1.35 | — |
+| META | 0.80 | 0.50 | 2.22 | 1.35 | 0.18 |
 | MSFT | 0.54 | 0.35 | 1.62 | 0.91 | 0.21 |
 | MU | 1.09 | 0.67 | 3.16 | 1.87 | 0.38 |
 | NVDA | 1.01 | 0.56 | 2.98 | 1.76 | 0.25 |
@@ -67,10 +67,10 @@ From 10:00, with σ = the root mean square of the 10:00 → close log move over 
 
 | period | k | names | P(touch), median | P(close beyond), median | touch ÷ close, median | min | max |
 |---|---|---|---|---|---|---|---|
-| 2017–22 | 0.50 | 43 | 0.580 | 0.297 | 1.98 | 1.83 | 2.14 |
-| 2017–22 | 1.00 | 43 | 0.297 | 0.149 | 2.00 | 1.80 | 2.36 |
+| 2017–22 | 0.50 | 43 | 0.579 | 0.296 | 1.99 | 1.83 | 2.14 |
+| 2017–22 | 1.00 | 43 | 0.297 | 0.149 | 2.00 | 1.80 | 2.17 |
 | 2017–22 | 1.50 | 43 | 0.143 | 0.072 | 1.99 | 1.82 | 2.21 |
-| 2017–22 | 2.00 | 43 | 0.070 | 0.035 | 1.99 | 1.76 | 2.55 |
+| 2017–22 | 2.00 | 43 | 0.070 | 0.036 | 1.99 | 1.76 | 2.55 |
 | 2023–26 | 0.50 | 40 | 0.587 | 0.289 | 2.01 | 1.88 | 2.16 |
 | 2023–26 | 1.00 | 40 | 0.301 | 0.148 | 2.04 | 1.91 | 2.21 |
 | 2023–26 | 1.50 | 40 | 0.147 | 0.071 | 2.03 | 1.85 | 2.38 |
@@ -114,7 +114,7 @@ Cross-name medians, both periods:
 
 | period | prior high touched | close above it, given a touch | prior low touched | close below it, given a touch | prior close touched | VWAP crosses after 10:00, median | close on the same VWAP side as 10:00 |
 |---|---|---|---|---|---|---|---|
-| 2017–22 | 0.30 | 0.52 | 0.30 | 0.50 | 0.62 | 10.50 | 0.54 |
+| 2017–22 | 0.30 | 0.52 | 0.30 | 0.50 | 0.63 | 10.50 | 0.54 |
 | 2023–26 | 0.32 | 0.52 | 0.30 | 0.49 | 0.63 | 10.00 | 0.53 |
 
 Touch rates are from the side the session opened on. "Close same VWAP side as 10:00": the share of sessions whose close is on the same side of the session VWAP as the 10:00 price was.
@@ -125,13 +125,13 @@ Gap = open ÷ the prior session's last close − 1, in units of the trailing 20-
 
 | gap size (daily SDs) | period | sessions | fill rate | minutes to fill, median of names |
 |---|---|---|---|---|
-| 0-0.25 | 2017–22 | 21156 | 0.86 | 1.00 |
+| 0-0.25 | 2017–22 | 21774 | 0.86 | 1.00 |
 | 0-0.25 | 2023–26 | 14406 | 0.86 | 1.00 |
-| 0.25-0.5 | 2017–22 | 14885 | 0.62 | 18.00 |
+| 0.25-0.5 | 2017–22 | 15230 | 0.62 | 18.00 |
 | 0.25-0.5 | 2023–26 | 9421 | 0.61 | 15.00 |
-| 0.5-1 | 2017–22 | 12577 | 0.39 | 49.50 |
+| 0.5-1 | 2017–22 | 12822 | 0.39 | 49.50 |
 | 0.5-1 | 2023–26 | 8222 | 0.39 | 47.75 |
-| 1-2 | 2017–22 | 4206 | 0.22 | 117.25 |
+| 1-2 | 2017–22 | 4275 | 0.22 | 116.00 |
 | 1-2 | 2023–26 | 2690 | 0.19 | 101.50 |
 | 2+ | 2017–22 | 64 | 0.06 | 165.00 |
 | 2+ | 2023–26 | 26 | 0.08 | 176.00 |
@@ -141,7 +141,7 @@ Gap = open ÷ the prior session's last close − 1, in units of the trailing 20-
 
 | period | cut | day range ÷ all days, median of names | 10:00 → close move ÷ all days | sessions per name |
 |---|---|---|---|---|
-| 2017–22 | CPI day | 1.01 | 0.95 | 66.00 |
+| 2017–22 | CPI day | 1.01 | 0.94 | 66.00 |
 | 2023–26 | CPI day | 1.04 | 0.93 | 44.00 |
 | 2017–22 | FOMC day | 1.16 | 1.18 | 47.00 |
 | 2023–26 | FOMC day | 1.12 | 1.29 | 30.00 |
@@ -149,9 +149,9 @@ Gap = open ÷ the prior session's last close − 1, in units of the trailing 20-
 | 2023–26 | NFP day | 1.12 | 1.11 | 42.00 |
 | 2017–22 | all sessions | 1.00 | 1.00 | 1395.00 |
 | 2023–26 | all sessions | 1.00 | 1.00 | 938.00 |
-| 2017–22 | first session of month | 1.09 | 1.22 | 66.00 |
+| 2017–22 | first session of month | 1.09 | 1.21 | 66.00 |
 | 2023–26 | first session of month | 1.12 | 1.10 | 46.00 |
-| 2017–22 | month end | 1.04 | 1.01 | 66.00 |
+| 2017–22 | month end | 1.05 | 1.01 | 66.00 |
 | 2023–26 | month end | 1.03 | 1.15 | 43.00 |
 | 2017–22 | monthly opex (third Friday) | 0.97 | 0.95 | 65.00 |
 | 2023–26 | monthly opex (third Friday) | 0.97 | 0.98 | 43.00 |
@@ -161,9 +161,9 @@ Gap = open ÷ the prior session's last close − 1, in units of the trailing 20-
 | 2023–26 | weekday Mon | 0.97 | 0.93 | 176.00 |
 | 2017–22 | weekday Thu | 1.03 | 1.01 | 284.00 |
 | 2023–26 | weekday Thu | 1.05 | 1.06 | 188.00 |
-| 2017–22 | weekday Tue | 0.99 | 0.98 | 286.00 |
+| 2017–22 | weekday Tue | 0.99 | 0.99 | 286.00 |
 | 2023–26 | weekday Tue | 0.96 | 1.00 | 195.00 |
-| 2017–22 | weekday Wed | 1.00 | 1.04 | 286.00 |
+| 2017–22 | weekday Wed | 1.00 | 1.03 | 286.00 |
 | 2023–26 | weekday Wed | 1.02 | 1.05 | 192.00 |
 
 The event dates are the repository's FOMC, CPI and NFP file; "monthly opex" is the third Friday. Ratios of medians, not a test.
@@ -172,7 +172,7 @@ The event dates are the repository's FOMC, CPI and NFP file; "monthly opex" is t
 
 | period | first 30 min vs last 30 min | 10:00–15:30 vs last 30 min | overnight vs intraday | intraday vs next intraday | share of up days | mean overnight, bp | mean intraday, bp |
 |---|---|---|---|---|---|---|---|
-| 2017–22 | -0.022 | +0.063 | +0.038 | -0.069 | +0.507 | +4.854 | +1.081 |
+| 2017–22 | -0.022 | +0.061 | +0.035 | -0.070 | +0.508 | +4.854 | +1.081 |
 | 2023–26 | +0.009 | -0.006 | -0.060 | -0.061 | +0.516 | +6.822 | +4.448 |
 
 Correlations are per name, then the median across names.
