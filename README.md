@@ -7,3 +7,8 @@
 - `data_lake/fetch/`: the scripts that download them.
 
 **Step 1 (done):** every same-day (0DTE) option contract on SPY, QQQ, IWM and SPX, broken down one contract at a time: 1,176,935 contracts over 3,687 sessions, checked against the raw quotes (`step1/`).
+
+**Step 2 (done):** can a same-day contract make +100%? Every contract was bought at nine times of day, sold the first minute its bid doubled, and otherwise held to the close: 10.5 million trades, checked against the raw quotes.
+- Near the money, 29% of trades doubled.
+- Every group still lost money, because the share needed to break even is higher.
+- See `step2/README.md`.

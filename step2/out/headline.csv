@@ -1,0 +1,2 @@
+trades,contracts,sessions,first,last,distance_groups,distance_groups_positive,distance_groups_positive_net,price_groups,price_groups_positive,price_groups_positive_net,tp100_beats_hold,discovery_groups,discovery_positive_net,check_positive_net,near_doubled_min,near_doubled_max,near_break_even_min,near_break_even_max,near_trades,near_doubled,near_loss_if_not_doubled,near_avg_net_pct,fee,id
+10547433,1176935,3687,2022-05-13,2026-10-09,648,0,0,576,0,0,177,541,13,0,0.1382,0.4088,0.3534,0.4473,430531,0.2906,0.6525,-0.1862,0.65,all
