@@ -1,0 +1,73 @@
+root,trades,win_rate,avg_pct,best_pct,worst_pct,total_usd,picks,how,exit,id
+IWM,84,0.190476,0.283013,15.32619,-0.86,810.8,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | IWM
+QQQ,194,0.262887,-0.134846,2.803125,-0.716667,-1452.2,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | QQQ
+SPXW,758,0.262533,0.960325,31.566739,-0.6575,500757.6,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | SPXW
+SPY,303,0.217822,1.037042,31.856818,-0.86,21561.1,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | SPY
+IWM,84,0.214286,0.43254,23.9,-1.26,1076.8,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | IWM
+QQQ,194,0.226804,-0.312584,5.788,-1.216667,-3717.2,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | QQQ
+SPXW,758,0.207124,0.998385,35.049714,-1.043333,452084.6,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | SPXW
+SPY,303,0.237624,1.167502,31.15,-1.26,19885.1,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | SPY
+IWM,84,0.178571,0.7354,36.361538,-1.13,1373.35,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | IWM
+QQQ,194,0.103093,-0.68422,5.4925,-1.13,-6834.93,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | QQQ
+SPXW,758,0.147757,1.39964,56.032571,-1.021667,652151.65,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | SPXW
+SPY,303,0.155116,1.720441,52.808333,-1.13,29070.65,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | SPY
+IWM,14,0.214286,0.021825,4.432051,-0.716667,242.8,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | IWM
+QQQ,17,0.294118,-0.064311,2.803125,-0.622581,-160.1,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | QQQ
+SPXW,31,0.258065,-0.114812,1.923521,-0.562647,-2288.3,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | SPXW
+SPY,14,0.071429,-0.365123,0.520588,-0.664706,-265.2,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | SPY
+IWM,14,0.142857,-0.491775,3.726923,-1.216667,49.8,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | IWM
+QQQ,17,0.235294,-0.120769,5.6675,-1.1,-48.1,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | QQQ
+SPXW,31,0.193548,0.035608,17.844154,-1.010833,2394.7,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | SPXW
+SPY,14,0.214286,-0.503107,1.638235,-1.0125,-459.2,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | SPY
+IWM,14,0.142857,-0.480609,4.432051,-1.108333,83.6,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | IWM
+QQQ,17,0.235294,-0.271178,5.4925,-1.05,-138.3,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | QQQ
+SPXW,31,0.096774,0.158902,23.585692,-1.00619,4641.95,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | SPXW
+SPY,14,0.0,-0.880048,-0.008824,-1.054167,-627.55,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | SPY
+IWM,588,0.221088,0.302903,20.428125,-1.1,5214.6,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | IWM
+QQQ,1411,0.255847,0.700412,118.246154,-1.1,46420.56,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | QQQ
+SPXW,4404,0.213442,0.122256,31.566739,-0.882857,612144.8,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | SPXW
+SPY,1947,0.212121,0.162733,31.856818,-1.1,33725.9,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | SPY
+IWM,588,0.212585,0.54909,53.783333,-1.433333,7504.6,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | IWM
+QQQ,1411,0.20978,0.339654,93.746154,-1.433333,28733.7,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | QQQ
+SPXW,4404,0.17416,0.106834,36.089048,-1.086667,563325.6,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | SPXW
+SPY,1947,0.202363,0.150688,33.55,-1.433333,29000.55,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | SPY
+IWM,588,0.180272,0.60281,63.283333,-1.216667,7083.55,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | IWM
+QQQ,1411,0.158044,0.408572,118.246154,-1.216667,32080.13,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | QQQ
+SPXW,4404,0.134196,0.286544,56.032571,-1.043333,853083.05,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | SPXW
+SPY,1947,0.149461,0.262651,59.407143,-1.216667,39610.65,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | SPY
+IWM,49,0.183673,-0.167322,4.686408,-0.82381,169.3,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | IWM
+QQQ,55,0.272727,0.338214,13.518182,-0.664286,592.5,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | QQQ
+SPXW,76,0.210526,-0.137378,4.299615,-0.589811,-2483.8,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | SPXW
+SPY,40,0.225,-0.040746,5.575,-0.62,-202.0,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | SPY
+IWM,49,0.285714,0.18203,13.35625,-1.1625,675.3,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | IWM
+QQQ,55,0.181818,-0.187009,13.632759,-1.185714,-424.5,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | QQQ
+SPXW,76,0.184211,-0.264939,7.997234,-1.0325,-2833.8,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | SPXW
+SPY,40,0.15,-0.495859,3.658261,-1.086667,-841.0,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | SPY
+IWM,49,0.244898,0.253174,23.10625,-1.108333,548.7,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | IWM
+QQQ,55,0.127273,-0.035095,17.374138,-1.092857,-127.25,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | QQQ
+SPXW,76,0.092105,-0.57508,5.855,-1.021667,-9780.25,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | SPXW
+SPY,40,0.1,-0.653156,3.284348,-1.059091,-1044.9,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | SPY
+IWM,998,0.204409,0.121001,20.428125,-1.1,5050.6,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | IWM
+QQQ,2558,0.247459,0.590556,118.246154,-1.1,87882.88,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | QQQ
+SPXW,7278,0.205276,0.033162,31.566739,-0.882857,576081.6,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | SPXW
+SPY,3138,0.206501,0.053802,31.856818,-1.1,29559.1,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | SPY
+IWM,998,0.205411,0.244774,53.783333,-1.433333,7464.6,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | IWM
+QQQ,2558,0.203284,0.441794,111.87,-1.433333,84699.25,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | QQQ
+SPXW,7278,0.169002,-0.076758,39.70129,-1.086667,389801.1,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | SPXW
+SPY,3138,0.195666,-0.027492,35.16875,-1.433333,25807.2,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | SPY
+IWM,998,0.175351,0.287514,70.425,-1.216667,7154.5,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | IWM
+QQQ,2558,0.161063,0.512083,144.02,-1.216667,92465.31,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | QQQ
+SPXW,7278,0.134652,0.032869,63.391613,-1.043333,702646.25,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | SPXW
+SPY,3138,0.137986,-0.000902,59.407143,-1.216667,29620.8,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | SPY
+IWM,75,0.186667,-0.149337,4.91875,-1.1,99.5,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | IWM
+QQQ,78,0.269231,0.299531,13.518182,-0.754545,800.6,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | QQQ
+SPXW,96,0.197917,-0.150149,2.909,-0.686327,-7263.8,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | SPXW
+SPY,46,0.173913,-0.204019,5.575,-1.056522,-536.8,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | SPY
+IWM,75,0.2,-0.21687,11.839394,-1.216667,483.5,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | IWM
+QQQ,78,0.179487,-0.060618,13.632759,-1.1625,141.25,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | QQQ
+SPXW,96,0.177083,-0.105828,14.043529,-1.037143,-8144.8,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | SPXW
+SPY,46,0.152174,-0.390857,9.915385,-1.13,-1173.8,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | SPY
+IWM,75,0.173333,-0.244852,16.748485,-1.216667,309.55,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | IWM
+QQQ,78,0.141026,-0.064437,17.374138,-1.08125,44.5,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | QQQ
+SPXW,96,0.135417,-0.44483,9.372941,-1.021667,-14203.8,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | SPXW
+SPY,46,0.043478,-0.766885,7.325641,-1.065,-1780.5,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | SPY

@@ -1,0 +1,391 @@
+month,trades,win_rate,avg_pct,total_usd,picks,how,exit,id
+2025-01,79,0.0,-0.501665,-11688.7,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2025-01
+2025-02,8,0.375,-0.052868,-86.4,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2025-02
+2025-03,29,0.0,-0.512402,-11824.7,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2025-03
+2025-05,24,0.0,-0.529341,-3842.2,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2025-05
+2025-06,137,0.094891,-0.357557,-7343.1,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2025-06
+2025-07,71,0.760563,0.551319,9139.7,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2025-07
+2025-08,51,0.352941,-0.069236,-248.3,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2025-08
+2025-09,59,0.050847,-0.437364,-4317.7,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2025-09
+2025-10,104,0.211538,-0.149262,1572.8,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2025-10
+2025-11,104,0.875,12.166442,589019.8,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2025-11
+2025-12,48,0.333333,-0.077864,-837.4,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2025-12
+2026-01,43,0.255814,-0.248384,-2323.9,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2026-01
+2026-02,24,0.0,-0.531028,-8312.2,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2026-02
+2026-03,198,0.116162,-0.407165,-22437.4,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2026-03
+2026-04,18,0.222222,0.415947,-1246.4,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2026-04
+2026-05,58,0.103448,-0.392035,-6913.4,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2026-05
+2026-06,18,0.944444,0.610108,4856.6,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2026-06
+2026-07,121,0.123967,-0.346452,-9292.3,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2026-07
+2026-08,44,0.0,-0.451452,-2347.2,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2026-08
+2026-09,83,0.409639,0.936019,12128.1,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2026-09
+2026-10,18,0.111111,-0.393489,-1978.4,Top 0.1%,Every pick,50% trailing stop,Top 0.1% | Every pick | 50% trailing stop | 2026-10
+2025-01,79,0.012658,-0.941474,-22820.7,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2025-01
+2025-02,8,0.375,-0.327084,-230.4,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2025-02
+2025-03,29,0.0,-1.004969,-23456.7,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2025-03
+2025-05,24,0.0,-0.992862,-7124.2,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2025-05
+2025-06,137,0.167883,-0.636449,-16540.1,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2025-06
+2025-07,71,0.28169,-0.145988,8439.7,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2025-07
+2025-08,51,0.254902,-0.294696,-4044.3,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2025-08
+2025-09,59,0.220339,-0.480288,-2216.7,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2025-09
+2025-10,104,0.461538,0.679138,13682.8,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2025-10
+2025-11,104,0.990385,16.192364,669063.8,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2025-11
+2025-12,48,0.0,-0.97334,-15777.4,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2025-12
+2026-01,43,0.162791,-0.435625,-5673.9,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2026-01
+2026-02,24,0.0,-1.002888,-15972.2,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2026-02
+2026-03,198,0.055556,-0.853632,-54633.4,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2026-03
+2026-04,18,0.722222,1.724557,3256.6,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2026-04
+2026-05,58,0.0,-0.997646,-21788.4,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2026-05
+2026-06,18,0.0,-0.968938,-7779.4,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2026-06
+2026-07,121,0.016529,-0.988518,-23345.3,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2026-07
+2026-08,44,0.0,-0.942633,-6548.2,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2026-08
+2026-09,83,0.409639,0.993891,7051.1,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2026-09
+2026-10,18,0.0,-0.895985,-4213.4,Top 0.1%,Every pick,Hold to 30 min before close,Top 0.1% | Every pick | Hold to 30 min before close | 2026-10
+2025-01,79,0.012658,-0.978497,-23859.65,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2025-01
+2025-02,8,0.0,-1.021389,-337.2,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2025-02
+2025-03,29,0.0,-1.003283,-23486.85,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2025-03
+2025-05,24,0.0,-1.003272,-7259.6,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2025-05
+2025-06,137,0.131387,-0.710445,-16425.35,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2025-06
+2025-07,71,0.253521,0.20111,19487.9,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2025-07
+2025-08,51,0.078431,-0.774291,-5843.68,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2025-08
+2025-09,59,0.0,-1.011876,-10172.35,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2025-09
+2025-10,104,0.067308,-0.832833,-11695.4,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2025-10
+2025-11,104,0.942308,23.157798,915042.7,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2025-11
+2025-12,48,0.0,-1.003343,-16762.5,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2025-12
+2026-01,43,0.162791,-0.585575,-7127.5,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2026-01
+2026-02,24,0.0,-1.004395,-15972.6,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2026-02
+2026-03,198,0.025253,-0.961169,-57177.55,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2026-03
+2026-04,18,0.555556,1.511427,2694.8,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2026-04
+2026-05,58,0.0,-1.006454,-21904.7,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2026-05
+2026-06,18,0.0,-1.002858,-7855.7,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2026-06
+2026-07,121,0.0,-1.002383,-23479.95,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2026-07
+2026-08,44,0.022727,-0.975643,-7743.25,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2026-08
+2026-09,83,0.301205,0.35663,595.85,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2026-09
+2026-10,18,0.0,-1.003285,-4956.7,Top 0.1%,Every pick,Hold to the close,Top 0.1% | Every pick | Hold to the close | 2026-10
+2025-01,5,0.0,-0.411042,-158.5,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2025-01
+2025-02,2,0.5,0.116944,-8.6,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2025-02
+2025-03,1,0.0,-0.529871,-821.3,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2025-03
+2025-05,2,0.0,-0.547344,-191.6,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2025-05
+2025-06,5,0.0,-0.532227,-480.5,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2025-06
+2025-07,6,0.833333,0.711044,684.2,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2025-07
+2025-08,4,0.0,-0.397113,-63.2,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2025-08
+2025-09,5,0.2,-0.243155,-401.5,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2025-09
+2025-10,8,0.25,-0.064435,919.6,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2025-10
+2025-11,2,0.0,-0.246769,-307.6,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2025-11
+2025-12,3,0.333333,-0.211536,172.1,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2025-12
+2026-01,4,0.25,-0.089429,-570.2,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2026-01
+2026-02,2,0.0,-0.588512,-82.6,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2026-02
+2026-03,6,0.166667,-0.267484,-563.8,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2026-03
+2026-04,3,0.333333,1.177743,-41.9,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2026-04
+2026-05,3,0.0,-0.426363,-513.9,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2026-05
+2026-06,2,0.5,0.331742,357.4,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2026-06
+2026-07,5,0.4,-0.051516,-56.5,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2026-07
+2026-08,4,0.0,-0.36409,-50.2,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2026-08
+2026-09,3,0.333333,-0.299333,-130.9,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2026-09
+2026-10,1,0.0,-0.336042,-161.3,Top 0.1%,First pick each day,50% trailing stop,Top 0.1% | First pick each day | 50% trailing stop | 2026-10
+2025-01,5,0.2,-0.422408,-284.5,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2025-01
+2025-02,2,0.5,-0.096944,-43.6,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2025-02
+2025-03,1,0.0,-0.997613,-1546.3,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2025-03
+2025-05,2,0.0,-1.001179,-356.6,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2025-05
+2025-06,5,0.0,-0.992661,-920.5,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2025-06
+2025-07,6,0.5,0.31509,463.2,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2025-07
+2025-08,4,0.0,-0.612429,-446.2,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2025-08
+2025-09,5,0.2,-0.537274,-123.5,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2025-09
+2025-10,8,0.25,-0.371769,770.6,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2025-10
+2025-11,2,0.5,8.704696,11507.4,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2025-11
+2025-12,3,0.0,-0.95309,-745.9,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2025-12
+2026-01,4,0.25,-0.073858,-1430.2,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2026-01
+2026-02,2,0.0,-1.007741,-146.6,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2026-02
+2026-03,6,0.166667,-0.778765,-1691.8,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2026-03
+2026-04,3,0.666667,0.968844,-688.9,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2026-04
+2026-05,3,0.0,-0.960213,-1196.9,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2026-05
+2026-06,2,0.0,-0.747803,-348.6,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2026-06
+2026-07,5,0.2,-0.793442,-212.5,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2026-07
+2026-08,4,0.0,-0.799379,-126.2,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2026-08
+2026-09,3,0.333333,1.223815,-18.9,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2026-09
+2026-10,1,0.0,-0.992292,-476.3,Top 0.1%,First pick each day,Hold to 30 min before close,Top 0.1% | First pick each day | Hold to 30 min before close | 2026-10
+2025-01,5,0.2,-0.517711,-309.55,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2025-01
+2025-02,2,0.0,-1.023472,-79.3,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2025-02
+2025-03,1,0.0,-1.000419,-1550.65,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2025-03
+2025-05,2,0.0,-1.008402,-365.3,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2025-05
+2025-06,5,0.0,-1.023139,-926.25,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2025-06
+2025-07,6,0.166667,0.445873,1383.5,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2025-07
+2025-08,4,0.25,-0.721298,-445.25,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2025-08
+2025-09,5,0.0,-1.010762,-1112.25,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2025-09
+2025-10,8,0.125,-0.566434,-344.5,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2025-10
+2025-11,2,0.5,11.291299,15120.05,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2025-11
+2025-12,3,0.0,-0.979941,-856.6,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2025-12
+2026-01,4,0.25,-0.043511,-1459.25,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2026-01
+2026-02,2,0.0,-1.016773,-147.3,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2026-02
+2026-03,6,0.166667,-0.824875,-1765.55,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2026-03
+2026-04,3,0.333333,0.792416,-687.6,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2026-04
+2026-05,3,0.0,-1.014309,-1207.95,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2026-05
+2026-06,2,0.0,-1.008371,-375.3,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2026-06
+2026-07,5,0.0,-0.87175,-229.4,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2026-07
+2026-08,4,0.0,-1.018891,-170.6,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2026-08
+2026-09,3,0.333333,1.154176,-30.6,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2026-09
+2026-10,1,0.0,-1.001354,-480.65,Top 0.1%,First pick each day,Hold to the close,Top 0.1% | First pick each day | Hold to the close | 2026-10
+2025-01,327,0.183486,-0.290987,-23822.1,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2025-01
+2025-02,156,0.320513,-0.072182,-5924.8,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2025-02
+2025-03,62,0.0,-0.538051,-22419.6,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2025-03
+2025-04,48,0.0,-0.500877,-4139.4,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2025-04
+2025-05,222,0.04955,-0.423619,-28890.6,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2025-05
+2025-06,536,0.192164,-0.256345,-13652.8,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2025-06
+2025-07,630,0.28254,-0.10888,-4145.0,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2025-07
+2025-08,423,0.182033,-0.228169,-10857.9,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2025-08
+2025-09,337,0.089021,-0.30059,-6456.1,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2025-09
+2025-10,771,0.274968,0.769214,11817.2,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2025-10
+2025-11,367,0.490463,5.904608,915692.26,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2025-11
+2025-12,459,0.165577,-0.293548,-39004.7,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2025-12
+2026-01,363,0.184573,-0.217579,-16406.9,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2026-01
+2026-02,204,0.039216,-0.496613,-43535.2,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2026-02
+2026-03,641,0.199688,-0.187282,-8299.3,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2026-03
+2026-04,557,0.423698,1.180242,83459.9,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2026-04
+2026-05,299,0.130435,-0.064762,-15173.7,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2026-05
+2026-06,383,0.412533,-0.024564,-3210.9,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2026-06
+2026-07,558,0.193548,-0.087452,-20697.4,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2026-07
+2026-08,487,0.065708,-0.377722,-32798.1,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2026-08
+2026-09,382,0.193717,0.044144,451.4,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2026-09
+2026-10,138,0.123188,-0.394225,-14480.4,Top 0.5%,Every pick,50% trailing stop,Top 0.5% | Every pick | 50% trailing stop | 2026-10
+2025-01,327,0.165138,0.030515,677.9,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2025-01
+2025-02,156,0.282051,0.687757,-3604.15,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2025-02
+2025-03,62,0.0,-1.014708,-43559.6,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2025-03
+2025-04,48,0.645833,1.187891,19390.6,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2025-04
+2025-05,222,0.004505,-0.958153,-64269.6,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2025-05
+2025-06,536,0.169776,-0.592536,-45199.8,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2025-06
+2025-07,630,0.188889,-0.517569,-18622.0,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2025-07
+2025-08,423,0.248227,-0.229121,-7394.9,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2025-08
+2025-09,337,0.172107,-0.409894,-8248.8,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2025-09
+2025-10,771,0.309987,1.055297,60498.2,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2025-10
+2025-11,367,0.724796,10.01464,1285092.9,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2025-11
+2025-12,459,0.002179,-0.962323,-120848.7,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2025-12
+2026-01,363,0.192837,-0.366361,-29237.9,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2026-01
+2026-02,204,0.039216,-0.668499,-58804.2,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2026-02
+2026-03,641,0.117005,-0.252706,-54339.3,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2026-03
+2026-04,557,0.366248,0.722685,79829.9,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2026-04
+2026-05,299,0.12709,-0.554219,-58429.7,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2026-05
+2026-06,383,0.075718,-0.695283,-116568.9,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2026-06
+2026-07,558,0.055556,-0.888802,-90059.4,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2026-07
+2026-08,487,0.057495,-0.824032,-69844.1,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2026-08
+2026-09,382,0.201571,-0.100709,-7153.6,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2026-09
+2026-10,138,0.094203,-0.758703,-20740.4,Top 0.5%,Every pick,Hold to 30 min before close,Top 0.5% | Every pick | Hold to 30 min before close | 2026-10
+2025-01,327,0.12844,-0.383026,-18360.95,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2025-01
+2025-02,156,0.224359,0.732462,-3292.7,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2025-02
+2025-03,62,0.0,-1.008145,-43665.3,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2025-03
+2025-04,48,0.333333,0.302313,9018.1,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2025-04
+2025-05,222,0.022523,-0.959116,-69305.85,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2025-05
+2025-06,536,0.128731,-0.69786,-62107.6,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2025-06
+2025-07,630,0.161905,-0.465322,11768.7,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2025-07
+2025-08,423,0.179669,-0.400761,-15732.08,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2025-08
+2025-09,337,0.10089,-0.253124,-10144.25,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2025-09
+2025-10,771,0.16083,0.503201,-30887.85,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2025-10
+2025-11,367,0.681199,16.109992,1804875.36,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2025-11
+2025-12,459,0.002179,-0.995974,-124972.1,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2025-12
+2026-01,363,0.104683,-0.681426,-45465.05,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2026-01
+2026-02,204,0.034314,-0.863552,-74109.0,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2026-02
+2026-03,641,0.078003,-0.408312,-92060.4,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2026-03
+2026-04,557,0.351885,0.706292,96606.05,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2026-04
+2026-05,299,0.063545,-0.539422,-61378.15,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2026-05
+2026-06,383,0.062663,-0.742016,-125219.75,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2026-06
+2026-07,558,0.039427,-0.922202,-93762.45,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2026-07
+2026-08,487,0.065708,-0.85588,-73657.55,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2026-08
+2026-09,382,0.170157,-0.377764,-15670.6,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2026-09
+2026-10,138,0.028986,-0.956129,-30619.2,Top 0.5%,Every pick,Hold to the close,Top 0.5% | Every pick | Hold to the close | 2026-10
+2025-01,12,0.166667,-0.209148,-543.6,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2025-01
+2025-02,5,0.6,0.706432,154.5,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2025-02
+2025-03,2,0.0,-0.584166,-829.6,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2025-03
+2025-04,4,0.0,-0.368112,-45.2,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2025-04
+2025-05,7,0.142857,-0.309901,-150.1,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2025-05
+2025-06,11,0.090909,-0.309553,-238.3,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2025-06
+2025-07,15,0.333333,-0.17618,-401.5,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2025-07
+2025-08,11,0.090909,-0.365919,-450.3,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2025-08
+2025-09,13,0.230769,-0.315735,-550.9,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2025-09
+2025-10,17,0.294118,0.084953,-201.1,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2025-10
+2025-11,7,0.0,-0.286454,-97.1,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2025-11
+2025-12,10,0.1,-0.280439,-464.0,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2025-12
+2026-01,14,0.428571,0.382448,-253.2,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2026-01
+2026-02,7,0.142857,-0.314813,106.9,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2026-02
+2026-03,12,0.25,0.162646,3084.4,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2026-03
+2026-04,12,0.333333,1.108802,-274.6,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2026-04
+2026-05,11,0.363636,0.890368,139.7,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2026-05
+2026-06,12,0.083333,-0.263433,-358.6,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2026-06
+2026-07,15,0.266667,0.037657,34.5,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2026-07
+2026-08,11,0.181818,-0.308986,-226.3,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2026-08
+2026-09,8,0.25,-0.030087,-57.4,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2026-09
+2026-10,4,0.0,-0.575811,-302.2,Top 0.5%,First pick each day,50% trailing stop,Top 0.5% | First pick each day | 50% trailing stop | 2026-10
+2025-01,12,0.25,0.241235,-752.6,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2025-01
+2025-02,5,0.4,2.355889,689.5,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2025-02
+2025-03,2,0.0,-1.048806,-1560.6,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2025-03
+2025-04,4,0.5,0.340949,107.8,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2025-04
+2025-05,7,0.0,-1.000964,-536.1,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2025-05
+2025-06,11,0.272727,-0.419527,-918.3,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2025-06
+2025-07,15,0.2,-0.446977,-907.5,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2025-07
+2025-08,11,0.181818,-0.403906,600.7,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2025-08
+2025-09,13,0.153846,-0.699147,-547.9,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2025-09
+2025-10,17,0.235294,-0.226327,-892.1,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2025-10
+2025-11,7,0.285714,1.859818,392.9,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2025-11
+2025-12,10,0.0,-0.90447,-1439.0,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2025-12
+2026-01,14,0.214286,-0.192729,-1517.2,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2026-01
+2026-02,7,0.142857,0.360593,3172.9,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2026-02
+2026-03,12,0.333333,0.663611,3656.4,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2026-03
+2026-04,12,0.25,-0.439918,-1113.6,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2026-04
+2026-05,11,0.272727,-0.057453,-666.3,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2026-05
+2026-06,12,0.166667,-0.448045,-586.6,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2026-06
+2026-07,15,0.133333,-0.685447,-932.5,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2026-07
+2026-08,11,0.090909,-0.647397,-659.3,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2026-08
+2026-09,8,0.25,0.180639,1563.6,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2026-09
+2026-10,4,0.0,-1.022096,-578.2,Top 0.5%,First pick each day,Hold to 30 min before close,Top 0.5% | First pick each day | Hold to 30 min before close | 2026-10
+2025-01,12,0.083333,-0.744844,-1808.75,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2025-01
+2025-02,5,0.2,2.657189,861.1,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2025-02
+2025-03,2,0.0,-1.02521,-1564.3,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2025-03
+2025-04,4,0.25,0.079526,187.75,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2025-04
+2025-05,7,0.0,-1.026502,-552.55,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2025-05
+2025-06,11,0.181818,-0.407315,-1020.45,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2025-06
+2025-07,15,0.066667,-0.489881,127.95,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2025-07
+2025-08,11,0.181818,-0.593966,52.55,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2025-08
+2025-09,13,0.0,-0.965388,-1240.1,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2025-09
+2025-10,17,0.117647,-0.498573,-2613.0,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2025-10
+2025-11,7,0.285714,3.166428,392.5,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2025-11
+2025-12,10,0.0,-1.024655,-1495.5,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2025-12
+2026-01,14,0.214286,-0.309585,-1755.05,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2026-01
+2026-02,7,0.142857,-0.213511,1223.15,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2026-02
+2026-03,12,0.166667,0.145041,2236.9,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2026-03
+2026-04,12,0.25,0.246618,-1064.4,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2026-04
+2026-05,11,0.090909,0.017369,-1165.8,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2026-05
+2026-06,12,0.166667,-0.359206,-142.1,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2026-06
+2026-07,15,0.133333,-0.699112,-961.05,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2026-07
+2026-08,11,0.181818,-0.729873,-785.45,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2026-08
+2026-09,8,0.25,0.06766,1275.5,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2026-09
+2026-10,4,0.0,-1.023769,-592.6,Top 0.5%,First pick each day,Hold to the close,Top 0.5% | First pick each day | Hold to the close | 2026-10
+2025-01,584,0.193493,-0.301818,-34608.2,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2025-01
+2025-02,237,0.265823,-0.143059,-8456.1,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2025-02
+2025-03,81,0.012346,-0.522476,-26954.3,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2025-03
+2025-04,95,0.010526,-0.453151,-5335.5,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2025-04
+2025-05,388,0.087629,-0.364073,-43780.4,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2025-05
+2025-06,846,0.216312,-0.23764,-15861.8,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2025-06
+2025-07,1048,0.229008,-0.183631,-27737.4,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2025-07
+2025-08,655,0.166412,-0.248212,-23104.5,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2025-08
+2025-09,658,0.141337,-0.207295,-2541.4,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2025-09
+2025-10,1122,0.245989,0.538182,-822.6,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2025-10
+2025-11,566,0.439929,4.785434,1035601.48,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2025-11
+2025-12,723,0.152144,-0.298776,-58453.9,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2025-12
+2026-01,628,0.186306,-0.204772,-30580.4,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2026-01
+2026-02,282,0.074468,-0.392608,-47561.6,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2026-02
+2026-03,1018,0.158153,-0.249408,-44254.4,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2026-03
+2026-04,1065,0.426291,0.994689,186992.5,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2026-04
+2026-05,641,0.157566,-0.135125,-35811.3,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2026-05
+2026-06,692,0.375723,0.143926,-374.6,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2026-06
+2026-07,944,0.195975,-0.055967,-19082.7,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2026-07
+2026-08,853,0.086753,-0.37185,-64804.9,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2026-08
+2026-09,605,0.158678,-0.084444,-11834.5,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2026-09
+2026-10,241,0.157676,-0.346642,-22059.3,Top 1%,Every pick,50% trailing stop,Top 1% | Every pick | 50% trailing stop | 2026-10
+2025-01,584,0.186644,-0.06627,24287.8,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2025-01
+2025-02,237,0.219409,0.335317,-7486.15,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2025-02
+2025-03,81,0.037037,-0.634976,-51349.3,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2025-03
+2025-04,95,0.505263,0.926572,24209.5,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2025-04
+2025-05,388,0.03866,-0.794927,-90690.15,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2025-05
+2025-06,846,0.171395,-0.58078,-53563.8,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2025-06
+2025-07,1048,0.173664,-0.534639,-62205.1,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2025-07
+2025-08,655,0.239695,-0.255198,-9993.85,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2025-08
+2025-09,658,0.182371,-0.366519,1197.2,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2025-09
+2025-10,1122,0.26738,0.808531,50274.5,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2025-10
+2025-11,566,0.646643,8.533568,1473938.2,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2025-11
+2025-12,723,0.008299,-0.947397,-171717.9,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2025-12
+2026-01,628,0.203822,-0.35351,-44975.4,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2026-01
+2026-02,282,0.074468,-0.570429,-65695.6,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2026-02
+2026-03,1018,0.151277,-0.184829,-18934.4,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2026-03
+2026-04,1065,0.288263,0.222129,65122.1,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2026-04
+2026-05,641,0.159126,-0.551002,-107056.0,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2026-05
+2026-06,692,0.141618,-0.255689,-126601.6,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2026-06
+2026-07,944,0.09428,-0.711419,-125788.2,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2026-07
+2026-08,853,0.0551,-0.838619,-134127.9,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2026-08
+2026-09,605,0.152066,-0.350698,-31840.5,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2026-09
+2026-10,241,0.116183,-0.697119,-29231.3,Top 1%,Every pick,Hold to 30 min before close,Top 1% | Every pick | Hold to 30 min before close | 2026-10
+2025-01,584,0.133562,-0.457502,-14213.6,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2025-01
+2025-02,237,0.177215,0.382511,-7704.5,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2025-02
+2025-03,81,0.037037,-0.754881,-51790.6,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2025-03
+2025-04,95,0.294737,0.369027,14144.75,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2025-04
+2025-05,388,0.056701,-0.790386,-92116.75,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2025-05
+2025-06,846,0.130024,-0.712897,-84093.95,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2025-06
+2025-07,1048,0.13645,-0.579568,-34085.6,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2025-07
+2025-08,655,0.184733,-0.410694,-18346.54,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2025-08
+2025-09,658,0.121581,-0.306923,-5213.15,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2025-09
+2025-10,1122,0.14082,0.36755,-68258.2,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2025-10
+2025-11,566,0.588339,13.469351,2043709.3,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2025-11
+2025-12,723,0.013831,-0.974859,-178986.0,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2025-12
+2026-01,628,0.111465,-0.641893,-76831.45,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2026-01
+2026-02,282,0.042553,-0.827386,-89496.5,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2026-02
+2026-03,1018,0.084479,-0.370835,-83225.25,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2026-03
+2026-04,1065,0.311737,0.314654,174118.75,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2026-04
+2026-05,641,0.110764,-0.572837,-107339.9,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2026-05
+2026-06,692,0.117052,-0.367945,-136774.95,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2026-06
+2026-07,944,0.065678,-0.80023,-142253.0,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2026-07
+2026-08,853,0.072685,-0.839862,-129046.35,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2026-08
+2026-09,605,0.138843,-0.515116,-35824.7,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2026-09
+2026-10,241,0.049793,-0.925879,-44484.95,Top 1%,Every pick,Hold to the close,Top 1% | Every pick | Hold to the close | 2026-10
+2025-01,16,0.125,-0.281195,-1301.8,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2025-01
+2025-02,9,0.333333,0.27958,102.3,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2025-02
+2025-03,4,0.25,-0.391071,-834.2,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2025-03
+2025-04,5,0.2,0.01371,703.5,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2025-04
+2025-05,11,0.181818,0.038674,-298.3,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2025-05
+2025-06,14,0.214286,-0.254252,-137.2,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2025-06
+2025-07,20,0.3,-0.130072,-455.0,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2025-07
+2025-08,15,0.066667,-0.383057,-625.5,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2025-08
+2025-09,20,0.2,0.054292,412.0,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2025-09
+2025-10,18,0.222222,-0.003736,220.6,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2025-10
+2025-11,10,0.3,-0.138454,-611.0,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2025-11
+2025-12,13,0.153846,-0.219663,-465.9,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2025-12
+2026-01,16,0.3125,0.097888,-499.8,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2026-01
+2026-02,9,0.333333,0.467856,161.3,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2026-02
+2026-03,16,0.0625,-0.371556,-379.8,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2026-03
+2026-04,16,0.25,0.731779,-533.8,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2026-04
+2026-05,15,0.2,0.325525,-480.5,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2026-05
+2026-06,16,0.3125,-0.008541,195.2,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2026-06
+2026-07,16,0.1875,0.080367,-183.8,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2026-07
+2026-08,16,0.1875,-0.331394,-824.8,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2026-08
+2026-09,15,0.2,-0.184021,-340.5,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2026-09
+2026-10,5,0.0,-0.592876,-723.5,Top 1%,First pick each day,50% trailing stop,Top 1% | First pick each day | 50% trailing stop | 2026-10
+2025-01,16,0.25,0.028723,-1360.8,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2025-01
+2025-02,9,0.333333,1.601292,685.3,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2025-02
+2025-03,4,0.25,1.700496,-1193.2,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2025-03
+2025-04,5,0.6,0.499764,664.5,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2025-04
+2025-05,11,0.090909,0.397741,-335.65,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2025-05
+2025-06,14,0.214286,-0.451682,-1407.2,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2025-06
+2025-07,20,0.25,-0.10622,-695.0,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2025-07
+2025-08,15,0.133333,-0.545123,-10.5,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2025-08
+2025-09,20,0.2,0.173469,2906.0,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2025-09
+2025-10,18,0.277778,-0.085289,300.6,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2025-10
+2025-11,10,0.2,0.904649,2800.0,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2025-11
+2025-12,13,0.0,-0.975705,-1603.9,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2025-12
+2026-01,16,0.125,-0.410632,-1447.8,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2026-01
+2026-02,9,0.111111,0.135971,1761.3,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2026-02
+2026-03,16,0.1875,-0.092296,-1120.8,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2026-03
+2026-04,16,0.25,-0.344446,-1180.8,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2026-04
+2026-05,15,0.133333,-0.324091,-2022.5,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2026-05
+2026-06,16,0.1875,-0.358283,-489.8,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2026-06
+2026-07,16,0.0625,-0.836465,-1199.8,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2026-07
+2026-08,16,0.0625,-0.786449,-1745.8,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2026-08
+2026-09,15,0.2,-0.358787,-731.5,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2026-09
+2026-10,5,0.0,-1.014951,-1266.5,Top 1%,First pick each day,Hold to 30 min before close,Top 1% | First pick each day | Hold to 30 min before close | 2026-10
+2025-01,16,0.125,-0.6291,-2616.65,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2025-01
+2025-02,9,0.222222,1.726745,849.2,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2025-02
+2025-03,4,0.25,1.060253,-1298.25,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2025-03
+2025-04,5,0.4,0.351217,916.45,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2025-04
+2025-05,11,0.090909,0.134382,-538.1,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2025-05
+2025-06,14,0.071429,-0.732898,-1675.4,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2025-06
+2025-07,20,0.15,-0.278703,32.4,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2025-07
+2025-08,15,0.133333,-0.711723,-562.05,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2025-08
+2025-09,20,0.15,-0.064903,3464.05,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2025-09
+2025-10,18,0.222222,-0.377049,-1342.3,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2025-10
+2025-11,10,0.2,1.266591,2490.2,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2025-11
+2025-12,13,0.0,-1.020085,-1655.45,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2025-12
+2026-01,16,0.125,-0.540189,-2065.7,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2026-01
+2026-02,9,0.111111,-0.723201,-253.5,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2026-02
+2026-03,16,0.125,-0.374319,-1327.7,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2026-03
+2026-04,16,0.1875,-0.118827,-1392.0,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2026-04
+2026-05,15,0.066667,-0.338385,-2257.05,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2026-05
+2026-06,16,0.125,-0.52556,-855.7,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2026-06
+2026-07,16,0.0625,-0.915494,-1304.05,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2026-07
+2026-08,16,0.125,-0.814669,-1818.7,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2026-08
+2026-09,15,0.133333,-0.6528,-1147.7,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2026-09
+2026-10,5,0.0,-1.025717,-1272.25,Top 1%,First pick each day,Hold to the close,Top 1% | First pick each day | Hold to the close | 2026-10

@@ -28,5 +28,6 @@
 **Step 5 (done, volume part running):** can what was visible at the turn tell the runners from the duds? Two models read 42 measurements known at the minute of buying for all 1.6 million turn-up buys, trained on 2022–2024 and scored once on 2025–2026.
 - Runners can be partly told apart: the top 1% reached 3× the price paid 26% of the time, against 6% for all turn-up buys.
 - They still don't pay reliably. Three in four of the best picks fail, and no way out of 184 kept the winners' runs. What profit there is comes from a handful of days.
+- Trading only the top 1%: every pick made money in total, almost all of it on one day (2025-11-20); without its best 5 days it lost $620,114, and one pick a day lost money.
 - Per-contract volume is downloading and will be tested next.
 - See `step5/README.md`.

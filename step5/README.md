@@ -75,6 +75,29 @@
 - A $0.02 contract costs $2, and $1.30 in fees eats 65% of that before the price moves.
 - Turn-up buys costing under $5 a contract averaged −166% a trade with the trailing stop, because the fees add to a price loss that is already near total.
 
+**6. Trading only the top 1% (and stricter)** (`top1.py`). On 2025–2026, one contract a trade, with each of three ways out. "Every pick" takes every trade in the top group. "First pick each day" takes one trade a day: the earliest pick of the day, which needs nothing from later in the day.
+
+| Picks | Way out | Trades | Win rate | Avg a trade | Avg win | Avg loss | Biggest win | Biggest loss | Total ($) | Days up |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Top 1%, every pick | 50% trailing stop | 13,972 | 21% | +14.6% | +233% | −45% | +11,825% | −110% | +$698,574 | 68 of 295 |
+| Top 1%, every pick | Hold to 30 min before close | 13,972 | 18% | +5.2% | +438% | −92% | +11,187% | −143% | +$507,772 | 71 of 295 |
+| Top 1%, first pick each day | 50% trailing stop | 295 | 21% | −3.9% | +151% | −45% | +1,352% | −110% | −$6,900 | 62 of 295 |
+| Top 1%, first pick each day | Hold to 30 min before close | 295 | 18% | −16.7% | +331% | −93% | +1,404% | −122% | −$8,694 | 53 of 295 |
+| Top 0.1%, every pick | 50% trailing stop | 1,339 | 25% | +77.7% | +455% | −47% | +3,186% | −86% | +$521,677 | 18 of 76 |
+| Top 0.1%, first pick each day | 50% trailing stop | 76 | 22% | −12.4% | +91% | −42% | +443% | −72% | −$2,471 | 17 of 76 |
+
+- **Every top-1% pick made money in total, but almost all of it came on one day.** 2025-11-20 alone made $1,046,400 across 323 picks.
+  - Without its best 5 days, the top 1% lost $620,114.
+  - 20 of 22 months lost money. Only November 2025 and April 2026 were clearly up.
+- **One trade a day, the version a person could actually follow, lost money on average** at every cut and with every way out.
+  - In dollars, the top 0.1% held to 30 minutes before the close came out +$1,937 over 76 trades, and held to the close +$3,960.
+  - Both rest on one or two trades: the biggest wins were $11,599 and $15,331.
+- **The stricter the cut, the higher the average, and the fewer the days it rests on.**
+  - The top 0.1% averaged +77.7% a trade, but made money on 18 of 76 days.
+  - It made +160% a trade in 2025 and −16% in 2026.
+  - Its 95% range runs from −31% to +271%.
+  - On 2022–2024 (scored by models that never saw those trades) the same top 0.1% averaged +0.4%.
+
 ## What it means
 
 - Price, quotes and timing do carry real information about which turns become runners, and it held up out of sample.
@@ -98,4 +121,5 @@ The one input this test didn't have is the trading in each contract: whether buy
 | `verify.py` | Re-derives 400 trades' measurements from the raw files with separate code. No differences |
 | `model.py` → `out/headline.csv`, `buckets.csv`, `stress.csv`, `importance.csv`, `feature_deciles.csv`, `scores.parquet` | The two models: their ranking power, every bucket by product and contract price, the stress tests, which measurements mattered, each strong measurement by tenth |
 | `exits.py` → `out/exits_grid.csv`, `exits_best.csv`, `exits_stress.csv`, `exit_paths.parquet` | 184 ways out for model A's picks, picked on 2022–2024 and read on 2025–2026 (checks that every pick's path equals step 4's) |
+| `top1.py` → `out/top1_summary.csv`, `top1_by_product.csv`, `top1_by_month.csv`, `top1_daily.csv` | Only the top 1%, 0.5% and 0.1%: every pick or the first each day, three ways out, trade by trade, by product, by month and day by day |
 | `volume.py` | The volume test, run when the download finishes |
