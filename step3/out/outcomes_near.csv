@@ -1,0 +1,25 @@
+product,held,held_order,trades,share,id
+IWM,Expired worthless (−100%),0,13607,0.501456,IWM | Expired worthless (−100%)
+IWM,Lost 50–99%,1,2535,0.093422,IWM | Lost 50–99%
+IWM,Lost 0–50%,2,3029,0.111627,IWM | Lost 0–50%
+IWM,Up 0–100%,3,4361,0.160715,IWM | Up 0–100%
+IWM,Up 100–200%,4,1902,0.070094,IWM | Up 100–200%
+IWM,Up 200% or more,5,1701,0.062687,IWM | Up 200% or more
+QQQ,Expired worthless (−100%),0,43992,0.500398,QQQ | Expired worthless (−100%)
+QQQ,Lost 50–99%,1,8145,0.092647,QQQ | Lost 50–99%
+QQQ,Lost 0–50%,2,10087,0.114737,QQQ | Lost 0–50%
+QQQ,Up 0–100%,3,14458,0.164456,QQQ | Up 0–100%
+QQQ,Up 100–200%,4,6012,0.068385,QQQ | Up 100–200%
+QQQ,Up 200% or more,5,5220,0.059376,QQQ | Up 200% or more
+SPX,Expired worthless (−100%),0,107988,0.500049,SPX | Expired worthless (−100%)
+SPX,Lost 50–99%,1,18125,0.08393,SPX | Lost 50–99%
+SPX,Lost 0–50%,2,24658,0.114181,SPX | Lost 0–50%
+SPX,Up 0–100%,3,36298,0.168081,SPX | Up 0–100%
+SPX,Up 100–200%,4,14375,0.066565,SPX | Up 100–200%
+SPX,Up 200% or more,5,14511,0.067195,SPX | Up 200% or more
+SPY,Expired worthless (−100%),0,49823,0.500628,SPY | Expired worthless (−100%)
+SPY,Lost 50–99%,1,8826,0.088685,SPY | Lost 50–99%
+SPY,Lost 0–50%,2,12068,0.121261,SPY | Lost 0–50%
+SPY,Up 0–100%,3,17028,0.1711,SPY | Up 0–100%
+SPY,Up 100–200%,4,6225,0.06255,SPY | Up 100–200%
+SPY,Up 200% or more,5,5551,0.055777,SPY | Up 200% or more
