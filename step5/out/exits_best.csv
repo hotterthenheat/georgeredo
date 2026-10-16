@@ -1,0 +1,4 @@
+bucket,exit,trades_disc,avg_pct_disc,trades_check,avg_pct_check,win_rate_check,avg_win_pct_check,avg_loss_pct_check,hold_avg_pct_check,exits_positive_disc,exits_positive_both,exits,best_check_exit,best_check_avg_pct,id
+Top 10%,none · -70% · 120 min after buying,71613,0.174253,92299,0.033212,0.228811,2.458808,-0.686458,-0.123601,14,6,184,none · -70% · 120 min after buying,0.033212,Top 10%
+Top 5%,none · none · 30 min before close,35807,0.176856,52235,0.011953,0.184455,4.137469,-0.92113,-0.013708,30,20,184,none · -30% · close,0.100185,Top 5%
+Top 1%,none · none · 30 min before close,7162,0.292884,13972,0.05221,0.183868,4.382825,-0.923441,0.131208,61,24,184,none · -30% · close,0.285771,Top 1%

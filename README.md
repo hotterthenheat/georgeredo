@@ -24,3 +24,9 @@
 - Turn-up buys caught more runners and ended near zero.
 - Of 126 rules that made money in both periods, the 11 biggest all failed the stress test.
 - See `step4/README.md`.
+
+**Step 5 (done, volume part running):** can what was visible at the turn tell the runners from the duds? Two models read 42 measurements known at the minute of buying for all 1.6 million turn-up buys, trained on 2022–2024 and scored once on 2025–2026.
+- Runners can be partly told apart: the top 1% reached 3× the price paid 26% of the time, against 6% for all turn-up buys.
+- They still don't pay reliably. Three in four of the best picks fail, and no way out of 184 kept the winners' runs. What profit there is comes from a handful of days.
+- Per-contract volume is downloading and will be tested next.
+- See `step5/README.md`.

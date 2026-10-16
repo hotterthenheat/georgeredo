@@ -1,0 +1,4 @@
+bucket,exit,trades,days,days_up,win_rate,avg_pct,ci_low,ci_high,without_best_5_days,without_best_20_days,best_5_days_share,avg_pct_2025,trades_2025,avg_pct_2026,trades_2026,id
+Top 10%,none · -70% · 120 min after buying,92299,441,89,0.228811,0.033212,-0.198523,0.378388,-0.230282,-0.332643,7.771665,0.044829,45334,0.021999,46965,Top 10%
+Top 5%,none · none · 30 min before close,52235,427,75,0.184455,0.011953,-0.332865,0.416495,-0.346417,-0.539525,29.175016,0.275095,25409,-0.237288,26826,Top 5%
+Top 1%,none · none · 30 min before close,13972,295,54,0.183868,0.05221,-0.430527,0.879118,-0.453714,-0.651968,9.327523,0.479961,7003,-0.377627,6969,Top 1%

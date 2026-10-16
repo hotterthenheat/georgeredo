@@ -1,0 +1,7 @@
+model,part,trades,rounds,auc_reach3,corr_trail50
+A: reaches 3x,train,511568,120,0.974093,0.311597
+A: reaches 3x,valid,204550,120,0.88393,0.249898
+A: reaches 3x,check,886283,120,0.87578,0.236401
+B: trail50 result,train,511568,90,0.650005,0.668242
+B: trail50 result,valid,204550,90,0.588606,0.680655
+B: trail50 result,check,886283,90,0.59848,0.605768
