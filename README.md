@@ -6,4 +6,4 @@
 - `data_lake/`: the vendor downloads (see `data_lake/README.md`).
 - `data_lake/fetch/`: the scripts that download them.
 
-**Step 1 (in progress):** every same-day (0DTE) option contract on SPY, QQQ, IWM and SPX, broken down one contract at a time.
+**Step 1 (done):** every same-day (0DTE) option contract on SPY, QQQ, IWM and SPX, broken down one contract at a time: 1,176,935 contracts over 3,687 sessions, checked against the raw quotes (`step1/`).
