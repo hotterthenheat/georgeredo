@@ -18,3 +18,9 @@
 - Profit targets raised the win rate but lowered the average.
 - Nothing made money in a way that held up.
 - See `step3/README.md`.
+
+**Step 4 (done):** buying on the turn up off the low and selling near the high with a trailing stop, retested on 12.1 million trades.
+- A trailing stop beat holding but still lost.
+- Turn-up buys caught more runners and ended near zero.
+- Of 126 rules that made money in both periods, the 11 biggest all failed the stress test.
+- See `step4/README.md`.
