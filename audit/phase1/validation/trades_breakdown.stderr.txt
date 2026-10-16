@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "/tmp/claude-0/-home-user-georgeredo/c2861f8a-c5af-5ae3-9258-5ee40d17d74a/scratchpad/audit_validation/evidence/scripts/analyze_trades_a.py", line 49, in <module>
-    print('--- entryDelta: n',len(dl),'med',round(statistics.median([abs(x) for x in dl]),3),'q',[round(abs(q),3) for q in statistics.quantiles([abs(x) for x in dl],n=4)])
-                                                  ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.13/statistics.py", line 637, in median
-    raise StatisticsError("no median for empty data")
-statistics.StatisticsError: no median for empty data

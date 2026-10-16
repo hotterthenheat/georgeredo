@@ -1,6 +1,0 @@
-{
- "check": "index_history_price_NDX_1m_2026-03-02",
- "ok": false,
- "error": "_MultiThreadedRendezvous: <_MultiThreadedRendezvous of RPC that terminated with:\n\tstatus = StatusCode.INVALID_ARGUMENT\n\tdetails = \"Requesting data for NASDAQ GIDs symbols: [NDX] without proper permissions.\nTo obtain access, please consider upgrading here! ( https://www.thetadata.net/subscribe )\"\n\tdebug_error_string = \"INVALID_ARGUMENT:Requesting data for NASDAQ GIDs symbols: [NDX] without proper permissions.\nTo obtain access, please consider upgrading here! ( https://www.thetadata.net/subscribe )\"\n>",
- "ms": 53
-}

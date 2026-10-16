@@ -1,5 +1,0 @@
-criterion,value,result
-"C1 executable lower 95% bound > 0, n >= 150 straddle-days, span >= 3 months","lower=-75.8, n=339, span=16.2 months",FAIL
-"C2 realized entry half-spread <= 1.5% of credit (straddle, % of mid)","mean=0.0087, median=0.0081",PASS
-C3 beats random-entry baseline by more than one round-trip cost,"13:00 minus random = 40.61 [-73.39, 164.22] vs mean round-trip cost 68.87",FAIL
-"C4 (plan §1.3) edge survives executable NBBO fills (same as C1 here: fills are at bid/ask, not mid)",exec mean=72.43 vs mid mean=141.3,FAIL

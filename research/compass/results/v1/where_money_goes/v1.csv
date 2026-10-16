@@ -1,3 +1,0 @@
-test,window,trades,at_mid,spread_entry,spread_exit,fees,net
-V1 T0 sell every monthly straddle (per name-month),Development + validation,31963,-0.006911248259262211,-0.12532968149494683,0.0,-0.003781544847712109,-0.13602247460192116
-V1 T0 sell every monthly straddle (per name-month),Hold-out,12484,-0.06739476773400088,-0.16460137051427767,0.0,-0.0030090205279713696,-0.23500515877624992

@@ -1,7 +1,0 @@
-# Phase 1 reproduction audit (2026-10-13)
-
-Reports: `backtest_reproduction.md`, `research_reproduction.md`, `validation_reproduction.md`. Supporting outputs live next to each report (`backtest/`, `research/`, `validation/`).
-
-Pruning note: the regenerated `trades.csv.gz` and `baseline.csv.gz` under `backtest/v1_copy/` and `backtest/rerun/` were deleted after verification because their decompressed contents are byte-identical to the committed `backtest/results/v1/` files (sha256 of the decompressed trades.csv 0e8c41c819e74eb0…, baseline.csv ed2ebd1640230c6d… on both sides; only gzip header timestamps differed). Large regenerated duplicates under `research/` were pruned the same way once the research reproduction finished; the comparison tables in the reports record the hashes and numeric diffs.
-
-Nothing under `backtest/results/`, `research/*/` (originals), `evidence/` or the top-level deliverables was overwritten by the audit. Fixes that the audit motivated were applied as *additions*: `backtest/run.py`/`prefetch.py` trading-days path (documented in `backtest/README.md`), `backtest/results/v1/signals.json.gz` (missing artifact), deterministic iteration in `evidence/scripts/gate_validity.py` with a new `evidence/analysis/validation_T5_gates_v2.txt`, a crash guard in `evidence/scripts/analyze_trades_a.py` with a new `evidence/analysis/trades_breakdown_v2.txt`, and an errata section at the end of `GEORGEFI_SIGNAL_RESEARCH.md`.

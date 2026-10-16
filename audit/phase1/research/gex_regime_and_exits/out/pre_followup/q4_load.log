@@ -1,6 +1,0 @@
-reference trades 5215
-bars loaded 3484 138.9 s
-verify: 6250 trade-configs, 0 mismatches
-cached contract-days 13502
-random entries 3000 tries 3445 Counter({'SPY': 1031, 'QQQ': 1021, 'IWM': 948})
-saved 283.8 s

@@ -1,6 +1,0 @@
-{
- "check": "option_history_quote_SPY_2026-03-02_C682_tick",
- "ok": false,
- "error": "_MultiThreadedRendezvous: <_MultiThreadedRendezvous of RPC that terminated with:\n\tstatus = StatusCode.INVALID_ARGUMENT\n\tdetails = \"Invalid interval: 0\"\n\tdebug_error_string = \"INVALID_ARGUMENT:Invalid interval: 0\"\n>",
- "ms": 47
-}

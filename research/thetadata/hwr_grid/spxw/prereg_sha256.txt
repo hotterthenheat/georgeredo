@@ -1,7 +1,0 @@
-b3fe73e07306da82bfe49f8668ebbab50ae38929ccdd9d0b514cda73c2eda73c  PREREGISTRATION.md
-written_utc 2026-10-13T23:53:06Z (before any run on option data of the T-E window, holdout, TRAIN or TEST)
-9231f7153e5f06b11a8a7718108adf29f2b95bf0d2246f9c14eb1fe5a4526ee6  PREREGISTRATION.md
-amendment_1_utc 2026-10-14T00:04:13Z (hash above is of the amended file; a typo in the amendment's own time stamp was corrected at 00:04:57Z)
-245ea86871ebe8b199d4207d4aecc96f032f31abcfa34ec58cababc0da3c12e2  results/selection_train.json
-4ab157a824ea4b38b3350b5dd4b470ef0047ea45dc8a2223c181587d569e33f7  results/train_metrics.csv.gz
-selection_written_before_TEST_stage_utc 2026-10-14T00:24:16Z

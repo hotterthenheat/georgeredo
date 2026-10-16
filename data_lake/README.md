@@ -1,8 +1,8 @@
 # Data lake (all-ticker data committed to the repository)
 
-Data pulled on 2026-10-14 for every ticker the user's accounts expose (ticker lists: `../research/data_inventory/`). Every file is Parquet (zstd), each under 40 MB, with row counts and SHA-256 in each folder's `manifest.json`. Read with `polars.read_parquet` or `pandas.read_parquet` (pyarrow).
+Data pulled on 2026-10-14 for every ticker the user's accounts expose (ticker lists: `fetch/`). Every file is Parquet (zstd), each under 40 MB, with row counts and SHA-256 in each folder's `manifest.json`. Read with `polars.read_parquet` or `pandas.read_parquet` (pyarrow).
 
-## `unusualwhales/` — per-ticker histories (one request per ticker; scripts `../research/data_inventory/uw_bulk_fetch.py`, `build_uw_tables.py`)
+## `unusualwhales/` — per-ticker histories (one request per ticker; scripts `fetch/uw_bulk_fetch.py`, `build_uw_tables.py`)
 
 | Table | Universe requested | Tickers with data | Rows | History |
 |---|---|---|---|---|
@@ -16,10 +16,10 @@ Data pulled on 2026-10-14 for every ticker the user's accounts expose (ticker li
 | `volatility__variance-risk-premium` | optionable | 5,941 | 1.27 M | daily variance risk premium, ~one year |
 | `max-pain` | optionable | 5,994 | 36,110 | current max pain for every listed expiration (snapshot, not history) |
 
-Values are stored as strings exactly as the API returned them; `ticker` is added to every row. Tickers that returned no rows are mostly OTC/foreign listings or symbols without options; failed requests (404/422) are counted in `../research/data_inventory/summary.json`. UW endpoints that only return one day per request (flow, OI, spot exposures, chains, …) were not pulled for every ticker: that would be ~250 requests per ticker per year at UW's 3-request concurrency limit.
+Values are stored as strings exactly as the API returned them; `ticker` is added to every row. Tickers that returned no rows are mostly OTC/foreign listings or symbols without options; failed requests (404/422) are counted in `fetch/summary.json`. UW endpoints that only return one day per request (flow, OI, spot exposures, chains, …) were not pulled for every ticker: that would be ~250 requests per ticker per year at UW's 3-request concurrency limit.
 
 ## `thetadata/` — see its README (bulk daily files for every stock/option/index, and daily stock bars for every symbol).
 
 ## Not in the repository (too large for git), kept with manifests and rebuild scripts
-- 0DTE option chains at 1-minute NBBO for SPY/QQQ/IWM/SPXW (band 0.67 GB, full chains 2.4 GB): `../research/thetadata/dataset/MANIFEST*.md`.
-- Any per-ticker option or minute-level history for all tickers (~100–300 GB+): see `../research/data_inventory/README.md` for the sizing.
+- 0DTE option chains at 1-minute NBBO for SPY/QQQ/IWM/SPXW (band 0.67 GB, full chains 2.4 GB): kept outside the repository (the session scratchpad), not committed.
+- Any per-ticker option or minute-level history for all tickers (~100–300 GB+): see `fetch/README.md` for the sizing.
