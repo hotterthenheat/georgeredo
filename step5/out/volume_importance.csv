@@ -1,0 +1,193 @@
+feature,share,features,model,id
+otm_im,0.507262,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | otm_im
+otm,0.080452,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | otm
+prior_range_pct,0.041921,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | prior_range_pct
+implied_open,0.039091,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | implied_open
+price,0.037677,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | price
+dgap,0.03544,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | dgap
+weekday,0.028263,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | weekday
+iv_now,0.026729,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | iv_now
+vix,0.02672,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | vix
+side_share5,0.012961,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | side_share5
+trades_5,0.011989,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | trades_5
+dret1,0.011976,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | dret1
+spread,0.011725,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | spread
+rv15_pct,0.011713,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | rv15_pct
+vix_chg,0.011001,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | vix_chg
+vol_1,0.010917,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | vol_1
+side_share_day,0.010076,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | side_share_day
+vix_chg15,0.009538,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | vix_chg15
+open_vs_low,0.007858,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | open_vs_low
+dret15,0.007375,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | dret15
+range_im,0.006694,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | range_im
+entry_minute,0.006608,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | entry_minute
+implied_rest,0.005285,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | implied_rest
+mom15,0.005263,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | mom15
+dret5,0.004655,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | dret5
+range_pct,0.004136,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | range_pct
+dmove,0.003924,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | dmove
+dret30,0.003815,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | dret30
+mom5,0.003568,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | mom5
+to_close,0.003029,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | to_close
+side_burst5,0.002073,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | side_burst5
+ask_size,0.001693,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | ask_size
+iv_ratio,0.001641,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | iv_ratio
+pos,0.001638,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | pos
+ask_vs_open,0.001473,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | ask_vs_open
+is_call,0.000662,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | is_call
+fall,0.000614,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | fall
+bid_size,0.000511,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | bid_size
+size_imb,0.000506,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | size_imb
+turn,0.000454,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | turn
+low_age,0.000322,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | low_age
+vol_5,0.000214,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | vol_5
+vol_day,0.000197,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | vol_day
+mom1,0.000174,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | mom1
+share_of_side5,0.00015,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | share_of_side5
+vol_15,0.000012,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | vol_15
+burst5,6e-6,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | burst5
+size_5,0.0,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | size_5
+buy_share5,0.0,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | buy_share5
+kind,0.0,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | kind
+product,0.0,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | product
+new_against5,0.0,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | new_against5
+new_ext5,0.0,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | new_ext5
+half_day,0.0,quotes + volume,A: reaches 3x,quotes + volume | A: reaches 3x | half_day
+price,0.311969,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | price
+otm_im,0.207946,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | otm_im
+spread,0.059843,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | spread
+prior_range_pct,0.053139,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | prior_range_pct
+dgap,0.042053,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | dgap
+implied_open,0.035592,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | implied_open
+otm,0.033389,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | otm
+vix_chg15,0.029163,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | vix_chg15
+vix,0.025362,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | vix
+side_share_day,0.022741,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | side_share_day
+side_share5,0.019225,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | side_share5
+ask_size,0.017281,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | ask_size
+iv_now,0.016415,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | iv_now
+weekday,0.016306,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | weekday
+iv_ratio,0.012016,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | iv_ratio
+dret30,0.010575,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | dret30
+implied_rest,0.010043,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | implied_rest
+open_vs_low,0.009527,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | open_vs_low
+rv15_pct,0.008395,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | rv15_pct
+mom15,0.006654,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | mom15
+dmove,0.005737,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | dmove
+low_age,0.004803,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | low_age
+entry_minute,0.004762,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | entry_minute
+dret5,0.004145,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | dret5
+range_pct,0.004089,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | range_pct
+dret1,0.003747,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | dret1
+vix_chg,0.003718,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | vix_chg
+dret15,0.003391,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | dret15
+is_call,0.003134,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | is_call
+range_im,0.003031,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | range_im
+ask_vs_open,0.002274,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | ask_vs_open
+mom5,0.002008,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | mom5
+fall,0.001354,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | fall
+to_close,0.001266,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | to_close
+side_burst5,0.001235,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | side_burst5
+pos,0.000594,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | pos
+trades_5,0.000536,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | trades_5
+vol_day,0.000432,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | vol_day
+mom1,0.000404,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | mom1
+vol_1,0.000342,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | vol_1
+turn,0.000282,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | turn
+size_imb,0.000261,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | size_imb
+share_of_side5,0.000251,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | share_of_side5
+burst5,0.000249,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | burst5
+bid_size,0.000189,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | bid_size
+vol_15,0.000136,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | vol_15
+kind,0.0,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | kind
+new_against5,0.0,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | new_against5
+size_5,0.0,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | size_5
+buy_share5,0.0,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | buy_share5
+new_ext5,0.0,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | new_ext5
+product,0.0,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | product
+half_day,0.0,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | half_day
+vol_5,0.0,quotes + volume,B: trail50 result,quotes + volume | B: trail50 result | vol_5
+otm_im,0.511912,quotes only,A: reaches 3x,quotes only | A: reaches 3x | otm_im
+price,0.219022,quotes only,A: reaches 3x,quotes only | A: reaches 3x | price
+prior_range_pct,0.039807,quotes only,A: reaches 3x,quotes only | A: reaches 3x | prior_range_pct
+dgap,0.034138,quotes only,A: reaches 3x,quotes only | A: reaches 3x | dgap
+vix,0.031513,quotes only,A: reaches 3x,quotes only | A: reaches 3x | vix
+spread,0.026717,quotes only,A: reaches 3x,quotes only | A: reaches 3x | spread
+rv15_pct,0.026154,quotes only,A: reaches 3x,quotes only | A: reaches 3x | rv15_pct
+implied_open,0.023459,quotes only,A: reaches 3x,quotes only | A: reaches 3x | implied_open
+implied_rest,0.020688,quotes only,A: reaches 3x,quotes only | A: reaches 3x | implied_rest
+weekday,0.013453,quotes only,A: reaches 3x,quotes only | A: reaches 3x | weekday
+vix_chg,0.01281,quotes only,A: reaches 3x,quotes only | A: reaches 3x | vix_chg
+iv_now,0.01137,quotes only,A: reaches 3x,quotes only | A: reaches 3x | iv_now
+dret1,0.009301,quotes only,A: reaches 3x,quotes only | A: reaches 3x | dret1
+open_vs_low,0.008039,quotes only,A: reaches 3x,quotes only | A: reaches 3x | open_vs_low
+dret15,0.005085,quotes only,A: reaches 3x,quotes only | A: reaches 3x | dret15
+ask_vs_open,0.004383,quotes only,A: reaches 3x,quotes only | A: reaches 3x | ask_vs_open
+ask_size,0.001779,quotes only,A: reaches 3x,quotes only | A: reaches 3x | ask_size
+mom5,0.000371,quotes only,A: reaches 3x,quotes only | A: reaches 3x | mom5
+new_ext5,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | new_ext5
+to_close,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | to_close
+range_im,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | range_im
+iv_ratio,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | iv_ratio
+vix_chg15,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | vix_chg15
+range_pct,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | range_pct
+new_against5,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | new_against5
+is_call,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | is_call
+pos,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | pos
+dmove,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | dmove
+dret30,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | dret30
+half_day,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | half_day
+entry_minute,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | entry_minute
+otm,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | otm
+bid_size,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | bid_size
+kind,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | kind
+dret5,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | dret5
+product,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | product
+size_imb,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | size_imb
+turn,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | turn
+mom15,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | mom15
+low_age,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | low_age
+mom1,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | mom1
+fall,0.0,quotes only,A: reaches 3x,quotes only | A: reaches 3x | fall
+price,0.36035,quotes only,B: trail50 result,quotes only | B: trail50 result | price
+otm_im,0.2068,quotes only,B: trail50 result,quotes only | B: trail50 result | otm_im
+dgap,0.05288,quotes only,B: trail50 result,quotes only | B: trail50 result | dgap
+prior_range_pct,0.051123,quotes only,B: trail50 result,quotes only | B: trail50 result | prior_range_pct
+spread,0.045285,quotes only,B: trail50 result,quotes only | B: trail50 result | spread
+otm,0.039761,quotes only,B: trail50 result,quotes only | B: trail50 result | otm
+implied_open,0.039689,quotes only,B: trail50 result,quotes only | B: trail50 result | implied_open
+vix_chg15,0.033658,quotes only,B: trail50 result,quotes only | B: trail50 result | vix_chg15
+weekday,0.023034,quotes only,B: trail50 result,quotes only | B: trail50 result | weekday
+vix,0.01839,quotes only,B: trail50 result,quotes only | B: trail50 result | vix
+iv_now,0.015916,quotes only,B: trail50 result,quotes only | B: trail50 result | iv_now
+dret30,0.011852,quotes only,B: trail50 result,quotes only | B: trail50 result | dret30
+iv_ratio,0.011596,quotes only,B: trail50 result,quotes only | B: trail50 result | iv_ratio
+ask_size,0.009784,quotes only,B: trail50 result,quotes only | B: trail50 result | ask_size
+rv15_pct,0.007836,quotes only,B: trail50 result,quotes only | B: trail50 result | rv15_pct
+implied_rest,0.007196,quotes only,B: trail50 result,quotes only | B: trail50 result | implied_rest
+open_vs_low,0.00665,quotes only,B: trail50 result,quotes only | B: trail50 result | open_vs_low
+entry_minute,0.006508,quotes only,B: trail50 result,quotes only | B: trail50 result | entry_minute
+dmove,0.005728,quotes only,B: trail50 result,quotes only | B: trail50 result | dmove
+range_pct,0.005358,quotes only,B: trail50 result,quotes only | B: trail50 result | range_pct
+dret1,0.005332,quotes only,B: trail50 result,quotes only | B: trail50 result | dret1
+low_age,0.004876,quotes only,B: trail50 result,quotes only | B: trail50 result | low_age
+vix_chg,0.004134,quotes only,B: trail50 result,quotes only | B: trail50 result | vix_chg
+range_im,0.00395,quotes only,B: trail50 result,quotes only | B: trail50 result | range_im
+to_close,0.003774,quotes only,B: trail50 result,quotes only | B: trail50 result | to_close
+is_call,0.003627,quotes only,B: trail50 result,quotes only | B: trail50 result | is_call
+dret5,0.003527,quotes only,B: trail50 result,quotes only | B: trail50 result | dret5
+mom15,0.002729,quotes only,B: trail50 result,quotes only | B: trail50 result | mom15
+ask_vs_open,0.002336,quotes only,B: trail50 result,quotes only | B: trail50 result | ask_vs_open
+mom5,0.002217,quotes only,B: trail50 result,quotes only | B: trail50 result | mom5
+dret15,0.001689,quotes only,B: trail50 result,quotes only | B: trail50 result | dret15
+mom1,0.001489,quotes only,B: trail50 result,quotes only | B: trail50 result | mom1
+fall,0.000372,quotes only,B: trail50 result,quotes only | B: trail50 result | fall
+pos,0.000365,quotes only,B: trail50 result,quotes only | B: trail50 result | pos
+bid_size,0.000126,quotes only,B: trail50 result,quotes only | B: trail50 result | bid_size
+size_imb,0.000063,quotes only,B: trail50 result,quotes only | B: trail50 result | size_imb
+product,0.0,quotes only,B: trail50 result,quotes only | B: trail50 result | product
+kind,0.0,quotes only,B: trail50 result,quotes only | B: trail50 result | kind
+half_day,0.0,quotes only,B: trail50 result,quotes only | B: trail50 result | half_day
+new_against5,0.0,quotes only,B: trail50 result,quotes only | B: trail50 result | new_against5
+new_ext5,0.0,quotes only,B: trail50 result,quotes only | B: trail50 result | new_ext5
+turn,0.0,quotes only,B: trail50 result,quotes only | B: trail50 result | turn

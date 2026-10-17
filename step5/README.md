@@ -105,13 +105,25 @@
 - What profit there is comes from a handful of days.
 - Like steps 2–4, this is a negative result. It was not tuned to look better.
 
-## Still running: per-contract volume
+## Per-contract volume (SPY done, SPX, QQQ and IWM downloading)
 
-The one input this test didn't have is the trading in each contract: whether buyers were paying up, and how much was trading against its own normal.
-- ThetaData's one-minute bars with volume are downloading now, outside market hours.
-- `volume.py` adds 12 volume measurements (the contract's volume burst, its trade sizes, whether its last trades were above the middle quote, and the call/put mix around it).
-- It then refits both models with and without them on the same trades and split, so any gain is volume's alone.
-- Results will be added here.
+The one input the models above didn't have is the trading in each contract: whether buyers were paying up, and how much was trading against its own normal.
+- ThetaData's one-minute bars with volume, for every same-day contract within 2% of the 9:31 price.
+- `volume.py` adds 12 volume measurements: the contract's volume over the last 1, 5 and 15 minutes and since the open, its burst against its own average, its trade count and average trade size, the share bought above the middle quote, and the call/put mix around it.
+- A minute's bar is used only once it has closed. `verify_volume.py` re-derived 100 SPY trades from the raw bars and quotes with separate code: no differences.
+- Both models are refitted with and without volume on the same trades and the same split, so any gain is volume's alone.
+- One measurement had to change: the vendor's average-price field is a running average for the whole session, rounded to the cent, so a minute's own average cannot be taken back out of it (re-derived, it fell inside the bar's low–high range on only 16% of bars). The buying-side share uses each bar's last trade against the middle quote instead.
+
+**SPY (107,358 turn-up buys with volume; 59,398 of them in 2025–2026): volume added nothing.**
+
+| | Without volume | With volume |
+|---|---|---|
+| How well model A ranks runners on 2025–2026 (0.5 = coin flip) | 0.751 | 0.749 |
+| Model B's top 1%, 50% trailing stop | +3.0% a trade (926 trades) | +5.9% a trade (757 trades) |
+| Its 95% range | −11% to +18% | −10% to +21% |
+| Without its best 5 days | −12% | −13% |
+
+The full four-product result will be added when the download finishes.
 
 ## Files
 
@@ -122,4 +134,5 @@ The one input this test didn't have is the trading in each contract: whether buy
 | `model.py` → `out/headline.csv`, `buckets.csv`, `stress.csv`, `importance.csv`, `feature_deciles.csv`, `scores.parquet` | The two models: their ranking power, every bucket by product and contract price, the stress tests, which measurements mattered, each strong measurement by tenth |
 | `exits.py` → `out/exits_grid.csv`, `exits_best.csv`, `exits_stress.csv`, `exit_paths.parquet` | 184 ways out for model A's picks, picked on 2022–2024 and read on 2025–2026 (checks that every pick's path equals step 4's) |
 | `top1.py` → `out/top1_summary.csv`, `top1_by_product.csv`, `top1_by_month.csv`, `top1_daily.csv` | Only the top 1%, 0.5% and 0.1%: every pick or the first each day, three ways out, trade by trade, by product, by month and day by day |
-| `volume.py` | The volume test, run when the download finishes |
+| `volume.py` → `out/volume_features_<PRODUCT>.parquet`, `volume_headline.csv`, `volume_buckets.csv`, `volume_stress.csv`, `volume_importance.csv` | The volume measurements and the with/without test |
+| `verify_volume.py` | Re-derives trades' volume measurements from the raw bars and quotes with separate code |

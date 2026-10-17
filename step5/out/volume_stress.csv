@@ -1,0 +1,31 @@
+features,model,bucket,exit,trades,days,days_up,win_rate,avg_pct,ci_low,ci_high,without_best_5_days,without_best_20_days,best_5_days_share,avg_pct_2025,trades_2025,avg_pct_2026,trades_2026,id
+quotes only,B: trail50 result,Top 10%,hold,6333,251,96,0.423812,-0.068447,-0.156713,0.031831,-0.142435,-0.225616,,-0.086039,3195,-0.050535,3138,quotes only | Top 10% | hold
+quotes only,B: trail50 result,Top 10%,trail20,6333,251,72,0.32828,-0.025249,-0.049513,-0.000203,-0.046969,-0.073755,,-0.042239,3195,-0.00795,3138,quotes only | Top 10% | trail20
+quotes only,B: trail50 result,Top 10%,trail30,6333,251,82,0.334597,-0.030631,-0.064795,0.006322,-0.060335,-0.102824,,-0.044475,3195,-0.016535,3138,quotes only | Top 10% | trail30
+quotes only,B: trail50 result,Top 10%,trail40,6333,251,80,0.353387,-0.027616,-0.073275,0.021628,-0.066147,-0.118826,,-0.04631,3195,-0.008581,3138,quotes only | Top 10% | trail40
+quotes only,B: trail50 result,Top 10%,trail50,6333,251,87,0.371704,-0.036412,-0.089851,0.020923,-0.079626,-0.145335,,-0.053505,3195,-0.019008,3138,quotes only | Top 10% | trail50
+quotes only,B: trail50 result,Top 5%,hold,3503,184,64,0.438196,-0.044212,-0.171583,0.102919,-0.156748,-0.306803,,-0.113633,1634,0.016481,1869,quotes only | Top 5% | hold
+quotes only,B: trail50 result,Top 5%,trail20,3503,184,48,0.320582,-0.023525,-0.060785,0.014947,-0.058408,-0.101065,,-0.044254,1634,-0.005403,1869,quotes only | Top 5% | trail20
+quotes only,B: trail50 result,Top 5%,trail30,3503,184,47,0.328005,-0.032178,-0.083306,0.019854,-0.076103,-0.147314,,-0.051774,1634,-0.015046,1869,quotes only | Top 5% | trail30
+quotes only,B: trail50 result,Top 5%,trail40,3503,184,47,0.351699,-0.026559,-0.097559,0.048312,-0.086423,-0.180555,,-0.06195,1634,0.004382,1869,quotes only | Top 5% | trail40
+quotes only,B: trail50 result,Top 5%,trail50,3503,184,52,0.370825,-0.029159,-0.112854,0.058931,-0.101434,-0.210964,,-0.071642,1634,0.007982,1869,quotes only | Top 5% | trail50
+quotes only,B: trail50 result,Top 1%,hold,926,83,36,0.493521,0.090068,-0.147015,0.335134,-0.136724,-0.457791,2.291784,-0.032448,355,0.166238,571,quotes only | Top 1% | hold
+quotes only,B: trail50 result,Top 1%,trail20,926,83,20,0.308855,-0.023006,-0.082045,0.035749,-0.084586,-0.13213,,-0.029719,355,-0.018833,571,quotes only | Top 1% | trail20
+quotes only,B: trail50 result,Top 1%,trail30,926,83,22,0.318575,-0.028675,-0.110856,0.050833,-0.120097,-0.202635,,-0.037374,355,-0.023266,571,quotes only | Top 1% | trail30
+quotes only,B: trail50 result,Top 1%,trail40,926,83,25,0.363931,-0.001227,-0.114266,0.113872,-0.120699,-0.245991,,-0.033771,355,0.019007,571,quotes only | Top 1% | trail40
+quotes only,B: trail50 result,Top 1%,trail50,926,83,30,0.399568,0.030097,-0.111581,0.178202,-0.122561,-0.302796,4.478505,-0.02921,355,0.066969,571,quotes only | Top 1% | trail50
+quotes + volume,B: trail50 result,Top 10%,hold,5987,263,84,0.416903,-0.038601,-0.142134,0.076752,-0.134664,-0.250302,,-0.075021,3139,0.001541,2848,quotes + volume | Top 10% | hold
+quotes + volume,B: trail50 result,Top 10%,trail20,5987,263,71,0.336061,-0.01109,-0.042944,0.024263,-0.04046,-0.073423,,-0.010656,3139,-0.011568,2848,quotes + volume | Top 10% | trail20
+quotes + volume,B: trail50 result,Top 10%,trail30,5987,263,74,0.346751,-0.009108,-0.053022,0.03792,-0.048334,-0.107622,,-0.011142,3139,-0.006867,2848,quotes + volume | Top 10% | trail30
+quotes + volume,B: trail50 result,Top 10%,trail40,5987,263,73,0.363287,-0.004036,-0.060733,0.056076,-0.054815,-0.131783,,-0.012621,3139,0.005426,2848,quotes + volume | Top 10% | trail40
+quotes + volume,B: trail50 result,Top 10%,trail50,5987,263,68,0.373476,-0.003713,-0.072259,0.070334,-0.066135,-0.15435,,-0.022427,3139,0.016913,2848,quotes + volume | Top 10% | trail50
+quotes + volume,B: trail50 result,Top 5%,hold,3204,192,64,0.438514,-0.018294,-0.154572,0.132252,-0.13425,-0.314826,,-0.071685,1510,0.029298,1694,quotes + volume | Top 5% | hold
+quotes + volume,B: trail50 result,Top 5%,trail20,3204,192,54,0.359238,0.006717,-0.036885,0.060026,-0.037927,-0.080487,6.216009,0.011983,1510,0.002024,1694,quotes + volume | Top 5% | trail20
+quotes + volume,B: trail50 result,Top 5%,trail30,3204,192,57,0.369226,0.012657,-0.046699,0.07921,-0.041621,-0.120723,4.037925,0.013514,1510,0.011893,1694,quotes + volume | Top 5% | trail30
+quotes + volume,B: trail50 result,Top 5%,trail40,3204,192,61,0.387953,0.019415,-0.053247,0.099071,-0.040086,-0.154163,2.915824,0.011798,1510,0.026205,1694,quotes + volume | Top 5% | trail40
+quotes + volume,B: trail50 result,Top 5%,trail50,3204,192,61,0.395443,0.02251,-0.064898,0.120075,-0.05228,-0.186045,3.150729,0.005131,1510,0.038001,1694,quotes + volume | Top 5% | trail50
+quotes + volume,B: trail50 result,Top 1%,hold,757,85,34,0.490092,0.128388,-0.115259,0.375327,-0.123436,-0.52576,1.772191,0.011578,282,0.197736,475,quotes + volume | Top 1% | hold
+quotes + volume,B: trail50 result,Top 1%,trail20,757,85,20,0.351387,0.010313,-0.063507,0.088921,-0.074147,-0.126084,6.774698,0.003554,282,0.014325,475,quotes + volume | Top 1% | trail20
+quotes + volume,B: trail50 result,Top 1%,trail30,757,85,19,0.364597,0.012885,-0.088548,0.113333,-0.111703,-0.182874,7.962887,0.00825,282,0.015637,475,quotes + volume | Top 1% | trail30
+quotes + volume,B: trail50 result,Top 1%,trail40,757,85,25,0.412153,0.044845,-0.083879,0.171924,-0.118136,-0.232798,3.067095,0.036916,282,0.049552,475,quotes + volume | Top 1% | trail40
+quotes + volume,B: trail50 result,Top 1%,trail50,757,85,28,0.422721,0.059111,-0.097111,0.211433,-0.127349,-0.26195,2.69052,0.038749,282,0.071199,475,quotes + volume | Top 1% | trail50

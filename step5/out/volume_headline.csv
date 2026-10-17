@@ -1,0 +1,9 @@
+features,model,part,trades,rounds,auc_reach3,corr_trail50,id
+quotes only,A: reaches 3x,valid,14262,3,0.743169,-0.009596,quotes only | A: reaches 3x | valid
+quotes only,A: reaches 3x,check,59398,3,0.750857,-0.00787,quotes only | A: reaches 3x | check
+quotes only,B: trail50 result,valid,14262,49,0.405798,0.326954,quotes only | B: trail50 result | valid
+quotes only,B: trail50 result,check,59398,49,0.422255,0.332151,quotes only | B: trail50 result | check
+quotes + volume,A: reaches 3x,valid,14262,53,0.745557,-0.014754,quotes + volume | A: reaches 3x | valid
+quotes + volume,A: reaches 3x,check,59398,53,0.748736,0.002731,quotes + volume | A: reaches 3x | check
+quotes + volume,B: trail50 result,valid,14262,56,0.415641,0.334134,quotes + volume | B: trail50 result | valid
+quotes + volume,B: trail50 result,check,59398,56,0.431359,0.333867,quotes + volume | B: trail50 result | check
