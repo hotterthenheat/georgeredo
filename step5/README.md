@@ -105,25 +105,38 @@
 - What profit there is comes from a handful of days.
 - Like steps 2–4, this is a negative result. It was not tuned to look better.
 
-## Per-contract volume (SPY done, SPX, QQQ and IWM downloading)
+## Does per-contract volume help? Not enough
 
 The one input the models above didn't have is the trading in each contract: whether buyers were paying up, and how much was trading against its own normal.
-- ThetaData's one-minute bars with volume, for every same-day contract within 2% of the 9:31 price.
-- `volume.py` adds 12 volume measurements: the contract's volume over the last 1, 5 and 15 minutes and since the open, its burst against its own average, its trade count and average trade size, the share bought above the middle quote, and the call/put mix around it.
-- A minute's bar is used only once it has closed. `verify_volume.py` re-derived 100 SPY trades from the raw bars and quotes with separate code: no differences.
-- Both models are refitted with and without volume on the same trades and the same split, so any gain is volume's alone.
-- One measurement had to change: the vendor's average-price field is a running average for the whole session, rounded to the cent, so a minute's own average cannot be taken back out of it (re-derived, it fell inside the bar's low–high range on only 16% of bars). The buying-side share uses each bar's last trade against the middle quote instead.
+- **The data:** ThetaData's one-minute bars with volume, for every same-day contract within 2% of the 9:31 price. That is 3,687 sessions over four products, with no gaps or errors.
+- **The measurements:** `volume.py` adds 12. They are:
+  - the contract's volume over the last 1, 5 and 15 minutes and since the open;
+  - its burst against its own average;
+  - its trade count and average trade size;
+  - the share bought above the middle quote;
+  - the call/put mix around it.
+- **No look-ahead:** a minute's bar is used only once it has closed.
+- **Checked:** `verify_volume.py` re-derived 100 trades of each product from the raw bars and quotes with separate code. No differences.
+- **The test:** both models are refitted with and without volume on the same trades and the same split, so any gain is volume's alone. It covers the 274,713 turn-up buys with volume on 2025–2026.
+- **One measurement had to change.** The vendor's average-price field is a running average for the whole session, rounded to the cent, so a minute's own average can't be taken back out of it. Re-derived, it fell inside the bar's low–high range on only 16% of bars. The buying-side share uses each bar's last trade against the middle quote instead.
 
-**SPY (107,358 turn-up buys with volume; 59,398 of them in 2025–2026): volume added nothing.**
-
-| | Without volume | With volume |
+| 2025–2026 | Without volume | With volume |
 |---|---|---|
-| How well model A ranks runners on 2025–2026 (0.5 = coin flip) | 0.751 | 0.749 |
-| Model B's top 1%, 50% trailing stop | +3.0% a trade (926 trades) | +5.9% a trade (757 trades) |
-| Its 95% range | −11% to +18% | −10% to +21% |
-| Without its best 5 days | −12% | −13% |
+| How well model A ranks runners (0.5 = coin flip) | 0.740 | 0.747 |
+| Model A's top 1%: reached 3× | 27.2% | 32.1% |
+| Model A's top 1%, 50% trailing stop | +15.3% a trade (2,713 trades) | +22.1% a trade (3,699 trades) |
+| — its 95% range | −18% to +66% | −17% to +74% |
+| — without its best 5 days | −22% | −22% |
+| — days up | 27 of 158 | 29 of 136 |
+| Model A's top 5%, 50% trailing stop | +5.7% (range −14% to +29%; −16% without the best 5 days) | +15.5% (range −10% to +52%; −14% without the best 5 days) |
+| Model B's top 1%, 50% trailing stop | −3.1% | −3.5% |
 
-The full four-product result will be added when the download finishes.
+- Volume barely changed how well the models rank trades.
+- Its 12 measurements carried 5% of model A's decisions and 3% of model B's.
+- The top picks averaged more with volume. But like every result above, the average rests on a handful of days, and without them it is negative.
+- So volume moved the picks around without making them reliable.
+
+**Correction.** An earlier commit (`f9f2746`) reported this test for SPY alone, with figures that were wrong. The volume table was joined to the trades without the product, so SPY's volume also matched QQQ, IWM and SPX trades with the same strike, day and minute. The test now joins on the product and stops if any trade is matched twice. The figures above are from the corrected run.
 
 ## Files
 

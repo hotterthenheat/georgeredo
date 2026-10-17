@@ -113,8 +113,13 @@ def test():
     import lightgbm as lgb
     import step5.model as M
     T = M.load()
-    V = pl.concat([pl.read_parquet(os.path.join(OUT, f'volume_features_{r}.parquet')) for r in M.PRODUCTS if os.path.exists(os.path.join(OUT, f'volume_features_{r}.parquet'))])
-    T = T.join(V, on=['session', 'tag', 'strike', 'right', 'entry_minute'], how='inner').filter(pl.col('has_vol') == 1)
+    V = pl.concat([pl.read_parquet(os.path.join(OUT, f'volume_features_{r}.parquet')).with_columns(pl.lit(r).alias('root'))
+                   for r in M.PRODUCTS if os.path.exists(os.path.join(OUT, f'volume_features_{r}.parquet'))])
+    key = ['root', 'session', 'tag', 'strike', 'right', 'entry_minute']
+    if V.select(key).is_duplicated().any(): raise SystemExit('a trade has two volume rows')
+    n = T.height
+    T = T.join(V, on=key, how='inner').filter(pl.col('has_vol') == 1)
+    if T.select(key).is_duplicated().any() or T.height > n: raise SystemExit('the join matched a trade twice')
     T = T.with_columns(pl.max_horizontal(pl.col('max_bid').fill_null(0.0), pl.col('settle')).alias('_pp'))
     T = T.with_columns((((pl.col('_pp') - pl.col('entry_ask')) * 100 - M.FEE - pl.when(pl.col('_pp') > 0).then(M.FEE).otherwise(0.0)) / pl.col('cost')).alias('r_perfect'),
                        pl.col('r_trail50').clip(-1.0, 4.0).alias('y_b')).drop('_pp')
@@ -136,7 +141,7 @@ def test():
             for lab, _ in M.TOPS:
                 rows.append(M.bucket_rows(C.filter(pl.col(s) >= cuts[lab]), lab).with_columns(pl.lit(label).alias('features'), pl.lit(name).alias('model'),
                                                                                              pl.lit(float(cuts[lab])).alias('cut')))
-            if s == 'sb':
+            if True:   # both models' top buckets
                 for lab, _ in M.TOPS[3:]:
                     for x in M.EXITS:
                         o = dict(features=label, model=name, bucket=lab, exit=x); o.update(M.stress(C.filter(pl.col(s) >= cuts[lab]), x)); srows.append(o)
@@ -146,7 +151,7 @@ def test():
     H = pl.DataFrame(heads).with_columns(pl.concat_str(['features', 'model', 'part'], separator=' | ').alias('id')); r6(H).write_csv(os.path.join(OUT, 'volume_headline.csv'))
     B = pl.concat(rows, how='diagonal_relaxed').with_columns(pl.concat_str(['features', 'model', 'bucket'], separator=' | ').alias('id'))
     r6(B).write_csv(os.path.join(OUT, 'volume_buckets.csv'))
-    S = pl.DataFrame(srows, infer_schema_length=None).with_columns(pl.concat_str(['features', 'bucket', 'exit'], separator=' | ').alias('id'))
+    S = pl.DataFrame(srows, infer_schema_length=None).with_columns(pl.concat_str(['features', 'model', 'bucket', 'exit'], separator=' | ').alias('id'))
     r6(S).write_csv(os.path.join(OUT, 'volume_stress.csv'))
     I = pl.concat(imps).sort('features', 'model', 'share', descending=[False, False, True]).with_columns(pl.concat_str(['features', 'model', 'feature'], separator=' | ').alias('id'))
     r6(I).write_csv(os.path.join(OUT, 'volume_importance.csv'))
