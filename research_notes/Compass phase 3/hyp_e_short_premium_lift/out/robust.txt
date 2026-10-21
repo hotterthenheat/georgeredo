@@ -1,0 +1,34 @@
+== fit: t2 LOGISTIC deciles, hold cells: 60; lift CI above zero (both yardsticks): 0; below: 0; point > 0: 26; wo5 > 0: 10
+   LR D1-2 put d15 w2: N 1100, cell 0.68% vs tod 0.51%, lift +0.16% [-1.36, +1.54], $+0.22 [-2.62, +2.79], wo5 $-0.73
+   LR D1 condor d20 w2: N 581, cell 2.46% vs tod 2.92%, lift -0.46% [-6.72, +5.33], $-1.09 [-10.38, +7.52], wo5 $-6.10
+   LR D1 condor d25 w1: N 645, cell 3.03% vs tod 4.22%, lift -1.19% [-10.35, +7.14], $-0.67 [-6.45, +4.42], wo5 $-3.81
+   LR D1-2 condor em1 w2: N 822, cell 2.83% vs tod 2.39%, lift +0.44% [-3.61, +4.31], $+0.36 [-6.04, +6.35], wo5 $-2.90
+   LR best lower bound: D1 put d10 w2: lift +1.52% [-0.84, +3.20], N 341
+== fit: FOMC decision days in the period (typed list, unverified): 17 sessions, 5860 rows removed of 147195
+   unconditional put d15 w2 hold: on decision days -7.23% of risk (N 203, full-loss 0.08) vs the other days +0.99% (N 5479, full-loss 0.019); D1-2 rows on decision days: 140, their mean -4.88%
+   unconditional condor d20 w2 hold: on decision days -3.63% of risk (N 203, full-loss 0.18) vs the other days +2.55% (N 5611, full-loss 0.051); D1-2 rows on decision days: 141, their mean -3.03%
+   unconditional condor d25 w2 hold: on decision days -6.45% of risk (N 204, full-loss 0.24) vs the other days +3.32% (N 5845, full-loss 0.072); D1-2 rows on decision days: 141, their mean -7.58%
+   unconditional condor em1 w2 hold: on decision days -2.77% of risk (N 201, full-loss 0.17) vs the other days +2.45% (N 4854, full-loss 0.040); D1-2 rows on decision days: 139, their mean -1.81%
+   GBM deciles, decision days removed, hold cells: lift CI above zero: 20 of 60; below: 0; wo5 > 0: 33
+   no-FOMC D1-2 put d15 w2: N 1029, cell 2.16% vs tod 1.05%, lift +1.11% [+0.21, +1.94], $+2.05 [+0.35, +3.62], wo5 $+1.41; full-loss sig 0.012 vs all 0.019
+   no-FOMC D1 condor d20 w2: N 514, cell 5.25% vs tod 3.29%, lift +1.95% [-2.87, +5.87], $+3.30 [-3.91, +9.33], wo5 $+0.17; full-loss sig 0.035 vs all 0.051
+   no-FOMC D1 condor d25 w1: N 543, cell 12.07% vs tod 4.36%, lift +7.72% [+1.00, +13.94], $+5.36 [+1.00, +9.44], wo5 $+3.29; full-loss sig 0.098 vs all 0.166
+   no-FOMC D1-2 condor em1 w2: N 818, cell 3.75% vs tod 3.01%, lift +0.74% [-2.16, +3.15], $+1.46 [-3.20, +5.33], wo5 $-0.65; full-loss sig 0.031 vs all 0.040
+   no-FOMC D1-2 condor d25 w2: N 1180, cell 5.53% vs tod 4.28%, lift +1.25% [-1.94, +4.07], $+1.94 [-2.72, +6.09], wo5 $-0.22; full-loss sig 0.050 vs all 0.072
+== oos: t2 LOGISTIC deciles, hold cells: 60; lift CI above zero (both yardsticks): 22; below: 0; point > 0: 55; wo5 > 0: 43
+   LR D1-2 put d15 w2: N 851, cell 2.17% vs tod 1.68%, lift +0.49% [-1.09, +1.83], $+0.86 [-2.06, +3.31], wo5 $-0.03
+   LR D1 condor d20 w2: N 503, cell 8.72% vs tod 4.92%, lift +3.80% [-0.31, +7.84], $+5.59 [-0.78, +11.60], wo5 $+1.83
+   LR D1 condor d25 w1: N 529, cell 8.77% vs tod 4.68%, lift +4.10% [-3.93, +12.15], $+2.35 [-2.77, +7.41], wo5 $-0.82
+   LR D1-2 condor em1 w2: N 743, cell 7.97% vs tod 4.20%, lift +3.77% [+0.59, +6.74], $+5.87 [+0.89, +10.47], wo5 $+3.22
+   LR best lower bound: D1-2 condor d15 w1: lift +6.65% [+2.66, +10.05], N 499
+== oos: FOMC decision days in the period (typed list, unverified): 14 sessions, 4847 rows removed of 128686
+   unconditional put d15 w2 hold: on decision days +0.07% of risk (N 168, full-loss 0.06) vs the other days +1.37% (N 4717, full-loss 0.023); D1-2 rows on decision days: 111, their mean +4.97%
+   unconditional condor d20 w2 hold: on decision days +12.05% of risk (N 168, full-loss 0.08) vs the other days +3.95% (N 4856, full-loss 0.066); D1-2 rows on decision days: 111, their mean +21.89%
+   unconditional condor d25 w2 hold: on decision days +11.44% of risk (N 168, full-loss 0.12) vs the other days +4.32% (N 4993, full-loss 0.095); D1-2 rows on decision days: 111, their mean +23.81%
+   unconditional condor em1 w2 hold: on decision days +10.63% of risk (N 168, full-loss 0.07) vs the other days +3.12% (N 4455, full-loss 0.064); D1-2 rows on decision days: 111, their mean +19.04%
+   GBM deciles, decision days removed, hold cells: lift CI above zero: 25 of 60; below: 0; wo5 > 0: 52
+   no-FOMC D1-2 put d15 w2: N 793, cell 2.60% vs tod 1.48%, lift +1.12% [-0.24, +2.40], $+2.08 [-0.46, +4.44], wo5 $+1.41; full-loss sig 0.011 vs all 0.023
+   no-FOMC D1 condor d20 w2: N 351, cell 10.61% vs tod 4.50%, lift +6.11% [+2.68, +9.48], $+9.88 [+4.59, +15.23], wo5 $+6.98; full-loss sig 0.026 vs all 0.066
+   no-FOMC D1 condor d25 w1: N 355, cell 16.57% vs tod 3.79%, lift +12.78% [+6.18, +19.26], $+8.56 [+4.23, +12.85], wo5 $+6.36; full-loss sig 0.099 vs all 0.192
+   no-FOMC D1-2 condor em1 w2: N 739, cell 6.16% vs tod 3.41%, lift +2.75% [+0.10, +5.30], $+4.37 [+0.04, +8.46], wo5 $+2.42; full-loss sig 0.031 vs all 0.064
+   no-FOMC D1-2 condor d25 w2: N 858, cell 7.41% vs tod 4.85%, lift +2.55% [-1.00, +6.28], $+3.59 [-1.56, +8.93], wo5 $+0.97; full-loss sig 0.066 vs all 0.095

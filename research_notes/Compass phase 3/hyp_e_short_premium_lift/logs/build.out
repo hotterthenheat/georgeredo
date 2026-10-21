@@ -1,0 +1,12 @@
+SPY 100 of 980 57s
+/home/user/georgeredo/research_notes/Compass phase 2/hyp_d_vol_breakout/lib.py:202: RuntimeWarning: All-NaN slice encountered
+  rec['rng' + name] = (np.nanmax(h[lo:m + 1]) - np.nanmin(l[lo:m + 1])) / c[m] * 1e4
+SPY 200 of 980 110s
+SPY 300 of 980 164s
+SPY 400 of 980 219s
+SPY 500 of 980 277s
+SPY 600 of 980 332s
+SPY 700 of 980 388s
+SPY 800 of 980 443s
+SPY 900 of 980 502s
+SPY sessions on disk 980 kept 971 skipped 9 rows 69912 cols 176 scan minutes 72 551s

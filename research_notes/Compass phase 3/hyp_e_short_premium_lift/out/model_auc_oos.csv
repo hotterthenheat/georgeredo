@@ -1,0 +1,7 @@
+target,model,period,n,auc
+t2,full_gbm,oos,31740,0.590133380434595
+t2,full_lr,oos,31740,0.6389811998176615
+t2,base_gbm,oos,31740,0.5815856765379532
+t2,hypd_pooled_full_gbm_on_SPY,oos,15682,0.6024380986035662
+t2,hypd_pooled_full_lr_on_SPY,oos,15682,0.650149478813518
+t2,hypd_pooled_base_gbm_on_SPY,oos,15682,0.5771985037648887
