@@ -1,0 +1,14 @@
+{
+ "picks": {
+  "SPXW": {
+   "sym": "SPXW",
+   "side": "CALL",
+   "rule": "m1.00",
+   "wing": 25.0,
+   "t": 930,
+   "mgmt": "hold"
+  }
+ },
+ "n_eligible": 14,
+ "rule": "see s3_report.py docstring"
+}

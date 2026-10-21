@@ -1,0 +1,5 @@
+sessions 1097 2022-05-13 2026-10-09
+16:00 print - SPY-implied (pts): mean 0.044 median 0.001 sd 1.007 p5 -1.28 p95 1.38 |diff|>1: 18.0% >2: 3.0% >5: 0.2% max|diff| 15.55 on 2026-06-26
+15:59 -> 16:00 print move (pts): mean 0.056 median|.| 1.770 sd 3.239 p1 -8.74 p99 7.74 |move|>5: 9.8%
+fit n 656 mean 0.042 sd 0.867 |diff|>2: 2.9%
+oos n 441 mean 0.048 sd 1.185 |diff|>2: 3.2%
