@@ -50,3 +50,7 @@ its root is passed when it exists).
 ## Compass phase 2 (2026-10-21)
 
 The audit's replacements locked into `docs/compass-core-spec-v2.md`; four pre-registered tests of 0DTE defined-risk short premium and volatility (`reports/Compass phase 2.md`, notes and scripts under `research_notes/Compass phase 2/`): the closing-pin spreads, the boundary touch, debit verticals and the volatility breakout have no edge after fees; two post-hoc or unconditional candidates — the midday SPY 2-wide condor and the 15:00/15:30 iron ±5 fly on SPY/QQQ — are written with their confirmation tests, not as rules. `scripts/eod_recorder.py` records the Unusual Whales flow, dark pool, net-prem-ticks, minute bars and strike books daily to clear the audit's blockers.
+
+## Compass phase 3 (2026-10-21)
+
+The live Unusual Whales check settled the rate question (its implied vols are solved on the market's carry, so the terminal's 4.15% stands; its printed greeks are r = 0 and are never used); the OCC strike is decoded in one module in the terminal and the three static checks read zero; the owner's defaults are locked in the spec; `scripts/paper_tracker.py` logs the two candidates forward every session. Hypothesis E (the volatility model's quiet deciles) adds no significant lift over selling the same SPY spread unconditionally; hypothesis F (the 15:30 SPY/QQQ long call ±5 fly) passes its rule at the NBBO and $0.01 a leg worse but needs about 450 forward sessions to confirm. Report: `reports/Compass phase 3.md`; notes under `research_notes/Compass phase 3/`.
