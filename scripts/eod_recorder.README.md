@@ -9,7 +9,7 @@ Built 2026-10-21 from the owner's brief, the Unusual Whales docs on disk, the te
 recorder (3abida `src/data/feed/uw.ts`, `server/feed.ts`, `server/fieldRecorder.ts`, `docs/data-feed.md`,
 `docs/data-feed-samples.md`), the audit's endpoint list (`research_notes/Compass engine audit/move_atr_flow.md`,
 key question 6) and the lake's conventions (`data_lake/README.md`). **No vendor call was made while building it**;
-the first live call is the owner's smoke test (below). What that test must settle is listed at the end.
+the first live calls were the owner's smoke test of 2026-10-21 (below); what it settled is listed at the end.
 
 Needs: Python 3.11+ (zoneinfo; on Windows `pip install tzdata`), `polars` (its own Parquet writer — pyarrow is not
 needed; it is not installed on the build machine). Nothing else beyond the standard library.
@@ -18,13 +18,13 @@ needed; it is not installed on the build machine). Nothing else beyond the stand
 
 | pass | folder | route | a call asks | paging | rows a day (SPY, expected) |
 |---|---|---|---|---|---|
-| scan | `spot_strike` | `GET /api/stock/{t}/spot-exposures/strike` | the whole book by strike, every expiry together, as UW figured it (`time`, `price` on every row); `limit=500`, `page` from 0 | by `page` until a page is short; cap 10 | 491 a scan × 14 scans |
-| eod | `flow_alerts` | `GET /api/option-trades/flow-alerts` | `ticker_symbol`, `min_premium=25000`, `limit=200`, `newer_than` = the day's start, `older_than` walked back on `created_at` | by `older_than`; cap 60 pages | hundreds |
-| eod | `darkpool` | `GET /api/darkpool/{t}` | `date=D`, `limit=500` (200 if refused), `newer_than`/`older_than` walked back on `executed_at` | by `older_than`; cap 250 pages | thousands |
+| scan | `spot_strike` | `GET /api/stock/{t}/spot-exposures/strike` | the whole book by strike, every expiry together, as UW figured it (`time`, `price` on every row); `limit=500`, `page` from 0 (honoured) | by `page` until a page is short; cap 10 | 491 a scan × 14 scans (SPX 824, two pages) |
+| eod | `flow_alerts` | `GET /api/option-trades/flow-alerts` | `ticker_symbol`, `min_premium=25000`, `limit=200` (accepted), `newer_than` = the day's start (honoured), `older_than` walked back on `created_at` | by `older_than`; cap 60 pages | hundreds (200 a page) |
+| eod | `darkpool` | `GET /api/darkpool/{t}` | `date=D` (does not bound the day — the recorder's filter does), `limit=500` (accepted; 200 if refused), `newer_than`/`older_than` walked back on `executed_at` | by `older_than`; cap 250 pages | thousands (a page of 500 spans ~35 minutes) |
 | eod | `net_prem_ticks` | `GET /api/stock/{t}/net-prem-ticks` | `date=D` | one call | ~390 (a tick a minute) |
-| eod | `ohlc_1m` | `GET /api/stock/{t}/ohlc/1m` | `date=D`, `limit=1000` | one call | ~750 (pre-market to after hours; `market_time` r = regular) |
+| eod | `ohlc_1m` | `GET /api/stock/{t}/ohlc/1m` | `date=D`, `limit=1000` | one call | ~870 (04:00 to 20:00; `market_time` pr / r / po, every row kept) |
 | eod | `oi_strike` | `GET /api/stock/{t}/oi-per-strike` | `date=D` | one call | 491 (`call_oi`, `put_oi` a strike) |
-| eod | `chain` | `GET /api/stock/{t}/option-contracts` | `exclude_zero_oi_chains=true`, `limit=500`, `page` from 0 | by `page`; cap 40 | ~9,900 contracts (20 pages) |
+| eod | `chain` | `GET /api/stock/{t}/option-contracts` | `exclude_zero_oi_chains=true`, `limit=500`, `page` from 0 | by `page` until a page is short; cap 40 | 9,625 contracts (20 pages, the last 125 rows) |
 
 The flow alerts are asked on the MARKET route with `ticker_symbol`: the per-name route `/api/stock/{t}/flow-alerts`
 answers without `id`, `start_time` or `end_time` (seen live 2026-10-12). Every field a live answer carried is kept —
@@ -71,7 +71,7 @@ An index is asked by UW's own name (`SPX`): its book under `SPX` covers SPXW's d
 rows under SPX, 2026-10-12). It has no stock prints and no bars on Basic (`/darkpool/SPX` has nothing to say;
 `/ohlc/1m` answers 422 `cboe_index_access_missing`), so those two are not asked for an index. Its flow alerts are asked
 under BOTH roots, `SPX` and `SPXW` (and `NDX`/`NDXP`, `RUT`/`RUTW`, `VIX`/`VIXW` — `ALERT_ROOTS`), the dedupe on `id`
-making the second ask harmless; which root UW files them under is unsettled (below).
+making a row filed twice harmless; UW files them under both (the smoke: SPX 174 rows, SPXW 200).
 
 ## Where it lands, and the schema
 
@@ -115,7 +115,7 @@ The six stamps lead every file, then the endpoint's known columns (the field lis
 | `_name` | the universe name asked (`SPX` for a row whose `ticker` reads `SPXW`) |
 | `_key` | the row's identity (24 hex chars, see the dedupe) |
 
-Known columns per endpoint: `flow_alerts` 43, `darkpool` 18, `net_prem_ticks` 13, `ohlc_1m` 9, `oi_strike` 4,
+Known columns per endpoint: `flow_alerts` 44 (`missing_periscope` on an index's rows), `darkpool` 18, `net_prem_ticks` 13, `ohlc_1m` 9, `oi_strike` 4,
 `spot_strike` 37 (`ticker`, `date`, `time`, `price`, `strike` and the 32 `{call,put}_{gamma,delta,charm,vanna}_{oi,vol,ask,bid}`
 figures — charm as UW sends it, a YEAR's: the terminal divides it by 365 to print a day's), `chain` 26. A column the
 answer did not carry is null; the smoke test prints which known columns were missing and which were new.
@@ -215,7 +215,7 @@ calls, 0 rows added.
 2. `python3 -I scripts/eod_recorder.py --smoke --name SPY` — one call an endpoint (seven calls, one page each; the
    flow alerts of SPX would be two). It prints, for each route: the status, rows, the columns the answer carried,
    which known columns were missing, which columns are new, and the first row. It writes under `<root>/smoke/`,
-   never the real store. Read the output against the list "Unsettled" below and note what each point settled.
+   never the real store. The run of 2026-10-21 is kept in `data_recorder/smoke/smoke_SPY.txt`; what it settled is the list "Settled by the smoke test" below.
 3. `python3 -I scripts/eod_recorder.py --smoke --name SPX` — the index: the book answers; `darkpool` and `ohlc_1m`
    say "not asked"; whether `net_prem_ticks`, `oi_strike` and `chain` answer for SPX, and under which root the flow
    alerts come, is what this run settles.
@@ -258,40 +258,143 @@ copied into the crontab.)
 ## The tests
 
 `python3 -I tests/test_eod_recorder.py` (or `python3 -I -m pytest tests/test_eod_recorder.py -q` where pytest is
-installed; it is not on the build machine). Seventeen tests, all on the fake client and a fake clock, all passing on
+installed; it is not on the build machine). Nineteen tests, all on the fake client and a fake clock, all passing on
 2026-10-21: two runs add no duplicate and the second makes no call; a partial marker is fetched again without a
 duplicate; the marker file's shape; the limiter paces 100 a minute (the 101st call waits 0.6 s, two hundred take a
 minute, three threads make 300 calls in 120 fake seconds without spinning), holds three in flight, and stops at the
 budget with the STOP line while saving the count; 429 waits the Retry-After, 5xx backs off 2-4-8-16 and gives up
 after five, a 404 is one call recorded and passed over; the token never appears in a log line, a marker, a failure
-record or an error even when a staged exception carries it, and the scrubber masks any Bearer value; every Parquet
+record or an error even when a staged exception carries it, and the scrubber masks any Bearer value; SPX's 824-strike book pages twice and its alert rows carry `missing_periscope` as a known column; the eod chain walk stops on the short page (20 pages for 9,625 contracts); every Parquet
 column is a string with the stamps first and every known column present, a bool as text, a null as null; the day's
 bounds in EDT and EST, the timestamp parser, the schedule (weekends, Thanksgiving, the half day, Friday evening →
 Monday 09:35, `--auto`'s window); the universe; the budget arithmetic.
 
-## Unsettled until the smoke test (each coded on the best reading, marked in the script's `Endpoint.note`)
+## The forward paper tracker (scripts/paper_tracker.py)
 
-1. **`flow-alerts` paging.** `limit=200` is assumed (UW caps `congress/recent-trades` and `multi-leg` at 200;
-   nothing on disk states this route's cap) with 100 as the fallback; `older_than` is assumed to compare `created_at`
-   (the answer echoes `older_than`/`newer_than` as ISO times); `newer_than` is assumed honoured but the recorder keeps
-   only the day's rows regardless. The echoed `newer_than` two months back suggests a 60-day window — a backfill of
-   past days with `--day` may reach that far, and no further.
-2. **`darkpool/{t}` paging.** `limit=500` is asked first (200 seen live; a 422 naming `limit` drops it to 200),
-   `older_than` on `executed_at` (the changelog of 2024-05-30 adds it to this route), `date=D` passed as well; whether
-   `date=D` alone bounds the day, and the per-day print count (hence the pages) for SPY, are unknown — the cap is 250
-   pages (50,000 prints).
-3. **`spot-exposures/strike` paging.** The route lists `limit` and `page`; the terminal read 491 rows for SPY in one
-   answer without either. The recorder asks `limit=500&page=0,1,…` and stops at a short page. If the route ignores
-   `page` and answers the same 491 rows for every page, the cap (10) ends it and the file holds 491 rows, the marker
-   `partial` with "page cap reached" — the smoke test's `pages` figure says which; then set `paging='none'`.
-4. **An index.** `SPX`'s book, OI by strike and chain: whether `/oi-per-strike` and `/option-contracts` answer for an
-   index, and whether the chain includes SPXW's contracts or only SPX's AM monthlies (the expiry breakdown lists the
-   roots apart; the book under SPX answered a SPXW date). `net-prem-ticks` for an index: unknown. Flow alerts: asked
-   under `SPX` and `SPXW` both — the smoke on SPX shows which root carries rows.
-5. **`ohlc/1m` `limit=1000`.** Seen live on 2026-10-12 (`date=D&limit=1000` answered a day's 746 bars). If a day
-   ever carries more than 1,000 bars the file is short by the oldest pre-market minutes; raise the limit.
-6. **`option-contracts` page count.** 20 pages for SPY on 2026-10-12 (9,875 contracts with OI); the cap is 40.
-   A name with more than 20,000 open contracts would be cut — none in the universe is near it.
-7. **Rate ceilings.** Three in flight is measured; the 100-a-minute bucket and the 20,000 daily budget are the
-   brief's, well under the 160,000 the plan allows (the per-minute header read 1,000,000 on 2026-10-12).
-8. **Holidays past 2027** and any early close other than the two listed: extend `HOLIDAYS` and `HALF_DAYS`.
+A second, isolated logger beside the recorder — it imports the recorder's client, limiter, scrubber, store and calendar
+and adds nothing to the UI or to any signal. It records, every session, the two Phase 2 candidates at their minutes
+from Unusual Whales' same-day chain, so their forward confirmation samples accumulate on their own:
+
+| candidate | names | minutes (New York) | the structure, as its report's engine picks it | threshold |
+|---|---|---|---|---|
+| `condor_em1` (`hyp_b_boundary_theta.md`, "The rule, conditional on X") | SPY | 11:30, 12:00, 12:30, 13:00, 13:30 | the ATM straddle M = call mid + put mid at the strike nearest spot with both sides quoted (a tie → the lower strike); short call = the first listed strike ≥ spot + M, short put = the first listed strike ≤ spot − M; longs 2 points beyond; shorts filled at the bid, longs at the ask; each spread's credit ≥ $0.05 (the condor's ≥ $0.10) else the row says `tradable=false`; every VIX | 60 settled sessions, then 120 |
+| `fly5` (`hyp_c_debit_flies.md` section 6) | SPY, QQQ | 15:00, 15:30 | K0 = the strike nearest spot with a call and a put quoted (a tie → the lower); wings ±5; three structures a capture — the iron fly (sell the K0 call and put at the bid, buy the K0−5 put and K0+5 call at the ask; max risk 5 − credit), the long call fly and the long put fly (buy the wings at the ask, sell two K0 at the bid; max risk = the debit); the short legs' bids > 0, max risk ≥ $0.05; stress fills $0.01 and $0.02 a leg worse | 250 settled sessions a name |
+
+Quotes: `GET /api/stock/{name}/option-contracts?expiry=D&limit=500&page=0…` (a same-day chain is one page — SPY's 302
+contracts on 2026-10-21, zero-OI strikes included; paged until a short page, cap 5), `nbbo_bid` / `nbbo_ask` a contract,
+the strike, right and expiry read off `option_symbol`. Spot: `GET /api/stock/{name}/stock-state` `close`. **The route
+carries no quote sizes**, so the `l*_bid_size` / `l*_ask_size` columns stay null until a route that does is found.
+
+The settle pass at **16:20** logs, a name: `ohlc/1m`'s last regular bar's close (the 15:59 bar, `close_1m_r`) and the
+bar stamped 16:00 (`close_1m_1600`), the stock-state `close` at that minute with its `market_time` (after the close it
+is the post-market last print — 773.50 against the official 773.09 on 2026-10-21 — logged, never used as the
+settlement) and its `prev_close`, and the official close from the daily bar (`/ohlc/1d?date=D`, the `r` row dated D,
+`close_official`). The settlement used is the official close when the bar carries it, else the 15:59 bar; each leg at
+intrinsic; $0.65 a leg at the open, nothing at expiry (a worthless leg pays nothing, an in-the-money leg settles at
+intrinsic with no fee assumed — the reports' convention); P&L at the NBBO fill, at the mid, and at the two stresses;
+and the **$0.25 settlement check** = |15:59 bar close − official close| ≤ 0.25 (`check_025`), a session. `--settle` is
+re-runnable: a name settled on the official close is skipped before any call; one settled on the 15:59 bar alone is
+asked again and gains its `official` rows once the daily bar has the day. The 16:20 time is the brief's; the terminal
+reads the official close from 4:01 pm and keeps it from 4:30 pm, so a 16:20 pass may find the daily bar's `r` row not
+yet there — the next `--settle` (or the daemon's next day) fills it.
+
+Where it writes: `data_recorder/paper/<candidate>/<NAME>/<YYYY-MM-DD>.parquet` (`PAPER_DATA` or `--data` moves the
+root) — a `capture` row a structure a minute and a `settle` row a structure a minute a settlement source, the
+recorder's six stamps first (`_scan` the minute, `settle`, or `smoke`), every value a string, the dedupe on
+(`row_kind`, `minute`, `structure`, `settle_source`); markers under `_markers/<candidate>/<NAME>/<day>/`, failures and
+the budget as the recorder's. **A second capture of the same minute makes no call and adds no row**; a partial (a
+failed call) is asked again. `data_recorder/paper/smoke/` holds the live smoke capture of 2026-10-21 (`_scan` =
+`smoke`, taken at 16:56 ET on the closing quotes: K0 773, straddle 0.83, shorts 775 and 772, both spreads under
+$0.05 — `tradable=false`); `--status` reads the real root alone and never counts it. `--dry-run` writes under
+`data_recorder/paper/dryrun/`.
+
+The budget: 9 name-minutes × (chain + state) = 18 capture calls, and 3 a name × 2 names = 6 at the settle — **24 a
+session**, the default `--budget` (`PAPER_BUDGET`), kept in `_budget/<day>.json` across runs; `--budget 22` leaves
+the daily bar out and the official close is read later off the next session's first stock-state `prev_close` (equal
+to the daily bar's close — 773.09 both, checked live at 16:43 ET on 2026-10-21); the brief's 20 cannot hold the two
+settlement calls a name on top of the 18 captures, so it is not the default. The limiter is one call in flight, 30 a
+minute.
+
+Modes:
+
+```
+python3 -I scripts/paper_tracker.py --log --when 11:30 [--day D]   # one capture (a scheduler's line); 11:30 12:00 12:30 13:00 13:30 15:00 15:30
+python3 -I scripts/paper_tracker.py --settle [--day D] [--official] # the after-close pass; re-runnable
+python3 -I scripts/paper_tracker.py --daemon                        # sleeps to each minute and to 16:20, Mon–Fri, holidays and half days skipped
+python3 -I scripts/paper_tracker.py --status [--data …]             # sessions logged, mean P&L (NBBO, mid, 1c, 2c), the check, what remains
+python3 -I scripts/paper_tracker.py --dry-run --log --when 15:00    # the fixture chain (tests/fixtures/paper_chain_SPY.json), no network
+python3 -I scripts/paper_tracker.py --log --when 11:30 --smoke      # a live capture under <root>/smoke/, labelled smoke, never a session
+```
+
+Half days are skipped whole (the reports skipped them; a 13:00 close has no 13:30 or 15:00 minute). A daemon started
+after 16:20 runs the day's settle pass; a capture minute it slept through is simply missing (a past minute's quotes
+cannot be asked for) — the `--log` lines from cron are the belt and braces.
+
+Keeping it running — **a second daemon beside the recorder**, my call: the two schedules do not overlap in a way worth
+one process (the recorder's scans are on the half hour at :00 and :30; the tracker's minutes too, but the tracker must
+hold its own one-in-flight budget and the recorder's budget must not pay for it), and a crash in one must not stop the
+other.
+
+- Windows, Task Scheduler: `scripts\paper_tracker.cmd`, a restart loop like `eod_recorder.cmd`, reading the SAME env
+  file (`%USERPROFILE%\.eod_recorder\env` or `RECORDER_ENV`: `UW_API_TOKEN=…`, optionally `PAPER_DATA=…`,
+  `PAPER_BUDGET=…`); register it as a second task at startup. Its log: `<paper root>\tracker.cmd.log`.
+- Linux, systemd: `scripts/paper_tracker.service` (`--daemon`, Restart=always, the same `EnvironmentFile` as the
+  recorder) and `scripts/paper_tracker.timer` (boot, and weekdays 11:00 New York). Copy beside the recorder's units,
+  then `systemctl daemon-reload && systemctl enable --now paper_tracker.timer paper_tracker.service`.
+- cron, no daemon (`CRON_TZ=America/New_York`, the env file sourced): `30 11,12,13 * * 1-5` and `0 12,13,15 * * 1-5`
+  and `30 15 * * 1-5` → `python3 -I scripts/paper_tracker.py --log --when HH:MM` with the matching minute (one line a
+  minute, seven lines), and `20 16 * * 1-5 … --settle`.
+
+Tests: `python3 -I tests/test_paper_tracker.py` — nine tests on the fixture chain and a fake clock: the two strike
+rules land on the hand-set strikes (spot 773.40 → straddle 2.10 at 773 → shorts 776 and 771, longs 778 and 769, credit
+$0.30 at the NBBO and $0.355 at the mid; K0 773 ±5 → iron credit 1.88 / risk 3.12, call fly debit 3.27, put fly 3.30);
+the P&L on a known settlement (777.20: condor −$92.60 NBBO / −$87.10 mid; iron −$234.60; call fly −$249.60; put fly
+−$252.60; at 773.00 the condor keeps $27.40); a whole dry-run session is 24 calls and a repeat capture or settle
+makes none; the official close arriving later is added once; a tight budget takes it from the next session's
+`prev_close`; a failed call is recorded and asked again; the token never appears in a line, a marker, a failure
+record or a Parquet cell; the schedule skips weekends, holidays and half days. All passing on 2026-10-21.
+
+## Settled by the smoke test (2026-10-21, the owner's token; `data_recorder/smoke/smoke_SPY.txt`, `smoke_SPX.txt`, the Parquet rows beside them, and seven follow-up probes the same evening)
+
+Every route answered 200 for SPY and for SPX. What each point of the build's list came to:
+
+1. **`flow-alerts` paging — settled.** `limit=200` is accepted (200 rows a page; SPY's page reached from 20:14Z back to
+   19:43Z, so a day is several pages); `newer_than` and `older_than` are both honoured on `created_at` (the window
+   [04:00Z, 13:00Z) of the day answered `[]`, not the session before's rows). The 100 fallback stays for a refusal.
+   An index is filed under BOTH roots — SPX 174 rows and SPXW 200 (its page cap) — so both stay asked; the dedupe on
+   `id` covers a row filed twice. Index rows carry one more field, `missing_periscope` ("true"), now a known column
+   (`FLOW_ALERT_COLUMNS`); a stock's rows leave it null.
+2. **`darkpool/{t}` paging — settled.** `limit=500` is accepted: the page of 500 held 490 distinct rows (ten exact
+   duplicates; 446 `tracking_id`s — the key is `tracking_id` + `executed_at` + `price` + `size`, which is why). **`date=D`
+   does NOT bound the rows**: `date=2026-10-21&older_than=2026-10-21T04:00:00Z` answered the session before's prints
+   (23:59Z of the 20th), so the day is bounded by the recorder's own filter and the walk stops once a page's oldest
+   row is before the day's start. One page spanned 19:58–20:33Z (35 minutes of SPY), so a day is 10–20 pages of 500,
+   far under the cap of 250.
+3. **`spot-exposures/strike` paging — settled: `page` is honoured.** SPY's book is 491 strikes in one page; SPX's
+   page 0 answered 500 rows (strikes 200 → 7660) and page 1 the remaining 324 — 824 strikes, two pages, the walk
+   stopping on the short page. The cap stays a generous 10 (5,000 strikes). `tests/test_eod_recorder.py` keeps the
+   two-page case.
+4. **An index — settled.** `/net-prem-ticks` answers for SPX (428 rows from 09:30 ET, the 13 fields); `/oi-per-strike`
+   answers (548 strikes); `/option-contracts` answers under SPX with BOTH roots' contracts in one chain (`SPXW261021…`
+   first — the heaviest volume — and `SPX261…` monthlies), 500 a page; the book answers under SPX (above). `darkpool`
+   and `ohlc/1m` are not asked for an index, by design (no stock prints; bars are a CBOE grant).
+5. **`ohlc/1m` `limit=1000` — settled.** 669 bars at 16:37 ET: 242 `pr` from 04:00, the 390 `r` of 09:30–15:59 and 37
+   `po` so far; a whole day to 20:00 is about 870, under the limit. Every row is kept and stamped; `market_time` says
+   which session. The 15:59 bar is the last regular one (its close 773.13 on the 21st; UW's daily bar put the
+   official close at 773.09 — the closing print is not a minute bar's close).
+6. **`option-contracts` page count — settled.** The eod walk asks `page` 0, 1, … and stops on the first page short of
+   500 (`_walk_pages`); SPY's page 19 answered 125 rows — 9,625 contracts with open interest in 20 pages — so the cap
+   of 40 is not near. The smoke's "500 / page cap 1" was the smoke's own one-page rule. The route also takes
+   `expiry=YYYY-MM-DD` (SPY's 2026-10-21 chain: 302 contracts in one page, zero-OI strikes included), which the
+   paper tracker uses.
+7. **Rate ceilings** — unchanged: three in flight is measured; the 100-a-minute bucket and the 20,000 daily budget are
+   the brief's (the smoke runs spent 26 calls in all).
+
+## Still unsettled
+
+- **A full day's page counts** for `flow_alerts` and `darkpool` on a busy name (the smoke asked one page each): the
+  caps (60 and 250) stand far above the extrapolation (5–10 and 10–20 pages); the first real `--eod` run's markers say
+  the counts.
+- **Holidays past 2027** and any early close other than the two listed: extend `HOLIDAYS` and `HALF_DAYS` each autumn.
+- **Whether `newer_than` reaches further back than about 60 days** for a backfill of old days with `--day` (the echoed
+  `newer_than` on 2026-10-12 sat two months back); not needed for the forward record.

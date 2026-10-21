@@ -362,6 +362,56 @@ def test_budget_arithmetic_stays_under_twenty_thousand():
     assert expected < 2_500
 
 
+def test_spx_book_of_824_strikes_pages_twice_and_index_alert_rows_carry_missing_periscope():
+    """The smoke test of 2026-10-21: SPX's spot-exposures book is 824 strikes — page 0 answers 500 (strikes 200 →
+    7660), page 1 the remaining 324 — so `page` is honoured and the walk stops on the short page (2 pages, done); and
+    SPX's flow alerts (under SPX and SPXW) carry `missing_periscope`, a known column since .2, never an extra."""
+    with tempfile.TemporaryDirectory() as d:
+        scrub = R.Scrub(TOKEN)
+        log = R.make_logger(scrub, None, stream=None, name='eod_recorder_test_spx')
+        clock = R.FakeClock(dt.datetime(2026, 10, 21, 20, 15, tzinfo=R.UTC))
+        limiter = R.RateLimiter(max_in_flight=3, per_minute=100, daily_budget=20_000, clock=clock)
+        client = R.FakeUwClient(limiter, log, clock, scrub, counts={'spot_strike_index': 824})
+        store = R.Store(Path(d))
+        rec = R.Recorder(client, store, limiter, log, clock, scrub, names=['SPX'])
+        s = rec.run_pass('scan', DAY, '10:00', R.ny_at(DAY, '10:00'))
+        assert s['failed'] == 0 and s['incomplete'] == 0 and s['calls'] == 2
+        m = store.marker('spot_strike', 'SPX', DAY, '10:00')
+        assert m.status == 'done' and m.pages == 2 and m.rows_fetched == 824 and m.rows_added == 824
+        pages = [(p, q.get('page')) for p, q in client.requests if p.endswith('spot-exposures/strike')]
+        assert pages == [('/api/stock/SPX/spot-exposures/strike', 0), ('/api/stock/SPX/spot-exposures/strike', 1)]
+        df = store.read('spot_strike', 'SPX', DAY)
+        assert df.height == 824 and df['strike'].n_unique() == 824 and df['_key'].n_unique() == 824
+        # the index's flow alerts: both roots, missing_periscope a known column filled 'true'
+        assert 'missing_periscope' in R.FLOW_ALERT_COLUMNS
+        rec.run_pass('eod', DAY, 'eod', R.ny_at(DAY, '16:15'), only=['flow_alerts'])
+        fa = store.read('flow_alerts', 'SPX', DAY)
+        assert fa.height == 450 + 40 and sorted(fa['ticker'].unique().to_list()) == ['SPX', 'SPXW']
+        assert fa['missing_periscope'].unique().to_list() == ['true']
+        assert fa.columns.index('missing_periscope') < len(R.STAMPS) + len(R.FLOW_ALERT_COLUMNS)   # known, not an extra
+        # a stock's rows leave it null, and an unknown column still lands as an extra after the known ones
+        rec2 = R.Recorder(client, store, limiter, log, clock, scrub, names=['SPY'])
+        rec2.run_pass('eod', DAY, 'eod', R.ny_at(DAY, '16:15'), only=['flow_alerts'])
+        spy = store.read('flow_alerts', 'SPY', DAY)
+        assert spy['missing_periscope'].null_count() == spy.height
+
+
+def test_eod_chain_walk_pages_until_a_short_page_under_the_cap():
+    """The eod path asks page 0, 1, … and stops on the first page short of 500 (SPY live: page 19 held 125 rows, 20
+    pages, the cap 40 untouched); the smoke path stops at one page and says so."""
+    with tempfile.TemporaryDirectory() as d:
+        rec, client, store, lines, clock, limiter = harness(Path(d), names=['SPY'])
+        client.counts['chain'] = 9_625
+        s = rec.run_pass('eod', DAY, 'eod', R.ny_at(DAY, '16:15'), only=['chain'])
+        pages = [q['page'] for p, q in client.requests if p.endswith('option-contracts')]
+        assert pages == list(range(20)) and s['incomplete'] == 0
+        m = store.marker('chain', 'SPY', DAY, 'eod')
+        assert m.status == 'done' and m.pages == 20 and m.rows_fetched == 9_625 and R.ENDPOINTS['chain'].max_pages == 40
+        rec.max_pages = 1
+        got = rec.fetch(R.ENDPOINTS['chain'], 'SPY', DAY, clock.utcnow())
+        assert got.pages == 1 and not got.complete and 'page cap 1' in got.note
+
+
 if __name__ == '__main__':
     failed = 0
     for name, fn in sorted(globals().items()):

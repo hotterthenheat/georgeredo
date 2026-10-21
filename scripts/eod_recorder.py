@@ -30,7 +30,9 @@ The data root is RECORDER_DATA, or data_recorder/ in the repo (git-ignored).
 MODES: --eod, --scan, --daemon, --auto (the pass the clock calls for — for cron), --dry-run (no network: a fake client
 on tests/fixtures), --smoke (one call an endpoint, one name — the owner's first run), --status.
 
-Read scripts/eod_recorder.README.md for the schema, the budget arithmetic, the smoke procedure and what is unsettled.
+Read scripts/eod_recorder.README.md for the schema, the budget arithmetic, the smoke procedure, what the smoke test of
+2026-10-21 settled and what is still unsettled. The forward paper tracker (scripts/paper_tracker.py) imports this
+module's client, limiter, scrubber and store.
 """
 from __future__ import annotations
 
@@ -54,7 +56,7 @@ from zoneinfo import ZoneInfo
 
 import polars as pl
 
-VERSION = 'eod-recorder-2026-10-21.1'
+VERSION = 'eod-recorder-2026-10-21.2'   # .2: the smoke test of 2026-10-21 settled the endpoint notes (README "Settled")
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 NY = ZoneInfo('America/New_York')
@@ -77,9 +79,10 @@ DEFAULT_NAMES = CORE_NAMES + TOP20
 
 # An index has no stock prints and no bars on UW Basic (darkpool: nothing; ohlc: 422 cboe_index_access_missing), and
 # lists its PM dailies under a second root (3abida docs/data-feed-samples.md: SPX's own dates are the AM monthlies,
-# SPXW's every session). Its book (/spot-exposures/strike) is asked under the index's own name — UW answered a SPXW
-# date with rows under SPX — while flow alerts are asked under BOTH roots (unsettled which root UW files them under;
-# the smoke test tells, and the dedupe on `id` makes asking both harmless).
+# SPXW's every session). Its book (/spot-exposures/strike) is asked under the index's own name — the smoke test of
+# 2026-10-21 read SPX's whole book under SPX, 824 strikes over two pages — and its chain under SPX carries BOTH roots'
+# contracts (SPXW261021… and SPX261… option_symbols in one answer). Flow alerts are filed under BOTH roots (SPX 174
+# rows and SPXW 200 in the smoke), so both are asked; the dedupe on `id` makes a row filed twice harmless.
 INDEX_NAMES = frozenset(['SPX', 'NDX', 'RUT', 'VIX'])
 ALERT_ROOTS = {'SPX': ['SPX', 'SPXW'], 'NDX': ['NDX', 'NDXP'], 'RUT': ['RUT', 'RUTW'], 'VIX': ['VIX', 'VIXW']}
 
@@ -133,6 +136,7 @@ FLOW_ALERT_COLUMNS = (
     'underlying_price', 'iv', 'iv_start', 'iv_end', 'delta', 'gamma', 'theta', 'vega', 'rho', 'has_sweep',
     'has_floor', 'has_singleleg', 'has_multileg', 'all_opening_trades', 'issue_type', 'sector', 'marketcap',
     'next_earnings_date', 'er_time',
+    'missing_periscope',   # an index root's rows carry it (SPX and SPXW, 2026-10-21 smoke: "true"); a stock's do not
 )
 DARKPOOL_COLUMNS = (
     'tracking_id', 'ticker', 'executed_at', 'trf_executed_at', 'price', 'size', 'premium', 'volume', 'nbbo_bid',
@@ -170,39 +174,53 @@ ENDPOINTS: dict[str, Endpoint] = {
         page_limit=200, page_limit_fallback=100, max_pages=60, paging='older_than', time_field='created_at',
         note='the market route with ticker_symbol (the per-name route answers without id or the times); '
              'min_premium 25000; newer_than the day\'s start, older_than walked back on created_at. '
-             'UNSETTLED: the largest `limit` (200 asked, 100 the fallback) and whether newer_than is honoured — '
-             'the recorder keeps only the day\'s rows either way.'),
+             'SETTLED 2026-10-21: limit=200 accepted (200 rows a page, SPY 19:43–20:14Z in one page, so a day is '
+             'several pages; the 100 fallback stays for a refusal); newer_than and older_than are both honoured '
+             '(the window [04:00Z, 13:00Z) of the day answered empty, not the session before\'s rows); an index '
+             'is filed under both roots (SPX 174 + SPXW 200 rows); index rows carry missing_periscope.'),
     'darkpool': Endpoint(
         'darkpool', 'eod', '/api/darkpool/{t}', ('tracking_id', 'executed_at', 'price', 'size'), DARKPOOL_COLUMNS,
         indices=False, page_limit=500, page_limit_fallback=200, max_pages=250, paging='older_than',
         time_field='executed_at',
         note='date=D and older_than walked back on executed_at (the per-name route takes older_than since 2024-05-30; '
-             '/darkpool/recent ignores it). UNSETTLED: the largest `limit` (500 asked, 200 seen live) and whether '
-             'date=D already bounds the rows — the recorder keeps only the day\'s rows either way.'),
+             '/darkpool/recent ignores it). SETTLED 2026-10-21: limit=500 accepted (a page of 500 held 490 distinct '
+             'rows — ten exact duplicates, 446 tracking_ids: the key is tracking_id+executed_at+price+size); '
+             'date=D does NOT bound the rows (older_than=04:00Z of D answered the session before\'s prints), so the '
+             'day is bounded by the recorder\'s own filter and the walk stops at the day\'s start; a page spans ~35 '
+             'minutes of SPY\'s session, so a day is 10–20 pages (the 200 fallback stays for a refusal).'),
     'net_prem_ticks': Endpoint(
         'net_prem_ticks', 'eod', '/api/stock/{t}/net-prem-ticks', ('tape_time',), NET_PREM_COLUMNS,
-        note='date=D, one call, a tick a minute (81 rows by 10:50 ET seen). UNSETTLED: an index\'s answer.'),
+        note='date=D, one call, a tick a minute from pre-market (SPY 510 rows 07:30–16:14 ET on 2026-10-21). SETTLED '
+             '2026-10-21: an index answers (SPX 428 rows from 09:30 ET, the same 13 fields).'),
     'ohlc_1m': Endpoint(
         'ohlc_1m', 'eod', '/api/stock/{t}/ohlc/1m', ('start_time',), OHLC_COLUMNS, indices=False, page_limit=1000,
         page_limit_fallback=None,
-        note='date=D&limit=1000: the day\'s whole tape, pre-market to after hours (746 bars seen; market_time r '
-             'is the regular session). An index answers 422 (cboe_index_access_missing) and is not asked.'),
+        note='date=D&limit=1000: the day\'s whole tape, pre-market to after hours, every row kept and stamped '
+             '(2026-10-21 at 16:37 ET: 669 bars — 242 pr from 04:00, 390 r 09:30–15:59, 37 po; a whole day ~870, '
+             'under the limit; market_time r is the regular session, the 15:59 bar the last of it). An index '
+             'answers 422 (cboe_index_access_missing) and is not asked.'),
     'oi_strike': Endpoint(
         'oi_strike', 'eod', '/api/stock/{t}/oi-per-strike', ('date', 'strike'), OI_STRIKE_COLUMNS,
-        note='date=D, one call: call_oi and put_oi by strike, every expiry together (491 rows for SPY). The count '
-             'dated D is the positions at the close of the session BEFORE D (UW publishes it about 06:45 on D).'),
+        note='date=D, one call: call_oi and put_oi by strike, every expiry together (491 rows for SPY, 548 for SPX '
+             'on 2026-10-21 — an index answers). The count dated D is the positions at the close of the session '
+             'BEFORE D (UW publishes it about 06:45 on D).'),
     'chain': Endpoint(
         'chain', 'eod', '/api/stock/{t}/option-contracts', ('option_symbol',), CHAIN_COLUMNS, page_limit=500,
         page_limit_fallback=None, max_pages=40, paging='page',
-        note='exclude_zero_oi_chains=true, 500 a page, `page` from 0, a page short of 500 the last (SPY: 9,875 '
-             'contracts, 20 pages). open_interest is the count published on D (the session before\'s close), '
-             'prev_oi the one before it. No date parameter: the route answers the current day only.'),
+        note='exclude_zero_oi_chains=true, 500 a page, `page` from 0, a page short of 500 the last — the eod walk '
+             '(_walk_pages) stops on the first short page, cap 40 (SETTLED 2026-10-21: SPY page 19 answered 125 '
+             'rows, 9,625 contracts in 20 pages; SPX answers, both roots\' contracts in one chain, SPXW261021… '
+             'first). Heaviest volume first, so an expiry\'s contracts are spread over the pages. open_interest is '
+             'the count published on D (the session before\'s close), prev_oi the one before it. No date '
+             'parameter: the route answers the current day only. `expiry=YYYY-MM-DD` filters to one date (SPY '
+             '2026-10-21: 302 rows in one page, zero-OI contracts included — the paper tracker reads it so).'),
     'spot_strike': Endpoint(
         'spot_strike', 'scan', '/api/stock/{t}/spot-exposures/strike', ('strike',), SPOT_STRIKE_COLUMNS,
         page_limit=500, page_limit_fallback=None, max_pages=10, paging='page',
         note='the whole book by strike, every expiry together, as UW figured it at `time` (491 rows for SPY in one '
-             'answer). UNSETTLED: whether `page` applies here as it does to /option-contracts (asked with '
-             'limit=500, page from 0; one page when the answer is short).'),
+             'answer). SETTLED 2026-10-21: `page` is honoured — SPX page 0 answered 500 rows (strikes 200 → 7660) '
+             'and page 1 the remaining 324, so SPX\'s book is 824 strikes over two pages; the cap of 10 pages is '
+             'generous on purpose (5,000 strikes).'),
 }
 EOD_ENDPOINTS = [e for e in ENDPOINTS.values() if e.pass_ == 'eod']
 SCAN_ENDPOINTS = [e for e in ENDPOINTS.values() if e.pass_ == 'scan']
@@ -684,6 +702,8 @@ class FakeUwClient:
                       'start_time': int(t.timestamp() * 1000) - 1800, 'end_time': int(t.timestamp() * 1000),
                       'total_premium': str(25_000 + (i * 7919) % 400_000), 'strike': str(700 + i % 40),
                       'has_sweep': i % 3 == 0, 'has_floor': i % 11 == 0, 'type': 'put' if i % 2 else 'call'})
+            if root in INDEX_NAMES or root in ('SPXW', 'NDXP', 'RUTW', 'VIXW'):
+                r['missing_periscope'] = True     # as the live SPX and SPXW rows carried it (2026-10-21 smoke)
             rows.append(r)
         rows.sort(key=lambda r: r['created_at'], reverse=True)
         older = parse_ts(params.get('older_than'))

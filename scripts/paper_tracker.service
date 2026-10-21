@@ -1,0 +1,25 @@
+# The forward paper confirmation tracker (scripts/paper_tracker.py --daemon) as a second systemd service beside
+# eod_recorder.service on the always-on Linux box — its own process, its own schedule (captures at 11:30, 12:00,
+# 12:30, 13:00, 13:30, 15:00 and 15:30 New York, the settle pass at 16:20), the same EnvironmentFile for the token.
+# Copy to /etc/systemd/system/paper_tracker.service, set User, WorkingDirectory and the EnvironmentFile, then:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now paper_tracker
+# The token lives in the EnvironmentFile OUTSIDE the repository (UW_API_TOKEN=…; optionally PAPER_DATA=…,
+# PAPER_BUDGET=…), mode 600, owned by the service's user. Nothing is read from a file inside the repo.
+[Unit]
+Description=Compass Phase 2 paper tracker (the two candidates' forward confirmation samples)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=compass
+WorkingDirectory=/home/compass/georgeredo
+EnvironmentFile=/home/compass/.config/eod_recorder/env
+ExecStart=/usr/bin/python3 -I scripts/paper_tracker.py --daemon
+Restart=always
+RestartSec=10
+# a stopped daemon loses the captures it slept through (a past minute's quotes cannot be asked for); on restart after
+# 16:20 it runs the day's settle pass, and the markers skip what is recorded
+
+[Install]
+WantedBy=multi-user.target
