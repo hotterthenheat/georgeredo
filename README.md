@@ -31,3 +31,7 @@
 - Trading only the top 1%: every pick made money in total, almost all of it on one day (2025-11-20); without its best 5 days it lost $620,114, and one pick a day lost money.
 - Adding each contract's minute-by-minute trading volume (3,687 sessions) barely changed how well the models rank, and their top picks still rest on a handful of days.
 - See `step5/README.md`.
+
+## Compass engine audit (2026-10-21)
+
+The owner's 16-module Compass specification audited under its own guardrails (no invented weights, friction-adjusted, picked on 2022–2024 and read on 2025–2026). Six groups of tests on the data on disk, one report: `reports/Compass engine audit.md`, with every number's script under `research_notes/Compass engine audit/`. No directional rule survives after fees; what holds is the 15:58 flat, the −32% backstop, a breakeven lock at +0% with a target on, a trailed remainder, the r,q pricer read off put-call parity, Method A flips with three-book slicing, a net/gross confidence in place of the sign gate, the MOC magnitude as a volatility gauge, and an ATR > 1.5 block on counter-trend fades.
