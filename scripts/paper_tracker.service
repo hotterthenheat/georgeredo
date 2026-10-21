@@ -1,12 +1,15 @@
 # The forward paper confirmation tracker (scripts/paper_tracker.py --daemon) as a second systemd service beside
 # eod_recorder.service on the always-on Linux box — its own process, its own schedule (captures at 11:30, 12:00,
-# 12:30, 13:00, 13:30, 15:00 and 15:30 New York, the settle pass at 16:20), the same EnvironmentFile for the token.
+# 12:30, 13:00, 13:30, 14:00, 14:30, 15:00 and 15:30 New York, the fly5 close quotes at 15:58, the settle pass at
+# 16:20), the same EnvironmentFile for the token. Its budget is 80 calls a session by default (README "The budget");
+# a PAPER_BUDGET set lower in the EnvironmentFile (the old 24) would starve candidate 3 — leave it unset or raise it.
+# VIX for candidate 3 comes from the Theta Terminal on 127.0.0.1:25503 when it runs on this machine (else none).
 # Copy to /etc/systemd/system/paper_tracker.service, set User, WorkingDirectory and the EnvironmentFile, then:
 #   sudo systemctl daemon-reload && sudo systemctl enable --now paper_tracker
 # The token lives in the EnvironmentFile OUTSIDE the repository (UW_API_TOKEN=…; optionally PAPER_DATA=…,
 # PAPER_BUDGET=…), mode 600, owned by the service's user. Nothing is read from a file inside the repo.
 [Unit]
-Description=Compass Phase 2 paper tracker (the two candidates' forward confirmation samples)
+Description=Compass paper tracker (the candidates' forward confirmation samples)
 After=network-online.target
 Wants=network-online.target
 

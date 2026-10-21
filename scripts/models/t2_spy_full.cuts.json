@@ -1,0 +1,17 @@
+{
+ "model": "t2_spy_full",
+ "cuts": [
+  0.18703489638087936,
+  0.23511863039346378,
+  0.2704904085549213,
+  0.3001351706123132,
+  0.33025425246758877,
+  0.36040625020619277,
+  0.39828041185485996,
+  0.4451984510260254,
+  0.5135431523541117
+ ],
+ "from": "the nine inner quantiles (0.1 .. 0.9) of the final score on the cut slice 2024-07-01 -> 2024-12-31, scan minutes 09:35 .. 15:25",
+ "decile_rule": "clip(searchsorted(cuts, score, side=\"right\"), 0, 9) + 1 (hyp_d model.decile_of)",
+ "n_cut_rows": 8875
+}

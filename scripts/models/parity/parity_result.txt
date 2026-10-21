@@ -1,0 +1,59 @@
+# parity_t2_spy.py — 2026-10-21T21:56:16Z
+
+## Part 1: the port — Theta inputs through vol_model.features_at, 14 sessions (2023-03-08, 2023-10-26, 2024-01-22, 2024-02-09, 2025-02-28, 2025-04-30, 2025-07-23, 2025-11-25, 2026-02-19, 2026-04-21, 2026-05-12, 2026-07-14, 2026-10-08, 2026-10-09), every scan minute; the straddle from the Theta chain through vol_model.atm_straddle
+rows 1008; decile agreement: t2_spy_full 1008/1008, t2_spy_novix 1008/1008
+max |difference| by feature: m 0, ret1 0, ret5 0, ret15 0, ret30 0, aret1 0, aret5 0, aret15 0, aret30 0, rng1 0, rng5 0, rng15 0, rng30 0, range_pos 0, or_pos 0, day_move_atr 0, day_range_atr 0, rv_session 3.21e-12, vix 0, vix_chg_open 0, vix_chg30 0, vix_chg_prev 0, straddle_rel 0, implied30 0, rel_vol 0
+
+## Part 2: 2026-10-09 — UW's bars for the session (ohlc/1m, 390 regular bars) against Theta's (390)
+bars: max |diff| open 0.055 high 0.24 low 0.06 close 0.07 volume 25717; closes differing by more than half a cent 85 of 390; minutes present in one and not the other 0; UW/Theta volume ratio a minute: median 0.9960, min 0.7869, max 1.3011
+scan minutes 72; decile agreement: t2_spy_full 58/72, t2_spy_novix 56/72
+max |difference| by feature (UW bars vs the parquet): m 0, ret1 0.515, ret5 0.45, ret15 0.45, ret30 0.45, aret1 0.515, aret5 0.45, aret15 0.45, aret30 0.45, rng1 0.774, rng5 0.774, rng15 0.774, rng30 0.774, range_pos 0.0322, or_pos 0.0206, day_move_atr 0.00514, day_range_atr 0.00882, rv_session 0.262, vix 0, vix_chg_open 0, vix_chg30 0, vix_chg_prev 0, straddle_rel 6.67e-08, implied30 2.9e-08, rel_vol 0.071
+  ret1: worst at m=50 parquet 0.128801 vs UW 0.644023
+  ret5: worst at m=280 parquet 4.36956 vs UW 4.81937
+  ret15: worst at m=280 parquet 2.1843 vs UW 2.63401
+  ret30: worst at m=280 parquet 4.81959 vs UW 5.26941
+  aret1: worst at m=50 parquet 0.128801 vs UW 0.644023
+  aret5: worst at m=280 parquet 4.36956 vs UW 4.81937
+  aret15: worst at m=280 parquet 2.1843 vs UW 2.63401
+  aret30: worst at m=280 parquet 4.81959 vs UW 5.26941
+  rng1: worst at m=15 parquet 10.4435 vs UW 9.66993
+  rng5: worst at m=15 parquet 17.6637 vs UW 16.8901
+  rng15: worst at m=15 parquet 19.9845 vs UW 19.2109
+  rng30: worst at m=15 parquet 19.9845 vs UW 19.2109
+  range_pos: worst at m=15 parquet 0.2 vs UW 0.167785
+  or_pos: worst at m=280 parquet 1.94706 vs UW 1.96765
+  day_move_atr: worst at m=280 parquet 0.670307 vs UW 0.675452
+  day_range_atr: worst at m=15 parquet 0.227846 vs UW 0.219026
+  rv_session: worst at m=5 parquet 3.60721 vs UW 3.86909
+  straddle_rel: worst at m=50 parquet 0.00258887 vs UW 0.00258881
+  implied30: worst at m=280 parquet 0.000644028 vs UW 0.000643999
+  rel_vol: worst at m=95 parquet 0.852874 vs UW 0.923828
+decile disagreements: t2_spy_novix m=25 decile 8 -> 9 (score 0.4166 -> 0.4198); t2_spy_full m=55 decile 4 -> 5 (score 0.2952 -> 0.3055); t2_spy_novix m=55 decile 3 -> 4 (score 0.2419 -> 0.2629); t2_spy_full m=65 decile 4 -> 5 (score 0.2985 -> 0.3172); t2_spy_novix m=65 decile 6 -> 5 (score 0.3139 -> 0.3026); t2_spy_full m=70 decile 3 -> 4 (score 0.2562 -> 0.2853); t2_spy_novix m=80 decile 2 -> 3 (score 0.2046 -> 0.2190); t2_spy_novix m=85 decile 5 -> 4 (score 0.2809 -> 0.2627); t2_spy_full m=90 decile 4 -> 3 (score 0.2780 -> 0.2690); t2_spy_full m=100 decile 6 -> 7 (score 0.3570 -> 0.3609); t2_spy_novix m=100 decile 6 -> 5 (score 0.3082 -> 0.2955); t2_spy_novix m=120 decile 6 -> 5 (score 0.3222 -> 0.2921); t2_spy_novix m=140 decile 2 -> 3 (score 0.2071 -> 0.2196); t2_spy_novix m=145 decile 2 -> 3 (score 0.2111 -> 0.2152); t2_spy_full m=150 decile 4 -> 5 (score 0.2794 -> 0.3008); t2_spy_full m=160 decile 5 -> 6 (score 0.3226 -> 0.3308); t2_spy_novix m=160 decile 4 -> 5 (score 0.2687 -> 0.2867); t2_spy_novix m=175 decile 1 -> 2 (score 0.1629 -> 0.1726); t2_spy_full m=185 decile 1 -> 2 (score 0.1862 -> 0.1951); t2_spy_novix m=205 decile 2 -> 1 (score 0.1814 -> 0.1664); t2_spy_novix m=210 decile 5 -> 4 (score 0.2795 -> 0.2758); t2_spy_novix m=245 decile 4 -> 5 (score 0.2633 -> 0.2847); t2_spy_full m=250 decile 4 -> 3 (score 0.2732 -> 0.2696); t2_spy_full m=255 decile 2 -> 3 (score 0.2304 -> 0.2366); t2_spy_full m=280 decile 4 -> 3 (score 0.2740 -> 0.2524); t2_spy_full m=295 decile 2 -> 3 (score 0.1902 -> 0.2386); t2_spy_novix m=295 decile 2 -> 3 (score 0.1821 -> 0.2324); t2_spy_novix m=310 decile 3 -> 2 (score 0.2150 -> 0.2075); t2_spy_full m=320 decile 4 -> 3 (score 0.2734 -> 0.2693); t2_spy_full m=345 decile 1 -> 2 (score 0.1851 -> 0.1929)
+candidate 3 minutes (13:00 .. 15:00), full model decile parquet -> UW: m210 5->5, m240 4->4, m270 5->5, m300 5->5, m330 2->2
+
+## Part 2: 2026-10-08 — UW's bars for the session (ohlc/1m, 390 regular bars) against Theta's (390)
+bars: max |diff| open 0.05 high 0.0304 low 0.05 close 0.12 volume 270927; closes differing by more than half a cent 144 of 390; minutes present in one and not the other 0; UW/Theta volume ratio a minute: median 0.9979, min 0.9227, max 1.4180
+scan minutes 72; decile agreement: t2_spy_full 57/72, t2_spy_novix 54/72
+max |difference| by feature (UW bars vs the parquet): m 0, ret1 0.906, ret5 0.648, ret15 1.17, ret30 0.775, aret1 0.906, aret5 0.648, aret15 1.17, aret30 0.775, rng1 0.516, rng5 0.517, rng15 0.516, rng30 0.516, range_pos 0.0405, or_pos 0.0466, day_move_atr 0.00751, day_range_atr 0.0015, rv_session 0.123, vix 0, vix_chg_open 0, vix_chg30 0, vix_chg_prev 0, straddle_rel 1.95e-07, implied30 8.09e-08, rel_vol 1.17
+  ret1: worst at m=215 parquet -0.777031 vs UW -1.68352
+  ret5: worst at m=220 parquet 4.53303 vs UW 5.18094
+  ret15: worst at m=230 parquet 3.23788 vs UW 4.4038
+  ret30: worst at m=40 parquet 11.2268 vs UW 10.4522
+  aret1: worst at m=215 parquet 0.777031 vs UW 1.68352
+  aret5: worst at m=220 parquet 4.53303 vs UW 5.18094
+  aret15: worst at m=230 parquet 3.23788 vs UW 4.4038
+  aret30: worst at m=40 parquet 11.2268 vs UW 10.4522
+  rng1: worst at m=85 parquet 6.19323 vs UW 5.67713
+  rng5: worst at m=210 parquet 12.6756 vs UW 12.1582
+  rng15: worst at m=85 parquet 18.8377 vs UW 18.3216
+  rng30: worst at m=100 parquet 18.8402 vs UW 18.324
+  range_pos: worst at m=30 parquet 0.632911 vs UW 0.673411
+  or_pos: worst at m=215 parquet -1.80611 vs UW -1.85271
+  day_move_atr: worst at m=215 parquet -0.76038 vs UW -0.767894
+  day_range_atr: worst at m=215 parquet 0.77691 vs UW 0.775408
+  rv_session: worst at m=10 parquet 3.28231 vs UW 3.40514
+  straddle_rel: worst at m=215 parquet 0.0030177 vs UW 0.0030179
+  implied30: worst at m=215 parquet 0.00124945 vs UW 0.00124953
+  rel_vol: worst at m=170 parquet 4.41363 vs UW 5.58223
+decile disagreements: t2_spy_novix m=10 decile 7 -> 8 (score 0.3634 -> 0.3731); t2_spy_novix m=20 decile 7 -> 8 (score 0.3634 -> 0.3776); t2_spy_full m=35 decile 7 -> 5 (score 0.3625 -> 0.3034); t2_spy_novix m=35 decile 8 -> 7 (score 0.3897 -> 0.3449); t2_spy_full m=40 decile 9 -> 7 (score 0.4463 -> 0.3831); t2_spy_novix m=50 decile 4 -> 5 (score 0.2691 -> 0.2884); t2_spy_full m=55 decile 9 -> 8 (score 0.4558 -> 0.4347); t2_spy_novix m=60 decile 10 -> 9 (score 0.4844 -> 0.4823); t2_spy_full m=65 decile 4 -> 3 (score 0.2773 -> 0.2703); t2_spy_novix m=70 decile 8 -> 9 (score 0.4108 -> 0.4187); t2_spy_full m=75 decile 6 -> 7 (score 0.3415 -> 0.3652); t2_spy_novix m=75 decile 6 -> 7 (score 0.3099 -> 0.3468); t2_spy_full m=85 decile 9 -> 8 (score 0.4615 -> 0.4378); t2_spy_novix m=95 decile 5 -> 4 (score 0.2814 -> 0.2730); t2_spy_novix m=115 decile 8 -> 9 (score 0.4173 -> 0.4183); t2_spy_full m=125 decile 9 -> 10 (score 0.4933 -> 0.5158); t2_spy_full m=135 decile 7 -> 6 (score 0.3688 -> 0.3496); t2_spy_novix m=135 decile 9 -> 8 (score 0.4194 -> 0.4113); t2_spy_novix m=155 decile 8 -> 7 (score 0.3905 -> 0.3630); t2_spy_full m=190 decile 6 -> 7 (score 0.3524 -> 0.3637); t2_spy_novix m=215 decile 4 -> 5 (score 0.2600 -> 0.2858); t2_spy_full m=220 decile 5 -> 4 (score 0.3106 -> 0.2933); t2_spy_novix m=220 decile 6 -> 5 (score 0.3269 -> 0.2913); t2_spy_novix m=240 decile 6 -> 7 (score 0.3288 -> 0.3606); t2_spy_full m=250 decile 6 -> 7 (score 0.3590 -> 0.3615); t2_spy_full m=265 decile 6 -> 8 (score 0.3583 -> 0.4200); t2_spy_novix m=265 decile 8 -> 9 (score 0.4149 -> 0.4339); t2_spy_full m=290 decile 7 -> 8 (score 0.3849 -> 0.3993); t2_spy_full m=295 decile 8 -> 7 (score 0.4086 -> 0.3871); t2_spy_novix m=295 decile 9 -> 8 (score 0.4328 -> 0.4109); t2_spy_full m=315 decile 8 -> 7 (score 0.4013 -> 0.3774); t2_spy_novix m=325 decile 10 -> 9 (score 0.4903 -> 0.4835); t2_spy_novix m=345 decile 8 -> 7 (score 0.3910 -> 0.3687)
+candidate 3 minutes (13:00 .. 15:00), full model decile parquet -> UW: m210 7->7, m240 6->6, m270 6->6, m300 8->8, m330 8->8

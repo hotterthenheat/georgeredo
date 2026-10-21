@@ -3,7 +3,9 @@ rem The forward paper confirmation tracker, kept running on this Windows machine
 rem Task Scheduler entry (run at startup, whether or not anyone is logged on) that starts the tracker's daemon again
 rem whenever it stops. It reads the SAME env file as the recorder — %USERPROFILE%\.eod_recorder\env, or RECORDER_ENV —
 rem lines of the form NAME=value, # a comment: UW_API_TOKEN=… (required); PAPER_DATA=… (the data root, data_recorder\paper
-rem in the repo by default); PAPER_BUDGET=… (24 calls a session by default). Nothing is read from a file inside the
+rem in the repo by default); PAPER_BUDGET=… (80 calls a session by default — leave it unset or at least 80: a lower
+rem value starves candidate 3); MACRO_EVENTS=… (the macro calendar, data\macro_events_2022_2027.json by default);
+rem THETA_BASE=… (the Theta Terminal for VIX, http://127.0.0.1:25503/v3 by default). Nothing is read from a file inside the
 rem repo, and the token is never written to the log.
 rem
 rem Python 3.11+ with polars; on Windows the zoneinfo database needs:  pip install tzdata

@@ -24,7 +24,7 @@ needed; it is not installed on the build machine). Nothing else beyond the stand
 | eod | `net_prem_ticks` | `GET /api/stock/{t}/net-prem-ticks` | `date=D` | one call | ~390 (a tick a minute) |
 | eod | `ohlc_1m` | `GET /api/stock/{t}/ohlc/1m` | `date=D`, `limit=1000` | one call | ~870 (04:00 to 20:00; `market_time` pr / r / po, every row kept) |
 | eod | `oi_strike` | `GET /api/stock/{t}/oi-per-strike` | `date=D` | one call | 491 (`call_oi`, `put_oi` a strike) |
-| eod | `chain` | `GET /api/stock/{t}/option-contracts` | `exclude_zero_oi_chains=true`, `limit=500`, `page` from 0 | by `page` until a page is short; cap 40 | 9,625 contracts (20 pages, the last 125 rows) |
+| eod | `chain` | `GET /api/stock/{t}/option-contracts` | `exclude_zero_oi_chains=true`, `limit=500`, `page` from 0 | by `page` until a page is short; cap 40, **150 for an index** (SPX: both roots in one chain) | 9,625 contracts (20 pages, the last 125 rows); SPX more than 20,000 |
 
 The flow alerts are asked on the MARKET route with `ticker_symbol`: the per-name route `/api/stock/{t}/flow-alerts`
 answers without `id`, `start_time` or `end_time` (seen live 2026-10-12). Every field a live answer carried is kept —
@@ -118,7 +118,10 @@ The six stamps lead every file, then the endpoint's known columns (the field lis
 Known columns per endpoint: `flow_alerts` 44 (`missing_periscope` on an index's rows), `darkpool` 18, `net_prem_ticks` 13, `ohlc_1m` 9, `oi_strike` 4,
 `spot_strike` 37 (`ticker`, `date`, `time`, `price`, `strike` and the 32 `{call,put}_{gamma,delta,charm,vanna}_{oi,vol,ask,bid}`
 figures — charm as UW sends it, a YEAR's: the terminal divides it by 365 to print a day's), `chain` 26. A column the
-answer did not carry is null; the smoke test prints which known columns were missing and which were new.
+answer did not carry is null; the smoke test prints which known columns were missing and which were new. Since `.3`
+four more close every row: `is_macro_event_day`, `macro_events`, `minutes_to_macro_release` and
+`minutes_since_last_release` (the scan's minutes at its scan time, an EOD row's null; all null when the calendar is not
+on disk — "The macro stamps" below); they are not vendor fields and never part of the key.
 
 ### Idempotent: the markers and the dedupe
 
@@ -160,9 +163,9 @@ logged as `GET <path?query> -> <status> <ms>`; the query never holds the token.
 | net_prem_ticks | **24** | |
 | ohlc_1m | **23** | no index |
 | oi_strike | **24** | |
-| chain | SPY 20 pages, most names 5–15 ≈ **250–480** | the cap is 40 pages a name |
+| chain | SPY 20 pages, most names 5–15, SPX ~45–60 ≈ **275–520** | the cap is 40 pages a name, 150 for an index (SPX) |
 | **a day, expected** | **≈ 1,100–1,900** | under a tenth of the budget, under 1.2% of UW's 160k |
-| **a day, every cap hit** | 3,360 + 1,500 + 5,750 + 71 + 960 = **11,641** | still under 20,000 (`test_budget_arithmetic…`) |
+| **a day, every cap hit** | 3,360 + 1,500 + 5,750 + 71 + (23 × 40 + 150 =) 1,070 = **11,751** | still under 20,000 (`test_budget_arithmetic…`) |
 
 Retries multiply a failing route by five at most; the daily budget is the hard stop either way.
 
@@ -258,7 +261,7 @@ copied into the crontab.)
 ## The tests
 
 `python3 -I tests/test_eod_recorder.py` (or `python3 -I -m pytest tests/test_eod_recorder.py -q` where pytest is
-installed; it is not on the build machine). Nineteen tests, all on the fake client and a fake clock, all passing on
+installed; it is not on the build machine). Twenty-one tests, all on the fake client and a fake clock, all passing on
 2026-10-21: two runs add no duplicate and the second makes no call; a partial marker is fetched again without a
 duplicate; the marker file's shape; the limiter paces 100 a minute (the 101st call waits 0.6 s, two hundred take a
 minute, three threads make 300 calls in 120 fake seconds without spinning), holds three in flight, and stops at the
@@ -267,18 +270,23 @@ after five, a 404 is one call recorded and passed over; the token never appears 
 record or an error even when a staged exception carries it, and the scrubber masks any Bearer value; SPX's 824-strike book pages twice and its alert rows carry `missing_periscope` as a known column; the eod chain walk stops on the short page (20 pages for 9,625 contracts); every Parquet
 column is a string with the stamps first and every known column present, a bool as text, a null as null; the day's
 bounds in EDT and EST, the timestamp parser, the schedule (weekends, Thanksgiving, the half day, Friday evening →
-Monday 09:35, `--auto`'s window); the universe; the budget arithmetic.
+Monday 09:35, `--auto`'s window); the universe; the budget arithmetic; since `.3`, an index's chain pages to 150 (a
+25,000-contract SPX chain done in 51 calls) while a stock's stops at 40 and is marked partial, and every row carries
+the macro stamps (a 10:30 scan 210 minutes before a 14:00 FOMC decision; an EOD row null minutes; a missing calendar
+null with one WARN; the stamps never in the key).
 
 ## The forward paper tracker (scripts/paper_tracker.py)
 
 A second, isolated logger beside the recorder — it imports the recorder's client, limiter, scrubber, store and calendar
-and adds nothing to the UI or to any signal. It records, every session, the two Phase 2 candidates at their minutes
-from Unusual Whales' same-day chain, so their forward confirmation samples accumulate on their own:
+and adds nothing to the UI or to any signal. It records, every session, the candidates at their minutes from Unusual
+Whales' same-day chain, so their forward confirmation samples accumulate on their own (`paper-tracker-2026-10-21.2`):
 
 | candidate | names | minutes (New York) | the structure, as its report's engine picks it | threshold |
 |---|---|---|---|---|
 | `condor_em1` (`hyp_b_boundary_theta.md`, "The rule, conditional on X") | SPY | 11:30, 12:00, 12:30, 13:00, 13:30 | the ATM straddle M = call mid + put mid at the strike nearest spot with both sides quoted (a tie → the lower strike); short call = the first listed strike ≥ spot + M, short put = the first listed strike ≤ spot − M; longs 2 points beyond; shorts filled at the bid, longs at the ask; each spread's credit ≥ $0.05 (the condor's ≥ $0.10) else the row says `tradable=false`; every VIX | 60 settled sessions, then 120 |
-| `fly5` (`hyp_c_debit_flies.md` section 6) | SPY, QQQ | 15:00, 15:30 | K0 = the strike nearest spot with a call and a put quoted (a tie → the lower); wings ±5; three structures a capture — the iron fly (sell the K0 call and put at the bid, buy the K0−5 put and K0+5 call at the ask; max risk 5 − credit), the long call fly and the long put fly (buy the wings at the ask, sell two K0 at the bid; max risk = the debit); the short legs' bids > 0, max risk ≥ $0.05; stress fills $0.01 and $0.02 a leg worse | 250 settled sessions a name |
+| `fly5` (`hyp_c_debit_flies.md` section 6) | SPY, QQQ | 15:00, 15:30 (+ 15:58 close quotes) | K0 = the strike nearest spot with a call and a put quoted (a tie → the lower); wings ±5; three structures a capture — the iron fly (sell the K0 call and put at the bid, buy the K0−5 put and K0+5 call at the ask; max risk 5 − credit), the long call fly and the long put fly (buy the wings at the ask, sell two K0 at the bid; max risk = the debit); the short legs' bids > 0, max risk ≥ $0.05; stress fills $0.01 and $0.02 a leg worse | 250 settled sessions a name |
+| `condor_d20` — **candidate 3** (`hyp_e_short_premium_lift.md` §8, "needs X (1)") | SPY | 13:00, 13:30, 14:00, 14:30, 15:00 | the 2-wide iron condor at Hypothesis B's `d20` short strikes (below), longs 2 beyond, held; fills and the tradable rule as `condor_em1`; every row carries the live t2 decile of the FROZEN SPY volatility model (below) — a column, never a filter | 150 settled sessions |
+| `fly_spxw` (`--spxw` only, OFF by default) | SPX (the SPXW root) | 15:00, 15:30 | the iron, call and put flies at ±5 and ±25 around K0 = the listed SPXW strike nearest parity-implied SPX (below) | 250 settled sessions |
 
 Quotes: `GET /api/stock/{name}/option-contracts?expiry=D&limit=500&page=0…` (a same-day chain is one page — SPY's 302
 contracts on 2026-10-21, zero-OI strikes included; paged until a short page, cap 5), `nbbo_bid` / `nbbo_ask` a contract,
@@ -296,34 +304,208 @@ and the **$0.25 settlement check** = |15:59 bar close − official close| ≤ 0.
 re-runnable: a name settled on the official close is skipped before any call; one settled on the 15:59 bar alone is
 asked again and gains its `official` rows once the daily bar has the day. The 16:20 time is the brief's; the terminal
 reads the official close from 4:01 pm and keeps it from 4:30 pm, so a 16:20 pass may find the daily bar's `r` row not
-yet there — the next `--settle` (or the daemon's next day) fills it.
+yet there — the next `--settle` (or the daemon's next day) fills it. SPY's whole-day `ohlc/1m` answer read there is
+also kept in the model's minute-bar cache (no extra call). A settle row carries its capture's macro stamps and (for
+candidate 3) its deciles, and (for fly5) the 15:58 exit beside the 16:00 settlement.
+
+### Candidate 3: the strike rule
+
+Hypothesis B's `nearest_delta` (`hyp_b_boundary_theta/engine.py`), reproduced line for line in `paper_tracker.py`
+(`bsm_abs_delta`, `otm_deltas`, `nearest_delta`): the candidates are the OTM strikes (a call K > spot, a put K < spot)
+whose quote stands (bid and ask, ask ≥ bid ≥ 0) with mid > 0, ask > 0 and the mid under its no-arbitrage bound (a
+call's < spot, a put's < K); each one's total vol v = σ√τ is solved from its own mid by 60 bisections on [1e-5, 5] at
+r = q = 0 (a put through parity, C = P + S − K); |delta| = N(d1) for a call, 1 − N(d1) for a put. Only σ√τ enters the
+delta, so the "τ to the 16:00 close" of the brief cancels — no clock is read. The short is the strike whose |delta| is
+nearest **0.20**; **a tie goes to the FARTHER out-of-the-money strike** — the larger call strike, the smaller put
+strike — because the code sorts `np.lexsort((-ks if call else ks, |delta − target|))`; the line's comment says "ties:
+the nearer-the-money strike", but the code is what produced the research's trades, so the code is reproduced (an exact
+tie in floating point is all but impossible on real quotes). Spot is UW's stock-state `close` at the minute, as for
+`condor_em1` (Hypothesis B used the close of the bar ending at the minute; `model_spot` logs that one). Longs at the
+short ± 2 (listed and quoted); each vertical's credit ≥ $0.05 or the row is `tradable=false` with its reason.
+Logged: `short_call_k`, `short_put_k`, `short_call_delta`, `short_put_delta`, `delta_target`; `k0` and `straddle`
+are the ATM straddle as `condor_em1` reads it (for the record). The tests price a chain at a known σ√τ and check the
+deltas against the closed form (S 500, v 0.01: the 0.20 call is 504 at 0.2142, the put 496 at 0.2095).
+
+### Candidate 3: the frozen model
+
+Hypothesis E's t2 model (`hyp_e_short_premium_lift/fit_model.py` `full_gbm`), refit ONCE by
+`scripts/models/freeze_t2_spy.py` exactly as Hypothesis E did — SPY alone, Hypothesis D's 25 features (`lib.FEATURES`,
+in that order) on `out/minutes_SPY_all.parquet`, fit = sessions before 2024-07-01 on the 71 scan minutes 09:35 … 15:25
+(28,750 rows, 405 sessions), Hypothesis D's LightGBM settings from its `model.py` (`num_leaves` 15, `learning_rate`
+0.05, 400 trees, `min_child_samples` 200, `subsample` 0.8, `colsample_bytree` 0.8, `reg_lambda` 1, `num_threads` 1,
+`random_state` 1), the nine decile cuts the inner quantiles of the final score on 2024-07 → 2024-12. **It reproduced
+Hypothesis E to the bit**: the scores of all 69,895 rows equal `out/scores_SPY.parquet`'s (max difference 0.0), AUC
+in-sample 0.8092, out-of-fold 0.6131, cut 0.5994 (Hypothesis E's 0.809 / 0.613 / 0.599), the cuts 0.187, 0.2351,
+0.2705, 0.3001, 0.3303, 0.3604, 0.3983, 0.4452, 0.5135 (its log). A second model, **`t2_spy_novix`**, is fitted
+identically without the four VIX features (`vix`, `vix_chg_open`, `vix_chg30`, `vix_chg_prev`; 21 features; AUC
+0.7919 / 0.6164 / 0.6108, its own cuts) so that a session without VIX still has a decile.
+
+Files, `scripts/models/`: `t2_spy_full.txt` and `t2_spy_novix.txt` (LightGBM's text model), `*.cuts.json` (the nine
+cuts and the decile rule — `clip(searchsorted(cuts, score, side='right'), 0, 9) + 1`), `*.manifest.json` (the features
+in order, the training rows and sessions, the AUCs, the settings, LightGBM 4.7.0, the sha256 of the model and the
+cuts, the reproduction check). The tracker **loads, never refits**: `vol_model.FrozenModel.load` checks both sha256s
+against the manifest and refuses a changed file; it scores in plain Python (`vol_model.TextBooster` walks the text
+model's trees as LightGBM's NumericalDecision does), so the owner's machine needs no LightGBM — checked equal to
+LightGBM's own scores on 3,000 rows (max difference 0.0) and on the ten fixture rows a model in
+`tests/fixtures/t2_feature_rows.json`. Columns a candidate-3 row carries: `t2_score_full`, `t2_decile_full`,
+`t2_score_novix`, `t2_decile_novix`, `t2_decile_primary`, `t2_primary_model`, the 25 features as `f_<name>`,
+`vix_source`, `vix_note`, `model_spot`, `model_atm_k`, `model_straddle`, `t2_bar_last` (the last bar's start, New
+York), `t2_bar_complete`, `t2_bar_asks`, `t2_prior_sessions`, `t2_atr_sessions`, `t2_relvol_sessions`, `t2_note`,
+`t2_model_full_sha`, `t2_model_novix_sha` (the first 16 of the sha256).
+
+The live features (`vol_model.features_at`, the exact definitions of `hyp_d_vol_breakout/lib.py` `session_rows`),
+from UW alone but VIX:
+
+- **SPY's minute bars**: `GET /api/stock/SPY/ohlc/1m?date=D&limit=1000`, the regular rows (`market_time` `r`). UW stamps
+  a bar by its open — `start_time` 13:30:00Z, `end_time` 13:31:00Z is the 09:30 bar (checked on the recorder's
+  2026-10-21 file and the two parity days) — the convention the model assumed (Theta's bars, stamped at their open):
+  the bar starting at 09:30 + (m − 1) closes at minute m and its close is the price known at m. A capture reads the bars
+  closing at or before its minute; if the bar closing AT the minute (stamped m − 1) is not out yet it asks once more
+  after 20 s, and otherwise carries the last close (`t2_bar_complete=false`, said in `t2_note`).
+- **The sessions before** (ATR14, the previous close, the 20-session relative-volume norm): the cache
+  `data_recorder/paper/_cache/bars/SPY/<day>.json`, a whole session a file — filled by the settle pass (its `ohlc/1m`
+  answer), else read from the recorder's own `data_recorder/ohlc_1m/SPY/<day>.parquet` (no call), else backfilled ONCE
+  with one call a day. The previous close is the last regular bar's close of the session before and ATR14 the mean
+  true range of the 14 sessions before (at least 10) — the audit's day table, which is built from minute bars, so the
+  "daily bars" are the cached minute bars' daily aggregates (UW's `/ohlc/1d?date=D` answers one day a call — its
+  `limit` does not reach back — so 15 calls would buy a definition the model was not trained on). `rel_vol` = the five
+  bars closing m−4 … m over the median of the same five bars in the up to 20 sessions before (at least 10; a missing
+  minute 0). The previous sessions are the recorder's calendar (half days included, as in the day table).
+- **The ATM straddle**: off the chain the capture already read — among the five listed strikes nearest the bars' spot,
+  the nearest with both sides quoted (ask > 0), call mid + put mid.
+- **VIX**: UW first — `GET /api/stock/VIX/stock-state` **answers 422 "Stock state data is not available for index
+  ticker VIX" on UW Basic (checked live 2026-10-21, one GET)**; the tracker asks at most once a session and remembers
+  the 422 for the day (`_cache/vix/<day>.json`). Then the owner's **Theta Terminal** at `http://127.0.0.1:25503/v3`
+  (`/index/history/price?symbol=VIX&date=YYYYMMDD&interval=1m&format=ndjson`; the terminal holds the key, none is sent;
+  always 127.0.0.1, never "localhost"; no proxy; `THETA_BASE` overrides): the day's VIX minutes (the print stamped m is
+  the price at m; `vix_chg_open` off the 09:31 print, `vix_chg30` off m − 30) and the session before's last print to
+  16:00, kept a day. Else none: the VIX features are null, `vix_source=none`, one WARN line a session.
+
+### Candidate 3: the pre-registration (written 2026-10-21, before any live session is logged)
+
+- **The primary decile** of a row is `t2_decile_full` (the full model) when all four VIX features are present at the
+  minute (`vix_source=theta`, normally), else `t2_decile_novix` (the no-VIX model): `t2_decile_primary`,
+  `t2_primary_model`. Both models' deciles are on every row; the other one is secondary.
+- **The test** (Hypothesis E §8, fixed there): signal = primary decile 1 at the capture minute; cell = SPY 2-wide iron
+  condor, 20-delta shorts, the five minutes 13:00 … 15:00, held to settlement; P&L = `pnl_nbbo` of the `official`
+  settle rows (shorts at the bid, longs at the ask, $0.65 a leg in, nothing at expiry; Hypothesis E settled on the 16:00
+  bar — `close_1m_1600` is logged beside it); rows `tradable=true`. The lift = Σ_s N_D1(s) · [mean(net | D1 at s) −
+  mean(net | every session at s)] / Σ_s N_D1(s), in % of max risk and in $, a 95 % paired session bootstrap (2,000
+  draws, seed 20261016). **Edge = both intervals above zero AND the lift > 0 without the best five sessions**, read
+  once at **≥ 150 settled sessions**. The expectation, written in Hypothesis E from the fit: inside the noise.
+  Secondary reads (never the verdict): the full and the no-VIX deciles each; with and without macro-event days
+  (`is_macro_event_day`, `minutes_to_macro_release` — the FOMC-afternoon effect Hypothesis E found); the unconditional
+  condor itself (the benchmark, "needs X" from Hypothesis B).
+- What the parity check (below) means for it: the live decile is the frozen model applied to UW's bars, which differ
+  from Theta's by cents; it agrees with the Theta-built decile at 80 % of minutes (all disagreements within one decile
+  at the candidate's five minutes, where it agreed 10 of 10). The test reads the live decile as defined here; it does
+  not claim to reproduce Theta's.
+
+### Candidate 3: parity of the live features (`scripts/models/parity/parity_t2_spy.py`, `parity_result.txt`)
+
+- **The port** (Theta's own bars, VIX prints and chain through `vol_model`, 14 sessions 2023-03 → 2026-10, every scan
+  minute, 1,008 rows): every feature equals `out/minutes_SPY_all.parquet` (max difference 0; `rv_session` 3e-12), the
+  decile agrees 1,008 of 1,008 for both models.
+- **UW's bars in place of Theta's** (2026-10-08 and 2026-10-09, `ohlc/1m?date=D` — two GETs, the answers kept in `data_recorder/parity/` (git-ignored); the sessions before and
+  VIX still Theta's, since rebuilding 20 sessions before each from UW is 20 calls a day): UW has the same 390 regular
+  minutes, but closes differ by more than half a cent at 85 and 144 of 390 minutes (max 7 and 12 cents; highs up to 24
+  cents), volume a minute 0.996–0.998 of Theta's at the median (0.79–1.42 at the extremes). Max |difference| by feature,
+  2026-10-09 / 2026-10-08: ret1 0.52 / 0.91 bp, ret5 0.45 / 0.65, ret15 0.45 / 1.17, ret30 0.45 / 0.78, rng1–30 0.77 /
+  0.52 bp, range_pos 0.032 / 0.041, or_pos 0.021 / 0.047, day_move_atr 0.005 / 0.008, day_range_atr 0.009 / 0.002,
+  rv_session 0.26 / 0.12 bp, rel_vol 0.07 / 1.17 (a 4.41 → 5.58 burst minute), straddle_rel and implied30 ~1e-7 (the
+  spot only), VIX features 0. **The decile agrees at 58 of 72 and 57 of 72 scan minutes (full model), 56 and 54
+  (no-VIX)**; all but three disagreements are one decile apart (three are two apart: 2026-10-08 m 35, 40, 265); D1 changed at 2 minutes
+  (full) and 2 (no-VIX) of the 144; **at candidate 3's minutes (13:00 … 15:00) the full-model decile agreed 10 of 10**
+  (5→5, 4→4, 5→5, 5→5, 2→2 and 7→7, 6→6, 6→6, 8→8, 8→8).
+
+### The 15:58 close quotes (fly5)
+
+At **15:58** New York the tracker reads SPY's and QQQ's same-day chain once a name and writes a `close1558` row for
+every fly5 structure logged that day (the iron, call and put flies of the 15:00 and the 15:30 captures): the four legs'
+NBBO (`l*_bid_1558`, `l*_ask_1558`), the liquidation value at the NBBO (`liq_nbbo`, cash a unit: sell what was bought
+at its bid, buy back what was sold at its ask) and at the mid (`liq_mid`), and the 15:58 exit P&L = (entry cash +
+liquidation cash) × 100 − $2.60 to open − $0.65 a contract closed (`pnl_1558_nbbo`: the NBBO both ways;
+`pnl_1558_mid`: the mid both ways). A long leg with no bid at 15:58 cannot be sold: it is left to expire (0 in both
+values, no fee); a leg missing from the chain leaves the row without a value and says so (`close_reason`). The settle
+rows carry the same figures beside the 16:00 intrinsic settlement (no fee at expiry). **Why**: an ETF option is
+physically settled — a SPY or QQQ option in the money at the close is exercised or assigned in shares. A fly that
+closes between its strikes leaves a long call exercised (100 shares bought, about $77,000 of SPY at ~773) and, past K0,
+two short calls assigned (200 shares sold, a net short of 100) — positions a cash account cannot carry overnight; the
+exit before 16:00 is the trade a cash account can actually make, so the forward record needs its price.
+
+**The cash-settled SPXW equivalent** (`--spxw`, OFF by default): the owner asked for it only at zero extra calls, and
+it is not — the tracker does not otherwise read SPX's chain at 15:00, 15:30 or 15:58. With `--spxw` it reads
+`/api/stock/SPX/option-contracts?expiry=D` (both roots in one answer; the SPXW root alone is kept — a third Friday's AM
+SPX contracts share the date) at 15:00 and 15:30 and builds the iron, call and put flies at ±5 and ±25 around K0.
+**SPX's price**: UW Basic has none (stock-state 422; ohlc 422 `cboe_index_access_missing`), and `option-contracts`
+rows carry no underlying price, so SPX at the capture is read off the same chain by **put-call parity** at r = q = 0
+(same day): the median of K + call mid − put mid over the three strikes where |call mid − put mid| is smallest, both
+bids > 0 (`spot_source`, `parity_strikes`). The settle (16:20) takes `price` from SPX's `/spot-exposures/strike`
+(page 0; UW's own SPX figure — a proxy for the official 16:00 SET, labelled `settle_source=spx_book_price`). Cost:
+**3–5 calls a session** (one chain page at each capture, two if the expiry's chain passes 500 contracts, and one at the
+settle). Cash-settled, SPXW needs no 15:58 exit.
+
+### The macro stamps
+
+Every row — the recorder's and the tracker's — carries four columns from `scripts/macro_calendar.py`, which reads
+`data/macro_events_2022_2027.json` (`MACRO_EVENTS` overrides the path; 231 releases 2022–2027: FOMC decisions and
+minutes at 14:00, CPI and payrolls at 08:30; a release whose status says cancelled or postponed is left out):
+`is_macro_event_day` ('true'/'false'), `macro_events` (the day's kinds in time order joined by '+', '' on a day with
+none), `minutes_to_macro_release` (minutes from the row's time to the next release that New York day, 0 at the
+release, **null once every release of the day is past**) and `minutes_since_last_release` (minutes since the latest
+release of the day at or before the row's time, null before the first) — so a 13:00 capture on an FOMC day reads 60
+and null, a 15:00 one null and 60. The recorder's scan rows read the minutes at their scan time, its EOD rows null; the
+tracker's capture rows at their capture minute, a settle or 15:58 row its capture's (the trade's entry). Without the
+file every field is null (unknown — never 'false') and one WARN line says so; the file is re-read when it changes. In
+the recorder the four columns follow the vendor's and are never part of a row's key.
 
 Where it writes: `data_recorder/paper/<candidate>/<NAME>/<YYYY-MM-DD>.parquet` (`PAPER_DATA` or `--data` moves the
-root) — a `capture` row a structure a minute and a `settle` row a structure a minute a settlement source, the
-recorder's six stamps first (`_scan` the minute, `settle`, or `smoke`), every value a string, the dedupe on
-(`row_kind`, `minute`, `structure`, `settle_source`); markers under `_markers/<candidate>/<NAME>/<day>/`, failures and
-the budget as the recorder's. **A second capture of the same minute makes no call and adds no row**; a partial (a
-failed call) is asked again. `data_recorder/paper/smoke/` holds the live smoke capture of 2026-10-21 (`_scan` =
-`smoke`, taken at 16:56 ET on the closing quotes: K0 773, straddle 0.83, shorts 775 and 772, both spreads under
-$0.05 — `tradable=false`); `--status` reads the real root alone and never counts it. `--dry-run` writes under
-`data_recorder/paper/dryrun/`.
+root) — a `capture` row a structure a minute, a `close1558` row a fly5 structure a minute and a `settle` row a structure
+a minute a settlement source, the recorder's six stamps first (`_scan` the minute, `close1558`, `settle`, or `smoke`),
+every value a string, the dedupe on (`row_kind`, `minute`, `structure`, `settle_source`); markers under
+`_markers/<candidate>/<NAME>/<day>/`, failures and the budget as the recorder's; the model's caches under `_cache/`.
+**A second capture of the same minute makes no call and adds no row**; a partial (a failed call) is asked again.
+`data_recorder/paper/smoke/` holds the live smoke capture of 2026-10-21 (`_scan` = `smoke`, taken at 16:56 ET on the
+closing quotes: K0 773, straddle 0.83, shorts 775 and 772, both spreads under $0.05 — `tradable=false`); `--status`
+reads the real root alone and never counts it. `--dry-run` writes under `data_recorder/paper/dryrun/`.
 
-The budget: 9 name-minutes × (chain + state) = 18 capture calls, and 3 a name × 2 names = 6 at the settle — **24 a
-session**, the default `--budget` (`PAPER_BUDGET`), kept in `_budget/<day>.json` across runs; `--budget 22` leaves
-the daily bar out and the official close is read later off the next session's first stock-state `prev_close` (equal
-to the daily bar's close — 773.09 both, checked live at 16:43 ET on 2026-10-21); the brief's 20 cannot hold the two
-settlement calls a name on top of the 18 captures, so it is not the default. The limiter is one call in flight, 30 a
-minute.
+### The budget
+
+A session's calls, the default candidates (`condor_em1`, `fly5`, `condor_d20`), recomputed for `.2`:
+
+| | calls | note |
+|---|---|---|
+| captures: chain + stock-state | 11 name-minutes × 2 = **22** | SPY at 11:30, 12:00, 12:30, 13:00, 13:30, 14:00, 14:30, 15:00, 15:30 (9 × 2 = 18, candidate 3 sharing the 13:00, 13:30 and 15:00 reads) + QQQ at 15:00 and 15:30 (2 × 2 = 4) = 22 |
+| candidate 3: today's bars | **5** | one `ohlc/1m` a capture minute (+1 when the minute's bar is not out yet: at most +5) |
+| candidate 3: VIX | **1** | UW's VIX stock-state, once a session while it answers 422; Theta Data is not a UW call |
+| candidate 3: the sessions before | **0** warm / **20** cold | the cache; the first day backfills 20 sessions once (19 tomorrow: the recorder's 2026-10-21 file is read free) |
+| 15:58 close quotes | **2** | one chain a name |
+| the settle | **6** | `ohlc/1m`, stock-state, `ohlc/1d` × SPY and QQQ (SPY's `ohlc/1m` also fills the cache) |
+| **a session, warm** | **36** | the tests' second day: 36 exactly |
+| **the first day, cold** | **56** | the tests' first day: 56 exactly |
+| the worst | **61** | cold, every bar asked twice |
+| `--spxw` | **+3 to +5** | |
+
+The default `--budget` (`PAPER_BUDGET`) is **80**: the cold worst (61) with a fifth to spare, `--spxw` included (66).
+It is counted per New York day in `_budget/<day>.json` across runs; at the budget a capture stops with the STOP line.
+`--budget 22` still runs the old pair (`condor_em1` and `fly5` alone, 18 captures and 4 settle calls — the daily bar
+left out and the official close read later off the next session's first stock-state `prev_close`, 773.09 both, checked
+live 2026-10-21), but with candidate 3 on, 22 is short: the default is the number to run. `--backfill [--day D]` warms
+the cache ahead (at most 20 calls, none for a day already kept) — run it once in the evening before the first live
+session so the 13:00 capture does not spend them. The limiter is one call in flight, 30 a minute.
 
 Modes:
 
 ```
-python3 -I scripts/paper_tracker.py --log --when 11:30 [--day D]   # one capture (a scheduler's line); 11:30 12:00 12:30 13:00 13:30 15:00 15:30
+python3 -I scripts/paper_tracker.py --log --when 11:30 [--day D]   # one capture (a scheduler's line); 11:30 12:00 12:30 13:00 13:30 14:00 14:30 15:00 15:30, and 15:58 (the close quotes)
 python3 -I scripts/paper_tracker.py --settle [--day D] [--official] # the after-close pass; re-runnable
-python3 -I scripts/paper_tracker.py --daemon                        # sleeps to each minute and to 16:20, Mon–Fri, holidays and half days skipped
-python3 -I scripts/paper_tracker.py --status [--data …]             # sessions logged, mean P&L (NBBO, mid, 1c, 2c), the check, what remains
-python3 -I scripts/paper_tracker.py --dry-run --log --when 15:00    # the fixture chain (tests/fixtures/paper_chain_SPY.json), no network
+python3 -I scripts/paper_tracker.py --backfill [--day D]            # the model's 20 sessions before into the cache (once)
+python3 -I scripts/paper_tracker.py --daemon [--spxw]               # sleeps to each minute, 15:58 and 16:20, Mon–Fri, holidays and half days skipped
+python3 -I scripts/paper_tracker.py --status [--data …]             # sessions logged, mean P&L (NBBO, mid, 1c, 2c), the 15:58 exit, candidate 3 by decile, the check, what remains
+python3 -I scripts/paper_tracker.py --dry-run --log --when 13:00    # the fixture chain, a fake Theta, no network
 python3 -I scripts/paper_tracker.py --log --when 11:30 --smoke      # a live capture under <root>/smoke/, labelled smoke, never a session
+python3 -I scripts/models/freeze_t2_spy.py                          # (once, done) refit and freeze the two t2 models; needs lightgbm
+python3 -I scripts/models/parity/parity_t2_spy.py                   # the parity check (Theta's files on disk, the two saved UW answers)
 ```
 
 Half days are skipped whole (the reports skipped them; a 13:00 close has no 13:30 or 15:00 minute). A daemon started
@@ -337,22 +519,34 @@ other.
 
 - Windows, Task Scheduler: `scripts\paper_tracker.cmd`, a restart loop like `eod_recorder.cmd`, reading the SAME env
   file (`%USERPROFILE%\.eod_recorder\env` or `RECORDER_ENV`: `UW_API_TOKEN=…`, optionally `PAPER_DATA=…`,
-  `PAPER_BUDGET=…`); register it as a second task at startup. Its log: `<paper root>\tracker.cmd.log`.
+  `PAPER_BUDGET=…`, `MACRO_EVENTS=…`); register it as a second task at startup. Its log: `<paper root>\tracker.cmd.log`.
+  On the owner's machine the Theta Terminal answers on 127.0.0.1, so VIX comes from it and the full model's decile is
+  the primary; a tracker on a machine without the terminal logs `vix_source=none` and the no-VIX decile.
 - Linux, systemd: `scripts/paper_tracker.service` (`--daemon`, Restart=always, the same `EnvironmentFile` as the
   recorder) and `scripts/paper_tracker.timer` (boot, and weekdays 11:00 New York). Copy beside the recorder's units,
   then `systemctl daemon-reload && systemctl enable --now paper_tracker.timer paper_tracker.service`.
-- cron, no daemon (`CRON_TZ=America/New_York`, the env file sourced): `30 11,12,13 * * 1-5` and `0 12,13,15 * * 1-5`
-  and `30 15 * * 1-5` → `python3 -I scripts/paper_tracker.py --log --when HH:MM` with the matching minute (one line a
-  minute, seven lines), and `20 16 * * 1-5 … --settle`.
+- cron, no daemon (`CRON_TZ=America/New_York`, the env file sourced): `30 11,12,13,14 * * 1-5` and
+  `0 12,13,14,15 * * 1-5` and `30 15 * * 1-5` and `58 15 * * 1-5` → `python3 -I scripts/paper_tracker.py --log --when
+  HH:MM` with the matching minute (one line a minute, ten lines), and `20 16 * * 1-5 … --settle`.
 
-Tests: `python3 -I tests/test_paper_tracker.py` — nine tests on the fixture chain and a fake clock: the two strike
-rules land on the hand-set strikes (spot 773.40 → straddle 2.10 at 773 → shorts 776 and 771, longs 778 and 769, credit
-$0.30 at the NBBO and $0.355 at the mid; K0 773 ±5 → iron credit 1.88 / risk 3.12, call fly debit 3.27, put fly 3.30);
-the P&L on a known settlement (777.20: condor −$92.60 NBBO / −$87.10 mid; iron −$234.60; call fly −$249.60; put fly
-−$252.60; at 773.00 the condor keeps $27.40); a whole dry-run session is 24 calls and a repeat capture or settle
-makes none; the official close arriving later is added once; a tight budget takes it from the next session's
-`prev_close`; a failed call is recorded and asked again; the token never appears in a line, a marker, a failure
-record or a Parquet cell; the schedule skips weekends, holidays and half days. All passing on 2026-10-21.
+Tests: `python3 -I tests/test_paper_tracker.py` — twenty tests on the fixture chain, a fake Theta and a fake clock: the
+two old strike rules land on the hand-set strikes (spot 773.40 → straddle 2.10 at 773 → shorts 776 and 771, longs 778
+and 769, credit $0.30 at the NBBO and $0.355 at the mid; K0 773 ±5 → iron credit 1.88 / risk 3.12, call fly debit
+3.27, put fly 3.30); the P&L on a known settlement (777.20: condor −$92.60 NBBO / −$87.10 mid; iron −$234.60; call fly
+−$249.60; put fly −$252.60; at 773.00 the condor keeps $27.40); the old pair's session is 24 calls and a repeat
+capture or settle makes none; the official close arriving later is added once; a tight budget takes it from the next
+session's `prev_close`; a failed call is recorded and asked again; the schedule (weekends, holidays, half days, 15:58);
+and since `.2`: the macro stamps on a fixture calendar (FOMC at 14:00 → 60 at 13:00, null and 60 at 15:00; CPI + minutes
+→ 'CPI+FOMC_MINUTES', 60 and 270; a cancelled release left out) and a missing or broken calendar (null, one WARN);
+candidate 3's rule on a chain priced at a known σ√τ (deltas against the closed form, 504 / 496) and its tie-break; the
+frozen models load (hashes checked, a changed file refused) and score the fixture rows to LightGBM's deciles 1 … 10;
+a candidate-3 capture (Theta's VIX → the full model primary; 24 calls cold at 13:00, 3 at 13:30, the VIX probe once;
+the decile re-scored from the logged features) and one without VIX (the no-VIX decile primary, one WARN, a late bar
+asked twice); the 15:58 liquidation on a known quote (iron −$133.55 NBBO / −$115.05 mid, a bidless long left to
+expire; call fly −$167.20); a whole default session cold (56) then warm (36) under the default budget with the settle
+carrying the 15:58 exit, the capture's stamps and deciles; `--spxw` (the SPXW root alone, parity spot, K0 3865 ±5 and
+±25, the book-price settle, 1 + 1 calls); the token never in a line, a marker, a failure record, a cache file or a
+Parquet cell, and no key in `vol_model.py` or `macro_calendar.py`. All passing on 2026-10-21.
 
 ## Settled by the smoke test (2026-10-21, the owner's token; `data_recorder/smoke/smoke_SPY.txt`, `smoke_SPX.txt`, the Parquet rows beside them, and seven follow-up probes the same evening)
 
@@ -389,6 +583,15 @@ Every route answered 200 for SPY and for SPX. What each point of the build's lis
    paper tracker uses.
 7. **Rate ceilings** — unchanged: three in flight is measured; the 100-a-minute bucket and the 20,000 daily budget are
    the brief's (the smoke runs spent 26 calls in all).
+
+8. **SPX's chain — settled by the first real EOD pass (2026-10-21, 627 calls, 0 failed).** SPX's `option-contracts`
+   stopped at the 40-page cap: 20,000 rows (12,226 SPXW and 7,774 SPX; heaviest volume first, 9,866 rows with volume,
+   then the open-interest tail, down to 3 contracts at the cut), marker `partial`. Since `.3` an index pages to
+   `max_pages_index` = 150 (75,000 rows; a page costs a call only while the chain lasts — expected ~45–60 pages); a
+   stock keeps 40. The partial marker means the next run asks SPX's chain again: a daemon (re)started the same New York
+   day after 16:15 runs the EOD catch-up (`due_now`), skips every `done` job and refetches SPX's chain whole (the dedupe
+   on `option_symbol` keeps the 20,000 rows once). The route has no date: re-asked after midnight New York it answers
+   the NEXT day's chain, so a 2026-10-21 refetch is only right before then — after that, leave the day partial.
 
 ## Still unsettled
 

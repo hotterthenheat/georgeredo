@@ -24,6 +24,11 @@ budget (20,000 by default) that ends the run with one clear line when it is spen
 or 2, 4, 8, 16 s and try five times; any other 4xx is recorded and passed over. Every call is logged with its status
 and elapsed time; the token is never logged, and every message is scrubbed.
 
+THE MACRO STAMPS (macro_calendar.py, data/macro_events_2022_2027.json or MACRO_EVENTS): every row carries
+is_macro_event_day, macro_events (the day's kinds joined by '+'), minutes_to_macro_release and
+minutes_since_last_release — a scan row at its scan time, an EOD row null; all null, with one WARN line, when the
+calendar is not on disk. They are written after the vendor's columns and are never part of a row's key.
+
 THE TOKEN comes from the environment alone (UW_API_TOKEN, sent as a Bearer header) — never from a file in the repo.
 The data root is RECORDER_DATA, or data_recorder/ in the repo (git-ignored).
 
@@ -56,7 +61,11 @@ from zoneinfo import ZoneInfo
 
 import polars as pl
 
-VERSION = 'eod-recorder-2026-10-21.2'   # .2: the smoke test of 2026-10-21 settled the endpoint notes (README "Settled")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import macro_calendar as MC  # noqa: E402  — the macro-release stamps (data/macro_events_2022_2027.json)
+
+VERSION = 'eod-recorder-2026-10-21.3'   # .3: the chain's page cap 150 for an index (SPX hit 40 on 2026-10-21); the macro stamps
+# .2: the smoke test of 2026-10-21 settled the endpoint notes (README "Settled")
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 NY = ZoneInfo('America/New_York')
@@ -125,6 +134,7 @@ class Endpoint:
     page_limit_fallback: int | None = None  # tried once when the vendor refuses the limit (422)
     max_pages: int = 1
     paging: str = 'none'            # 'none' | 'older_than' | 'page'
+    max_pages_index: int | None = None  # the page cap for an index name (SPX's chain carries SPX and SPXW), else max_pages
     time_field: str = ''            # the row's time for the older_than cursor and the day's bounds
     note: str = ''
 
@@ -206,14 +216,17 @@ ENDPOINTS: dict[str, Endpoint] = {
              'BEFORE D (UW publishes it about 06:45 on D).'),
     'chain': Endpoint(
         'chain', 'eod', '/api/stock/{t}/option-contracts', ('option_symbol',), CHAIN_COLUMNS, page_limit=500,
-        page_limit_fallback=None, max_pages=40, paging='page',
+        page_limit_fallback=None, max_pages=40, paging='page', max_pages_index=150,
         note='exclude_zero_oi_chains=true, 500 a page, `page` from 0, a page short of 500 the last — the eod walk '
              '(_walk_pages) stops on the first short page, cap 40 (SETTLED 2026-10-21: SPY page 19 answered 125 '
              'rows, 9,625 contracts in 20 pages; SPX answers, both roots\' contracts in one chain, SPXW261021… '
              'first). Heaviest volume first, so an expiry\'s contracts are spread over the pages. open_interest is '
              'the count published on D (the session before\'s close), prev_oi the one before it. No date '
              'parameter: the route answers the current day only. `expiry=YYYY-MM-DD` filters to one date (SPY '
-             '2026-10-21: 302 rows in one page, zero-OI contracts included — the paper tracker reads it so).'),
+             '2026-10-21: 302 rows in one page, zero-OI contracts included — the paper tracker reads it so). AN INDEX: '
+             'SPX\'s chain holds both roots (SPX monthlies and SPXW) — the first real EOD pass (2026-10-21) stopped at '
+             'the 40-page cap with 20,000 rows (12,226 SPXW, 7,774 SPX; the open interest at the cut down to 3 '
+             'contracts), so an index takes max_pages_index = 150 (75,000 rows) and stops on its short page as ever.'),
     'spot_strike': Endpoint(
         'spot_strike', 'scan', '/api/stock/{t}/spot-exposures/strike', ('strike',), SPOT_STRIKE_COLUMNS,
         page_limit=500, page_limit_fallback=None, max_pages=10, paging='page',
@@ -842,10 +855,12 @@ class Store:
         f = self.file(endpoint, name, day)
         return pl.read_parquet(f) if f.exists() else None
 
-    def append(self, ep: Endpoint, name: str, day: str, rows: list, stamps: dict) -> tuple[int, int]:
-        """Adds the rows the file does not hold (by `_key`); never changes or drops a row. Returns (added, total)."""
-        extras = sorted({k for r in rows for k in r.keys()} - set(ep.columns) - set(STAMPS))
-        cols = STAMPS + list(ep.columns) + extras
+    def append(self, ep: Endpoint, name: str, day: str, rows: list, stamps: dict, tags: dict | None = None) -> tuple[int, int]:
+        """Adds the rows the file does not hold (by `_key`); never changes or drops a row. Returns (added, total).
+        `tags`: columns written on every row of this append (the macro stamps), after the vendor's — never in the key."""
+        tags = dict(tags or {})
+        extras = sorted({k for r in rows for k in r.keys()} - set(ep.columns) - set(STAMPS) - set(tags))
+        cols = STAMPS + list(ep.columns) + extras + [k for k in tags if k not in ep.columns]
         data = {c: [] for c in cols}
         for r in rows:
             key = row_key(ep, r, stamps.get('_scan'))
@@ -854,6 +869,8 @@ class Store:
                     data[c].append(key)
                 elif c in STAMPS:
                     data[c].append(stamps.get(c))
+                elif c in tags:
+                    data[c].append(stringify(tags[c]))
                 else:
                     data[c].append(stringify(r.get(c)))
         new = pl.DataFrame(data, schema={c: pl.Utf8 for c in cols})
@@ -1004,8 +1021,12 @@ class Recorder:
             ans.attempts += first
         return ans
 
-    def _pages(self, ep: Endpoint) -> int:
-        return self.max_pages if self.max_pages is not None else ep.max_pages
+    def _pages(self, ep: Endpoint, name: str | None = None) -> int:
+        if self.max_pages is not None:
+            return self.max_pages
+        if name in INDEX_NAMES and ep.max_pages_index is not None:
+            return ep.max_pages_index
+        return ep.max_pages
 
     # -- the fetchers --
     def fetch(self, ep: Endpoint, name: str, day: str, now: dt.datetime) -> Fetched:
@@ -1016,7 +1037,7 @@ class Recorder:
         if ep.paging == 'older_than':
             return self._walk_older_than(ep, ep.path.format(t=name), {'date': day}, name, day, now)
         if ep.paging == 'page':
-            return self._walk_pages(ep, ep.path.format(t=name), {'exclude_zero_oi_chains': 'true'} if ep.key == 'chain' else {})
+            return self._walk_pages(ep, ep.path.format(t=name), {'exclude_zero_oi_chains': 'true'} if ep.key == 'chain' else {}, name)
         params = {'date': day}
         ans = self._get(ep, ep.path.format(t=name), params)
         if not ans.ok:
@@ -1078,9 +1099,10 @@ class Recorder:
         out.complete = False
         return out
 
-    def _walk_pages(self, ep: Endpoint, path: str, base: dict) -> Fetched:
+    def _walk_pages(self, ep: Endpoint, path: str, base: dict, name: str | None = None) -> Fetched:
         out = Fetched()
-        for page in range(self._pages(ep)):
+        cap = self._pages(ep, name)
+        for page in range(cap):
             ans = self._get(ep, path, dict(base, page=page))
             out.calls += ans.attempts
             if not ans.ok:
@@ -1092,9 +1114,16 @@ class Recorder:
             limit = self._limits.get(ep.key, ep.page_limit) or 0
             if not ans.rows or (limit and len(ans.rows) < limit):
                 return out
-        out.note = f'page cap {self._pages(ep)} reached — the answer may be incomplete'
+        out.note = f'page cap {cap} reached — the answer may be incomplete'
         out.complete = False
         return out
+
+    # -- the macro stamps: the day's releases on every row; the minutes to / since a release at a scan's time --
+    def macro_tags(self, ep: Endpoint, day: str, scan_at: dt.datetime | None) -> dict:
+        """is_macro_event_day, macro_events, minutes_to_macro_release and minutes_since_last_release
+        (macro_calendar.py): a scan row reads the minutes at its scan time, an EOD row null; all null (one WARN) when
+        the calendar is not on disk"""
+        return MC.calendar(self.log).stamps(day, scan_at if ep.pass_ == 'scan' else None)
 
     # -- one job: an endpoint for a name, recorded and marked --
     def job(self, ep: Endpoint, name: str, day: str, scan: str, scan_at: dt.datetime, force: bool = False) -> dict:
@@ -1112,7 +1141,7 @@ class Recorder:
         added = total = 0
         if got.rows:
             stamps = {'_day': day, '_scan': scan, '_scan_at': iso_z(scan_at), '_fetched_at': iso_z(now), '_name': name}
-            added, total = self.store.append(ep, name, day, got.rows, stamps)
+            added, total = self.store.append(ep, name, day, got.rows, stamps, tags=self.macro_tags(ep, day, scan_at))
         status = 'done' if got.complete else 'partial'
         m = Marker(ep.key, name, day, scan, status, rows_fetched=len(got.rows), rows_added=added, pages=got.pages,
                    calls=got.calls, fetched_at=iso_z(now), note=self.scrub(got.note or got.error or ''))

@@ -1,0 +1,96 @@
+{
+ "model": "t2_spy_full",
+ "kind": "LightGBM binary classifier, t2 target (P[|30-minute move| > implied30])",
+ "product": "SPY",
+ "features": [
+  "m",
+  "ret1",
+  "ret5",
+  "ret15",
+  "ret30",
+  "aret1",
+  "aret5",
+  "aret15",
+  "aret30",
+  "rng1",
+  "rng5",
+  "rng15",
+  "rng30",
+  "range_pos",
+  "or_pos",
+  "day_move_atr",
+  "day_range_atr",
+  "rv_session",
+  "vix",
+  "vix_chg_open",
+  "vix_chg30",
+  "vix_chg_prev",
+  "straddle_rel",
+  "implied30",
+  "rel_vol"
+ ],
+ "n_features": 25,
+ "training_rows": 28750,
+ "training_sessions": 405,
+ "fit_period": "sessions before 2024-07-01 (2022-11-11 ->)",
+ "train_scan_minutes": "m = 5 .. 355 step 5 (09:35 .. 15:25)",
+ "cut_period": "2024-07-01 -> 2024-12-31",
+ "auc": {
+  "fit_insample": 0.8092144793818808,
+  "fit_oof": 0.613138425834206,
+  "cut": 0.5994450637107347
+ },
+ "base_rate_fit": 0.3095652173913043,
+ "gbm_settings": {
+  "objective": "binary",
+  "num_leaves": 15,
+  "learning_rate": 0.05,
+  "n_estimators": 400,
+  "min_child_samples": 200,
+  "subsample": 0.8,
+  "subsample_freq": 1,
+  "colsample_bytree": 0.8,
+  "reg_lambda": 1.0,
+  "num_threads": 1,
+  "verbose": -1,
+  "random_state": 1
+ },
+ "lightgbm_version": "4.7.0",
+ "model_file": "t2_spy_full.txt",
+ "model_sha256": "eee1b89358a044c0d1060fc5908e62b640196856160261e01e5441e61eef4919",
+ "cuts_file": "t2_spy_full.cuts.json",
+ "cuts_sha256": "0888f516ad71afaf2d2e8d860f382c235b93f51122266cfc329bc2c0bc76d562",
+ "cuts": [
+  0.18703489638087936,
+  0.23511863039346378,
+  0.2704904085549213,
+  0.3001351706123132,
+  0.33025425246758877,
+  0.36040625020619277,
+  0.39828041185485996,
+  0.4451984510260254,
+  0.5135431523541117
+ ],
+ "source": "research_notes/Compass phase 3/hyp_e_short_premium_lift/out/minutes_SPY_all.parquet (Theta Data bars, chains and VIX prints; hyp_d lib.session_rows features)",
+ "recipe": "scripts/models/freeze_t2_spy.py = hyp_e fit_model.py full_gbm (feature list varies by model)",
+ "frozen_at": "2026-10-21T21:32:37Z",
+ "reproduction_check": {
+  "rows_compared": 69895,
+  "max_abs_score_diff_vs_hyp_e": 0.0,
+  "auc_vs_hyp_e": {
+   "fit_insample": [
+    0.8092144793818808,
+    0.8092144793818808
+   ],
+   "fit_oof": [
+    0.613138425834206,
+    0.613138425834206
+   ],
+   "cut": [
+    0.5994450637107347,
+    0.5994450637107347
+   ]
+  },
+  "cuts_vs_hyp_e_logged": true
+ }
+}

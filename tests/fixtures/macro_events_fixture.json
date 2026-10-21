@@ -1,0 +1,7 @@
+[
+  {"date": "2026-10-14", "time_et": "08:30", "event": "CPI", "reference_period": "2026-09", "status": "scheduled", "source": "test fixture"},
+  {"date": "2026-10-14", "time_et": "14:00", "event": "FOMC_MINUTES", "reference_period": "2026-09-16/17 meeting", "status": "scheduled", "source": "test fixture"},
+  {"date": "2026-10-20", "time_et": "14:00", "event": "FOMC_DECISION", "reference_period": "2026-10-19/20 meeting", "status": "scheduled", "source": "test fixture"},
+  {"date": "2026-10-21", "time_et": "08:30", "event": "NFP", "reference_period": "2026-09", "status": "cancelled", "source": "test fixture (a cancelled release is left out)"},
+  {"date": "2026-11-06", "time_et": "08:30", "event": "NFP", "reference_period": "2026-10", "status": "confirmed", "source": "test fixture"}
+]

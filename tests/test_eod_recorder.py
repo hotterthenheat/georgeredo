@@ -355,8 +355,8 @@ def test_budget_arithmetic_stays_under_twenty_thousand():
     eod = (R.ENDPOINTS['flow_alerts'].max_pages * (names + indices)                      # a second root an index
            + R.ENDPOINTS['darkpool'].max_pages * stocks
            + 1 * names + 1 * stocks + 1 * names
-           + R.ENDPOINTS['chain'].max_pages * names)
-    assert scans + eod < 20_000, (scans, eod)
+           + R.ENDPOINTS['chain'].max_pages * stocks + R.ENDPOINTS['chain'].max_pages_index * indices)   # an index pages to 150 (.3)
+    assert scans + eod < 20_000 and scans + eod == 11_751, (scans, eod)                  # the README's every-cap total
     # the expected day (what the fixtures and the live samples suggest), far smaller
     expected = len(R.SCAN_TIMES) * names + (2 * (names + indices) + 30 * stocks + names + stocks + names + 20 * names)
     assert expected < 2_500
@@ -411,6 +411,61 @@ def test_eod_chain_walk_pages_until_a_short_page_under_the_cap():
         got = rec.fetch(R.ENDPOINTS['chain'], 'SPY', DAY, clock.utcnow())
         assert got.pages == 1 and not got.complete and 'page cap 1' in got.note
 
+
+
+# ---- since .3: the index chain's page cap, the macro stamps ----------------------------------------------------------------------------
+
+def test_an_index_chain_takes_150_pages_and_a_stock_keeps_40():
+    """2026-10-21's first real EOD pass stopped SPX's chain at the 40-page cap (20,000 rows; SPX and SPXW in one chain).
+    An index name now pages to 150 (75,000 rows): a 25,000-contract SPX chain is 50 full pages and a short (empty) 51st
+    — done; the same chain under a stock name still stops at 40 and is marked partial, so the next run asks it again."""
+    with tempfile.TemporaryDirectory() as d:
+        rec, client, store, lines, clock, limiter = harness(Path(d), names=['SPX', 'SPY'])
+        client.counts['chain'] = 25_000
+        s = rec.run_pass('eod', DAY, 'eod', R.ny_at(DAY, '16:15'), only=['chain'])
+        spx, spy = store.marker('chain', 'SPX', DAY, 'eod'), store.marker('chain', 'SPY', DAY, 'eod')
+        assert spx.status == 'done' and spx.pages == 51 and spx.rows_fetched == 25_000 and rows_in(store, 'chain', 'SPX') == 25_000
+        assert spy.status == 'partial' and spy.pages == 40 and 'page cap 40' in spy.note and s['incomplete'] == 1
+        assert R.ENDPOINTS['chain'].max_pages_index == 150 and rec._pages(R.ENDPOINTS['chain'], 'NVDA') == 40
+        # the partial is asked again by the next run; the done is skipped (the dedupe keeps the rows once)
+        s2 = rec.run_pass('eod', DAY, 'eod', R.ny_at(DAY, '16:15'), only=['chain'])
+        assert s2['skipped'] == 1 and rows_in(store, 'chain', 'SPY') == 20_000 and rows_in(store, 'chain', 'SPX') == 25_000
+
+
+def test_every_row_carries_the_macro_stamps():
+    """The fixture calendar (tests/fixtures/macro_events_fixture.json via MACRO_EVENTS): 2026-10-20 holds an FOMC
+    decision at 14:00 — a 10:00 scan row reads 240 minutes to it, an EOD row the day's flag and kinds with null minutes.
+    The stamps are never part of a row's key: a run before the calendar existed and one after keep one row each."""
+    import os
+    import macro_calendar as MC
+    fixture = Path(__file__).resolve().parent / 'fixtures' / 'macro_events_fixture.json'
+    old = os.environ.get('MACRO_EVENTS')
+    try:
+        with tempfile.TemporaryDirectory() as d:
+            os.environ['MACRO_EVENTS'] = str(Path(d) / 'not_yet.json')
+            rec, client, store, lines, clock, limiter = harness(Path(d), names=['SPY'])
+            rec.run_pass('scan', DAY, '10:00', R.ny_at(DAY, '10:00'))
+            first = store.read('spot_strike', 'SPY', DAY)
+            assert all(first[c].null_count() == first.height for c in MC.FIELDS)
+            assert len([l for l in lines.lines if 'macro calendar' in l and 'WARN' in l]) == 1
+            os.environ['MACRO_EVENTS'] = str(fixture)
+            rec.run_pass('scan', DAY, '10:00', R.ny_at(DAY, '10:00'), force=True)
+            again = store.read('spot_strike', 'SPY', DAY)
+            assert again.height == first.height                                        # the key ignores the stamps
+            rec.run_pass('scan', DAY, '10:30', R.ny_at(DAY, '10:30'))
+            rec.run_pass('eod', DAY, 'eod', R.ny_at(DAY, '16:15'), only=['oi_strike', 'net_prem_ticks'])
+            sc = store.read('spot_strike', 'SPY', DAY).filter(pl.col('_scan') == '10:30')
+            assert sc['is_macro_event_day'].unique().to_list() == ['true'] and sc['macro_events'].unique().to_list() == ['FOMC_DECISION']
+            assert sc['minutes_to_macro_release'].unique().to_list() == ['210'] and sc['minutes_since_last_release'].null_count() == sc.height
+            eod = store.read('oi_strike', 'SPY', DAY)
+            assert eod['is_macro_event_day'].unique().to_list() == ['true'] and eod['minutes_to_macro_release'].null_count() == eod.height
+            assert eod.columns[:len(R.STAMPS)] == R.STAMPS and eod.columns[-4:] == list(MC.FIELDS)
+            assert all(t == pl.Utf8 for t in eod.schema.values())
+    finally:
+        if old is None:
+            os.environ.pop('MACRO_EVENTS', None)
+        else:
+            os.environ['MACRO_EVENTS'] = old
 
 if __name__ == '__main__':
     failed = 0
