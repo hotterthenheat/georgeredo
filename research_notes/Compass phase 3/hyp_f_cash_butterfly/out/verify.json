@@ -1,0 +1,357 @@
+{
+ "seed": 20261021,
+ "checked": 50,
+ "differing": 0,
+ "rows": [
+  {
+   "product": "QQQ",
+   "session": "2025-01-07",
+   "t": "1530",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2025-01-07",
+   "t": "1500",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2025-05-22",
+   "t": "1530",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2022-12-28",
+   "t": "1500",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2024-12-18",
+   "t": "1530",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2025-03-26",
+   "t": "1500",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2024-03-21",
+   "t": "1500",
+   "form": "put",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2026-01-14",
+   "t": "1500",
+   "form": "put",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2026-02-03",
+   "t": "1530",
+   "form": "put",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2023-05-01",
+   "t": "1500",
+   "form": "put",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2026-02-03",
+   "t": "1500",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2025-03-05",
+   "t": "1530",
+   "form": "put",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2025-03-31",
+   "t": "1530",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2022-11-11",
+   "t": "1500",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2023-03-08",
+   "t": "1500",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2023-01-27",
+   "t": "1500",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2023-06-20",
+   "t": "1500",
+   "form": "put",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2026-07-09",
+   "t": "1500",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2025-11-17",
+   "t": "1500",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2025-06-17",
+   "t": "1530",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2025-12-05",
+   "t": "1530",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2023-07-24",
+   "t": "1500",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2024-03-15",
+   "t": "1530",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2025-11-10",
+   "t": "1500",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2025-04-11",
+   "t": "1500",
+   "form": "put",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2023-11-10",
+   "t": "1500",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2024-01-29",
+   "t": "1500",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2024-02-27",
+   "t": "1530",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2026-06-05",
+   "t": "1530",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2023-08-14",
+   "t": "1530",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2024-11-07",
+   "t": "1500",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2024-06-05",
+   "t": "1530",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2024-07-25",
+   "t": "1500",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2024-03-08",
+   "t": "1530",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2026-03-11",
+   "t": "1500",
+   "form": "put",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2023-06-23",
+   "t": "1530",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2024-02-21",
+   "t": "1530",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2023-06-02",
+   "t": "1530",
+   "form": "put",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2023-07-21",
+   "t": "1500",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2024-10-04",
+   "t": "1530",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2024-09-17",
+   "t": "1530",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2023-01-05",
+   "t": "1500",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2025-06-24",
+   "t": "1530",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2025-02-26",
+   "t": "1530",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2024-10-18",
+   "t": "1500",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "QQQ",
+   "session": "2023-11-01",
+   "t": "1530",
+   "form": "iron",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2026-08-07",
+   "t": "1530",
+   "form": "put",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2024-01-16",
+   "t": "1500",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2024-07-24",
+   "t": "1530",
+   "form": "call",
+   "diffs": []
+  },
+  {
+   "product": "SPY",
+   "session": "2024-01-04",
+   "t": "1500",
+   "form": "put",
+   "diffs": []
+  }
+ ]
+}

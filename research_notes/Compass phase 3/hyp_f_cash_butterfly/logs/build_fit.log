@@ -1,0 +1,14 @@
+SPY fit 0 536 6 0s
+SPY fit 100 536 594 3s
+SPY fit 200 536 1188 6s
+SPY fit 300 536 1782 9s
+SPY fit 400 536 2361 12s
+SPY fit 500 536 2940 15s
+{"product": "SPY", "period": "fit", "sessions_listed": 536, "half_days_dropped": 6, "missing": 0, "flies": 3138, "first": "2022-11-11", "last": "2024-12-31", "seconds": 16}
+QQQ fit 0 536 6 0s
+QQQ fit 100 536 597 2s
+QQQ fit 200 536 1188 5s
+QQQ fit 300 536 1782 8s
+QQQ fit 400 536 2373 11s
+QQQ fit 500 536 2954 14s
+{"product": "QQQ", "period": "fit", "sessions_listed": 536, "half_days_dropped": 6, "missing": 0, "flies": 3149, "first": "2022-11-11", "last": "2024-12-31", "seconds": 15}

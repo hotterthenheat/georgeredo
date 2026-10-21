@@ -1,0 +1,12 @@
+SPY oos 0 444 6 0s
+SPY oos 100 444 603 4s
+SPY oos 200 444 1197 7s
+SPY oos 300 444 1785 10s
+SPY oos 400 444 2382 14s
+{"product": "SPY", "period": "oos", "sessions_listed": 444, "half_days_dropped": 3, "missing": 0, "flies": 2640, "first": "2025-01-02", "last": "2026-10-09", "seconds": 15}
+QQQ oos 0 444 6 0s
+QQQ oos 100 444 606 3s
+QQQ oos 200 444 1197 7s
+QQQ oos 300 444 1785 10s
+QQQ oos 400 444 2373 15s
+{"product": "QQQ", "period": "oos", "sessions_listed": 444, "half_days_dropped": 3, "missing": 0, "flies": 2631, "first": "2025-01-02", "last": "2026-10-09", "seconds": 17}

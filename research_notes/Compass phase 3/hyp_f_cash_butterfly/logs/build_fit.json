@@ -1,0 +1,24 @@
+[
+ {
+  "product": "SPY",
+  "period": "fit",
+  "sessions_listed": 536,
+  "half_days_dropped": 6,
+  "missing": 0,
+  "flies": 3138,
+  "first": "2022-11-11",
+  "last": "2024-12-31",
+  "seconds": 16
+ },
+ {
+  "product": "QQQ",
+  "period": "fit",
+  "sessions_listed": 536,
+  "half_days_dropped": 6,
+  "missing": 0,
+  "flies": 3149,
+  "first": "2022-11-11",
+  "last": "2024-12-31",
+  "seconds": 15
+ }
+]
