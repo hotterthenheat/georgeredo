@@ -4,16 +4,20 @@ Status: LOCKED, 2026-10-21. Written from `reports/Compass engine audit.md` and t
 `research_notes/Compass engine audit/` (clock_session, sweep_trigger, exits_sizing, greeks_books, move_atr_flow,
 horizons), executing the owner's Phase 2 directive item by item. Nothing in this document is a grade, a score, a win
 probability or an expected value: every number is the audit's measurement of a loss, a frequency or a distance, and
-every detector below is a drawn object or a boolean tag with no claim attached. Where the owner gave no number the
-text says **owner sets** and no number is invented. The owner's Phase 3 directive (2026-10-21, items 1.1 and 2)
-resolved 5.5 on the live check and set the defaults in 3.5, 4.2, 6.3, 12.3 and 12.6 — each "configurable via
-environment/settings, default …", the default the owner's; what is still owner-set is listed at the end.
+every detector below is a drawn object or a boolean tag with no claim attached. The owner's Phase 3 directive
+(2026-10-21, items 1.1 and 2) resolved 5.5 on the live check and set the defaults in 3.5, 4.2, 6.3, 12.3 and 12.6; the
+owner's finalization directive (2026-10-21, item 1) set the rest — 0.1, 1.4, 2.2, 3.2, 3.6, 3.9, 4.2, 6.3, 6.4, 7.1,
+10.2, 12.4, 12.6, 13.1 and 14.1 — and added the macro-event telemetry at the end of Module 1. Each is "configurable via
+environment/settings, default …", the default the owner's; where a default goes against the audit's measurement the
+measurement stays beside the rule and the text says plainly that the default is the owner's choice. Where the owner
+gave no number the text says so and no number is invented; what genuinely remains is listed at the end.
 
 Tags: **KEEP** (the rule as the owner wrote it), **CHANGED** (the owner's rule with the stated change), **DROPPED**
 (out of the engine; may stay on screen as telemetry where said), **PENDING** (cannot be settled on the data on disk —
-what settles it is in the blockers at the end). Count, by the heading of each numbered rule (0.1–16.2): 25 KEEP,
-17 CHANGED, 9 DROPPED, 1 PENDING (12.2); 3.6 is KEEP or DROP at the owner's word, and 2.2's tags are its sub-rules'
-(two KEEP, one DROPPED, one PENDING, one owner-set).
+what settles it is in the blockers at the end). Count, by the first tag in the heading of each numbered rule (0.1–16.2):
+25 KEEP, 17 CHANGED, 10 DROPPED, 1 PENDING (12.2); 3.8 (the stack as one state machine) carries no tag, and 2.2's tags
+are its sub-rules' (two KEEP, one CHANGED, one DROPPED, one PENDING). A second tag inside a heading (6.3's Method B
+DROPPED, for one) is not counted apart.
 
 Conventions throughout (the audit's): minute t is New York's hour × 60 + minute; a 1-minute bar stamped t closes at
 t + 1; a chain NBBO row stamped t is the quote at t; a contract is bought at the ask and sold at the bid, $0.65 a
@@ -40,8 +44,29 @@ EPS = 1e-9            # every threshold test after loading: bid <= level + EPS, 
 ```
 
 A threshold itself (0.68 × entryAsk, 1.25 × entryAsk, 0.90 × peak) is computed from the rounded entry ask and
-compared with EPS; it is never rounded to the tick, because a resting limit is placed at the tick by the broker, not by
-the engine (owner sets the tick rounding of resting orders at the order layer, outside this spec).
+compared with EPS; it is never rounded to the tick. A resting order is, at the order layer, by the option's tick —
+configurable via environment/settings, default the owner's table (finalization item 1): $0.01 for SPY, QQQ and IWM
+options and for any option priced under $3.00; $0.05 for equity options at or above $3.00 and for SPXW (SPXW is named
+apart, so it takes $0.05 at every price). A buy rounds DOWN and a sell rounds UP, so a resting limit never crosses the
+intended price — a buy never rests above what the engine meant to pay, a sell never below what it meant to take:
+
+```python
+def tick_of(root, price):
+    """The option's minimum increment for a resting limit; price is the intended limit, loaded by load_price."""
+    if root == 'SPXW':                  return 0.05            # every price
+    if root in ('SPY', 'QQQ', 'IWM'):   return 0.01            # every price
+    if root == 'SPX':                   return None            # SPX's AM-settled root is not in the owner's table: no order is placed
+    return 0.01 if price < 3.00 - EPS else 0.05                # every other root: under $3.00 a cent, at or above $3.00 a nickel
+
+def round_to_tick(price, tick, side):
+    """side 'buy' rounds down, 'sell' rounds up: a resting limit never crosses the intended price."""
+    n = price / tick
+    steps = floor(n + EPS) if side == 'buy' else ceil(n - EPS)   # EPS keeps 1.05 / 0.05 on 21 ticks, not 20.999…
+    return load_price(steps * tick)
+```
+
+The replay (3.8) filled T1 at its unrounded price; the resting sell is `round_to_tick(1.25 × entryAsk, tick, 'sell')`,
+at most one tick above it.
 
 ---
 
@@ -93,19 +118,21 @@ fade held to the close, and it is negative (−12.3% of premium [−23.5, −0.7
 Rule: the check is removed. An opening-range breakout is a boolean event flag `or_breakout(t)` = the first 1-minute
 close beyond the 09:30–09:59 high or low, valid from bar 31, no direction attached, no EV claim.
 
-**1.4 The 15:58 flat — KEEP on SPY, QQQ and IWM, with one exception; SPXW `may_ride` boolean (directive item 2).**
+**1.4 The 15:58 flat — KEEP on SPY, QQQ and IWM, with one exception; SPXW `may_ride` boolean, default off (directive item 2; the default the owner's, finalization item 1).**
 Evidence: clock_session §4 — riding the nearest in-the-money contract to settlement loses $7.4 [−8.8, −6.1] fit and
 $14.8 [−17.1, −12.6] check a contract on SPY (N 1,060 / 882), $10.0 / $21.5 on QQQ, $1–2 on IWM, negative in every year;
 by moneyness, intrinsic 0.2–0.5% of spot rides +$1 to +$4 and 0.5–1% +$7 to +$14 on the ETFs (riding wins 60–65%);
-SPXW nearest ITM +$16.3 [+5.0, +27.5] mean, median −$42, 5th percentile −$390, and "delta-aligned" separates nothing
+SPXW nearest ITM +$16.3 [+5.0, +27.5] mean, median −$28 to −$42 (riding loses on 55–56% of contracts), 5th percentile
+−$390, and "delta-aligned" separates nothing
 (+$14.9 [−14.1, +43.3] against +$17.6 [−11.1, +48.8]).
 Rule (0DTE):
 
 ```python
 FLAT_MINUTE = 958                       # 15:58 New York; 12:58 on a half day
 ITM_EXEMPT_SHARE = 0.002                # the owner's 0.2% of spot
+SPXW_MAY_RIDE = False                   # configurable via environment/settings; default off (the owner's) — the user toggles it per trade
 
-def settlement_action(name, right, K, S_958, bid_958, may_ride):
+def settlement_action(name, right, K, S_958, bid_958, may_ride=SPXW_MAY_RIDE):
     intrinsic = max(S_958 - K, 0.0) if right == 'C' else max(K - S_958, 0.0)
     if name in ('SPY', 'QQQ', 'IWM'):
         if intrinsic / S_958 > ITM_EXEMPT_SHARE:
@@ -115,11 +142,41 @@ def settlement_action(name, right, K, S_958, bid_958, may_ride):
         return 'HOLD_TO_SETTLEMENT' if may_ride else 'SELL_AT_BID_958'   # a boolean, never "should ride"
 ```
 
-`may_ride` is a boolean the owner sets (per desk or per session); it carries no delta condition and no claim. The
-exemption was measured to 1% of spot; a contract deeper than that was not in the sample and the exemption stands on
+`may_ride` is a boolean, configurable via environment/settings, default `False`: an SPXW contract exits at 15:58 New
+York with the ETFs unless the user toggles riding on for that trade. It carries no delta condition and no claim. The
+default is the owner's choice against a positive measured mean: riding the nearest ITM SPXW contract averaged +$16.3
+[+5.0, +27.5] a contract OOS, with a median of −$28 to −$42 and a 5th percentile of −$390 — a variance trade, which the
+default declines and the toggle allows. The exemption was measured to 1% of spot; a contract deeper than that was not in the sample and the exemption stands on
 the owner's word there. A held contract is valued at its intrinsic at the close; exercise and assignment handling is
 the broker's, outside this spec. Caveat kept from the audit: SPXW's settlement is approximated by the 16:00 print
 (about $0.50 of precision; the official series is not on disk).
+
+**Telemetry on the clock — the macro-event fields (display only; the owner's finalization directive, item 1).**
+Evidence: none — new fields; the audit measured no macro-day cut, so nothing is claimed for them.
+Rule (every horizon; written to the telemetry sink and shown on the panel; never an argument of a function that returns
+an entry, an exit or a contract count, and never a gate of a directional rule — 16.2's Helix isolation check covers
+them under the same test):
+
+```python
+MACRO_EVENTS_FILE = 'data/macro_events_2022_2027.json'    # in the georgeredo repository (being built, 2026-10-21)
+# schema: a list of {"date": "YYYY-MM-DD", "time_et": "HH:MM",
+#                    "event": "FOMC_DECISION" | "FOMC_MINUTES" | "CPI" | "NFP",
+#                    "status": "released" | "scheduled", "source": url}
+MACRO_EVENTS = ('FOMC_DECISION', 'FOMC_MINUTES', 'CPI', 'NFP')
+
+def macro_fields(events, day, t):
+    """day: New York's date 'YYYY-MM-DD'; t: now, in New York minutes (Module 1's clock)."""
+    today = [e for e in events if e['date'] == day and e['event'] in MACRO_EVENTS]
+    at    = [int(e['time_et'][:2]) * 60 + int(e['time_et'][3:5]) for e in today]
+    ahead = [m - t for m in at if m >= t]
+    return {
+        'is_macro_event_day':       len(today) > 0,                    # boolean
+        'minutes_to_macro_release': min(ahead) if ahead else None,     # to the next release that day; None (null) when none is left
+    }
+```
+
+Afternoon short-premium candidates are logged with both fields and are never evaluated blind of them: every reading of
+such a candidate is cut by `is_macro_event_day`. Telemetry, no gate, until a forward test earns one.
 
 ---
 
@@ -173,8 +230,19 @@ Rules:
   underlying within ±3.4 bps in every cell).
 - "Positive gamma between walls" as a trade condition — PENDING (untestable: no strike-level OI history before
   2026-10); drawn as context when the strike book exists, never a gate.
-- Product blocks ("block QQQ", "approve IWM") — owner sets the product list; the only ordering the data supports is
-  SPXW ≈ SPY > QQQ > IWM, an ordering of losses (IWM, which the spec approves, is the worst product).
+- Product blocks ("block QQQ", "approve IWM") — CHANGED to the owner's product lists (finalization item 1), each
+  configurable via environment/settings:
+
+  ```python
+  PRODUCTS_0DTE = ['SPXW', 'SPY', 'QQQ', 'IWM']                    # default: the four 0DTE products
+  PRODUCTS_MULTI_DTE = ['SPX', 'SPY', 'QQQ', 'IWM',                # default (Weekly / Swing / LEAPS): the recorder's 24 names —
+      'NVDA', 'TSLA', 'AAPL', 'MU', 'INTC', 'AMZN', 'TLT', 'META', 'EWZ', 'PLTR',     # scripts/eod_recorder.py CORE_NAMES + TOP20,
+      'AMD', 'IBIT', 'MSFT', 'GOOGL', 'MSTR', 'HYG', 'AVGO', 'SOFI', 'ORCL', 'GME']   # the twenty from horizons/top20.json `top20_used`
+  ```
+
+  The twenty are `research_notes/Compass engine audit/horizons/top20.json` `top20_used` (by option volume, 2026-10-06
+  → 12; SPCX, listed 2026, replaced by GME, the 21st name). The only ordering the data supports is SPXW ≈ SPY > QQQ >
+  IWM, an ordering of losses: IWM, the worst product, stays in the 0DTE list by the owner's choice.
 
 **2.3 SWEEP_FLOOR, BONUS_CAP, CONFIDENCE_CAP — DROPPED; the fitted score — not deployed (directive item 3).**
 Evidence: sweep_trigger §4 — a logistic regression on the spec's features (N 7,989 fit / 6,928 check) has AUC 0.563 fit
@@ -189,7 +257,8 @@ Evidence: sweep_trigger §5 — 0.1–0.2% of sweeps had no clean candidate; spr
 sweep minutes and most picks after 15:30 everywhere (SPY's pass share 0.999 at 09:30 → 0.478 at 15:30; IWM 0.945 →
 0.042), and the rejected candidates lose more of their premium (SPY −28.5 / −24.7% against −4.1 / −7.2%); the
 0.30–0.45 delta pick is unavailable 36–78% of the time after 15:30 (59% on IWM 13:45–15:30).
-Rule (every horizon; the delta bands of the longer horizons are module 13's):
+Rule (every horizon; the delta bands and the spread cap of the longer horizons are module 13's — `SPREAD_MAX` below
+is 0DTE's):
 
 ```python
 SPREAD_MAX = 0.05
@@ -234,7 +303,9 @@ tightened.
 **3.2 The structural stop at the swept level — KEEP, buffer 0–2 bp (directive item 4).**
 Evidence: exits_sizing test 1 — fires on 95.8% of sweep fades at +0 bp (realised −9.4%), 93.7% at +2 bp (−14.7%),
 90.1% at +5 bp (−22.4%, worse in fit and no better in check); paired against none inside the stack ±0.6%.
-Rule: `STRUCT_BUFFER_BPS` ∈ [0, 2] (owner sets within the band). After a high-side sweep (the fade side is PUT) the stop
+Rule: `STRUCT_BUFFER_BPS = 1` — configurable via environment/settings within [0, 2], default 1 bp (0.01% beyond the
+swept level), the owner's. The default sits between the two buffers measured (+0 bp −9.4%, +2 bp −14.7% realised); 1 bp
+itself was not run. After a high-side sweep (the fade side is PUT) the stop
 is the underlying trading above `L × (1 + STRUCT_BUFFER_BPS / 1e4)` on a bar's high; after a low-side sweep (CALL) below
 `L × (1 − STRUCT_BUFFER_BPS / 1e4)` on a bar's low; sell all legs at that minute's bid. For an entry with no swept level
 (not a sweep lane) the structural stop is absent and the backstop stands alone.
@@ -275,12 +346,15 @@ all-out with the lock read −8.5% OOS on A and −8.3% on B, and shape (b) −2
 check and the worst in fit, its +234% average win a handful of days). Neither is positive; the default is the owner's
 choice, the loss the audit's measurement. A one-lot Swing position (DTE ≥ 8) is 12.6's rule.
 
-**3.6 The 5-minute time stop — KEEP or DROP, owner sets.**
+**3.6 The 5-minute time stop — DROPPED by default: `TIME_STOP = None` (the owner's default, finalization item 1).**
 Evidence: exits_sizing test 4 — fires on 47% of trades and sells them at −13% where holding would have averaged −12 to
 −13%; 10, 15, 30 and 60 minutes the same within noise; paired 5 min against none −1.3% [−6.4, +3.3] then +1.3%
 [−2.1, +4.4] (A).
-Rule: `TIME_STOP = None` or an integer of minutes (owner sets; 5 is as good as any). If set: at minute `e + TIME_STOP`,
-if the peak bid through that minute < `1.06 × entryAsk`, sell all legs at that minute's bid.
+Rule: `TIME_STOP` is configurable via environment/settings (None or an integer of minutes), default `None` — disabled;
+the structural stop (3.2) and the +0% lock (3.3) govern. The default is the owner's choice where the audit found
+nothing to choose: 5-, 10-, 15-, 30- and 60-minute stops were indistinguishable, and 5 minutes against none flipped sign
+between periods (above). If set: at minute `e + TIME_STOP`, if the peak bid through that minute < `1.06 × entryAsk`,
+sell all legs at that minute's bid.
 
 **3.7 The hard flat — KEEP.** Module 1.4's rule: `HARD_FLAT = 958` (12:58 on a half day); every leg still open sells at
 that minute's bid unless 1.4 exempts it.
@@ -290,7 +364,8 @@ that minute's bid unless 1.4 exempts it.
 ```python
 PREM_STOP, LOCK_ACT, TRAIL_ACT, TRAIL, T1, HARD_FLAT = 0.68, 1.00, 1.06, 0.10, 1.25, 958
 ONE_LOT_SHAPE = 't1_lock'      # configurable via environment/settings; default the owner's (Phase 3); 'trail_only' selectable
-# owner sets: STRUCT_BUFFER_BPS in [0, 2]; TIME_STOP (None or minutes)
+STRUCT_BUFFER_BPS = 1          # configurable via environment/settings within [0, 2]; default 1 bp (the owner's, 3.2)
+TIME_STOP = None               # configurable via environment/settings (None or minutes); default None, disabled (the owner's, 3.6)
 
 def run_stack(entry_m, entryAsk, size, bids, bars, swept):       # bids[m] = the bid at minute m, loaded by 0.1
     a0 = entryAsk
@@ -332,18 +407,30 @@ a later minute; the trail compared the current bid with the peak THROUGH THE PRE
 of the minute it first triggers (a bid that gaps through the level sells at the gapped bid); a target fills at its
 price. Intra-minute ticks were not observed — a tick-watching engine fires earlier within the minute than this replay.
 
-**3.9 Sizing — CHANGED: by the dollar risk budget; the count cap (< 5) DROPPED.**
+**3.9 Sizing — CHANGED: by the dollar risk budget, capped at the displayed size; the count cap (< 5) DROPPED (the budget the owner's, finalization item 1).**
 Evidence: exits_sizing test 6 — the displayed NBBO covers 2 contracts on 95–96% of trades at entry and exit, 3 on
 92–94%, 5 on 89–92%, 10 on 80–85% (SPXW thinnest); per-contract EV by quoted size is non-monotonic; "≥ 5 contracts had
 negative EV" is a losing engine on its largest tickets, not a size effect.
-Rule (named inputs, owner sets the budget):
+Rule (named inputs, each configurable via environment/settings, the defaults the owner's):
 
 ```python
-RISK_PER_TRADE_USD = owner_sets          # the dollars the backstop may lose on one position, nominal
-size = floor(RISK_PER_TRADE_USD / (entryAsk * 100 * (1 - PREM_STOP)))     # the backstop's nominal loss a contract
+RISK_PER_TRADE_USD_PAPER = 150           # default in paper mode: $150 the backstop may lose on one position, nominal
+RISK_PER_TRADE_PCT       = 0.005         # default otherwise: 0.5% of account equity
+
+def risk_per_trade_usd(equity_usd, paper):
+    return RISK_PER_TRADE_USD_PAPER if paper else RISK_PER_TRADE_PCT * equity_usd
+
+budget_contracts = floor(risk_per_trade_usd(equity_usd, paper) / (entryAsk * 100 * (1 - PREM_STOP)))   # the backstop's nominal loss a contract
+contracts = min(budget_contracts, displayed_size)        # a count of 0 places nothing
+# displayed_size: the displayed NBBO size of the leg being bought at the entry minute (its ask_size); for a multi-leg
+# order, the smallest displayed size across the legs on the side each takes (a bought leg's ask_size, a sold leg's
+# bid_size). A hygiene cap, no EV claim.
 # the realised loss on a backstop exit ran 3-5 points past nominal (p10 -40%): the budget is nominal, not a bound
-# owner sets whether size is also capped at the displayed ask_size at the entry minute (a hygiene rule, no EV claim)
 ```
+
+The formula is written on 0DTE's backstop (3.1). A Weekly / Swing / LEAPS position's backstop is 12.4's (−25% from
+21 DTE, none below it); the owner named no per-contract nominal loss for a position with no premium backstop — listed
+at the end.
 
 No size is ever read off a ledger's size-EV correlation without the one-contract counterfactual.
 
@@ -358,31 +445,41 @@ SPY −3.7% all against −8.2% live-only; IWM −7.6 against −16.3%); the tra
 true +5% of debit it trips in 49% (A) to 85% (B) of runs, median first trip at trade 71–99; on a fat-tailed exit shape
 (13% wins, +240% average win) ~100% at +10% and 95–98% at +20%.
 
-**4.2 A hard daily dollar drawdown cap — CHANGED (the replacement), parameters as named inputs with the owner's defaults (Phase 3 item 2).**
-Rule (every horizon; one cap for the account; each input configurable via environment/settings, the default the
-owner's):
+**4.2 A hard daily dollar drawdown cap — CHANGED (the replacement), parameters as named inputs with the owner's defaults (Phase 3 item 2; the mark and the lane cap, finalization item 1).**
+Rule (every horizon; one cap for the account and one for each lane; each input configurable via environment/settings,
+the default the owner's):
 
 ```python
 DAILY_DD_CAP_PCT   = 0.03                   # default 3.0% of start-of-day account equity: the day's loss at which no new entry is placed
 PAPER_DD_CAP_USD   = 500                    # default $500 flat in paper mode, in place of the percentage
-DD_BASIS           = 'start_of_day_equity'  # the cap is read against the account's equity at 09:30 New York
-DD_SCOPE           = 'account'              # one cap for the whole account, every lane and name together
+LANE_DD_CAP_PCT    = 0.015                  # default 1.5% of start-of-day account equity: each lane's own cap, beside the account's
+PAPER_LANE_DD_CAP_USD = 250                 # default $250 flat a lane in paper mode, in place of the percentage
+DD_BASIS           = 'start_of_day_equity'  # the caps are read against the account's equity at 09:30 New York
+DD_SCOPE           = 'account_and_lane'     # the account's cap over every lane and name together, and each lane's own
 DD_RESET           = 'next_session_open_NY' # the day is New York's; the count starts at zero at 09:30
-RE_ENTRY           = 'none_that_session'    # a hard cap: once breached, no new entry until the next session
-DD_MARK            = owner_sets             # 'realised' or 'realised_plus_open_at_bid' (open legs marked at the current bid) — unnamed by Phase 3
+RE_ENTRY           = 'none_that_session'    # a hard cap: once breached, no new entry (the account's, or that lane's) until the next session
+DD_MARK            = 'realized_plus_bid_mark'   # default: realized P&L plus every open position marked at its current bid
+
+def day_pnl_usd(realized_usd, open_positions):    # DD_MARK: an open position counts at its legs' current bid, less its cost
+    return realized_usd + sum(p.qty * (p.bid_now - p.entry) * 100 for p in open_positions)
 
 def dd_cap_usd(equity_sod_usd, paper):
     return PAPER_DD_CAP_USD if paper else DAILY_DD_CAP_PCT * equity_sod_usd
 
-def governor(day_pnl_usd, equity_sod_usd, paper):
-    if day_pnl_usd <= -dd_cap_usd(equity_sod_usd, paper):  return 'HALT_NEW_ENTRIES'   # until the next session; open positions keep their exit stack
-    return 'OPEN'
+def lane_cap_usd(equity_sod_usd, paper):
+    return PAPER_LANE_DD_CAP_USD if paper else LANE_DD_CAP_PCT * equity_sod_usd
+
+def governor(account_pnl_usd, lane_pnl_usd, equity_sod_usd, paper):   # both from day_pnl_usd, the account's and the lane's
+    if account_pnl_usd <= -dd_cap_usd(equity_sod_usd, paper):  return 'HALT_NEW_ENTRIES'    # every lane, until the next session
+    if lane_pnl_usd <= -lane_cap_usd(equity_sod_usd, paper):   return 'HALT_LANE_ENTRIES'   # this lane, until the next session
+    return 'OPEN'                                              # open positions keep their exit stack either way
 ```
 
-The cap halts entries, never exits: module 3 keeps running on what is open. The default is set; the audit's noise
-table (`exits_sizing/out/t7_breaker_noise_{A,B}.csv`, the method in `run_tests.py`) is still recomputed for the actual
-lane's win-rate shape with the cap in place of the breaker before the lane runs on it, and the UI states that a
-30-trade window had the trip rates above.
+The caps halt entries, never exits: module 3 keeps running on what is open. Marking open positions at the bid counts
+an open loss toward a cap before it is realised, so a cap can halt entries on a day whose realised P&L alone has not
+reached it. The defaults are set; the audit's noise table (`exits_sizing/out/t7_breaker_noise_{A,B}.csv`, the method
+in `run_tests.py`) is still recomputed for the actual lane's win-rate shape with the caps in place of the breaker
+before the lane runs on them, and the UI states that a 30-trade window had the trip rates above.
 
 ---
 
@@ -468,7 +565,7 @@ Evidence: greeks_books KQ3 — no convention predicts next-hour or next-day drif
 confirmation.
 Rule: recorded daily, nothing into the engine.
 
-**6.3 The flip — KEEP Method A; Method B under its own name or dropped (owner sets); tiers in units of the day's ATM straddle M (directive item 5; the tiers the owner's, Phase 3 item 2).**
+**6.3 The flip — KEEP Method A; Method B DROPPED from the UI (finalization item 1); tiers in units of the day's ATM straddle M (directive item 5; the tiers the owner's, Phase 3 item 2).**
 Evidence: greeks_books KQ4 — Method A found in 67 of 67 snapshots (66 within 3%), |F_A − S| median 33 bp; Method B has a
 zero in 56 of 67 and where both exist |B − A| median $11.37 (188 bp), p90 $22.88, more than one strike step apart in
 95% of cases, the same side of spot 57%; the 1 / 5 / 12 / 25 bp tiers are 1/20, 1/4, 2/3 and 1.4 of SPY's $1 strike
@@ -483,7 +580,8 @@ def flip_A(profile):        # profile: [(strike, net GEX at the strike)] sorted;
         if va * vb < 0: return a + (b - a) * abs(va) / (abs(va) + abs(vb))
     return None
 # Method B (the spot at which the whole book's gamma re-priced on a 0.05% grid is zero, sticky-strike vols) is a
-# different object: shown as "book zero (B)" or not shown — never called "the flip". Owner sets which.
+# different object, never called "the flip": DROPPED from the UI — configurable via environment/settings, default
+# FLIP_DISPLAY = 'A' (the owner's): only Method A's F_A is displayed, and no "book zero (B)" is drawn.
 
 # The flip's distance from spot in units of the day's 1.0 x ATM straddle M (module 7.1), never bps; configurable via
 # environment/settings, the defaults the owner's (Phase 3). A tier is a label on the panel with no claim attached.
@@ -502,7 +600,8 @@ Evidence: greeks_books KQ4 — the 25- and 60-DTE expiries on one date give the 
 same put wall on 4; the 0DTE book's call wall never matched the Macro book's on 15 name-days, the Near book's did on 9;
 on 34 dates the next session reached a monthly wall no more often than its mirror strike (call wall 3% against 10%,
 put wall 4% against 4%, king 10 / 10%).
-Rule: three books — `0DTE` (today's expiry), `Near` (≤ 14 calendar days), `Macro` (the rest, to the owner's horizon);
+Rule: three books — `0DTE` (today's expiry), `Near` (≤ 14 calendar days), `Macro` (the rest: every listed expiry, to 365+ DTE —
+configurable via environment/settings, default `MACRO_HORIZON = 'all_listed'`, the owner's);
 the call wall, put wall, king and pin computed per book by the owner's definitions (unchanged; the house's `pickWalls`),
 and printed with the book's name beside them ("0DTE call wall 784 · Macro call wall 785" are different claims). A
 wall's reach is a claim nothing here makes; the terminal's own track record (data/feed/trackRecord.ts) is the
@@ -540,7 +639,7 @@ read (the house already does); every printed figure carries its unit.
 
 ## Module 7 — Expected-move bands and the king scanner
 
-**7.1 The band — CHANGED: M = straddle, labelled "~63% open containment" (directive item 6).**
+**7.1 The band — CHANGED: M = straddle, labelled "Expected Move (~63% open containment)"; no separate 1-SD band (directive item 6; the label and the single band the owner's, finalization item 1).**
 Evidence: move_atr_flow Q1 — on 3,654 sessions × 14 scans the 68.3% quantile of |close − spot| / straddle at 09:35 is
 1.09–1.19 and 0.70–0.95 in the last 90 minutes (ETFs); 1.0 × holds 59–65% of closes, 1.2533 × 70–75% (more than its
 nominal 68.3%); RMS 1.15–1.29.
@@ -549,9 +648,10 @@ Rule (0DTE; the Swing engine's 1 × EM target in module 12 uses the same M on it
 ```python
 M       = straddle_mid(expiry, strike_nearest_spot)     # the ATM call mid + put mid at the scan, loaded by 0.1
 upper_1 = S + M;  lower_1 = S - M
-LABEL   = "~63% open containment"                       # never "1 SD", never 1.2533 x
-# if a 1-SD band is ever wanted: 1.10-1.15 x M at the open tapering to 0.9 x after 14:00 (the measured quantile),
-# never 1.2533 x; owner sets whether such a band is drawn at all
+LABEL   = "Expected Move (~63% open containment)"       # never "1 SD", never 1.2533 x
+DRAW_1SD_BAND = False                                   # configurable via environment/settings; default False (the owner's): only M = 1.0 x is drawn
+# the measured 1-SD quantile stays the audit's reading and is drawn nowhere by default: 1.10-1.15 x M at the open
+# tapering to 0.9 x after 14:00, never 1.2533 x
 ```
 
 SPXW's late-day containment (58–60% of sessions beyond ±1.0 × at 15:50) is PENDING — the 16:00 print against a 15:50
@@ -706,8 +806,9 @@ messages from 15:50) enters as the fifth unit-weight term the day a feed exists 
 Evidence: clock_session §5 — Spearman ρ of moc_mag with |15:49 → close move| +0.213 fit and +0.157 check (N 1,836 /
 1,767 at t = 950), +0.14 to +0.25 on every name in both periods, the top quintile moving 17–18 bp against 9–10 bp in the
 bottom.
-Rule: `moc_mag` is shown as "expect a move" with its quintile; it may enter sizing as an owner-set input
-(`MOC_MAG_SIZE_RULE = owner_sets`); it sets no direction.
+Rule: `moc_mag` is shown as "expect a move" with its quintile — display and telemetry only. `MOC_MAG_SIZE_RULE` is
+configurable via environment/settings, default `1.0`, a flat size multiplier (the owner's): `moc_mag` changes no
+contract count and sets no direction (16.2 covers it).
 
 **10.3 moc_score as a direction, and the power-hour long-premium buy rule — DROPPED (directive item 6).**
 Evidence: clock_session §5 — the signed score's ρ with the move is +0.069 fit and −0.010 check, sign hit 48.7% (47.1%
@@ -787,7 +888,7 @@ def level_stop(entry, level, name, side):
 
 The prior-week low and the prior-day low are shown as the levels they are. Neither version is positive.
 
-**12.4 The premium backstop — CHANGED (directive item 4): none below 21 DTE, or widened to the tenor.**
+**12.4 The premium backstop — CHANGED (directive item 4): none below 21 DTE, −25% from 21 DTE (the owner's default, finalization item 1); widened to the tenor selectable.**
 Evidence: horizons §3, exits_sizing test 8 — by Black-Scholes at IV 20% a −20% premium stop on a 7-DTE ATM option is a
 0.47% adverse move at entry, 0.20% after one trading day and is tripped by time decay alone by the third day; at
 14 DTE 0.67 / 0.48 / 0.08%; three sessions of pure decay take 42% off a 7-DTE premium and 19–20% off a 14-DTE one; in
@@ -796,14 +897,21 @@ with the stop at 21 DTE in train).
 Rule:
 
 ```python
-def premium_backstop(dte, mode):              # mode: owner sets 'none_below_21' or 'widened'
+PREMIUM_BACKSTOP_MODE = 'none_below_21'      # configurable via environment/settings; default the owner's; 'widened' selectable
+
+def premium_backstop(dte, mode=PREMIUM_BACKSTOP_MODE):   # the fraction of the entry premium at which all legs sell, or None
     if mode == 'none_below_21':
-        return None if dte < 21 else 0.80     # the level stop alone under 21 DTE; the owner's -20% may stand from 21 DTE
+        return None if dte < 21 else 0.75     # under 21 DTE no premium backstop: 12.3's underlying level stop governs; from 21 DTE -25%
     if mode == 'widened':
         if dte <= 7:   return 0.55            # >= 45% at 7 DTE
         if dte <= 14:  return 0.75            # >= 25% at 14 DTE
-        return owner_sets                      # 15-20 DTE and the A/A+ split (-20%/-17%, a 0.07% difference in the underlying at 7 DTE): the owner's
+        return owner_sets                      # over 14 DTE (and the A/A+ split, -20%/-17%, a 0.07% difference in the underlying at 7 DTE): no figure from the owner; not the default
 ```
+
+The default is the owner's choice. Under 21 DTE it is the audit's reading (the backstop fired on decay alone within
+three sessions at ≤ 14 DTE, always before the level stop). From 21 DTE the −25% backstop was not itself run at that
+tenor: at 21 DTE the audit ran −20% (−17.4% train / −3.0% check against hold −0.3% / −25.3%, no sign either way) and
+−17% (−17.8% / −0.3%); −25% was run on LEAPS (180 DTE) only, below.
 
 LEAPS: the −25% stop stands as the owner wrote it (a 4.3% move at 365 DTE; the audit: +1.7% train / −13.2% check
 against hold +15.0% / −4.4%, no EV either way) — KEEP, no claim.
@@ -812,16 +920,36 @@ against hold +15.0% / −4.4%, no EV either way) — KEEP, no claim.
 Evidence: horizons §2 — −1.95% → −1.37% train, −1.72% → −0.74% check; 46 / 31 trades out at −3.0% / −3.7% on day 3,
 losers and winners alike.
 
-**12.6 Scale-outs, trail lock, RSI(14) exit — KEEP sizing-conditional; the lock and RSI owner sets.**
+**12.6 Scale-outs, trail lock, RSI(14) exit — KEEP the ladder sizing-conditional; the trail lock on at +25% / out at +21%, the RSI exit telemetry only (the owner's defaults, finalization item 1).**
 Evidence: horizons §4 — scale-outs raise the hit rate (11% → 18–28%) without changing the sign; the ladder needs four
 contracts (two run the 50% tier only, one has no ladder); the trail lock and the RSI exit stay within ±2 points of
 the plain stop.
-Rule: the 25% / 50% ladder exists at `size ≥ 4`; at `size = 2` the 50% tier only; at `size = 1` none — a one-lot
-Swing position (DTE ≥ 8) runs the owner's trail lock plus 12.3's underlying level stop (Phase 3 item 2; configurable via
-environment/settings, default on): the lock arms once the mark reaches `TRAIL_LOCK_ARM` ∈ [1.21, 1.31] × the entry
-premium and the exit then rests `TRAIL_LOCK_OUT` ∈ [0.03, 0.05] of the entry under that level (the owner's "+21–31%,
-exiting 3–5 points under"; the audit modelled +26% / 4 points: −16.4% / −11.9% at 21 DTE, no evidence either way).
-At `size ≥ 2` `TRAIL_LOCK` and `RSI_EXIT` are owner-set booleans with no evidence either way.
+Rule (each input configurable via environment/settings, the defaults the owner's):
+
+```python
+TRAIL_LOCK      = True         # default on: a one-lot Swing position (DTE >= 8, Phase 3 item 2) and the ladder's remainder at size >= 2
+TRAIL_LOCK_ARM  = 1.25         # the lock arms once the mark reaches +25% of the entry premium
+TRAIL_LOCK_OUT  = 0.04         # then the exit rests 4 points of the entry under the lock: at 1.21 x the entry premium (+21%)
+LADDER          = [('T1', 0.25), ('T2', 0.50)]   # shares of the position sold at T1 and at T2; the remainder rides the trail lock
+RSI_EXIT        = False        # default off: RSI(14) is written to telemetry, read by no exit
+
+def ladder_legs(size):
+    """Each tier's share of `size` rounded DOWN to whole contracts; at least one contract always left on the trail lock."""
+    t1 = floor(0.25 * size); t2 = floor(0.50 * size)
+    trail = size - t1 - t2                                    # >= 1 for every size >= 1, since t1 + t2 <= 0.75 x size
+    return {'T1': t1, 'T2': t2, 'trail_lock': trail}
+# size 1: T1 0, T2 0, trail 1 (the one-lot rule: Swing, DTE >= 8; a one-lot Weekly has no ladder and no trail lock)
+# size 2: T1 0, T2 1, trail 1                       size 3: T1 0, T2 1, trail 2
+# size 4: T1 1, T2 2, trail 1                       size 5: T1 1, T2 2, trail 2   size 8: T1 2, T2 4, trail 2
+```
+
+T1 and T2 are the owner's swing targets (the owner's spec: 25% at +25–29% and 50% at +50% of the entry premium; the
+audit modelled T1 at +27%). The 25% / 50% partials need `size ≥ 4` to exist as written (the audit: one contract
+cannot be scaled, two run the 50% tier only); with two or three contracts the rule above leaves exactly a T2 leg of
+one contract and the rest on the trail lock, no T1 leg. Every leg keeps 12.3's underlying level stop and 12.4's
+backstop. The default is the owner's choice where the audit found nothing either way: the trail lock as modelled
+(+26%, out 4 points under) read −16.4% train / −11.9% check at 21 DTE, the RSI exit −16.7% / −9.4%, both within ±2
+points of the plain stop; the owner's +25% / +21% point was not itself run.
 
 **12.7 LEAPS — KEEP the 0.60–0.80 Δ band, the 33/33 ladder and the roll below 60 DTE as written.**
 Evidence: horizons §3/§6 — the roll at 90 against 60 DTE is within ±0.3% of spot a cycle (decay 90 → 60 DTE 0.81 =
@@ -839,8 +967,22 @@ and swing bands) and expensive on single names (5.1–5.3% median, 90th percenti
 3.7–4.4% to cross.
 Rule: Weekly 4–7 DTE at 0.35–0.50 |Δ|; Swing 8–28 DTE at 0.40–0.55; LEAPS 90–365+ DTE at 0.60–0.80; quote hygiene
 (2.4) on every pick. The 5% spread/mid guard is a 0DTE figure: at the swing band a single name's median is 5.1–5.3%
-and 8.5% at 8–14 DTE, so `SPREAD_MAX_MULTI_DTE = owner_sets` (the ETFs pass 5% at every band; a single name would be
-rejected about half the time).
+and 8.5% at 8–14 DTE (the ETFs pass 5% at every band; a single name would be rejected about half the time at 5%).
+`SPREAD_MAX_MULTI_DTE` is configurable via environment/settings, the defaults the owner's:
+
+```python
+def spread_max_multi_dte(root, dte):                     # replaces SPREAD_MAX in 2.4's eligible() for Weekly / Swing / LEAPS
+    if root in ('SPY', 'QQQ', 'IWM', 'SPXW'):  return 0.05     # every multi-DTE horizon
+    if root == 'SPX':                          return None     # SPX's AM-settled root: not named by the owner
+    if 15 <= dte <= 28:                        return 0.08     # every other name (the single names) in 13.3's preferred window
+    return None                                                 # no figure from the owner: no eligible contract → NO_TRADE
+```
+
+The owner gave no figure for a single name outside 15–28 DTE (Weekly 4–7, Swing's 8–14 fallback in 13.3, LEAPS 90–365+
+DTE), so none is invented: with no cap there is no eligible contract and the outcome is `NO_TRADE('no eligible
+contract')` — a single name's Swing walk has no 8–14 fallback, and a single name has no Weekly or LEAPS entry, until
+the owner gives one. "Every other name" includes the ETFs of the twenty (TLT, EWZ, IBIT, HYG): the owner's 5% list names
+four roots only.
 
 **13.2 The OI ≥ 500 floor — CHANGED: "the nearest expiry with a qualifying contract" (directive item 4).**
 Evidence: horizons §6 — OI ≥ 500 leaves a qualifying 0.40–0.55 Δ call in about half of the 8–28 DTE expiries (SPY 59%,
@@ -868,10 +1010,12 @@ against 0.9–3.0%; 1,515 reports 1996 → 2026 on 16 names); the swing entries 
 the underlying (+0.91% against −3.04% train, N 29 / 76; +1.97% against −2.85% check); the gate removes about a quarter
 of the entries; the option-side cost (IV crush, 20% spreads before announcements) is in the literature and not
 priceable here.
-Rule: a Weekly or Swing entry whose maximum hold (sessions × 7/5 ≤ DTE − 1) crosses a report date on UW's calendar
-(date and pre/post-market time) is `NO_TRADE('earnings in the hold')`. LEAPS: `LEAPS_EARNINGS_GATE = owner_sets`
-(almost every 63-session hold crosses one). The card words it as what it is — a block on announcement variance — and
-never as an expectation.
+Rule: the hard block stays for Weekly and Swing — an entry with `days_to_earnings < DTE` (a report date on UW's
+calendar, date and pre/post-market time, before the contract's expiry) is `NO_TRADE('earnings in the hold')`; since
+the maximum hold never outlives the contract (sessions × 7/5 ≤ DTE − 1), this covers every hold that crosses a
+report, the case the audit read. LEAPS (DTE ≥ 90): `LEAPS_EARNINGS_GATE` is configurable via environment/settings,
+default `False` (the owner's) — a LEAPS entry is exempt from the block (almost every 63-session hold crosses a report).
+The card words the block as what it is — a block on announcement variance — and never as an expectation.
 
 ---
 
@@ -908,7 +1052,8 @@ cap used to bind, each difference listed.
 
 **16.2 Helix isolation (telemetry only) — KEEP as the rule; the check is `check_helix_isolation.py`.**
 Rule: Helix's fields (and any "Physics" / "Nerve" telemetry the spec says has no weights, and module 1.2's
-`charm_pressure`, `sign(GEX_book)`, module 10's `moc_score`, module 11's flow fields) are written by the engine and read
+`charm_pressure`, `sign(GEX_book)`, Module 1's macro-event fields `is_macro_event_day` and `minutes_to_macro_release`,
+module 10's `moc_score` and `moc_mag`, module 11's flow fields) are written by the engine and read
 by the UI and the logs, never by a decision: (a) the gate's booleans, the picker, the stops, the scale-outs and the
 sizing are pure functions of market inputs and config with no telemetry argument; (b) nothing under the decision
 modules imports the telemetry module (an import-graph walk); (c) decisions on a fixed replay day are identical with the
@@ -924,27 +1069,29 @@ the Journal's trade records.
 | 0.1 four-decimal load, EPS | yes | yes | yes | yes |
 | 1.1 window flags | yes | the EOD clock only | the EOD clock only | the EOD clock only |
 | 1.2 charm / regime telemetry | display | display | display | display |
-| 1.4 15:58 flat, exemption, may_ride | yes | no (exempt) | no | no |
+| 1.4 15:58 flat, exemption, may_ride (default off) | yes | no (exempt) | no | no |
+| 1 macro-event fields (telemetry) | display | display | display | display |
 | 2.1–2.2 sweep and exclusion tags | yes | drawn | drawn | drawn |
-| 2.4 quote hygiene, no-eligible-contract | yes (5%) | yes (owner's cap) | yes (owner's cap) | yes (owner's cap) |
-| 3.1–3.8 the 0DTE stack | yes | no | no | no |
-| 3.9 risk-budget sizing | yes | yes | yes | yes |
-| 4.2 daily dollar drawdown cap | yes | yes | yes | yes |
+| 2.2 product list | SPXW, SPY, QQQ, IWM | the recorder's 24 names | the recorder's 24 names | the recorder's 24 names |
+| 2.4 quote hygiene, no-eligible-contract | yes (5%) | yes (5% SPY/QQQ/IWM/SPXW; single names no cap given — no entry) | yes (5% SPY/QQQ/IWM/SPXW; 8% single names at 15–28 DTE, none at 8–14) | yes (5% SPY/QQQ/IWM/SPXW; single names no cap given — no entry) |
+| 3.1–3.8 the 0DTE stack (buffer 1 bp, no time stop) | yes | no | no | no |
+| 3.9 risk-budget sizing ($150 paper / 0.5% of equity; ≤ displayed size) | yes | yes | yes | yes |
+| 4.2 daily dollar drawdown caps (account 3.0% / $500, lane 1.5% / $250; open positions at the bid) | yes | yes | yes | yes |
 | 5.1–5.4 pricer, forward parity, parity benchmark | r = q = 0 | yes | yes | yes |
-| 6.3–6.5 flip A, books, conf | 0DTE book | Near book | Near / Macro | Macro |
-| 7.1 M = straddle, 7.3 reachability | yes | the 1 × EM target (12) | the 1 × EM target | — |
+| 6.3–6.5 flip A (B not shown), books, conf | 0DTE book | Near book | Near / Macro | Macro (every listed expiry, to 365+ DTE) |
+| 7.1 M = straddle, "Expected Move (~63% open containment)", no 1-SD band; 7.3 reachability | yes | the 1 × EM target (12) | the 1 × EM target | — |
 | 8.1 ATR block | yes | no | no | no |
 | 9.1 geometry drawn | yes | drawn | drawn | drawn |
-| 10 MOC gauge | yes | no | no | no |
+| 10 MOC gauge | display (size × 1.0) | no | no | no |
 | 11 flow telemetry | display | display | display | display |
 | 12.1–12.2 B1–B4 | no | yes | yes | yes |
 | 12.3 level stop at the level, capped 6.0% / 3.5% | no | yes | yes | yes (the owner's weekly-close rule) |
-| 12.4 premium backstop | no (3.1 instead) | none, or ≥ 45% at 7 DTE | none < 21 DTE, or ≥ 25% at 14 | −25% as written |
+| 12.4 premium backstop | no (3.1 instead) | none (under 21 DTE) | none < 21 DTE; −25% from 21 DTE | −25% as written |
 | 12.5 3-day stall | no | no | 8–13 DTE | no |
-| 12.6 ladder, trail lock, RSI | no | size ≥ 4 | size ≥ 4; one lot: the trail lock + level stop | 33/33 |
+| 12.6 ladder, trail lock, RSI | no | 25% at T1 / 50% at T2 in whole contracts (T2 from 2, T1 from 4), the rest on the trail lock (arm +25%, out +21%); one lot none; RSI telemetry | the same; one lot: the trail lock + level stop | 33/33 |
 | 12.7 roll < 60 DTE | no | no | no | yes |
 | 13.1–13.3 bands, nearest qualifying expiry, 15–28 preference | no | 0.35–0.50 | 0.40–0.55; 15–28 first on names | 0.60–0.80 |
-| 14.1 earnings gate | no | yes | yes | owner sets |
+| 14.1 earnings gate | no | yes | yes | no (exempt by default) |
 | 15–16 checks | yes | yes | yes | yes |
 
 ---
@@ -974,7 +1121,7 @@ the Journal's trade records.
 9. **Pre-market and after-hours bars (1.1).** Not in the data (one bar at 16:00). Clears: the two windows' flags as
    measured rather than assumed.
 10. **A Compass trade log and the lane's own win-rate shape (3.5 one-lot shape, 4.2).** Clears: the noise table the
-    cap's default (3.0% / $500) is read against, whether the one-lot default stands on the lane's own outcomes, and
+    caps' defaults (3.0% / $500 the account, 1.5% / $250 a lane) are read against, whether the one-lot default stands on the lane's own outcomes, and
     whether a soft gate (6.5) changes realised P&L.
 11. **Intra-minute ticks (3.8).** Only one-minute NBBO exists on disk; a tick-watching engine fires earlier within the
     minute. Clears: the realised-overshoot figures as bounds.
@@ -982,17 +1129,19 @@ the Journal's trade records.
 ## What this specification does not do
 
 It does not pick a direction anywhere; it does not promise a profit from any rule above (every exit rule here is a
-smaller loss on a losing universe, measured); it does not invent a number the owner did not give (each is marked
-"owner sets"; Phase 3's defaults are the owner's, named as such); it does not patch trailField (the GET in 5.5
+smaller loss on a losing universe, measured); it does not invent a number the owner did not give (where the owner
+gave none the text says so; Phase 3's and the finalization directive's defaults are the owner's, named as such); it does not patch trailField (the GET in 5.5
 confirmed its convention); and it does not reach N > 500 on the swing gate by loosening it.
 
 ## Still owner-set
 
-What Phase 3 did not name stays as it was, each with its own section: 0.1 the tick rounding of resting orders (at
-the order layer); 1.4 `may_ride` for SPXW; 2.2 the product list; 3.2 `STRUCT_BUFFER_BPS` within [0, 2]; 3.6
-`TIME_STOP` (None or minutes); 3.9 `RISK_PER_TRADE_USD` and whether size is capped at the displayed ask_size; 4.2
-`DD_MARK` (whether open legs at the bid count toward the day's loss) and whether a lane gets a cap of its own beside the
-account's; 6.3 whether Method B is shown as "book zero (B)" or not at all; 6.4 the Macro book's horizon; 7.1 whether a
-1-SD band is drawn at all; 10.2 `MOC_MAG_SIZE_RULE`; 12.4 the premium-backstop mode (`none_below_21` or `widened`)
-and its 15–20 DTE level; 12.6 the point inside the trail lock's band (+21–31%, 3–5 under) for a one-lot swing, and
-`TRAIL_LOCK` / `RSI_EXIT` at `size ≥ 2`; 13.1 `SPREAD_MAX_MULTI_DTE`; 14.1 `LEAPS_EARNINGS_GATE`.
+The owner's finalization directive (item 1) set every default this list held. What genuinely remains is where the
+owner's words stop short of a case; each is said in its own section, and no number is invented for it:
+- 0.1 and 13.1 — SPX's AM-settled root (SPX, not SPXW, on the SPX chain): in neither the tick table nor the spread
+  list, so no order is placed and no contract is eligible on it.
+- 3.9 — the per-contract nominal loss the budget divides by for a Weekly / Swing position with no premium backstop
+  (under 21 DTE, 12.4).
+- 12.4 — the `widened` mode's level over 14 DTE; only if that mode is selected (it is not the default).
+- 12.6 — T1's point inside the owner's +25–29% band (the audit modelled +27%).
+- 13.1 — a spread cap for a single name outside 15–28 DTE (Weekly 4–7, Swing's 8–14 fallback, LEAPS); until one is
+  given, no entry.
