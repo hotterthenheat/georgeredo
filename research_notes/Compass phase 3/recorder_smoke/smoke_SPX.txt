@@ -1,0 +1,39 @@
+2026-10-21T20:37:15Z INFO GET /api/option-trades/flow-alerts?ticker_symbol=SPX&min_premium=25000&newer_than=2026-10-21T04%3A00%3A00Z&older_than=2026-10-21T20%3A37%3A15Z&limit=200 -> 200 199ms
+2026-10-21T20:37:15Z INFO GET /api/option-trades/flow-alerts?ticker_symbol=SPXW&min_premium=25000&newer_than=2026-10-21T04%3A00%3A00Z&older_than=2026-10-21T20%3A37%3A15Z&limit=200 -> 200 244ms
+2026-10-21T20:37:16Z INFO GET /api/stock/SPX/net-prem-ticks?date=2026-10-21 -> 200 396ms
+2026-10-21T20:37:16Z INFO GET /api/stock/SPX/oi-per-strike?date=2026-10-21 -> 200 161ms
+2026-10-21T20:37:16Z INFO GET /api/stock/SPX/option-contracts?exclude_zero_oi_chains=true&page=0&limit=500 -> 200 222ms
+2026-10-21T20:37:16Z INFO GET /api/stock/SPX/spot-exposures/strike?page=0&limit=500 -> 200 221ms
+smoke: one call an endpoint for SPX on 2026-10-21 → /home/user/georgeredo/data_recorder/smoke  (the token stays in the header)
+
+flow_alerts     /api/option-trades/flow-alerts  ok  rows 374  pages 2  calls 2
+  note: SPXW: page cap 1 reached — the day may be incomplete
+  columns (44): alert_rule, all_opening_trades, ask, bid, created_at, delta, end_time, er_time, expiry, expiry_count, gamma, has_floor, has_multileg, has_singleleg, has_sweep, id, issue_type, iv, iv_end, iv_start, marketcap, missing_periscope, next_earnings_date, open_interest, option_chain, price, rho, rule_id, sector, start_time, strike, theo, theta, ticker, total_ask_side_prem, total_bid_side_prem, total_premium, total_size, trade_count, type, underlying_price, vega, volume, volume_oi_ratio
+  columns NOT in the known list (kept as extras): missing_periscope
+  first row: {"er_time":null,"underlying_price":null,"has_multileg":"false","has_floor":"false","has_sweep":"false","created_at":"2026-10-21T20:31:00.716378Z","ask":"3.9","open_interest":"19845","total_premium":"190000","theta":"-0.45238890292158196","total_size":"500","issue_type":null,"all_opening_trades":"false","iv_end":"0.410799029644628","bid":"3.4","volume":"1732","rule_id":"e6b9f0b6-fcd9-44fe-9d1c-f53521c152c3","alert_rule":"RepeatedHits","iv":"0.41079902964462783","strike":"6000","delta":"-0.011629066279811971","start_time":"1792614527598","trade_count":"9","total_ask_side_prem":"190000","sector":
+
+darkpool        /api/darkpool/SPX  ok  rows 0  pages 0  calls 0
+  note: an index: not asked (no stock prints; bars are a CBOE grant)
+
+net_prem_ticks  /api/stock/SPX/net-prem-ticks  ok  rows 428  pages 1  calls 1
+  columns (13): call_volume, call_volume_ask_side, call_volume_bid_side, date, net_call_premium, net_call_volume, net_delta, net_put_premium, net_put_volume, put_volume, put_volume_ask_side, put_volume_bid_side, tape_time
+  first row: {"date":"2026-10-21","call_volume":"18005","put_volume":"105261","call_volume_ask_side":"12866","call_volume_bid_side":"3834","put_volume_ask_side":"93244","put_volume_bid_side":"9141","tape_time":"2026-10-21T13:30:00.000000Z","net_call_volume":"9032","net_call_premium":"15969081.0000","net_put_volume":"84103","net_put_premium":"40976916.0000","net_delta":"-70322.5970615121407650600"}
+
+ohlc_1m         /api/stock/SPX/ohlc/1m  ok  rows 0  pages 0  calls 0
+  note: an index: not asked (no stock prints; bars are a CBOE grant)
+
+oi_strike       /api/stock/SPX/oi-per-strike  ok  rows 548  pages 1  calls 1
+  columns (4): call_oi, date, put_oi, strike
+  first row: {"date":"2026-10-21","strike":"200","call_oi":"5399","put_oi":"34247"}
+
+chain           /api/stock/SPX/option-contracts  ok  rows 500  pages 1  calls 1
+  note: page cap 1 reached — the answer may be incomplete
+  columns (26): ask_volume, avg_price, bid_volume, delta, floor_volume, gamma, high_price, implied_volatility, last_price, last_tape_time, low_price, mid_volume, multi_leg_volume, nbbo_ask, nbbo_bid, no_side_volume, open_interest, option_symbol, prev_oi, rho, stock_multi_leg_volume, sweep_volume, theta, total_premium, vega, volume
+  first row: {"delta":"0.292425983067975","theta":"-0.579536276609369","gamma":"0.108996314484051","open_interest":"2845","volume":"214765","last_price":"0.10","option_symbol":"SPXW261021C07760000","avg_price":"3.7550632086233790422089260500","implied_volatility":"0.2185601396898447","nbbo_ask":"0.05","nbbo_bid":"0.00","rho":"0.0001023768761888014","vega":"0.0566153851925909","prev_oi":"819","bid_volume":"100586","ask_volume":"85989","mid_volume":"28190","floor_volume":"2524","high_price":"11.60","last_tape_time":"2026-10-21T20:00:00Z","low_price":"0.05","multi_leg_volume":"64986","stock_multi_leg_volume":
+
+spot_strike     /api/stock/SPX/spot-exposures/strike  ok  rows 500  pages 1  calls 1
+  note: page cap 1 reached — the answer may be incomplete
+  columns (37): call_charm_ask, call_charm_bid, call_charm_oi, call_charm_vol, call_delta_ask, call_delta_bid, call_delta_oi, call_delta_vol, call_gamma_ask, call_gamma_bid, call_gamma_oi, call_gamma_vol, call_vanna_ask, call_vanna_bid, call_vanna_oi, call_vanna_vol, date, price, put_charm_ask, put_charm_bid, put_charm_oi, put_charm_vol, put_delta_ask, put_delta_bid, put_delta_oi, put_delta_vol, put_gamma_ask, put_gamma_bid, put_gamma_oi, put_gamma_vol, put_vanna_ask, put_vanna_bid, put_vanna_oi, put_vanna_vol, strike, ticker, time
+  first row: {"call_charm_bid":"227.42","put_delta_vol":"0","put_gamma_bid":"0","put_vanna_vol":"0","call_vanna_oi":"-49.47","put_charm_vol":"0","call_charm_oi":"118003.49","date":"2026-10-21","put_delta_bid":"0","put_vanna_oi":"41.89","put_gamma_ask":"0","ticker":"SPX","put_gamma_vol":"0","call_gamma_vol":"0.26","call_charm_ask":"-8.01","price":"7755","call_delta_oi":"323931893805.4","call_delta_ask":"419493605.99","strike":"200","put_charm_oi":"-102000.66","call_delta_vol":"1617828634.89","put_charm_bid":"0","time":"2026-10-21T20:15:00.000000Z","call_gamma_ask":"-0.01","put_charm_ask":"0","call_vanna_vol
+
+calls made: 6; budget spent today: 26

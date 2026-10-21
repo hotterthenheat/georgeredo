@@ -1,0 +1,1 @@
+SPX /spot-exposures/strike paging probe (2026-10-21): page=0 500 rows (strikes 200 -> 7660), page=1 324 rows; paging honoured, 824 strikes in all.

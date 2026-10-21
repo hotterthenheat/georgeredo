@@ -1,0 +1,41 @@
+2026-10-21T20:37:13Z INFO GET /api/option-trades/flow-alerts?ticker_symbol=SPY&min_premium=25000&newer_than=2026-10-21T04%3A00%3A00Z&older_than=2026-10-21T20%3A37%3A13Z&limit=200 -> 200 490ms
+2026-10-21T20:37:14Z INFO GET /api/darkpool/SPY?date=2026-10-21&newer_than=2026-10-21T04%3A00%3A00Z&older_than=2026-10-21T20%3A37%3A13Z&limit=500 -> 200 272ms
+2026-10-21T20:37:14Z INFO GET /api/stock/SPY/net-prem-ticks?date=2026-10-21 -> 200 203ms
+2026-10-21T20:37:14Z INFO GET /api/stock/SPY/ohlc/1m?date=2026-10-21&limit=1000 -> 200 174ms
+2026-10-21T20:37:14Z INFO GET /api/stock/SPY/oi-per-strike?date=2026-10-21 -> 200 162ms
+2026-10-21T20:37:14Z INFO GET /api/stock/SPY/option-contracts?exclude_zero_oi_chains=true&page=0&limit=500 -> 200 211ms
+2026-10-21T20:37:15Z INFO GET /api/stock/SPY/spot-exposures/strike?page=0&limit=500 -> 200 258ms
+smoke: one call an endpoint for SPY on 2026-10-21 → /home/user/georgeredo/data_recorder/smoke  (the token stays in the header)
+
+flow_alerts     /api/option-trades/flow-alerts  ok  rows 200  pages 1  calls 1
+  note: SPY: page cap 1 reached — the day may be incomplete
+  columns (43): alert_rule, all_opening_trades, ask, bid, created_at, delta, end_time, er_time, expiry, expiry_count, gamma, has_floor, has_multileg, has_singleleg, has_sweep, id, issue_type, iv, iv_end, iv_start, marketcap, next_earnings_date, open_interest, option_chain, price, rho, rule_id, sector, start_time, strike, theo, theta, ticker, total_ask_side_prem, total_bid_side_prem, total_premium, total_size, trade_count, type, underlying_price, vega, volume, volume_oi_ratio
+  first row: {"er_time":null,"underlying_price":"773.28","has_multileg":"false","has_floor":"false","has_sweep":"false","created_at":"2026-10-21T20:14:53.126664Z","ask":"1.54","open_interest":"2500","total_premium":"28909","theta":"-1.0135680011877857","total_size":"189","issue_type":"ETF","all_opening_trades":"false","iv_end":"0.133576998935114","bid":"1.52","volume":"59579","rule_id":"e6b9f0b6-fcd9-44fe-9d1c-f53521c152c3","alert_rule":"RepeatedHits","iv":"0.13354865555652073","strike":"772","delta":"-0.3983310416671253","start_time":"1792613673943","trade_count":"6","total_ask_side_prem":"0","sector":nul
+
+darkpool        /api/darkpool/SPY  ok  rows 490  pages 1  calls 1
+  note: page cap 1 reached — the day may be incomplete
+  columns (18): canceled, executed_at, ext_hour_sold_codes, market_center, nbbo_ask, nbbo_ask_quantity, nbbo_bid, nbbo_bid_quantity, premium, price, sale_cond_codes, size, ticker, tracking_id, trade_code, trade_settlement, trf_executed_at, volume
+  first row: {"size":"55620","ticker":"SPY","price":"773.09","volume":"31524695","executed_at":"2026-10-21T20:33:52Z","canceled":"false","premium":"42999265.80","sale_cond_codes":"prior_reference_price","nbbo_ask":"773.2","nbbo_bid":"773.15","ext_hour_sold_codes":"extended_hours_trade","market_center":"L","nbbo_ask_quantity":"166","nbbo_bid_quantity":"540","tracking_id":"10509859005408","trade_code":null,"trade_settlement":"regular","trf_executed_at":"2026-10-21T20:33:50Z"}
+
+net_prem_ticks  /api/stock/SPY/net-prem-ticks  ok  rows 510  pages 1  calls 1
+  columns (13): call_volume, call_volume_ask_side, call_volume_bid_side, date, net_call_premium, net_call_volume, net_delta, net_put_premium, net_put_volume, put_volume, put_volume_ask_side, put_volume_bid_side, tape_time
+  first row: {"date":"2026-10-21","call_volume":"36","put_volume":"14","call_volume_ask_side":"34","call_volume_bid_side":"1","put_volume_ask_side":"10","put_volume_bid_side":"4","tape_time":"2026-10-21T11:30:00.000000Z","net_call_volume":"33","net_call_premium":"14506.00","net_put_volume":"6","net_put_premium":"4407.00","net_delta":"1753.58865119302685700"}
+
+ohlc_1m         /api/stock/SPY/ohlc/1m  ok  rows 669  pages 1  calls 1
+  columns (9): close, end_time, high, low, market_time, open, start_time, total_volume, volume
+  first row: {"close":"773.38","end_time":"2026-10-21T20:38:00Z","high":"773.38","low":"773.38","market_time":"po","open":"773.38","start_time":"2026-10-21T20:37:00Z","total_volume":"31528295","volume":"793"}
+
+oi_strike       /api/stock/SPY/oi-per-strike  ok  rows 491  pages 1  calls 1
+  columns (4): call_oi, date, put_oi, strike
+  first row: {"date":"2026-10-21","strike":"50","call_oi":"47","put_oi":"72498"}
+
+chain           /api/stock/SPY/option-contracts  ok  rows 500  pages 1  calls 1
+  note: page cap 1 reached — the answer may be incomplete
+  columns (26): ask_volume, avg_price, bid_volume, delta, floor_volume, gamma, high_price, implied_volatility, last_price, last_tape_time, low_price, mid_volume, multi_leg_volume, nbbo_ask, nbbo_bid, no_side_volume, open_interest, option_symbol, prev_oi, rho, stock_multi_leg_volume, sweep_volume, theta, total_premium, vega, volume
+  first row: {"delta":"0.0729777256023818","theta":"-0.0352691191595985","gamma":"0.1277634427939391","open_interest":"7035","volume":"675672","last_price":"0.02","option_symbol":"SPY261021C00775000","avg_price":"0.2399332072366473673616784473","implied_volatility":"0.410078519172738","nbbo_ask":"0.03","nbbo_bid":"0.02","rho":"2.54640709751419e-06","vega":"0.00227807817547258","prev_oi":"2850","bid_volume":"328179","ask_volume":"344098","mid_volume":"3395","floor_volume":"0","high_price":"0.65","last_tape_time":"2026-10-21T20:14:58Z","low_price":"0.02","multi_leg_volume":"27375","stock_multi_leg_volume":"0
+
+spot_strike     /api/stock/SPY/spot-exposures/strike  ok  rows 491  pages 1  calls 1
+  columns (37): call_charm_ask, call_charm_bid, call_charm_oi, call_charm_vol, call_delta_ask, call_delta_bid, call_delta_oi, call_delta_vol, call_gamma_ask, call_gamma_bid, call_gamma_oi, call_gamma_vol, call_vanna_ask, call_vanna_bid, call_vanna_oi, call_vanna_vol, date, price, put_charm_ask, put_charm_bid, put_charm_oi, put_charm_vol, put_delta_ask, put_delta_bid, put_delta_oi, put_delta_vol, put_gamma_ask, put_gamma_bid, put_gamma_oi, put_gamma_vol, put_vanna_ask, put_vanna_bid, put_vanna_oi, put_vanna_vol, strike, ticker, time
+  first row: {"call_vanna_ask":"0","put_vanna_vol":"0","put_delta_oi":"-2201335.65","call_vanna_bid":"0","call_delta_ask":"0","call_vanna_vol":"0","put_delta_vol":"0","call_vanna_oi":"-1.24","date":"2026-10-21","put_delta_ask":"0","put_charm_vol":"0","call_charm_vol":"0","put_vanna_ask":"0","put_gamma_vol":"0","put_gamma_oi":"-12367.57","put_charm_bid":"0","call_gamma_bid":"0","time":"2026-10-21T20:15:00.000000Z","strike":"50","put_charm_ask":"0","call_charm_oi":"3705.6","call_delta_bid":"0","put_charm_oi":"-3297799.11","put_vanna_oi":"4496.09","put_delta_bid":"0","call_gamma_oi":"4.38","call_charm_ask":"0
+
+calls made: 7; budget spent today: 20

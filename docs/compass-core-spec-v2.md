@@ -5,11 +5,15 @@ Status: LOCKED, 2026-10-21. Written from `reports/Compass engine audit.md` and t
 horizons), executing the owner's Phase 2 directive item by item. Nothing in this document is a grade, a score, a win
 probability or an expected value: every number is the audit's measurement of a loss, a frequency or a distance, and
 every detector below is a drawn object or a boolean tag with no claim attached. Where the owner gave no number the
-text says **owner sets** and no number is invented.
+text says **owner sets** and no number is invented. The owner's Phase 3 directive (2026-10-21, items 1.1 and 2)
+resolved 5.5 on the live check and set the defaults in 3.5, 4.2, 6.3, 12.3 and 12.6 — each "configurable via
+environment/settings, default …", the default the owner's; what is still owner-set is listed at the end.
 
 Tags: **KEEP** (the rule as the owner wrote it), **CHANGED** (the owner's rule with the stated change), **DROPPED**
 (out of the engine; may stay on screen as telemetry where said), **PENDING** (cannot be settled on the data on disk —
-what settles it is in the blockers at the end).
+what settles it is in the blockers at the end). Count, by the heading of each numbered rule (0.1–16.2): 25 KEEP,
+17 CHANGED, 9 DROPPED, 1 PENDING (12.2); 3.6 is KEEP or DROP at the owner's word, and 2.2's tags are its sub-rules'
+(two KEEP, one DROPPED, one PENDING, one owner-set).
 
 Conventions throughout (the audit's): minute t is New York's hour × 60 + minute; a 1-minute bar stamped t closes at
 t + 1; a chain NBBO row stamped t is the quote at t; a contract is bought at the ask and sold at the bid, $0.65 a
@@ -262,10 +266,14 @@ Evidence: exits_sizing test 5 — T1 +25% all-out needs a 60.8–62.8% win rate 
 are immaterial (−5.4 to −5.6%); bid_size ≥ 1 at every target exit minute.
 Rule: `T1 = 1.25`. With `size ≥ 2`: one contract rests at `1.25 × entryAsk` (a limit; fills at the first minute whose
 bid ≥ T1 − EPS, and a target minute equal to a common-exit minute goes to the target), the other `size − 1` are
-trailed (3.4), with the lock (3.3) on. T2 is gone. With `size = 1`: **owner sets** which of the two tested shapes the
-lane runs — (a) T1 all-out with the lock (audit: −8.5% OOS on A, −8.3% on B) or (b) no target, no lock, the trail alone
-(audit: −2.6% / −0.6% OOS, the best single exit in check and the worst in fit, its +234% average win a handful of
-days). Neither is positive; the spec does not choose for the owner.
+trailed (3.4), with the lock (3.3) on. T2 is gone. With `size = 1` (configurable via environment/settings, default
+`ONE_LOT_SHAPE = 't1_lock'` — the owner's Phase 3 choice): the one contract exits 100% at T1 (+25%) with the +0%
+breakeven lock (3.3) active — shape (a) of the two tested; shape (b), no target, no lock, the trail alone, stays
+selectable. The loss is stated, not hidden: the stack as written with one contract sold at T1 +25% lost −4.3% /
+−4.5% of debit on the sweep universe (exits_sizing `t0_spec_stack_A`, "spec 1c", 2022–24 / 2025–26); test 5's T1
+all-out with the lock read −8.5% OOS on A and −8.3% on B, and shape (b) −2.6% / −0.6% OOS (the best single exit in
+check and the worst in fit, its +234% average win a handful of days). Neither is positive; the default is the owner's
+choice, the loss the audit's measurement. A one-lot Swing position (DTE ≥ 8) is 12.6's rule.
 
 **3.6 The 5-minute time stop — KEEP or DROP, owner sets.**
 Evidence: exits_sizing test 4 — fires on 47% of trades and sells them at −13% where holding would have averaged −12 to
@@ -281,12 +289,17 @@ that minute's bid unless 1.4 exempts it.
 
 ```python
 PREM_STOP, LOCK_ACT, TRAIL_ACT, TRAIL, T1, HARD_FLAT = 0.68, 1.00, 1.06, 0.10, 1.25, 958
-# owner sets: STRUCT_BUFFER_BPS in [0, 2]; TIME_STOP (None or minutes); ONE_LOT_SHAPE in {'t1_lock', 'trail_only'}
+ONE_LOT_SHAPE = 't1_lock'      # configurable via environment/settings; default the owner's (Phase 3); 'trail_only' selectable
+# owner sets: STRUCT_BUFFER_BPS in [0, 2]; TIME_STOP (None or minutes)
 
 def run_stack(entry_m, entryAsk, size, bids, bars, swept):       # bids[m] = the bid at minute m, loaded by 0.1
     a0 = entryAsk
-    legs = [('target', 1), ('trail', size - 1)] if size >= 2 else \
-           ([('target', 1)] if ONE_LOT_SHAPE == 't1_lock' else [('trail', 1)])
+    if size >= 2:                                   # one contract at T1 +25%; the rest trailed 10% from the peak once +6%; the lock on
+        legs = [('target', 1), ('trail', size - 1)]
+    elif ONE_LOT_SHAPE == 't1_lock':                # size == 1, the default: 100% out at T1 +25%, the +0% lock active
+        legs = [('target', 1)]
+    else:                                           # size == 1, 'trail_only': no target, no lock, the trail alone
+        legs = [('trail', 1)]
     t1_on = any(kind == 'target' for kind, _ in legs)
     peak = None; peak_prior = None; lock_armed_at = None
     for m in range(entry_m + 1, HARD_FLAT + 1):
@@ -345,25 +358,31 @@ SPY −3.7% all against −8.2% live-only; IWM −7.6 against −16.3%); the tra
 true +5% of debit it trips in 49% (A) to 85% (B) of runs, median first trip at trade 71–99; on a fat-tailed exit shape
 (13% wins, +240% average win) ~100% at +10% and 95–98% at +20%.
 
-**4.2 A hard daily dollar drawdown cap — CHANGED (the replacement), parameters as named inputs.**
-Rule (every horizon; one cap for the desk unless the owner sets one per lane):
+**4.2 A hard daily dollar drawdown cap — CHANGED (the replacement), parameters as named inputs with the owner's defaults (Phase 3 item 2).**
+Rule (every horizon; one cap for the account; each input configurable via environment/settings, the default the
+owner's):
 
 ```python
-DAILY_DD_CAP_USD   = owner_sets     # the day's loss at which no new entry is placed
-DD_BASIS           = owner_sets     # 'realised' or 'realised_plus_open_at_bid' (open legs marked at the current bid)
-DD_SCOPE           = owner_sets     # 'desk' or per lane / per name
-DD_RESET           = 'next_session_open_NY'   # the day is New York's; the count starts at zero at 09:30
-RE_ENTRY           = owner_sets     # none inside the session (a hard cap), or a rule the owner writes down
+DAILY_DD_CAP_PCT   = 0.03                   # default 3.0% of start-of-day account equity: the day's loss at which no new entry is placed
+PAPER_DD_CAP_USD   = 500                    # default $500 flat in paper mode, in place of the percentage
+DD_BASIS           = 'start_of_day_equity'  # the cap is read against the account's equity at 09:30 New York
+DD_SCOPE           = 'account'              # one cap for the whole account, every lane and name together
+DD_RESET           = 'next_session_open_NY' # the day is New York's; the count starts at zero at 09:30
+RE_ENTRY           = 'none_that_session'    # a hard cap: once breached, no new entry until the next session
+DD_MARK            = owner_sets             # 'realised' or 'realised_plus_open_at_bid' (open legs marked at the current bid) — unnamed by Phase 3
 
-def governor(day_pnl_usd):
-    if day_pnl_usd <= -DAILY_DD_CAP_USD:  return 'HALT_NEW_ENTRIES'     # open positions keep their exit stack
+def dd_cap_usd(equity_sod_usd, paper):
+    return PAPER_DD_CAP_USD if paper else DAILY_DD_CAP_PCT * equity_sod_usd
+
+def governor(day_pnl_usd, equity_sod_usd, paper):
+    if day_pnl_usd <= -dd_cap_usd(equity_sod_usd, paper):  return 'HALT_NEW_ENTRIES'   # until the next session; open positions keep their exit stack
     return 'OPEN'
 ```
 
-The cap halts entries, never exits: module 3 keeps running on what is open. Before any dollar number is chosen the
-audit's noise table (`exits_sizing/out/t7_breaker_noise_{A,B}.csv`, the method in `run_tests.py`) is recomputed for the
-actual lane's win-rate shape with the cap in place of the breaker; the UI states that a 30-trade window had the trip
-rates above.
+The cap halts entries, never exits: module 3 keeps running on what is open. The default is set; the audit's noise
+table (`exits_sizing/out/t7_breaker_noise_{A,B}.csv`, the method in `run_tests.py`) is still recomputed for the actual
+lane's win-rate shape with the cap in place of the breaker before the lane runs on it, and the UI states that a
+30-trade window had the trip rates above.
 
 ---
 
@@ -415,16 +434,20 @@ Rule: the spec reads — "Under r = 0 a deep in-the-money put is often quoted be
 monthlies), so no vol solves; the forward-consistent floor restores one. In-the-money calls are unaffected under r = 0
 and more often unsolvable under r > 0 with q = 0 (5.7%)."
 
-**5.5 trailField and UW's live vols — PENDING (directive item 5).**
-Evidence: the audit's r = 0 finding stands on UW's `option-contracts` snapshots (68 snapshots of SPY, 34 dates
-2023-11-20 → 2026-08-24); the house's own measurement of 2026-10-13 (the terminal repo,
-docs/research-2026-10-13/uw-vol-convention.md: r = 4.15% fitted on 8,096 prints of six names from the per-print intraday
-vols) stands against it — possibly two endpoints with two conventions.
-Rule: ONE live GET against UW's `option-contracts` endpoint (SPY, an expiry about 30 days out, with `stock-state` for
-the spot, the audit's `q1c` script) decides whether live IVs stand on r = 0 like the historical snapshots. Only then
-is trailField patched so UW's vols are not repriced at r = 4.15% if they were inverted at r = 0. The live check could
-not be run in this session: the stored token answers 401 and the new one could not be loaded here. Nothing is patched
-before the GET.
+**5.5 trailField and UW's live vols — KEEP: no rate patch (directive item 5, resolved by Phase 3 item 1.1).**
+Evidence: the live check ran on 2026-10-21 at 20:36 UTC (`research_notes/Compass engine audit/greeks_books/
+q1c_live_uw_check.py`, results in `q1c_results.txt` beside it): SPY `stock-state` 773.21; `option-contracts` for
+2026-11-20 (30 DTE), 195 usable contracts within 10% of spot. UW's own `implied_volatility` field is parity-consistent
+at the market's carry: same-strike IV_call − IV_put median +0.13 vol points (n 51), where an r = 0 inversion of the mids
+gives +3.32 and an r = 4.15%, q = 0 inversion +0.04; the ATM put-call forward is 776.00 against spot 773.21, r − q =
++4.38%. So the live IVs stand on about 4% carry, the house's `UW_VOL_CONVENTION` (r = 0.0415, q = 0, measured
+2026-10-13 on 8,096 `/option-trades` prints) is confirmed for the live chain, and trailField's repricing is right. UW's
+printed GREEKS are another matter: on the 68 historical snapshots and on the live chain the delta best-fits r = 0 (live
+rmse 0.028 at r = 0 against 0.040 at r = 4.15%) — UW's greek fields and its IV field do not share a convention. The
+house never reads the greek fields (it reprices from the IV), so nothing depends on them.
+Rule: price UW's IV under `UW_VOL_CONVENTION`; never consume UW's printed delta, gamma or theta for pricing; the
+benchmark is put-call parity (5.3). trailField is unchanged. The house's own forward pricer keeps 5.2's
+r − q := ln(F/S)/τ as it stands.
 
 ---
 
@@ -445,7 +468,7 @@ Evidence: greeks_books KQ3 — no convention predicts next-hour or next-day drif
 confirmation.
 Rule: recorded daily, nothing into the engine.
 
-**6.3 The flip — KEEP Method A; Method B under its own name or dropped (owner sets); tiers in strike steps or daily 1σ units (directive item 5).**
+**6.3 The flip — KEEP Method A; Method B under its own name or dropped (owner sets); tiers in units of the day's ATM straddle M (directive item 5; the tiers the owner's, Phase 3 item 2).**
 Evidence: greeks_books KQ4 — Method A found in 67 of 67 snapshots (66 within 3%), |F_A − S| median 33 bp; Method B has a
 zero in 56 of 67 and where both exist |B − A| median $11.37 (188 bp), p90 $22.88, more than one strike step apart in
 95% of cases, the same side of spot 57%; the 1 / 5 / 12 / 25 bp tiers are 1/20, 1/4, 2/3 and 1.4 of SPY's $1 strike
@@ -462,8 +485,16 @@ def flip_A(profile):        # profile: [(strike, net GEX at the strike)] sorted;
 # Method B (the spot at which the whole book's gamma re-priced on a 0.05% grid is zero, sticky-strike vols) is a
 # different object: shown as "book zero (B)" or not shown — never called "the flip". Owner sets which.
 
-TIER_UNIT = owner_sets      # 'strike_step' or 'daily_1sd' (module 7's M on the day); never bps
-# tiers, in TIER_UNIT: e.g. "inside one step", "1-3 steps", "beyond"; the boundaries are the owner's, in that unit
+# The flip's distance from spot in units of the day's 1.0 x ATM straddle M (module 7.1), never bps; configurable via
+# environment/settings, the defaults the owner's (Phase 3). A tier is a label on the panel with no claim attached.
+FLIP_TIERS_M = [(0.05, 'breached'), (0.15, 'critical'), (0.35, 'warn'), (0.75, 'watch')]   # upper bound inclusive; beyond 0.75 M 'safe'
+
+def flip_tier(spot, F_A, M):
+    """tier(|spot - F_A| / M): <= 0.05 M breached; <= 0.15 M critical; <= 0.35 M warn; <= 0.75 M watch; > 0.75 M safe."""
+    d = abs(spot - F_A) / M
+    for bound, name in FLIP_TIERS_M:
+        if d <= bound + EPS: return name
+    return 'safe'
 ```
 
 **6.4 The walls, the king, the pin and the three books — KEEP the definitions and the slicing; every level labelled by its book.**
@@ -736,12 +767,25 @@ positive-gamma entries, 6 negative; unconditionally negative-gamma days returned
 20 sessions).
 Rule: run with B4 off and say so on the card; it comes in when a year of the strike-level book exists (blockers).
 
-**12.3 The level stop — CHANGED (wording): a distance from entry sized to the entry's depth, owner sets; never "2.4–4.6%, median 3.45%".**
+**12.3 The level stop — CHANGED: strictly at the structural level, capped at a maximum underlying distance (the caps the owner's, Phase 3 item 2); never "2.4–4.6%, median 3.45%".**
 Evidence: horizons §2 — after an entry 62–70% down an impulse the prior-week low sits a median 8.25% below entry (q25
 −12.1%, 10th percentile −17.7%) against a 1 × EM target a median +10.3% away at a 35–40% hit rate; "median 3.45%" is a
-fact about 35 vendor trades, and a fixed 3.45% stop is hit on 74–78% of trades.
-Rule: `LEVEL_STOP_DISTANCE = owner_sets` (a share of the entry price, or a function of the entry's depth in the
-impulse); the prior-week low and the prior-day low are shown as the levels they are. Neither version is positive.
+fact about 35 vendor trades, and a fixed 3.45% stop is hit on 74–78% of trades. So the cap below binds often: a median
+of 8.25% is beyond both caps, and the stop sits at the cap rather than the level on more than half of the entries.
+Rule (Weekly, Swing, LEAPS; configurable via environment/settings, the defaults the owner's):
+
+```python
+LEVEL_STOP_CAP = {'single_name': 0.060, 'SPY': 0.035, 'QQQ': 0.035, 'IWM': 0.035}   # maximum underlying distance from entry
+
+def level_stop(entry, level, name, side):
+    """The stop sits strictly at the structural level — the Near book's put wall (a long) or call wall (a short), or the
+    prior-week low / high — unless the level is farther than the cap, in which case it sits at the cap."""
+    cap  = LEVEL_STOP_CAP.get(name, LEVEL_STOP_CAP['single_name'])
+    dist = min(abs(entry - level) / entry, cap)
+    return entry * (1 - dist) if side == 'long' else entry * (1 + dist)
+```
+
+The prior-week low and the prior-day low are shown as the levels they are. Neither version is positive.
 
 **12.4 The premium backstop — CHANGED (directive item 4): none below 21 DTE, or widened to the tenor.**
 Evidence: horizons §3, exits_sizing test 8 — by Black-Scholes at IV 20% a −20% premium stop on a 7-DTE ATM option is a
@@ -772,8 +816,12 @@ losers and winners alike.
 Evidence: horizons §4 — scale-outs raise the hit rate (11% → 18–28%) without changing the sign; the ladder needs four
 contracts (two run the 50% tier only, one has no ladder); the trail lock and the RSI exit stay within ±2 points of
 the plain stop.
-Rule: the 25% / 50% ladder exists at `size ≥ 4`; at `size = 2` the 50% tier only; at `size = 1` none. `TRAIL_LOCK`
-and `RSI_EXIT` are owner-set booleans with no evidence either way.
+Rule: the 25% / 50% ladder exists at `size ≥ 4`; at `size = 2` the 50% tier only; at `size = 1` none — a one-lot
+Swing position (DTE ≥ 8) runs the owner's trail lock plus 12.3's underlying level stop (Phase 3 item 2; configurable via
+environment/settings, default on): the lock arms once the mark reaches `TRAIL_LOCK_ARM` ∈ [1.21, 1.31] × the entry
+premium and the exit then rests `TRAIL_LOCK_OUT` ∈ [0.03, 0.05] of the entry under that level (the owner's "+21–31%,
+exiting 3–5 points under"; the audit modelled +26% / 4 points: −16.4% / −11.9% at 21 DTE, no evidence either way).
+At `size ≥ 2` `TRAIL_LOCK` and `RSI_EXIT` are owner-set booleans with no evidence either way.
 
 **12.7 LEAPS — KEEP the 0.60–0.80 Δ band, the 33/33 ladder and the roll below 60 DTE as written.**
 Evidence: horizons §3/§6 — the roll at 90 against 60 DTE is within ±0.3% of spot a cycle (decay 90 → 60 DTE 0.81 =
@@ -890,10 +938,10 @@ the Journal's trade records.
 | 10 MOC gauge | yes | no | no | no |
 | 11 flow telemetry | display | display | display | display |
 | 12.1–12.2 B1–B4 | no | yes | yes | yes |
-| 12.3 level stop distance | no | yes | yes | yes (the owner's weekly-close rule) |
+| 12.3 level stop at the level, capped 6.0% / 3.5% | no | yes | yes | yes (the owner's weekly-close rule) |
 | 12.4 premium backstop | no (3.1 instead) | none, or ≥ 45% at 7 DTE | none < 21 DTE, or ≥ 25% at 14 | −25% as written |
 | 12.5 3-day stall | no | no | 8–13 DTE | no |
-| 12.6 ladder, trail lock, RSI | no | size ≥ 4 | size ≥ 4 | 33/33 |
+| 12.6 ladder, trail lock, RSI | no | size ≥ 4 | size ≥ 4; one lot: the trail lock + level stop | 33/33 |
 | 12.7 roll < 60 DTE | no | no | no | yes |
 | 13.1–13.3 bands, nearest qualifying expiry, 15–28 preference | no | 0.35–0.50 | 0.40–0.55; 15–28 first on names | 0.60–0.80 |
 | 14.1 earnings gate | no | yes | yes | owner sets |
@@ -903,8 +951,10 @@ the Journal's trade records.
 
 ## Blockers — what is PENDING and what data clears it
 
-1. **UW's live vol convention (5.5).** One GET of `stock/SPY/option-contracts?expiry=<~30 d>` plus `stock-state` with
-   a working token, run through the audit's `q1c` script. Clears: whether trailField reprices r = 0 vols at 4.15%.
+1. **UW's live vol convention (5.5) — CLEARED 2026-10-21.** The GET of `stock/SPY/option-contracts?expiry=2026-11-20`
+   plus `stock-state` ran through the audit's `q1c` script: the live IV field stands on ~4% carry (parity gap +0.13 vol
+   points), trailField's r = 4.15% repricing is right and is not patched; UW's printed greeks fit r = 0 and are read by
+   nothing.
 2. **The ThetaData greek benchmark (5.3) and the multi-day option paths (12.4–12.7, 13).** A ThetaData pull outside the
    owner's terminal hours (it is in use 13:00–21:00 UTC): greeks at 7 / 14 / 30 / 180 DTE and the daily option NBBO
    history of the universe. Clears: a backtest, not a Black-Scholes model, of every Weekly / Swing / LEAPS exit.
@@ -924,7 +974,8 @@ the Journal's trade records.
 9. **Pre-market and after-hours bars (1.1).** Not in the data (one bar at 16:00). Clears: the two windows' flags as
    measured rather than assumed.
 10. **A Compass trade log and the lane's own win-rate shape (3.5 one-lot shape, 4.2).** Clears: the noise table the
-    cap's dollar number is read against, and whether a soft gate (6.5) changes realised P&L.
+    cap's default (3.0% / $500) is read against, whether the one-lot default stands on the lane's own outcomes, and
+    whether a soft gate (6.5) changes realised P&L.
 11. **Intra-minute ticks (3.8).** Only one-minute NBBO exists on disk; a tick-watching engine fires earlier within the
     minute. Clears: the realised-overshoot figures as bounds.
 
@@ -932,5 +983,16 @@ the Journal's trade records.
 
 It does not pick a direction anywhere; it does not promise a profit from any rule above (every exit rule here is a
 smaller loss on a losing universe, measured); it does not invent a number the owner did not give (each is marked
-"owner sets"); it does not patch trailField before the GET in 5.5; and it does not reach N > 500 on the swing gate by
-loosening it.
+"owner sets"; Phase 3's defaults are the owner's, named as such); it does not patch trailField (the GET in 5.5
+confirmed its convention); and it does not reach N > 500 on the swing gate by loosening it.
+
+## Still owner-set
+
+What Phase 3 did not name stays as it was, each with its own section: 0.1 the tick rounding of resting orders (at
+the order layer); 1.4 `may_ride` for SPXW; 2.2 the product list; 3.2 `STRUCT_BUFFER_BPS` within [0, 2]; 3.6
+`TIME_STOP` (None or minutes); 3.9 `RISK_PER_TRADE_USD` and whether size is capped at the displayed ask_size; 4.2
+`DD_MARK` (whether open legs at the bid count toward the day's loss) and whether a lane gets a cap of its own beside the
+account's; 6.3 whether Method B is shown as "book zero (B)" or not at all; 6.4 the Macro book's horizon; 7.1 whether a
+1-SD band is drawn at all; 10.2 `MOC_MAG_SIZE_RULE`; 12.4 the premium-backstop mode (`none_below_21` or `widened`)
+and its 15–20 DTE level; 12.6 the point inside the trail lock's band (+21–31%, 3–5 under) for a one-lot swing, and
+`TRAIL_LOCK` / `RSI_EXIT` at `size ≥ 2`; 13.1 `SPREAD_MAX_MULTI_DTE`; 14.1 `LEAPS_EARNINGS_GATE`.

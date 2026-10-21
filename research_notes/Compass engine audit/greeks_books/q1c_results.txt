@@ -1,1 +1,12 @@
-No output: the UW token on disk answered HTTP 401 to the stock-state call on 2026-10-21 (and once more through the earlier fetch script). No live data was read.
+stock-state keys: ['close', 'high', 'low', 'open', 'volume', 'total_volume', 'market_time', 'tape_time', 'prev_close']
+SPY spot (UW stock-state close): 773.21 tape_time 2026-10-21T20:34:51Z
+option-contracts rows: 474 keys: ['delta', 'theta', 'gamma', 'open_interest', 'volume', 'last_price', 'option_symbol', 'bid_volume', 'ask_volume', 'mid_volume', 'avg_price', 'nbbo_bid', 'nbbo_ask', 'rho', 'vega', 'floor_volume', 'high_price', 'implied_volatility', 'last_tape_time', 'low_price', 'multi_leg_volume', 'stock_multi_leg_volume', 'sweep_volume', 'total_premium', 'prev_oi', 'no_side_volume']
+today 2026-10-21 expiry 2026-11-20 DTE 30
+usable contracts within 10% of spot: 195
+  r=0.0000 q=0.000: delta med|err| 0.0128 p90 0.0374 mean +0.0038 | gamma med rel err +0.010 | theta/365 med|err| 0.0176
+  r=0.0200 q=0.000: delta med|err| 0.0056 p90 0.0459 mean +0.0145 | gamma med rel err -0.006 | theta/365 med|err| 0.0029
+  r=0.0415 q=0.000: delta med|err| 0.0155 p90 0.0552 mean +0.0260 | gamma med rel err -0.030 | theta/365 med|err| 0.0139
+  r=0.0415 q=0.013: delta med|err| 0.0053 p90 0.0497 mean +0.0190 | gamma med rel err -0.012 | theta/365 med|err| 0.0046
+  best-fit r (q=0) on the live chain: 0.0000 (delta rmse 0.02846); at r=4.15%: 0.03989
+  same-strike IV_call-IV_put within 4% of spot: UW own IVs median +0.13 vol pts (n=51); mid-inverted r=0: +3.32; r=4.15%,q=0: +0.04
+  forward from ATM parity: 776.00 vs spot 773.21 -> implied r-q = +0.0438 (spot and quotes at the same moment this time)
