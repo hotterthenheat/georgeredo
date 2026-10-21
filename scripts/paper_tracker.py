@@ -87,6 +87,10 @@ minute, to 15:58 and to 16:20, Mon–Fri, the recorder's holidays, half days ski
 --settle [--day D] (the after-close pass, re-runnable: the official close is added once the daily bar carries it),
 --backfill (warms the minute-bar cache: at most 20 calls, once), --status, --dry-run (the fixture chain, no network),
 --smoke (one live capture under <root>/smoke/, labelled smoke, never a session), --spxw (adds fly_spxw).
+--backtest --start D1 --end D2 [--candidates …] [--parquet-root R] [--backtest-data DIR] [--out DIR]: the historical
+replay through THIS code (scripts/paper_backtest.py — the stored minute NBBO Parquet adapted into the UW answers the
+tracker reads; rows apart, source=backtest-parquet; a P&L and fill report); --fetch-theta --start --end: on the owner's
+machine, those sessions from the Theta Terminal running there into the same Parquet layout (README "Historical replay").
 
 The token: UW_API_TOKEN in the environment alone — the recorder's client, limiter and scrubber (never logged).
 """
@@ -1029,7 +1033,8 @@ class Tracker:
     def __init__(self, client, store: R.Store, limiter: R.RateLimiter, log, clock: R.Clock, scrub: R.Scrub,
                  label: str | None = None, cands: tuple | None = None, theta=None, models_dir: Path = V.MODELS_DIR,
                  recorder_root: Path | None = None, bar_wait_s: float = BAR_WAIT_S, vix_uw: bool = True,
-                 macro_path: Path | None = None):
+                 macro_path: Path | None = None, spx_spot=None, spx_settle_source: str = 'spx_book_price',
+                 official_from: str | None = None):
         self.client, self.store, self.limiter, self.log, self.clock, self.scrub = client, store, limiter, log, clock, scrub
         self.label = label                 # 'smoke' marks a row that is not a session
         self.cands = tuple(cands) if cands else active_candidates()
@@ -1039,6 +1044,12 @@ class Tracker:
         self.bar_wait_s = bar_wait_s
         self.vix_uw = vix_uw
         self.macro_path = macro_path
+        # the historical replay's three hooks (paper_backtest.py; live leaves them at these defaults): SPX's price at a
+        # capture from a source other than chain parity — a callable (day, minute) -> (spot | None, spot_source) — the
+        # SPXW settlement's label, and the label of an official close that is not UW's daily bar
+        self.spx_spot = spx_spot
+        self.spx_settle_source = spx_settle_source
+        self.official_from = official_from
         self._models = None
         self._budget_day = ''
 
@@ -1105,6 +1116,8 @@ class Tracker:
             if name == 'SPX':
                 spot, used = chain.parity_spot()
                 extra = {'spot_source': 'parity: median of K + call mid − put mid at the 3 strikes nearest C = P', 'parity_strikes': used}
+                if self.spx_spot is not None:
+                    spot, extra['spot_source'] = self.spx_spot(day, minute)
             else:
                 spot = fnum(state.get('close')) if state else None
             if cerr or serr or spot is None or not rows:
@@ -1396,6 +1409,8 @@ class Tracker:
             for e in errors:
                 self.log.error('settle %s %s: %s', name, day, self.scrub(e))
                 self.store.record_failure(day, {'at': R.iso_z(now), 'name': name, 'settle': True, 'error': self.scrub(e)})
+            if closes.get('close_official') is not None and self.official_from and not closes.get('close_official_from'):
+                closes['close_official_from'] = self.official_from
             if closes.get('close_official') is None:
                 # a prev_close read after the session, on a later day's capture, is the official close too
                 closes['close_official'] = self._official_from_later_state(name, day)
@@ -1448,7 +1463,8 @@ class Tracker:
         if df is None:
             return
         caps = df.filter(pl.col('row_kind') == 'capture').to_dicts()
-        m = self.store.marker(cand.key, 'SPX', day, 'settle-spx_book_price')
+        src = self.spx_settle_source
+        m = self.store.marker(cand.key, 'SPX', day, f'settle-{src}')
         if not caps or (m and m.status == 'done' and not force):
             summary['skipped'] += int(bool(caps))
             return
@@ -1468,14 +1484,14 @@ class Tracker:
         for cap in caps:
             s = structure_from_row(cap)
             if s is not None:
-                rows.append(settle_row(cap, s, 'spx_book_price', px, {'close_state': px, 'state_market_time': at}, now))
+                rows.append(settle_row(cap, s, src, px, {'close_state': px, 'state_market_time': at}, now))
         stamps = {'_day': day, '_scan': 'settle' if not self.label else f'{self.label}-settle',
                   '_scan_at': R.iso_z(R.ny_at(day, SETTLE_TIME)), '_fetched_at': R.iso_z(now), '_name': 'SPX'}
         added, _ = self.store.append(endpoint_for(cand), 'SPX', day, rows, stamps)
         summary['rows'] += added
-        self.store.set_marker(R.Marker(cand.key, 'SPX', day, 'settle-spx_book_price', 'done', rows_fetched=len(rows), rows_added=added,
+        self.store.set_marker(R.Marker(cand.key, 'SPX', day, f'settle-{src}', 'done', rows_fetched=len(rows), rows_added=added,
                                        calls=1, fetched_at=R.iso_z(now), version=VERSION))
-        self.log.info('settle SPX %s: UW book price %s at %s (a proxy for the 16:00 SET)', day, fmt(px), at)
+        self.log.info('settle SPX %s: %s %s at %s (a proxy for the 16:00 SET)', day, src, fmt(px), at)
 
     def _official_from_later_state(self, name: str, day: str) -> float | None:
         """The first capture after `day` carries stock-state's prev_close = the official close of the session before"""
@@ -1660,6 +1676,11 @@ def main(argv: list[str] | None = None) -> int:
     mode.add_argument('--settle', action='store_true', help='the after-close pass for --day (today); re-runnable')
     mode.add_argument('--backfill', action='store_true', help='warm the minute-bar cache for --day: the 20 sessions before (one call a day not kept)')
     mode.add_argument('--status', action='store_true', help='sessions logged, running P&L, the settlement check, what remains')
+    mode.add_argument('--backtest', action='store_true', help='the historical replay: --start/--end through the stored minute NBBO Parquet '
+                      '(--parquet-root), every candidate at its minutes through this tracker\'s own code; rows under --backtest-data '
+                      '(source=backtest-parquet), then the P&L and fill report in --out (scripts/paper_backtest.py)')
+    mode.add_argument('--fetch-theta', action='store_true', help='ON THE OWNER\'S MACHINE: write --start/--end into the Parquet layout '
+                      'from the Theta Terminal already running on 127.0.0.1:25503 (at most 3 requests in flight; never starts one)')
     p.add_argument('--when', help='the minute for --log, HH:MM New York (11:30 12:00 12:30 13:00 13:30 14:00 14:30 15:00 15:30 15:58)')
     p.add_argument('--day', help='the New York day, YYYY-MM-DD (today by default)')
     p.add_argument('--dry-run', action='store_true', help='no network: the fixture chain, a fake clock, under <root>/dryrun')
@@ -1673,7 +1694,19 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument('--budget', type=int, default=int(os.environ.get('PAPER_BUDGET') or DEFAULT_BUDGET),
                    help=f'calls a session (PAPER_BUDGET, {DEFAULT_BUDGET}: 36 warm, 56 the cold first day — README "The budget")')
     p.add_argument('--fixture', default=str(DEFAULT_CHAIN_FIXTURE), help='the fake chain (--dry-run)')
+    p.add_argument('--start', help='--backtest / --fetch-theta: the first New York day, YYYY-MM-DD')
+    p.add_argument('--end', help='--backtest / --fetch-theta: the last New York day, YYYY-MM-DD')
+    p.add_argument('--candidates', help='--backtest: comma-separated (default condor_em1,fly5,condor_d20; fly_spxw only when listed)')
+    p.add_argument('--parquet-root', default=os.environ.get('PAPER_PARQUET_ROOT'),
+                   help='--backtest / --fetch-theta: the stored Parquet layout (PAPER_PARQUET_ROOT): data_full/chains/<ROOT>/<D>.parquet, '
+                        'data/underlying/<SYM>/<D>.parquet, data/index/<SYM>/<D>.parquet')
+    p.add_argument('--backtest-data', default=os.environ.get('PAPER_BACKTEST_DATA') or str(R.REPO / 'data_recorder' / 'paper_backtest'),
+                   help='--backtest: the replay\'s own root (PAPER_BACKTEST_DATA; never the live --data root)')
+    p.add_argument('--out', help='--backtest: where backtest_<D1>_<D2>.md and .csv go (default <backtest-data>/reports)')
     args = p.parse_args(argv)
+    if args.backtest or args.fetch_theta:
+        import paper_backtest as B          # files only: no UW token is read or needed
+        return B.run_cli(args)
 
     token = os.environ.get('UW_API_TOKEN')
     if args.status:

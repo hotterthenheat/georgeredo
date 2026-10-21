@@ -16,6 +16,9 @@ known total vol (the deltas checked against the closed form) and its tie-break; 
 a changed file refused) and score fixture rows to LightGBM's own deciles; a candidate-3 capture with VIX from Theta,
 and without any VIX (the no-VIX decile the primary); the 15:58 liquidation arithmetic on a known quote; a whole default
 session's calls cold (56) and warm (36) under the default budget; --spxw's SPXW-only chain, parity spot and settle.
+The historical replay (scripts/paper_backtest.py): the Parquet-to-Chain adapter on a fixture (hand-checked strikes and
+fills), a replay of fixture Parquet producing its rows (apart, source=backtest-parquet) and its report, the replay root
+refused where it meets the live root, and --fetch-theta against a fake Theta Terminal writing the layout.
 """
 from __future__ import annotations
 
@@ -25,6 +28,8 @@ import math
 import shutil
 import sys
 import tempfile
+import threading
+import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
@@ -613,6 +618,291 @@ def test_spxw_flies_read_the_spxw_root_and_settle_on_the_book_price():
         se = store.read('fly_spxw', 'SPX', DAY).filter(pl.col('row_kind') == 'settle')
         assert se['settle_source'].unique().to_list() == ['spx_book_price'] and se['settle_px'][0] == '3887'
         assert tr.settle(DAY)['calls'] == 0
+
+
+# ---- the historical replay (scripts/paper_backtest.py: --backtest, the report, --fetch-theta) ------------------------------------------------
+
+import paper_backtest as B  # noqa: E402
+
+REPLAY_MINUTES = ('11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '15:58')
+
+
+def _ny_ts(day, j):
+    return dt.datetime.fromisoformat(day).replace(hour=9, minute=30, tzinfo=R.NY) + dt.timedelta(minutes=j)
+
+
+def write_parquet_fixture(root: Path, days, chains=('SPY', 'QQQ'), spot=773.40, close_1559=777.20, nulls=True):
+    """The research's layout on a tiny scale: the paper fixture chain as Theta's 1-minute NBBO (sizes 10 bid / 12 ask; the
+    P768 ask size 0), at the replay's minutes; SPY/QQQ bars closing at `spot` until the 15:59 bar closes at `close_1559`
+    (the 16:00 bar empty, as Theta's is); VIX prints. With `nulls`, the C790 row at 11:30 has no quote."""
+    rows = json.loads(T.DEFAULT_CHAIN_FIXTURE.read_text())['rows']
+    for day in days:
+        for name in chains:
+            rec = {'timestamp': [], 'strike': [], 'right': [], 'bid': [], 'ask': [], 'bid_size': [], 'ask_size': [], 'mid': []}
+            for hhmm in REPLAY_MINUTES:
+                j = int(hhmm[:2]) * 60 + int(hhmm[3:]) - 570
+                for r in rows:
+                    _, _, right, k = T.parse_symbol(r['option_symbol'])
+                    b, a = float(r['nbbo_bid']), float(r['nbbo_ask'])
+                    if nulls and hhmm == '11:30' and k == 790 and right == 'C':
+                        b = a = None
+                    rec['timestamp'].append(_ny_ts(day, j)); rec['strike'].append(float(k)); rec['right'].append('CALL' if right == 'C' else 'PUT')
+                    rec['bid'].append(b); rec['ask'].append(a); rec['bid_size'].append(10)
+                    rec['ask_size'].append(0 if (k == 768 and right == 'P') else 12)
+                    rec['mid'].append(None if b is None else (a + b) / 2)
+            df = pl.DataFrame(rec, schema={'timestamp': pl.Datetime('ms', 'America/New_York'), 'strike': pl.Float64, 'right': pl.Utf8, 'bid': pl.Float64,
+                                           'ask': pl.Float64, 'bid_size': pl.Int32, 'ask_size': pl.Int32, 'mid': pl.Float64})
+            f = root / 'data_full' / 'chains' / name / f'{day}.parquet'
+            f.parent.mkdir(parents=True, exist_ok=True)
+            df.write_parquet(f)
+        for name in ('SPY', 'QQQ'):
+            ts = [_ny_ts(day, j) for j in range(391)]
+            c = [spot] * 389 + [close_1559, None]
+            df = pl.DataFrame({'timestamp': ts, 'open': c, 'high': [None if x is None else x + 0.05 for x in c], 'low': [None if x is None else x - 0.05 for x in c],
+                               'close': c, 'volume': [100_000] * 390 + [0], 'count': [100] * 390 + [0], 'vwap': [spot] * 391},
+                              schema={'timestamp': pl.Datetime('ms', 'America/New_York'), 'open': pl.Float64, 'high': pl.Float64, 'low': pl.Float64,
+                                      'close': pl.Float64, 'volume': pl.Int64, 'count': pl.Int64, 'vwap': pl.Float64})
+            f = root / 'data' / 'underlying' / name / f'{day}.parquet'
+            f.parent.mkdir(parents=True, exist_ok=True)
+            df.write_parquet(f)
+        f = root / 'data' / 'index' / 'VIX' / f'{day}.parquet'
+        f.parent.mkdir(parents=True, exist_ok=True)
+        pl.DataFrame({'timestamp': [_ny_ts(day, j) for j in range(391)], 'price': [None] + [16.0 + 0.002 * j for j in range(1, 391)]},
+                     schema={'timestamp': pl.Datetime('ms', 'America/New_York'), 'price': pl.Float64}).write_parquet(f)
+
+
+def test_the_parquet_to_chain_adapter_lands_on_the_hand_checked_strikes_and_fills():
+    """The Parquet rows at 11:30 become UW rows (OCC symbols as UW writes them, nbbo_bid/ask, the sizes) and the LIVE
+    Chain and strike rules read them: spot 773.40 → the straddle 2.10 at 773 → condor shorts 776 / 771, longs 778 / 769,
+    credit $0.30 at the NBBO ($0.355 at the mid); K0 773 ±5 → iron credit 1.88, call fly 3.27, put fly 3.30. A row with
+    no quote is listed but not quoted; the sizes ride into the legs."""
+    with tempfile.TemporaryDirectory() as d:
+        root = Path(d) / 'pq'
+        write_parquet_fixture(root, ['2026-10-20'])
+        src = B.ParquetSource(root)
+        rows = B.chain_rows(src, 'SPY', '2026-10-20', 120)
+        assert len(rows) == 62 and rows[0]['option_symbol'] == 'SPY261020C00760000'
+        assert B.occ('SPXW', '2026-10-20', 'PUT', 5800.0) == 'SPXW261020P05800000' and B.occ('QQQ', '2026-11-21', 'CALL', 612.5) == 'QQQ261121C00612500'
+        c790 = next(r for r in rows if r['option_symbol'] == 'SPY261020C00790000')
+        assert c790['nbbo_bid'] is None and c790['nbbo_ask'] is None
+        ch = T.Chain(rows, '2026-10-20')
+        assert ch.rows == 62 and 790 in ch.listed and 790 not in ch.calls and 790 in ch.puts
+        c = T.condor_em1(ch, 773.40, 2.0)
+        assert [(l.side, l.right, l.strike) for l in c.legs] == [('short', 'C', 776), ('long', 'C', 778), ('short', 'P', 771), ('long', 'P', 769)]
+        assert close(c.price(), 0.30) and close(c.price(mid=True), 0.355) and c.tradable
+        assert [(l.bid_size, l.ask_size) for l in c.legs] == [(10, 12)] * 4
+        iron, call, put = T.flies5(ch, 773.40, 5.0)
+        assert close(iron.price(), 1.88) and close(call.price(), 3.27) and close(put.price(), 3.30)
+        assert next(l for l in iron.legs if l.strike == 768).ask_size == 0
+        # the replay client: spot at 11:30 = the close of the bar stamped 11:29; the chain served at the clock's minute
+        tr, store, client, clock = B.make_tracker(src, Path(d) / 'replay', None, ('condor_em1',))
+        clock.set(R.ny_at('2026-10-20', '11:30'))
+        st = client.get('/api/stock/SPY/stock-state')
+        assert st.ok and st.body['data']['close'] == 773.40 and st.body['data']['tape_time'] == R.iso_z(R.ny_at('2026-10-20', '11:30'))
+        ans = client.get('/api/stock/SPY/option-contracts', {'expiry': '2026-10-20', 'limit': 500, 'page': 0})
+        assert ans.ok and len(ans.rows) == 62
+        bars = client.get('/api/stock/SPY/ohlc/1m', {'date': '2026-10-20'})
+        assert len(bars.rows) == 120 and bars.rows[0]['start_time'] == R.iso_z(R.ny_at('2026-10-20', '11:29'))   # nothing past the clock
+        assert client.get('/api/stock/SPY/ohlc/1d', {'date': '2026-10-20'}).rows == []                             # no close before 16:00
+        clock.set(R.ny_at('2026-10-20', '16:20'))
+        assert client.get('/api/stock/SPY/ohlc/1d', {'date': '2026-10-20'}).rows[0]['close'] == 777.20             # the 15:59 bar
+        assert client.get('/api/stock/VIX/stock-state').status == 422
+
+
+def test_a_replay_over_fixture_parquets_writes_its_rows_apart_and_reports():
+    """Two whole sessions (2026-10-19, -20), a third missing QQQ's chain (-21), two after the files end: the live tracker
+    runs at every minute; the rows carry source=backtest-parquet under the replay root; the settlement is the 15:59 bar
+    (777.20) → the condor −$92.60 at the NBBO (−$87.10 mid, −$96.60 / −$100.60 stressed), the iron fly −$234.60; fly5 has
+    its 15:58 exit; candidate 3 its deciles; the report and its CSV say all of it; a second replay writes nothing."""
+    with tempfile.TemporaryDirectory() as d:
+        pq, rroot, live, out = Path(d) / 'pq', Path(d) / 'replay', Path(d) / 'paper', Path(d) / 'out'
+        write_parquet_fixture(pq, ['2026-10-19', '2026-10-20'])
+        write_parquet_fixture(pq, ['2026-10-21'], chains=('SPY',))
+        saved = (R.HOLIDAYS, R.HALF_DAYS)
+        res = B.replay('2026-10-19', '2026-10-23', T.DEFAULT_KEYS, pq, rroot, live_root=live, progress=None)
+        assert (R.HOLIDAYS, R.HALF_DAYS) == saved                                            # the calendar is put back
+        assert res['replayed'] == 3 and not live.exists()
+        days = B.read_days(rroot)
+        assert days['2026-10-21']['missing'] == [{'candidate': 'fly5', 'name': 'QQQ', 'files': ['data_full/chains/QQQ/2026-10-21.parquet']}]
+        assert days['2026-10-22']['status'] == 'not in files' and 'fetch' in days['2026-10-22']['note']
+        df = B.read_rows(rroot, T.DEFAULT_KEYS, '2026-10-19', '2026-10-23')
+        assert df['source'].unique().to_list() == [B.SOURCE]
+        em = df.filter((pl.col('candidate') == 'condor_em1') & (pl.col('row_kind') == 'settle'))
+        assert em.height == 15 and em['settle_source'].unique().to_list() == ['official'] and em['settle_px'].unique().to_list() == ['777.2']
+        assert em['close_official_from'].unique().to_list() == [B.OFFICIAL_FROM]
+        assert em['pnl_nbbo'].unique().to_list() == ['-92.6'] and em['pnl_mid'].unique().to_list() == ['-87.1']
+        assert em['pnl_1c'].unique().to_list() == ['-96.6'] and em['pnl_2c'].unique().to_list() == ['-100.6']
+        fl = df.filter((pl.col('candidate') == 'fly5') & (pl.col('row_kind') == 'settle'))
+        assert fl.filter(pl.col('_name') == 'QQQ')['_day'].unique().sort().to_list() == ['2026-10-19', '2026-10-20']
+        iron = fl.filter(pl.col('structure') == 'iron')
+        assert iron['pnl_nbbo'].unique().to_list() == ['-234.6'] and iron['pnl_1558_nbbo'].null_count() == 0
+        # the 15:58 exit off the 15:58 quotes (the same fixture quotes) is the live close_row's figure
+        cap = df.filter((pl.col('candidate') == 'fly5') & (pl.col('row_kind') == 'capture') & (pl.col('structure') == 'iron')).to_dicts()[0]
+        ch = T.Chain(B.chain_rows(B.ParquetSource(pq), 'SPY', cap['_day'], 388), cap['_day'])
+        want = T.close_row(cap, T.structure_from_row(cap), ch, R.ny_at(cap['_day'], '15:58'))['pnl_1558_nbbo']
+        assert iron['pnl_1558_nbbo'].unique().to_list() == [want]
+        c3 = df.filter((pl.col('candidate') == 'condor_d20') & (pl.col('row_kind') == 'capture'))
+        assert c3.height == 15 and c3['vix_source'].unique().to_list() == ['theta'] and c3['t2_decile_full'].null_count() == 0
+        # the first day has no VIX file for the session before (vix_chg_prev null) → the no-VIX model is its primary
+        prim = dict(c3.group_by('_day').agg(pl.col('t2_primary_model').unique().first()).iter_rows())
+        assert prim == {'2026-10-19': V.NOVIX, '2026-10-20': V.FULL, '2026-10-21': V.FULL}
+        rep = B.build_report(rroot, T.DEFAULT_KEYS, '2026-10-19', '2026-10-23', out, stream=None)
+        md = Path(rep['md']).read_text()
+        assert Path(rep['md']).name == 'backtest_2026-10-19_2026-10-23.md' and Path(rep['csv']).exists()
+        assert '| condor | 3 | 15 | 100.0% | -92.60 |' in md and '15:59 bar' in md and 'fetch' in md
+        assert 'fly5 QQQ: data_full/chains/QQQ/2026-10-21.parquet' in md
+        assert '| iron | 3 | 10 | 100.0% | -234.60 |' in md
+        # the fill facts by hand: the condor's legs quote 0.04 + 0.02 + 0.03 + 0.02 wide = $11, slip |0.30 − 0.355| = $5.50; the
+        # iron fly's 0.10 + 0.10 + 0.01 + 0.02 = $23, slip |1.88 − 1.995| = $11.50, and its long P768 shows 0 contracts on its ask
+        assert '| condor | 15 | 11.00 / 11.00 | 5.50 / 5.50 | 100.0% (of 15) |' in md
+        assert '| iron | 10 | 23.00 / 23.00 | 11.50 / 11.50 | 0.0% (of 10) |' in md
+        cells = {(c['candidate'], c['structure']): c for c in rep['cells']}
+        assert cells[('condor_em1', 'condor')]['trades'] == 15 and close(cells[('condor_em1', 'condor')]['mean_nbbo'], -92.6)
+        csv = pl.read_csv(rep['csv'])
+        assert {'cell', 'fills', '1558', 'decile', 'lift'} <= set(csv['section'].to_list())
+        # a second replay of the same days writes no row
+        n = sum(f.stat().st_size for f in rroot.rglob('*.parquet'))
+        B.replay('2026-10-19', '2026-10-21', T.DEFAULT_KEYS, pq, rroot, live_root=live, progress=None)
+        assert sum(f.stat().st_size for f in rroot.rglob('*.parquet')) == n
+
+
+def test_the_replay_root_is_kept_apart_from_the_live_root():
+    with tempfile.TemporaryDirectory() as d:
+        live = Path(d) / 'paper'
+        for bad in (live, live / 'backtest'):
+            try:
+                B.ReplayStore(bad, live_root=live)
+                assert False, 'the live root was accepted'
+            except ValueError as e:
+                assert 'never writes there' in str(e)
+        try:
+            B.ReplayStore(Path(d), live_root=live)                      # a root holding the live one
+            assert False
+        except ValueError:
+            pass
+        st = B.ReplayStore(Path(d) / 'paper_backtest', live_root=live)
+        st.append(T.endpoint_for(T.CANDIDATES['condor_em1']), 'SPY', '2026-10-20', [{'row_kind': 'capture', 'minute': '11:30', 'structure': 'condor'}],
+                  {'_day': '2026-10-20', '_scan': '11:30', '_scan_at': 'x', '_fetched_at': 'x', '_name': 'SPY'})
+        assert st.read('condor_em1', 'SPY', '2026-10-20')['source'].to_list() == [B.SOURCE]
+        # the command line refuses it too, and --status still reads the live root alone
+        rc = T.main(['--backtest', '--start', '2026-10-20', '--end', '2026-10-20', '--parquet-root', d, '--data', str(live), '--backtest-data', str(live)])
+        assert rc == 2
+        assert T.status(R.Store(live)) == {(c.key, n): {'captured': 0, 'tradable_sessions': 0, 'settled': 0, 'official': 0, 'check_pass': 0, 'check_n': 0, 'structures': {}}
+                                           for c in T.CANDIDATES.values() if not c.optional for n in c.names}
+
+
+class _FakeThetaTerminal:
+    """A Theta Terminal v3 stand-in on 127.0.0.1: NDJSON in the recorded shape (New York wall-clock stamps, the quote
+    rows' strike/right/bid/ask/sizes, the stock bars, the index prices; 472 for no data), counting what is in flight"""
+
+    def __init__(self, day):
+        import http.server
+        self.day, self.paths, self.queries = day, [], []
+        self.in_flight = self.max_in_flight = 0
+        self.lock = threading.Lock()
+        rows = json.loads(T.DEFAULT_CHAIN_FIXTURE.read_text())['rows']
+        outer = self
+
+        class H(http.server.BaseHTTPRequestHandler):
+            def log_message(self, *a):
+                pass
+
+            def do_GET(self):
+                import urllib.parse as up
+                u = up.urlparse(self.path)
+                q = dict(up.parse_qsl(u.query))
+                with outer.lock:
+                    outer.paths.append(u.path); outer.queries.append(q)
+                    outer.in_flight += 1
+                    outer.max_in_flight = max(outer.max_in_flight, outer.in_flight)
+                time.sleep(0.05)
+                try:
+                    body = outer.answer(u.path, q, rows)
+                    if body is None:
+                        self.send_response(472); self.end_headers(); self.wfile.write(b'No data for the specified timeframe'); return
+                    data = '\n'.join(json.dumps(r) for r in body).encode()
+                    self.send_response(200); self.send_header('Content-Type', 'application/x-ndjson'); self.end_headers(); self.wfile.write(data)
+                finally:
+                    with outer.lock:
+                        outer.in_flight -= 1
+
+        self.server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), H)
+        self.base = f'http://127.0.0.1:{self.server.server_address[1]}/v3'
+        threading.Thread(target=self.server.serve_forever, daemon=True).start()
+
+    def answer(self, path, q, rows):
+        day = f'{q["date" if "date" in q else "start_date"][:4]}-{q.get("date", q.get("start_date"))[4:6]}-{q.get("date", q.get("start_date"))[6:]}'
+        stamp = lambda j: (dt.datetime.fromisoformat(day) + dt.timedelta(hours=9, minutes=30 + j)).strftime('%Y-%m-%dT%H:%M:%S.000')  # noqa: E731
+        js = [int(h[:2]) * 60 + int(h[3:]) - 570 for h in REPLAY_MINUTES]
+        if path == '/v3/option/history/quote':
+            if q['symbol'] == 'SPXW':
+                return None
+            out = []
+            for j in [0] + js:
+                for r in rows:
+                    _, _, right, k = T.parse_symbol(r['option_symbol'])
+                    nq = j == 0                                              # 09:30: no quote yet (0 / 0, sizes 0)
+                    out.append({'symbol': q['symbol'], 'expiration': q['expiration'], 'strike': k, 'right': 'CALL' if right == 'C' else 'PUT',
+                                'timestamp': stamp(j), 'bid_size': 0 if nq else 10, 'bid_exchange': 1, 'bid': 0.0 if nq else float(r['nbbo_bid']),
+                                'bid_condition': 0, 'ask_size': 0 if nq else 12, 'ask_exchange': 1, 'ask': 0.0 if nq else float(r['nbbo_ask']), 'ask_condition': 0})
+            return out
+        if path == '/v3/stock/history/ohlc':
+            return [{'timestamp': stamp(j), 'open': 773.40, 'high': 773.45, 'low': 773.35, 'close': 777.20 if j == 389 else 773.40,
+                     'volume': 100_000, 'count': 100, 'vwap': 773.40} for j in range(390)] + [
+                    {'timestamp': stamp(390), 'open': 0.0, 'high': 0.0, 'low': 0.0, 'close': 0.0, 'volume': 0, 'count': 0, 'vwap': 773.40}]
+        if path == '/v3/index/history/price':
+            if q['symbol'] == 'SPX':
+                return None
+            return [{'timestamp': stamp(j), 'price': 0.0 if j == 0 else 16.0 + 0.002 * j} for j in range(391)]
+        return None
+
+    def close(self):
+        self.server.shutdown()
+
+
+def test_the_theta_fetch_writes_the_layout_against_a_fake_terminal():
+    """--fetch-theta against a fake terminal: 127.0.0.1 only ("localhost" refused), format=ndjson on every call, at most
+    3 in flight; the chains, bars and prints land in the dataset's layout and dtypes (09:30's 0/0 quote and the 16:00
+    bar's zeros and the 0 price null, as the dataset holds them); a 472 writes nothing and is said; a second run skips
+    what is on disk; and the replay reads what the fetch wrote (the condor at 11:30: credit $0.30)."""
+    try:
+        B.ThetaFetch('http://localhost:25503/v3')
+        assert False, 'localhost accepted'
+    except ValueError:
+        pass
+    day = '2026-10-20'
+    term = _FakeThetaTerminal(day)
+    try:
+        with tempfile.TemporaryDirectory() as d:
+            pq = Path(d) / 'pq'
+            res = B.fetch_theta(day, day, pq, base=term.base, stream=None)
+            assert sorted(res['written']) == sorted(['data_full/chains/SPY/2026-10-20.parquet', 'data_full/chains/QQQ/2026-10-20.parquet',
+                                                     'data/underlying/SPY/2026-10-20.parquet', 'data/underlying/QQQ/2026-10-20.parquet',
+                                                     'data/index/VIX/2026-10-20.parquet'])
+            assert sorted(res['empty']) == ['data/index/SPX/2026-10-20.parquet', 'data_full/chains/SPXW/2026-10-20.parquet'] and not res['failed']
+            assert res['calls'] == 7 and 1 <= term.max_in_flight <= 3
+            assert all(q.get('format') == 'ndjson' for q in term.queries)
+            assert {p for p in term.paths} == {'/v3/option/history/quote', '/v3/stock/history/ohlc', '/v3/index/history/price'}
+            qq = next(q for q in term.queries if q['symbol'] == 'SPY' and 'expiration' in q)
+            assert qq['expiration'] == qq['date'] == '20261020' and qq['interval'] == '1m'
+            c = pl.read_parquet(pq / 'data_full' / 'chains' / 'SPY' / f'{day}.parquet')
+            assert c.schema == pl.Schema({'timestamp': pl.Datetime('ms', 'America/New_York'), 'strike': pl.Float64, 'right': pl.Utf8, 'bid': pl.Float64,
+                                          'ask': pl.Float64, 'bid_size': pl.Int32, 'ask_size': pl.Int32, 'mid': pl.Float64})
+            assert c.filter(pl.col('timestamp').dt.hour() == 9)['bid'].null_count() == 62 and c['right'].unique().sort().to_list() == ['CALL', 'PUT']
+            assert c.filter((pl.col('strike') == 773) & (pl.col('right') == 'CALL') & (pl.col('timestamp').dt.hour() == 11))['bid'].to_list() == [1.2]
+            u = pl.read_parquet(pq / 'data' / 'underlying' / 'SPY' / f'{day}.parquet')
+            assert u.schema['timestamp'] == pl.Datetime('ms', 'America/New_York') and u.schema['volume'] == pl.Int64 and u.height == 391
+            assert u['close'][-1] is None and u['close'][-2] == 777.20 and str(u['timestamp'][0])[:16] == '2026-10-20 09:30'
+            v = pl.read_parquet(pq / 'data' / 'index' / 'VIX' / f'{day}.parquet')
+            assert v['price'][0] is None and v.height == 391
+            again = B.fetch_theta(day, day, pq, base=term.base, stream=None)
+            assert not again['written'] and len(again['skipped']) == 5 and again['calls'] == 2          # SPXW and SPX asked again (nothing on disk)
+            # the replay reads the fetched layout
+            B.replay(day, day, ('condor_em1',), pq, Path(d) / 'replay', progress=None)
+            r = B.read_rows(Path(d) / 'replay', ('condor_em1',), day, day).filter((pl.col('row_kind') == 'capture') & (pl.col('minute') == '11:30')).to_dicts()[0]
+            assert r['price_nbbo'] == '0.3' and r['l1_symbol'] == 'SPY261020C00776000'
+    finally:
+        term.close()
 
 if __name__ == '__main__':
     failed = 0

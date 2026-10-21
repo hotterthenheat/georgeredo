@@ -548,6 +548,148 @@ carrying the 15:58 exit, the capture's stamps and deciles; `--spxw` (the SPXW ro
 ±25, the book-price settle, 1 + 1 calls); the token never in a line, a marker, a failure record, a cache file or a
 Parquet cell, and no key in `vol_model.py` or `macro_calendar.py`. All passing on 2026-10-21.
 
+### Historical replay (`--backtest`, `scripts/paper_backtest.py`)
+
+The owner's directive (2026-10-21): "support an explicit historical backfill flag … iterate through the specified date
+range using the stored local minute NBBO parquet files, evaluate Candidate 1 (condor_em1), Candidate 2 (fly5), and
+Candidate 3 (condor_d20) at their exact entry times, and output a consolidated P&L and fill report with $0.65/leg fees
+applied." It reads files only — no UW call, no Theta call — and **runs the live tracker itself**: a `ReplayClient`
+answers the UW routes `Tracker` asks out of the Parquet at the replay clock's minute, and `capture` (the strike rules,
+fills, tradable rule, candidate 3's features and both frozen deciles), `close_quotes` (15:58) and `settle` run
+unchanged; there is no second strike or P&L implementation. The `Tracker` gained three hooks for it, each defaulting to
+the live behaviour: `spx_spot` (SPX's price at a fly_spxw capture), `spx_settle_source` (the SPXW settlement's label)
+and `official_from` (the label of an official close that is not UW's daily bar).
+
+```
+python3 -I scripts/paper_tracker.py --backtest --start 2025-01-02 --end 2026-10-09 \
+    [--candidates condor_em1,fly5,condor_d20[,fly_spxw]] [--parquet-root R | PAPER_PARQUET_ROOT] \
+    [--backtest-data DIR | PAPER_BACKTEST_DATA] [--out DIR]
+python3 -I scripts/paper_backtest.py parity --start 2022-11-11 --end 2026-10-09 --parquet-root R [--out DIR]
+python3 -I scripts/paper_tracker.py --fetch-theta --start 2026-10-12 --end 2026-10-16 --parquet-root R     # the owner's machine only
+```
+
+- **The layout** (the research's dataset): `R/data_full/chains/{SPY,QQQ,SPXW}/<D>.parquet` (every same-day contract's
+  1-minute NBBO: timestamp New York, strike, right CALL/PUT, bid, ask, bid_size, ask_size, mid; a row stamped t is the
+  quote at t), `R/data/underlying/{SPY,QQQ}/<D>.parquet` (1-minute bars; a bar stamped t closes at t+1),
+  `R/data/index/{SPX,VIX}/<D>.parquet` (prints). In this workspace R is the scratchpad's `theta/`; SPY and QQQ run
+  2022-11-11 → 2026-10-09, SPXW 2022-05-13 → 2026-10-09.
+- **The adapter**: the rows stamped m become UW `/option-contracts` rows — `option_symbol` written as UW writes it (OCC:
+  root, YYMMDD, C/P, strike × 1000 in eight digits; the SPXW root for SPX), `nbbo_bid` / `nbbo_ask` (null where Theta had
+  no quote), `nbbo_bid_size` / `nbbo_ask_size` (Theta's sizes — the live route has none, so the fill facts can be read),
+  the same-day expiry, 500 a page. **Spot** (stock-state `close`) at m = the close of the bar stamped m − 1 (the live
+  stock-state's last trade; the research's spot). ohlc/1m serves only the bars closed by the clock (nothing ahead of the
+  minute). **The official close = the 15:59 bar's close for SPY and QQQ** — the research's convention (hyp_c
+  `common.py`), labelled `close_official_from` on every settle row; **SPXW settles on the last SPX print at or before
+  16:00** (`settle_source` `spx_last_print`) and fly_spxw's spot is the SPX print at the minute (the live tracker's
+  parity spot is logged beside it). VIX comes from `R/data/index/VIX` through the tracker's Theta path, so the full model
+  is the primary decile wherever VIX is on disk. The calendar: a weekday with no SPY file (or one with under 30 bars — a
+  holiday's padded file) is a holiday; a session whose SPY bars end before 15:00 is a half day, skipped as the reports
+  skipped them; a day missing a file drops that candidate's name for the day and the report lists which file.
+- **Storage**: `data_recorder/paper_backtest/` by default (git-ignored), the live schema plus **`source =
+  backtest-parquet` on every row** (`ReplayStore`); a root equal to, inside or holding the live `--data` root is refused.
+  Markers as live, so a run resumes and a second run of the same days writes nothing; `_replay/days_<D1>_<D2>.json`
+  says what each day was.
+- **The report**, `<out>/backtest_<D1>_<D2>.md` and `.csv` (and a summary printed): per candidate and structure, by name
+  and by entry minute — sessions, trades, tradable share (and why not, by reason), mean / median at the NBBO, mid, +1c,
+  +2c, total, win rate, average win / loss, worst trade, worst session, profit factor, a session-bootstrap 95 % CI (2,000
+  draws, seed 20261016), the mean without the best five sessions, by year and month; the fill facts (the package's
+  quoted width, the NBBO-to-mid slip in $ a structure, the share of entries where every leg showed ≥ 1 contract on the
+  side hit); candidate 3 by decile (D1, D2–D10, all; primary, full and no-VIX) with the time-matched lift of §8; fly5's
+  15:58 close-out against the 16:00 settlement. `--status` is unchanged and never reads the replay root.
+- **Speed**: about 1 s a session on one core (`nice -n 10`, one thread): the research's 971 sessions in two parallel
+  chunks took 526 s and 535 s (~9 minutes wall); the 2025-01-02 → 2026-10-09 span alone, fresh, single process: 349 s (6 minutes with the report; the rows identical, the report's CSV equal to the chunked run's).
+
+**Parity** — the replay over the research's whole range (2022-11-11 → 2026-10-09) trade by trade against the research's
+own tables (`research_notes/Compass phase 3/backtest_replay/parity_2022-11-11_2026-10-09.md`):
+
+| cell | replay tradable | research trades | matched | replay only | research only | strikes differ | entry price diffs > $0.01 | P&L diffs > $0.01 (max) | P&L at the research's settlement |
+|---|---|---|---|---|---|---|---|---|---|
+| condor_em1 vs hyp_b `em1` 2-wide condor (11:30–13:30) | 4,426 | 4,396 | 4,396 | 30 | 0 | 0 | 0 | 395 ($200.00) | 0 diffs |
+| condor_d20 vs hyp_b `d20` 2-wide condor (13:00–15:00; hyp_e's cell) | 4,485 | 4,455 | 4,455 | 30 | 0 | 0 | 0 | 471 ($184.00) | 0 diffs |
+| fly5 SPY iron / call / put vs hyp_f ±5 (15:00, 15:30) | 1,926 each | 1,926 each | 1,926 each | 0 | 0 | 0 | 0 | 0 | — |
+| fly5 QQQ iron / call / put vs hyp_f ±5 | 1,926 / 1,926 / 1,928 | the same | the same | 0 | 0 | 0 | 0 | 0 | — |
+
+hyp_c's own ±5 fly rows (`flies_SPY/QQQ.parquet`, wing `w5`) agree with the replay to the cent as well. The systematic
+differences, every one explained:
+
+1. **The settlement convention (condors).** hyp_b — and hyp_e, which reads hyp_b's trades — settles SPY on "the close of
+   the last bar ≤ 16:00": the bar stamped 16:00 when Theta printed one (a few thousand shares just after the bell),
+   else the 15:59 bar; hyp_c / hyp_f settle on the 15:59 bar, and the replay does as directed. The two differ on 419 of
+   980 sessions (at most $0.12), which moves 395 em1 and 471 d20 P&Ls (a cent of settlement across a short strike is
+   $1; a strike crossed, up to the width). **Re-figured by the live `Structure.pnl` on the replay's own logged
+   structures at hyp_b's settlement, every one of the 8,851 matched condors equals the research's P&L (0 over $0.01).**
+   Neither bar is the official closing print; the live tracker settles on UW's daily bar.
+2. **The $0.05 minimum credit — the live rule differs from the research's code, NOT changed.** hyp_b `vertical()` drops a
+   spread when `credit < MIN_CREDIT` in floating point, so a spread whose credit is exactly $0.05 is dropped when the
+   subtraction lands a hair under (0.09 − 0.04 = 0.049999999999999996); the live `_condor` keeps it (`< MIN_CREDIT −
+   1e-9`, i.e. the written rule "≥ $0.05"). All 30 + 30 replay-only condors are this case (e.g. 2023-03-28 15:00 d20:
+   put spread 0.09 − 0.04). The coordinator decides whether the live rule should copy the float edge.
+3. **Candidate 3's deciles.** Against the research's regular full-fit scores (`scores_SPY.parquet` `full_gbm_score` /
+   `full_gbm_dec_reg`) the replay's frozen decile agrees on 4,806 of 4,854 rows; outside 24 sessions it agrees 4,734 of
+   4,734 with the score equal to 5e-7 (the six significant digits it is stored to). **The 24 sessions are each the
+   session after an exchange holiday whose VIX file is on disk** (2023-01-17, 2023-02-21, … 2026-09-08): the research's
+   `vix_prev_close` takes the last print of the previous VIX *file* (hyp_d `lib.py` `vix_sessions` lists VIX files, and
+   VIX files exist on equity holidays — 2023-01-16 holds 391 prints), so its `vix_chg_prev` there is measured against
+   the holiday; the live tracker (and the replay) take the session before's last print, as `vol_model.py` documents.
+   Live code NOT changed. Separately, the research's *signal* column (`full_gbm_dec`) is the out-of-fold decile on the
+   sessions before 2024-07-01 — exactly the sessions the frozen model was fitted on — so the replay's deciles there are
+   in-sample and are not the research's signal (over the whole range D1 is 822 replay rows, 817 by the research's
+   regular score, 540 by its signal column); from 2024-07-01 (`dec_kind` `reg`) the two agree except on the holiday rows
+   (2,803 of 2,829). The 2025-01-02 → 2026-10-09 replay below is wholly after the fit and the cuts.
+4. **QQQ's adjusted strikes** (410.78 …, late December 2023 – January 2024) match to the cent; only a float comparison
+   of the K0 needed a tolerance in the parity script.
+
+**The two replays** (`research_notes/Compass phase 3/backtest_replay/backtest_<D1>_<D2>.md` and `.csv`; the rows stay
+in the git-ignored replay root). $ a structure, one lot, fees in, settlement the 15:59 bar; CI the session bootstrap.
+
+**2025-01-02 → 2026-10-09** (462 weekdays: 441 sessions replayed, 18 holidays, 3 half days skipped):
+
+| candidate | structure | sessions | trades | tradable | mean NBBO [95% CI] | median | mid | +1c | +2c | total | win | PF | w/o best 5 | worst trade |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| condor_em1 | condor | 439 | 2,068 | 93.8% | +4.46 [-0.22, +8.84] | +23.40 | +6.52 | +0.46 | -3.54 | +9,232 | 80.4% | 1.24 | +3.83 | -187.60 |
+| fly5 | iron | 441 | 1,757 | 99.6% | +16.28 [+9.04, +23.51] | +29.40 | +18.70 | +12.28 | +8.28 | +28,597 | 63.7% | 1.55 | +14.09 | -349.60 |
+| fly5 | call | 441 | 1,757 | 99.6% | +7.21 [-0.18, +14.40] | +20.40 | +18.85 | +3.21 | -0.79 | +12,665 | 60.4% | 1.21 | +4.94 | -470.60 |
+| fly5 | put | 441 | 1,757 | 99.6% | +5.65 [-1.68, +12.71] | +19.40 | +19.51 | +1.65 | -2.35 | +9,934 | 59.2% | 1.16 | +3.37 | -365.60 |
+| condor_d20 | condor | 440 | 2,090 | 94.8% | +8.27 [+4.47, +11.84] | +23.40 | +10.37 | +4.27 | +0.27 | +17,280 | 82.5% | 1.57 | +7.72 | -189.60 |
+
+Candidate 3 by the primary decile (all rows the full model): D1 196 trades in 116 sessions, +22.28 [+15.34, +27.92]; D2–D10 1894 trades, +6.82 [+2.76, +10.42]; the time-matched lift of D1 +14.03 $ [+8.01, +19.62], +9.14 % of max risk [+5.31, +12.69]. This is the same historical span the research's out-of-sample read used, settled on the 15:59 bar — not the pre-registered forward test (≥ 150 forward sessions), which this replay cannot stand in for.
+
+fly5's 15:58 close-out against the 16:00 settlement, the same trades: iron -13.77 against +16.12 (-29.89 [-34.17, -25.77]); call -35.98 against +7.11 (-43.09 [-47.68, -38.84]); put -39.19 against +5.48 (-44.67 [-49.08, -40.42]).
+
+**2026-10-05 → 2026-10-09** (the last stored week, 5 sessions — far too few to read; kept as the replay's check on the newest files):
+
+| candidate | structure | sessions | trades | tradable | mean NBBO [95% CI] | median | mid | +1c | +2c | total | win | PF | w/o best 5 | worst trade |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| condor_em1 | condor | 5 | 24 | 96.0% | +18.77 [+16.90, +20.44] | +17.90 | +20.77 | +14.78 | +10.78 | +451 | 100.0% | ∞ | — | +9.40 |
+| fly5 | iron | 5 | 20 | 100.0% | +19.40 [-8.65, +43.25] | +16.40 | +21.43 | +15.40 | +11.40 | +388 | 70.0% | 3.14 | — | -58.60 |
+| fly5 | call | 5 | 20 | 100.0% | +16.85 [-10.50, +39.55] | +12.40 | +21.80 | +12.85 | +8.85 | +337 | 70.0% | 2.83 | — | -61.60 |
+| fly5 | put | 5 | 20 | 100.0% | +14.15 [-14.35, +40.70] | +13.90 | +21.90 | +10.15 | +6.15 | +283 | 65.0% | 2.33 | — | -66.60 |
+| condor_d20 | condor | 5 | 23 | 92.0% | +20.88 [+16.31, +26.84] | +19.40 | +22.88 | +16.88 | +12.88 | +480 | 100.0% | ∞ | — | +9.40 |
+
+Sessions after 2026-10-09 (the 12th onward) are not in the stored files: fetch them first.
+
+**`--fetch-theta`** (the owner's machine, the Theta Terminal v3 already running there; this workspace has none): for
+each weekday (not a recorder holiday) it asks `http://127.0.0.1:25503/v3` — never "localhost" (refused, Theta's 476),
+no proxy, no key in any request (the terminal holds it), `format=ndjson` on every call, at most 3 in flight, never
+starting, stopping or signing into a terminal — `/option/history/quote` (symbol SPY, QQQ, SPXW; expiration = date = D;
+interval 1m; 09:30–16:00), `/stock/history/ohlc` (SPY, QQQ; 1m; `venue=utp_cta`, as the 3abida downloader asks) and
+`/index/history/price` (SPX, VIX; 1m), and writes the same layout and dtypes (a 0/0 quote with both sizes 0, a 0 price
+and a no-trade bar's zero prices stored null, as the dataset holds them); 472 is no data (said, nothing written); a file
+on disk is skipped (`--force` asks again). **It is tested only against a fake terminal** answering in the recorded
+NDJSON shape (`tests/test_paper_tracker.py`); untested against the real terminal: the parameters it leaves at their
+defaults (strike and right, all contracts and both rights assumed), the venue, the strike units (dollars assumed, as
+3abida's fixtures carry) and how the real answers mark an empty minute.
+
+Tests (`python3 -I tests/test_paper_tracker.py`, since this build twenty-five): the Parquet-to-Chain adapter on a
+fixture (the hand-checked strikes and fills — condor 776/771 · 778/769 at $0.30, the flies at K0 773 — the OCC symbols,
+an unquoted row, the sizes, the clock's minute, no bar past it, the 15:59 official close only after 16:00); a replay of
+fixture Parquet over five weekdays (two whole sessions, one missing QQQ's chain, two after the files) — the 15:59
+settlement, condor −$92.60 / −$87.10 / −$96.60 / −$100.60, iron fly −$234.60, the 15:58 exit equal to the live
+`close_row`, candidate 3's deciles (the no-VIX model primary where the session before has no VIX), the report's tables
+and hand-worked fill facts ($11.00 width / $5.50 slip for the condor), and a second replay writing nothing; the replay
+root refused where it meets the live root, from the command line too; and `--fetch-theta` against a fake terminal (the
+layout and dtypes, ≤ 3 in flight, NDJSON, 472, the skip, "localhost" refused, and a replay of the fetched day).
+
 ## Settled by the smoke test (2026-10-21, the owner's token; `data_recorder/smoke/smoke_SPY.txt`, `smoke_SPX.txt`, the Parquet rows beside them, and seven follow-up probes the same evening)
 
 Every route answered 200 for SPY and for SPX. What each point of the build's list came to:
