@@ -1,82 +1,94 @@
-# Compass static checks — results of the demonstration run (2026-10-21)
+# Compass static checks — results of the demonstration run (2026-10-21, second run: zero findings)
 
 **What this is.** The three scripts in this folder are the module 15–16 verification of
 `docs/compass-core-spec-v2.md` (cents normalization, dead-code quarantine, Helix isolation). They take a code root
 as an argument. **The Compass bot's own code is not in any repository on this machine**, so the run below is a
-demonstration on the terminal's source, `/home/user/3abida/src` (Slayer, read-only; nothing there was edited). The
-bot's root must be passed when it exists; every line below is about the terminal, not the bot.
+demonstration on the terminal's source, `/home/user/3abida/src` (Slayer). The bot's root must be passed when it
+exists; every line below is about the terminal, not the bot.
 
-Run from this folder (Python 3, standard library only; `-I` isolates the interpreter from the scanned tree):
+Run from this folder (Python 3, standard library only; `-I` isolates the interpreter from the scanned tree). These
+are the exact commands of the run recorded below:
 
 ```
-python3 -I check_cents.py           <root> --boundary <glob> ... --selftest
-python3 -I check_dead_code.py       <root> [--names A,B --value A=0.35 --names-file removed.txt]
-python3 -I check_helix_isolation.py <root> --decision <glob> ... [--telemetry <glob|name> ... --field <regex> ...]
+python3 -I check_cents.py           /home/user/3abida/src --boundary 'data/feed/occ.ts' --allow allow.3abida.json --selftest
+python3 -I check_dead_code.py       /home/user/3abida/src --names SWEEP_FLOOR,BONUS_CAP,CONFIDENCE_CAP
+python3 -I check_helix_isolation.py /home/user/3abida/src --decision 'components/compass/*.ts' --decision data/compass.ts \
+                                    --decision data/compassStandIn.ts --decision data/compassView.ts \
+                                    --telemetry data/dealerTimeline.ts --telemetry data/feed/trailModel.ts --telemetry data/feed/trailField.ts
 ```
 
-Each exits 0 on a pass and 1 on a finding; `--json` prints the full result.
+Each exits 0 on a pass and 1 on a finding (check_cents also on a stale `--allow` entry); `--json` prints the full result.
+Result: **all three at zero findings, exit 0.**
+
+## What changed between the first run and this one
+
+The first run (the same day, earlier) put 31 price-unit hits outside the boundary. One was real; the rest were
+lines the classifier read by a price-like word (`open`, `close`, `strike`, `move`) that on that line meant an instant,
+a share or a greek. They were brought to zero three ways, and in no case by loosening a rule:
+
+1. **Fixed in the terminal — the OCC boundary.** The genuine finding, a second decoder of the OCC strike (`/ 1000`
+   in `data/feed/trailModel.ts`), and its inverse found on the second run (`Math.round(c.strike * 1000)` in
+   `data/feed/massive.ts`, the retired Massive provider's `occTicker`), now live in ONE module:
+   `src/data/feed/occ.ts` — `parseOcc`, `strikeFromThousandths`, `occStrike` (the decode) and `thousandthsFromStrike`,
+   `occSymbol` (the encode). `uw.ts`'s multi-leg legs, `trailModel.ts` (re-exporting `parseOcc` for the server) and
+   `massive.ts` read and write through it. `occTicker`'s output is byte-identical before and after (checked on 192
+   contracts across four roots, three expiries, both rights and eight strikes, 167.5 and 225.0001 among them). That
+   module is the declared boundary: `--boundary 'data/feed/occ.ts'`; the earlier four-file boundary (uw, client,
+   theta, massive) is no longer needed, since none of those files converts a unit any more.
+2. **The checker classifies what text can settle.** `check_cents.py` gained classes and rules that read the words on
+   the line: `time-ms` when the ×1000 / ÷1000 feeds a clock function (the `ny*` / `viewer*` of core/nyTime.ts,
+   `readerClock`, `sessionSpan`, `new Date`) or a `time:` field, or its operand is a span's or bar's instant
+   (`span.close`, `s.open`, `x.time`); `percent` for `(a / b − 1) * 100`, a `score` or a `move` × 100, and
+   `((strike − spot) / spot) * 100` (a distance in percent, which the first run's rule had been calling a contract
+   multiplier); `vol-points` for `iv = … * 100`; `greek-per-point` for rho or vega over 100; `svg-width` for a
+   `width={… / 100}`; `thousands-label` for `/ 1000}K`; `contract-multiplier` extended to `callOI * 100`,
+   `* 100 * u.vega`, `past(strike) * 100` and `* 100 * contracts` / `* size`. A continuation line (opening with a
+   bracket, an operator or a ternary's `?` / `:`) is read with the line before it, which is how `const rho = Number(`
+   names the `/ 100` on the next line. Every hit whose class changed between the two runs was read by hand
+   (a JSON diff of the two runs): 28 of the 31 moved into the class their text names, and no hit moved into
+   `price-unit`. Two over-reaches found in that diff were taken back before the run below — `(side ? 1 : −1) * 100
+   * contracts` had matched the change-in-percent shape (it is the multiplier) and `impliedMovePct = … * 100` had
+   matched the vol rule (it is a percent).
+3. **A reviewed allowlist for what a line alone cannot settle** — `allow.3abida.json`, one entry a line, a reason
+   each, passed with `--allow`. An entry is narrow (one path, a regex on the line), only ever turns a price-unit hit
+   into `allowed`, and an entry that matches nothing is STALE and fails the run, so the list cannot outlive the code.
+   The three entries:
+   - `data/levelview.ts:59` `const lo = open / 1000;` — `open` is an epoch-millisecond instant destructured from
+     `nySession()` on the line before, divided to the bars' seconds; the line alone reads as a price named open.
+   - `data/levelview.ts:60` `const hi = close / 1000;` — `close` is the session's closing instant from the same
+     `nySession()` call, milliseconds to seconds; not the closing price.
+   - `core/simulator.ts:229` `const refWall = (20000 * 2.4 * 100 * price * price * 0.01 * 0.54) / …` — the house
+     simulator's reference wall: 20,000 contracts of open interest × gamma × the contract's 100 shares × price², the
+     exposure arithmetic of a seeded shelf, the literal OI unnamed on the line; no vendor unit is changed.
+
+   What was NOT made a rule, on purpose: `/ 100).toFixed(n)` as a percent signal — that is exactly the shape a
+   cents-to-dollars conversion would take, so it stays a finding unless the figure's name settles it (as `rho` does
+   through the continuation rule).
 
 ## 1. check_cents.py — one price unit at the vendor boundary
 
-Boundary declared for the terminal: `data/feed/uw.ts`, `data/feed/client.ts` (UW's numeric strings read by `num()`),
-`data/feed/theta.ts`, `data/feed/massive.ts`. The round-trip harness ran on the reference engine with the audit's
-known contract (SPY 20261030 808 C at 0.55 / 0.56 on 2026-10-09): 16 of 16 figures to the cent, and the float32 case
-behind spec 0.1 reproduced (1.05 stored as float32 reads back 1.0499999523; `round(x, 4)` restores it).
+Boundary: `data/feed/occ.ts` alone. The round-trip harness ran on the reference engine with the audit's known
+contract (SPY 20261030 808 C at 0.55 / 0.56 on 2026-10-09): 16 of 16 figures to the cent, and the float32 case behind
+spec 0.1 reproduced. The classes listed apart (not findings) are the terminal's own arithmetic: cent-rounding,
+the simulator's integer-cents map keys (dollars in, dollars out), the contract multiplier in exposure and P&L,
+percent, time-ms, vol points, the three allowed lines, and 78 `other` (a ×100 or ÷1000 on no price-like word —
+listed for a human in `--json`).
 
-Reading the 31 "price-unit" findings on the terminal (a human reads this list; that is the check's job):
-- **One genuine second decoder of a vendor unit outside the boundary:** `data/feed/trailModel.ts:137` reads the OCC
-  option symbol's strike (`× 1000`) with its own `/ 1000` — the same conversion `data/feed/uw.ts:1057` does inside
-  the boundary. Under spec 15.1 that decode belongs in one place.
-- The rest are not unit changes and are named by a price-like word the classifier cannot tell from a time or a
-  share: epoch seconds ↔ milliseconds on a bar's `open` / `close` / `time` (NetFlowPane 136, RecapWatcher 146,
-  levelview 59–60, replayFrame 149/409/410, oiChange 100, journalFigures 223, StrikeChart 5702), SVG bar widths out of
-  a 0–100 figure (TraceGuide 129/990, StocksGuide 53/129), an implied vol in vol points (VolCurves 60), rho per 1%
-  (weigherDesk 254), a percent change or distance (CompareTapes 63, dossier 602/603/649), a 0–100 figure (trace 326),
-  the contract multiplier in exposure arithmetic (simulator 229/542/543/588/589: OI × 100 × greek × spot — the
-  house's own units), intrinsic × 100 to dollars a contract (paper/feed 195), and a dollar floor printed in
-  thousands (Watchers 509, Windows 449, MultiLeg 608).
-- The classes listed apart (not findings): cent-rounding 52, cents-keyed map 113 (the simulator keys its book by
-  integer cents — dollars in, dollars out), contract-multiplier 77, lot-rounding 3, percent 296, time-ms 150,
-  vol-points, other 125, comments 9.
-
-Result on the terminal: **1 finding to act on (trailModel's OCC decode), 30 to read and dismiss**; exit code 1.
+Result on the terminal: **0 findings, 3 allowed with reasons, 0 stale; exit code 0.**
 
 ```
 check_cents: /home/user/3abida/src
-  boundary globs: ['data/feed/uw.ts', 'data/feed/client.ts', 'data/feed/theta.ts', 'data/feed/massive.ts']
-  hits by class: boundary 3, cent-rounding 52, cents-keyed-map 113, comment 9, contract-multiplier 77, lot-rounding 3, other 125, percent 296, price-unit 31, time-ms 150, vol-points 30
-  FINDINGS (price-unit conversions outside the boundary): 31
-    components/trace/NetFlowPane.tsx:136: const first = Math.floor(s.open / 1000);
-    components/trace/TraceGuide.tsx:129: <rect x={12} y={r.y - 6} width={70 * (r.ask / 100)} height={4} rx={2} fill={BULL} />
-    components/trace/TraceGuide.tsx:990: <rect x={296} y={r.y - 6} width={(r.c / 100) * 64} height={3} rx={1.5} fill={r.ink} opacity={0.8} />
-    components/review/RecapWatcher.tsx:146: book: f.cols.map(([m, spot, cells]): GexSnapshot => ({ time: m / 1000, spot, rebuilt: true, levels: cells.map(([strike, value]) => ({ strike, value })) })),
-    components/weigher/VolCurves.tsx:60: const iv = contractIvFor(ticker, spot, 'C') * 100;
-    components/record/StocksGuide.tsx:53: <rect x={x} y={y} width={(w * v) / 100} height={4} rx={2} fill={v > 50 ? BULL : BEAR} fillOpacity={v > 50 ? 1 : 0.7} />
-    components/record/StocksGuide.tsx:129: <rect x={10} y={r.y - 6} width={140 * (r.v / 100)} height={4} rx={2} fill={r.ink} fillOpacity={r.ink === BULL ? 1 : 0.7} />
-    components/gex/StrikeChart.tsx:5702: {k(beadCard.strike)} · {cellBar > 60 ? barSpanLabel(beadCard.time, beadCard.time + cellBar) : nyClockOf(beadCard.time * 1000, { zone: true })}
-    components/gex/CompareTapes.tsx:63: for (const bar of bars) m.set(bar.time, { p: (bar.close / open0 - 1) * 100, c: bar.close });
-    data/oiChange.ts:100: return fromLevels(ticker, spot, a.levels, b.levels, nyDay(lastEnd * 1000), nyDay(beforeEnd * 1000));
-    data/weigherDesk.ts:254: (((right === 'C' ? 1 : -1) * strike * t * Math.exp(-r * t) * (right === 'C' ? nd2 : 1 - nd2)) / 100).toFixed(4)
+  boundary globs: ['data/feed/occ.ts']
+  hits by class: allowed 3, boundary 3, cent-rounding 52, cents-keyed-map 113, comment 9, contract-multiplier 83, greek-per-point 2, lot-rounding 3, other 78, percent 320, svg-width 5, thousands-label 8, time-ms 178, vol-points 32
+  FINDINGS (price-unit conversions outside the boundary): 0
+  ALLOWED (reviewed by hand in allow.3abida.json, a reason each; not findings): 3
     data/levelview.ts:59: const lo = open / 1000;
+      reason: `open` is an epoch-millisecond instant destructured from nySession() on the line before, divided to the bars' seconds; the line alone reads as a price named open.
     data/levelview.ts:60: const hi = close / 1000;
-    data/replayFrame.ts:149: if (guard) pitRead(guard, 'day bar', sessionSpan(d).close * 1000);
-    data/replayFrame.ts:409: const open = span.first * 1000;
-    data/replayFrame.ts:410: const close = span.close * 1000;
-    data/review/journalFigures.ts:223: const by = groupBy(rows, r => String(Math.floor(nyAt(instantOf(r, r.t.opened) * 1000).minutes / 60)));
-    data/paper/feed.ts:195: const itm = past(c.strike) * 100;
-    data/feed/trailModel.ts:137: return { root: m[1], expiry: `20${m[2]}-${m[3]}-${m[4]}`, right: m[5] as 'C' | 'P', strike: Number(m[6]) / 1000 };
-    data/feed/dossier.ts:602: const away = Number.isFinite(px) && px > 0 ? ((r.strike - px) / px) * 100 : NaN;
-    data/feed/dossier.ts:603: const be = Number.isFinite(px) && px > 0 && Number.isFinite(mid) ? (right === 'C' ? ((r.strike + mid - px) / px) * 100 : ((px - (r.strike - mid)) / px) * 100) : NaN;
-    data/feed/dossier.ts:649: const moves = reported.map(x => (x.postMove1d == null ? NaN : x.postMove1d * 100));
-    data/feed/trace.ts:326: flowScore: Number.isFinite(width) ? Math.round((fillPos * 2 - 1) * 100) : 0,
+      reason: `close` is the session's closing instant from the same nySession() call, milliseconds to seconds; not the closing price.
     core/simulator.ts:229: const refWall = (20000 * 2.4 * 100 * price * price * 0.01 * 0.54) / (2.5066 * denom);
-    core/simulator.ts:542: const dex = callOI * 100 * u.deltaCall * spot * -0.55 + putOI * 100 * u.deltaPut * spot * -0.53;
-    core/simulator.ts:543: const vex = (callOI * -0.55 + putOI * -0.53) * 100 * u.vega * spot;
-    core/simulator.ts:588: const dex = entry.callOI * 100 * u.deltaCall * spot * -0.55 + entry.putOI * 100 * u.deltaPut * spot * -0.53;
-    core/simulator.ts:589: const vex = (entry.callOI * -0.55 + entry.putOI * -0.53) * 100 * u.vega * spot;
-    pages/trace/Watchers.tsx:509: sub={`${activeRule ? `${activeRule.label} — ${activeRule.phrase} · newest first` : "Every reason a contract is flagged — the desk's and yours, newest first"}${onFeed ? ` · flags of $${ALERT_FL
-    pages/trace/Windows.tsx:449: sub={`${activeCut.label} — ${activeCut.hint}${onFeed ? ` · prints of $${WINDOW_FLOOR / 1000}K and up` : ''} · a row opens the contract's card`}
-    pages/trace/MultiLeg.tsx:608: sub={`${activeKind ? `${activeKind.label} — ${activeKind.read}` : 'Every structure on the tape today, newest first'}${onFeed ? ` · orders of $${SPREAD_FLOOR / 1000}K and up` : ''} · a row open
+      reason: The house simulator's reference wall: 20,000 contracts of open interest x gamma x the contract's 100 shares x price^2 — the exposure arithmetic of a seeded shelf, the literal OI unnamed on the line; no vendor unit is changed.
+  STALE allow entries (match no price-unit hit — remove them): 0
 round trip — SPY 20261030 808 C at 0.55 / 0.56 on 2026-10-09 (ThetaData bulk file):
   [ok ] load bid (dollars a share): got 0.55 want 0.55 ($)
   [ok ] load ask (dollars a share): got 0.56 want 0.56 ($)
@@ -108,6 +120,8 @@ words:check` bans the words on screen, not in code. For the bot, every such name
 (removed) or kept on purpose. The tsc half is printed: delete the exports and `npx tsc -p tsconfig.json --noEmit`
 must pass; then the fixed-day replay diff.
 
+Result: **0 resolves; exit code 0.**
+
 ```
 check_dead_code: /home/user/3abida/src
   removed names checked: SWEEP_FLOOR, BONUS_CAP, CONFIDENCE_CAP
@@ -126,30 +140,17 @@ check_dead_code: /home/user/3abida/src
 
 Helix does not exist in the terminal (it is the bot's), so the run names the terminal's nearest equivalents as the
 telemetry modules — `data/dealerTimeline.ts`, `data/feed/trailModel.ts`, `data/feed/trailField.ts` (the modeled
-dealer field and the regime strip, spec 1.2's "display telemetry") — and Compass as the decision root.
+dealer field and the regime strip, spec 1.2's "display telemetry") — and Compass's pure logic as the decision root
+(`components/compass/*.ts`: setupProcess, campaignStore, trackModel, setupMarksPrimitive; `data/compass.ts`,
+`data/compassStandIn.ts`, `data/compassView.ts`).
 
-Run A, the whole Compass folder (its React panels included): 4 import paths reach the trail model, every one through
-`components/gex/StrikeChart.tsx` — the chart the Compass panels draw. That is the UI reading telemetry to draw it,
-which spec 16.2 allows; the check cannot tell a drawing component from a decision by its imports, which is why the
-decision globs must name the decision modules, not the screens.
+A note kept from the first run: with the Compass folder's React screens in the decision glob
+(`components/compass/*`) the same arguments show 4 import paths, every one through `components/gex/StrikeChart.tsx`,
+the chart the panels draw — the UI reading telemetry to draw it, which spec 16.2 allows. The decision globs must
+name the decision modules, not the screens; that run is a lesson about the glob, not a finding, and is not the run
+on record. The (c) replay test (decisions identical with the telemetry fields null) is the owner's to run on the bot.
 
-Run B, Compass's pure logic (`components/compass/*.ts`: setupProcess, campaignStore, trackModel, setupMarksPrimitive;
-`data/compass.ts`, `data/compassStandIn.ts`, `data/compassView.ts`): **0 import paths, 0 field reads — PASS.** The
-(c) replay test (decisions identical with the telemetry fields null) is the owner's to run on the bot.
-
-```
-check_helix_isolation: /home/user/3abida/src
-  decision files: 22 (globs ['components/compass/*', 'data/compass.ts', 'data/compassStandIn.ts', 'data/compassView.ts'])
-  telemetry modules present: 3 — data/dealerTimeline.ts, data/feed/trailModel.ts, data/feed/trailField.ts
-  (b) import paths from a decision file to a telemetry module: 4
-    components/compass/CampaignAnalysis.tsx  ->  components/gex/StrikeChart.tsx  ->  data/feed/trailModel.ts
-    components/compass/CampaignAnalysis.tsx  ->  components/gex/StrikeChart.tsx  ->  data/feed/trailField.ts
-    components/compass/ContractTrack.tsx  ->  components/gex/ChartToolbar.tsx  ->  components/gex/StrikeChart.tsx  ->  data/feed/trailModel.ts
-    components/compass/ContractTrack.tsx  ->  components/gex/ChartToolbar.tsx  ->  components/gex/StrikeChart.tsx  ->  data/feed/trailField.ts
-  (a)/(d) telemetry fields read inside decision files: 0
-  (c) run the engine on one fixed replay day twice — once as is, once with every telemetry field set to null — and diff the decisions byte for byte; they must be identical.
-  result: FAIL
-```
+Result: **0 import paths, 0 field reads; exit code 0.**
 
 ```
 check_helix_isolation: /home/user/3abida/src
@@ -163,8 +164,9 @@ check_helix_isolation: /home/user/3abida/src
 
 ## What the bot's run must pass
 
-- check_cents: the bot's boundary module(s) declared with `--boundary`; zero price-unit findings outside them; the
-  round trip plugged into the bot's own picker / stops / P&L (see the docstring's method list) passing to the cent.
+- check_cents: the bot's boundary module(s) declared with `--boundary`; zero price-unit findings outside them, every
+  `--allow` entry (if any) reviewed with a true reason and none stale; the round trip plugged into the bot's own
+  picker / stops / P&L (see the docstring's method list) passing to the cent.
 - check_dead_code: `--names` carrying every removed cap and floor by name and `--value` their literals; zero
   resolves; the tsc half and the fixed-day byte diff done by hand and their output kept beside this file.
 - check_helix_isolation: `--decision` naming the gate, the picker, the stops, the scale-outs, the sizing and the

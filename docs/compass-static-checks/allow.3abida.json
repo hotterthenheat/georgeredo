@@ -1,0 +1,17 @@
+[
+  {
+    "path": "data/levelview.ts",
+    "line-pattern": "^\\s*const lo = open / 1000;$",
+    "reason": "`open` is an epoch-millisecond instant destructured from nySession() on the line before, divided to the bars' seconds; the line alone reads as a price named open."
+  },
+  {
+    "path": "data/levelview.ts",
+    "line-pattern": "^\\s*const hi = close / 1000;$",
+    "reason": "`close` is the session's closing instant from the same nySession() call, milliseconds to seconds; not the closing price."
+  },
+  {
+    "path": "core/simulator.ts",
+    "line-pattern": "const refWall = \\(20000 \\* 2\\.4 \\* 100 \\* price \\* price \\* 0\\.01 \\* 0\\.54\\)",
+    "reason": "The house simulator's reference wall: 20,000 contracts of open interest x gamma x the contract's 100 shares x price^2 — the exposure arithmetic of a seeded shelf, the literal OI unnamed on the line; no vendor unit is changed."
+  }
+]
