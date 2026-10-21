@@ -1,0 +1,19 @@
+name-days with a book: 5738 2025-10-15 2026-10-13 positive-gamma share 0.758
+H=5 ALL days pos_gamma=True: N=4236 mean=0.0045 hit=0.499
+H=5 ALL days pos_gamma=False: N=1364 mean=0.0070 hit=0.535
+H=5 GATE pos_gamma=True: N=3 mean=-0.0589 hit=0.333
+H=5 GATE pos_gamma=False: N=2 mean=-0.0240 hit=0.500
+H=5 SEQ5_12 pos_gamma=True: N=38 mean=-0.0005 hit=0.526
+H=5 SEQ5_12 pos_gamma=False: N=6 mean=0.0162 hit=0.833
+H=10 ALL days pos_gamma=True: N=4142 mean=0.0088 hit=0.479
+H=10 ALL days pos_gamma=False: N=1343 mean=0.0120 hit=0.525
+H=10 GATE pos_gamma=True: N=3 mean=-0.0839 hit=0.333
+H=10 GATE pos_gamma=False: N=2 mean=0.0007 hit=0.500
+H=10 SEQ5_12 pos_gamma=True: N=36 mean=0.0096 hit=0.528
+H=10 SEQ5_12 pos_gamma=False: N=6 mean=0.0210 hit=0.833
+H=20 ALL days pos_gamma=True: N=3958 mean=0.0183 hit=0.483
+H=20 ALL days pos_gamma=False: N=1297 mean=0.0254 hit=0.577
+H=20 GATE pos_gamma=True: N=2 mean=-0.0226 hit=0.000
+H=20 GATE pos_gamma=False: N=2 mean=-0.0122 hit=0.500
+H=20 SEQ5_12 pos_gamma=True: N=27 mean=-0.0188 hit=0.296
+H=20 SEQ5_12 pos_gamma=False: N=6 mean=0.0116 hit=0.667

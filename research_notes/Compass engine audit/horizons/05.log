@@ -1,0 +1,124 @@
+weekly_7dte hold_only train N 105 hit 0.286 mean 0.0406 med -0.6672 wo5 -0.2966 wo5days -0.3017 t 0.20 {'time': 105}
+weekly_7dte hold_only check N 71 hit 0.225 mean -0.1504 med -0.7243 wo5 -0.4306 wo5days -0.4306 t -0.98 {'time': 71}
+weekly_7dte level_stop train N 105 hit 0.276 mean 0.0313 med -0.6415 wo5 -0.3064 wo5days -0.3115 t 0.16 {'time': 91, 'level': 14}
+weekly_7dte level_stop check N 71 hit 0.225 mean -0.1288 med -0.7092 wo5 -0.4072 wo5days -0.4072 t -0.85 {'time': 65, 'level': 6}
+weekly_7dte level+prem20 train N 105 hit 0.124 mean -0.1328 med -0.4496 wo5 -0.3862 wo5days -0.3862 t -0.87 {'prem_stop': 87, 'time': 14, 'level': 4}
+weekly_7dte level+prem20 check N 71 hit 0.127 mean -0.1487 med -0.4723 wo5 -0.4186 wo5days -0.4409 t -1.11 {'prem_stop': 56, 'time': 12, 'level': 3}
+weekly_7dte level+prem17 train N 105 hit 0.114 mean -0.1430 med -0.4496 wo5 -0.3968 wo5days -0.3968 t -0.94 {'prem_stop': 88, 'time': 13, 'level': 4}
+weekly_7dte level+prem17 check N 71 hit 0.127 mean -0.1417 med -0.4624 wo5 -0.4111 wo5days -0.4331 t -1.06 {'prem_stop': 56, 'time': 12, 'level': 3}
+weekly_7dte prem20_only train N 105 hit 0.124 mean -0.1395 med -0.4570 wo5 -0.3932 wo5days -0.3932 t -0.92 {'prem_stop': 91, 'time': 14}
+weekly_7dte prem20_only check N 71 hit 0.127 mean -0.1586 med -0.4790 wo5 -0.4292 wo5days -0.4521 t -1.19 {'prem_stop': 59, 'time': 12}
+weekly_7dte level+prem20+scale4 train N 105 hit 0.143 mean -0.1438 med -0.4455 wo5 -0.3750 wo5days -0.3750 t -1.09 {'prem_stop': 87, 'time': 14, 'level': 4}
+weekly_7dte level+prem20+scale4 check N 71 hit 0.296 mean -0.1057 med -0.3789 wo5 -0.2471 wo5days -0.2894 t -1.22 {'prem_stop': 56, 'time': 12, 'level': 3}
+weekly_7dte level+prem20+scale2 train N 105 hit 0.133 mean -0.1484 med -0.4455 wo5 -0.3834 wo5days -0.3834 t -1.09 {'prem_stop': 87, 'time': 14, 'level': 4}
+weekly_7dte level+prem20+scale2 check N 71 hit 0.239 mean -0.1128 med -0.3789 wo5 -0.3065 wo5days -0.3422 t -1.10 {'prem_stop': 56, 'time': 12, 'level': 3}
+weekly_7dte level+prem20+trail train N 105 hit 0.133 mean -0.1326 med -0.4393 wo5 -0.3849 wo5days -0.3849 t -0.89 {'prem_stop': 82, 'time': 12, 'trail': 7, 'level': 4}
+weekly_7dte level+prem20+trail check N 71 hit 0.141 mean -0.1228 med -0.4392 wo5 -0.3907 wo5days -0.4183 t -0.92 {'prem_stop': 52, 'time': 9, 'trail': 7, 'level': 3}
+weekly_7dte level+prem20+rsi train N 105 hit 0.124 mean -0.1220 med -0.4455 wo5 -0.3748 wo5days -0.3748 t -0.80 {'prem_stop': 85, 'time': 11, 'rsi': 5, 'level': 4}
+weekly_7dte level+prem20+rsi check N 71 hit 0.127 mean -0.1702 med -0.4624 wo5 -0.4336 wo5days -0.4514 t -1.32 {'prem_stop': 55, 'time': 9, 'rsi': 4, 'level': 3}
+weekly_7dte all_rules_4c train N 105 hit 0.171 mean -0.1310 med -0.4393 wo5 -0.3613 wo5days -0.3613 t -1.00 {'prem_stop': 81, 'time': 9, 'trail': 7, 'level': 4, 'rsi': 4}
+weekly_7dte all_rules_4c check N 71 hit 0.296 mean -0.1044 med -0.3681 wo5 -0.2450 wo5days -0.2861 t -1.23 {'prem_stop': 52, 'trail': 7, 'time': 6, 'level': 3, 'rsi': 3}
+weekly_10dte hold_only train N 105 hit 0.267 mean -0.0500 med -0.6362 wo5 -0.3146 wo5days -0.3194 t -0.34 {'time': 105}
+weekly_10dte hold_only check N 71 hit 0.324 mean -0.1047 med -0.5995 wo5 -0.3555 wo5days -0.3555 t -0.74 {'time': 71}
+weekly_10dte level_stop train N 105 hit 0.238 mean -0.0731 med -0.6480 wo5 -0.3388 wo5days -0.3439 t -0.49 {'time': 86, 'level': 19}
+weekly_10dte level_stop check N 71 hit 0.324 mean -0.0766 med -0.5044 wo5 -0.3252 wo5days -0.3252 t -0.54 {'time': 63, 'level': 8}
+weekly_10dte level+prem20 train N 105 hit 0.133 mean -0.2065 med -0.4339 wo5 -0.4051 wo5days -0.4051 t -1.99 {'prem_stop': 83, 'time': 17, 'level': 5}
+weekly_10dte level+prem20 check N 71 hit 0.197 mean -0.1070 med -0.3921 wo5 -0.3365 wo5days -0.3532 t -0.95 {'prem_stop': 53, 'time': 15, 'level': 3}
+weekly_10dte level+prem17 train N 105 hit 0.114 mean -0.2138 med -0.3980 wo5 -0.4084 wo5days -0.4084 t -2.11 {'prem_stop': 88, 'time': 13, 'level': 4}
+weekly_10dte level+prem17 check N 71 hit 0.197 mean -0.0872 med -0.3823 wo5 -0.3153 wo5days -0.3309 t -0.78 {'prem_stop': 53, 'time': 15, 'level': 3}
+weekly_10dte prem20_only train N 105 hit 0.133 mean -0.2119 med -0.4440 wo5 -0.4107 wo5days -0.4107 t -2.04 {'prem_stop': 88, 'time': 17}
+weekly_10dte prem20_only check N 71 hit 0.197 mean -0.1156 med -0.4087 wo5 -0.3458 wo5days -0.3628 t -1.02 {'prem_stop': 56, 'time': 15}
+weekly_10dte level+prem20+scale4 train N 105 hit 0.181 mean -0.1560 med -0.4134 wo5 -0.3360 wo5days -0.3360 t -1.53 {'prem_stop': 83, 'time': 17, 'level': 5}
+weekly_10dte level+prem20+scale4 check N 71 hit 0.338 mean -0.0914 med -0.3426 wo5 -0.2091 wo5days -0.2452 t -1.22 {'prem_stop': 53, 'time': 15, 'level': 3}
+weekly_10dte level+prem20+scale2 train N 105 hit 0.171 mean -0.1829 med -0.4279 wo5 -0.3588 wo5days -0.3588 t -1.84 {'prem_stop': 83, 'time': 17, 'level': 5}
+weekly_10dte level+prem20+scale2 check N 71 hit 0.296 mean -0.0900 med -0.3426 wo5 -0.2487 wo5days -0.2808 t -1.03 {'prem_stop': 53, 'time': 15, 'level': 3}
+weekly_10dte level+prem20+trail train N 105 hit 0.124 mean -0.2147 med -0.4134 wo5 -0.3939 wo5days -0.3939 t -2.20 {'prem_stop': 77, 'trail': 12, 'time': 11, 'level': 5}
+weekly_10dte level+prem20+trail check N 71 hit 0.197 mean -0.0975 med -0.3823 wo5 -0.3264 wo5days -0.3480 t -0.87 {'prem_stop': 49, 'time': 12, 'trail': 7, 'level': 3}
+weekly_10dte level+prem20+rsi train N 105 hit 0.143 mean -0.1405 med -0.4268 wo5 -0.3714 wo5days -0.3714 t -1.08 {'prem_stop': 80, 'time': 12, 'rsi': 8, 'level': 5}
+weekly_10dte level+prem20+rsi check N 71 hit 0.211 mean -0.1222 med -0.3908 wo5 -0.3388 wo5days -0.3381 t -1.16 {'prem_stop': 52, 'time': 11, 'rsi': 5, 'level': 3}
+weekly_10dte all_rules_4c train N 105 hit 0.219 mean -0.1273 med -0.3884 wo5 -0.3196 wo5days -0.3196 t -1.16 {'prem_stop': 75, 'trail': 12, 'time': 8, 'level': 5, 'rsi': 5}
+weekly_10dte all_rules_4c check N 71 hit 0.338 mean -0.0946 med -0.3335 wo5 -0.2090 wo5days -0.2440 t -1.30 {'prem_stop': 49, 'time': 8, 'trail': 7, 'rsi': 4, 'level': 3}
+swing_14dte hold_only train N 105 hit 0.276 mean -0.0760 med -0.7010 wo5 -0.3292 wo5days -0.3406 t -0.52 {'time': 105}
+swing_14dte hold_only check N 60 hit 0.250 mean -0.2353 med -0.8002 wo5 -0.4841 wo5days -0.4760 t -1.64 {'time': 60}
+swing_14dte level_stop train N 105 hit 0.257 mean -0.0969 med -0.6702 wo5 -0.3512 wo5days -0.3630 t -0.67 {'time': 75, 'level': 30}
+swing_14dte level_stop check N 60 hit 0.250 mean -0.1964 med -0.7000 wo5 -0.4417 wo5days -0.4328 t -1.39 {'time': 48, 'level': 12}
+swing_14dte level+prem20 train N 105 hit 0.114 mean -0.1858 med -0.4055 wo5 -0.3816 wo5days -0.3816 t -1.89 {'prem_stop': 84, 'time': 14, 'level': 7}
+swing_14dte level+prem20 check N 60 hit 0.133 mean -0.1701 med -0.3524 wo5 -0.3648 wo5days -0.3672 t -1.80 {'prem_stop': 48, 'time': 9, 'level': 3}
+swing_14dte level+prem17 train N 105 hit 0.114 mean -0.1686 med -0.3979 wo5 -0.3635 wo5days -0.3635 t -1.72 {'prem_stop': 85, 'time': 13, 'level': 7}
+swing_14dte level+prem17 check N 60 hit 0.133 mean -0.1553 med -0.3436 wo5 -0.3487 wo5days -0.3516 t -1.66 {'prem_stop': 48, 'time': 9, 'level': 3}
+swing_14dte prem20_only train N 105 hit 0.114 mean -0.1913 med -0.4072 wo5 -0.3873 wo5days -0.3873 t -1.94 {'prem_stop': 91, 'time': 14}
+swing_14dte prem20_only check N 60 hit 0.133 mean -0.1785 med -0.3574 wo5 -0.3740 wo5days -0.3767 t -1.89 {'prem_stop': 51, 'time': 9}
+swing_14dte level+prem20+scale4 train N 105 hit 0.190 mean -0.1524 med -0.3663 wo5 -0.2957 wo5days -0.2957 t -1.90 {'prem_stop': 84, 'time': 14, 'level': 7}
+swing_14dte level+prem20+scale4 check N 60 hit 0.267 mean -0.1482 med -0.3180 wo5 -0.2469 wo5days -0.2485 t -2.47 {'prem_stop': 48, 'time': 9, 'level': 3}
+swing_14dte level+prem20+scale2 train N 105 hit 0.152 mean -0.1707 med -0.3979 wo5 -0.3235 wo5days -0.3235 t -2.04 {'prem_stop': 84, 'time': 14, 'level': 7}
+swing_14dte level+prem20+scale2 check N 60 hit 0.217 mean -0.1564 med -0.3269 wo5 -0.2888 wo5days -0.2870 t -2.26 {'prem_stop': 48, 'time': 9, 'level': 3}
+swing_14dte level+prem20+trail train N 105 hit 0.133 mean -0.1817 med -0.3587 wo5 -0.3533 wo5days -0.3533 t -2.04 {'prem_stop': 73, 'trail': 19, 'time': 7, 'level': 6}
+swing_14dte level+prem20+trail check N 60 hit 0.167 mean -0.1791 med -0.3394 wo5 -0.3562 wo5days -0.3552 t -2.12 {'prem_stop': 44, 'trail': 8, 'time': 5, 'level': 3}
+swing_14dte level+prem20+rsi train N 105 hit 0.143 mean -0.1997 med -0.3842 wo5 -0.3426 wo5days -0.3426 t -2.22 {'prem_stop': 74, 'rsi': 17, 'level': 7, 'time': 7}
+swing_14dte level+prem20+rsi check N 60 hit 0.167 mean -0.1553 med -0.3524 wo5 -0.3486 wo5days -0.3504 t -1.64 {'prem_stop': 47, 'time': 8, 'level': 3, 'rsi': 2}
+swing_14dte all_rules_4c train N 105 hit 0.210 mean -0.1399 med -0.3400 wo5 -0.2755 wo5days -0.2881 t -1.73 {'prem_stop': 67, 'trail': 17, 'rsi': 11, 'level': 6, 'time': 4}
+swing_14dte all_rules_4c check N 60 hit 0.283 mean -0.1501 med -0.3180 wo5 -0.2466 wo5days -0.2508 t -2.56 {'prem_stop': 44, 'trail': 7, 'time': 5, 'level': 3, 'rsi': 1}
+swing_21dte hold_only train N 105 hit 0.267 mean -0.0031 med -0.7408 wo5 -0.2934 wo5days -0.3276 t -0.02 {'time': 105}
+swing_21dte hold_only check N 60 hit 0.217 mean -0.2528 med -0.7834 wo5 -0.5625 wo5days -0.5461 t -1.58 {'time': 60}
+swing_21dte level_stop train N 105 hit 0.229 mean -0.0507 med -0.7357 wo5 -0.3433 wo5days -0.3785 t -0.31 {'time': 68, 'level': 37}
+swing_21dte level_stop check N 60 hit 0.217 mean -0.2130 med -0.7217 wo5 -0.5191 wo5days -0.5018 t -1.34 {'time': 44, 'level': 16}
+swing_21dte level+prem20 train N 105 hit 0.105 mean -0.1738 med -0.3749 wo5 -0.3651 wo5days -0.3651 t -1.83 {'prem_stop': 85, 'time': 12, 'level': 8}
+swing_21dte level+prem20 check N 60 hit 0.150 mean -0.0299 med -0.3401 wo5 -0.3194 wo5days -0.3137 t -0.21 {'prem_stop': 47, 'time': 10, 'level': 3}
+swing_21dte level+prem17 train N 105 hit 0.086 mean -0.1775 med -0.3476 wo5 -0.3689 wo5days -0.3689 t -1.90 {'prem_stop': 87, 'time': 10, 'level': 8}
+swing_21dte level+prem17 check N 60 hit 0.150 mean -0.0031 med -0.3028 wo5 -0.2901 wo5days -0.2922 t -0.02 {'prem_stop': 48, 'time': 9, 'level': 3}
+swing_21dte prem20_only train N 105 hit 0.105 mean -0.1792 med -0.3764 wo5 -0.3707 wo5days -0.3707 t -1.88 {'prem_stop': 93, 'time': 12}
+swing_21dte prem20_only check N 60 hit 0.150 mean -0.0435 med -0.3470 wo5 -0.3342 wo5days -0.3291 t -0.31 {'prem_stop': 50, 'time': 10}
+swing_21dte level+prem20+scale4 train N 105 hit 0.181 mean -0.1617 med -0.3388 wo5 -0.2807 wo5days -0.2807 t -2.39 {'prem_stop': 85, 'time': 12, 'level': 8}
+swing_21dte level+prem20+scale4 check N 60 hit 0.233 mean -0.1168 med -0.3164 wo5 -0.2468 wo5days -0.2528 t -1.64 {'prem_stop': 47, 'time': 10, 'level': 3}
+swing_21dte level+prem20+scale2 train N 105 hit 0.162 mean -0.1725 med -0.3500 wo5 -0.3076 wo5days -0.3076 t -2.34 {'prem_stop': 85, 'time': 12, 'level': 8}
+swing_21dte level+prem20+scale2 check N 60 hit 0.200 mean -0.0854 med -0.3324 wo5 -0.2732 wo5days -0.2644 t -0.90 {'prem_stop': 47, 'time': 10, 'level': 3}
+swing_21dte level+prem20+trail train N 105 hit 0.133 mean -0.1640 med -0.3387 wo5 -0.3328 wo5days -0.3328 t -1.92 {'prem_stop': 72, 'trail': 22, 'level': 6, 'time': 5}
+swing_21dte level+prem20+trail check N 60 hit 0.167 mean -0.1189 med -0.3307 wo5 -0.3354 wo5days -0.3343 t -1.00 {'prem_stop': 42, 'trail': 10, 'time': 5, 'level': 3}
+swing_21dte level+prem20+rsi train N 105 hit 0.152 mean -0.1674 med -0.3434 wo5 -0.3075 wo5days -0.3075 t -2.10 {'prem_stop': 73, 'rsi': 19, 'level': 8, 'time': 5}
+swing_21dte level+prem20+rsi check N 60 hit 0.183 mean -0.0944 med -0.3360 wo5 -0.3006 wo5days -0.2943 t -0.91 {'prem_stop': 45, 'rsi': 6, 'time': 6, 'level': 3}
+swing_21dte all_rules_4c train N 105 hit 0.219 mean -0.1439 med -0.3247 wo5 -0.2543 wo5days -0.2543 t -2.17 {'prem_stop': 66, 'trail': 18, 'rsi': 12, 'level': 6, 'time': 3}
+swing_21dte all_rules_4c check N 60 hit 0.267 mean -0.1557 med -0.3164 wo5 -0.2548 wo5days -0.2617 t -2.74 {'prem_stop': 42, 'trail': 9, 'level': 3, 'rsi': 3, 'time': 3}
+swing_30dte hold_only train N 105 hit 0.305 mean -0.1233 med -0.8583 wo5 -0.3868 wo5days -0.4073 t -0.84 {'time': 105}
+swing_30dte hold_only check N 60 hit 0.217 mean -0.3404 med -0.9748 wo5 -0.6925 wo5days -0.6776 t -1.84 {'time': 60}
+swing_30dte level_stop train N 105 hit 0.229 mean -0.1761 med -0.7716 wo5 -0.4423 wo5days -0.4639 t -1.24 {'time': 56, 'level': 49}
+swing_30dte level_stop check N 60 hit 0.217 mean -0.2802 med -0.8885 wo5 -0.6268 wo5days -0.6258 t -1.54 {'time': 42, 'level': 18}
+swing_30dte level+prem20 train N 105 hit 0.076 mean -0.2643 med -0.3640 wo5 -0.3759 wo5days -0.3759 t -4.53 {'prem_stop': 87, 'level': 9, 'time': 9}
+swing_30dte level+prem20 check N 60 hit 0.133 mean -0.0278 med -0.3333 wo5 -0.3410 wo5days -0.3390 t -0.17 {'prem_stop': 48, 'time': 8, 'level': 4}
+swing_30dte level+prem17 train N 105 hit 0.067 mean -0.2482 med -0.3355 wo5 -0.3590 wo5days -0.3590 t -4.35 {'prem_stop': 90, 'level': 8, 'time': 7}
+swing_30dte level+prem17 check N 60 hit 0.117 mean -0.0069 med -0.3031 wo5 -0.3182 wo5days -0.3153 t -0.04 {'prem_stop': 50, 'time': 7, 'level': 3}
+swing_30dte prem20_only train N 105 hit 0.076 mean -0.2726 med -0.3649 wo5 -0.3846 wo5days -0.3846 t -4.65 {'prem_stop': 96, 'time': 9}
+swing_30dte prem20_only check N 60 hit 0.133 mean -0.0408 med -0.3411 wo5 -0.3552 wo5days -0.3538 t -0.26 {'prem_stop': 52, 'time': 8}
+swing_30dte level+prem20+scale4 train N 105 hit 0.162 mean -0.2045 med -0.3318 wo5 -0.2947 wo5days -0.2947 t -3.88 {'prem_stop': 87, 'level': 9, 'time': 9}
+swing_30dte level+prem20+scale4 check N 60 hit 0.250 mean -0.0981 med -0.2938 wo5 -0.2314 wo5days -0.2253 t -1.37 {'prem_stop': 48, 'time': 8, 'level': 4}
+swing_30dte level+prem20+scale2 train N 105 hit 0.143 mean -0.2307 med -0.3549 wo5 -0.3234 wo5days -0.3234 t -4.40 {'prem_stop': 87, 'level': 9, 'time': 9}
+swing_30dte level+prem20+scale2 check N 60 hit 0.233 mean -0.0751 med -0.3050 wo5 -0.2735 wo5days -0.2690 t -0.75 {'prem_stop': 48, 'time': 8, 'level': 4}
+swing_30dte level+prem20+trail train N 105 hit 0.124 mean -0.2224 med -0.3355 wo5 -0.3313 wo5days -0.3313 t -3.96 {'prem_stop': 74, 'trail': 19, 'level': 7, 'time': 5}
+swing_30dte level+prem20+trail check N 60 hit 0.183 mean -0.1045 med -0.3031 wo5 -0.3051 wo5days -0.3049 t -0.85 {'prem_stop': 39, 'trail': 14, 'level': 4, 'time': 3}
+swing_30dte level+prem20+rsi train N 105 hit 0.143 mean -0.1752 med -0.3457 wo5 -0.3052 wo5days -0.3052 t -2.49 {'prem_stop': 73, 'rsi': 23, 'level': 9}
+swing_30dte level+prem20+rsi check N 60 hit 0.167 mean -0.1432 med -0.3193 wo5 -0.3172 wo5days -0.3143 t -1.66 {'prem_stop': 45, 'rsi': 9, 'level': 4, 'time': 2}
+swing_30dte all_rules_4c train N 105 hit 0.210 mean -0.1630 med -0.3179 wo5 -0.2578 wo5days -0.2578 t -2.89 {'prem_stop': 68, 'rsi': 16, 'trail': 14, 'level': 7}
+swing_30dte all_rules_4c check N 60 hit 0.267 mean -0.1602 med -0.2938 wo5 -0.2427 wo5days -0.2505 t -3.20 {'prem_stop': 39, 'trail': 11, 'rsi': 6, 'level': 4}
+leaps_180dte hold_only train N 105 hit 0.448 mean 0.1501 med -0.0873 wo5 0.0094 wo5days -0.0019 t 1.64 {'time': 105}
+leaps_180dte hold_only check N 51 hit 0.294 mean -0.0439 med -0.2926 wo5 -0.2932 wo5days -0.2923 t -0.33 {'time': 51}
+leaps_180dte prem25_only train N 105 hit 0.276 mean 0.0171 med -0.3173 wo5 -0.0965 wo5days -0.1010 t 0.24 {'prem_stop': 72, 'time': 33}
+leaps_180dte prem25_only check N 51 hit 0.137 mean -0.1319 med -0.3259 wo5 -0.3039 wo5days -0.3030 t -1.59 {'prem_stop': 42, 'time': 9}
+leaps_180dte prem25+scale3 train N 105 hit 0.314 mean -0.0039 med -0.3137 wo5 -0.0687 wo5days -0.0751 t -0.07 {'prem_stop': 72, 'time': 33}
+leaps_180dte prem25+scale3 check N 51 hit 0.157 mean -0.1427 med -0.3172 wo5 -0.2664 wo5days -0.2647 t -2.39 {'prem_stop': 42, 'time': 9}
+GATEweekly_7dte level_stop train N 14 hit 0.357 mean 0.4895 med -0.8844 wo5 -0.9226 wo5days -0.9226 t 0.57 {'time': 11, 'level': 3}
+GATEweekly_7dte level_stop check N 6 hit 0.167 mean -0.2934 med -0.6198 wo5 -1.0015 wo5days -1.0015 t -0.72 {'level': 3, 'time': 3}
+GATEweekly_7dte level+prem20 train N 14 hit 0.071 mean -0.4520 med -0.6582 wo5 -0.7785 wo5days -0.7785 t -1.98 {'prem_stop': 11, 'level': 2, 'time': 1}
+GATEweekly_7dte level+prem20 check N 6 hit 0.000 mean -0.5190 med -0.5365 wo5 -0.7430 wo5days -0.7430 t -6.09 {'prem_stop': 4, 'level': 2}
+GATEswing_21dte level_stop train N 14 hit 0.286 mean -0.0287 med -0.7590 wo5 -0.8454 wo5days -0.8454 t -0.06 {'level': 8, 'time': 6}
+GATEswing_21dte level_stop check N 5 hit 0.200 mean -0.2813 med -0.4311 wo5 nan wo5days nan t -0.88 {'level': 4, 'time': 1}
+GATEswing_21dte level+prem20 train N 14 hit 0.000 mean -0.5123 med -0.4639 wo5 -0.6035 wo5days -0.6035 t -9.75 {'prem_stop': 11, 'level': 3}
+GATEswing_21dte level+prem20 check N 5 hit 0.000 mean -0.2964 med -0.3041 wo5 nan wo5days nan t -4.30 {'prem_stop': 3, 'level': 2}
+BASELINE all days (15% sample), swing 21DTE/12 sessions level+prem20: [{'split': 'train', 'N': 2456, 'hit': np.float64(0.1718), 'mean': np.float64(0.0086), 'med': np.float64(-0.323), 'mean_wo5': np.float64(-0.0225), 'mean_wo5days': np.float64(-0.0307), 't': np.float64(0.3243)}, {'split': 'check', 'N': 1547, 'hit': np.float64(0.1694), 'mean': np.float64(-0.0313), 'med': np.float64(-0.3214), 'mean_wo5': np.float64(-0.0574), 'mean_wo5days': np.float64(-0.0905), 't': np.float64(-1.1791)}]
+DTE 7 IV 0.15: premium 0.76% of spot; -20% at day0 = 0.34% down, after 3 sessions 0.00%; -17%: day0 0.29%, 3 sessions 0.00%; 3 sessions of pure decay = 42.9%
+DTE 7 IV 0.25: premium 1.25% of spot; -20% at day0 = 0.56% down, after 3 sessions 0.00%; -17%: day0 0.47%, 3 sessions 0.00%; 3 sessions of pure decay = 42.1%
+DTE 7 IV 0.45: premium 2.21% of spot; -20% at day0 = 1.00% down, after 3 sessions 0.00%; -17%: day0 0.84%, 3 sessions 0.00%; 3 sessions of pure decay = 42.1%
+DTE 14 IV 0.15: premium 1.06% of spot; -20% at day0 = 0.48% down, after 3 sessions 0.00%; -17%: day0 0.40%, 3 sessions 0.00%; 3 sessions of pure decay = 19.9%
+DTE 14 IV 0.25: premium 1.75% of spot; -20% at day0 = 0.79% down, after 3 sessions 0.02%; -17%: day0 0.66%, 3 sessions 0.00%; 3 sessions of pure decay = 19.4%
+DTE 14 IV 0.45: premium 3.08% of spot; -20% at day0 = 1.39% down, after 3 sessions 0.05%; -17%: day0 1.17%, 3 sessions 0.00%; 3 sessions of pure decay = 19.3%
+DTE 30 IV 0.15: premium 1.54% of spot; -20% at day0 = 0.70% down, after 3 sessions 0.36%; -17%: day0 0.59%, 3 sessions 0.26%; 3 sessions of pure decay = 9.4%
+DTE 30 IV 0.25: premium 2.53% of spot; -20% at day0 = 1.14% down, after 3 sessions 0.62%; -17%: day0 0.96%, 3 sessions 0.44%; 3 sessions of pure decay = 9.0%
+DTE 30 IV 0.45: premium 4.40% of spot; -20% at day0 = 1.98% down, after 3 sessions 1.08%; -17%: day0 1.67%, 3 sessions 0.78%; 3 sessions of pure decay = 8.9%

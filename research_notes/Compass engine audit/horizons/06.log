@@ -1,0 +1,75 @@
+earnings rows (quarterly, dated) for the universe: 1515 date range 1996-03-14 2026-11-18
+              min        max  count
+ticker                             
+AAPL   1996-04-17 2026-11-02    123
+AMD    1996-04-09 2026-11-03    123
+AMZN   1997-07-10 2026-10-29    118
+AVGO   2009-09-04 2026-09-02     69
+GME    2002-03-12 2026-09-08     99
+GOOGL  2004-10-21 2026-10-28     89
+INTC   1996-04-15 2026-10-29    123
+META   2012-05-30 2026-11-04     59
+MSFT   1996-04-18 2026-10-28    123
+MSTR   1998-07-29 2026-10-29    114
+MU     1996-03-14 2026-09-30    123
+NVDA   1999-05-18 2026-11-18    111
+ORCL   1996-03-14 2026-09-10    123
+PLTR   2020-09-30 2026-11-02     26
+SOFI   2019-12-31 2026-10-27     26
+TSLA   2010-08-05 2026-10-21     66
+   symbol  n_earn  n_other  med_abs_earn  med_abs_other  mean_abs_earn  mean_abs_other  p90_earn  p90_other  ratio_mean
+0    AAPL      28   1676.0        0.0250         0.0093         0.0323          0.0133    0.0713     0.0295      2.4189
+1     AMD      28   1676.0        0.0627         0.0190         0.0680          0.0248    0.1258     0.0541      2.7476
+2    AMZN      28   1676.0        0.0683         0.0121         0.0645          0.0153    0.1163     0.0328      4.2141
+3    AVGO      28   1676.0        0.0480         0.0136         0.0603          0.0183    0.1176     0.0404      3.2943
+4     EWZ       0      NaN           NaN            NaN            NaN             NaN       NaN        NaN         NaN
+5     GME      28   1675.0        0.1024         0.0236         0.1168          0.0420    0.2981     0.0847      2.7815
+6   GOOGL      28   1675.0        0.0496         0.0106         0.0514          0.0141    0.0929     0.0307      3.6544
+7     HYG       0      NaN           NaN            NaN            NaN             NaN       NaN        NaN         NaN
+8    IBIT       0      NaN           NaN            NaN            NaN             NaN       NaN        NaN         NaN
+9    INTC      28   1675.0        0.0813         0.0146         0.0920          0.0210    0.1656     0.0461      4.3790
+10    IWM       0      NaN           NaN            NaN            NaN             NaN       NaN        NaN         NaN
+11   META      21   1217.0        0.0825         0.0119         0.7828          0.0159    0.2341     0.0346     49.2334
+12   MSFT      28   1676.0        0.0307         0.0096         0.0421          0.0128    0.0766     0.0269      3.3016
+13   MSTR      28   1675.0        0.0456         0.0295         0.0573          0.0403    0.1035     0.0885      1.4219
+14     MU      28   1676.0        0.0483         0.0179         0.0644          0.0243    0.1437     0.0514      2.6465
+15   NVDA      28   1676.0        0.0401         0.0180         0.0575          0.0233    0.1120     0.0497      2.4646
+16   ORCL      28   1676.0        0.0667         0.0107         0.0846          0.0155    0.1434     0.0337      5.4614
+17   PLTR      25   1491.0        0.1205         0.0208         0.1438          0.0284    0.2378     0.0622      5.0633
+18    QQQ       0      NaN           NaN            NaN            NaN             NaN       NaN        NaN         NaN
+19   SOFI      22   1327.0        0.0657         0.0241         0.0924          0.0299    0.1990     0.0621      3.0962
+20    SPY       0      NaN           NaN            NaN            NaN             NaN       NaN        NaN         NaN
+21    TLT       0      NaN           NaN            NaN            NaN             NaN       NaN        NaN         NaN
+22   TSLA      28   1676.0        0.0665         0.0207         0.0745          0.0288    0.1221     0.0614      2.5868
+GATE swing rules (wk stop, EM target) train crosses_earnings=True: N=6 hit=0.167 mean=0.0962 med=-0.0547 sd=0.4358
+GATE swing rules (wk stop, EM target) train crosses_earnings=False: N=8 hit=0.250 mean=-0.0764 med=-0.0340 sd=0.2885
+GATE swing rules (wk stop, EM target) check crosses_earnings=True: N=0 hit=nan mean=nan med=nan sd=nan
+GATE swing rules (wk stop, EM target) check crosses_earnings=False: N=5 hit=0.200 mean=-0.0355 med=-0.0361 sd=0.0631
+GATE swing fixed 20 train crosses_earnings=True: N=6 hit=0.500 mean=0.0111 med=-0.0037 sd=0.1084
+GATE swing fixed 20 train crosses_earnings=False: N=8 hit=0.375 mean=-0.0293 med=-0.0208 sd=0.2987
+GATE swing fixed 20 check crosses_earnings=True: N=0 hit=nan mean=nan med=nan sd=nan
+GATE swing fixed 20 check crosses_earnings=False: N=5 hit=0.400 mean=-0.0277 med=-0.0440 sd=0.0519
+GATE weekly fixed 5 train crosses_earnings=True: N=3 hit=0.667 mean=-0.0404 med=0.0123 sd=0.1262
+GATE weekly fixed 5 train crosses_earnings=False: N=11 hit=0.273 mean=-0.0007 med=-0.0242 sd=0.0994
+GATE weekly fixed 5 check crosses_earnings=True: N=0 hit=nan mean=nan med=nan sd=nan
+GATE weekly fixed 5 check crosses_earnings=False: N=6 hit=0.333 mean=-0.0233 med=-0.0261 sd=0.0524
+SEQ5_12 swing rules train crosses_earnings=True: N=29 hit=0.414 mean=0.0091 med=-0.0166 sd=0.2228
+SEQ5_12 swing rules train crosses_earnings=False: N=76 hit=0.395 mean=-0.0304 med=-0.0205 sd=0.1451
+SEQ5_12 swing rules check crosses_earnings=True: N=14 hit=0.429 mean=0.0197 med=-0.0263 sd=0.1129
+SEQ5_12 swing rules check crosses_earnings=False: N=46 hit=0.326 mean=-0.0285 med=-0.0146 sd=0.0926
+SEQ5_12 swing fixed 20 train crosses_earnings=True: N=29 hit=0.483 mean=-0.0023 med=-0.0071 sd=0.1437
+SEQ5_12 swing fixed 20 train crosses_earnings=False: N=76 hit=0.526 mean=-0.0057 med=0.0056 sd=0.1634
+SEQ5_12 swing fixed 20 check crosses_earnings=True: N=14 hit=0.357 mean=-0.0271 med=-0.0472 sd=0.1312
+SEQ5_12 swing fixed 20 check crosses_earnings=False: N=46 hit=0.391 mean=-0.0058 med=-0.0136 sd=0.1151
+SEQ5_12 weekly fixed 5 train crosses_earnings=True: N=15 hit=0.600 mean=-0.0138 med=0.0119 sd=0.1178
+SEQ5_12 weekly fixed 5 train crosses_earnings=False: N=90 hit=0.478 mean=0.0006 med=-0.0010 sd=0.0588
+SEQ5_12 weekly fixed 5 check crosses_earnings=True: N=4 hit=0.500 mean=-0.0051 med=-0.0327 sd=0.1032
+SEQ5_12 weekly fixed 5 check crosses_earnings=False: N=67 hit=0.507 mean=-0.0025 med=0.0014 sd=0.0634
+SEQ5_12 leaps fixed 63 train crosses_earnings=True: N=83 hit=0.639 mean=0.0917 med=0.0500 sd=0.2914
+SEQ5_12 leaps fixed 63 train crosses_earnings=False: N=22 hit=0.364 mean=-0.0262 med=-0.0346 sd=0.0860
+SEQ5_12 leaps fixed 63 check crosses_earnings=True: N=35 hit=0.486 mean=0.0428 med=-0.0080 sd=0.3325
+SEQ5_12 leaps fixed 63 check crosses_earnings=False: N=16 hit=0.375 mean=-0.0183 med=-0.0107 sd=0.1158
+ALL days fixed 10 train crosses_earnings=True: N=1910 hit=0.538 mean=0.0763 med=0.0144 sd=0.8270
+ALL days fixed 10 train crosses_earnings=False: N=14811 hit=0.526 mean=0.0076 med=0.0031 sd=0.1003
+ALL days fixed 10 check crosses_earnings=True: N=1119 hit=0.493 mean=0.0130 med=-0.0020 sd=0.1309
+ALL days fixed 10 check crosses_earnings=False: N=8897 hit=0.543 mean=0.0125 med=0.0045 sd=0.0851

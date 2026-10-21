@@ -1,0 +1,216 @@
+{
+ "days": [
+  "2026-10-06.parquet",
+  "2026-10-07.parquet",
+  "2026-10-08.parquet",
+  "2026-10-09.parquet",
+  "2026-10-12.parquet"
+ ],
+ "top20": [
+  "NVDA",
+  "TSLA",
+  "AAPL",
+  "MU",
+  "SPCX",
+  "INTC",
+  "AMZN",
+  "TLT",
+  "META",
+  "EWZ",
+  "PLTR",
+  "AMD",
+  "IBIT",
+  "MSFT",
+  "GOOGL",
+  "MSTR",
+  "HYG",
+  "AVGO",
+  "SOFI",
+  "ORCL"
+ ],
+ "table": [
+  {
+   "root": "SPY",
+   "v": 58755618
+  },
+  {
+   "root": "QQQ",
+   "v": 38712909
+  },
+  {
+   "root": "NVDA",
+   "v": 13676983
+  },
+  {
+   "root": "TSLA",
+   "v": 10065025
+  },
+  {
+   "root": "IWM",
+   "v": 9545870
+  },
+  {
+   "root": "AAPL",
+   "v": 6224396
+  },
+  {
+   "root": "MU",
+   "v": 6160741
+  },
+  {
+   "root": "SPCX",
+   "v": 5767807
+  },
+  {
+   "root": "INTC",
+   "v": 4947322
+  },
+  {
+   "root": "AMZN",
+   "v": 4603940
+  },
+  {
+   "root": "TLT",
+   "v": 4483291
+  },
+  {
+   "root": "META",
+   "v": 3653101
+  },
+  {
+   "root": "EWZ",
+   "v": 3264808
+  },
+  {
+   "root": "PLTR",
+   "v": 3127350
+  },
+  {
+   "root": "AMD",
+   "v": 2994900
+  },
+  {
+   "root": "IBIT",
+   "v": 2865576
+  },
+  {
+   "root": "MSFT",
+   "v": 2746139
+  },
+  {
+   "root": "GOOGL",
+   "v": 2352550
+  },
+  {
+   "root": "MSTR",
+   "v": 2235872
+  },
+  {
+   "root": "HYG",
+   "v": 2181628
+  },
+  {
+   "root": "AVGO",
+   "v": 1995280
+  },
+  {
+   "root": "SOFI",
+   "v": 1819508
+  },
+  {
+   "root": "ORCL",
+   "v": 1779975
+  },
+  {
+   "root": "GME",
+   "v": 1748924
+  },
+  {
+   "root": "SLV",
+   "v": 1713327
+  },
+  {
+   "root": "IREN",
+   "v": 1694286
+  },
+  {
+   "root": "SOXL",
+   "v": 1606888
+  },
+  {
+   "root": "TQQQ",
+   "v": 1569999
+  },
+  {
+   "root": "NFLX",
+   "v": 1512961
+  },
+  {
+   "root": "CRWV",
+   "v": 1450402
+  },
+  {
+   "root": "XLF",
+   "v": 1444870
+  },
+  {
+   "root": "GLD",
+   "v": 1443163
+  },
+  {
+   "root": "SMH",
+   "v": 1308611
+  },
+  {
+   "root": "HOOD",
+   "v": 1275596
+  },
+  {
+   "root": "NBIS",
+   "v": 1230257
+  },
+  {
+   "root": "ASTS",
+   "v": 1207954
+  },
+  {
+   "root": "MRVL",
+   "v": 1190188
+  },
+  {
+   "root": "DRAM",
+   "v": 1081744
+  },
+  {
+   "root": "SMCI",
+   "v": 1000795
+  },
+  {
+   "root": "MARA",
+   "v": 962703
+  }
+ ],
+ "top20_used": [
+  "NVDA",
+  "TSLA",
+  "AAPL",
+  "MU",
+  "INTC",
+  "AMZN",
+  "TLT",
+  "META",
+  "EWZ",
+  "PLTR",
+  "AMD",
+  "IBIT",
+  "MSFT",
+  "GOOGL",
+  "MSTR",
+  "HYG",
+  "AVGO",
+  "SOFI",
+  "ORCL",
+  "GME"
+ ],
+ "note": "SPCX (SpaceX, listed 2026) replaced by GME, the 21st name by option volume"
+}

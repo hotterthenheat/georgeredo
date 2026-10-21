@@ -1,0 +1,21 @@
+SPY 2456
+QQQ 3610
+IWM 2456
+Traceback (most recent call last):
+  File "/home/user/georgeredo/research_notes/Compass engine audit/horizons/02_daily_bars.py", line 27, in <module>
+    print(bars.group_by('symbol').agg(pl.col('date').min(),pl.col('date').max(),pl.len()).sort('symbol'))
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/polars/dataframe/group_by.py", line 375, in agg
+    ._collect_eager(optimizations=QueryOptFlags._eager())
+     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/polars/lazyframe/frame.py", line 1947, in _collect_eager
+    return _eager_engine().collect(
+           ~~~~~~~~~~~~~~~~~~~~~~~^
+        self, optimizations=optimizations, background=False
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/polars/lazyframe/engine.py", line 408, in collect
+    return wrap_df(ldf.collect(self.name, callback))
+                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+polars.exceptions.DuplicateError: column with name 'date' has more than one occurrence
