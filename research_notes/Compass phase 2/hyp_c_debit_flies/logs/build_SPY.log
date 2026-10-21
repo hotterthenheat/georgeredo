@@ -1,0 +1,11 @@
+SPY 0 980 8 24 0s
+SPY 100 980 848 2367 8s
+SPY 200 980 1624 4743 16s
+SPY 300 980 2340 7119 26s
+SPY 400 980 3096 9489 35s
+SPY 500 980 3908 11809 46s
+SPY 600 980 4616 14137 56s
+SPY 700 980 5372 16504 64s
+SPY 800 980 6092 18849 74s
+SPY 900 980 6856 21246 84s
+{"product": "SPY", "sessions": 980, "half_days_dropped": 9, "missing": 0, "entries": 1867, "structures": 6805, "no_structure": 619, "flies": 23142, "legs": 6424, "seconds": 94}

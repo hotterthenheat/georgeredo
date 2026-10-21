@@ -1,0 +1,11 @@
+QQQ 0 980 8 15 0s
+QQQ 100 980 836 2388 9s
+QQQ 200 980 1604 4743 20s
+QQQ 300 980 2360 7110 29s
+QQQ 400 980 3112 9426 42s
+QQQ 500 980 3948 11731 55s
+QQQ 600 980 4728 14062 65s
+QQQ 700 980 5504 16438 76s
+QQQ 800 980 6248 18781 88s
+QQQ 900 980 7040 21169 98s
+{"product": "QQQ", "sessions": 980, "half_days_dropped": 9, "missing": 0, "entries": 1924, "structures": 7140, "no_structure": 512, "flies": 23065, "legs": 7240, "seconds": 105}

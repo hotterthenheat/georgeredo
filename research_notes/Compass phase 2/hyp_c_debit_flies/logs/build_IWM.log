@@ -1,0 +1,8 @@
+IWM 0 621 8 18 0s
+IWM 100 621 752 1299 7s
+IWM 200 621 1504 2553 14s
+IWM 300 621 2272 3957 21s
+IWM 400 621 3040 5231 30s
+IWM 500 621 3796 6617 40s
+IWM 600 621 4560 7955 51s
+{"product": "IWM", "sessions": 621, "half_days_dropped": 6, "missing": 0, "entries": 1190, "structures": 3845, "no_structure": 883, "flies": 8198, "legs": 3082, "seconds": 54}

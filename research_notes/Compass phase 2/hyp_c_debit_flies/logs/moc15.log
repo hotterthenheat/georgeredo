@@ -1,0 +1,31 @@
+SPY 971
+QQQ 971
+IWM 615
+SPXW 1106
+t=930 rows checked against the audit's t5_scores: 3663 max |diff| 0.0 null both 60
+SPY 900 fit n 515 cuts [0.35  0.433 0.51  0.614] n scored 956
+IWM 900 fit n 159 cuts [0.35  0.448 0.508 0.635] n scored 600
+SPXW 900 fit n 647 cuts [0.363 0.439 0.512 0.606] n scored 1091
+SPY 930 fit n 515 cuts [0.352 0.435 0.512 0.627] n scored 956
+QQQ 930 fit n 515 cuts [0.35  0.434 0.512 0.62 ] n scored 956
+SPXW 930 fit n 647 cuts [0.35  0.434 0.516 0.614] n scored 1091
+QQQ 900 fit n 515 cuts [0.359 0.424 0.512 0.615] n scored 956
+IWM 930 fit n 159 cuts [0.376 0.451 0.531 0.617] n scored 600
+shape: (16, 5)
+┌──────┬─────┬────────┬─────┬──────────┐
+│ sym  ┆ t   ┆ period ┆ len ┆ moc_mag  │
+│ ---  ┆ --- ┆ ---    ┆ --- ┆ ---      │
+│ str  ┆ i64 ┆ str    ┆ u32 ┆ f64      │
+╞══════╪═════╪════════╪═════╪══════════╡
+│ IWM  ┆ 900 ┆ fit    ┆ 159 ┆ 0.49499  │
+│ IWM  ┆ 900 ┆ oos    ┆ 441 ┆ 0.487164 │
+│ IWM  ┆ 930 ┆ fit    ┆ 159 ┆ 0.500921 │
+│ IWM  ┆ 930 ┆ oos    ┆ 441 ┆ 0.489382 │
+│ QQQ  ┆ 900 ┆ fit    ┆ 515 ┆ 0.487898 │
+│ …    ┆ …   ┆ …      ┆ …   ┆ …        │
+│ SPXW ┆ 930 ┆ oos    ┆ 444 ┆ 0.494172 │
+│ SPY  ┆ 900 ┆ fit    ┆ 515 ┆ 0.48807  │
+│ SPY  ┆ 900 ┆ oos    ┆ 441 ┆ 0.487697 │
+│ SPY  ┆ 930 ┆ fit    ┆ 515 ┆ 0.490498 │
+│ SPY  ┆ 930 ┆ oos    ┆ 441 ┆ 0.488795 │
+└──────┴─────┴────────┴─────┴──────────┘
