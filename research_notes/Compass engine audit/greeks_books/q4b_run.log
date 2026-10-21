@@ -1,0 +1,107 @@
+
+SPY 2026-10-06  S=779.09  contracts with OI and a quote within 25% of spot: 6460 (0.990 solvable at r=0); next session 2026-10-07
+   net/gross: mine +0.150, UW +0.163; sign agrees: True
+   Macro net GEX (gamma x OI x 100): mine r=0 1,083,922 (calls 4,164,165, puts -3,080,243) | mine r=4.15% 1,638,477 | UW greek-exposure 1,419,262 (calls 5,055,698, puts -3,636,437) | $ per 1%: mine 6,579M, UW 8,615M
+   0DTE(next session): n=  163 net        178,640 ($1,084M/1%) | flip A 774.07 (-64 bp) | call wall 782 (+37 bp) put wall 773 (-78 bp) | king 782 pin 740 | strike-agreement share 0.91
+   Near<=14d         : n= 1515 net      1,228,720 ($7,458M/1%) | flip A 773.47 (-72 bp) | call wall 785 (+76 bp) put wall 767 (-155 bp) | king 785 pin 785 | strike-agreement share 0.74
+   Macro             : n= 6460 net      1,083,922 ($6,579M/1%) | flip A 773.51 (-72 bp) | call wall 785 (+76 bp) put wall 755 (-309 bp) | king 785 pin 700 | strike-agreement share 0.62
+
+QQQ 2026-10-06  S=759.66  contracts with OI and a quote within 25% of spot: 5971 (0.991 solvable at r=0); next session 2026-10-07
+   net/gross: mine +0.195, UW +0.181; sign agrees: True
+   Macro net GEX (gamma x OI x 100): mine r=0 827,770 (calls 2,534,120, puts -1,706,350) | mine r=4.15% 1,076,383 | UW greek-exposure 882,898 (calls 2,884,151, puts -2,001,252) | $ per 1%: mine 4,777M, UW 5,095M
+   0DTE(next session): n=  180 net        181,558 ($1,048M/1%) | flip A 754.48 (-68 bp) | call wall 762 (+31 bp) put wall 750 (-127 bp) | king 762 pin 675 | strike-agreement share 0.92
+   Near<=14d         : n= 1723 net        754,328 ($4,353M/1%) | flip A 753.17 (-85 bp) | call wall 760 (+4 bp) put wall 749 (-140 bp) | king 760 pin 760 | strike-agreement share 0.82
+   Macro             : n= 5971 net        827,770 ($4,777M/1%) | flip A 753.17 (-85 bp) | call wall 760 (+4 bp) put wall 700 (-785 bp) | king 760 pin 700 | strike-agreement share 0.66
+
+IWM 2026-10-06  S=281.34  contracts with OI and a quote within 25% of spot: 2592 (0.987 solvable at r=0); next session 2026-10-07
+   net/gross: mine -0.473, UW -0.333; sign agrees: True
+   Macro net GEX (gamma x OI x 100): mine r=0 -5,841,603 (calls 3,253,635, puts -9,095,237) | mine r=4.15% -4,986,659 | UW greek-exposure -4,062,545 (calls 4,075,182, puts -8,137,727) | $ per 1%: mine -4,624M, UW -3,216M
+   0DTE(next session): n=   49 net         82,923 ($66M/1%) | flip A 281.09 (-9 bp) | call wall 286 (+166 bp) put wall 277 (-154 bp) | king 280 pin 286 | strike-agreement share 0.86
+   Near<=14d         : n=  679 net     -3,284,851 ($-2,600M/1%) | flip A 284.12 (+99 bp) | call wall 289 (+272 bp) put wall 275 (-225 bp) | king 280 pin 275 | strike-agreement share 0.92
+   Macro             : n= 2592 net     -5,841,603 ($-4,624M/1%) | flip A 282.48 (+41 bp) | call wall 300 (+663 bp) put wall 275 (-225 bp) | king 280 pin 270 | strike-agreement share 0.87
+
+SPY 2026-10-07  S=777.22  contracts with OI and a quote within 25% of spot: 6499 (0.982 solvable at r=0); next session 2026-10-08
+   net/gross: mine +0.030, UW -0.064; sign agrees: False
+   Macro net GEX (gamma x OI x 100): mine r=0 235,353 (calls 4,060,157, puts -3,824,804) | mine r=4.15% 817,666 | UW greek-exposure -594,231 (calls 4,312,052, puts -4,906,282) | $ per 1%: mine 1,422M, UW -3,590M
+   0DTE(next session): n=  163 net           -362 ($-2M/1%) | flip A 779.17 (+25 bp) | call wall 781 (+49 bp) put wall 775 (-29 bp) | king 780 pin 770 | strike-agreement share 0.50
+   Near<=14d         : n= 1467 net        506,562 ($3,060M/1%) | flip A 777.38 (+2 bp) | call wall 785 (+100 bp) put wall 767 (-131 bp) | king 785 pin 785 | strike-agreement share 0.61
+   Macro             : n= 6499 net        235,353 ($1,422M/1%) | flip A 779.15 (+25 bp) | call wall 785 (+100 bp) put wall 767 (-131 bp) | king 785 pin 700 | strike-agreement share 0.53
+
+QQQ 2026-10-07  S=757.73  contracts with OI and a quote within 25% of spot: 6017 (0.986 solvable at r=0); next session 2026-10-08
+   net/gross: mine +0.050, UW -0.036; sign agrees: False
+   Macro net GEX (gamma x OI x 100): mine r=0 238,166 (calls 2,519,752, puts -2,281,586) | mine r=4.15% 497,846 | UW greek-exposure -202,825 (calls 2,704,092, puts -2,906,917) | $ per 1%: mine 1,367M, UW -1,165M
+   0DTE(next session): n=  198 net       -194,611 ($-1,117M/1%) | flip A 758.83 (+15 bp) | call wall 765 (+96 bp) put wall 755 (-36 bp) | king 755 pin 755 | strike-agreement share 0.90
+   Near<=14d         : n= 1719 net        212,744 ($1,221M/1%) | flip A 758.4 (+9 bp) | call wall 760 (+30 bp) put wall 755 (-36 bp) | king 760 pin 760 | strike-agreement share 0.61
+   Macro             : n= 6017 net        238,166 ($1,367M/1%) | flip A 758.26 (+7 bp) | call wall 760 (+30 bp) put wall 700 (-762 bp) | king 760 pin 700 | strike-agreement share 0.55
+
+IWM 2026-10-07  S=277.70  contracts with OI and a quote within 25% of spot: 2597 (0.951 solvable at r=0); next session 2026-10-08
+   net/gross: mine -0.589, UW -0.541; sign agrees: True
+   Macro net GEX (gamma x OI x 100): mine r=0 -7,956,128 (calls 2,777,986, puts -10,734,114) | mine r=4.15% -7,165,101 | UW greek-exposure -7,406,945 (calls 3,147,708, puts -10,554,653) | $ per 1%: mine -6,136M, UW -5,712M
+   0DTE(next session): n=   52 net       -114,673 ($-88M/1%) | flip A 280.47 (+100 bp) | call wall 281 (+119 bp) put wall 279 (+47 bp) | king 279 pin 267 | strike-agreement share 0.90
+   Near<=14d         : n=  650 net     -4,832,182 ($-3,726M/1%) | flip A 284.03 (+228 bp) | call wall 289 (+407 bp) put wall 275 (-97 bp) | king 280 pin 275 | strike-agreement share 0.95
+   Macro             : n= 2597 net     -7,956,128 ($-6,136M/1%) | flip A 277.5 (-7 bp) | call wall 300 (+803 bp) put wall 275 (-97 bp) | king 280 pin 270 | strike-agreement share 0.91
+
+SPY 2026-10-08  S=773.93  contracts with OI and a quote within 25% of spot: 6479 (0.975 solvable at r=0); next session 2026-10-09
+   net/gross: mine -0.119, UW -0.074; sign agrees: True
+   Macro net GEX (gamma x OI x 100): mine r=0 -970,599 (calls 3,592,830, puts -4,563,429) | mine r=4.15% -388,132 | UW greek-exposure -701,363 (calls 4,392,883, puts -5,094,246) | $ per 1%: mine -5,814M, UW -4,201M
+   0DTE(next session): n=  178 net       -174,658 ($-1,046M/1%) | flip A 776.8 (+37 bp) | call wall 780 (+78 bp) put wall 767 (-90 bp) | king 775 pin 785 | strike-agreement share 0.59
+   Near<=14d         : n= 1449 net       -481,334 ($-2,883M/1%) | flip A 776.85 (+38 bp) | call wall 780 (+78 bp) put wall 767 (-90 bp) | king 775 pin 785 | strike-agreement share 0.60
+   Macro             : n= 6479 net       -970,599 ($-5,814M/1%) | flip A 776.95 (+39 bp) | call wall 785 (+143 bp) put wall 767 (-90 bp) | king 775 pin 700 | strike-agreement share 0.60
+
+QQQ 2026-10-08  S=747.58  contracts with OI and a quote within 25% of spot: 6038 (0.977 solvable at r=0); next session 2026-10-09
+   net/gross: mine -0.084, UW -0.060; sign agrees: True
+   Macro net GEX (gamma x OI x 100): mine r=0 -418,515 (calls 2,282,225, puts -2,700,740) | mine r=4.15% -161,935 | UW greek-exposure -355,866 (calls 2,777,385, puts -3,133,251) | $ per 1%: mine -2,339M, UW -1,989M
+   0DTE(next session): n=  245 net       -121,493 ($-679M/1%) | flip A 747.39 (-3 bp) | call wall 754 (+86 bp) put wall 750 (+32 bp) | king 750 pin 754 | strike-agreement share 0.64
+   Near<=14d         : n= 1686 net       -171,605 ($-959M/1%) | flip A 747.45 (-2 bp) | call wall 760 (+166 bp) put wall 740 (-101 bp) | king 750 pin 760 | strike-agreement share 0.57
+   Macro             : n= 6038 net       -418,515 ($-2,339M/1%) | flip A 747.47 (-2 bp) | call wall 760 (+166 bp) put wall 700 (-636 bp) | king 750 pin 700 | strike-agreement share 0.58
+
+IWM 2026-10-08  S=277.57  contracts with OI and a quote within 25% of spot: 2572 (0.957 solvable at r=0); next session 2026-10-09
+   net/gross: mine -0.561, UW -0.575; sign agrees: True
+   Macro net GEX (gamma x OI x 100): mine r=0 -7,894,761 (calls 3,089,501, puts -10,984,261) | mine r=4.15% -7,118,934 | UW greek-exposure -8,416,180 (calls 3,109,038, puts -11,525,218) | $ per 1%: mine -6,083M, UW -6,484M
+   0DTE(next session): n=   77 net       -733,565 ($-565M/1%) | flip A 279.98 (+87 bp) | call wall 285 (+268 bp) put wall 279 (+52 bp) | king 279 pin 285 | strike-agreement share 0.87
+   Near<=14d         : n=  633 net     -4,506,916 ($-3,472M/1%) | flip A 282.76 (+187 bp) | call wall 289 (+412 bp) put wall 275 (-93 bp) | king 280 pin 285 | strike-agreement share 0.93
+   Macro             : n= 2572 net     -7,894,761 ($-6,083M/1%) | flip A 277.5 (-2 bp) | call wall 300 (+808 bp) put wall 275 (-93 bp) | king 280 pin 270 | strike-agreement share 0.90
+
+SPY 2026-10-09  S=778.57  contracts with OI and a quote within 25% of spot: 6550 (0.988 solvable at r=0); next session 2026-10-12
+   net/gross: mine +0.045, UW +0.025; sign agrees: True
+   Macro net GEX (gamma x OI x 100): mine r=0 312,067 (calls 3,610,361, puts -3,298,294) | mine r=4.15% 903,985 | UW greek-exposure 235,100 (calls 4,872,427, puts -4,637,327) | $ per 1%: mine 1,892M, UW 1,425M
+   0DTE(next session): n=  172 net        222,789 ($1,350M/1%) | flip A 773.46 (-66 bp) | call wall 780 (+18 bp) put wall 770 (-110 bp) | king 780 pin 729 | strike-agreement share 0.87
+   Near<=14d         : n= 1673 net        493,342 ($2,990M/1%) | flip A 774.29 (-55 bp) | call wall 785 (+83 bp) put wall 765 (-174 bp) | king 780 pin 625 | strike-agreement share 0.63
+   Macro             : n= 6550 net        312,067 ($1,892M/1%) | flip A 774.27 (-55 bp) | call wall 785 (+83 bp) put wall 755 (-303 bp) | king 780 pin 700 | strike-agreement share 0.54
+
+QQQ 2026-10-09  S=751.27  contracts with OI and a quote within 25% of spot: 5923 (0.992 solvable at r=0); next session 2026-10-12
+   net/gross: mine -0.001, UW +0.023; sign agrees: False
+   Macro net GEX (gamma x OI x 100): mine r=0 -6,467 (calls 2,292,639, puts -2,299,107) | mine r=4.15% 273,074 | UW greek-exposure 130,802 (calls 2,927,111, puts -2,796,309) | $ per 1%: mine -37M, UW 738M
+   0DTE(next session): n=  170 net         13,279 ($75M/1%) | flip A 746.29 (-66 bp) | call wall 755 (+50 bp) put wall 742 (-123 bp) | king 755 pin 738 | strike-agreement share 0.54
+   Near<=14d         : n= 1786 net        159,335 ($899M/1%) | flip A 752.89 (+22 bp) | call wall 760 (+116 bp) put wall 740 (-150 bp) | king 750 pin 760 | strike-agreement share 0.58
+   Macro             : n= 5923 net         -6,467 ($-37M/1%) | flip A 752.83 (+21 bp) | call wall 760 (+116 bp) put wall 700 (-682 bp) | king 750 pin 700 | strike-agreement share 0.50
+
+IWM 2026-10-09  S=278.94  contracts with OI and a quote within 25% of spot: 2609 (0.982 solvable at r=0); next session 2026-10-12
+   net/gross: mine -0.467, UW -0.441; sign agrees: True
+   Macro net GEX (gamma x OI x 100): mine r=0 -6,196,491 (calls 3,542,693, puts -9,739,184) | mine r=4.15% -5,314,847 | UW greek-exposure -6,589,065 (calls 4,181,352, puts -10,770,417) | $ per 1%: mine -4,821M, UW -5,127M
+   0DTE(next session): n=   51 net         41,910 ($33M/1%) | flip A 278.34 (-21 bp) | call wall 280 (+38 bp) put wall 275 (-141 bp) | king 280 pin 283 | strike-agreement share 0.64
+   Near<=14d         : n=  727 net     -3,204,396 ($-2,493M/1%) | flip A 282.48 (+127 bp) | call wall 289 (+361 bp) put wall 275 (-141 bp) | king 280 pin 280 | strike-agreement share 0.91
+   Macro             : n= 2609 net     -6,196,491 ($-4,821M/1%) | flip A 277.5 (-52 bp) | call wall 300 (+755 bp) put wall 275 (-141 bp) | king 280 pin 270 | strike-agreement share 0.88
+
+SPY 2026-10-12  S=778.10  contracts with OI and a quote within 25% of spot: 6637 (0.981 solvable at r=0); next session 2026-10-13
+   net/gross: mine +0.000, UW +0.066; sign agrees: True
+   Macro net GEX (gamma x OI x 100): mine r=0 3,119 (calls 3,617,452, puts -3,614,333) | mine r=4.15% 561,508 | UW greek-exposure 569,729 (calls 4,631,571, puts -4,061,842) | $ per 1%: mine 19M, UW 3,449M
+   0DTE(next session): n=  164 net         47,808 ($289M/1%) | flip A 778.44 (+4 bp) | call wall 784 (+76 bp) put wall 774 (-53 bp) | king 778 pin 776 | strike-agreement share 0.68
+   Near<=14d         : n= 1634 net        259,292 ($1,570M/1%) | flip A 774.7 (-44 bp) | call wall 785 (+89 bp) put wall 772 (-78 bp) | king 785 pin 625 | strike-agreement share 0.57
+   Macro             : n= 6637 net          3,119 ($19M/1%) | flip A 774.68 (-44 bp) | call wall 785 (+89 bp) put wall 755 (-297 bp) | king 785 pin 700 | strike-agreement share 0.50
+
+QQQ 2026-10-12  S=746.04  contracts with OI and a quote within 25% of spot: 5993 (0.985 solvable at r=0); next session 2026-10-13
+   net/gross: mine -0.107, UW -0.112; sign agrees: True
+   Macro net GEX (gamma x OI x 100): mine r=0 -514,299 (calls 2,142,687, puts -2,656,986) | mine r=4.15% -235,704 | UW greek-exposure -618,152 (calls 2,460,783, puts -3,078,935) | $ per 1%: mine -2,862M, UW -3,440M
+   0DTE(next session): n=  164 net       -163,900 ($-912M/1%) | flip A 750.98 (+66 bp) | call wall 755 (+120 bp) put wall 750 (+53 bp) | king 750 pin 750 | strike-agreement share 0.96
+   Near<=14d         : n= 1699 net       -201,034 ($-1,119M/1%) | flip A 749.26 (+43 bp) | call wall 760 (+187 bp) put wall 740 (-81 bp) | king 750 pin 760 | strike-agreement share 0.61
+   Macro             : n= 5993 net       -514,299 ($-2,862M/1%) | flip A 749.32 (+44 bp) | call wall 760 (+187 bp) put wall 725 (-282 bp) | king 750 pin 700 | strike-agreement share 0.60
+
+IWM 2026-10-12  S=277.90  contracts with OI and a quote within 25% of spot: 2630 (0.967 solvable at r=0); next session 2026-10-13
+   net/gross: mine -0.498, UW -0.438; sign agrees: True
+   Macro net GEX (gamma x OI x 100): mine r=0 -6,854,593 (calls 3,448,530, puts -10,303,123) | mine r=4.15% -6,079,763 | UW greek-exposure -6,185,677 (calls 3,967,606, puts -10,153,283) | $ per 1%: mine -5,294M, UW -4,777M
+   0DTE(next session): n=   53 net         15,248 ($12M/1%) | flip A 277.9 (-0 bp) | call wall 281 (+112 bp) put wall 277 (-32 bp) | king 281 pin 281 | strike-agreement share 0.58
+   Near<=14d         : n=  698 net     -3,618,009 ($-2,794M/1%) | flip A 281.99 (+147 bp) | call wall 285 (+255 bp) put wall 275 (-104 bp) | king 280 pin 280 | strike-agreement share 0.91
+   Macro             : n= 2630 net     -6,854,593 ($-5,294M/1%) | flip A 281.98 (+147 bp) | call wall 300 (+795 bp) put wall 275 (-104 bp) | king 280 pin 270 | strike-agreement share 0.89
+
+Across 15 name-days: cw 0DTE=Macro 0/15, pw 0DTE=Macro 2/15, cw Near=Macro 9/15, pw Near=Macro 7/15, king 0DTE=Macro 6/15, flip sign 0DTE=Macro 9/15

@@ -1,0 +1,74 @@
+N contracts 26307 snapshots 68 dates 34 DTE values [np.int64(24), np.int64(25), np.int64(31), np.int64(32), np.int64(52), np.int64(53), np.int64(59), np.int64(60)]
+DTE distribution: 15-30d: 9726  31-90d: 16581  (no <=7, 8-14 or >90 DTE snapshots exist on disk)
+contracts with a UW IV and delta: 17332
+
+=== Stage A: greeks from UW implied_volatility; which convention reproduces UW delta/gamma/theta/vega/rho ===
+r=0.0000 q=0.000 tau=days/365          delta: med|err| 0.0015 p90 0.0096 mean err +0.0015 | gamma med rel err +0.001 | vega/100 med|err| 0.0024 | theta/365 med|err| 0.0012 theta/252 0.0382 | rho/100 med|err| 0.0010
+r=0.0415 q=0.000 tau=days/365          delta: med|err| 0.0106 p90 0.0433 mean err +0.0170 | gamma med rel err -0.035 | vega/100 med|err| 0.0158 | theta/365 med|err| 0.0180 theta/252 0.0271 | rho/100 med|err| 0.0056
+r=0.0415 q=0.013 tau=days/365          delta: med|err| 0.0068 p90 0.0316 mean err +0.0120 | gamma med rel err -0.023 | vega/100 med|err| 0.0108 | theta/365 med|err| 0.0112 theta/252 0.0299 | rho/100 med|err| 0.0037
+r=0.0500 q=0.000 tau=days/365          delta: med|err| 0.0129 p90 0.0511 mean err +0.0201 | gamma med rel err -0.044 | vega/100 med|err| 0.0193 | theta/365 med|err| 0.0221 theta/252 0.0257 | rho/100 med|err| 0.0068
+r=0.0525 q=0.000 tau=days/365          delta: med|err| 0.0136 p90 0.0533 mean err +0.0211 | gamma med rel err -0.046 | vega/100 med|err| 0.0203 | theta/365 med|err| 0.0233 theta/252 0.0252 | rho/100 med|err| 0.0072
+r=0.0415 q=0 tau=trading days/252      delta: med|err| 0.0110 p90 0.0432 mean err +0.0170 | gamma med rel err -0.039 | vega/100 med|err| 0.0172 | theta/365 med|err| 0.0179 theta/252 0.0268 | rho/100 med|err| 0.0056
+r=0.0415 q=0 tau=days/365 (same)       delta: med|err| 0.0106 p90 0.0433 mean err +0.0170 | gamma med rel err -0.035 | vega/100 med|err| 0.0158 | theta/365 med|err| 0.0180 theta/252 0.0271 | rho/100 med|err| 0.0056
+
+Best-fit r by snapshot (grid 0..8% step 0.25%, delta RMSE, q=0 | q=1.3%):
+  median best r (q=0): 0.0000  IQR 0.0000..0.0000 ; median best r (q=1.3%): 0.0100 ; median delta RMSE at best (q=0) 0.00599
+   2023-11-20 DTE 25 best r q=0: 0.0050 (rmse 0.00647) | q=1.3%: 0.0175 (rmse 0.00630)
+   2024-02-20 DTE 24 best r q=0: 0.0000 (rmse 0.00566) | q=1.3%: 0.0000 (rmse 0.00308)
+   2024-05-20 DTE 32 best r q=0: 0.0000 (rmse 0.00546) | q=1.3%: 0.0050 (rmse 0.00439)
+   2024-08-19 DTE 32 best r q=0: 0.0000 (rmse 0.00766) | q=1.3%: 0.0000 (rmse 0.00389)
+   2024-11-18 DTE 32 best r q=0: 0.0000 (rmse 0.00361) | q=1.3%: 0.0075 (rmse 0.00307)
+   2025-02-24 DTE 25 best r q=0: 0.0175 (rmse 0.01020) | q=1.3%: 0.0300 (rmse 0.01023)
+   2025-05-19 DTE 32 best r q=0: 0.0000 (rmse 0.00783) | q=1.3%: 0.0000 (rmse 0.00444)
+   2025-08-18 DTE 32 best r q=0: 0.0000 (rmse 0.00420) | q=1.3%: 0.0125 (rmse 0.00431)
+   2025-11-24 DTE 25 best r q=0: 0.0150 (rmse 0.00599) | q=1.3%: 0.0275 (rmse 0.00613)
+   2026-02-23 DTE 25 best r q=0: 0.0075 (rmse 0.00588) | q=1.3%: 0.0225 (rmse 0.00602)
+   2026-05-18 DTE 31 best r q=0: 0.0000 (rmse 0.00738) | q=1.3%: 0.0000 (rmse 0.00562)
+   2026-08-24 DTE 25 best r q=0: 0.0000 (rmse 0.02509) | q=1.3%: 0.0000 (rmse 0.02450)
+
+Same-strike put/call checks (UW greeks):
+  pairs 5626 | delta_call - delta_put: median 0.9737 (e^-q*tau would be 0.9989 at q=1.3%, 1.0000 at q=0)
+  K/S-1 in (-0.05,-0.02]: n 855  put gamma / call gamma median 1.145  IV_put-IV_call median -0.0411
+  K/S-1 in (-0.02,+0.02]: n 1394  put gamma / call gamma median 1.245  IV_put-IV_call median -0.0308
+  K/S-1 in (+0.02,+0.05]: n 649  put gamma / call gamma median 1.058  IV_put-IV_call median -0.0330
+
+=== Stage B: implied vol by bisection [0.01,3.00] x60 on the NBBO mid, tau=days/365 ===
+spec skip rule (mid - intrinsic <= 0.01): skipped share of quoted contracts 0.062 (n=1566 of 25276)
+
+By right x moneyness x DTE: n | share unsolvable under each convention | median |IV - IV_uw| (vol pts) for solvable | median |delta(IV) - delta_uw|
+CALL 15-30d K<S-3%     n= 1118 | r=0,q=0: unsolv 0.000 ivErr  0.95 dErr 0.0055 | r=4.15%,q=0: unsolv 0.020 ivErr  4.95 dErr 0.0368 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  3.11 dErr 0.0202
+CALL 15-30d S-3..-1%   n=  256 | r=0,q=0: unsolv 0.000 ivErr  0.31 dErr 0.0038 | r=4.15%,q=0: unsolv 0.000 ivErr  1.87 dErr 0.0372 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  1.19 dErr 0.0231
+CALL 15-30d ATM +-1%   n=  268 | r=0,q=0: unsolv 0.000 ivErr  0.20 dErr 0.0032 | r=4.15%,q=0: unsolv 0.000 ivErr  1.25 dErr 0.0269 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  0.82 dErr 0.0174
+CALL 15-30d S+1..3%    n=  263 | r=0,q=0: unsolv 0.000 ivErr  0.14 dErr 0.0019 | r=4.15%,q=0: unsolv 0.000 ivErr  0.86 dErr 0.0134 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  0.56 dErr 0.0085
+CALL 15-30d K>S+3%     n=  881 | r=0,q=0: unsolv 0.000 ivErr  0.20 dErr 0.0003 | r=4.15%,q=0: unsolv 0.000 ivErr  0.52 dErr 0.0005 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  0.38 dErr 0.0004
+CALL 31-90d K<S-3%     n= 1761 | r=0,q=0: unsolv 0.000 ivErr  0.59 dErr 0.0042 | r=4.15%,q=0: unsolv 0.081 ivErr  5.40 dErr 0.0558 | r=4.15%,q=1.3%: unsolv 0.007 ivErr  3.31 dErr 0.0322
+CALL 31-90d S-3..-1%   n=  394 | r=0,q=0: unsolv 0.000 ivErr  0.27 dErr 0.0040 | r=4.15%,q=0: unsolv 0.000 ivErr  2.56 dErr 0.0547 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  1.65 dErr 0.0353
+CALL 31-90d ATM +-1%   n=  451 | r=0,q=0: unsolv 0.000 ivErr  0.20 dErr 0.0033 | r=4.15%,q=0: unsolv 0.000 ivErr  1.88 dErr 0.0430 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  1.24 dErr 0.0280
+CALL 31-90d S+1..3%    n=  436 | r=0,q=0: unsolv 0.000 ivErr  0.15 dErr 0.0021 | r=4.15%,q=0: unsolv 0.000 ivErr  1.42 dErr 0.0283 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  0.94 dErr 0.0184
+CALL 31-90d K>S+3%     n= 1579 | r=0,q=0: unsolv 0.000 ivErr  0.13 dErr 0.0002 | r=4.15%,q=0: unsolv 0.000 ivErr  0.77 dErr 0.0022 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  0.54 dErr 0.0014
+PUT 15-30d K<S-3%     n= 2433 | r=0,q=0: unsolv 0.000 ivErr  0.23 dErr 0.0001 | r=4.15%,q=0: unsolv 0.000 ivErr  0.51 dErr 0.0003 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  0.37 dErr 0.0002
+PUT 15-30d S-3..-1%   n=  267 | r=0,q=0: unsolv 0.000 ivErr  0.19 dErr 0.0019 | r=4.15%,q=0: unsolv 0.000 ivErr  0.85 dErr 0.0118 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  0.56 dErr 0.0081
+PUT 15-30d ATM +-1%   n=  268 | r=0,q=0: unsolv 0.000 ivErr  0.24 dErr 0.0044 | r=4.15%,q=0: unsolv 0.000 ivErr  1.19 dErr 0.0272 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  0.80 dErr 0.0191
+PUT 15-30d S+1..3%    n=  239 | r=0,q=0: unsolv 0.004 ivErr  0.56 dErr 0.0114 | r=4.15%,q=0: unsolv 0.000 ivErr  2.08 dErr 0.0637 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  1.42 dErr 0.0467
+PUT 15-30d K>S+3%     n=  353 | r=0,q=0: unsolv 0.385 ivErr  1.82 dErr 0.0198 | r=4.15%,q=0: unsolv 0.000 ivErr  5.77 dErr 0.0953 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  4.28 dErr 0.0728
+PUT 31-90d K<S-3%     n= 4313 | r=0,q=0: unsolv 0.000 ivErr  0.17 dErr 0.0001 | r=4.15%,q=0: unsolv 0.000 ivErr  0.72 dErr 0.0007 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  0.51 dErr 0.0005
+PUT 31-90d S-3..-1%   n=  439 | r=0,q=0: unsolv 0.000 ivErr  0.14 dErr 0.0023 | r=4.15%,q=0: unsolv 0.000 ivErr  1.37 dErr 0.0240 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  0.95 dErr 0.0177
+PUT 31-90d ATM +-1%   n=  451 | r=0,q=0: unsolv 0.000 ivErr  0.19 dErr 0.0044 | r=4.15%,q=0: unsolv 0.000 ivErr  1.77 dErr 0.0462 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  1.24 dErr 0.0343
+PUT 31-90d S+1..3%    n=  377 | r=0,q=0: unsolv 0.000 ivErr  0.35 dErr 0.0072 | r=4.15%,q=0: unsolv 0.000 ivErr  2.54 dErr 0.0848 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  1.79 dErr 0.0650
+PUT 31-90d K>S+3%     n=  495 | r=0,q=0: unsolv 0.273 ivErr  0.95 dErr 0.0149 | r=4.15%,q=0: unsolv 0.000 ivErr  5.52 dErr 0.1421 | r=4.15%,q=1.3%: unsolv 0.000 ivErr  4.16 dErr 0.1137
+
+--- The claim: ITM calls more than 3% from spot (K < 0.97 S) ---
+r=0,q=0          n=2879  mid<=floor (no vol): 0.000  unsolvable by bisection: 0.000  IV err: med 0.67 vol pts, p90 4.16  delta err: med 0.0046 p90 0.0124  within 0.5% rel delta: 0.469
+r=4.15%,q=0      n=2879  mid<=floor (no vol): 0.057  unsolvable by bisection: 0.057  IV err: med 5.25 vol pts, p90 13.06  delta err: med 0.0492 p90 0.0756  within 0.5% rel delta: 0.020
+r=4.15%,q=1.3%   n=2879  mid<=floor (no vol): 0.004  unsolvable by bisection: 0.004  IV err: med 3.24 vol pts, p90 7.46  delta err: med 0.0276 p90 0.0497  within 0.5% rel delta: 0.089
+--- Mirror: ITM puts more than 3% from spot (K > 1.03 S) ---
+r=0,q=0          n=848  mid<=floor: 0.320  unsolvable: 0.320  IV err med 1.32 p90 5.43  delta err med 0.0167 p90 0.0414
+r=4.15%,q=0      n=848  mid<=floor: 0.000  unsolvable: 0.000  IV err med 5.64 p90 12.07  delta err med 0.1208 p90 0.1784
+r=4.15%,q=1.3%   n=848  mid<=floor: 0.000  unsolvable: 0.000  IV err med 4.20 p90 10.13  delta err med 0.0947 p90 0.1457
+
+--- Does the ITM-call distortion matter for a book? share of OI and of |gamma x OI| in K<0.97S calls ---
+  K<S-3%     share of OI 0.729  share of |gamma*OI| 0.406  (calls only: OI 0.063, |gamma*OI| 0.067)
+  S-3..-1%   share of OI 0.069  share of |gamma*OI| 0.181  (calls only: OI 0.024, |gamma*OI| 0.056)
+  ATM +-1%   share of OI 0.057  share of |gamma*OI| 0.185  (calls only: OI 0.030, |gamma*OI| 0.093)
+  S+1..3%    share of OI 0.043  share of |gamma*OI| 0.127  (calls only: OI 0.031, |gamma*OI| 0.091)
+  K>S+3%     share of OI 0.102  share of |gamma*OI| 0.101  (calls only: OI 0.094, |gamma*OI| 0.089)

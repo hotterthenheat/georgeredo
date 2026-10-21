@@ -1,0 +1,1 @@
+No output: the UW token on disk answered HTTP 401 to the stock-state call on 2026-10-21 (and once more through the earlier fetch script). No live data was read.

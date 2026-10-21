@@ -1,0 +1,22 @@
+snapshots 67 dates 34
+
+=== Flip: Method A vs Method B ===
+Method A found a crossing: 67/67; within 3% of spot: 66; Method B found a zero on the +-4% grid: 56/67
+both exist: 56; |B-A| median $11.37 (188 bp), p90 $22.88 (351 bp); share |B-A| > 1 strike spacing: 0.95; share > 0.5%: 0.91
+|F_A - S| in bps: median 33, p25 11, p75 67; same-sign of (F_A-S) and (F_B-S): 0.57
+strike spacing near spot: $1.00 = 18 bp of spot (range 13-97 bp); 1 bp of SPY = $0.059
+Distance tiers of |F_A - S| (bps): <= 1: 0.01, <= 5: 0.15, <= 12: 0.28, <= 25: 0.42, > 25: 0.58  (n=67)
+   a snapshot is end-of-day; intraday the flip moves with spot, so the tier a trader sees is the distance at the moment. 1 and 5 bp are 1/20 and 1/4 of one $1 strike step here.
+
+=== Walls, king, pin: 25-DTE vs 60-DTE expiry on the same date (both are "Macro" by the spec; how much the wall depends on the expiry picked) ===
+dates with both expiries: 33; same call wall 8/33, same put wall 4/33, same king 6/33, same pin 3/33; median |call wall diff| $5, |put wall diff| $10
+net GEX_book sign (spec sign, single expiry): positive in 0.10 of snapshots; king == call wall in 0.13, king == put wall in 0.39, pin == king in 0.13
+   distances from spot (bps): call wall median +277, put wall -367, king -123, pin -1837
+
+=== Next-session touch test (34 dates; the walls of the 25-DTE snapshot and of the 60-DTE snapshot counted separately; small N) ===
+A wall is "touched" if the next session's range reaches it; the control is the strike at the same distance on the OTHER side of spot (mirror) and the walls shifted by +-1 strike.
+call wall: n=67 touched next session 0.03 | mirror strike 0.10 | +-1 strike 0.04 | median |level-S| 16.3 $
+put wall : n=67 touched next session 0.04 | mirror strike 0.04 | +-1 strike 0.03 | median |level-S| 22.0 $
+king     : n=67 touched next session 0.10 | mirror strike 0.10 | +-1 strike 0.10 | median |level-S| 11.9 $
+pin      : n=67 touched next session 0.00 | mirror strike 0.03 | +-1 strike 0.00 | median |level-S| 102.9 $
+of walls touched next session, closed back on the approach side ("held"): 0.80 (n=5); a random level touched inside the day's range closes on the approach side by chance roughly half the time

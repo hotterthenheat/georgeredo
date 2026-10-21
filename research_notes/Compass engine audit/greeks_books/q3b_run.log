@@ -1,0 +1,17 @@
+
+SPY: n=231 (split 2026-04-17)
+  H1: log rv_next ~ log trail_rv + GEX_z: b(trail) +0.657 (t +2.92), b(GEX_z) -0.0839 (t -3.67) [n=110] | rv_next/trail: top GEX_z tercile 0.876 vs bottom 1.126 | ac5 ~ trail + GEX_z: b(GEX_z) -0.0222 (t -1.98)
+  H2: log rv_next ~ log trail_rv + GEX_z: b(trail) +0.546 (t +3.53), b(GEX_z) -0.1037 (t -4.18) [n=121] | rv_next/trail: top GEX_z tercile 0.850 vs bottom 1.163 | ac5 ~ trail + GEX_z: b(GEX_z) -0.0163 (t -1.57)
+  ALL: log rv_next ~ log trail_rv + GEX_z: b(trail) +0.689 (t +6.24), b(GEX_z) -0.0960 (t -5.90) [n=231] | rv_next/trail: top GEX_z tercile 0.849 vs bottom 1.171 | ac5 ~ trail + GEX_z: b(GEX_z) -0.0214 (t -2.65)
+
+QQQ: n=235 (split 2026-04-15)
+  H1: log rv_next ~ log trail_rv + GEX_z: b(trail) +0.510 (t +2.39), b(GEX_z) -0.0955 (t -3.87) [n=112] | rv_next/trail: top GEX_z tercile 0.923 vs bottom 1.194 | ac5 ~ trail + GEX_z: b(GEX_z) -0.0309 (t -2.45)
+  H2: log rv_next ~ log trail_rv + GEX_z: b(trail) +0.690 (t +4.25), b(GEX_z) -0.0317 (t -1.76) [n=123] | rv_next/trail: top GEX_z tercile 0.922 vs bottom 1.092 | ac5 ~ trail + GEX_z: b(GEX_z) -0.0054 (t -0.69)
+  ALL: log rv_next ~ log trail_rv + GEX_z: b(trail) +0.594 (t +4.42), b(GEX_z) -0.0518 (t -2.85) [n=235] | rv_next/trail: top GEX_z tercile 0.913 vs bottom 1.131 | ac5 ~ trail + GEX_z: b(GEX_z) -0.0146 (t -1.80)
+
+IWM: n=235 (split 2026-04-15)
+  H1: log rv_next ~ log trail_rv + GEX_z: b(trail) +0.767 (t +3.79), b(GEX_z) -0.0878 (t -3.46) [n=112] | rv_next/trail: top GEX_z tercile 0.893 vs bottom 1.149 | ac5 ~ trail + GEX_z: b(GEX_z) -0.0075 (t -0.85)
+  H2: log rv_next ~ log trail_rv + GEX_z: b(trail) +0.824 (t +5.13), b(GEX_z) -0.0840 (t -2.45) [n=123] | rv_next/trail: top GEX_z tercile 0.864 vs bottom 1.036 | ac5 ~ trail + GEX_z: b(GEX_z) -0.0075 (t -0.47)
+  ALL: log rv_next ~ log trail_rv + GEX_z: b(trail) +0.893 (t +8.92), b(GEX_z) -0.0879 (t -4.11) [n=235] | rv_next/trail: top GEX_z tercile 0.891 vs bottom 1.091 | ac5 ~ trail + GEX_z: b(GEX_z) -0.0089 (t -0.93)
+
+Reading: b(GEX_z) is the change in log next-session realized vol per unit of GEX_z after the trailing-vol control; negative with |t|>2 in both halves would support "positive gamma dampens".
