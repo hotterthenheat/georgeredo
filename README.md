@@ -35,3 +35,14 @@
 ## Compass engine audit (2026-10-21)
 
 The owner's 16-module Compass specification audited under its own guardrails (no invented weights, friction-adjusted, picked on 2022–2024 and read on 2025–2026). Six groups of tests on the data on disk, one report: `reports/Compass engine audit.md`, with every number's script under `research_notes/Compass engine audit/`. No directional rule survives after fees; what holds is the 15:58 flat, the −32% backstop, a breakeven lock at +0% with a target on, a trailed remainder, the r,q pricer read off put-call parity, Method A flips with three-book slicing, a net/gross confidence in place of the sign gate, the MOC magnitude as a volatility gauge, and an ATR > 1.5 block on counter-trend fades.
+
+## Compass core specification v2 and the static checks (2026-10-21)
+
+The audit's verdicts executed as the owner's Phase 2 directive: `docs/compass-core-spec-v2.md` is the locked
+specification, module by module (1–16), every rule tagged KEEP / CHANGED / DROPPED / PENDING with its evidence line
+and its code-ready form (the 4-decimal load rule, the sweep detector, the 0DTE exit state machine, the MOC
+normalization, the forward-parity pricer, the net/gross confidence, the multi-DTE backstop, the drawdown governor
+as named inputs), the horizons matrix and the blockers. `docs/compass-static-checks/` holds the module 15–16
+checks — `check_cents.py`, `check_dead_code.py`, `check_helix_isolation.py`, Python 3, a code root as the argument —
+and `RESULTS.md`, their demonstration run on the terminal's source (the bot's code is not in any repository here;
+its root is passed when it exists).
