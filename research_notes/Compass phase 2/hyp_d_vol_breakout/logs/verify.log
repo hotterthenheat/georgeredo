@@ -1,0 +1,52 @@
+ 1 SPY  2026-04-29 m=290 dir   h30    K=710          debit=1.74 exit_m=320 net=  -15.30 t2=0 -> OK
+ 2 SPY  2026-08-20 m=270 dir   h30    K=764          debit=0.44 exit_m=300 net=  +43.70 t2=1 -> OK
+ 3 SPY  2026-09-01 m=185 sg10  ri     K=765,758      debit=0.26 exit_m=186 net=   -7.60 t2=0 -> OK
+ 4 SPY  2024-03-28 m=305 dir   trail  K=523          debit=0.40 exit_m=327 net=  -15.30 t2=0 -> OK
+ 5 SPY  2024-01-12 m=135 dir   h30    K=475          debit=0.56 exit_m=165 net=  -10.30 t2=0 -> OK
+ 6 SPY  2023-02-15 m=325 str   settle K=413,413      debit=1.12 exit_m=390 net=  -14.30 t2=0 -> OK
+ 7 SPY  2025-04-17 m= 65 dir   h60    K=525          debit=2.54 exit_m=125 net= -133.30 t2=0 -> OK
+ 8 SPY  2024-04-24 m=105 dir   h30    K=504          debit=1.05 exit_m=135 net=  +22.70 t2=0 -> OK
+ 9 SPY  2026-07-31 m=115 sg15  ri     K=745,736      debit=0.63 exit_m=116 net=   -5.60 t2=1 -> OK
+10 SPY  2023-06-29 m=160 str   h30    K=438,438      debit=1.34 exit_m=190 net=  -15.60 t2=0 -> OK
+11 SPY  2024-12-05 m=270 dir   h60    K=607          debit=0.29 exit_m=330 net=   -6.30 t2=0 -> OK
+12 SPY  2025-03-20 m= 10 sg15  trail  K=570,558      debit=0.91 exit_m=121 net=   +0.40 t2=1 -> OK
+13 SPY  2026-09-03 m=150 sg15  h30    K=776,770      debit=0.38 exit_m=180 net=  -12.60 t2=1 -> OK
+14 QQQ  2023-02-01 m=165 sg15  ri     K=300,287      debit=0.89 exit_m=314 net=  -11.60 t2=0 -> OK
+15 QQQ  2023-08-31 m=225 str   ri     K=378,378      debit=1.48 exit_m=226 net=   -3.60 t2=0 -> OK
+16 QQQ  2023-08-31 m=180 sg20  ri     K=380,376      debit=0.43 exit_m=197 net=   +2.40 t2=0 -> OK
+17 QQQ  2022-12-27 m=210 str   ri     K=264,264      debit=1.52 exit_m=211 net=   -3.60 t2=0 -> OK
+18 QQQ  2024-06-12 m= 30 str   h30    K=474,474      debit=3.97 exit_m=60 net=   +7.40 t2=1 -> OK
+19 QQQ  2025-08-29 m=205 dir   trail  K=571          debit=0.80 exit_m=216 net=  -41.30 t2=1 -> OK
+20 QQQ  2025-12-26 m=175 sg20  ri     K=625,622      debit=0.27 exit_m=176 net=   -5.60 t2=0 -> OK
+21 QQQ  2024-05-02 m= 80 str   ri     K=423,423      debit=3.50 exit_m=81 net=   -4.60 t2=0 -> OK
+22 QQQ  2025-05-14 m=345 sg15  settle K=520,516      debit=0.28 exit_m=390 net=  -29.30 t2=0 -> OK
+23 QQQ  2024-09-11 m=155 sg10  h60    K=464,453      debit=0.33 exit_m=215 net=  -10.60 t2=0 -> OK
+24 QQQ  2026-04-29 m= 60 str   settle K=660,660      debit=6.46 exit_m=390 net= -486.30 t2=0 -> OK
+25 QQQ  2026-08-24 m=255 dir   h30    K=706          debit=0.48 exit_m=285 net=  -39.30 t2=1 -> OK
+26 QQQ  2025-10-21 m=170 sg10  h30    K=615,608      debit=0.25 exit_m=200 net=   -8.60 t2=0 -> OK
+27 IWM  2025-04-21 m=185 str   h30    K=183,183      debit=1.42 exit_m=215 net=  +27.40 t2=1 -> OK
+28 IWM  2025-01-31 m= 90 str   h60    K=229,229      debit=1.18 exit_m=150 net=  -16.60 t2=0 -> OK
+29 IWM  2024-10-30 m=195 str   trail  K=223,223      debit=0.71 exit_m=390 net=  +78.70 t2=0 -> OK
+30 IWM  2024-05-01 m=150 sg15  trail  K=199,192      debit=0.49 exit_m=347 net=  +12.05 t2=0 -> OK
+31 IWM  2024-07-29 m=105 str   ri     K=222,222      debit=1.80 exit_m=106 net=   -5.60 t2=0 -> OK
+32 IWM  2024-10-04 m=255 dir   h60    K=220          debit=0.10 exit_m=315 net=   -9.30 t2=1 -> OK
+33 IWM  2024-12-18 m=135 sg20  settle K=235,229      debit=0.64 exit_m=390 net= +742.59 t2=0 -> OK
+34 IWM  2025-06-13 m=160 sg10  trail  K=213,209      debit=0.11 exit_m=263 net=   -4.95 t2=0 -> OK
+35 IWM  2024-12-31 m=215 sg15  h60    K=223,220      debit=0.33 exit_m=275 net=   -0.60 t2=1 -> OK
+36 IWM  2026-08-21 m=105 sg10  settle K=301,297      debit=0.11 exit_m=390 net=  -12.30 t2=1 -> OK
+37 IWM  2026-03-18 m=165 str   trail  K=248,248      debit=2.40 exit_m=337 net= -129.60 t2=0 -> OK
+38 IWM  2025-03-11 m= 15 sg15  trail  K=206,198      debit=0.49 exit_m=98 net=  -13.60 t2=1 -> OK
+39 SPXW 2024-04-08 m= 75 sg20  ri     K=5235,5195    debit=4.15 exit_m=81 net=  -42.60 t2=0 -> OK
+40 SPXW 2026-03-25 m= 20 sg15  ri     K=6660,6540    debit=8.90 exit_m=21 net= +137.40 t2=0 -> OK
+41 SPXW 2022-11-11 m=175 sg10  ri     K=4005,3930    debit=2.65 exit_m=221 net=  -62.60 t2=0 -> OK
+42 SPXW 2024-01-19 m=295 sg10  h60    K=4855,4815    debit=1.65 exit_m=355 net= -142.60 t2=0 -> OK
+43 SPXW 2026-07-09 m=115 dir   trail  K=7530         debit=7.50 exit_m=326 net=  +68.70 t2=0 -> OK
+44 SPXW 2023-12-07 m= 20 sg15  settle K=4585,4545    debit=3.15 exit_m=390 net= -316.30 t2=1 -> OK
+45 SPXW 2024-05-08 m=170 str   ri     K=5185,5185    debit=12.60 exit_m=172 net=  -32.60 t2=0 -> OK
+46 SPXW 2022-10-20 m=290 sg15  h60    K=3685,3640    debit=3.05 exit_m=350 net= -227.60 t2=0 -> OK
+47 SPXW 2023-08-31 m=245 str   trail  K=4520,4520    debit=11.30 exit_m=361 net= -582.60 t2=0 -> OK
+48 SPXW 2025-02-07 m=145 sg15  ri     K=6070,5995    debit=5.90 exit_m=147 net=  -42.60 t2=0 -> OK
+49 SPXW 2023-01-18 m= 35 sg10  h60    K=4040,3975    debit=2.80 exit_m=95 net= +292.40 t2=1 -> OK
+50 SPXW 2023-05-18 m=270 sg20  trail  K=4175,4150    debit=3.05 exit_m=390 net=+2011.70 t2=1 -> OK
+
+50 trades re-derived with plain-loop code, 0 with a difference

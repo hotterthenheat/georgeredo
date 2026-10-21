@@ -1,0 +1,20 @@
+SPY 100 of 490 55s
+SPY 200 of 490 110s
+SPY 300 of 490 171s
+SPY 400 of 490 235s
+SPY sessions taken (every 2 th) 490 kept 486 rows 34506 cols 176 293s
+QQQ 100 of 490 58s
+QQQ 200 of 490 114s
+QQQ 300 of 490 170s
+QQQ 400 of 490 227s
+QQQ sessions taken (every 2 th) 490 kept 486 rows 34506 cols 176 283s
+IWM 100 of 311 53s
+IWM 200 of 311 104s
+IWM 300 of 311 152s
+IWM sessions taken (every 2 th) 311 kept 308 rows 21868 cols 176 158s
+SPXW 100 of 553 62s
+SPXW 200 of 553 123s
+SPXW 300 of 553 188s
+SPXW 400 of 553 254s
+SPXW 500 of 553 324s
+SPXW sessions taken (every 2 th) 553 kept 549 rows 38979 cols 176 365s

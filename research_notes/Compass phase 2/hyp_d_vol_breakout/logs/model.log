@@ -1,0 +1,56 @@
+rows 129859 [{'period': 'cut', 'len': 17679}, {'period': 'fit', 'len': 49487}, {'period': 'oos', 'len': 62693}]
+
+==== target t1: n fit 49487 cut 17679 oos 62693; base rate fit 0.524 cut 0.525 oos 0.510
+   {'target': 't1', 'model': 'full_gbm', 'auc_fit_insample': 0.799, 'auc_fit_oof': 0.673, 'auc_cut': 0.682, 'auc_oos': 0.713}
+   {'target': 't1', 'model': 'full_lr', 'auc_fit_insample': 0.689, 'auc_fit_oof': 0.684, 'auc_cut': 0.697, 'auc_oos': 0.734}
+   standardised coefficients: implied30 +0.403, straddle_rel -0.319, m -0.255, rv_session +0.180, vix +0.180, vix_chg_prev -0.149, day_move_atr -0.140, rng5 +0.124, rng30 +0.124, rng1 +0.114, day_range_atr +0.113, vix_chg_open +0.107
+   {'target': 't1', 'model': 'base_gbm', 'auc_fit_insample': 0.692, 'auc_fit_oof': 0.653, 'auc_cut': 0.698, 'auc_oos': 0.712}
+   lift fit_oof {'target': 't1', 'period': 'fit_oof', 'n_rows': 49487, 'base_rate': 0.524, 'n_d10_full': 4949, 'rate_d10_full': 0.761, 'rate_d10_lr': 0.774, 'rate_d10_base': 0.721, 'rate_tod_matched': 0.58, 'overlap_full_base': 0.444, 'rate_full_d10_not_in_base_d10': 0.744, 'rate_base_d10_not_in_full_d10': 0.673, 'mv30_d10_full': 28.724, 'mv30_d10_base': 26.207, 'mv30_all': 14.96, 'lift_full_over_base': 0.04, 'lift_full_over_tod': 0.181}
+     D10 by half hour: 0930:0.22 1000:0.17 1030:0.11 1100:0.07 1130:0.04 1200:0.03 1230:0.04 1300:0.05 1330:0.06 1400:0.07 1430:0.07 1500:0.07
+   lift cut {'target': 't1', 'period': 'cut', 'n_rows': 17679, 'base_rate': 0.525, 'n_d10_full': 1768, 'rate_d10_full': 0.774, 'rate_d10_lr': 0.803, 'rate_d10_base': 0.792, 'rate_tod_matched': 0.616, 'overlap_full_base': 0.495, 'rate_full_d10_not_in_base_d10': 0.728, 'rate_base_d10_not_in_full_d10': 0.765, 'mv30_d10_full': 30.492, 'mv30_d10_base': 32.309, 'mv30_all': 15.564, 'lift_full_over_base': -0.019, 'lift_full_over_tod': 0.157}
+     D10 by half hour: 0930:0.19 1000:0.19 1030:0.13 1100:0.06 1130:0.05 1200:0.04 1230:0.05 1300:0.06 1330:0.06 1400:0.06 1430:0.06 1500:0.06
+   lift oos {'target': 't1', 'period': 'oos', 'n_rows': 62693, 'base_rate': 0.51, 'n_d10_full': 6636, 'rate_d10_full': 0.804, 'rate_d10_lr': 0.803, 'rate_d10_base': 0.777, 'rate_tod_matched': 0.591, 'overlap_full_base': 0.533, 'rate_full_d10_not_in_base_d10': 0.788, 'rate_base_d10_not_in_full_d10': 0.728, 'mv30_d10_full': 37.907, 'mv30_d10_base': 32.469, 'mv30_all': 16.144, 'lift_full_over_base': 0.028, 'lift_full_over_tod': 0.214}
+     D10 by half hour: 0930:0.20 1000:0.16 1030:0.11 1100:0.08 1130:0.05 1200:0.04 1230:0.06 1300:0.06 1330:0.06 1400:0.06 1430:0.05 1500:0.06
+
+==== target t2: n fit 49476 cut 17679 oos 62676; base rate fit 0.326 cut 0.364 oos 0.362
+   {'target': 't2', 'model': 'full_gbm', 'auc_fit_insample': 0.81, 'auc_fit_oof': 0.613, 'auc_cut': 0.588, 'auc_oos': 0.609}
+   {'target': 't2', 'model': 'full_lr', 'auc_fit_insample': 0.633, 'auc_fit_oof': 0.621, 'auc_cut': 0.64, 'auc_oos': 0.647}
+   standardised coefficients: straddle_rel -0.406, m -0.353, rng30 +0.181, rv_session +0.155, vix_chg_open +0.137, rng5 +0.134, or_pos +0.130, aret30 -0.122, vix_chg_prev -0.116, rng15 +0.104, vix_chg30 -0.098, implied30 -0.097
+   {'target': 't2', 'model': 'base_gbm', 'auc_fit_insample': 0.64, 'auc_fit_oof': 0.575, 'auc_cut': 0.601, 'auc_oos': 0.594}
+   lift fit_oof {'target': 't2', 'period': 'fit_oof', 'n_rows': 49476, 'base_rate': 0.326, 'n_d10_full': 4948, 'rate_d10_full': 0.494, 'rate_d10_lr': 0.511, 'rate_d10_base': 0.461, 'rate_tod_matched': 0.405, 'overlap_full_base': 0.358, 'rate_full_d10_not_in_base_d10': 0.463, 'rate_base_d10_not_in_full_d10': 0.412, 'mv30_d10_full': 22.136, 'mv30_d10_base': 19.528, 'mv30_all': 14.957, 'lift_full_over_base': 0.033, 'lift_full_over_tod': 0.089}
+     D10 by half hour: 0930:0.27 1000:0.23 1030:0.15 1100:0.08 1130:0.03 1200:0.03 1230:0.04 1300:0.04 1330:0.05 1400:0.04 1430:0.03 1500:0.01
+   lift cut {'target': 't2', 'period': 'cut', 'n_rows': 17679, 'base_rate': 0.364, 'n_d10_full': 1768, 'rate_d10_full': 0.484, 'rate_d10_lr': 0.584, 'rate_d10_base': 0.559, 'rate_tod_matched': 0.474, 'overlap_full_base': 0.406, 'rate_full_d10_not_in_base_d10': 0.42, 'rate_base_d10_not_in_full_d10': 0.547, 'mv30_d10_full': 22.131, 'mv30_d10_base': 26.705, 'mv30_all': 15.564, 'lift_full_over_base': -0.075, 'lift_full_over_tod': 0.01}
+     D10 by half hour: 0930:0.29 1000:0.24 1030:0.13 1100:0.06 1130:0.02 1200:0.02 1230:0.03 1300:0.04 1330:0.04 1400:0.03 1430:0.04 1500:0.05
+   lift oos {'target': 't2', 'period': 'oos', 'n_rows': 62676, 'base_rate': 0.362, 'n_d10_full': 6102, 'rate_d10_full': 0.537, 'rate_d10_lr': 0.556, 'rate_d10_base': 0.539, 'rate_tod_matched': 0.477, 'overlap_full_base': 0.421, 'rate_full_d10_not_in_base_d10': 0.496, 'rate_base_d10_not_in_full_d10': 0.497, 'mv30_d10_full': 25.335, 'mv30_d10_base': 25.247, 'mv30_all': 16.111, 'lift_full_over_base': -0.002, 'lift_full_over_tod': 0.06}
+     D10 by half hour: 0930:0.32 1000:0.25 1030:0.14 1100:0.05 1130:0.02 1200:0.02 1230:0.03 1300:0.04 1330:0.04 1400:0.03 1430:0.04 1500:0.03
+
+==== target t3: n fit 49476 cut 17679 oos 62676; base rate fit 0.369 cut 0.318 oos 0.328
+   {'target': 't3', 'model': 'full_gbm', 'auc_fit_insample': 0.934, 'auc_fit_oof': 0.518, 'auc_cut': 0.514, 'auc_oos': 0.496}
+   {'target': 't3', 'model': 'full_lr', 'auc_fit_insample': 0.562, 'auc_fit_oof': 0.469, 'auc_cut': 0.58, 'auc_oos': 0.493}
+   standardised coefficients: straddle_rel +0.374, implied30 -0.352, rv_session -0.249, vix +0.113, range_pos -0.111, vix_chg_prev -0.078, product=SPXW +0.078, product=QQQ +0.061, m +0.060, rng5 +0.050, rng30 +0.049, day_move_atr -0.043
+   {'target': 't3', 'model': 'base_gbm', 'auc_fit_insample': 0.62, 'auc_fit_oof': 0.495, 'auc_cut': 0.535, 'auc_oos': 0.508}
+   lift fit_oof {'target': 't3', 'period': 'fit_oof', 'n_rows': 49476, 'base_rate': 0.369, 'n_d10_full': 4948, 'rate_d10_full': 0.405, 'rate_d10_lr': 0.301, 'rate_d10_base': 0.348, 'rate_tod_matched': 0.378, 'overlap_full_base': 0.172, 'rate_full_d10_not_in_base_d10': 0.421, 'rate_base_d10_not_in_full_d10': 0.352, 'mv30_d10_full': 13.966, 'mv30_d10_base': 17.338, 'mv30_all': 14.957, 'lift_full_over_base': 0.057, 'lift_full_over_tod': 0.027}
+     D10 by half hour: 0930:0.04 1000:0.06 1030:0.07 1100:0.07 1130:0.10 1200:0.11 1230:0.11 1300:0.10 1330:0.10 1400:0.09 1430:0.08 1500:0.08
+   lift cut {'target': 't3', 'period': 'cut', 'n_rows': 17679, 'base_rate': 0.318, 'n_d10_full': 1768, 'rate_d10_full': 0.332, 'rate_d10_lr': 0.455, 'rate_d10_base': 0.323, 'rate_tod_matched': 0.336, 'overlap_full_base': 0.162, 'rate_full_d10_not_in_base_d10': 0.323, 'rate_base_d10_not_in_full_d10': 0.312, 'mv30_d10_full': 11.188, 'mv30_d10_base': 14.161, 'mv30_all': 15.564, 'lift_full_over_base': 0.009, 'lift_full_over_tod': -0.004}
+     D10 by half hour: 0930:0.01 1000:0.04 1030:0.07 1100:0.09 1130:0.11 1200:0.11 1230:0.11 1300:0.10 1330:0.10 1400:0.09 1430:0.10 1500:0.07
+   lift oos {'target': 't3', 'period': 'oos', 'n_rows': 62676, 'base_rate': 0.328, 'n_d10_full': 6822, 'rate_d10_full': 0.327, 'rate_d10_lr': 0.335, 'rate_d10_base': 0.344, 'rate_tod_matched': 0.325, 'overlap_full_base': 0.197, 'rate_full_d10_not_in_base_d10': 0.331, 'rate_base_d10_not_in_full_d10': 0.352, 'mv30_d10_full': 11.953, 'mv30_d10_base': 16.588, 'mv30_all': 16.111, 'lift_full_over_base': -0.017, 'lift_full_over_tod': 0.002}
+     D10 by half hour: 0930:0.02 1000:0.04 1030:0.04 1100:0.07 1130:0.09 1200:0.11 1230:0.10 1300:0.11 1330:0.12 1400:0.11 1430:0.10 1500:0.09
+shape: (24, 3)
+┌────────┬───────────────┬──────────────┐
+│ target ┆ feature       ┆ gain         │
+│ ---    ┆ ---           ┆ ---          │
+│ str    ┆ str           ┆ f64          │
+╞════════╪═══════════════╪══════════════╡
+│ t1     ┆ rv_session    ┆ 28355.099392 │
+│ t1     ┆ implied30     ┆ 11849.476295 │
+│ t1     ┆ vix           ┆ 7503.910343  │
+│ t1     ┆ vix_chg_prev  ┆ 6782.044968  │
+│ t1     ┆ vix_chg_open  ┆ 6196.407909  │
+│ …      ┆ …             ┆ …            │
+│ t3     ┆ day_range_atr ┆ 21622.457017 │
+│ t3     ┆ vix_chg_open  ┆ 19150.128055 │
+│ t3     ┆ or_pos        ┆ 17355.271768 │
+│ t3     ┆ implied30     ┆ 14966.013015 │
+│ t3     ┆ rv_session    ┆ 13712.359025 │
+└────────┴───────────────┴──────────────┘
+done 80s
