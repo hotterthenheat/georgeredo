@@ -1,0 +1,11 @@
+SPY 2023-04-10 100 21s 567
+SPY 2023-09-01 200 40s 417
+SPY 2024-01-29 300 62s 581
+SPY 2024-06-21 400 81s 233
+SPY 2024-11-13 500 100s 592
+SPY 2025-04-14 600 123s 724
+SPY 2025-09-09 700 146s 433
+SPY 2026-02-04 800 169s 740
+SPY 2026-06-30 900 193s 590
+SPY rows 553024
+SPY sessions 971 skipped 0 211s {'touch_rows': 129190, 'touch_taken': 111675, 'sched_rows': 380632, 'sched_taken': 304147} settle=close of the last bar <= 16:00 fees=0.65/leg/way min_credit=0.05 tp=0.5 stop=2.0

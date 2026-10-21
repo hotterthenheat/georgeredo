@@ -1,0 +1,1 @@
+SPXW sessions 1097 skipped 0 313s {'touch_rows': 172700, 'touch_taken': 170771, 'sched_rows': 430024, 'sched_taken': 426610} settle=last SPX print <= 16:00 fees=0.65/leg/way min_credit=0.05 tp=0.5 stop=2.0

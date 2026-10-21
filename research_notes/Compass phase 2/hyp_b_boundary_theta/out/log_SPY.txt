@@ -1,0 +1,1 @@
+SPY sessions 971 skipped 0 211s {'touch_rows': 129190, 'touch_taken': 111675, 'sched_rows': 380632, 'sched_taken': 304147} settle=close of the last bar <= 16:00 fees=0.65/leg/way min_credit=0.05 tp=0.5 stop=2.0
