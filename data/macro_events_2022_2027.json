@@ -1,0 +1,1850 @@
+[
+ {
+  "date": "2022-01-05",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2021-12-14/2021-12-15",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-01-07",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2021-12",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2022-01-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2021-12",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2022-01-26",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2022-01-25/2022-01-26",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-02-04",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2022-01",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2022-02-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2022-01",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2022-02-16",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2022-01-25/2022-01-26",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-03-04",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2022-02",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2022-03-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2022-02",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2022-03-16",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2022-03-15/2022-03-16",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-04-01",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2022-03",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2022-04-06",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2022-03-15/2022-03-16",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-04-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2022-03",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2022-05-04",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2022-05-03/2022-05-04",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-05-06",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2022-04",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2022-05-11",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2022-04",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2022-05-25",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2022-05-03/2022-05-04",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-06-03",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2022-05",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2022-06-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2022-05",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2022-06-15",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2022-06-14/2022-06-15",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-07-06",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2022-06-14/2022-06-15",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-07-08",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2022-06",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2022-07-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2022-06",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2022-07-27",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2022-07-26/2022-07-27",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-08-05",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2022-07",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2022-08-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2022-07",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2022-08-17",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2022-07-26/2022-07-27",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-09-02",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2022-08",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2022-09-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2022-08",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2022-09-21",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2022-09-20/2022-09-21",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-10-07",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2022-09",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2022-10-12",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2022-09-20/2022-09-21",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-10-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2022-09",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2022-11-02",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2022-11-01/2022-11-02",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-11-04",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2022-10",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2022-11-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2022-10",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2022-11-23",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2022-11-01/2022-11-02",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2022-12-02",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2022-11",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2022-12-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2022-11",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2022-12-14",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2022-12-13/2022-12-14",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-01-04",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2022-12-13/2022-12-14",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-01-06",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2022-12",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2023-01-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2022-12",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2023-02-01",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2023-01-31/2023-02-01",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-02-03",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2023-01",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2023-02-14",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2023-01",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2023-02-22",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2023-01-31/2023-02-01",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-03-10",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2023-02",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2023-03-14",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2023-02",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2023-03-22",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2023-03-21/2023-03-22",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-04-07",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2023-03",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2023-04-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2023-03",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2023-04-12",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2023-03-21/2023-03-22",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-05-03",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2023-05-02/2023-05-03",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-05-05",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2023-04",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2023-05-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2023-04",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2023-05-24",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2023-05-02/2023-05-03",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-06-02",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2023-05",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2023-06-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2023-05",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2023-06-14",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2023-06-13/2023-06-14",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-07-05",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2023-06-13/2023-06-14",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-07-07",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2023-06",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2023-07-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2023-06",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2023-07-26",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2023-07-25/2023-07-26",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-08-04",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2023-07",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2023-08-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2023-07",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2023-08-16",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2023-07-25/2023-07-26",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-09-01",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2023-08",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2023-09-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2023-08",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2023-09-20",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2023-09-19/2023-09-20",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-10-06",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2023-09",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2023-10-11",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2023-09-19/2023-09-20",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-10-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2023-09",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2023-11-01",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2023-10-31/2023-11-01",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-11-03",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2023-10",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2023-11-14",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2023-10",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2023-11-21",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2023-10-31/2023-11-01",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2023-12-08",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2023-11",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2023-12-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2023-11",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2023-12-13",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2023-12-12/2023-12-13",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-01-03",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2023-12-12/2023-12-13",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-01-05",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2023-12",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2024-01-11",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2023-12",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2024-01-31",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2024-01-30/2024-01-31",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-02-02",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2024-01",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2024-02-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2024-01",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2024-02-21",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2024-01-30/2024-01-31",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-03-08",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2024-02",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2024-03-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2024-02",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2024-03-20",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2024-03-19/2024-03-20",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-04-05",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2024-03",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2024-04-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2024-03",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2024-04-10",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2024-03-19/2024-03-20",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-05-01",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2024-04-30/2024-05-01",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-05-03",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2024-04",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2024-05-15",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2024-04",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2024-05-22",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2024-04-30/2024-05-01",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-06-07",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2024-05",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2024-06-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2024-05",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2024-06-12",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2024-06-11/2024-06-12",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-07-03",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2024-06-11/2024-06-12",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-07-05",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2024-06",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2024-07-11",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2024-06",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2024-07-31",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2024-07-30/2024-07-31",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-08-02",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2024-07",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2024-08-14",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2024-07",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2024-08-21",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2024-07-30/2024-07-31",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-09-06",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2024-08",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2024-09-11",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2024-08",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2024-09-18",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2024-09-17/2024-09-18",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-10-04",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2024-09",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2024-10-09",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2024-09-17/2024-09-18",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-10-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2024-09",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2024-11-01",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2024-10",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2024-11-07",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2024-11-06/2024-11-07",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-11-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2024-10",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2024-11-26",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2024-11-06/2024-11-07",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2024-12-06",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2024-11",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2024-12-11",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2024-11",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2024-12-18",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2024-12-17/2024-12-18",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-01-08",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2024-12-17/2024-12-18",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-01-10",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2024-12",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2025-01-15",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2024-12",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2025-01-29",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2025-01-28/2025-01-29",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-02-07",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2025-01",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2025-02-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2025-01",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2025-02-19",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2025-01-28/2025-01-29",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-03-07",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2025-02",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2025-03-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2025-02",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2025-03-19",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2025-03-18/2025-03-19",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-04-04",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2025-03",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2025-04-09",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2025-03-18/2025-03-19",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-04-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2025-03",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2025-05-02",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2025-04",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2025-05-07",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2025-05-06/2025-05-07",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-05-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2025-04",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2025-05-28",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2025-05-06/2025-05-07",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-06-06",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2025-05",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2025-06-11",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2025-05",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2025-06-18",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2025-06-17/2025-06-18",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-07-03",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2025-06",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2025-07-09",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2025-06-17/2025-06-18",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-07-15",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2025-06",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2025-07-30",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2025-07-29/2025-07-30",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-08-01",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2025-07",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2025-08-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2025-07",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2025-08-20",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2025-07-29/2025-07-30",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-09-05",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2025-08",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2025-09-11",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2025-08",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2025-09-17",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2025-09-16/2025-09-17",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-10-08",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2025-09-16/2025-09-17",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-10-24",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2025-09",
+  "status": "released",
+  "source": "https://www.bls.gov/news.release/archives/cpi_10242025.htm"
+ },
+ {
+  "date": "2025-10-29",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2025-10-28/2025-10-29",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-11-19",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2025-10-28/2025-10-29",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-11-20",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2025-09",
+  "status": "released",
+  "source": "https://www.bls.gov/news.release/archives/empsit_11202025.htm"
+ },
+ {
+  "date": "2025-12-10",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2025-12-09/2025-12-10",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2025-12-16",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2025-11",
+  "status": "released",
+  "source": "https://www.bls.gov/news.release/archives/empsit_12162025.htm"
+ },
+ {
+  "date": "2025-12-18",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2025-11",
+  "status": "released",
+  "source": "https://www.bls.gov/news.release/archives/cpi_12182025.htm"
+ },
+ {
+  "date": "2025-12-30",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2025-12-09/2025-12-10",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-01-09",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2025-12",
+  "status": "released",
+  "source": "https://www.bls.gov/news.release/archives/empsit_01092026.htm"
+ },
+ {
+  "date": "2026-01-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2025-12",
+  "status": "released",
+  "source": "https://www.bls.gov/news.release/archives/cpi_01132026.htm"
+ },
+ {
+  "date": "2026-01-28",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2026-01-27/2026-01-28",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-02-11",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2026-01",
+  "status": "released",
+  "source": "https://www.bls.gov/news.release/archives/empsit_02112026.htm"
+ },
+ {
+  "date": "2026-02-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2026-01",
+  "status": "released",
+  "source": "https://www.bls.gov/news.release/archives/cpi_02132026.htm"
+ },
+ {
+  "date": "2026-02-18",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2026-01-27/2026-01-28",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-03-06",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2026-02",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2026-03-11",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2026-02",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2026-03-18",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2026-03-17/2026-03-18",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-04-03",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2026-03",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2026-04-08",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2026-03-17/2026-03-18",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-04-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2026-03",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2026-04-29",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2026-04-28/2026-04-29",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-05-08",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2026-04",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2026-05-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2026-04",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2026-05-20",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2026-04-28/2026-04-29",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-06-05",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2026-05",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2026-06-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2026-05",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2026-06-17",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2026-06-16/2026-06-17",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-07-02",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2026-06",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2026-07-08",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2026-06-16/2026-06-17",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-07-14",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2026-06",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2026-07-29",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2026-07-28/2026-07-29",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-08-07",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2026-07",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2026-08-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2026-07",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2026-08-19",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2026-07-28/2026-07-29",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-09-04",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2026-08",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2026-09-11",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2026-08",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2026-09-16",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2026-09-15/2026-09-16",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-10-02",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2026-09",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/empsit.htm"
+ },
+ {
+  "date": "2026-10-07",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2026-09-15/2026-09-16",
+  "status": "released",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-10-14",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2026-09",
+  "status": "released",
+  "source": "https://www.bls.gov/bls/news-release/cpi.htm"
+ },
+ {
+  "date": "2026-10-28",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2026-10-27/2026-10-28",
+  "status": "scheduled",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-11-06",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2026-10",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2026-11-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2026-10",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2026-11-18",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2026-10-27/2026-10-28",
+  "status": "scheduled",
+  "source": "https://www.federalreserve.gov/newsevents/2026-november.htm"
+ },
+ {
+  "date": "2026-12-04",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2026-11",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2026-12-09",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2026-12-08/2026-12-09",
+  "status": "scheduled",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2026-12-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2026-11",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2026-12-30",
+  "time_et": "14:00",
+  "event": "FOMC_MINUTES",
+  "reference_period": "2026-12-08/2026-12-09",
+  "status": "scheduled",
+  "source": "https://www.federalreserve.gov/newsevents/2026-december.htm"
+ },
+ {
+  "date": "2027-01-08",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2026-12",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2027-01-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2026-12",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2027-01-27",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2027-01-26/2027-01-27",
+  "status": "scheduled",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2027-02-05",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2027-01",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2027-02-11",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2027-01",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2027-03-05",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2027-02",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2027-03-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2027-02",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2027-03-17",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2027-03-16/2027-03-17",
+  "status": "scheduled",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2027-04-02",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2027-03",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2027-04-13",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2027-03",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2027-04-28",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2027-04-27/2027-04-28",
+  "status": "scheduled",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2027-05-07",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2027-04",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2027-05-12",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2027-04",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2027-06-04",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2027-05",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2027-06-09",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2027-06-08/2027-06-09",
+  "status": "scheduled",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2027-06-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2027-05",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2027-07-02",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2027-06",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2027-07-14",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2027-06",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2027-07-28",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2027-07-27/2027-07-28",
+  "status": "scheduled",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2027-08-06",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2027-07",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2027-08-11",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2027-07",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2027-09-03",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2027-08",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2027-09-14",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2027-08",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2027-09-15",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2027-09-14/2027-09-15",
+  "status": "scheduled",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2027-10-08",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2027-09",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2027-10-14",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2027-09",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2027-10-27",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2027-10-26/2027-10-27",
+  "status": "scheduled",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2027-11-05",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2027-10",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2027-11-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2027-10",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ },
+ {
+  "date": "2027-12-03",
+  "time_et": "08:30",
+  "event": "NFP",
+  "reference_period": "2027-11",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+ },
+ {
+  "date": "2027-12-08",
+  "time_et": "14:00",
+  "event": "FOMC_DECISION",
+  "reference_period": "2027-12-07/2027-12-08",
+  "status": "scheduled",
+  "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+ },
+ {
+  "date": "2027-12-10",
+  "time_et": "08:30",
+  "event": "CPI",
+  "reference_period": "2027-11",
+  "status": "scheduled",
+  "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+ }
+]
