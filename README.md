@@ -46,3 +46,7 @@ as named inputs), the horizons matrix and the blockers. `docs/compass-static-che
 checks — `check_cents.py`, `check_dead_code.py`, `check_helix_isolation.py`, Python 3, a code root as the argument —
 and `RESULTS.md`, their demonstration run on the terminal's source (the bot's code is not in any repository here;
 its root is passed when it exists).
+
+## Compass phase 2 (2026-10-21)
+
+The audit's replacements locked into `docs/compass-core-spec-v2.md`; four pre-registered tests of 0DTE defined-risk short premium and volatility (`reports/Compass phase 2.md`, notes and scripts under `research_notes/Compass phase 2/`): the closing-pin spreads, the boundary touch, debit verticals and the volatility breakout have no edge after fees; two post-hoc or unconditional candidates — the midday SPY 2-wide condor and the 15:00/15:30 iron ±5 fly on SPY/QQQ — are written with their confirmation tests, not as rules. `scripts/eod_recorder.py` records the Unusual Whales flow, dark pool, net-prem-ticks, minute bars and strike books daily to clear the audit's blockers.
