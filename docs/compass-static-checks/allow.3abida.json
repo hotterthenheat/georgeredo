@@ -12,6 +12,16 @@
   {
     "path": "core/simulator.ts",
     "line-pattern": "const refWall = \\(20000 \\* 2\\.4 \\* 100 \\* price \\* price \\* 0\\.01 \\* 0\\.54\\)",
-    "reason": "The house simulator's reference wall: 20,000 contracts of open interest x gamma x the contract's 100 shares x price^2 — the exposure arithmetic of a seeded shelf, the literal OI unnamed on the line; no vendor unit is changed."
+    "reason": "The house simulator's reference wall: 20,000 contracts of open interest x gamma x the contract's 100 shares x price^2 \u2014 the exposure arithmetic of a seeded shelf, the literal OI unnamed on the line; no vendor unit is changed."
+  },
+  {
+    "path": "data/feed/trailModel.ts",
+    "line-pattern": "wallObsOf\\(r\\.m / 1000, r\\.spot,",
+    "reason": "`r.m` is a store row's minute as an epoch millisecond, divided to the seconds wallObsOf takes as `time`; the strike and value beside it are untouched."
+  },
+  {
+    "path": "data/feed/forward.ts",
+    "line-pattern": "const vega = blackScholesGreeks\\(spot, q\\.strike, t, iv, r, 0\\)\\.vega \\* 100;",
+    "reason": "Vega per 1.00 of vol: the model's vega is per unit of vol (0.01 a point), scaled by 100 to a full point so (ask - bid) / vega reads a quote's width in vol points; no price unit changes."
   }
 ]

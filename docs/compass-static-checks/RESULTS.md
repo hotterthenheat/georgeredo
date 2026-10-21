@@ -172,3 +172,17 @@ check_helix_isolation: /home/user/3abida/src
 - check_helix_isolation: `--decision` naming the gate, the picker, the stops, the scale-outs, the sizing and the
   governor; `--telemetry helix` plus the bot's Physics / Nerve modules and `charm_pressure`, `moc_score`,
   `sign(GEX_book)`, the flow fields; zero paths, zero reads; the (c) replay diff kept beside this file.
+
+## Rerun after the terminal's rebase (2026-10-21, 58 upstream commits taken in)
+
+The terminal's default branch had moved 58 commits while the occ.ts change was made; the change was rebased onto it
+(parseOcc in trailModel now wraps occ.ts's decoder and keeps upstream's `tradingExpiry`, which dates a Saturday-stamped
+monthly to its Friday). The three checks were run again on the rebased tree with the same commands:
+
+- check_cents: FINDINGS 0, ALLOWED 5, STALE 0. Two lines the upstream commits added were reviewed and allowlisted with
+  their reasons — `data/feed/trailModel.ts` `wallObsOf(r.m / 1000, …)` (a store row's minute, milliseconds to the
+  seconds wallObsOf takes) and `data/feed/forward.ts` `.vega * 100` (vega per unit of vol scaled to a full point, so a
+  quote's width reads in vol points).
+- check_dead_code: RESOLVES 0 — PASS.
+- check_helix_isolation: 0 import paths, 0 field reads — PASS.
+- The terminal's typecheck passes; its trail-field, priced-move, feed and field-store proofs pass (47, 20, 29, 30).
