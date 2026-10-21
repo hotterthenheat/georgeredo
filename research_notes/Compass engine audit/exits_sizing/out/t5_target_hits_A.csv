@@ -1,0 +1,9 @@
+rule,period,n,hit_rate,hit_before_32_stop
+target +25% reached before 15:58,disc,1826,0.66922,0.46386
+target +25% reached before 15:58,check,1607,0.66584,0.46795
+target +45% reached before 15:58,disc,1826,0.55203,0.35268
+target +45% reached before 15:58,check,1607,0.55507,0.35345
+target +50% reached before 15:58,disc,1826,0.52464,0.32256
+target +50% reached before 15:58,check,1607,0.5364,0.33727
+target +100% reached before 15:58,disc,1826,0.34337,0.1988
+target +100% reached before 15:58,check,1607,0.36777,0.21531
