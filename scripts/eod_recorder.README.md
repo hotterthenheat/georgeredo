@@ -286,7 +286,7 @@ Whales' same-day chain, so their forward confirmation samples accumulate on thei
 | `condor_em1` (`hyp_b_boundary_theta.md`, "The rule, conditional on X") | SPY | 11:30, 12:00, 12:30, 13:00, 13:30 | the ATM straddle M = call mid + put mid at the strike nearest spot with both sides quoted (a tie → the lower strike); short call = the first listed strike ≥ spot + M, short put = the first listed strike ≤ spot − M; longs 2 points beyond; shorts filled at the bid, longs at the ask; each spread's credit ≥ $0.05 (the condor's ≥ $0.10) else the row says `tradable=false`; every VIX | 60 settled sessions, then 120 |
 | `fly5` (`hyp_c_debit_flies.md` section 6) | SPY, QQQ | 15:00, 15:30 (+ 15:58 close quotes) | K0 = the strike nearest spot with a call and a put quoted (a tie → the lower); wings ±5; three structures a capture — the iron fly (sell the K0 call and put at the bid, buy the K0−5 put and K0+5 call at the ask; max risk 5 − credit), the long call fly and the long put fly (buy the wings at the ask, sell two K0 at the bid; max risk = the debit); the short legs' bids > 0, max risk ≥ $0.05; stress fills $0.01 and $0.02 a leg worse | 250 settled sessions a name |
 | `condor_d20` — **candidate 3** (`hyp_e_short_premium_lift.md` §8, "needs X (1)") | SPY | 13:00, 13:30, 14:00, 14:30, 15:00 | the 2-wide iron condor at Hypothesis B's `d20` short strikes (below), longs 2 beyond, held; fills and the tradable rule as `condor_em1`; every row carries the live t2 decile of the FROZEN SPY volatility model (below) — a column, never a filter | 150 settled sessions |
-| `fly_spxw` (`--spxw` only, OFF by default) | SPX (the SPXW root) | 15:00, 15:30 | the iron, call and put flies at ±5 and ±25 around K0 = the listed SPXW strike nearest parity-implied SPX (below) | 250 settled sessions |
+| `fly_spxw` (ON by default since the owner's final patch; `--no-spxw` or `PAPER_SPXW=0` turns it off) | SPX (the SPXW root) | 15:00, 15:30 | the iron, call and put flies at ±5 and ±25 around K0 = the listed SPXW strike nearest parity-implied SPX (below) | 250 settled sessions |
 
 Quotes: `GET /api/stock/{name}/option-contracts?expiry=D&limit=500&page=0…` (a same-day chain is one page — SPY's 302
 contracts on 2026-10-21, zero-OI strikes included; paged until a short page, cap 5), `nbbo_bid` / `nbbo_ask` a contract,
@@ -433,8 +433,8 @@ closes between its strikes leaves a long call exercised (100 shares bought, abou
 two short calls assigned (200 shares sold, a net short of 100) — positions a cash account cannot carry overnight; the
 exit before 16:00 is the trade a cash account can actually make, so the forward record needs its price.
 
-**The cash-settled SPXW equivalent** (`--spxw`, OFF by default): the owner asked for it only at zero extra calls, and
-it is not — the tracker does not otherwise read SPX's chain at 15:00, 15:30 or 15:58. With `--spxw` it reads
+**The cash-settled SPXW equivalent** (ON by default since 2026-10-21 — the owner's final patch: 3–5 calls a session is
+negligible against the plan's daily quota; `--no-spxw` or `PAPER_SPXW=0` turns it off). It is not zero extra calls — the tracker does not otherwise read SPX's chain at 15:00, 15:30 or 15:58. With `--spxw` it reads
 `/api/stock/SPX/option-contracts?expiry=D` (both roots in one answer; the SPXW root alone is kept — a third Friday's AM
 SPX contracts share the date) at 15:00 and 15:30 and builds the iron, call and put flies at ±5 and ±25 around K0.
 **SPX's price**: UW Basic has none (stock-state 422; ohlc 422 `cboe_index_access_missing`), and `option-contracts`
@@ -484,9 +484,9 @@ A session's calls, the default candidates (`condor_em1`, `fly5`, `condor_d20`), 
 | **a session, warm** | **36** | the tests' second day: 36 exactly |
 | **the first day, cold** | **56** | the tests' first day: 56 exactly |
 | the worst | **61** | cold, every bar asked twice |
-| `--spxw` | **+3 to +5** | |
+| `fly_spxw` (on by default) | **+3 to +5** | |
 
-The default `--budget` (`PAPER_BUDGET`) is **80**: the cold worst (61) with a fifth to spare, `--spxw` included (66).
+The default `--budget` (`PAPER_BUDGET`) is **90**: the cold worst with the SPXW flies (66) with a third to spare.
 It is counted per New York day in `_budget/<day>.json` across runs; at the budget a capture stops with the STOP line.
 `--budget 22` still runs the old pair (`condor_em1` and `fly5` alone, 18 captures and 4 settle calls — the daily bar
 left out and the official close read later off the next session's first stock-state `prev_close`, 773.09 both, checked
@@ -500,7 +500,7 @@ Modes:
 python3 -I scripts/paper_tracker.py --log --when 11:30 [--day D]   # one capture (a scheduler's line); 11:30 12:00 12:30 13:00 13:30 14:00 14:30 15:00 15:30, and 15:58 (the close quotes)
 python3 -I scripts/paper_tracker.py --settle [--day D] [--official] # the after-close pass; re-runnable
 python3 -I scripts/paper_tracker.py --backfill [--day D]            # the model's 20 sessions before into the cache (once)
-python3 -I scripts/paper_tracker.py --daemon [--spxw]               # sleeps to each minute, 15:58 and 16:20, Mon–Fri, holidays and half days skipped
+python3 -I scripts/paper_tracker.py --daemon [--no-spxw]               # sleeps to each minute, 15:58 and 16:20, Mon–Fri, holidays and half days skipped
 python3 -I scripts/paper_tracker.py --status [--data …]             # sessions logged, mean P&L (NBBO, mid, 1c, 2c), the 15:58 exit, candidate 3 by decile, the check, what remains
 python3 -I scripts/paper_tracker.py --dry-run --log --when 13:00    # the fixture chain, a fake Theta, no network
 python3 -I scripts/paper_tracker.py --log --when 11:30 --smoke      # a live capture under <root>/smoke/, labelled smoke, never a session

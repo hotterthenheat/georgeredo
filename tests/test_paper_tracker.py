@@ -319,7 +319,8 @@ def test_schedule_skips_weekends_holidays_and_half_days():
             assert m in DEFAULT_MINUTES
     assert T.CANDIDATES['condor_em1'].thresholds == (60, 120) and T.CANDIDATES['fly5'].thresholds == (250,)
     assert T.CANDIDATES['condor_d20'].thresholds == (150,) and T.CANDIDATES['condor_d20'].minutes == ('13:00', '13:30', '14:00', '14:30', '15:00')
-    assert [c.key for c in T.active_candidates()] == ['condor_em1', 'fly5', 'condor_d20'] and T.CANDIDATES['fly_spxw'].optional
+    assert [c.key for c in T.active_candidates()] == ['condor_em1', 'fly5', 'condor_d20', 'fly_spxw']   # fly_spxw on by default (the owner's final patch)
+    assert [c.key for c in T.active_candidates(spxw=False)] == ['condor_em1', 'fly5', 'condor_d20'] and T.CANDIDATES['fly_spxw'].optional
     assert T.CANDIDATES['condor_em1'].names == ('SPY',) and T.CANDIDATES['fly5'].names == ('SPY', 'QQQ')
 
 
@@ -532,12 +533,12 @@ def test_the_1558_liquidation_arithmetic_on_a_known_quote():
 def test_a_default_session_cold_then_warm_fits_the_budget_and_the_settle_carries_1558():
     """The default candidates: day one on a cold cache is 56 calls (22 chain/state + 5 bars + 1 VIX probe + 20
     backfill + 2 at 15:58 + 6 at the settle), day two 36 (the cache holds day one from its settle, the 19 before from the
-    backfill); both under the default budget of 80. The settle rows carry the 15:58 exit, the capture's macro stamps and
+    backfill); both under the default budget of 90 (fly_spxw, on by default, adds 3–5: its own test). The settle rows carry the 15:58 exit, the capture's macro stamps and
     candidate 3's deciles; a second settle and a second 15:58 make no call."""
     with tempfile.TemporaryDirectory() as d:
-        tr, client, store, lines, clock, limiter = harness(Path(d), budget=T.DEFAULT_BUDGET, cands=T.active_candidates(),
+        tr, client, store, lines, clock, limiter = harness(Path(d), budget=T.DEFAULT_BUDGET, cands=T.active_candidates(spxw=False),
                                                            start=dt.datetime(2026, 10, 20, 20, 25, tzinfo=R.UTC))
-        assert T.DEFAULT_BUDGET == 80
+        assert T.DEFAULT_BUDGET == 90
         for m in DEFAULT_MINUTES:
             assert tr.capture(DAY, m)['failed'] == 0, m
         assert client.calls == 22 + 5 + 1 + 20
@@ -573,6 +574,21 @@ def test_a_default_session_cold_then_warm_fits_the_budget_and_the_settle_carries
         e = T.status(store)
         assert e[('condor_d20', 'SPY')]['settled'] == 2 and 'condor' in e[('condor_d20', 'SPY')]['structures']
         assert e[('fly5', 'SPY')]['structures']['iron']['n_1558'] == 4
+
+
+def test_spxw_is_on_by_default_and_fits_the_budget():
+    """The owner's final patch: fly_spxw is on without a flag (--no-spxw / PAPER_SPXW=0 turn it off), and a whole cold
+    first day with it stays under the default budget of 90."""
+    import argparse as _ap
+    assert 'fly_spxw' in [c.key for c in T.active_candidates()]
+    with tempfile.TemporaryDirectory() as d:
+        tr, client, store, lines, clock, limiter = harness(Path(d), budget=T.DEFAULT_BUDGET, cands=T.active_candidates(),
+                                                           start=dt.datetime(2026, 10, 20, 20, 25, tzinfo=R.UTC), spx_price=3887.0)
+        for m in DEFAULT_MINUTES:
+            assert tr.capture(DAY, m)['failed'] == 0, m
+        tr.capture(DAY, '15:58')
+        st = tr.settle(DAY)
+        assert st['failed'] == 0 and 56 < limiter.spent <= 61 <= T.DEFAULT_BUDGET, limiter.spent
 
 
 def test_spxw_flies_read_the_spxw_root_and_settle_on_the_book_price():

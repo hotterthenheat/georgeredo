@@ -45,18 +45,28 @@ EPS = 1e-9            # every threshold test after loading: bid <= level + EPS, 
 
 A threshold itself (0.68 × entryAsk, 1.25 × entryAsk, 0.90 × peak) is computed from the rounded entry ask and
 compared with EPS; it is never rounded to the tick. A resting order is, at the order layer, by the option's tick —
-configurable via environment/settings, default the owner's table (finalization item 1): $0.01 for SPY, QQQ and IWM
-options and for any option priced under $3.00; $0.05 for equity options at or above $3.00 and for SPXW (SPXW is named
-apart, so it takes $0.05 at every price). A buy rounds DOWN and a sell rounds UP, so a resting limit never crosses the
-intended price — a buy never rests above what the engine meant to pay, a sell never below what it meant to take:
+configurable via environment/settings, default the owner's table (finalization item 1, the index row corrected by the
+final patch to Cboe's published increments): $0.01 for SPY, QQQ and IWM options and for any equity option priced under
+$3.00; $0.05 for equity options at or above $3.00; SPX and SPXW $0.05 under $3.00 and $0.10 at or above $3.00 (Cboe's
+SPX/SPXW product specification and Rule 5.4(a) for classes outside the Penny Interval Program; checked 2026-10-21). A
+complex (multi-leg) SPX/SPXW order is priced differently: its legs may print in $0.01, but the net package price rests
+in $0.05 increments (Cboe's specification; boxes excepted). A buy rounds DOWN and a sell rounds UP, so a resting limit
+never crosses the intended price — a buy never rests above what the engine meant to pay, a sell never below what it
+meant to take:
 
 ```python
 def tick_of(root, price):
     """The option's minimum increment for a resting limit; price is the intended limit, loaded by load_price."""
-    if root == 'SPXW':                  return 0.05            # every price
+    if root in ('SPXW', 'SPX'):         return 0.05 if price < 3.00 - EPS else 0.10   # Cboe: a nickel under $3.00, a dime at or above
+                                                               # (SPX's AM-settled root is never traded, 2.2; the tick is defined for completeness)
     if root in ('SPY', 'QQQ', 'IWM'):   return 0.01            # every price
-    if root == 'SPX':                   return None            # SPX's AM-settled root is not in the owner's table: no order is placed
     return 0.01 if price < 3.00 - EPS else 0.05                # every other root: under $3.00 a cent, at or above $3.00 a nickel
+
+def package_tick(roots):
+    """A complex order's net price increment: SPX/SPXW packages rest in $0.05 (legs may print in $0.01); an equity
+    package takes the tick of its legs' class (a cent where every leg is a penny class)."""
+    if any(r in ('SPXW', 'SPX') for r in roots): return 0.05
+    return 0.01
 
 def round_to_tick(price, tick, side):
     """side 'buy' rounds down, 'sell' rounds up: a resting limit never crosses the intended price."""
@@ -235,10 +245,16 @@ Rules:
 
   ```python
   PRODUCTS_0DTE = ['SPXW', 'SPY', 'QQQ', 'IWM']                    # default: the four 0DTE products
-  PRODUCTS_MULTI_DTE = ['SPX', 'SPY', 'QQQ', 'IWM',                # default (Weekly / Swing / LEAPS): the recorder's 24 names —
+  PRODUCTS_MULTI_DTE = ['SPXW', 'SPY', 'QQQ', 'IWM',               # default (Weekly / Swing / LEAPS): the recorder's 24 names, SPX traded as SPXW —
       'NVDA', 'TSLA', 'AAPL', 'MU', 'INTC', 'AMZN', 'TLT', 'META', 'EWZ', 'PLTR',     # scripts/eod_recorder.py CORE_NAMES + TOP20,
       'AMD', 'IBIT', 'MSFT', 'GOOGL', 'MSTR', 'HYG', 'AVGO', 'SOFI', 'ORCL', 'GME']   # the twenty from horizons/top20.json `top20_used`
   ```
+
+  SPX's AM-settled root stays in the recorder and in the Macro book's GEX/OI aggregation (6.4) — its open interest is
+  real exposure — but is never traded: `TRADABLE_AM_SETTLED = False` (configurable via environment/settings, default the
+  owner's final patch), and every index option order routes to the PM-settled SPXW root, which shares SPY/QQQ/IWM's 5%
+  `SPREAD_MAX_MULTI_DTE` (13.1). A contract whose root is SPX (not SPXW) is ineligible in 2.4's `eligible()`:
+  `Outcome('NO_TRADE', 'AM-settled root')`.
 
   The twenty are `research_notes/Compass engine audit/horizons/top20.json` `top20_used` (by option volume, 2026-10-06
   → 12; SPCX, listed 2026, replaced by GME, the 21st name). The only ordering the data supports is SPXW ≈ SPY > QQQ >
@@ -428,9 +444,28 @@ contracts = min(budget_contracts, displayed_size)        # a count of 0 places n
 # the realised loss on a backstop exit ran 3-5 points past nominal (p10 -40%): the budget is nominal, not a bound
 ```
 
-The formula is written on 0DTE's backstop (3.1). A Weekly / Swing / LEAPS position's backstop is 12.4's (−25% from
-21 DTE, none below it); the owner named no per-contract nominal loss for a position with no premium backstop — listed
-at the end.
+The formula above is 0DTE's (3.1's backstop). A Weekly / Swing / LEAPS position with a premium backstop (12.4: −25%
+from 21 DTE) divides by that backstop's nominal loss the same way. A position with NO premium backstop (12.4's
+`none_below_21`, under 21 DTE) divides by the option's value lost at the underlying level stop — the owner's final
+patch, configurable via environment/settings:
+
+```python
+LOSS_FLOOR_SHARE = 0.25          # default the owner's: never size on less than a quarter of the premium per contract
+
+def max_loss_per_contract(entryAsk, K, right, S_entry, S_stop, iv, dte_years, r_minus_q, r):
+    """S_stop: 12.3's level stop (the Near book's wall or the prior week's low/high), capped at 3.5% (SPY/QQQ/IWM/SPXW)
+    or 6.0% (single names) from S_entry. The option is priced at S_stop with the entry's own implied vol and the entry's
+    time to expiry (the stop taken at once — the largest value it can hold there), on 5.2's forward carry."""
+    at_stop = bsm_price(S_stop, K, iv, dte_years, r, r_minus_q, right)
+    loss = (entryAsk - at_stop) * 100
+    return max(loss, LOSS_FLOOR_SHARE * entryAsk * 100)      # finite and deterministic: a floor of 25% of the premium
+
+budget_contracts = floor(risk_per_trade_usd(equity_usd, paper) / max_loss_per_contract(...))
+contracts = min(budget_contracts, displayed_size)
+```
+
+The figure is nominal, as the 0DTE one is: a gap through the level, an IV drop or decay held to a later stop loses more
+than the BSM value at the stop (the audit: four to five vol points of IV drop alone took 20% off a 7–14 DTE premium).
 
 No size is ever read off a ledger's size-EV correlation without the one-contract counterfactual.
 
@@ -930,6 +965,8 @@ Rule (each input configurable via environment/settings, the defaults the owner's
 TRAIL_LOCK      = True         # default on: a one-lot Swing position (DTE >= 8, Phase 3 item 2) and the ladder's remainder at size >= 2
 TRAIL_LOCK_ARM  = 1.25         # the lock arms once the mark reaches +25% of the entry premium
 TRAIL_LOCK_OUT  = 0.04         # then the exit rests 4 points of the entry under the lock: at 1.21 x the entry premium (+21%)
+SWING_T1        = 1.25         # T1 at +25.0% of the entry premium (the owner's final patch)
+SWING_T2        = 1.50         # T2 at +50%
 LADDER          = [('T1', 0.25), ('T2', 0.50)]   # shares of the position sold at T1 and at T2; the remainder rides the trail lock
 RSI_EXIT        = False        # default off: RSI(14) is written to telemetry, read by no exit
 
@@ -943,8 +980,9 @@ def ladder_legs(size):
 # size 4: T1 1, T2 2, trail 1                       size 5: T1 1, T2 2, trail 2   size 8: T1 2, T2 4, trail 2
 ```
 
-T1 and T2 are the owner's swing targets (the owner's spec: 25% at +25–29% and 50% at +50% of the entry premium; the
-audit modelled T1 at +27%). The 25% / 50% partials need `size ≥ 4` to exist as written (the audit: one contract
+T1 and T2 are the owner's swing targets: `SWING_T1 = 1.25` (+25.0% of the entry premium exactly, the 0DTE T1's level —
+the owner's final patch, configurable via environment/settings; the owner's spec gave a +25–29% band and the audit
+modelled +27%, so +25% itself was not run) and `SWING_T2 = 1.50` (+50%). The 25% / 50% partials need `size ≥ 4` to exist as written (the audit: one contract
 cannot be scaled, two run the 50% tier only); with two or three contracts the rule above leaves exactly a T2 leg of
 one contract and the rest on the trail lock, no T1 leg. Every leg keeps 12.3's underlying level stop and 12.4's
 backstop. The default is the owner's choice where the audit found nothing either way: the trail lock as modelled
@@ -961,7 +999,7 @@ Rule: unchanged; the entry gate adds nothing over buying the name, and the card 
 
 ## Module 13 — The contract picker for Weekly / Swing / LEAPS
 
-**13.1 The delta bands — KEEP.**
+**13.1 The delta bands — KEEP; the multi-DTE spread caps — CHANGED (the owner's finalization and final patch).**
 Evidence: horizons §6 — on five bulk days the bands are liquid on the ETFs (median spread/mid 1.0–1.2% at the weekly
 and swing bands) and expensive on single names (5.1–5.3% median, 90th percentile 18–21%); LEAPS at 0.60–0.80 Δ cost
 3.7–4.4% to cross.
@@ -972,17 +1010,18 @@ and 8.5% at 8–14 DTE (the ETFs pass 5% at every band; a single name would be r
 
 ```python
 def spread_max_multi_dte(root, dte):                     # replaces SPREAD_MAX in 2.4's eligible() for Weekly / Swing / LEAPS
+    if root == 'SPX':                          return None     # SPX's AM-settled root is never traded (2.2): orders route to SPXW
     if root in ('SPY', 'QQQ', 'IWM', 'SPXW'):  return 0.05     # every multi-DTE horizon
-    if root == 'SPX':                          return None     # SPX's AM-settled root: not named by the owner
-    if 15 <= dte <= 28:                        return 0.08     # every other name (the single names) in 13.3's preferred window
-    return None                                                 # no figure from the owner: no eligible contract → NO_TRADE
+    if 4 <= dte <= 28:                         return 0.08     # every other name: Weekly (4-14 in the owner's patch) and Swing (15-28)
+    if dte >= 90:                              return 0.06     # every other name: LEAPS (90-365+)
+    return None                                                 # 29-89 DTE belongs to no horizon: no eligible contract
 ```
 
-The owner gave no figure for a single name outside 15–28 DTE (Weekly 4–7, Swing's 8–14 fallback in 13.3, LEAPS 90–365+
-DTE), so none is invented: with no cap there is no eligible contract and the outcome is `NO_TRADE('no eligible
-contract')` — a single name's Swing walk has no 8–14 fallback, and a single name has no Weekly or LEAPS entry, until
-the owner gives one. "Every other name" includes the ETFs of the twenty (TLT, EWZ, IBIT, HYG): the owner's 5% list names
-four roots only.
+"Every other name" is the single names and the ETFs of the twenty (TLT, EWZ, IBIT, HYG): the owner's 5% list names four
+roots. With these caps a single name's Weekly and LEAPS entries and its Swing walk's 8–14 fallback are open again; 13.3's
+preference stands — where both an 8–14 and a 15–28 DTE expiry qualify on a Swing setup, the 15–28 contract is the pick.
+The 8% cap sits near a single name's measured median at 8–14 DTE (8.5%), so about half of those picks fail it; the 6%
+LEAPS cap sits above the measured 3.7–4.4% cost to cross at 0.60–0.80 Δ.
 
 **13.2 The OI ≥ 500 floor — CHANGED: "the nearest expiry with a qualifying contract" (directive item 4).**
 Evidence: horizons §6 — OI ≥ 500 leaves a qualifying 0.40–0.55 Δ call in about half of the 8–28 DTE expiries (SPY 59%,
@@ -998,7 +1037,7 @@ def pick_expiry(listings, band, oi_floor=500):
 **13.3 Tenor preference on single names — CHANGED (directive item 4): prefer 15–28 DTE over 8–14.**
 Evidence: horizons §6 — single names at 0.35–0.50 Δ: 8–14 DTE median spread 8.5% (q75 20.7%), 15–28 DTE 4.4% (q75 8.2%).
 Rule: for a non-ETF name the Swing walk in 13.2 starts at 15 DTE and falls back to 8–14 only when nothing qualifies
-from 15 to 28; for SPY, QQQ, IWM the walk starts at 8.
+from 15 to 28 (so where both qualify, the 15–28 contract is taken); for SPY, QQQ, IWM the walk starts at 8.
 
 ---
 
@@ -1072,10 +1111,10 @@ the Journal's trade records.
 | 1.4 15:58 flat, exemption, may_ride (default off) | yes | no (exempt) | no | no |
 | 1 macro-event fields (telemetry) | display | display | display | display |
 | 2.1–2.2 sweep and exclusion tags | yes | drawn | drawn | drawn |
-| 2.2 product list | SPXW, SPY, QQQ, IWM | the recorder's 24 names | the recorder's 24 names | the recorder's 24 names |
+| 2.2 product list | SPXW, SPY, QQQ, IWM | the recorder's 24 names, SPX as SPXW (AM-settled SPX never traded) | the same | the same |
 | 2.4 quote hygiene, no-eligible-contract | yes (5%) | yes (5% SPY/QQQ/IWM/SPXW; single names no cap given — no entry) | yes (5% SPY/QQQ/IWM/SPXW; 8% single names at 15–28 DTE, none at 8–14) | yes (5% SPY/QQQ/IWM/SPXW; single names no cap given — no entry) |
 | 3.1–3.8 the 0DTE stack (buffer 1 bp, no time stop) | yes | no | no | no |
-| 3.9 risk-budget sizing ($150 paper / 0.5% of equity; ≤ displayed size) | yes | yes | yes | yes |
+| 3.9 risk-budget sizing ($150 paper / 0.5% of equity; ≤ displayed size) | yes (on the −32% backstop) | yes (BSM loss at the level stop, ≥ 25% of premium) | the same under 21 DTE; on the −25% backstop from 21 | on the −25% backstop |
 | 4.2 daily dollar drawdown caps (account 3.0% / $500, lane 1.5% / $250; open positions at the bid) | yes | yes | yes | yes |
 | 5.1–5.4 pricer, forward parity, parity benchmark | r = q = 0 | yes | yes | yes |
 | 6.3–6.5 flip A (B not shown), books, conf | 0DTE book | Near book | Near / Macro | Macro (every listed expiry, to 365+ DTE) |
@@ -1090,7 +1129,7 @@ the Journal's trade records.
 | 12.5 3-day stall | no | no | 8–13 DTE | no |
 | 12.6 ladder, trail lock, RSI | no | 25% at T1 / 50% at T2 in whole contracts (T2 from 2, T1 from 4), the rest on the trail lock (arm +25%, out +21%); one lot none; RSI telemetry | the same; one lot: the trail lock + level stop | 33/33 |
 | 12.7 roll < 60 DTE | no | no | no | yes |
-| 13.1–13.3 bands, nearest qualifying expiry, 15–28 preference | no | 0.35–0.50 | 0.40–0.55; 15–28 first on names | 0.60–0.80 |
+| 13.1–13.3 bands, nearest qualifying expiry, 15–28 preference | no | 0.35–0.50; spread ≤ 5% index/ETF, ≤ 8% names | 0.40–0.55; 15–28 first on names; ≤ 5% / ≤ 8% | 0.60–0.80; ≤ 5% / ≤ 6% |
 | 14.1 earnings gate | no | yes | yes | no (exempt by default) |
 | 15–16 checks | yes | yes | yes | yes |
 
@@ -1135,13 +1174,7 @@ confirmed its convention); and it does not reach N > 500 on the swing gate by lo
 
 ## Still owner-set
 
-The owner's finalization directive (item 1) set every default this list held. What genuinely remains is where the
-owner's words stop short of a case; each is said in its own section, and no number is invented for it:
-- 0.1 and 13.1 — SPX's AM-settled root (SPX, not SPXW, on the SPX chain): in neither the tick table nor the spread
-  list, so no order is placed and no contract is eligible on it.
-- 3.9 — the per-contract nominal loss the budget divides by for a Weekly / Swing position with no premium backstop
-  (under 21 DTE, 12.4).
-- 12.4 — the `widened` mode's level over 14 DTE; only if that mode is selected (it is not the default).
-- 12.6 — T1's point inside the owner's +25–29% band (the audit modelled +27%).
-- 13.1 — a spread cap for a single name outside 15–28 DTE (Weekly 4–7, Swing's 8–14 fallback, LEAPS); until one is
-  given, no entry.
+The owner's finalization directive and final patch set every default this list held: the SPX/SPXW ticks (0.1), the
+AM-settled root (2.2, 13.1), sizing with no premium backstop (3.9), the swing T1 (12.6) and the single-name spread caps
+(13.1). One selectable mode keeps an open figure, and it is not the default:
+- 12.4 — the `widened` premium-backstop mode's level over 14 DTE (the default is `none_below_21`).

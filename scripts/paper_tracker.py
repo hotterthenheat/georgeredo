@@ -38,7 +38,7 @@ THE CANDIDATES (the rules reproduced from the reports; the strikes are picked ex
               rule as condor_em1. Every capture row carries the live t2 decile of the FROZEN SPY volatility model
               (scripts/models/, vol_model.py) — the full model and the no-VIX model, each its own column, and the
               pre-registered primary (README) — a column, never a filter. Threshold: 150 settled sessions.
-  fly_spxw    (--spxw only; OFF by default — it is not zero extra calls) SPXW, the cash-settled equivalent of fly5: at
+  fly_spxw    (ON by default since the owner's final patch, 2026-10-21 — 3–5 calls a session; --no-spxw turns it off) SPXW, the cash-settled equivalent of fly5: at
               15:00 and 15:30 the iron, call and put flies at ±5 and ±25 around K0 = the listed SPXW strike nearest SPX,
               off SPX's same-day chain (/option-contracts?expiry=D under SPX, the SPXW root alone). UW Basic has no SPX
               price (stock-state answers 422 for an index), so SPX is read off the same chain by put-call parity (r = q
@@ -74,7 +74,8 @@ the day's VIX minutes; the key stays in the terminal), else none — the no-VIX 
 
 BUDGET a session (README "The budget"): captures 22 chain/state calls (11 name-minutes: SPY at nine, QQQ at two) + 5
 minute-bar calls + 1 VIX probe + 2 at 15:58 + 6 at the settle = 36 with the cache warm; the first day with a cold
-cache adds the 20-session backfill (56); a bar asked twice adds up to 5. The default `--budget` is 80. --spxw adds 3–5.
+cache adds the 20-session backfill (56); a bar asked twice adds up to 5; fly_spxw (on by default) adds 3–5. The default
+`--budget` is 90.
 
 STORAGE: append-only Parquet under data_recorder/paper/<candidate>/<name>/<YYYY-MM-DD>.parquet with the recorder's
 stamps and dedupe (eod_recorder.Store): a capture row a structure a minute, a close1558 row a fly5 structure a minute,
@@ -124,7 +125,7 @@ CLOSE_TIME = '15:58'                     # the fly5 close quotes
 SETTLE_CHECK_TOL = 0.25
 CHAIN_PAGE = 500
 CHAIN_MAX_PAGES = 5
-DEFAULT_BUDGET = 80                      # README "The budget": 36 warm, 56 the cold first day, + up to 5 bars asked twice
+DEFAULT_BUDGET = 90                      # README "The budget": 36 warm, 56 the cold first day, + up to 5 bars asked twice, + 3–5 for fly_spxw (on by default)
 DELTA_TARGET = 0.20
 BAR_WAIT_S = 20.0                        # the bar closing at the capture minute not out yet: ask once more after this
 PRIOR_SESSIONS = 20                      # hyp_d rel_vol: the 20 sessions before (ATR14 needs 15 of them)
@@ -160,7 +161,7 @@ CANDIDATES: dict[str, Candidate] = {
 DEFAULT_KEYS = ('condor_em1', 'fly5', 'condor_d20')
 
 
-def active_candidates(spxw: bool = False, keys: tuple | None = None) -> tuple:
+def active_candidates(spxw: bool = True, keys: tuple | None = None) -> tuple:
     ks = keys or (DEFAULT_KEYS + (('fly_spxw',) if spxw else ()))
     return tuple(CANDIDATES[k] for k in ks)
 
@@ -1665,7 +1666,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument('--smoke', action='store_true', help='a live capture under <root>/smoke/, labelled smoke — never a session')
     p.add_argument('--force', action='store_true', help='capture again what a marker says is done (the dedupe still holds)')
     p.add_argument('--official', action='store_true', help='--settle: ask the daily bar even under a tight budget')
-    p.add_argument('--spxw', action='store_true', help='add fly_spxw (SPXW ±5 and ±25 flies at 15:00 and 15:30; 3–5 calls a session more)')
+    p.add_argument('--spxw', action=argparse.BooleanOptionalAction, default=(os.environ.get('PAPER_SPXW', '1') not in ('0', 'false', 'no')),
+                   help='fly_spxw (SPXW ±5 and ±25 flies at 15:00 and 15:30; 3–5 calls a session more) — ON by default since the owner\'s final patch; --no-spxw or PAPER_SPXW=0 turns it off')
     p.add_argument('--data', default=os.environ.get('PAPER_DATA') or str(R.REPO / 'data_recorder' / 'paper'),
                    help='the data root (PAPER_DATA, else data_recorder/paper in the repo)')
     p.add_argument('--budget', type=int, default=int(os.environ.get('PAPER_BUDGET') or DEFAULT_BUDGET),
