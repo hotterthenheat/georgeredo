@@ -12,3 +12,6 @@ __pycache__/
 # deep-research intermediate caches (raw option bars, grid arrays)
 research/**/*.pkl
 research/**/*.npz
+
+# the Compass Phase 2 recorder's Parquet store (scripts/eod_recorder.py) — local data, never committed
+data_recorder/

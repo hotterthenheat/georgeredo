@@ -1,0 +1,15 @@
+# Starts eod_recorder.service (the daemon) at boot and every weekday at 09:00 New York if it is not already running —
+# belt and braces for the always-on box. Copy beside the service, then:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now eod_recorder.timer
+# Without a daemon at all, run the passes from cron with --auto instead (scripts/eod_recorder.README.md "cron").
+[Unit]
+Description=Start the Compass Phase 2 recorder
+
+[Timer]
+OnBootSec=2min
+OnCalendar=Mon..Fri 09:00 America/New_York
+Persistent=true
+Unit=eod_recorder.service
+
+[Install]
+WantedBy=timers.target

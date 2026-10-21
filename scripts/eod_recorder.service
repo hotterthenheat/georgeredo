@@ -1,0 +1,23 @@
+# The Compass Phase 2 recorder (scripts/eod_recorder.py --daemon) as a systemd service on a Linux box that is always
+# on. Copy to /etc/systemd/system/eod_recorder.service, set User, WorkingDirectory and the EnvironmentFile, then:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now eod_recorder
+# The token lives in the EnvironmentFile OUTSIDE the repository (UW_API_TOKEN=…; optionally RECORDER_DATA=…,
+# RECORDER_BUDGET=…), mode 600, owned by the service's user. Nothing is read from a file inside the repo.
+# scripts/eod_recorder.timer (optional) starts this unit at boot and each weekday morning if it is not running.
+[Unit]
+Description=Compass Phase 2 recorder (Unusual Whales, append-only Parquet)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=compass
+WorkingDirectory=/home/compass/georgeredo
+EnvironmentFile=/home/compass/.config/eod_recorder/env
+ExecStart=/usr/bin/python3 -I scripts/eod_recorder.py --daemon
+Restart=always
+RestartSec=10
+# a stopped daemon loses nothing: on restart it runs a missed EOD pass of the day, and the markers skip what is recorded
+
+[Install]
+WantedBy=multi-user.target
