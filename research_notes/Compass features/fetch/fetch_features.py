@@ -772,7 +772,9 @@ def tman(rec: dict):
 
 
 def theta_gap_wait():
-    """never ask Theta between 00:00 and 01:45 New York"""
+    """never ask Theta between 00:00 and 01:45 New York (THETA_IGNORE_GAP=1 skips the wait: the owner asked for it)"""
+    if os.environ.get('THETA_IGNORE_GAP') == '1':
+        return
     while True:
         n = dt.datetime.now(NY)
         if n.hour == 0 or (n.hour == 1 and n.minute < 45):
