@@ -1,0 +1,252 @@
+{
+ "day": "2026-10-12",
+ "files": {
+  "data/index/SPX/2026-10-12.parquet": {
+   "checks": {
+    "duplicates": 0,
+    "minutes": 391,
+    "minutes_expected": 391,
+    "priced": 389,
+    "priced_expected": 389,
+    "rows": 391
+   },
+   "fetched_at": "2026-10-22T00:43:59Z",
+   "placed": "placed",
+   "problems": [],
+   "request": {
+    "call": "index_history_price",
+    "date": "2026-10-12",
+    "raw_rows": 391,
+    "seconds": 0.1,
+    "statuses": [
+     "OK"
+    ],
+    "symbol": "SPX"
+   },
+   "rows": 391,
+   "run": "20261022T004357Z",
+   "sha256": "e6182e2a1b4e0fad5e5a0e01bbecf97bdc83c372c5b7cb3718deeaaa9b4f1378",
+   "staged": null,
+   "status": "ok",
+   "tries": 1,
+   "via": "thetadata SDK 1.0.14 (gRPC)"
+  },
+  "data/index/VIX/2026-10-12.parquet": {
+   "checks": {
+    "duplicates": 0,
+    "minutes": 391,
+    "minutes_expected": 391,
+    "priced": 390,
+    "priced_expected": 390,
+    "rows": 391
+   },
+   "fetched_at": "2026-10-22T00:43:59Z",
+   "placed": "placed",
+   "problems": [],
+   "request": {
+    "call": "index_history_price",
+    "date": "2026-10-12",
+    "raw_rows": 391,
+    "seconds": 0.0,
+    "statuses": [
+     "OK"
+    ],
+    "symbol": "VIX"
+   },
+   "rows": 391,
+   "run": "20261022T004357Z",
+   "sha256": "87a656a1980f5f6829415ae43acda0fcc84fdae502e1a64febce9a11ed4d6d90",
+   "staged": null,
+   "status": "ok",
+   "tries": 1,
+   "via": "thetadata SDK 1.0.14 (gRPC)"
+  },
+  "data/underlying/QQQ/2026-10-12.parquet": {
+   "checks": {
+    "duplicates": 0,
+    "minutes": 391,
+    "minutes_expected": 391,
+    "priced": 390,
+    "priced_expected": 390,
+    "rows": 391,
+    "volume": 21776026,
+    "volume_norm": 28329897.0
+   },
+   "fetched_at": "2026-10-22T00:43:57Z",
+   "placed": "placed",
+   "problems": [],
+   "request": {
+    "call": "stock_history_ohlc",
+    "date": "2026-10-12",
+    "raw_rows": 391,
+    "seconds": 1.9,
+    "statuses": [
+     "OK"
+    ],
+    "symbol": "QQQ"
+   },
+   "rows": 391,
+   "run": "20261022T004357Z",
+   "sha256": "e954300d695539b40dbaf3eba202b8229602791f90e192fb32953bcd772892bd",
+   "staged": null,
+   "status": "ok",
+   "tries": 1,
+   "venue": "nqb (the SDK default, as the stored bars)",
+   "via": "thetadata SDK 1.0.14 (gRPC)"
+  },
+  "data/underlying/SPY/2026-10-12.parquet": {
+   "checks": {
+    "duplicates": 0,
+    "minutes": 391,
+    "minutes_expected": 391,
+    "priced": 390,
+    "priced_expected": 390,
+    "rows": 391,
+    "volume": 16131060,
+    "volume_norm": 35466117.0
+   },
+   "fetched_at": "2026-10-22T00:43:50Z",
+   "placed": "placed",
+   "problems": [],
+   "request": {
+    "call": "stock_history_ohlc",
+    "date": "2026-10-12",
+    "raw_rows": 391,
+    "seconds": 1.9,
+    "statuses": [
+     "OK"
+    ],
+    "symbol": "SPY"
+   },
+   "rows": 391,
+   "run": "20261022T004350Z",
+   "sha256": "0bc3c3fbc7545c38861d57ed8ab9fdd315fa785fae7c706f7ed45143226b4e0b",
+   "staged": null,
+   "status": "ok",
+   "tries": 1,
+   "venue": "nqb (the SDK default, as the stored bars)",
+   "via": "thetadata SDK 1.0.14 (gRPC)"
+  },
+  "data_full/chains/QQQ/2026-10-12.parquet": {
+   "checks": {
+    "contracts": 360,
+    "crossed": 0,
+    "crossed_share": 0.0,
+    "duplicates": 0,
+    "grid": 1.0,
+    "minutes": 391,
+    "minutes_expected": 391,
+    "negative": 0,
+    "no_quote_after_0930": 0,
+    "no_quote_share": 0.0,
+    "one_sided_strikes": 0,
+    "rows": 140760,
+    "strike_median": 730.5,
+    "strikes": 180,
+    "strikes_norm": 186.0,
+    "zero_bid_share": 0.413
+   },
+   "fetched_at": "2026-10-22T00:44:06Z",
+   "placed": "placed",
+   "problems": [],
+   "request": {
+    "call": "option_history_quote",
+    "date": "2026-10-12",
+    "raw_rows": 140760,
+    "seconds": 7.4,
+    "statuses": [
+     "OK"
+    ],
+    "symbol": "QQQ"
+   },
+   "rows": 140760,
+   "run": "20261022T004357Z",
+   "sha256": "0604e6fc07e71f518152d249a4027d164f00c839fd19f45420c1626ebb2bd00f",
+   "staged": null,
+   "status": "ok",
+   "tries": 1,
+   "via": "thetadata SDK 1.0.14 (gRPC)"
+  },
+  "data_full/chains/SPXW/2026-10-12.parquet": {
+   "checks": {
+    "contracts": 488,
+    "crossed": 0,
+    "crossed_share": 0.0,
+    "duplicates": 0,
+    "grid": 1.0,
+    "minutes": 391,
+    "minutes_expected": 391,
+    "negative": 0,
+    "no_quote_after_0930": 0,
+    "no_quote_share": 0.0,
+    "one_sided_strikes": 0,
+    "rows": 190808,
+    "strike_median": 7587.5,
+    "strikes": 244,
+    "strikes_norm": 250.5,
+    "zero_bid_share": 0.3812
+   },
+   "fetched_at": "2026-10-22T00:44:14Z",
+   "placed": "placed",
+   "problems": [],
+   "request": {
+    "call": "option_history_quote",
+    "date": "2026-10-12",
+    "raw_rows": 190808,
+    "seconds": 9.6,
+    "statuses": [
+     "OK"
+    ],
+    "symbol": "SPXW"
+   },
+   "rows": 190808,
+   "run": "20261022T004357Z",
+   "sha256": "d699f1911adc917ac058ec7cfdd0691e638d323669caf3c839ac2464d931caad",
+   "staged": null,
+   "status": "ok",
+   "tries": 1,
+   "via": "thetadata SDK 1.0.14 (gRPC)"
+  },
+  "data_full/chains/SPY/2026-10-12.parquet": {
+   "checks": {
+    "contracts": 302,
+    "crossed": 0,
+    "crossed_share": 0.0,
+    "duplicates": 0,
+    "grid": 1.0,
+    "minutes": 391,
+    "minutes_expected": 391,
+    "negative": 0,
+    "no_quote_after_0930": 0,
+    "no_quote_share": 0.0,
+    "one_sided_strikes": 0,
+    "rows": 118082,
+    "strike_median": 763.0,
+    "strikes": 151,
+    "strikes_norm": 171.0,
+    "zero_bid_share": 0.4199
+   },
+   "fetched_at": "2026-10-22T00:44:00Z",
+   "placed": "placed",
+   "problems": [],
+   "request": {
+    "call": "option_history_quote",
+    "date": "2026-10-12",
+    "raw_rows": 118082,
+    "seconds": 6.2,
+    "statuses": [
+     "OK"
+    ],
+    "symbol": "SPY"
+   },
+   "rows": 118082,
+   "run": "20261022T004357Z",
+   "sha256": "a470f7cabe0dd7b9a2dc9cf3efc2331c625b1c26d41756a34987e1ed50329627",
+   "staged": null,
+   "status": "ok",
+   "tries": 1,
+   "via": "thetadata SDK 1.0.14 (gRPC)"
+  }
+ },
+ "session": "full"
+}

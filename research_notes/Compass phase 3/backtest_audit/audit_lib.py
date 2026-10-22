@@ -163,8 +163,11 @@ def theta_eod(symbols=('SPY', 'QQQ'), lake: Path = REPO / 'data_lake' / 'thetada
 
 
 def uw_daily(symbols=('SPY', 'QQQ'), lake: Path = REPO / 'data_lake' / 'unusualwhales') -> pl.DataFrame:
-    fs = sorted(glob.glob(str(lake / 'ohlc__1d.part0*.parquet')))
-    u = pl.concat([pl.scan_parquet(f).filter(pl.col('ticker').is_in(list(symbols)) & (pl.col('market_time') == 'r')).collect() for f in fs])
+    # the lake's year of daily bars (to 2026-10-13) and the forward days' official closes fetched from the same UW route
+    # (/api/stock/{T}/ohlc/1d, kept as fetched under data/official_closes/)
+    fs = sorted(glob.glob(str(lake / 'ohlc__1d.part0*.parquet'))) + sorted(glob.glob(str(REPO / 'data' / 'official_closes' / 'uw_ohlc_1d_*.parquet')))
+    u = pl.concat([pl.scan_parquet(f).filter(pl.col('ticker').is_in(list(symbols)) & (pl.col('market_time') == 'r'))
+                   .select('ticker', 'date', 'close').collect() for f in fs])
     return u.select(pl.col('ticker').alias('symbol'), pl.col('date').alias('day'), pl.col('close').cast(pl.Float64).alias('close_uw')).unique()
 
 

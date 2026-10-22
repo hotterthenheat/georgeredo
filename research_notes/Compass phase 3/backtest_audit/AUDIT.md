@@ -1,6 +1,6 @@
 # Audit of the paper tracker's historical replay, 2022-11-11 → 2026-10-09
 
-Written 2026-10-22 00:40 UTC by `run_audit.py` in this folder (93 s). It reads the replay's rows (`data_recorder/paper_backtest`, `source = backtest-parquet`), the stored minute Parquet (`PAPER_PARQUET_ROOT`), Theta's EOD daily bars (`data_lake/thetadata/stock_eod`), UW's daily bars (`data_lake/unusualwhales/ohlc__1d.part0*.parquet`, the `r` rows) and `data/macro_events_2022_2027.json`. Nothing is fetched and the replay's code and rows are not touched. The corrected cumulative report is `cumulative_through_2026-10-21.md`; the tables behind both are in `out/`.
+Written 2026-10-22 00:50 UTC by `run_audit.py` in this folder (92 s). It reads the replay's rows (`data_recorder/paper_backtest`, `source = backtest-parquet`), the stored minute Parquet (`PAPER_PARQUET_ROOT`), Theta's EOD daily bars (`data_lake/thetadata/stock_eod`), UW's daily bars (`data_lake/unusualwhales/ohlc__1d.part0*.parquet`, the `r` rows) and `data/macro_events_2022_2027.json`. Nothing is fetched and the replay's code and rows are not touched. The corrected cumulative report is `cumulative_through_2026-10-21.md`; the tables behind both are in `out/`.
 
 ## Summary
 
@@ -166,22 +166,22 @@ Session P&L correlation, 2025-01-02 → 2026-10-09 (official close, NBBO):
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | condor_em1 (SPY 2-wide iron condor, straddle edge, 11:30–13:30) | i | 2022-11-11 → 2024-12-31 | 2358 | 525 / 530 | +3.47 | 2.16% | $173 | +15.46 | [-0.73, +31.74] | [-2.26, +31.58] | [-0.16, +29.96] | [-0.04, +6.68] | +0.04 -0.01 -0.09 -0.08 +0.01 | 730 / 606 | +8,193 |
 | condor_em1 (SPY 2-wide iron condor, straddle edge, 11:30–13:30) | ii | 2025-01-02 → 2026-10-09 | 2068 | 439 / 441 | +4.10 | 2.46% | $167 | +19.25 | [-2.26, +38.82] | [-3.06, +38.70] | [-2.40, +38.40] | [-0.51, +8.15] | -0.02 -0.01 -0.01 +0.07 -0.03 | 440 / 464 | +8,487 |
-| condor_em1 (SPY 2-wide iron condor, straddle edge, 11:30–13:30) | iii | 2026-10-12 → 2026-10-21 | 0 | 0 | — | — | — | — | — | — | — | — | — | — | — |
+| condor_em1 (SPY 2-wide iron condor, straddle edge, 11:30–13:30) | iii | 2026-10-12 → 2026-10-21 | 39 | 8 / 8 | +6.35 | 3.47% | $172 | +30.95 | [-117.63, +125.75] | — | — | — | -0.04 -0.38 -0.23 +0.06 +0.06 | 45 / — | +248 |
 | fly5 iron ±5 (SPY+QQQ, 15:00 and 15:30) | i | 2022-11-11 → 2024-12-31 | 2095 | 530 / 530 | +16.59 | 4.74% | $399 | +65.58 | [+43.08, +87.28] | [+42.54, +89.37] | [+49.06, +91.11] | [+12.41, +23.06] | +0.01 -0.03 +0.01 -0.01 -0.02 | 580 / 629 | +34,755 |
 | fly5 long call ±5 | i | 2022-11-11 → 2024-12-31 | 2095 | 530 / 530 | +9.60 | 2.96% | $406 | +37.95 | [+14.70, +59.95] | [+14.27, +61.80] | [+20.94, +64.30] | [+5.29, +16.25] | +0.02 -0.02 +0.01 -0.01 -0.02 | 549 / 596 | +20,116 |
 | fly5 long put ±5 | i | 2022-11-11 → 2024-12-31 | 2097 | 530 / 530 | +7.43 | 2.43% | $408 | +29.42 | [+6.08, +51.25] | [+5.36, +53.67] | [+11.92, +56.63] | [+3.01, +14.31] | +0.01 -0.01 +0.01 +0.01 -0.01 | 515 / 542 | +15,591 |
 | fly5 iron ±5 (SPY+QQQ, 15:00 and 15:30) | ii | 2025-01-02 → 2026-10-09 | 1757 | 441 / 441 | +16.20 | 5.42% | $366 | +64.54 | [+34.13, +92.37] | [+37.19, +92.60] | [+40.67, +89.07] | [+10.26, +22.36] | -0.02 -0.05 +0.01 -0.05 -0.06 | 663 / 663 | +28,463 |
 | fly5 long call ±5 | ii | 2025-01-02 → 2026-10-09 | 1757 | 441 / 441 | +7.13 | 2.93% | $375 | +28.41 | [-3.04, +56.35] | [+0.40, +56.54] | [+3.06, +53.91] | [+0.77, +13.53] | -0.01 -0.05 +0.01 -0.05 -0.06 | 639 / 622 | +12,531 |
 | fly5 long put ±5 | ii | 2025-01-02 → 2026-10-09 | 1757 | 441 / 441 | +5.58 | 2.53% | $377 | +22.22 | [-9.01, +49.80] | [-5.47, +50.67] | [-4.15, +47.72] | [-1.04, +12.00] | -0.02 -0.05 +0.02 -0.04 -0.06 | 630 / 607 | +9,800 |
-| fly5 iron ±5 (SPY+QQQ, 15:00 and 15:30) | iii | 2026-10-12 → 2026-10-21 | 0 | 0 | — | — | — | — | — | — | — | — | — | — | — |
-| fly5 long call ±5 | iii | 2026-10-12 → 2026-10-21 | 0 | 0 | — | — | — | — | — | — | — | — | — | — | — |
-| fly5 long put ±5 | iii | 2026-10-12 → 2026-10-21 | 0 | 0 | — | — | — | — | — | — | — | — | — | — | — |
+| fly5 iron ±5 (SPY+QQQ, 15:00 and 15:30) | iii | 2026-10-12 → 2026-10-21 | 32 | 8 / 8 | +52.62 | 17.52% | $361 | +210.47 | [+63.03, +352.11] | — | — | — | -0.17 -0.15 +0.07 -0.09 +0.27 | 11 / — | +1,684 |
+| fly5 long call ±5 | iii | 2026-10-12 → 2026-10-21 | 32 | 8 / 8 | +49.68 | 16.47% | $364 | +198.72 | [+51.40, +337.10] | — | — | — | -0.16 -0.17 +0.07 -0.08 +0.28 | 12 / — | +1,590 |
+| fly5 long put ±5 | iii | 2026-10-12 → 2026-10-21 | 32 | 8 / 8 | +50.21 | 16.63% | $364 | +200.85 | [+53.64, +341.64] | — | — | — | -0.16 -0.15 +0.08 -0.09 +0.27 | 11 / — | +1,607 |
 | condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | i-a | 2022-11-11 → 2024-06-30 | 1823 | 403 / 405 | +2.42 | 1.53% | $171 | +10.88 | [-8.26, +29.12] | [-6.13, +27.35] | [-3.59, +22.52] | [-0.77, +4.99] | -0.03 -0.05 -0.08 -0.10 +0.06 | 658 / 857 | +4,407 |
 | condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | i-b | 2024-07-01 → 2024-12-31 | 572 | 125 / 125 | +8.71 | 5.25% | $169 | +39.86 | [+4.36, +73.08] | [+2.07, +73.25] | [+16.68, +74.80] | [+3.68, +15.89] | +0.17 -0.10 -0.15 -0.12 -0.13 | 323 / 186 | +4,983 |
 | condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | ii | 2025-01-02 → 2026-10-09 | 2090 | 440 / 441 | +7.67 | 4.68% | $168 | +36.36 | [+18.25, +53.22] | [+17.68, +53.66] | [+18.42, +51.77] | [+3.87, +10.89] | +0.02 -0.01 +0.02 +0.04 -0.08 | 453 / 466 | +16,034 |
-| condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | iii | 2026-10-12 → 2026-10-21 | 0 | 0 | — | — | — | — | — | — | — | — | — | — | — |
+| condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | iii | 2026-10-12 → 2026-10-21 | 36 | 8 / 8 | +21.59 | 12.83% | $171 | +97.18 | [+67.85, +124.20] | — | — | — | +0.05 -0.18 +0.22 -0.13 -0.05 | 9 / — | +777 |
 
-The session autocorrelations at lags 1–5 are within ±0.10 on every series except condor_d20 i-b (max |ρ| 0.17), and the block-5 and block-20 intervals are close to the iid-session ones: dependence between neighbouring sessions adds little width here. What changes the reading is the official-close settlement (section 2) and the period split (sections 5–6).
+The session autocorrelations at lags 1–5 are within ±0.10 on every series except condor_em1 iii (max |ρ| 0.38), fly5 iron ±5 iii (max |ρ| 0.27), fly5 long call ±5 iii (max |ρ| 0.28), fly5 long put ±5 iii (max |ρ| 0.27), condor_d20 i-b (max |ρ| 0.17), condor_d20 iii (max |ρ| 0.22), and the block-5 and block-20 intervals are close to the iid-session ones: dependence between neighbouring sessions adds little width here. What changes the reading is the official-close settlement (section 2) and the period split (sections 5–6).
 
 ## 5. Periods: training, selection, untouched forward
 
@@ -202,7 +202,7 @@ Defined from the research notes, never pooled into one headline:
 
 Sources: condor_em1 — `research_notes/Compass phase 2/hyp_b_boundary_theta.md` ("The pre-registered picks": the midday pick was the VIX-mid cell, its all-VIX parent fourth by the fit lower bound; "The rule, conditional on X" drops the VIX cut after "the VIX cut that made it the pick did not help OOS"). fly5 — `hyp_c_debit_flies.md` (pre-registered 15:00 iron ±2, call ±2, call ±5; "a neighbouring cell I did not pick (the IRON ±5 …) … identified after the OOS read") and `Compass phase 3/hyp_f_cash_butterfly.md` ("the primary cell was named … after C's OOS was printed"). condor_d20 — `hyp_e_short_premium_lift.md` and `scripts/models/t2_spy_full.manifest.json` (fit = sessions before 2024-07-01, 405 sessions, in-sample AUC 0.81 against 0.61 out of fold; cuts = the score quantiles of 2024-07 → 2024-12; frozen 2026-10-21T21:32Z, after the OOS read at 21:01Z); its section 4: "NOT PRE-REGISTRABLE … The OOS lift is read for the record only".
 
-**There is no untouched forward period on the stored data for any candidate.** Every session from 2022-11-11 to 2026-10-09 was either the development span or the span the candidate was chosen on. The first untouched sessions are 2026-10-12 onward; they are not in the stored files and wait for the fetch (`paper_tracker.py --fetch-theta` on the owner's machine, then `--backtest` over them). Forward sessions expected through 2026-10-21: 8; fetched: 0.
+**There is no untouched forward period on the stored data for any candidate.** Every session from 2022-11-11 to 2026-10-09 was either the development span or the span the candidate was chosen on. The first untouched sessions are 2026-10-12 onward; they are not in the stored files and wait for the fetch (`paper_tracker.py --fetch-theta` on the owner's machine, then `--backtest` over them). Forward sessions expected through 2026-10-21: 8; fetched: 8.
 
 ## 6. D1 selection bias
 
@@ -264,15 +264,20 @@ SPY and QQQ options are American-style and physically settled: an option in the 
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | condor_em1 (SPY 2-wide iron condor, straddle edge, 11:30–13:30) | i | 2358 | 23.2% | 23.2% | 3.5% | 19.8% (8.9% long, 10.8% short) | 3.5% | $46,733 / $60,433 | $173 | 1.0% / 10.3% / 22.5% | 1.4% |
 | condor_em1 (SPY 2-wide iron condor, straddle edge, 11:30–13:30) | ii | 2068 | 23.4% | 23.4% | 6.4% | 16.9% (8.3% long, 8.6% short) | 6.4% | $66,391 / $77,722 | $167 | 0.6% / 8.6% / 15.5% | 1.5% |
+| condor_em1 (SPY 2-wide iron condor, straddle edge, 11:30–13:30) | iii | 39 | 23.1% | 23.1% | 2.6% | 20.5% (12.8% long, 7.7% short) | 2.6% | $76,959 / $77,801 | $172 | 7.7% / 12.8% / 15.4% | 0.0% |
 | fly5 iron ±5 (SPY+QQQ, 15:00 and 15:30) | i | 2095 | 99.7% | 99.7% | 0.7% | 98.9% (47.1% long, 51.9% short) | 0.7% | $43,706 / $60,781 | $399 | 1.4% / 23.5% / 42.4% | 2.1% |
 | fly5 iron ±5 (SPY+QQQ, 15:00 and 15:30) | ii | 1757 | 99.6% | 99.6% | 1.8% | 97.8% (47.0% long, 50.8% short) | 1.8% | $63,509 / $77,909 | $366 | 1.0% / 16.8% / 32.2% | 2.0% |
+| fly5 iron ±5 (SPY+QQQ, 15:00 and 15:30) | iii | 32 | 96.9% | 96.9% | 0.0% | 96.9% (28.1% long, 68.8% short) | 0.0% | $74,987 / $77,810 | $361 | 9.4% / 28.1% / 31.2% | 6.2% |
 | fly5 long call ±5 | i | 2095 | 99.4% | 52.0% | 99.4% | 99.3% (47.4% long, 51.9% short) | 0.1% | $43,718 / $60,781 | $406 | 1.4% / 23.5% / 42.4% | 1.8% |
 | fly5 long call ±5 | ii | 1757 | 99.0% | 51.6% | 99.0% | 98.2% (47.4% long, 50.8% short) | 0.8% | $63,532 / $77,909 | $375 | 1.0% / 16.8% / 32.2% | 1.5% |
+| fly5 long call ±5 | iii | 32 | 100.0% | 68.8% | 100.0% | 100.0% (31.2% long, 68.8% short) | 0.0% | $74,918 / $77,810 | $364 | 9.4% / 28.1% / 31.2% | 6.2% |
 | fly5 long put ±5 | i | 2097 | 99.9% | 47.6% | 99.9% | 99.3% (47.0% long, 52.3% short) | 0.6% | $43,722 / $60,781 | $408 | 1.4% / 23.6% / 42.4% | 1.7% |
 | fly5 long put ±5 | ii | 1757 | 99.2% | 48.0% | 99.2% | 98.2% (47.0% long, 51.2% short) | 1.0% | $63,532 / $77,909 | $377 | 1.0% / 16.8% / 32.2% | 2.0% |
+| fly5 long put ±5 | iii | 32 | 100.0% | 28.1% | 100.0% | 100.0% (28.1% long, 71.9% short) | 0.0% | $74,918 / $77,810 | $364 | 9.4% / 28.1% / 31.2% | 3.1% |
 | condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | i-a | 1823 | 29.3% | 29.3% | 3.3% | 26.0% (11.1% long, 14.9% short) | 3.3% | $44,437 / $54,710 | $171 | 1.0% / 15.2% / 32.3% | 1.1% |
 | condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | i-b | 572 | 21.5% | 21.5% | 4.9% | 16.6% (8.0% long, 8.6% short) | 4.9% | $57,238 / $60,766 | $169 | 1.6% / 12.9% / 24.8% | 1.6% |
 | condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | ii | 2090 | 24.3% | 24.3% | 4.1% | 20.2% (9.5% long, 10.7% short) | 4.1% | $65,899 / $77,326 | $168 | 0.6% / 13.2% / 25.0% | 2.2% |
+| condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | iii | 36 | 11.1% | 11.1% | 0.0% | 11.1% (2.8% long, 8.3% short) | 0.0% | $77,276 / $77,801 | $171 | 5.6% / 13.9% / 30.6% | 0.0% |
 
 After the close (2025-10-13 → 2026-10-09 only, where UW's post-market bar is on disk): the share of trades whose post-market range (16:00–20:00, so an upper bound for the window to the exercise cut-off) took a short strike across the money — the trades where the assignment was undecided at 16:00: condor_em1 (SPY 2-wide iron condor, straddle edge, 11:30–13:30) 38.1% of 1183; fly5 iron ±5 (SPY+QQQ, 15:00 and 15:30) 56.6% of 987; fly5 long call ±5 56.4% of 987; fly5 long put ±5 56.0% of 987; condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) 51.7% of 1176.
 
@@ -282,15 +287,20 @@ After the close (2025-10-13 → 2026-10-09 only, where UW's post-market bar is o
 |---|---|---|---|---|---|---|---|
 | condor_em1 (SPY 2-wide iron condor, straddle edge, 11:30–13:30) | i | +3.47 | -4.83 (2358) | -0.83 | $4.18 | -0.54 (0.6%) | -1.33 (0.0%) |
 | condor_em1 (SPY 2-wide iron condor, straddle edge, 11:30–13:30) | ii | +4.10 | -7.52 (2062) | -2.81 | $4.61 | -2.66 (0.6%) | -3.47 (0.2%) |
+| condor_em1 (SPY 2-wide iron condor, straddle edge, 11:30–13:30) | iii | +6.35 | -6.28 (39) | -2.47 | $4.87 | +2.84 (0.0%) | +1.53 (0.0%) |
 | fly5 iron ±5 (SPY+QQQ, 15:00 and 15:30) | i | +16.59 | -7.81 (2095) | -1.65 | $4.04 | -4.08 (0.9%) | -6.81 (0.0%) |
 | fly5 iron ±5 (SPY+QQQ, 15:00 and 15:30) | ii | +16.20 | -13.77 (1752) | -6.53 | $4.52 | -9.20 (1.9%) | -12.90 (0.3%) |
+| fly5 iron ±5 (SPY+QQQ, 15:00 and 15:30) | iii | +52.62 | +3.07 (32) | +7.51 | $4.71 | +10.55 (0.0%) | +5.29 (0.0%) |
 | fly5 long call ±5 | i | +9.60 | -31.37 (2095) | -2.65 | $4.59 | -27.48 (0.8%) | -30.32 (0.0%) |
 | fly5 long call ±5 | ii | +7.13 | -35.98 (1754) | -7.59 | $4.72 | -30.05 (0.8%) | -33.65 (0.1%) |
+| fly5 long call ±5 | iii | +49.68 | -3.92 (32) | +7.41 | $4.92 | +2.29 (0.0%) | -3.79 (0.0%) |
 | fly5 long put ±5 | i | +7.43 | -36.63 (2097) | -1.81 | $4.66 | -32.06 (0.1%) | -34.73 (0.0%) |
 | fly5 long put ±5 | ii | +5.58 | -39.19 (1752) | -6.15 | $4.99 | -32.87 (1.1%) | -36.85 (0.2%) |
+| fly5 long put ±5 | iii | +50.21 | -2.81 (32) | +7.43 | $5.00 | +9.04 (0.0%) | +4.61 (0.0%) |
 | condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | i-a | +2.42 | -5.66 (1823) | -1.61 | $4.21 | -1.24 (0.6%) | -2.44 (0.0%) |
 | condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | i-b | +8.71 | -6.62 (572) | -2.22 | $4.35 | -0.93 (0.2%) | -2.70 (0.2%) |
 | condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | ii | +7.67 | -5.54 (2084) | -1.03 | $4.72 | +0.35 (1.0%) | -1.23 (0.5%) |
+| condor_d20 (SPY 2-wide 20-delta iron condor, 13:00–15:00) | iii | +21.59 | +1.16 (36) | +5.05 | $5.04 | +14.91 (0.0%) | +8.16 (0.0%) |
 
 **What the hold-to-expiration payoff assumes, by account.**
 
@@ -298,7 +308,7 @@ After the close (2025-10-13 → 2026-10-09 only, where UW's post-market bar is o
 - **Margin account with spread approval.** It can carry an assignment overnight, but then the position is no longer the defined-risk structure: one side assigned and the other not (the "stock left" column — about one condor in five, nearly every fly) is a 100-share position exposed to the overnight gap, with the margin it needs; and near a short strike (the pin columns) the writer does not know at 16:00 whether he will be assigned. A positive defined-risk payoff at intrinsic does not remove this; the modeled P&L also charges no exercise, assignment or stock commission.
 - **With an early close.** Closing before the close removes the delivery problem and costs the exit's bid-ask, the last minutes' time value and the fees; on the tracker's full 15:58 exit every candidate's mean turns negative in every period, and at the mids it is still negative. Closing only the legs within $0.50 or $1.00 of the money gives back most or all of the hold's mean as well (the condors land near zero, the flies stay negative) and still leaves a few trades with a leg in the money. **On this data the hold-to-expiration P&L is the only one that is positive, and it is the one a cash account cannot achieve and a margin account can achieve only by carrying assignment and overnight stock risk the P&L does not price.**
 
-**SPXW is a different instrument and these results do not transfer.** SPXW options are cash-settled, European-style (no early exercise, no delivery) and PM-settled on the official SPX closing value; their quotes, widths and fees differ (index option fees and the $0.05 complex-order step), and Hypothesis B found SPXW condors negative or flat at the NBBO. On disk: same-day SPXW chains, 1-minute NBBO, 1106 session files 2022-05-13 → 2026-10-09; SPX 1-minute prints 2353 files 2017-06-01 → 2026-10-09 (the research's settlement proxy: the last print at or before 16:00); the official SPX closing value only in Theta's flat index_eod for 2026-10-06, 2026-10-07, 2026-10-08, 2026-10-09, 2026-10-12. The replay's fly_spxw candidate has been run only as a one-week sanity run (2026-10-05 → 09, outside the repository). An SPXW alternative needs its own backtest on actual SPXW contracts and quotes, SPXW fees, a stated package-fill rule in $0.05 steps, and the official SPX closing value for every session (not on disk before 2026-10-06).
+**SPXW is a different instrument and these results do not transfer.** SPXW options are cash-settled, European-style (no early exercise, no delivery) and PM-settled on the official SPX closing value; their quotes, widths and fees differ (index option fees and the $0.05 complex-order step), and Hypothesis B found SPXW condors negative or flat at the NBBO. On disk: same-day SPXW chains, 1-minute NBBO, 1114 session files 2022-05-13 → 2026-10-21; SPX 1-minute prints 2361 files 2017-06-01 → 2026-10-21 (the research's settlement proxy: the last print at or before 16:00); the official SPX closing value only in Theta's flat index_eod for 2026-10-06, 2026-10-07, 2026-10-08, 2026-10-09, 2026-10-12. The replay's fly_spxw candidate has been run only as a one-week sanity run (2026-10-05 → 09, outside the repository). An SPXW alternative needs its own backtest on actual SPXW contracts and quotes, SPXW fees, a stated package-fill rule in $0.05 steps, and the official SPX closing value for every session (not on disk before 2026-10-06).
 
 ## 9. Files and commands
 
