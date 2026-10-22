@@ -465,9 +465,9 @@ The time-matched lift of D1 (Hypothesis E §8: Σ_s N_D1(s)·[mean(D1 at s) − 
 <!-- cumulative:historical:end -->
 
 <!-- cumulative:forward:begin -->
-# Forward — period iii, 8 sessions, 2026-10-12 → 2026-10-21
+# Forward — period iii, 9 sessions, 2026-10-12 → 2026-10-22
 
-Regenerated from the replay root `paper_backtest_official` by the append (`paper-backtest-2026-10-22.2`, 2026-10-22 02:38 UTC); a session listed here is never dropped. These sessions are untouched by any rule, model or choice — an execution and data-quality record until the thresholds (60 → 120 sessions for condor_em1, 150 for condor_d20's D1 re-test, 250 a name for fly5).
+Regenerated from the replay root `paper_backtest_official` by the append (`paper-backtest-2026-10-22.2`, 2026-10-22 22:00 UTC); a session listed here is never dropped. These sessions are untouched by any rule, model or choice — an execution and data-quality record until the thresholds (60 → 120 sessions for condor_em1, 150 for condor_d20's D1 re-test, 250 a name for fly5).
 
 ### Settlement: the official close
 
@@ -475,8 +475,8 @@ The options settle (and are auto-exercised) on the primary listing's official cl
 
 | name | sessions settled | official close (source) | 15:59 bar fallback (flagged) | official − 15:59 bar: mean / max |abs| | sessions where they differ by > $0.05 |
 |---|---|---|---|---|---|
-| QQQ | 8 | 8 (uw_1d 8) | 0 | 0.072 / 0.13 | 7 |
-| SPY | 8 | 8 (uw_1d 8) | 0 | 0.029 / 0.06 | 1 |
+| QQQ | 9 | 9 (uw_1d 9) | 0 | 0.078 / 0.13 | 8 |
+| SPY | 9 | 9 (uw_1d 9) | 0 | 0.027 / 0.06 | 1 |
 
 No session fell back to the 15:59 bar.
 
@@ -490,7 +490,7 @@ Official close, every leg at its own NBBO, $0.65 a contract at the open, nothing
 
 | structure | period | sessions | trades | traded / run | mean $ a trade | block-20 CI (trade) | mean % of max risk | mean $ a session | session CI (iid) | session CI (block-20) | total $ | win | max drawdown $ (sessions) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| condor | iii | 8 | 39 | 8 / 8 | +6.35 | — | 3.47% | +30.95 | [-117.63, +125.75] | — | +248 | 84.6% | 455 |
+| condor | iii | 9 | 44 | 9 / 9 | +9.99 | — | 5.84% | +48.84 | [-85.89, +139.11] | — | +440 | 86.4% | 455 |
 
 #### fly5
 
@@ -498,9 +498,9 @@ Official close, every leg at its own NBBO, $0.65 a contract at the open, nothing
 
 | structure | period | sessions | trades | traded / run | mean $ a trade | block-20 CI (trade) | mean % of max risk | mean $ a session | session CI (iid) | session CI (block-20) | total $ | win | max drawdown $ (sessions) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| iron | iii | 8 | 32 | 8 / 8 | +52.62 | — | 17.52% | +210.48 | [+63.03, +352.11] | — | +1,684 | 68.8% | 100 |
-| call | iii | 8 | 32 | 8 / 8 | +49.68 | — | 16.47% | +198.73 | [+51.40, +337.10] | — | +1,590 | 68.8% | 112 |
-| put | iii | 8 | 32 | 8 / 8 | +50.21 | — | 16.63% | +200.85 | [+53.64, +341.64] | — | +1,607 | 68.8% | 111 |
+| iron | iii | 9 | 36 | 9 / 9 | +52.93 | — | 17.56% | +211.71 | [+80.93, +341.38] | — | +1,905 | 69.4% | 100 |
+| call | iii | 9 | 36 | 9 / 9 | +50.07 | — | 16.53% | +200.27 | [+70.15, +330.19] | — | +1,802 | 69.4% | 112 |
+| put | iii | 9 | 36 | 9 / 9 | +50.68 | — | 16.73% | +202.71 | [+70.15, +332.84] | — | +1,824 | 69.4% | 111 |
 
 #### condor_d20
 
@@ -508,7 +508,7 @@ Official close, every leg at its own NBBO, $0.65 a contract at the open, nothing
 
 | structure | period | sessions | trades | traded / run | mean $ a trade | block-20 CI (trade) | mean % of max risk | mean $ a session | session CI (iid) | session CI (block-20) | total $ | win | max drawdown $ (sessions) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| condor | iii | 8 | 36 | 8 / 8 | +21.59 | — | 12.83% | +97.17 | [+67.85, +124.20] | — | +777 | 94.4% | 0 |
+| condor | iii | 9 | 41 | 9 / 9 | +23.38 | — | 14.02% | +106.49 | [+75.17, +135.20] | — | +958 | 95.1% | 0 |
 
 ### Hold to expiry against the 15:58 exit
 
@@ -516,11 +516,11 @@ The same trades, $ a structure. The 15:58 exit (the tracker's `close_quotes`, ev
 
 | candidate · structure | period | trades | hold NBBO | hold +$0.01 | hold +$0.02 | hold at mids | 15:58 trades | 15:58 NBBO | 15:58 +$0.01 open & close | 15:58 +$0.02 open & close | 15:58 at mids | 15:58 NBBO: block-20 CI (trade) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| condor_em1 condor (SPY 2-wide, straddle edge, 11:30–13:30) | iii | 39 | +6.35 | +2.35 | -1.65 | +8.35 | 39 | -6.28 | -13.76 | -21.25 | -2.47 | — |
-| fly5 iron ±5 (SPY+QQQ, 15:00 / 15:30) | iii | 32 | +52.62 | +48.62 | +44.62 | +54.70 | 32 | +3.07 | -4.18 | -11.43 | +7.51 | — |
-| fly5 long call ±5 | iii | 32 | +49.68 | +45.68 | +41.68 | +54.84 | 32 | -3.92 | -11.48 | -19.04 | +7.41 | — |
-| fly5 long put ±5 | iii | 32 | +50.21 | +46.21 | +42.21 | +54.99 | 32 | -2.81 | -10.50 | -18.18 | +7.43 | — |
-| condor_d20 condor (SPY 2-wide 20-delta, 13:00–15:00) | iii | 36 | +21.59 | +17.59 | +13.59 | +23.59 | 36 | +1.16 | -6.59 | -14.34 | +5.05 | — |
+| condor_em1 condor (SPY 2-wide, straddle edge, 11:30–13:30) | iii | 44 | +9.99 | +5.99 | +1.99 | +11.99 | 44 | -2.23 | -9.69 | -17.14 | +1.55 | — |
+| fly5 iron ±5 (SPY+QQQ, 15:00 / 15:30) | iii | 36 | +52.93 | +48.93 | +44.93 | +55.01 | 36 | +6.35 | -0.93 | -8.20 | +10.88 | — |
+| fly5 long call ±5 | iii | 36 | +50.07 | +46.07 | +42.07 | +55.19 | 36 | -1.12 | -8.71 | -16.29 | +10.68 | — |
+| fly5 long put ±5 | iii | 36 | +50.68 | +46.68 | +42.68 | +55.36 | 36 | +0.78 | -6.92 | -14.61 | +10.83 | — |
+| condor_d20 condor (SPY 2-wide 20-delta, 13:00–15:00) | iii | 41 | +23.38 | +19.38 | +15.38 | +25.38 | 41 | +3.23 | -4.53 | -12.29 | +7.12 | — |
 
 ### Expiry flags (held to the official close)
 
@@ -528,11 +528,11 @@ SPY and QQQ options are American and physically settled: OCC exercises every opt
 
 | candidate · structure | period | trades | stock left (long / short) | mean / max stock left $ | pin ≤ $0.25 | pin ≤ $0.50 | post-market cross (of trades with the bar) | settled on the 15:59 bar (flagged) |
 |---|---|---|---|---|---|---|---|---|
-| condor_em1 condor (SPY 2-wide, straddle edge, 11:30–13:30) | iii | 39 | 20.5% (12.8% / 7.7%) | $76,959 / $77,801 | 12.8% | 15.4% | 48.7% of 39 | 0 |
-| fly5 iron ±5 (SPY+QQQ, 15:00 / 15:30) | iii | 32 | 96.9% (28.1% / 68.8%) | $74,987 / $77,810 | 28.1% | 31.2% | 75.0% of 32 | 0 |
-| fly5 long call ±5 | iii | 32 | 100.0% (31.2% / 68.8%) | $74,918 / $77,810 | 28.1% | 31.2% | 75.0% of 32 | 0 |
-| fly5 long put ±5 | iii | 32 | 100.0% (28.1% / 71.9%) | $74,918 / $77,810 | 28.1% | 31.2% | 75.0% of 32 | 0 |
-| condor_d20 condor (SPY 2-wide 20-delta, 13:00–15:00) | iii | 36 | 11.1% (2.8% / 8.3%) | $77,276 / $77,801 | 13.9% | 30.6% | 50.0% of 36 | 0 |
+| condor_em1 condor (SPY 2-wide, straddle edge, 11:30–13:30) | iii | 44 | 18.2% (11.4% / 6.8%) | $76,959 / $77,801 | 11.4% | 13.6% | 43.2% of 44 | 0 |
+| fly5 iron ±5 (SPY+QQQ, 15:00 / 15:30) | iii | 36 | 97.2% (27.8% / 69.4%) | $74,808 / $77,810 | 25.0% | 27.8% | 72.2% of 36 | 0 |
+| fly5 long call ±5 | iii | 36 | 100.0% (30.6% / 69.4%) | $74,752 / $77,810 | 25.0% | 27.8% | 72.2% of 36 | 0 |
+| fly5 long put ±5 | iii | 36 | 100.0% (27.8% / 72.2%) | $74,752 / $77,810 | 25.0% | 27.8% | 72.2% of 36 | 0 |
+| condor_d20 condor (SPY 2-wide 20-delta, 13:00–15:00) | iii | 41 | 9.8% (2.4% / 7.3%) | $77,276 / $77,801 | 14.6% | 29.3% | 51.2% of 41 | 0 |
 
 ### After the close: the four expiry cases (the after-hours study's hook)
 
@@ -540,11 +540,11 @@ SPY and QQQ options are American and physically settled: OCC exercises every opt
 
 | candidate · structure | period | official trades | with the next open | case 0 | case a | with a decision price too | case 0 | case a | case b | case c |
 |---|---|---|---|---|---|---|---|---|---|---|
-| condor_em1 condor (SPY 2-wide, straddle edge, 11:30–13:30) | iii | 39 | 34 | +3.64 | +62.37 | 34 | +3.64 | +62.37 | +60.55 | +60.55 |
-| fly5 iron ±5 (SPY+QQQ, 15:00 / 15:30) | iii | 32 | 28 | +40.51 | +117.26 | 28 | +40.51 | +117.26 | -41.81 | -41.81 |
-| fly5 long call ±5 | iii | 32 | 28 | +37.36 | +105.26 | 28 | +37.36 | +105.26 | -58.35 | -58.35 |
-| fly5 long put ±5 | iii | 32 | 28 | +38.04 | +123.65 | 28 | +38.04 | +123.65 | -30.89 | -30.10 |
-| condor_d20 condor (SPY 2-wide 20-delta, 13:00–15:00) | iii | 36 | 31 | +20.69 | +48.79 | 31 | +20.69 | +48.79 | +43.14 | +43.14 |
+| condor_em1 condor (SPY 2-wide, straddle edge, 11:30–13:30) | iii | 44 | 39 | +6.35 | +57.55 | 39 | +6.35 | +57.55 | +55.96 | +55.96 |
+| fly5 iron ±5 (SPY+QQQ, 15:00 / 15:30) | iii | 36 | 32 | +52.62 | +161.77 | 32 | +52.62 | +161.77 | -18.85 | -18.85 |
+| fly5 long call ±5 | iii | 36 | 32 | +49.68 | +151.09 | 32 | +49.68 | +151.09 | -33.51 | -33.51 |
+| fly5 long put ±5 | iii | 36 | 32 | +50.21 | +167.12 | 32 | +50.21 | +167.12 | -9.54 | -8.85 |
+| condor_d20 condor (SPY 2-wide 20-delta, 13:00–15:00) | iii | 41 | 36 | +21.59 | +45.79 | 36 | +21.59 | +45.79 | +40.93 | +40.93 |
 
 ### Sessions
 
@@ -590,6 +590,11 @@ SPY and QQQ options are American and physically settled: OCC exercises every opt
 | 2026-10-21 | fly5 long call ±5 | 4 | +543.60 | -9.80 | QQQ 725.2 (uw_1d); SPY 773.09 (uw_1d) | 4 | 1 | 4 of 4 |
 | 2026-10-21 | fly5 long put ±5 | 4 | +541.60 | -14.80 | QQQ 725.2 (uw_1d); SPY 773.09 (uw_1d) | 4 | 1 | 4 of 4 |
 | 2026-10-21 | condor_d20 condor (SPY 2-wide 20-delta, 13:00–15:00) | 5 | +136.00 | -26.00 | SPY 773.09 (uw_1d) | 0 | 0 | 5 of 5 |
+| 2026-10-22 | condor_em1 condor (SPY 2-wide, straddle edge, 11:30–13:30) | 5 | +192.00 | +146.60 | SPY 763.96 (uw_1d) | 0 | 0 | 0 of 5 |
+| 2026-10-22 | fly5 iron ±5 (SPY+QQQ, 15:00 / 15:30) | 4 | +221.60 | +130.50 | QQQ 704.47 (uw_1d); SPY 763.96 (uw_1d) | 4 | 0 | 2 of 4 |
+| 2026-10-22 | fly5 long call ±5 | 4 | +212.60 | +84.85 | QQQ 704.47 (uw_1d); SPY 763.96 (uw_1d) | 4 | 0 | 2 of 4 |
+| 2026-10-22 | fly5 long put ±5 | 4 | +217.60 | +117.85 | QQQ 704.47 (uw_1d); SPY 763.96 (uw_1d) | 4 | 0 | 2 of 4 |
+| 2026-10-22 | condor_d20 condor (SPY 2-wide 20-delta, 13:00–15:00) | 5 | +181.00 | +90.65 | SPY 763.96 (uw_1d) | 0 | 1 | 3 of 5 |
 
-<!-- cumulative:forward-sessions ["2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-19", "2026-10-20", "2026-10-21"] -->
+<!-- cumulative:forward-sessions ["2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-19", "2026-10-20", "2026-10-21", "2026-10-22"] -->
 <!-- cumulative:forward:end -->
