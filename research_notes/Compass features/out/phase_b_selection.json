@@ -1,0 +1,22 @@
+{
+ "rule": "(fixed here, before the variants were computed): a variant is eligible when its PICK \u0394 > 0 with the PICK interval's\nlower end > 0, AND its CHECK \u0394 > 0 with the CHECK interval's lower end > 0. Among the eligible, at most one per family\n(veto, exit, direction, combination) \u2014 the one with the highest PICK lower end \u2014 and at most 3 in all (if four families have\none, the three with the highest CHECK lower end). Nothing is selected on the whole-exploration figures.",
+ "trials": 33,
+ "eligible": [
+  "BV1a",
+  "BV1b",
+  "BV1c",
+  "BV1d",
+  "BX3a",
+  "BX3b",
+  "BX3e",
+  "BC1",
+  "BC2",
+  "BC3",
+  "BC4"
+ ],
+ "chosen": [
+  "BX3e",
+  "BC3",
+  "BV1b"
+ ]
+}

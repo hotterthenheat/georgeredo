@@ -1,0 +1,1741 @@
+[
+ {
+  "id": "BV1a",
+  "family": "veto",
+  "definition": "V1 spread veto at 5%",
+  "pick": {
+   "sessions": 2278,
+   "first": "2012-06-01",
+   "last": "2024-05-31",
+   "trades_with": 193746,
+   "trades_without": 348310,
+   "sessions_with": 2177,
+   "sessions_without": 2179,
+   "mean_with": -0.0858657861262819,
+   "mean_without": -0.14741031137780716,
+   "delta": 0.06154452525152526,
+   "ci": [
+    0.042338173741759105,
+    0.08217776834955569
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 207429,
+   "trades_without": 302922,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.09456430889644292,
+   "mean_without": -0.1174923353698647,
+   "delta": 0.022928026473421778,
+   "ci": [
+    0.009820088383012585,
+    0.04224170336211344
+   ]
+  },
+  "all": {
+   "sessions": 2695,
+   "first": "2012-06-01",
+   "last": "2026-09-30",
+   "trades_with": 401175,
+   "trades_without": 651232,
+   "sessions_with": 2594,
+   "sessions_without": 2596,
+   "mean_with": -0.0903633891167268,
+   "mean_without": -0.13349389890379185,
+   "delta": 0.04313050978706505,
+   "ci": [
+    0.029673335503899625,
+    0.05906776318510669
+   ]
+  }
+ },
+ {
+  "id": "BV1b",
+  "family": "veto",
+  "definition": "V1 spread veto at 3%",
+  "pick": {
+   "sessions": 2278,
+   "first": "2012-06-01",
+   "last": "2024-05-31",
+   "trades_with": 120541,
+   "trades_without": 348310,
+   "sessions_with": 2159,
+   "sessions_without": 2179,
+   "mean_with": -0.07057603076915386,
+   "mean_without": -0.14741031137780716,
+   "delta": 0.0768342806086533,
+   "ci": [
+    0.05271798290073626,
+    0.1060694518108482
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 144875,
+   "trades_without": 302922,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.08701578089039926,
+   "mean_without": -0.1174923353698647,
+   "delta": 0.030476554479465442,
+   "ci": [
+    0.012916497154058345,
+    0.058913825084552486
+   ]
+  },
+  "all": {
+   "sessions": 2695,
+   "first": "2012-06-01",
+   "last": "2026-09-30",
+   "trades_with": 265416,
+   "trades_without": 651232,
+   "sessions_with": 2576,
+   "sessions_without": 2596,
+   "mean_with": -0.07954952445007522,
+   "mean_without": -0.13349389890379185,
+   "delta": 0.05394437445371662,
+   "ci": [
+    0.036044178136733954,
+    0.0752415266431714
+   ]
+  }
+ },
+ {
+  "id": "BV1c",
+  "family": "veto",
+  "definition": "V1 spread veto at 20%",
+  "pick": {
+   "sessions": 2278,
+   "first": "2012-06-01",
+   "last": "2024-05-31",
+   "trades_with": 317508,
+   "trades_without": 348310,
+   "sessions_with": 2178,
+   "sessions_without": 2179,
+   "mean_with": -0.12995588116517662,
+   "mean_without": -0.14741031137780716,
+   "delta": 0.017454430212630545,
+   "ci": [
+    0.010049300660862352,
+    0.025533288220031595
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 293533,
+   "trades_without": 302922,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.11418836758335195,
+   "mean_without": -0.1174923353698647,
+   "delta": 0.0033039677865127487,
+   "ci": [
+    0.0012942719304513152,
+    0.005738464410994717
+   ]
+  },
+  "all": {
+   "sessions": 2695,
+   "first": "2012-06-01",
+   "last": "2026-09-30",
+   "trades_with": 611041,
+   "trades_without": 651232,
+   "sessions_with": 2595,
+   "sessions_without": 2596,
+   "mean_with": -0.12238145397581658,
+   "mean_without": -0.13349389890379185,
+   "delta": 0.011112444927975265,
+   "ci": [
+    0.006851776345566426,
+    0.01602448960598516
+   ]
+  }
+ },
+ {
+  "id": "BV1d",
+  "family": "veto",
+  "definition": "V1 at 10%, 0DTE only",
+  "pick": {
+   "sessions": 1345,
+   "first": "2017-07-07",
+   "last": "2024-05-31",
+   "trades_with": 137198,
+   "trades_without": 201440,
+   "sessions_with": 547,
+   "sessions_without": 547,
+   "mean_with": -0.15708123437283245,
+   "mean_without": -0.2057413373044152,
+   "delta": 0.048660102931582766,
+   "ci": [
+    0.022092348478613476,
+    0.07087115527392158
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 159829,
+   "trades_without": 174737,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.1668901990326852,
+   "mean_without": -0.17499110086710062,
+   "delta": 0.00810090183441542,
+   "ci": [
+    0.00042425243513155504,
+    0.01726655005068259
+   ]
+  },
+  "all": {
+   "sessions": 1762,
+   "first": "2017-07-07",
+   "last": "2026-09-30",
+   "trades_with": 297027,
+   "trades_without": 376177,
+   "sessions_with": 964,
+   "sessions_without": 964,
+   "mean_with": -0.1623593976799379,
+   "mean_without": -0.19145762494468285,
+   "delta": 0.029098227264744952,
+   "ci": [
+    0.014459643153639852,
+    0.044290341561292065
+   ]
+  }
+ },
+ {
+  "id": "BV1e",
+  "family": "veto",
+  "definition": "V1 at 10%, 1-60 DTE only",
+  "pick": {
+   "sessions": 2277,
+   "first": "2012-06-01",
+   "last": "2024-05-30",
+   "trades_with": 132889,
+   "trades_without": 146870,
+   "sessions_with": 2153,
+   "sessions_without": 2156,
+   "mean_with": -0.06180864701962332,
+   "mean_without": -0.06740621345000761,
+   "delta": 0.005597566430384289,
+   "ci": [
+    -0.00048078909882687205,
+    0.0106693532933882
+   ]
+  },
+  "check": {
+   "sessions": 414,
+   "first": "2024-07-01",
+   "last": "2026-09-25",
+   "trades_with": 108552,
+   "trades_without": 128185,
+   "sessions_with": 402,
+   "sessions_without": 402,
+   "mean_with": -0.020246331868028405,
+   "mean_without": -0.03911216774736196,
+   "delta": 0.018865835879333555,
+   "ci": [
+    0.00996971098645517,
+    0.029868393806990464
+   ]
+  },
+  "all": {
+   "sessions": 2692,
+   "first": "2012-06-01",
+   "last": "2026-09-25",
+   "trades_with": 241441,
+   "trades_without": 275055,
+   "sessions_with": 2555,
+   "sessions_without": 2558,
+   "mean_with": -0.04312220836862398,
+   "mean_without": -0.05422022429004457,
+   "delta": 0.011098015921420588,
+   "ci": [
+    0.005656892456586156,
+    0.016079935579314846
+   ]
+  }
+ },
+ {
+  "id": "BV3a",
+  "family": "veto",
+  "definition": "V3 volume veto at 1,000",
+  "pick": {
+   "sessions": 2278,
+   "first": "2012-06-01",
+   "last": "2024-05-31",
+   "trades_with": 117330,
+   "trades_without": 218863,
+   "sessions_with": 2029,
+   "sessions_without": 2166,
+   "mean_with": -0.08392470073751111,
+   "mean_without": -0.07556940556073974,
+   "delta": -0.008355295176771374,
+   "ci": [
+    -0.03370052448193344,
+    0.019373586831089924
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 198107,
+   "trades_without": 301419,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.1414127505329187,
+   "mean_without": -0.11772242223215043,
+   "delta": -0.023690328300768282,
+   "ci": [
+    -0.04103477697831489,
+    -0.005695248529193461
+   ]
+  },
+  "all": {
+   "sessions": 2695,
+   "first": "2012-06-01",
+   "last": "2026-09-30",
+   "trades_with": 315437,
+   "trades_without": 520282,
+   "sessions_with": 2446,
+   "sessions_without": 2583,
+   "mean_with": -0.12002948578434712,
+   "mean_without": -0.09999023913191832,
+   "delta": -0.020039246652428802,
+   "ci": [
+    -0.03481656648388195,
+    -0.0033020201009522445
+   ]
+  }
+ },
+ {
+  "id": "BV3b",
+  "family": "veto",
+  "definition": "V3 volume veto at 10",
+  "pick": {
+   "sessions": 2278,
+   "first": "2012-06-01",
+   "last": "2024-05-31",
+   "trades_with": 202266,
+   "trades_without": 218863,
+   "sessions_with": 2166,
+   "sessions_without": 2166,
+   "mean_with": -0.07543699147740061,
+   "mean_without": -0.07556940556073974,
+   "delta": 0.00013241408333912463,
+   "ci": [
+    -0.0034363140277610758,
+    0.0031904949172818675
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 289001,
+   "trades_without": 301419,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.11864792250805478,
+   "mean_without": -0.11772242223215043,
+   "delta": -0.0009255002759043507,
+   "ci": [
+    -0.0032969986488572967,
+    0.0004784078272492812
+   ]
+  },
+  "all": {
+   "sessions": 2695,
+   "first": "2012-06-01",
+   "last": "2026-09-30",
+   "trades_with": 491267,
+   "trades_without": 520282,
+   "sessions_with": 2583,
+   "sessions_without": 2583,
+   "mean_with": -0.10085698158215034,
+   "mean_without": -0.09999023913191832,
+   "delta": -0.000866742450232022,
+   "ci": [
+    -0.002940476500116451,
+    0.000931012055640437
+   ]
+  }
+ },
+ {
+  "id": "BV2a",
+  "family": "veto",
+  "definition": "V2 open-interest veto at 100",
+  "pick": {
+   "sessions": 110,
+   "first": "2023-11-21",
+   "last": "2024-05-31",
+   "trades_with": 27751,
+   "trades_without": 29678,
+   "sessions_with": 110,
+   "sessions_without": 110,
+   "mean_with": -0.022589605760488927,
+   "mean_without": -0.028879832923086476,
+   "delta": 0.006290227162597549,
+   "ci": [
+    -0.003022426322084292,
+    0.016417517750473228
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 134203,
+   "trades_without": 144535,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.12819596040862163,
+   "mean_without": -0.12630906939628095,
+   "delta": -0.0018868910123406857,
+   "ci": [
+    -0.00986498347834945,
+    0.004505842249189654
+   ]
+  },
+  "all": {
+   "sessions": 527,
+   "first": "2023-11-21",
+   "last": "2026-09-30",
+   "trades_with": 161954,
+   "trades_without": 174213,
+   "sessions_with": 527,
+   "sessions_without": 527,
+   "mean_with": -0.1101001927965816,
+   "mean_without": -0.10971154291977536,
+   "delta": -0.0003886498768062435,
+   "ci": [
+    -0.006831871864018151,
+    0.005993135141123189
+   ]
+  }
+ },
+ {
+  "id": "BV2b",
+  "family": "veto",
+  "definition": "V2 open-interest veto at 5,000",
+  "pick": {
+   "sessions": 110,
+   "first": "2023-11-21",
+   "last": "2024-05-31",
+   "trades_with": 10022,
+   "trades_without": 29678,
+   "sessions_with": 110,
+   "sessions_without": 110,
+   "mean_with": -0.10835931619949708,
+   "mean_without": -0.028879832923086476,
+   "delta": -0.0794794832764106,
+   "ci": [
+    -0.22593068476877676,
+    -0.010972714625022195
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 37057,
+   "trades_without": 144535,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.16726336039337347,
+   "mean_without": -0.12630906939628095,
+   "delta": -0.040954290997092524,
+   "ci": [
+    -0.08684918051031351,
+    -0.003457176220597013
+   ]
+  },
+  "all": {
+   "sessions": 527,
+   "first": "2023-11-21",
+   "last": "2026-09-30",
+   "trades_with": 47079,
+   "trades_without": 174213,
+   "sessions_with": 527,
+   "sessions_without": 527,
+   "mean_with": -0.15472408957387795,
+   "mean_without": -0.10971154291977536,
+   "delta": -0.04501254665410259,
+   "ci": [
+    -0.08650511584011082,
+    -0.005965634869662408
+   ]
+  }
+ },
+ {
+  "id": "BV6a",
+  "family": "veto",
+  "definition": "V6 IV-rank veto at 0.5",
+  "pick": {
+   "sessions": 2069,
+   "first": "2013-06-07",
+   "last": "2024-05-31",
+   "trades_with": 127694,
+   "trades_without": 151665,
+   "sessions_with": 1769,
+   "sessions_without": 1968,
+   "mean_with": -0.07981852416708642,
+   "mean_without": -0.08002365010006073,
+   "delta": 0.00020512593297430937,
+   "ci": [
+    -0.014866289712215656,
+    0.017026889095262246
+   ]
+  },
+  "check": {
+   "sessions": 411,
+   "first": "2024-07-01",
+   "last": "2026-09-22",
+   "trades_with": 240764,
+   "trades_without": 297363,
+   "sessions_with": 407,
+   "sessions_without": 411,
+   "mean_with": -0.12745017334353695,
+   "mean_without": -0.11778717103789099,
+   "delta": -0.009663002305645957,
+   "ci": [
+    -0.02784654072798407,
+    0.012927074383861382
+   ]
+  },
+  "all": {
+   "sessions": 2480,
+   "first": "2013-06-07",
+   "last": "2026-09-22",
+   "trades_with": 368458,
+   "trades_without": 449028,
+   "sessions_with": 2176,
+   "sessions_without": 2379,
+   "mean_with": -0.1109427944565602,
+   "mean_without": -0.10503205464640533,
+   "delta": -0.005910739810154872,
+   "ci": [
+    -0.019535794399104096,
+    0.008679065357448217
+   ]
+  }
+ },
+ {
+  "id": "BV6b",
+  "family": "veto",
+  "definition": "V6 low-IV veto: IV rank < 0.2",
+  "pick": {
+   "sessions": 2069,
+   "first": "2013-06-07",
+   "last": "2024-05-31",
+   "trades_with": 78733,
+   "trades_without": 151665,
+   "sessions_with": 1386,
+   "sessions_without": 1968,
+   "mean_with": -0.041564412225464815,
+   "mean_without": -0.08002365010006073,
+   "delta": 0.03845923787459591,
+   "ci": [
+    0.006872717385947355,
+    0.058375817399351874
+   ]
+  },
+  "check": {
+   "sessions": 411,
+   "first": "2024-07-01",
+   "last": "2026-09-22",
+   "trades_with": 180224,
+   "trades_without": 297363,
+   "sessions_with": 396,
+   "sessions_without": 411,
+   "mean_with": -0.09708937938042551,
+   "mean_without": -0.11778717103789099,
+   "delta": 0.020697791657465478,
+   "ci": [
+    -0.004112103162167191,
+    0.04971089860108706
+   ]
+  },
+  "all": {
+   "sessions": 2480,
+   "first": "2013-06-07",
+   "last": "2026-09-22",
+   "trades_with": 258957,
+   "trades_without": 449028,
+   "sessions_with": 1782,
+   "sessions_without": 2379,
+   "mean_with": -0.08020762975013356,
+   "mean_without": -0.10503205464640533,
+   "delta": 0.024824424896271777,
+   "ci": [
+    0.005972756768530413,
+    0.04674793371749621
+   ]
+  }
+ },
+ {
+  "id": "BX3a",
+  "family": "exit",
+  "definition": "0DTE time exit at 12:00 (entries before)",
+  "pick": {
+   "sessions": 1345,
+   "first": "2017-07-07",
+   "last": "2024-05-31",
+   "trades_with": 93828,
+   "trades_without": 93828,
+   "sessions_with": 547,
+   "sessions_without": 547,
+   "mean_with": -0.1328207571122077,
+   "mean_without": -0.18246091679399917,
+   "delta": 0.049640159681791474,
+   "ci": [
+    0.0018972877175968495,
+    0.0956578037851975
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 82426,
+   "trades_without": 82426,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.08046294155078745,
+   "mean_without": -0.19906459351021014,
+   "delta": 0.11860165195942268,
+   "ci": [
+    0.061670830182535316,
+    0.17748684383227742
+   ]
+  },
+  "all": {
+   "sessions": 1762,
+   "first": "2017-07-07",
+   "last": "2026-09-30",
+   "trades_with": 176254,
+   "trades_without": 176254,
+   "sessions_with": 964,
+   "sessions_without": 964,
+   "mean_with": -0.10833538199751172,
+   "mean_without": -0.19022570316486395,
+   "delta": 0.08189032116735223,
+   "ci": [
+    0.04387898030023207,
+    0.12044762447716745
+   ]
+  }
+ },
+ {
+  "id": "BX3b",
+  "family": "exit",
+  "definition": "0DTE time exit at 13:00 (entries before)",
+  "pick": {
+   "sessions": 1345,
+   "first": "2017-07-07",
+   "last": "2024-05-31",
+   "trades_with": 126061,
+   "trades_without": 126061,
+   "sessions_with": 547,
+   "sessions_without": 547,
+   "mean_with": -0.1320076500776638,
+   "mean_without": -0.1928805727986427,
+   "delta": 0.06087292272097891,
+   "ci": [
+    0.013591995010025318,
+    0.11219451707905063
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 110335,
+   "trades_without": 110335,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.08410601112612402,
+   "mean_without": -0.19629679506293332,
+   "delta": 0.1121907839368093,
+   "ci": [
+    0.049601119764070584,
+    0.1720793811697793
+   ]
+  },
+  "all": {
+   "sessions": 1762,
+   "first": "2017-07-07",
+   "last": "2026-09-30",
+   "trades_with": 236396,
+   "trades_without": 236396,
+   "sessions_with": 964,
+   "sessions_without": 964,
+   "mean_with": -0.10965013415642089,
+   "mean_without": -0.19447505360005435,
+   "delta": 0.08482491944363346,
+   "ci": [
+    0.04318362061229101,
+    0.12566185312523762
+   ]
+  }
+ },
+ {
+  "id": "BX3c",
+  "family": "exit",
+  "definition": "0DTE time exit at 15:00 (entries before)",
+  "pick": {
+   "sessions": 1345,
+   "first": "2017-07-07",
+   "last": "2024-05-31",
+   "trades_with": 181402,
+   "trades_without": 181402,
+   "sessions_with": 547,
+   "sessions_without": 547,
+   "mean_with": -0.1756603734686244,
+   "mean_without": -0.2037607750499115,
+   "delta": 0.0281004015812871,
+   "ci": [
+    -0.002699823559568722,
+    0.06897429441510657
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 157093,
+   "trades_without": 157093,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.16495133148156516,
+   "mean_without": -0.18507339504219886,
+   "delta": 0.0201220635606337,
+   "ci": [
+    -0.02758616209183387,
+    0.06928444899950409
+   ]
+  },
+  "all": {
+   "sessions": 1762,
+   "first": "2017-07-07",
+   "last": "2026-09-30",
+   "trades_with": 338495,
+   "trades_without": 338495,
+   "sessions_with": 964,
+   "sessions_without": 964,
+   "mean_with": -0.1706903871087872,
+   "mean_without": -0.19508810163508528,
+   "delta": 0.024397714526298075,
+   "ci": [
+    -0.006450390053033454,
+    0.05474467853254438
+   ]
+  }
+ },
+ {
+  "id": "BX3d",
+  "family": "exit",
+  "definition": "X3 (14:00) on SPXW only",
+  "pick": {
+   "sessions": 344,
+   "first": "2022-05-13",
+   "last": "2024-05-31",
+   "trades_with": 29669,
+   "trades_without": 29669,
+   "sessions_with": 344,
+   "sessions_without": 344,
+   "mean_with": -0.06091003425546756,
+   "mean_without": 0.0012669869369618416,
+   "delta": -0.0621770211924294,
+   "ci": [
+    -0.16840025666554903,
+    0.03521698759874033
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 36398,
+   "trades_without": 36398,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.07339046663587676,
+   "mean_without": -0.12095161481548931,
+   "delta": 0.04756114817961256,
+   "ci": [
+    -0.031050511316136346,
+    0.12985911768711736
+   ]
+  },
+  "all": {
+   "sessions": 761,
+   "first": "2022-05-13",
+   "last": "2026-09-30",
+   "trades_with": 66067,
+   "trades_without": 66067,
+   "sessions_with": 761,
+   "sessions_without": 761,
+   "mean_with": -0.06778582364778345,
+   "mean_without": -0.06606636657667914,
+   "delta": -0.0017194570711043106,
+   "ci": [
+    -0.07317949339659714,
+    0.05882350306251112
+   ]
+  }
+ },
+ {
+  "id": "BX3e",
+  "family": "exit",
+  "definition": "X3 (14:00) on the physically settled names only",
+  "pick": {
+   "sessions": 1345,
+   "first": "2017-07-07",
+   "last": "2024-05-31",
+   "trades_with": 125915,
+   "trades_without": 125915,
+   "sessions_with": 480,
+   "sessions_without": 480,
+   "mean_with": -0.1686662048062523,
+   "mean_without": -0.24432761291220415,
+   "delta": 0.07566140810595184,
+   "ci": [
+    0.0315042526132432,
+    0.12223486837624238
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 99108,
+   "trades_without": 99108,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.1481433370697474,
+   "mean_without": -0.2220606915681505,
+   "delta": 0.07391735449840312,
+   "ci": [
+    0.019594424070538824,
+    0.1231830718397438
+   ]
+  },
+  "all": {
+   "sessions": 1762,
+   "first": "2017-07-07",
+   "last": "2026-09-30",
+   "trades_with": 225023,
+   "trades_without": 225023,
+   "sessions_with": 897,
+   "sessions_without": 897,
+   "mean_with": -0.1596272160111979,
+   "mean_without": -0.2345204819053006,
+   "delta": 0.0748932658941027,
+   "ci": [
+    0.03877957971114004,
+    0.10943157799962898
+   ]
+  }
+ },
+ {
+  "id": "BX1a",
+  "family": "exit",
+  "definition": "0DTE target at 0.25 IM",
+  "pick": {
+   "sessions": 1345,
+   "first": "2017-07-07",
+   "last": "2024-05-31",
+   "trades_with": 200701,
+   "trades_without": 200701,
+   "sessions_with": 547,
+   "sessions_without": 547,
+   "mean_with": -0.19187134430526928,
+   "mean_without": -0.20475190067536486,
+   "delta": 0.01288055637009558,
+   "ci": [
+    -0.023760014404892938,
+    0.05980707932127376
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 174737,
+   "trades_without": 174737,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.10475165398156865,
+   "mean_without": -0.17499110086710062,
+   "delta": 0.07023944688553198,
+   "ci": [
+    0.012854471404957104,
+    0.13307990452910703
+   ]
+  },
+  "all": {
+   "sessions": 1762,
+   "first": "2017-07-07",
+   "last": "2026-09-30",
+   "trades_with": 375438,
+   "trades_without": 375438,
+   "sessions_with": 964,
+   "sessions_without": 964,
+   "mean_with": -0.15132394812243088,
+   "mean_without": -0.19090057801730506,
+   "delta": 0.03957662989487418,
+   "ci": [
+    0.0010879627699964354,
+    0.0778034588938171
+   ]
+  }
+ },
+ {
+  "id": "BX1b",
+  "family": "exit",
+  "definition": "0DTE target at 0.5 IM",
+  "pick": {
+   "sessions": 1345,
+   "first": "2017-07-07",
+   "last": "2024-05-31",
+   "trades_with": 200701,
+   "trades_without": 200701,
+   "sessions_with": 547,
+   "sessions_without": 547,
+   "mean_with": -0.22242059380630733,
+   "mean_without": -0.20475190067536486,
+   "delta": -0.017668693130942464,
+   "ci": [
+    -0.05288539863482925,
+    0.027561090576698585
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 174737,
+   "trades_without": 174737,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.12768458065101596,
+   "mean_without": -0.17499110086710062,
+   "delta": 0.04730652021608467,
+   "ci": [
+    -0.010289749229560677,
+    0.105875304972034
+   ]
+  },
+  "all": {
+   "sessions": 1762,
+   "first": "2017-07-07",
+   "last": "2026-09-30",
+   "trades_with": 375438,
+   "trades_without": 375438,
+   "sessions_with": 964,
+   "sessions_without": 964,
+   "mean_with": -0.17832839554529978,
+   "mean_without": -0.19090057801730506,
+   "delta": 0.012572182472005283,
+   "ci": [
+    -0.025531669745557393,
+    0.0488697178748205
+   ]
+  }
+ },
+ {
+  "id": "BD6a",
+  "family": "direction",
+  "definition": "D6 read the other way (fade the opening-range break)",
+  "pick": {
+   "sessions": 1345,
+   "first": "2017-07-07",
+   "last": "2024-05-31",
+   "trades_with": 50523,
+   "trades_without": 101091,
+   "sessions_with": 542,
+   "sessions_without": 542,
+   "mean_with": -0.28795478531641666,
+   "mean_without": -0.21062305092834507,
+   "delta": -0.07733173438807159,
+   "ci": [
+    -0.17773281471486457,
+    -0.015723843854808538
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 48382,
+   "trades_without": 96766,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.1245401078444578,
+   "mean_without": -0.18210969935252813,
+   "delta": 0.057569591508070325,
+   "ci": [
+    -0.03810326961620107,
+    0.14310637566385523
+   ]
+  },
+  "all": {
+   "sessions": 1762,
+   "first": "2017-07-07",
+   "last": "2026-09-30",
+   "trades_with": 98905,
+   "trades_without": 197857,
+   "sessions_with": 959,
+   "sessions_without": 959,
+   "mean_with": -0.20801616820455868,
+   "mean_without": -0.19667801497517937,
+   "delta": -0.01133815322937931,
+   "ci": [
+    -0.08085526956595446,
+    0.0483535896977721
+   ]
+  }
+ },
+ {
+  "id": "BD6b",
+  "family": "direction",
+  "definition": "D6 on 0DTE entries from 13:15",
+  "pick": {
+   "sessions": 1345,
+   "first": "2017-07-07",
+   "last": "2024-05-31",
+   "trades_with": 24579,
+   "trades_without": 49087,
+   "sessions_with": 533,
+   "sessions_without": 533,
+   "mean_with": -0.193118529183273,
+   "mean_without": -0.21655346678132975,
+   "delta": 0.02343493759805676,
+   "ci": [
+    -0.0397649587369337,
+    0.12870494240381908
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 21912,
+   "trades_without": 43879,
+   "sessions_with": 410,
+   "sessions_without": 410,
+   "mean_with": -0.22614562167283658,
+   "mean_without": -0.13475303886200862,
+   "delta": -0.09139258281082796,
+   "ci": [
+    -0.18852644133835705,
+    0.020406743270198303
+   ]
+  },
+  "all": {
+   "sessions": 1762,
+   "first": "2017-07-07",
+   "last": "2026-09-30",
+   "trades_with": 46491,
+   "trades_without": 92966,
+   "sessions_with": 943,
+   "sessions_without": 943,
+   "mean_with": -0.20868476029534455,
+   "mean_without": -0.17794450246456994,
+   "delta": -0.03074025783077461,
+   "ci": [
+    -0.10004809395380905,
+    0.045440179674770126
+   ]
+  }
+ },
+ {
+  "id": "BD6c",
+  "family": "direction",
+  "definition": "D6 on SPXW only",
+  "pick": {
+   "sessions": 344,
+   "first": "2022-05-13",
+   "last": "2024-05-31",
+   "trades_with": 12844,
+   "trades_without": 25687,
+   "sessions_with": 339,
+   "sessions_without": 339,
+   "mean_with": 0.06665916377458671,
+   "mean_without": -0.002032133731172744,
+   "delta": 0.06869129750575945,
+   "ci": [
+    -0.03823850070367852,
+    0.23664707278778754
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 16339,
+   "trades_without": 32695,
+   "sessions_with": 414,
+   "sessions_without": 414,
+   "mean_with": -0.20473202325210726,
+   "mean_without": -0.12086454044992369,
+   "delta": -0.08386748280218358,
+   "ci": [
+    -0.1950791775141263,
+    0.02230410797217287
+   ]
+  },
+  "all": {
+   "sessions": 761,
+   "first": "2022-05-13",
+   "last": "2026-09-30",
+   "trades_with": 29183,
+   "trades_without": 58382,
+   "sessions_with": 753,
+   "sessions_without": 753,
+   "mean_with": -0.08528753823785724,
+   "mean_without": -0.06858047975682383,
+   "delta": -0.01670705848103342,
+   "ci": [
+    -0.10414781911596951,
+    0.0807327862897814
+   ]
+  }
+ },
+ {
+  "id": "BD7a",
+  "family": "direction",
+  "definition": "D7 read the other way",
+  "pick": {
+   "sessions": 1430,
+   "first": "2017-01-04",
+   "last": "2024-05-31",
+   "trades_with": 83298,
+   "trades_without": 166495,
+   "sessions_with": 1132,
+   "sessions_without": 1132,
+   "mean_with": -0.13815540217728736,
+   "mean_without": -0.14765676193963906,
+   "delta": 0.009501359762351697,
+   "ci": [
+    -0.05995905362437256,
+    0.0663678399148189
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 82048,
+   "trades_without": 164048,
+   "sessions_with": 416,
+   "sessions_without": 416,
+   "mean_with": -0.10417817532012784,
+   "mean_without": -0.12416671183865473,
+   "delta": 0.01998853651852689,
+   "ci": [
+    -0.028367093197695318,
+    0.07822534163548926
+   ]
+  },
+  "all": {
+   "sessions": 1847,
+   "first": "2017-01-04",
+   "last": "2026-09-30",
+   "trades_with": 165346,
+   "trades_without": 330543,
+   "sessions_with": 1548,
+   "sessions_without": 1548,
+   "mean_with": -0.12129522104695324,
+   "mean_without": -0.13599868496034656,
+   "delta": 0.01470346391339332,
+   "ci": [
+    -0.030988856005912228,
+    0.05381626589002209
+   ]
+  }
+ },
+ {
+  "id": "BD7b",
+  "family": "direction",
+  "definition": "D7 on 1-60 DTE only",
+  "pick": {
+   "sessions": 1429,
+   "first": "2017-01-04",
+   "last": "2024-05-30",
+   "trades_with": 33498,
+   "trades_without": 67063,
+   "sessions_with": 1043,
+   "sessions_without": 1043,
+   "mean_with": -0.06387551073926993,
+   "mean_without": -0.07040837180727648,
+   "delta": 0.006532861068006546,
+   "ci": [
+    -0.04271266219789941,
+    0.06682500969540157
+   ]
+  },
+  "check": {
+   "sessions": 414,
+   "first": "2024-07-01",
+   "last": "2026-09-25",
+   "trades_with": 35456,
+   "trades_without": 71002,
+   "sessions_with": 398,
+   "sessions_without": 398,
+   "mean_with": -0.055828934748013204,
+   "mean_without": -0.04225930968255092,
+   "delta": -0.013569625065462283,
+   "ci": [
+    -0.08037185207536517,
+    0.04442618714213659
+   ]
+  },
+  "all": {
+   "sessions": 1844,
+   "first": "2017-01-04",
+   "last": "2026-09-25",
+   "trades_with": 68954,
+   "trades_without": 138065,
+   "sessions_with": 1441,
+   "sessions_without": 1441,
+   "mean_with": -0.05973797849536821,
+   "mean_without": -0.055932293807930064,
+   "delta": -0.0038056846874381448,
+   "ci": [
+    -0.046992819814950224,
+    0.03944775109256989
+   ]
+  }
+ },
+ {
+  "id": "BD3a",
+  "family": "direction",
+  "definition": "D3 (NOPE) read the other way",
+  "pick": {
+   "delta": null,
+   "ci": null,
+   "trades_with": 0,
+   "trades_without": 0
+  },
+  "check": {
+   "sessions": 374,
+   "first": "2024-09-03",
+   "last": "2026-09-30",
+   "trades_with": 38727,
+   "trades_without": 77399,
+   "sessions_with": 374,
+   "sessions_without": 374,
+   "mean_with": -0.11640959890030202,
+   "mean_without": -0.15987806112521247,
+   "delta": 0.04346846222491045,
+   "ci": [
+    0.002651594865465425,
+    0.09435395337089617
+   ]
+  },
+  "all": {
+   "sessions": 374,
+   "first": "2024-09-03",
+   "last": "2026-09-30",
+   "trades_with": 38727,
+   "trades_without": 77399,
+   "sessions_with": 374,
+   "sessions_without": 374,
+   "mean_with": -0.11640959890030202,
+   "mean_without": -0.15987806112521247,
+   "delta": 0.04346846222491045,
+   "ci": [
+    0.002651594865465425,
+    0.09435395337089617
+   ]
+  }
+ },
+ {
+  "id": "BD4a",
+  "family": "direction",
+  "definition": "D4 (tide) read the other way",
+  "pick": {
+   "sessions": 110,
+   "first": "2023-11-21",
+   "last": "2024-05-31",
+   "trades_with": 15055,
+   "trades_without": 30126,
+   "sessions_with": 110,
+   "sessions_without": 110,
+   "mean_with": 0.16855362820079012,
+   "mean_without": -0.029785340731808194,
+   "delta": 0.1983389689325983,
+   "ci": [
+    -0.030842687271006915,
+    0.41846555507334937
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 73584,
+   "trades_without": 147119,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.126353894624456,
+   "mean_without": -0.12606175642837317,
+   "delta": -0.00029213819608284175,
+   "ci": [
+    -0.06716651836934011,
+    0.07602508115824412
+   ]
+  },
+  "all": {
+   "sessions": 527,
+   "first": "2023-11-21",
+   "last": "2026-09-30",
+   "trades_with": 88639,
+   "trades_without": 177245,
+   "sessions_with": 527,
+   "sessions_without": 527,
+   "mean_with": -0.07626496361063502,
+   "mean_without": -0.10969783474214947,
+   "delta": 0.033432871131514455,
+   "ci": [
+    -0.041801859950690426,
+    0.10113996677064249
+   ]
+  }
+ },
+ {
+  "id": "BD1a",
+  "family": "direction",
+  "definition": "D1 (net premium) read the other way",
+  "pick": {
+   "sessions": 110,
+   "first": "2023-11-21",
+   "last": "2024-05-31",
+   "trades_with": 15065,
+   "trades_without": 30126,
+   "sessions_with": 110,
+   "sessions_without": 110,
+   "mean_with": -0.040833284608581266,
+   "mean_without": -0.029785340731808194,
+   "delta": -0.011047943876773072,
+   "ci": [
+    -0.03954499242289336,
+    0.08200333325799769
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 73616,
+   "trades_without": 147119,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.11895992415692269,
+   "mean_without": -0.12606175642837317,
+   "delta": 0.007101832271450476,
+   "ci": [
+    -0.030324905934381984,
+    0.05164038541158676
+   ]
+  },
+  "all": {
+   "sessions": 527,
+   "first": "2023-11-21",
+   "last": "2026-09-30",
+   "trades_with": 88681,
+   "trades_without": 177245,
+   "sessions_with": 527,
+   "sessions_without": 527,
+   "mean_with": -0.10568788364321892,
+   "mean_without": -0.10969783474214947,
+   "delta": 0.004009951098930556,
+   "ci": [
+    -0.027221139960171357,
+    0.042893806462337834
+   ]
+  }
+ },
+ {
+  "id": "BD2a",
+  "family": "direction",
+  "definition": "D2 (sweeps) with |value| \u2265 $1M",
+  "pick": {
+   "sessions": 110,
+   "first": "2023-11-21",
+   "last": "2024-05-31",
+   "trades_with": 5709,
+   "trades_without": 11434,
+   "sessions_with": 110,
+   "sessions_without": 110,
+   "mean_with": -0.11914367487813589,
+   "mean_without": -0.10948189955449544,
+   "delta": -0.009661775323640445,
+   "ci": [
+    -0.17317240878877238,
+    0.11951464824237999
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 30745,
+   "trades_without": 61469,
+   "sessions_with": 414,
+   "sessions_without": 414,
+   "mean_with": -0.12577941268323142,
+   "mean_without": -0.1132240584523381,
+   "delta": -0.012555354230893323,
+   "ci": [
+    -0.08079598193978767,
+    0.04241260615557581
+   ]
+  },
+  "all": {
+   "sessions": 527,
+   "first": "2023-11-21",
+   "last": "2026-09-30",
+   "trades_with": 36454,
+   "trades_without": 72903,
+   "sessions_with": 524,
+   "sessions_without": 524,
+   "mean_with": -0.12474020087851066,
+   "mean_without": -0.1126371437185421,
+   "delta": -0.012103057159968567,
+   "ci": [
+    -0.06483979011748912,
+    0.049520460367903155
+   ]
+  }
+ },
+ {
+  "id": "BD2b",
+  "family": "direction",
+  "definition": "D2 (sweeps) on 0DTE only",
+  "pick": {
+   "sessions": 110,
+   "first": "2023-11-21",
+   "last": "2024-05-31",
+   "trades_with": 4942,
+   "trades_without": 9899,
+   "sessions_with": 110,
+   "sessions_without": 110,
+   "mean_with": -0.11715908912010382,
+   "mean_without": -0.10531043393902065,
+   "delta": -0.011848655181083176,
+   "ci": [
+    -0.1463228949560773,
+    0.09671434222491893
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 45761,
+   "trades_without": 91554,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.1653148056493424,
+   "mean_without": -0.16520159764842943,
+   "delta": -0.00011320800091296768,
+   "ci": [
+    -0.052997646479228146,
+    0.045659999402002764
+   ]
+  },
+  "all": {
+   "sessions": 527,
+   "first": "2023-11-21",
+   "last": "2026-09-30",
+   "trades_with": 50703,
+   "trades_without": 101453,
+   "sessions_with": 527,
+   "sessions_without": 527,
+   "mean_with": -0.160621088293614,
+   "mean_without": -0.15935788056209946,
+   "delta": -0.0012632077315145318,
+   "ci": [
+    -0.04867455603336112,
+    0.04335078876465751
+   ]
+  }
+ },
+ {
+  "id": "BD26",
+  "family": "direction",
+  "definition": "D2 and D6 agree (0DTE from 10:15)",
+  "pick": {
+   "sessions": 110,
+   "first": "2023-11-21",
+   "last": "2024-05-31",
+   "trades_with": 1180,
+   "trades_without": 2366,
+   "sessions_with": 84,
+   "sessions_without": 84,
+   "mean_with": -0.3296717191850425,
+   "mean_without": 0.09141355728101425,
+   "delta": -0.42108527646605676,
+   "ci": [
+    -0.8901363415270027,
+    -0.1897901509098975
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 14482,
+   "trades_without": 28970,
+   "sessions_with": 399,
+   "sessions_without": 399,
+   "mean_with": -0.23838758857866027,
+   "mean_without": -0.19912171257739558,
+   "delta": -0.03926587600126469,
+   "ci": [
+    -0.14792625201696216,
+    0.0735937358296813
+   ]
+  },
+  "all": {
+   "sessions": 527,
+   "first": "2023-11-21",
+   "last": "2026-09-30",
+   "trades_with": 15662,
+   "trades_without": 31336,
+   "sessions_with": 483,
+   "sessions_without": 483,
+   "mean_with": -0.24526508022184318,
+   "mean_without": -0.177185075850149,
+   "delta": -0.06808000437169417,
+   "ci": [
+    -0.16762556811638132,
+    0.05011625832821811
+   ]
+  }
+ },
+ {
+  "id": "BC1",
+  "family": "combination",
+  "definition": "V1 veto + X3 exit, against all base trades",
+  "pick": {
+   "sessions": 2278,
+   "first": "2012-06-01",
+   "last": "2024-05-31",
+   "trades_with": 270087,
+   "trades_without": 348310,
+   "sessions_with": 2177,
+   "sessions_without": 2179,
+   "mean_with": -0.09086385459333621,
+   "mean_without": -0.14741031137780716,
+   "delta": 0.056546456784470955,
+   "ci": [
+    0.034911317519432605,
+    0.08402039132843607
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 268381,
+   "trades_without": 302922,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.07540233638516462,
+   "mean_without": -0.1174923353698647,
+   "delta": 0.042089998984700075,
+   "ci": [
+    0.01573620013849769,
+    0.06875816168884157
+   ]
+  },
+  "all": {
+   "sessions": 2695,
+   "first": "2012-06-01",
+   "last": "2026-09-30",
+   "trades_with": 538468,
+   "trades_without": 651232,
+   "sessions_with": 2594,
+   "sessions_without": 2596,
+   "mean_with": -0.08315758844896497,
+   "mean_without": -0.13349389890379185,
+   "delta": 0.05033631045482688,
+   "ci": [
+    0.032920439900684495,
+    0.06993246129369743
+   ]
+  }
+ },
+ {
+  "id": "BC2",
+  "family": "combination",
+  "definition": "V1 veto + VN1 venue + X3 exit, against all base trades",
+  "pick": {
+   "sessions": 2278,
+   "first": "2012-06-01",
+   "last": "2024-05-31",
+   "trades_with": 245328,
+   "trades_without": 348310,
+   "sessions_with": 2177,
+   "sessions_without": 2179,
+   "mean_with": -0.08863502119819427,
+   "mean_without": -0.14741031137780716,
+   "delta": 0.05877529017961289,
+   "ci": [
+    0.03810264098768086,
+    0.08588823259702945
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 221496,
+   "trades_without": 302922,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.0737293791671135,
+   "mean_without": -0.1174923353698647,
+   "delta": 0.043762956202751196,
+   "ci": [
+    0.01731920095524171,
+    0.06986978719082808
+   ]
+  },
+  "all": {
+   "sessions": 2695,
+   "first": "2012-06-01",
+   "last": "2026-09-30",
+   "trades_with": 466824,
+   "trades_without": 651232,
+   "sessions_with": 2594,
+   "sessions_without": 2596,
+   "mean_with": -0.08156267683004638,
+   "mean_without": -0.13349389890379185,
+   "delta": 0.05193122207374547,
+   "ci": [
+    0.03411140847137925,
+    0.07103332628826381
+   ]
+  }
+ },
+ {
+  "id": "BC3",
+  "family": "combination",
+  "definition": "V1 veto + X3 exit + D6 direction, against all base trades",
+  "pick": {
+   "sessions": 2278,
+   "first": "2012-06-01",
+   "last": "2024-05-31",
+   "trades_with": 234641,
+   "trades_without": 348310,
+   "sessions_with": 2177,
+   "sessions_without": 2179,
+   "mean_with": -0.07769427141334061,
+   "mean_without": -0.14741031137780716,
+   "delta": 0.06971603996446656,
+   "ci": [
+    0.04925319670439798,
+    0.09970139005070579
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 223620,
+   "trades_without": 302922,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.07017905295541949,
+   "mean_without": -0.1174923353698647,
+   "delta": 0.04731328241444521,
+   "ci": [
+    0.017792320211751735,
+    0.0762058048382523
+   ]
+  },
+  "all": {
+   "sessions": 2695,
+   "first": "2012-06-01",
+   "last": "2026-09-30",
+   "trades_with": 458261,
+   "trades_without": 651232,
+   "sessions_with": 2594,
+   "sessions_without": 2596,
+   "mean_with": -0.07402703123457714,
+   "mean_without": -0.13349389890379185,
+   "delta": 0.059466867669214704,
+   "ci": [
+    0.04054308024650991,
+    0.08053066678417439
+   ]
+  }
+ },
+ {
+  "id": "BC4",
+  "family": "combination",
+  "definition": "V1 veto + X3 exit, 0DTE entries before 14:00 only",
+  "pick": {
+   "sessions": 1345,
+   "first": "2017-07-07",
+   "last": "2024-05-31",
+   "trades_with": 112440,
+   "trades_without": 155584,
+   "sessions_with": 547,
+   "sessions_without": 547,
+   "mean_with": -0.11205485921064726,
+   "mean_without": -0.19749409415111746,
+   "delta": 0.0854392349404702,
+   "ci": [
+    0.04058330766568277,
+    0.13781065350923669
+   ]
+  },
+  "check": {
+   "sessions": 417,
+   "first": "2024-07-01",
+   "last": "2026-09-30",
+   "trades_with": 127530,
+   "trades_without": 135506,
+   "sessions_with": 417,
+   "sessions_without": 417,
+   "mean_with": -0.11951416009195198,
+   "mean_without": -0.19490198143248597,
+   "delta": 0.07538782134053398,
+   "ci": [
+    0.014917655111079208,
+    0.13106727629578016
+   ]
+  },
+  "all": {
+   "sessions": 1762,
+   "first": "2017-07-07",
+   "last": "2026-09-30",
+   "trades_with": 239970,
+   "trades_without": 291090,
+   "sessions_with": 964,
+   "sessions_without": 964,
+   "mean_with": -0.11601904073914164,
+   "mean_without": -0.1962874335786111,
+   "delta": 0.08026839283946945,
+   "ci": [
+    0.04272053564967188,
+    0.11741663847562882
+   ]
+  }
+ }
+]
