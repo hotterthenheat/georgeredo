@@ -1,0 +1,142 @@
+{
+ "what": "per session and model, S/N of both arms on the committed Phase A holdout table (the table behind out/holdout.json, 2a49049, and out/phase_b_holdout.json, e5dd8c6), restricted to the forward set (0DTE SPY/QQQ/SPXW); the forward code must reproduce these from the layout",
+ "holdout_table": "features_work/hold/trades_with_inputs.parquet",
+ "holdout_table_sha256": "28a5cb40f08077b2e2c18189c8f509ed653e1bfda6cd7b81ba444a0073ce442c",
+ "sessions": {
+  "2026-10-19": {
+   "trades": {
+    "SPY": 95,
+    "QQQ": 109,
+    "SPXW": 118
+   },
+   "models": {
+    "V1": {
+     "S_with": -122.40313242163964,
+     "N_with": 321,
+     "S_without": -123.41590722163963,
+     "N_without": 322
+    },
+    "X3": {
+     "S_with": -89.71820365715924,
+     "N_with": 250,
+     "S_without": -118.9846368985648,
+     "N_without": 250
+    },
+    "VN1": {
+     "S_with": -38.45178855010979,
+     "N_with": 86,
+     "S_without": -91.75991880680341,
+     "N_without": 172
+    },
+    "BV1b": {
+     "S_with": -96.45666277196962,
+     "N_with": 265,
+     "S_without": -123.41590722163963,
+     "N_without": 322
+    },
+    "BX3e": {
+     "S_with": -55.444971149517635,
+     "N_with": 160,
+     "S_without": -80.30655537263866,
+     "N_without": 160
+    },
+    "BC3": {
+     "S_with": -140.42555575660126,
+     "N_with": 233,
+     "S_without": -123.41590722163963,
+     "N_without": 322
+    }
+   }
+  },
+  "2026-10-20": {
+   "trades": {
+    "SPY": 94,
+    "QQQ": 115,
+    "SPXW": 118
+   },
+   "models": {
+    "V1": {
+     "S_with": -165.906431561952,
+     "N_with": 325,
+     "S_without": -167.66089156195198,
+     "N_without": 327
+    },
+    "X3": {
+     "S_with": -73.0529268857079,
+     "N_with": 249,
+     "S_without": -133.8686446476885,
+     "N_without": 249
+    },
+    "VN1": {
+     "S_with": -59.463889873055706,
+     "N_with": 90,
+     "S_without": -111.47881875870694,
+     "N_without": 180
+    },
+    "BV1b": {
+     "S_with": -115.48290346834376,
+     "N_with": 259,
+     "S_without": -167.66089156195198,
+     "N_without": 327
+    },
+    "BX3e": {
+     "S_with": -45.27868611203672,
+     "N_with": 161,
+     "S_without": -77.04736241521,
+     "N_without": 161
+    },
+    "BC3": {
+     "S_with": -37.67447684050866,
+     "N_with": 175,
+     "S_without": -167.66089156195198,
+     "N_without": 327
+    }
+   }
+  },
+  "2026-10-21": {
+   "trades": {
+    "SPY": 101,
+    "QQQ": 130,
+    "SPXW": 117
+   },
+   "models": {
+    "V1": {
+     "S_with": -70.15441039897269,
+     "N_with": 347,
+     "S_without": -71.16718519897269,
+     "N_without": 348
+    },
+    "X3": {
+     "S_with": 35.354979103600634,
+     "N_with": 252,
+     "S_without": -55.875547560584266,
+     "N_without": 252
+    },
+    "VN1": {
+     "S_with": -29.886404606936846,
+     "N_with": 92,
+     "S_without": -39.42083764697881,
+     "N_without": 184
+    },
+    "BV1b": {
+     "S_with": -45.535389202258926,
+     "N_with": 285,
+     "S_without": -71.16718519897269,
+     "N_without": 348
+    },
+    "BX3e": {
+     "S_with": 20.50729808712277,
+     "N_with": 164,
+     "S_without": -21.177469454020777,
+     "N_without": 164
+    },
+    "BC3": {
+     "S_with": 30.01316189896228,
+     "N_with": 207,
+     "S_without": -71.16718519897269,
+     "N_without": 348
+    }
+   }
+  }
+ }
+}

@@ -798,6 +798,16 @@ merge-parquet, verify-layout, official-close, decision-price, replay, complete, 
 (or after it) appended — the next run retries from there. A refusal (`DAILY-FORWARD REFUSED`, exit 2): the SDK outside
 its window, or any run inside Theta's 00:00–01:45 gap.
 
+**Step 7, the Compass features forward test** (on by default; `--no-features` skips it, `--no-cboe` asks Cboe nothing):
+after the tracker's append — and on a run with nothing else pending — every whole forward session from 2026-10-22 not yet
+in `research_notes/Compass features/forward/forward_sessions.csv` gets one row per model (V1, X3, VN1, BV1b, BX3e, BC3:
+both arms' summed return and trade count) from the 0DTE base trades on SPY, QQQ and SPXW, built by the study's frozen code
+(`forward/forward_features.py`, sha256 checked against `FORWARD_RULE.md`) from the same layout; SPXW settles on the
+official SPX close from Cboe's history (`data/official_closes/cboe_SPX_History_*.csv`, asked once a run when the day is
+missing; not published yet → `DAILY-FORWARD FAIL <day> features-official-spx-close`, exit 1, retried next run; the
+tracker's append is not held back). `forward/FORWARD_REPORT.md` is rewritten each run: sessions counted against each
+model's N, "no verdict" until N. Commit both files with the cumulative report.
+
 **Two fetch sources, one a run.**
 - `--source terminal` (**the default**, the owner's PC): through the Theta Terminal already running there, the
   `--fetch-theta` REST path (`127.0.0.1:25503`, at most 3 in flight, nothing ever signs in) — **no new login, so it never

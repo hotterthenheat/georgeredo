@@ -32,6 +32,15 @@ run), in this order, stopping at the first failure:
   6. append    the whole sessions to the cumulative report (paper_backtest.append_cumulative): the historical sections
                untouched, the forward block regenerated — so yesterday's after-hours columns (they need the next 09:30
                open) fill on today's run.
+  7. compass features (on by default from the command line; --no-features skips it): the forward test of the six
+               Compass features models (research_notes/Compass features/FORWARD_RULE.md: V1, X3, VN1, BV1b, BX3e, BC3) on
+               every whole forward session from 2026-10-22 not yet in forward/forward_sessions.csv — the 0DTE base trades on
+               SPY, QQQ and SPXW built by the study's own frozen code (forward/forward_features.py, sha256 checked) from the
+               same layout, SPXW settled on the official SPX close (Cboe's SPX history, data/official_closes/
+               cboe_SPX_History_*.csv; asked ONCE a run when the day is not on disk, --no-cboe asks nothing). A session
+               missing anything fails loudly (`DAILY-FORWARD FAIL <day> features-<step>`, exit 1, nothing written for it);
+               the paper tracker's append above is not held back by it. forward/FORWARD_REPORT.md is rewritten each run:
+               sessions counted against each model's N, "no verdict" until N.
 
 A NEW MACHINE: the sessions the cumulative report already lists but this replay root does not hold (the owner's PC
 with the committed report) go through the same steps first — fetched if the layout lacks them, replayed — so the
@@ -73,7 +82,7 @@ import paper_audit as P  # noqa: E402
 import paper_backtest as B  # noqa: E402
 import paper_tracker as T  # noqa: E402
 
-JOB_VERSION = 'daily-forward-2026-10-22.1'
+JOB_VERSION = 'daily-forward-2026-10-22.2'
 READY_AFTER = '17:30'               # a session is pending once its official close is out and the 17:30 decision price has passed
 SCHEDULE_NY = '17:45'
 THETA_GAP_END_MIN = 105             # 00:00–01:45 New York: Theta serves no previous day; the SDK never logs in then
@@ -371,6 +380,11 @@ class Job:
     postmarket_dir: Path = P.POSTMARKET_DIR
     historical_from: Path | None = None
     decision_prices: dict | None = None
+    features: bool = False                  # step 7 (the command line turns it on unless --no-features)
+    features_csv: Path | None = None        # default: research_notes/Compass features/forward/forward_sessions.csv
+    features_report: Path | None = None     # default: …/forward/FORWARD_REPORT.md
+    features_work: Path | None = None       # default: <replay root>/_compass_features
+    use_cboe: bool = True
 
     def __post_init__(self):
         self.parquet_root, self.replay_root, self.cumulative = Path(self.parquet_root), Path(self.replay_root), Path(self.cumulative)
@@ -401,8 +415,46 @@ def make_log(root: Path | None, stream=sys.stderr, scrub: R.Scrub | None = None)
     return log
 
 
+def features_module():
+    """research_notes/Compass features/forward/forward_features.py (imported only when step 7 runs)"""
+    d = str(R.REPO / 'research_notes' / 'Compass features' / 'forward')
+    if d not in sys.path:
+        sys.path.insert(0, d)
+    import forward_features as FF  # noqa: E402
+    return FF
+
+
+def run_features(job: Job, log: logging.Logger, spx_fetch=None) -> dict:
+    """step 7: every whole forward session (the replay root's complete sessions, in the layout) not yet in the features file"""
+    FF = features_module()
+    comp = B.complete_sessions(job.replay_root, job.keys, FF.FORWARD_START, '9999-12-31')[0]
+    days = [d for d in comp if (job.day is None or d == job.day) and day_in_layout(job.parquet_root, d)]
+    work = job.features_work or (job.replay_root / '_compass_features')
+    fetch = spx_fetch if spx_fetch is not None else (FF.default_fetch_text if job.use_cboe else None)
+    return FF.run(days, job.parquet_root, work, job.official_dir, csv_path=job.features_csv or FF.CSV_PATH,
+                  report_path=job.features_report or FF.REPORT_PATH, fetch_text=fetch, log=log,
+                  today=dt.datetime.now(R.UTC).astimezone(R.NY).date().isoformat())
+
+
+def features_step(job: Job, res: dict, log: logging.Logger, spx_fetch=None) -> None:
+    """step 7 into the run's result: a failure is one DAILY-FORWARD FAIL line and rc 1, never a half-written session"""
+    try:
+        fr = run_features(job, log, spx_fetch)
+        res['features_added'], res['features_failure'], res['cboe_calls'] = fr['added'], fr['failure'], fr['calls']
+        if fr['failure']:
+            day_, _, why_ = fr['failure'].partition(' ')
+            step_, _, why_ = why_.partition(': ')
+            log.error('DAILY-FORWARD FAIL %s features-%s: %s', day_, step_, red(why_)[:400])
+            res.update(rc=1, failure=res['failure'] or f'features {red(fr["failure"])}'[:400])
+        else:
+            log.info('compass features: %s', ' '.join(fr['added']) or 'nothing new')
+    except Exception as e:  # noqa: BLE001
+        log.error('DAILY-FORWARD FAIL - features: %s', red(f'{type(e).__name__}: {e}')[:400])
+        res.update(rc=1, failure=res['failure'] or f'features: {red(type(e).__name__)}')
+
+
 def run_job(job: Job, now: dt.datetime | None = None, log: logging.Logger | None = None, theta_fetcher=None, sdk: SdkSource | None = None,
-            uw_client=None, closes: P.OfficialCloses | None = None, window: str | None = None) -> dict:
+            uw_client=None, closes: P.OfficialCloses | None = None, window: str | None = None, spx_fetch=None) -> dict:
     """One run. → {'rc': 0 ok or nothing to do | 1 a failure | 2 refused, 'pending', 'completed', 'appended', 'failure',
     'uw_calls', 'logins', 'fetched'}"""
     now = now or dt.datetime.now(R.UTC)
@@ -436,6 +488,8 @@ def run_job(job: Job, now: dt.datetime | None = None, log: logging.Logger | None
     if not pend:
         log.info('DAILY-FORWARD OK: nothing pending (%d forward sessions in %s; the next is due after %s New York on a trading day)',
                  len(listed), job.cumulative.name, READY_AFTER)
+        if job.features:                     # a session the tracker finished earlier may still wait for step 7
+            features_step(job, res, log, spx_fetch)
         return res
     log.info('daily forward %s (%s): pending %s%s', JOB_VERSION, job.source, ' '.join(res['pending']) or '—',
              f"; listed but not in this replay root, rebuilt first: {' '.join(rebuild)}" if rebuild else '')
@@ -513,6 +567,8 @@ def run_job(job: Job, now: dt.datetime | None = None, log: logging.Logger | None
         except Exception as e:  # noqa: BLE001
             log.error('DAILY-FORWARD FAIL %s append: %s', res['completed'][-1], red(f'{type(e).__name__}: {e}')[:400])
             res.update(rc=1, failure=f'append: {red(e)}'[:400])
+    if job.features:
+        features_step(job, res, log, spx_fetch)
     if res['rc'] == 0:
         log.info('DAILY-FORWARD OK: %d session(s) completed, %d appended (%s), %d UW calls, %d Theta logins', len(res['completed']),
                  len(res['appended']), ' '.join(res['appended']) or '—', res['uw_calls'], res['logins'])
@@ -543,6 +599,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument('--no-prior-check', action='store_true', help='skip the sessions-before check of --verify-parquet on the layout')
     p.add_argument('--decision-prices', help='the after-hours study\'s CSV name,day,price')
     p.add_argument('--status', action='store_true', help='what the cumulative report holds and what is pending; asks nothing')
+    p.add_argument('--no-features', action='store_true', help='skip step 7 (the Compass features forward test)')
+    p.add_argument('--no-cboe', action='store_true', help='step 7 asks Cboe nothing: the official SPX close must be on disk already')
     a = p.parse_args(argv)
     if not a.parquet_root:
         print('--parquet-root (or PAPER_PARQUET_ROOT) names the stored Parquet layout', file=sys.stderr)
@@ -550,7 +608,7 @@ def main(argv: list[str] | None = None) -> int:
     job = Job(Path(a.parquet_root), Path(a.backtest_data), Path(a.cumulative), a.source,
               tuple(k.strip() for k in a.candidates.split(',') if k.strip()), Path(a.official_dir), max_days=a.max_days, day=a.day,
               prior_check=not a.no_prior_check, use_uw=not a.no_uw, historical_from=Path(a.historical_from) if a.historical_from else None,
-              decision_prices=B.read_decision_prices(a.decision_prices))
+              decision_prices=B.read_decision_prices(a.decision_prices), features=not a.no_features, use_cboe=not a.no_cboe)
     if a.status:
         print(json.dumps(status(job), indent=1))
         return 0

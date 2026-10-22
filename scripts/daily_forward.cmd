@@ -11,6 +11,7 @@ rem lines NAME=value: UW_API_TOKEN=... (one UW call a name for the official clos
 rem PAPER_PARQUET_ROOT=... (the stored Parquet layout, required); optionally PAPER_FORWARD_DATA=... (the replay root,
 rem data_recorder\paper_backtest_official by default), PAPER_CUMULATIVE=... (the report, research_notes\Compass phase
 rem 3\forward_cumulative.md by default), THETA_BASE=... Nothing is read from a file inside the repo; no key is logged.
+rem Step 7 (the Compass features forward test) runs too: one Cboe call for the official SPX close when it is not on disk.
 rem Exit code: 0 done or nothing pending, 1 a failure (the log's DAILY-FORWARD FAIL line), 2 refused.
 cd /d "%~dp0.."
 if "%RECORDER_ENV%"=="" set "RECORDER_ENV=%USERPROFILE%\.eod_recorder\env"
