@@ -241,6 +241,8 @@ class Limiter:
 
     @staticmethod
     def allowed() -> int:
+        if os.environ.get('UW_IN_FLIGHT'):  # the owner, 2026-10-22: "nobody is using the token but you" -> 3 (UW's limit)
+            return int(os.environ['UW_IN_FLIGHT'])
         n = dt.datetime.now(NY)
         return 1 if (n.weekday() < 5 and 9 <= n.hour < 17) else 2
 
@@ -254,7 +256,7 @@ class Limiter:
                 if self.inflight >= min(self.allowed(), 3):
                     self.cv.wait(1.0)
                     continue
-                gap = self.last + 1.2 - now
+                gap = self.last + float(os.environ.get('UW_MIN_GAP', '1.2')) - now
                 if gap > 0:
                     self.cv.wait(gap)
                     continue
@@ -702,7 +704,7 @@ def uw_run(smoke: bool = False) -> int:
                 log('progress', n, route, t, d)
 
     status()
-    ths = [threading.Thread(target=worker, daemon=True) for _ in range(2)]
+    ths = [threading.Thread(target=worker, daemon=True) for _ in range(3)]
     for th in ths:
         th.start()
     for th in ths:
