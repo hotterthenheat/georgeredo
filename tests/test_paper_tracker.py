@@ -29,6 +29,7 @@ from __future__ import annotations
 import datetime as dt
 import json
 import math
+import os
 import shutil
 import sys
 import tempfile
@@ -552,7 +553,9 @@ def test_a_default_session_cold_then_warm_fits_the_budget_and_the_settle_carries
             assert tr.capture(DAY, m)['failed'] == 0, m
         assert client.calls == 22 + 5 + 1 + 20
         s = tr.capture(DAY, '15:58')
-        assert s['calls'] == 2 and s['rows'] == 12 and client.calls == 50
+        # since .3 every candidate is read again at 15:58 off the same one chain a name: SPY (condor_em1 5, condor_d20 5,
+        # fly5 6) and QQQ (fly5 6) — still two calls
+        assert s['calls'] == 2 and s['rows'] == 22 and client.calls == 50
         assert tr.capture(DAY, '15:58')['calls'] == 0
         st = tr.settle(DAY)
         assert st['calls'] == 6 and st['failed'] == 0 and limiter.spent == 56 <= T.DEFAULT_BUDGET
@@ -714,16 +717,17 @@ def test_the_parquet_to_chain_adapter_lands_on_the_hand_checked_strikes_and_fill
 
 
 def test_a_replay_over_fixture_parquets_writes_its_rows_apart_and_reports():
-    """Two whole sessions (2026-10-19, -20), a third missing QQQ's chain (-21), two after the files end: the live tracker
-    runs at every minute; the rows carry source=backtest-parquet under the replay root; the settlement is the 15:59 bar
-    (777.20) → the condor −$92.60 at the NBBO (−$87.10 mid, −$96.60 / −$100.60 stressed), the iron fly −$234.60; fly5 has
-    its 15:58 exit; candidate 3 its deciles; the report and its CSV say all of it; a second replay writes nothing."""
+    """--settle-on 1559 (the old convention, kept so the committed reports stay reproducible). Two whole sessions
+    (2026-10-19, -20), a third missing QQQ's chain (-21), two after the files end: the live tracker runs at every minute;
+    the rows carry source=backtest-parquet under the replay root; the settlement is the 15:59 bar (777.20) → the condor
+    −$92.60 at the NBBO (−$87.10 mid, −$96.60 / −$100.60 stressed), the iron fly −$234.60; fly5 has its 15:58 exit;
+    candidate 3 its deciles; the report and its CSV say all of it; a second replay writes nothing."""
     with tempfile.TemporaryDirectory() as d:
         pq, rroot, live, out = Path(d) / 'pq', Path(d) / 'replay', Path(d) / 'paper', Path(d) / 'out'
         write_parquet_fixture(pq, ['2026-10-19', '2026-10-20'])
         write_parquet_fixture(pq, ['2026-10-21'], chains=('SPY',))
         saved = (R.HOLIDAYS, R.HALF_DAYS)
-        res = B.replay('2026-10-19', '2026-10-23', T.DEFAULT_KEYS, pq, rroot, live_root=live, progress=None)
+        res = B.replay('2026-10-19', '2026-10-23', T.DEFAULT_KEYS, pq, rroot, live_root=live, progress=None, settle_on='1559')
         assert (R.HOLIDAYS, R.HALF_DAYS) == saved                                            # the calendar is put back
         assert res['replayed'] == 3 and not live.exists()
         days = B.read_days(rroot)
@@ -750,9 +754,10 @@ def test_a_replay_over_fixture_parquets_writes_its_rows_apart_and_reports():
         # the first day has no VIX file for the session before (vix_chg_prev null) → the no-VIX model is its primary
         prim = dict(c3.group_by('_day').agg(pl.col('t2_primary_model').unique().first()).iter_rows())
         assert prim == {'2026-10-19': V.NOVIX, '2026-10-20': V.FULL, '2026-10-21': V.FULL}
-        rep = B.build_report(rroot, T.DEFAULT_KEYS, '2026-10-19', '2026-10-23', out, stream=None)
+        rep = B.build_report(rroot, T.DEFAULT_KEYS, '2026-10-19', '2026-10-23', out, stream=None)     # the root's own convention: 1559
         md = Path(rep['md']).read_text()
         assert Path(rep['md']).name == 'backtest_2026-10-19_2026-10-23.md' and Path(rep['csv']).exists()
+        assert 'Results by period' not in md and 'trades_csv' not in rep                               # the old report, unchanged
         assert '| condor | 3 | 15 | 100.0% | -92.60 |' in md and '15:59 bar' in md and 'fetch' in md
         assert 'fly5 QQQ: data_full/chains/QQQ/2026-10-21.parquet' in md
         assert '| iron | 3 | 10 | 100.0% | -234.60 |' in md
@@ -766,8 +771,14 @@ def test_a_replay_over_fixture_parquets_writes_its_rows_apart_and_reports():
         assert {'cell', 'fills', '1558', 'decile', 'lift'} <= set(csv['section'].to_list())
         # a second replay of the same days writes no row
         n = sum(f.stat().st_size for f in rroot.rglob('*.parquet'))
-        B.replay('2026-10-19', '2026-10-21', T.DEFAULT_KEYS, pq, rroot, live_root=live, progress=None)
+        B.replay('2026-10-19', '2026-10-21', T.DEFAULT_KEYS, pq, rroot, live_root=live, progress=None, settle_on='1559')
         assert sum(f.stat().st_size for f in rroot.rglob('*.parquet')) == n
+        # the root is a 1559 root: an official-close run into it is refused (their settle rows would collide)
+        try:
+            B.replay('2026-10-19', '2026-10-19', T.DEFAULT_KEYS, pq, rroot, live_root=live, progress=None, settle_on='official')
+            assert False, 'mixed conventions in one root'
+        except ValueError as e:
+            assert 'settle-on 1559' in str(e)
 
 
 def test_the_replay_root_is_kept_apart_from_the_live_root():
@@ -1208,6 +1219,483 @@ def test_the_replay_reads_a_refused_file_as_absent_and_a_missing_session_is_not_
         write_parquet_fixture(pq2, ['2025-12-22', '2025-12-24'])
         B.replay('2025-12-22', '2025-12-24', ('condor_em1',), pq2, Path(d) / 'replay2', progress=None)
         assert B.read_days(Path(d) / 'replay2')['2025-12-23']['status'] == 'holiday'
+
+
+# ---- the audit's corrections as the defaults (2026-10-22; scripts/paper_audit.py) -------------------------------------------------------
+
+import paper_audit as PA  # noqa: E402
+import daily_forward as DF  # noqa: E402
+
+AUDIT_DIR = Path(__file__).resolve().parents[1] / 'research_notes' / 'Compass phase 3' / 'backtest_audit'
+
+
+def _import_audit(name):
+    """the audit's own modules, imported read-only (no bytecode written into its folder)"""
+    sys.dont_write_bytecode = True
+    if str(AUDIT_DIR) not in sys.path:
+        sys.path.insert(0, str(AUDIT_DIR))
+    import importlib
+    return importlib.import_module(name)
+
+
+def uw_close_file(d: Path, rows):
+    """a UW daily-bar file as data/official_closes keeps them: (ticker, date, market_time, close[, low, high, open])"""
+    d.mkdir(parents=True, exist_ok=True)
+    recs = [{'ticker': t, 'date': day, 'market_time': mt, 'close': str(c), 'open': str(o if o is not None else c), 'high': str(h if h is not None else c),
+             'low': str(lo if lo is not None else c), 'total_volume': '1', 'volume': '1'} for t, day, mt, c, lo, h, o in rows]
+    pl.DataFrame(recs).write_parquet(d / 'uw_ohlc_1d_test.parquet')
+
+
+def test_period_labels_at_the_boundaries():
+    """AUDIT.md section 5, one function for the rows and the report: condor_d20 i-a to 2024-06-30, i-b from 2024-07-01 to
+    2024-12-31, ii from 2025-01-02 to 2026-10-09, iii from 2026-10-12; condor_em1 and fly5 i / ii / iii; before the span
+    'pre'; every row carries it (capture, 15:58 and settle)."""
+    p = PA.period_of
+    assert [p('condor_d20', d) for d in ('2022-11-10', '2022-11-11', '2024-06-28', '2024-07-01', '2024-12-31', '2025-01-02', '2026-10-09', '2026-10-12', '2027-03-01')] == \
+        ['pre', 'i-a', 'i-a', 'i-b', 'i-b', 'ii', 'ii', 'iii', 'iii']
+    for k in ('condor_em1', 'fly5'):
+        assert [p(k, d) for d in ('2022-11-11', '2024-12-31', '2025-01-02', '2026-10-09', '2026-10-12')] == ['i', 'i', 'ii', 'ii', 'iii']
+    assert p('fly_spxw', '2024-01-02') == 'hist' and p('fly_spxw', '2026-10-13') == 'iii' and p('fly5', None) is None
+    audit = _import_audit('audit_lib')
+    for k in audit.KEYS:                                       # the audit's own definitions, day for day
+        for d in ('2022-11-11', '2024-06-30', '2024-07-01', '2024-12-31', '2025-01-02', '2026-10-09', '2026-10-12', '2026-10-21'):
+            assert p(k, d) == audit.period_of(k, d), (k, d)
+    with tempfile.TemporaryDirectory() as d:
+        tr, client, store, *_ = harness(Path(d), budget=80, cands=T.active_candidates(spxw=False), start=dt.datetime(2026, 10, 20, 20, 25, tzinfo=R.UTC))
+        for m in DEFAULT_MINUTES + ['15:58']:
+            tr.capture(DAY, m)
+        tr.settle(DAY)
+        for k, nm in (('condor_em1', 'SPY'), ('fly5', 'QQQ'), ('condor_d20', 'SPY')):
+            df = store.read(k, nm, DAY)
+            assert set(df['row_kind'].unique().to_list()) == {'capture', 'close1558', 'settle'} and df['period'].unique().to_list() == ['iii'], k
+
+
+def test_session_statistics_agree_with_the_audits():
+    """paper_audit's ported block_draws / session_stats give audit_lib's numbers to the last digit (seeded draws)"""
+    import numpy as np
+    audit = _import_audit('audit_lib')
+    rng = np.random.default_rng(7)
+    for n in (5, 61, 150):
+        S = rng.normal(5, 40, n) * (rng.random(n) > 0.1)
+        N = (S != 0).astype(float) * rng.integers(1, 6, n)
+        a, b = PA.session_stats(S, N), audit.session_stats(S, N)
+        assert a.keys() == b.keys()
+        for k in a:
+            va, vb = a[k], b[k]
+            if isinstance(va, (tuple, list)):
+                assert all((x == y) or (x != x and y != y) for x, y in zip(va, vb)), (n, k)
+            else:
+                assert va == vb or (va != va and vb != vb), (n, k, va, vb)
+    assert (PA.block_draws(30, 20) == audit.block_draws(30, 20)).all()
+
+
+def test_official_closes_source_chain():
+    """UW's daily bar first (its newest fetch), Theta's EOD where UW has none, nothing where neither; UW's post-market
+    bar gives the range"""
+    with tempfile.TemporaryDirectory() as d:
+        uw = Path(d) / 'oc'
+        uw_close_file(uw, [('SPY', '2026-10-19', 'r', 777.31, None, None, 776.0), ('SPY', '2026-10-19', 'po', 777.4, 776.9, 778.1, None)])
+        eod = Path(d) / 'eod' / 'year=2026'
+        eod.mkdir(parents=True)
+        ts = lambda day: dt.datetime.fromisoformat(day).replace(hour=17, minute=15, tzinfo=R.NY)      # noqa: E731
+        pl.DataFrame({'symbol': ['SPY', 'SPY', 'QQQ'], 'created': [ts('2026-10-19'), ts('2026-10-21'), ts('2026-10-21')], 'close': [999.0, 770.5, 700.25]},
+                     schema={'symbol': pl.Utf8, 'created': pl.Datetime('ms', 'America/New_York'), 'close': pl.Float64}).write_parquet(eod / 'p.parquet')
+        oc = PA.OfficialCloses(uw_dirs=(uw,), uw_lake_glob=None, theta_glob=str(Path(d) / 'eod' / 'year=*' / '*.parquet'), live_root=None)
+        assert oc.get('SPY', '2026-10-19') == (777.31, 'uw_1d')                 # UW over Theta's 999
+        assert oc.get('SPY', '2026-10-21') == (770.5, 'theta_eod') and oc.get('QQQ', '2026-10-21') == (700.25, 'theta_eod')
+        assert oc.get('SPY', '2026-10-20') == (None, None)
+        assert oc.post_market('SPY', '2026-10-19')[:2] == (776.9, 778.1) and oc.post_market('SPY', '2026-10-20')[0] is None
+        assert oc.open_r('SPY', '2026-10-19') == 776.0
+
+
+def test_the_replay_settles_on_the_official_close_by_default_and_flags_a_fallback():
+    """The default replay (--settle-on official): 2026-10-19 has UW's official close 777.30 → every SPY/QQQ settle row
+    'official' at 777.30 (the condor −$102.60: (0.30 − 1.30) × 100 − $2.60), labelled where it came from; 2026-10-20 has
+    none on disk → the 15:59 bar (777.20), labelled `1559_bar`, `settle_fallback` true, the session flagged in the day
+    file and in the report, and not whole for the cumulative report; every row carries its period; the 15:58 rows of
+    every candidate (the condors too) with the stress on the exit; the report's period tables and trades CSV."""
+    with tempfile.TemporaryDirectory() as d:
+        pq, rroot, out, oc_dir = Path(d) / 'pq', Path(d) / 'replay', Path(d) / 'out', Path(d) / 'oc'
+        write_parquet_fixture(pq, ['2026-10-19', '2026-10-20'])
+        uw_close_file(oc_dir, [('SPY', '2026-10-19', 'r', 777.30, None, None, None), ('QQQ', '2026-10-19', 'r', 777.30, None, None, None),
+                               ('SPY', '2026-10-19', 'po', 777.5, 775.5, 777.6, None)])
+        oc = PA.OfficialCloses(uw_dirs=(oc_dir,), uw_lake_glob=None, theta_glob=None, live_root=None)
+        B.replay('2026-10-19', '2026-10-20', T.DEFAULT_KEYS, pq, rroot, progress=None, closes=oc)
+        assert B.root_mode(rroot) == 'official'
+        df = B.read_rows(rroot, T.DEFAULT_KEYS, '2026-10-19', '2026-10-20')
+        em = df.filter((pl.col('candidate') == 'condor_em1') & (pl.col('row_kind') == 'settle')).sort('_day')
+        a, b = em.filter(pl.col('_day') == '2026-10-19'), em.filter(pl.col('_day') == '2026-10-20')
+        assert a['settle_source'].unique().to_list() == ['official'] and a['settle_px'].unique().to_list() == ['777.3']
+        assert a['close_official_from'][0] == 'replay: official close (uw_1d)' and a['pnl_nbbo'].unique().to_list() == ['-102.6']
+        assert a['settle_fallback'].unique().to_list() == ['false'] and a['close_1m_r'][0] == '777.2'
+        assert b['settle_source'].unique().to_list() == ['1559_bar'] and b['settle_px'].unique().to_list() == ['777.2']
+        assert b['settle_fallback'].unique().to_list() == ['true'] and b['pnl_nbbo'].unique().to_list() == ['-92.6']
+        # the flags at the settlement: the short 776 call in the money → 100 shares short left; the pin; the post-market cross
+        assert a['stock_left'].unique().to_list() == ['-100'] and a['stock_left_side'][0] == 'short' and a['pin_dist'][0] == '1.3'
+        assert a['pm_cross'][0] == 'true' and a['pm_source'][0].startswith('uw_1d po')                # 775.5 – 777.6 takes 776 across
+        assert b['pm_cross'][0] is None and b['pm_source'][0].startswith('none')
+        assert df['period'].null_count() == 0 and df['period'].unique().to_list() == ['iii']
+        days = B.read_days(rroot)
+        assert 'settle_fallback' not in days['2026-10-19'] and days['2026-10-20']['settle_fallback'] == ['condor_d20 SPY', 'condor_em1 SPY', 'fly5 QQQ', 'fly5 SPY']
+        assert 'NO OFFICIAL CLOSE' in days['2026-10-20']['note']
+        cl = df.filter(pl.col('row_kind') == 'close1558')
+        assert sorted(cl['candidate'].unique().to_list()) == ['condor_d20', 'condor_em1', 'fly5'] and cl['pnl_1558_1c'].null_count() == 0
+        comp, pend = B.complete_sessions(rroot, T.DEFAULT_KEYS, '2026-10-19', '2026-10-20')
+        assert comp == ['2026-10-19'] and 'no official close' in pend['2026-10-20']
+        rep = B.build_report(rroot, T.DEFAULT_KEYS, '2026-10-19', '2026-10-20', out, parquet_root=pq, stream=None, closes=oc, decision_prices={})
+        md = Path(rep['md']).read_text()
+        assert 'official-close settlement' in md and '## Results by period — never pooled' in md and '## Hold to expiry against the 15:58 exit' in md
+        assert '**Flagged — settled on the 15:59 bar (`1559_bar`), no official close on disk:** 2026-10-20 QQQ, 2026-10-20 SPY' in md
+        assert '| condor | iii | 2 | 10 | 2 / 2 | -97.60 |' in md                     # (5 × −102.60 + 5 × −92.60) / 10
+        tc = pl.read_csv(rep['trades_csv'])
+        assert tc.height == 10 + 3 * 4 * 2 + 10 and set(tc['period'].unique().to_list()) == {'iii'}
+        csv = pl.read_csv(rep['csv'])
+        assert {'settlement', 'period', 'exit1558', 'flags', 'afterhours', 'cell', '1558'} <= set(csv['section'].to_list())
+
+
+def test_1558_rows_for_every_candidate_with_the_stress_on_the_exit():
+    """The 15:58 exit with the stress on the open AND the exit, by hand on the fixture iron fly (credit 1.88; at 15:58
+    C773 3.10/3.20, P773 0.00/0.02, P768 0.00/0.01 — no bid, abandoned —, C778 0.05/0.07): +1c: entry 1.84, the exit
+    −3.21 − 0.03 + 0.04 = −3.20 → (1.84 − 3.20) × 100 − $2.60 − $1.95 = −140.55; +2c: 1.80, −3.22 − 0.04 + 0.03 = −3.23 →
+    −147.55. And the same figures as the audit's own `exit_1558` (run_audit.py) on every structure and quote set."""
+    iron, call, put = T.flies5(fixture_chain(), 773.40, 5.0)
+    condor = T.condor_em1(fixture_chain(), 773.40, 2.0)
+    q = {('C', 773): (3.10, 3.20), ('P', 773): (0.00, 0.02), ('P', 768): (0.00, 0.01), ('C', 778): (0.05, 0.07), ('C', 768): (8.00, 8.20),
+         ('P', 778): (4.60, 4.75), ('C', 776): (1.20, 1.25), ('P', 771): (0.00, 0.01), ('P', 769): (0.0, 0.01)}
+    ch = T.Chain([{'option_symbol': f'SPY261020{r}{k * 1000:08d}', 'nbbo_bid': str(b), 'nbbo_ask': str(a)} for (r, k), (b, a) in q.items()], DAY)
+    cap = T.capture_row(T.CANDIDATES['fly5'], iron, '15:30', R.parse_ts('2026-10-20T19:30:00Z'), 773.40, {}, fixture_chain(), 1, day=DAY)
+    r = T.close_row(dict(cap, _day=DAY), iron, ch, R.parse_ts('2026-10-20T19:58:00Z'))
+    assert r['pnl_1558_nbbo'] == '-133.55' and r['pnl_1558_1c'] == '-140.55' and r['pnl_1558_2c'] == '-147.55' and r['period'] == 'iii'
+    run_audit = _import_audit('run_audit')
+    quotes = {k: v for k, v in q.items()}
+    for s in (iron, call, put, condor):
+        legs = [(l.right, l.strike, l.side, l.qty) for l in s.legs]
+        cash = s.entry_cash()
+        liq = T.liquidation(s, ch)
+        mine = T.exit_pnl(s, liq)
+        for tag, w in (('nbbo', 0.0), ('1c', 0.01), ('2c', 0.02)):
+            nb, _, closed = run_audit.exit_1558(legs, cash, quotes, w)
+            if nb is None:
+                assert mine[f'pnl_1558_{tag}'] is None
+                continue
+            want = (cash - 4 * w + nb) * 100 - 4 * 0.65 - closed * 0.65            # run_audit.build_trades' formula
+            assert abs(mine[f'pnl_1558_{tag}'] - want) < 1e-9, (s.structure, tag, mine, want)
+    # in a session: a condor's 15:58 row, its settle row carrying the stressed exit
+    with tempfile.TemporaryDirectory() as d:
+        tr, client, store, *_ = harness(Path(d), budget=80, cands=T.active_candidates(keys=('condor_em1', 'condor_d20')))
+        tr.capture(DAY, '13:00')
+        s = tr.capture(DAY, '15:58')
+        assert s['calls'] == 1 and s['rows'] == 2                        # one SPY chain for both condors
+        tr.settle(DAY)
+        se = store.read('condor_em1', 'SPY', DAY).filter(pl.col('row_kind') == 'settle').to_dicts()[0]
+        cl = store.read('condor_em1', 'SPY', DAY).filter(pl.col('row_kind') == 'close1558').to_dicts()[0]
+        assert se['pnl_1558_nbbo'] == cl['pnl_1558_nbbo'] and se['pnl_1558_2c'] == cl['pnl_1558_2c'] is not None
+        assert float(se['pnl_1558_2c']) < float(se['pnl_1558_1c']) < float(se['pnl_1558_nbbo'])
+
+
+def test_expiry_flags_on_a_fixture():
+    """At 777.20: the condor's short 776 call is assigned (−100 shares), the iron fly's short 773 call (−100), the call
+    fly's long 768 and two short 773 calls (+100 − 200 = −100), the put fly's long 778 put (−100); at 773.00 neither the
+    condor nor the iron fly has a leg in the money (0; the iron fly's pin 0.00) but the call fly's long 768 call is
+    (+100 — a long fly pinned at K0 still delivers stock) and the put fly's long 778 put (−100). Exercise-by-exception needs $0.01: at 776.01 the 776 call is assigned, at
+    776.004 it is not. The pins are the nearest short strike within $0.25 / $0.50. The post-market cross: a range that
+    takes a short strike across the money (775.5–777.6 around 776), not one wholly on one side (776.5–777.6), none
+    without the bar."""
+    ch = fixture_chain()
+    c = T.condor_em1(ch, 773.40, 2.0)
+    iron, call, put = T.flies5(ch, 773.40, 5.0)
+    assert [PA.stock_left(x, 777.20) for x in (c, iron, call, put)] == [-100, -100, -100, -100]
+    assert [PA.stock_left(x, 773.00) for x in (c, iron, call, put)] == [0, 0, 100, -100]
+    assert PA.stock_left(c, 776.01) == -100 and PA.stock_left(c, 776.004) == 0
+    f = PA.flags(c, 776.20)
+    assert f['pin_025'] and f['pin_050'] and close(f['pin_dist'], 0.20) and f['stock_left_side'] == 'short'
+    f = PA.flags(c, 776.40)
+    assert not f['pin_025'] and f['pin_050']
+    assert PA.flags(c, 777.20, 775.5, 777.6)['pm_cross'] is True and PA.flags(c, 777.20, 776.5, 777.6)['pm_cross'] is False
+    assert PA.flags(c, 777.20)['pm_cross'] is None
+    assert PA.flags(iron, 773.0)['pin_dist'] == 0.0 and PA.flags(iron, 773.0, cash_settled=True)['stock_left_side'] == 'cash-settled'
+    row = T.settle_row(dict(T.capture_row(T.CANDIDATES['condor_em1'], c, '11:30', R.parse_ts('2026-10-20T15:30:00Z'), 773.4, {}, ch, 1, day=DAY), _day=DAY),
+                       c, 'official', 777.20, {'close_official': 777.20, 'pm_low': 775.5, 'pm_high': 777.6, 'pm_source': 'test'}, R.parse_ts('2026-10-20T20:20:00Z'))
+    assert (row['stock_left'], row['stock_left_side'], row['pin_025'], row['pin_050'], row['pm_cross'], row['settle_fallback'], row['period']) == \
+        ('-100', 'short', 'false', 'false', 'true', 'false', 'iii')
+
+
+def test_after_hours_cases_by_hand():
+    """paper_audit.after_hours_pnl on the fixture condor (credit 0.30: short C776 / long C778, short P771 / long P769):
+    official 777.20, the next open 778.00. (0) intrinsic: (0.30 − 1.20) × 100 − 2.60 = −92.60. (a) the short 776 call
+    assigned at the close, the short stock bought back at the open: (0.30 + (776 − 778)) × 100 − 2.60 = −172.60.
+    (b) decision 775.90: the call is out of the money then — not assigned, no long in the money at the close → +27.40;
+    decision 776.50: assigned → −172.60. (c) both at the decision price 778.50: the long 778 call is exercised too —
+    (0.30 + (776 − 778) + (778 − 778)) → −172.60; at 779.00 the same. With a fee of $1 a contract exercised: (a) −173.60.
+    The iron fly (credit 1.88) at official 773.004 (nothing ≥ $0.01 in the money) is case 0's +185.40 in (a); at 772.99
+    the short 773 put is assigned (+100 shares) and the open 770 marks it: (1.88 − 3.00) × 100 − 2.60 = −114.60. A
+    missing open: (a) (b) (c) None; a missing decision price: (b) (c) None; cash-settled: every case is case 0."""
+    ch = fixture_chain()
+    c = T.condor_em1(ch, 773.40, 2.0)
+    ah = PA.after_hours_pnl(c, c.entry_cash(), 777.20, 778.00, 775.90)
+    assert close(ah['pnl_ah0'], -92.60) and close(ah['pnl_ah_a'], -172.60) and close(ah['pnl_ah_b'], 27.40) and close(ah['pnl_ah_c'], 27.40)
+    ah = PA.after_hours_pnl(c, c.entry_cash(), 777.20, 778.00, 776.50)
+    assert close(ah['pnl_ah_b'], -172.60) and close(ah['pnl_ah_c'], -172.60)
+    ah = PA.after_hours_pnl(c, c.entry_cash(), 777.20, 778.00, 778.50)
+    assert close(ah['pnl_ah_c'], -172.60) and close(ah['pnl_ah_b'], -172.60)
+    assert close(PA.after_hours_pnl(c, c.entry_cash(), 777.20, 778.00, None, fee_per_exercise=1.0)['pnl_ah_a'], -173.60)
+    iron = T.flies5(ch, 773.40, 5.0)[0]
+    assert close(PA.after_hours_pnl(iron, iron.entry_cash(), 773.004, 770.0, None)['pnl_ah_a'], 185.40)
+    assert close(PA.after_hours_pnl(iron, iron.entry_cash(), 772.99, 770.0, None)['pnl_ah_a'], -114.60)
+    none = PA.after_hours_pnl(c, c.entry_cash(), 777.20, None, 776.0)
+    assert close(none['pnl_ah0'], -92.60) and none['pnl_ah_a'] is None and none['pnl_ah_b'] is None and none['pnl_ah_c'] is None
+    nod = PA.after_hours_pnl(c, c.entry_cash(), 777.20, 778.0, None)
+    assert nod['pnl_ah_a'] is not None and nod['pnl_ah_b'] is None and nod['pnl_ah_c'] is None
+    cash = PA.after_hours_pnl(c, c.entry_cash(), 777.20, 778.0, 776.5, cash_settled=True)
+    assert all(close(cash[k], -92.60) for k in ('pnl_ah0', 'pnl_ah_a', 'pnl_ah_b', 'pnl_ah_c'))
+
+
+def test_after_hours_cases_equal_the_studys_rows():
+    """Reconciled with the after-hours study (research_notes/Compass phase 3/backtest_audit/out/afterhours_trades.csv,
+    commit 633fbff): on period ii's overlap, rows of fly5 iron and condor_d20 where the cases differ — the study's own
+    legs, NBBO entry, official close, decision price (its last UW post-market minute bar ≤ 17:30) and next 09:30 open
+    fed to paper_audit.after_hours_pnl give its four P&Ls to the cent. And its decision prices for the forward sessions
+    are what decision_prices_on_disk reads off data/postmarket_1m."""
+    f = AUDIT_DIR / 'out' / 'afterhours_trades.csv'
+    assert f.exists(), f
+    d = pl.read_csv(f, infer_schema_length=None).filter(pl.col('period') == 'ii')
+    picks = []
+    for cand in ('fly5', 'condor_d20'):
+        x = d.filter(pl.col('candidate') == cand)
+        for cond in ((pl.col('pnl_a') - pl.col('pnl_0')).abs() > 0.005, (pl.col('pnl_b') - pl.col('pnl_a')).abs() > 0.005,
+                     (pl.col('pnl_c') - pl.col('pnl_b')).abs() > 0.005, (pl.col('pnl_a') - pl.col('pnl_0')).abs() <= 0.005):
+            picks += x.filter(cond).sort('day', 'name', 'minute').head(3).to_dicts()
+    assert len(picks) == 24
+    for r in picks:
+        legs = [tuple(x) for x in json.loads(r['legs'])]
+        entry = r['price_nbbo'] if r['package'] == 'credit' else -r['price_nbbo']
+        ah = PA.after_hours_pnl(legs, entry, r['official'], r['next_open_0930'], r['decision_px'])
+        for mine, theirs in (('pnl_ah0', 'pnl_0'), ('pnl_ah_a', 'pnl_a'), ('pnl_ah_b', 'pnl_b'), ('pnl_ah_c', 'pnl_c')):
+            assert abs(round(ah[mine], 2) - round(r[theirs], 2)) < 0.005, (r['candidate'], r['day'], r['minute'], mine, ah[mine], r[theirs])
+    dp = PA.decision_prices_on_disk()
+    iii = pl.read_csv(f, infer_schema_length=None).filter(pl.col('period') == 'iii').select('name', 'day', 'decision_px').unique()
+    assert iii.height == 16 and all(abs(dp[(n, dd)] - px) < 1e-9 for n, dd, px in iii.iter_rows())
+
+
+def test_the_append_mode_leaves_the_history_untouched():
+    """append_cumulative: a new file holds the historical sections given; the forward sessions of the root (whole ones
+    alone) are appended; a second append with nothing new writes nothing; a session added to the root later is appended
+    and the historical bytes are still the same; a session not whole (a 15:59 fallback) is pending, never appended; a
+    listed session gone from the root stops it."""
+    with tempfile.TemporaryDirectory() as d:
+        pq, rroot, cum, oc_dir = Path(d) / 'pq', Path(d) / 'replay', Path(d) / 'cumulative.md', Path(d) / 'oc'
+        days = ['2026-10-19', '2026-10-20', '2026-10-21']
+        write_parquet_fixture(pq, days)
+        uw_close_file(oc_dir, [(n, dd, 'r', 777.30, None, None, None) for n in ('SPY', 'QQQ') for dd in days[:2]])
+        oc = PA.OfficialCloses(uw_dirs=(oc_dir,), uw_lake_glob=None, theta_glob=None, live_root=None)
+        hist = Path(d) / 'hist.md'
+        hist.write_text('# Historical replay 2022-11-11 → 2026-10-09\n\n| period | mean |\n|---|---|\n| i | +3.47 |\n', encoding='utf-8')
+        B.replay(days[0], days[0], T.DEFAULT_KEYS, pq, rroot, progress=None, closes=oc)
+        r1 = B.append_cumulative(rroot, cum, parquet_root=pq, closes=oc, decision_prices={}, historical_from=hist)
+        assert r1['added'] == [days[0]] and r1['written']
+        t1 = cum.read_text()
+        h0 = t1[:t1.index(B.CUM_HIST_END) + len(B.CUM_HIST_END)]
+        assert '## Historical replay 2022-11-11 → 2026-10-09' in h0 and '| i | +3.47 |' in h0
+        assert '# Forward — period iii, 1 session, 2026-10-19 → 2026-10-19' in t1 and '| 2026-10-19 | condor_em1 condor' in t1
+        st = cum.stat().st_mtime_ns
+        assert B.append_cumulative(rroot, cum, parquet_root=pq, closes=oc, decision_prices={})['added'] == [] and cum.stat().st_mtime_ns == st
+        B.replay(days[1], days[2], T.DEFAULT_KEYS, pq, rroot, progress=None, closes=oc)
+        r2 = B.append_cumulative(rroot, cum, parquet_root=pq, closes=oc, decision_prices={})
+        assert r2['added'] == [days[1]] and 'no official close' in r2['pending'][days[2]]
+        t2 = cum.read_text()
+        assert t2.startswith(h0) and '2 sessions, 2026-10-19 → 2026-10-20' in t2 and '| 2026-10-21 |' not in t2
+        assert t2.count(B.CUM_HIST_BEGIN) == 1 and t2.count(B.CUM_FWD_BEGIN) == 1
+        # the next session's open is now on disk for 2026-10-19: its after-hours (a) column fills on this regeneration
+        tc = B.trade_table(B.read_rows(rroot, T.DEFAULT_KEYS, days[0], days[0]), oc, pq, {})[0]
+        assert all(t['next_open'] == 773.40 and t['pnl_ah_a'] is not None for t in tc if t['candidate'] != 'fly_spxw')
+        shutil.rmtree(rroot / 'condor_em1' / 'SPY')
+        (rroot / 'condor_em1' / 'SPY').mkdir()
+        try:
+            B.append_cumulative(rroot, cum, parquet_root=pq, closes=oc, decision_prices={})
+            assert False, 'a listed session gone from the root must stop the append'
+        except ValueError as e:
+            assert 'not whole' in str(e)
+        assert cum.read_text() == t2
+
+
+# ---- the daily job (scripts/daily_forward.py) -------------------------------------------------------------------------------------------
+
+JOB_DAY = '2026-10-22'
+JOB_NOW = dt.datetime(2026, 10, 22, 21, 45, tzinfo=R.UTC)        # 17:45 New York
+
+
+def job_layout(root: Path, day: str = JOB_DAY):
+    """a layout holding the 20 sessions before `day` that the replay and --verify-parquet read (the stored 2026-10-09
+    bars and prints copied under their dates; the bars are read by minute)"""
+    for d in T.previous_sessions(day, 20):
+        for rel in ('data/underlying/SPY/2026-10-09.parquet', 'data/underlying/QQQ/2026-10-09.parquet', 'data/index/VIX/2026-10-09.parquet'):
+            dst = root / rel.replace('2026-10-09', d)
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(REF / rel, dst)
+
+
+def job_pieces(d: Path, **kw):
+    pq, rroot, cum, oc_dir, pm = Path(d) / 'pq', Path(d) / 'replay', Path(d) / 'cumulative.md', Path(d) / 'oc', Path(d) / 'pm'
+    job_layout(pq)
+    job = DF.Job(pq, rroot, cum, official_dir=oc_dir, postmarket_dir=pm, day=kw.pop('day', JOB_DAY), **kw)
+    scrub = R.Scrub(TOKEN)
+    log = R.make_logger(scrub, None, stream=None, name='daily_forward_test')
+    lines = R.ListHandler(scrub)
+    log.addHandler(lines)
+    clock = R.FakeClock(JOB_NOW)
+    uw = T.FakePaperClient(R.RateLimiter(max_in_flight=1, per_minute=100, daily_budget=50, clock=clock), log, clock, scrub, close_official=777.50)
+    closes = PA.OfficialCloses(uw_dirs=(oc_dir,), uw_lake_glob=None, theta_glob=None, live_root=None)
+    return job, log, lines, uw, closes
+
+
+def test_the_daily_job_fetches_verifies_merges_replays_and_appends_once():
+    """--source terminal (no login): the fake Theta Terminal answers the day; staged, verified, merged; UW's daily bar
+    asked once a name (2 calls) for the official close, kept as fetched; the session replayed on it and appended. A
+    second run: nothing pending — no Theta call, no UW call, the cumulative report unchanged; `--day` again on an
+    appended day: nothing either."""
+    term = _FakeThetaTerminal()
+    try:
+        with tempfile.TemporaryDirectory() as d:
+            job, log, lines, uw, closes = job_pieces(d)
+            res = DF.run_job(job, now=JOB_NOW, log=log, theta_fetcher=term.fetcher(), uw_client=uw, closes=closes)
+            assert res['rc'] == 0 and res['completed'] == [JOB_DAY] and res['appended'] == [JOB_DAY] and res['fetched'] == [JOB_DAY], (res, lines.lines)
+            assert res['logins'] == 0 and sum(1 for p, _ in uw.requests if p.endswith('/ohlc/1d')) == 2
+            assert all((job.parquet_root / B.rel_of(j['kind'], j['sym'], JOB_DAY)).exists() for j in B.fetch_jobs(JOB_DAY))
+            assert not (job.staging / JOB_DAY).exists() and list(job.official_dir.glob('uw_ohlc_1d_2026-10-22_fetched*.parquet'))
+            se = B.read_rows(job.replay_root, ('condor_em1',), JOB_DAY, JOB_DAY).filter(pl.col('row_kind') == 'settle')
+            assert se.height and se['settle_source'].unique().to_list() == ['official'] and se['settle_px'].unique().to_list() == ['777.5']
+            txt = job.cumulative.read_text()
+            assert f'| {JOB_DAY} | condor_em1 condor' in txt and B._cum_parse(txt)[2] == [JOB_DAY]
+            assert any('DAILY-FORWARD OK' in l for l in lines.lines) and all(TOKEN not in l for l in lines.lines)
+            n_theta, n_uw, mt = len(term.paths), len(uw.requests), job.cumulative.stat().st_mtime_ns
+            again = DF.run_job(DF.Job(job.parquet_root, job.replay_root, job.cumulative, official_dir=job.official_dir, postmarket_dir=job.postmarket_dir,
+                                      start=JOB_DAY), now=JOB_NOW + dt.timedelta(hours=1), log=log, theta_fetcher=term.fetcher(), uw_client=uw, closes=closes)
+            assert again['rc'] == 0 and again['pending'] == [] and len(term.paths) == n_theta and len(uw.requests) == n_uw
+            assert job.cumulative.stat().st_mtime_ns == mt
+            assert DF.run_job(job, now=JOB_NOW, log=log, theta_fetcher=term.fetcher(), uw_client=uw, closes=closes)['pending'] == []
+            # a new machine: the report lists the day, this replay root does not hold it → rebuilt (no fetch: in the
+            # layout; no UW call: the close is on disk), nothing appended twice
+            shutil.rmtree(job.replay_root)
+            reb = DF.run_job(job, now=JOB_NOW, log=log, theta_fetcher=term.fetcher(), uw_client=uw, closes=closes)
+            assert reb['rc'] == 0 and reb['rebuild'] == [JOB_DAY] and reb['completed'] == [JOB_DAY] and reb['appended'] == [], reb
+            assert len(term.paths) == n_theta, term.paths[n_theta:]
+            assert len(uw.requests) == n_uw, uw.requests[n_uw:]
+            assert B.complete_sessions(job.replay_root, T.DEFAULT_KEYS, JOB_DAY, JOB_DAY)[0] == [JOB_DAY]
+            # the day before the ready time: not pending yet
+            assert DF.pending_sessions([], R.ny_at('2026-10-23', '17:00'), start='2026-10-23') == []
+            assert DF.pending_sessions([], JOB_NOW, start='2026-11-25') == [] and DF.pending_sessions([], R.ny_at('2026-11-30', '18:00'), start='2026-11-25') == \
+                ['2026-11-25', '2026-11-30']                                                  # Thanksgiving and the half day skipped
+    finally:
+        term.close()
+
+
+def test_the_daily_job_never_appends_a_partial_day():
+    """A fetch that comes back short (a 472 on a file), a staged day that fails --verify-parquet, and an official close
+    not published yet: each exits 1 with one DAILY-FORWARD FAIL line naming the day and the step; nothing is merged
+    or appended (the cumulative report never written)."""
+    term = _FakeThetaTerminal()
+    try:
+        with tempfile.TemporaryDirectory() as d:
+            job, log, lines, uw, closes = job_pieces(d)
+            term.script[('/v3/index/history/price', 'VIX')] = [('status', 472, 'No data')]
+            res = DF.run_job(job, now=JOB_NOW, log=log, theta_fetcher=term.fetcher(), uw_client=uw, closes=closes)
+            assert res['rc'] == 1 and res['completed'] == [] and not job.cumulative.exists()
+            assert any(l.split(' ', 2)[2].startswith(f'DAILY-FORWARD FAIL {JOB_DAY} fetch:') for l in lines.lines), lines.lines
+            assert not (job.parquet_root / 'data_full' / 'chains' / 'SPY' / f'{JOB_DAY}.parquet').exists()
+        with tempfile.TemporaryDirectory() as d:
+            job, log, lines, uw, closes = job_pieces(d)
+            # a staged leftover the fetch keeps (it never re-asks a staged file): a chain with half an hour cut out
+            stage = job.staging / JOB_DAY
+            src = pl.read_parquet(REF / 'data_full/chains/SPY/2026-10-09.parquet')
+            bad = src.with_columns(pl.col('timestamp') + pl.duration(days=13)).filter(~((pl.col('timestamp').dt.hour() == 13) & (pl.col('timestamp').dt.minute() < 30)))
+            f = stage / B.rel_of('chain', 'SPY', JOB_DAY)
+            f.parent.mkdir(parents=True)
+            bad.write_parquet(f)
+            res = DF.run_job(job, now=JOB_NOW, log=log, theta_fetcher=term.fetcher(), uw_client=uw, closes=closes)
+            assert res['rc'] == 1 and not job.cumulative.exists()
+            assert any(f'DAILY-FORWARD FAIL {JOB_DAY} verify-parquet:' in l for l in lines.lines), lines.lines
+            assert not (job.parquet_root / 'data_full' / 'chains' / 'SPY' / f'{JOB_DAY}.parquet').exists()
+        with tempfile.TemporaryDirectory() as d:
+            job, log, lines, uw, closes = job_pieces(d)
+            uw.close_official = None                                        # UW's daily bar does not carry the day yet
+            res = DF.run_job(job, now=JOB_NOW, log=log, theta_fetcher=term.fetcher(), uw_client=uw, closes=closes)
+            assert res['rc'] == 1 and not job.cumulative.exists() and 'official-close' in res['failure']
+            assert any(f'DAILY-FORWARD FAIL {JOB_DAY} official-close: no official close for SPY, QQQ' in l for l in lines.lines)
+            assert not (job.replay_root / 'condor_em1').exists()                  # never settled on the 15:59 bar
+    finally:
+        term.close()
+
+
+class _FakeSdkClient:
+    """the thetadata SDK's three calls, answering the stored 2026-10-09 re-dated to the day asked (polars frames as the
+    SDK hands them: the chain without its mid, with symbol and expiration)"""
+
+    def __init__(self):
+        self.calls = []
+
+    def _frame(self, kind, sym, D):
+        df = pl.read_parquet(REF / B.rel_of(kind, sym, '2026-10-09'))
+        shift = (D - dt.date(2026, 10, 9)).days
+        df = df.with_columns(pl.col('timestamp') + pl.duration(days=shift))
+        if kind == 'chain':
+            df = df.drop('mid').with_columns(pl.lit(sym).alias('symbol'), pl.lit(D.isoformat()).alias('expiration'))
+        return df
+
+    def option_history_quote(self, symbol, expiration, interval, date, strike, right):
+        self.calls.append(('chain', symbol, date))
+        return self._frame('chain', symbol, date)
+
+    def stock_history_ohlc(self, symbol, interval, date):
+        self.calls.append(('under', symbol, date))
+        return self._frame('under', symbol, date)
+
+    def index_history_price(self, symbol, interval, date):
+        self.calls.append(('index', symbol, date))
+        return self._frame('index', symbol, date)
+
+
+def test_the_sdk_source_logs_in_once_and_only_inside_the_owners_window():
+    """--source sdk: refused (exit 2, no login) with THETA_SDK_WINDOW unset, outside the window, and between 00:00 and
+    01:45 New York even inside a window that holds it; inside the window two sessions are fetched on ONE login, verified,
+    merged, replayed and appended."""
+    logins = []
+
+    def factory():
+        logins.append(1)
+        return _FakeSdkClient()
+    with tempfile.TemporaryDirectory() as d:
+        job, log, lines, uw, closes = job_pieces(d, source='sdk', day=None, start=JOB_DAY)
+        for win, now, why in ((None, JOB_NOW, 'not set'), ('18:00-19:00', JOB_NOW, 'outside'),
+                              ('23:00-02:00', dt.datetime(2026, 10, 23, 4, 30, tzinfo=R.UTC), 'gap')):
+            sdk = DF.SdkSource(factory=factory, log=log)
+            env = os.environ.pop(DF.SDK_WINDOW_ENV, None)
+            try:
+                res = DF.run_job(job, now=now, log=log, sdk=sdk, uw_client=uw, closes=closes, window=win)
+            finally:
+                if env is not None:
+                    os.environ[DF.SDK_WINDOW_ENV] = env
+            assert res['rc'] == 2 and why in res['failure'] and not logins and not job.cumulative.exists(), (win, res)
+        assert any('DAILY-FORWARD REFUSED' in l for l in lines.lines)
+        assert DF.in_window(R.ny_at(JOB_DAY, '23:30').astimezone(R.NY), DF.parse_window('23:00-02:00'))
+        sdk = DF.SdkSource(factory=factory, log=log)
+        res = DF.run_job(job, now=dt.datetime(2026, 10, 23, 22, 0, tzinfo=R.UTC), log=log, sdk=sdk, uw_client=uw, closes=closes, window='17:00-23:00')
+        assert res['rc'] == 0 and res['completed'] == ['2026-10-22', '2026-10-23'] and res['logins'] == 1 and len(logins) == 1, (res, lines.lines[-5:])
+        assert B._cum_parse(job.cumulative.read_text())[2] == ['2026-10-22', '2026-10-23']
+
+
+def test_the_next_open_skips_a_holidays_padded_file():
+    """The next session's 09:30 open (the after-hours cases' stock mark) skips a padded holiday file in the layout (the
+    stored data holds one for Thanksgiving 2025-11-27 — taking it left seven condors of 2025-11-26 without an open until
+    the reconciliation with the after-hours study found it); no next session on disk → None"""
+    with tempfile.TemporaryDirectory() as d:
+        pq = Path(d) / 'pq'
+        write_parquet_fixture(pq, ['2026-10-19', '2026-10-21'])
+        pad = pl.read_parquet(pq / 'data/underlying/SPY/2026-10-19.parquet').head(5).with_columns(pl.col('timestamp') + pl.duration(days=1))
+        pad.with_columns([pl.lit(None, pl.Float64).alias(c) for c in ('open', 'high', 'low', 'close')]).write_parquet(pq / 'data/underlying/SPY/2026-10-20.parquet')
+        src = B.ParquetSource(pq)
+        oc = PA.OfficialCloses.none()
+        assert B.next_session_open(src, oc, 'SPY', '2026-10-19') == (773.40, '2026-10-21', "parquet: the 09:30 bar's open")
+        assert B.next_session_open(src, oc, 'SPY', '2026-10-21')[0] is None
 
 
 if __name__ == '__main__':

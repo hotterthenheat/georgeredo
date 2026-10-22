@@ -1,0 +1,21 @@
+# The daily post-close forward job (scripts/daily_forward.py) — a oneshot started by daily_forward.timer at 17:45 New
+# York each weekday: fetch -> verify -> merge -> replay -> append. On a machine with the Theta Terminal running
+# (--source terminal, the default: no login). On the CONTAINER path set DAILY_FORWARD_SOURCE=sdk AND
+# THETA_SDK_WINDOW=HH:MM-HH:MM (New York) in the EnvironmentFile: the SDK logs in once a run and signs the owner's PC
+# terminal out, so it runs only inside the window the owner sets (never 00:00–01:45 New York) — the timer below must
+# then fire inside that window too.
+# Copy to /etc/systemd/system/, set User, WorkingDirectory and the EnvironmentFile (OUTSIDE the repo, mode 600:
+# UW_API_TOKEN=…, PAPER_PARQUET_ROOT=…; for the SDK path THETADATA_KEY=…), then:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now daily_forward.timer
+[Unit]
+Description=Compass daily forward job (fetch, verify, merge, replay, append)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=compass
+WorkingDirectory=/home/compass/georgeredo
+EnvironmentFile=/home/compass/.config/eod_recorder/env
+ExecStart=/usr/bin/python3 -I scripts/daily_forward.py
+# exit 1 = a failure (journalctl shows the DAILY-FORWARD FAIL line); the next run retries the day from where it stopped

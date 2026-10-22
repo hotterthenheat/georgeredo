@@ -20,8 +20,8 @@ THE CANDIDATES (the rules reproduced from the reports; the strikes are picked ex
               K0−5 put and the K0+5 call at the ask; max risk 5 − credit), the long call fly (buy K0−5 and K0+5 calls
               at the ask, sell two K0 calls at the bid; max risk = the debit) and the long put fly. A structure's max
               risk must be >= $0.05 and its short legs' bids > 0. Stress fills: every leg $0.01 and $0.02 worse than the
-              NBBO. Threshold: 250 settled sessions a name. AT 15:58 every fly5 structure logged that day is read again
-              off one chain a name (`close1558` rows): the four legs' NBBO, the package's liquidation value at the NBBO
+              NBBO. Threshold: 250 settled sessions a name. AT 15:58 every structure logged that day — fly5's and, since .3,
+              every candidate's — is read again off one chain a name (`close1558` rows): the four legs' NBBO, the package's liquidation value at the NBBO
               (sell what was bought at the bid, buy back what was sold at the ask) and at the mid, and the 15:58 exit
               P&L ($0.65 a contract to close; a long leg with no bid is left to expire, no fee) beside the 16:00
               intrinsic settlement — an in-the-money ETF option at the close is exercised or assigned in shares, which
@@ -55,6 +55,15 @@ the last regular bar; each leg at intrinsic, $0.65 a leg at the open and nothing
 nothing; an in-the-money leg settles at intrinsic with no fee assumed — the reports' convention); and the "$0.25
 settlement check" = |ohlc/1m 15:59 close − official close| <= 0.25, flagged a session. SPY's whole-day ohlc/1m answer
 read there is also kept in the minute-bar cache the volatility model reads (no extra call).
+
+THE AUDIT'S CORRECTIONS (.3, paper_audit.py — research_notes/Compass phase 3/backtest_audit/AUDIT.md made the default):
+every row carries its `period` (i / ii / iii, condor_d20's i-a / i-b / ii / iii; forward iii from 2026-10-12); every
+candidate gets the 15:58 exit with the $0.01 / $0.02 stress at the open AND the exit (`pnl_1558_1c`, `pnl_1558_2c`); a
+settle row says whether its price is a fallback (`settle_fallback`), the shares OCC's exercise-by-exception leaves
+(`stock_left`, `stock_left_side`), the pins (`pin_dist`, `pin_025`, `pin_050`) and the post-market cross (`pm_cross`,
+`pm_low`, `pm_high`, `pm_source`). The replay settles on the official close by default (--settle-on 1559 keeps the old
+convention); --append-report adds the newest forward sessions to the cumulative report; scripts/daily_forward.py is the
+daily post-close job.
 
 THE MACRO STAMPS (macro_calendar.py): every row carries is_macro_event_day, macro_events (the day's kinds joined by
 '+'), minutes_to_macro_release and minutes_since_last_release at its capture minute; a settle or 15:58 row carries its
@@ -114,9 +123,11 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import eod_recorder as R  # noqa: E402  — the client, limiter, scrubber, store, calendar and clock
 import macro_calendar as MC  # noqa: E402  — the macro-release stamps
+import paper_audit as P  # noqa: E402  — the audit's corrections: periods, the official close, the flags, after hours
 import vol_model as V  # noqa: E402  — the frozen t2 model and its live inputs
 
-VERSION = 'paper-tracker-2026-10-21.2'   # .2: candidate 3 (condor_d20 + the frozen t2 model), 15:58 close quotes, macro stamps, --spxw
+VERSION = 'paper-tracker-2026-10-22.3'   # .3: the audit's corrections — 15:58 rows for every candidate (stress on the exit too), the period and the expiry flags on every row
+# .2: candidate 3 (condor_d20 + the frozen t2 model), 15:58 close quotes, macro stamps, --spxw
 RULES_VERSION = 'rules-2026-10-21.1'     # condor_em1 and fly5: the strike and fill rules below; a change here is a new version
 C3_RULES_VERSION = 'rules-c3-2026-10-21.1'      # condor_d20: Hypothesis B's 20-delta rule, 2 wide, hold
 SPXW_RULES_VERSION = 'rules-spxw-2026-10-21.1'  # fly_spxw: parity-implied SPX, ±5 and ±25
@@ -188,12 +199,18 @@ COLUMNS = (
     'settle_source', 'settle_px', 'close_1m_r', 'close_1m_r_bar', 'close_1m_1600', 'close_state', 'state_market_time',
     'prev_close_state', 'close_official', 'close_official_from', 'check_025', 'settled_at',
     'l1_settle', 'l2_settle', 'l3_settle', 'l4_settle', 'payoff', 'pnl_nbbo', 'pnl_mid', 'pnl_1c', 'pnl_2c',
+    # .3, the audit's corrections (paper_audit.py): the period on every row; on a settle row whether the price is a
+    # fallback (not an official close), the shares OCC's exercise-by-exception leaves, the pin, the post-market cross
+    'period', 'settle_fallback', 'stock_left', 'stock_left_side', 'pin_dist', 'pin_025', 'pin_050',
+    'pm_low', 'pm_high', 'pm_cross', 'pm_source',
 ) + MC.FIELDS
 CLOSE_COLUMNS = (
     'close_at', 'close_chain_rows',
     'l1_bid_1558', 'l1_ask_1558', 'l2_bid_1558', 'l2_ask_1558', 'l3_bid_1558', 'l3_ask_1558', 'l4_bid_1558', 'l4_ask_1558',
     'liq_nbbo', 'liq_mid', 'legs_closed', 'fees_close', 'pnl_1558_nbbo', 'pnl_1558_mid', 'close_reason',
+    'pnl_1558_1c', 'pnl_1558_2c',          # .3: the $0.01 / $0.02 stress on every contract at the open AND at the 15:58 exit
 )
+FALLBACK_SOURCES = ('ohlc_1m_r', P.FALLBACK_1559)   # a settlement price that is not an official close: the row says so
 C3_FEATURES = tuple(f'f_{f}' for f in ('m', 'ret1', 'ret5', 'ret15', 'ret30', 'aret1', 'aret5', 'aret15', 'aret30', 'rng1', 'rng5',
                                         'rng15', 'rng30', 'range_pos', 'or_pos', 'day_move_atr', 'day_range_atr', 'rv_session', 'vix',
                                         'vix_chg_open', 'vix_chg30', 'vix_chg_prev', 'straddle_rel', 'implied30', 'rel_vol'))
@@ -210,8 +227,9 @@ DEDUPE = ('row_kind', 'minute', 'structure', 'settle_source')
 
 
 def columns_for(cand: Candidate) -> tuple:
-    extra = {'fly5': CLOSE_COLUMNS, 'condor_d20': C3_COLUMNS, 'fly_spxw': SPXW_COLUMNS}.get(cand.key, ())
-    return COLUMNS + extra
+    """every candidate carries the 15:58 columns since .3 (the close-out is read for all of them)"""
+    extra = {'condor_d20': C3_COLUMNS, 'fly_spxw': SPXW_COLUMNS}.get(cand.key, ())
+    return COLUMNS + CLOSE_COLUMNS + extra
 
 
 def endpoint_for(cand: Candidate) -> R.Endpoint:
@@ -590,9 +608,9 @@ def leg_columns(s: Structure) -> dict:
 
 
 def capture_row(cand: Candidate, s: Structure, minute: str, now: dt.datetime, spot: float, state: dict, chain: Chain,
-                pages: int, macro: dict | None = None, extra: dict | None = None) -> dict:
+                pages: int, macro: dict | None = None, extra: dict | None = None, day: str | None = None) -> dict:
     has = bool(s.legs)
-    r = {'row_kind': 'capture', 'candidate': cand.key, 'structure': s.structure, 'minute': minute,
+    r = {'row_kind': 'capture', 'candidate': cand.key, 'structure': s.structure, 'minute': minute, 'period': P.period_of(cand.key, day),
          'rules_version': cand.rules, 'tracker_version': VERSION, 'captured_at': R.iso_z(now), 'spot': fmt(spot),
          'spot_tape_time': state.get('tape_time'), 'spot_market_time': state.get('market_time'),
          'prev_close': fmt(fnum(state.get('prev_close'))), 'chain_rows': chain.rows, 'chain_pages': pages,
@@ -632,12 +650,26 @@ def structure_from_row(row: dict) -> Structure | None:
                      float(row['wing']), row.get('tradable') == 'true', row.get('reason') or '')
 
 
-def settle_row(cap: dict, s: Structure, source: str, px: float, closes: dict, now: dt.datetime, close: dict | None = None) -> dict:
-    """The settle row for one capture row at one settlement source (and the 15:58 exit beside it, when it was read)"""
+def settle_row(cap: dict, s: Structure, source: str, px: float, closes: dict, now: dt.datetime, close: dict | None = None,
+               cash_settled: bool = False) -> dict:
+    """The settle row for one capture row at one settlement source (and the 15:58 exit beside it, when it was read).
+    Since .3 it also carries the period, whether the price is a fallback (`settle_fallback`: not an official close),
+    and the expiry flags at that price (paper_audit.flags): the shares OCC's exercise-by-exception leaves (`stock_left`
+    signed, `stock_left_side`), the nearest short strike's distance and the $0.25 / $0.50 pins, and whether the
+    post-market range crossed a short strike (`pm_cross`, from `closes['pm_low'/'pm_high']`, `pm_source` saying where
+    from — or none)"""
     r = {k: cap.get(k) for k in ('candidate', 'structure', 'minute', 'rules_version', 'tracker_version', 'wing', 'package',
                                  'k0', 'straddle', 'spot', 'price_nbbo', 'price_mid', 'price_1c', 'price_2c', 'max_risk',
                                  'tradable', 'reason') + MC.FIELDS + C3_CARRY + SPXW_COLUMNS}
     r.update({'row_kind': 'settle', 'settle_source': source, 'settle_px': fmt(px), 'settled_at': R.iso_z(now)})
+    r['period'] = P.period_of(cap.get('candidate'), cap.get('_day')) or cap.get('period')
+    r['settle_fallback'] = fmt(source in FALLBACK_SOURCES)
+    fl = P.flags(s, px, closes.get('pm_low'), closes.get('pm_high'), cash_settled=cash_settled)
+    r.update({'stock_left': None if fl['stock_left'] is None else f"{fl['stock_left']:+d}" if fl['stock_left'] else '0',
+              'stock_left_side': fl['stock_left_side'], 'pin_dist': fmt(fl['pin_dist']), 'pin_025': fmt(fl['pin_025']),
+              'pin_050': fmt(fl['pin_050']), 'pm_low': fmt(closes.get('pm_low')), 'pm_high': fmt(closes.get('pm_high')),
+              'pm_cross': fmt(fl['pm_cross']),
+              'pm_source': 'cash-settled: no delivery' if cash_settled else (closes.get('pm_source') or 'none: no post-market bar read')})
     for k in ('close_1m_r', 'close_1m_r_bar', 'close_1m_1600', 'close_state', 'state_market_time', 'prev_close_state', 'close_official'):
         r[k] = fmt(closes.get(k))
     r['close_official_from'] = closes.get('close_official_from') or ('daily bar' if closes.get('close_official') is not None else None)
@@ -649,7 +681,8 @@ def settle_row(cap: dict, s: Structure, source: str, px: float, closes: dict, no
     r.update({'payoff': fmt(s.payoff(px)), 'pnl_nbbo': fmt(s.pnl(px)), 'pnl_mid': fmt(s.pnl(px, mid=True)),
               'pnl_1c': fmt(s.pnl(px, STRESSES[0])), 'pnl_2c': fmt(s.pnl(px, STRESSES[1]))})
     if close:
-        for k in ('close_at', 'liq_nbbo', 'liq_mid', 'legs_closed', 'fees_close', 'pnl_1558_nbbo', 'pnl_1558_mid', 'close_reason'):
+        for k in ('close_at', 'liq_nbbo', 'liq_mid', 'legs_closed', 'fees_close', 'pnl_1558_nbbo', 'pnl_1558_mid', 'close_reason',
+                  'pnl_1558_1c', 'pnl_1558_2c'):
             r[k] = close.get(k)
     return {k: v for k, v in r.items() if v is not None or k in COLUMNS}
 
@@ -657,9 +690,13 @@ def settle_row(cap: dict, s: Structure, source: str, px: float, closes: dict, no
 def liquidation(s: Structure, chain: Chain) -> dict:
     """The package closed at 15:58 off `chain`: each leg's NBBO; sell a long at its bid, buy back a short at its ask
     (`liq_nbbo`, cash a unit: + received), and at the mid (`liq_mid`); $0.65 a contract closed. A long leg with no bid
-    (bid 0) cannot be sold — it is left to expire (0 in both values, no fee). A leg missing from the chain → no value."""
-    out = {'legs': [], 'liq_nbbo': None, 'liq_mid': None, 'legs_closed': 0, 'fees_close': None, 'reason': ''}
+    (bid 0) cannot be sold — it is left to expire (0 in both values, no fee). A leg missing from the chain → no value.
+    Since .3 also the exit with every contract closed $0.01 / $0.02 worse (`liq_1c`, `liq_2c`: a long sold at its bid
+    less the stress, a short bought at its ask plus it — the audit's `exit_1558`, whose rule this is; an abandoned
+    long stays abandoned)."""
+    out = {'legs': [], 'liq_nbbo': None, 'liq_mid': None, 'liq_1c': None, 'liq_2c': None, 'legs_closed': 0, 'fees_close': None, 'reason': ''}
     nbbo = mid = 0.0
+    stressed = [0.0 for _ in STRESSES]
     closed = 0
     missing = []
     for l in s.legs:
@@ -673,35 +710,60 @@ def liquidation(s: Structure, chain: Chain) -> dict:
                 continue                                   # abandoned: worthless at the bid, no fee
             nbbo += l.qty * q.bid
             mid += l.qty * q.mid
+            for i, w in enumerate(STRESSES):
+                stressed[i] += l.qty * (q.bid - w)
         else:
             nbbo -= l.qty * q.ask
             mid -= l.qty * q.mid
+            for i, w in enumerate(STRESSES):
+                stressed[i] -= l.qty * (q.ask + w)
         closed += l.qty
     if missing:
         out['reason'] = '; '.join(missing)
         return out
-    out.update({'liq_nbbo': nbbo, 'liq_mid': mid, 'legs_closed': closed, 'fees_close': closed * FEE})
+    out.update({'liq_nbbo': nbbo, 'liq_mid': mid, 'liq_1c': stressed[0], 'liq_2c': stressed[1], 'legs_closed': closed, 'fees_close': closed * FEE})
+    return out
+
+
+def exit_pnl(s: Structure, liq: dict) -> dict:
+    """The 15:58 exit P&L, $ a structure: (entry cash + liquidation cash) × 100 − $2.60 to open − $0.65 a contract
+    closed; at the NBBO both ways, at the mid both ways, and with the stress on every contract at the open AND the exit
+    (entry at Structure.price(worse), the liquidation at liq_1c / liq_2c). None without a liquidation value."""
+    if liq.get('liq_nbbo') is None:
+        return {'pnl_1558_nbbo': None, 'pnl_1558_mid': None, 'pnl_1558_1c': None, 'pnl_1558_2c': None}
+
+    def cash(worse=0.0, mid=False):
+        p = s.price(worse, mid)
+        return p if s.package == 'credit' else -p
+    out = {'pnl_1558_nbbo': (cash() + liq['liq_nbbo']) * 100 - LEGS * FEE - liq['fees_close'],
+           'pnl_1558_mid': (cash(mid=True) + liq['liq_mid']) * 100 - LEGS * FEE - liq['fees_close']}
+    for tag, w in zip(('1c', '2c'), STRESSES):
+        out[f'pnl_1558_{tag}'] = (cash(w) + liq[f'liq_{tag}']) * 100 - LEGS * FEE - liq['fees_close']
     return out
 
 
 def close_row(cap: dict, s: Structure, chain: Chain, now: dt.datetime) -> dict:
-    """A fly5 structure read again at 15:58: the legs' NBBO, the liquidation value, the 15:58 exit P&L — (entry cash +
-    liquidation cash) × 100 − $2.60 to open − $0.65 a contract closed; at the NBBO both ways, and at the mid both ways"""
+    """A logged structure read again at 15:58 (every candidate since .3): the legs' NBBO, the liquidation value, the
+    15:58 exit P&L — (entry cash + liquidation cash) × 100 − $2.60 to open − $0.65 a contract closed; at the NBBO both
+    ways, at the mid both ways, and with the $0.01 / $0.02 stress on every contract at the open and the exit"""
     liq = liquidation(s, chain)
     r = {k: cap.get(k) for k in ('candidate', 'structure', 'minute', 'rules_version', 'wing', 'package', 'k0', 'spot',
                                  'price_nbbo', 'price_mid', 'max_risk', 'tradable', 'reason') + MC.FIELDS}
     r.update({'row_kind': 'close1558', 'tracker_version': VERSION, 'settle_source': None, 'close_at': R.iso_z(now),
               'close_chain_rows': chain.rows, 'liq_nbbo': None, 'liq_mid': None, 'legs_closed': None, 'fees_close': None,
-              'pnl_1558_nbbo': None, 'pnl_1558_mid': None})
+              'pnl_1558_nbbo': None, 'pnl_1558_mid': None, 'pnl_1558_1c': None, 'pnl_1558_2c': None,
+              'period': P.period_of(cap.get('candidate'), cap.get('_day')) or cap.get('period')})
     for i, (l, q) in enumerate(zip(s.legs, liq['legs'])):
         r.update({f'l{i + 1}_symbol': l.symbol, f'l{i + 1}_side': l.side, f'l{i + 1}_qty': l.qty,
                   f'l{i + 1}_bid_1558': fmt(q.bid) if q else None, f'l{i + 1}_ask_1558': fmt(q.ask) if q else None})
     if liq['liq_nbbo'] is not None:
         e_n, e_m = s.entry_cash(), s.entry_cash(mid=True)
+        ex = exit_pnl(s, liq)
         r.update({'liq_nbbo': fmt(liq['liq_nbbo']), 'liq_mid': fmt(liq['liq_mid']), 'legs_closed': liq['legs_closed'],
                   'fees_close': fmt(liq['fees_close']),
                   'pnl_1558_nbbo': fmt((e_n + liq['liq_nbbo']) * 100 - LEGS * FEE - liq['fees_close']),
-                  'pnl_1558_mid': fmt((e_m + liq['liq_mid']) * 100 - LEGS * FEE - liq['fees_close'])})
+                  'pnl_1558_mid': fmt((e_m + liq['liq_mid']) * 100 - LEGS * FEE - liq['fees_close']),
+                  'pnl_1558_1c': fmt(ex['pnl_1558_1c']), 'pnl_1558_2c': fmt(ex['pnl_1558_2c'])})
     r['close_reason'] = liq['reason'] or None
     return r
 
@@ -767,6 +829,10 @@ def fetch_closes(client, name: str, day: str, with_official: bool = True, keep: 
             for r in ans.rows:
                 if str(r.get('date')) == day and r.get('market_time') == 'r' and fnum(r.get('close')) is not None:
                     closes['close_official'] = fnum(r['close'])
+                if str(r.get('date')) == day and r.get('market_time') == 'po' and fnum(r.get('low')) is not None and fnum(r.get('high')) is not None:
+                    # the post-market bar as far as it has printed when asked (16:00–20:00; the settle pass reads it early)
+                    closes['pm_low'], closes['pm_high'] = fnum(r['low']), fnum(r['high'])
+                    closes['pm_source'] = 'uw_1d po (as read at the settle pass — the post-market session may not be over)'
         else:
             errors.append(f'ohlc/1d: {ans.error}')
     return closes, errors
@@ -1014,7 +1080,7 @@ def events_for(day: str, cands: tuple | None = None) -> list[tuple[str, str, dt.
     if not is_tracked_day(day):
         return []
     out = [(m, 'capture', R.ny_at(day, m)) for m in minutes_of(day, cands)]
-    if any(c.key == 'fly5' for c in cands):
+    if cands:                                   # since .3 every candidate's structures are read again at 15:58
         out.append((CLOSE_TIME, 'close', R.ny_at(day, CLOSE_TIME)))
     out.append((SETTLE_TIME, 'settle', R.ny_at(day, SETTLE_TIME)))
     return sorted(out, key=lambda e: e[2])
@@ -1036,7 +1102,7 @@ class Tracker:
                  label: str | None = None, cands: tuple | None = None, theta=None, models_dir: Path = V.MODELS_DIR,
                  recorder_root: Path | None = None, bar_wait_s: float = BAR_WAIT_S, vix_uw: bool = True,
                  macro_path: Path | None = None, spx_spot=None, spx_settle_source: str = 'spx_book_price',
-                 official_from: str | None = None):
+                 official_from=None, fallback_source: str = 'ohlc_1m_r', later_state_official: bool = True):
         self.client, self.store, self.limiter, self.log, self.clock, self.scrub = client, store, limiter, log, clock, scrub
         self.label = label                 # 'smoke' marks a row that is not a session
         self.cands = tuple(cands) if cands else active_candidates()
@@ -1046,12 +1112,17 @@ class Tracker:
         self.bar_wait_s = bar_wait_s
         self.vix_uw = vix_uw
         self.macro_path = macro_path
-        # the historical replay's three hooks (paper_backtest.py; live leaves them at these defaults): SPX's price at a
+        # the historical replay's hooks (paper_backtest.py; live leaves them at these defaults): SPX's price at a
         # capture from a source other than chain parity — a callable (day, minute) -> (spot | None, spot_source) — the
-        # SPXW settlement's label, and the label of an official close that is not UW's daily bar
+        # SPXW settlement's label, the label of an official close that is not UW's daily bar (a string, or a callable
+        # (name, day) -> label), the label of a settlement on the 15:59 bar when no official close is found
+        # ('ohlc_1m_r' live — asked again later; '1559_bar' in the replay — flagged), and whether a later session's
+        # captured prev_close may stand in for the official close (live yes; the replay no: its prev_close is not one)
         self.spx_spot = spx_spot
         self.spx_settle_source = spx_settle_source
         self.official_from = official_from
+        self.fallback_source = fallback_source
+        self.later_state_official = later_state_official
         self._models = None
         self._budget_day = ''
 
@@ -1133,7 +1204,7 @@ class Tracker:
                 extra.update(self.model_inputs(day, minute, chain))
             out = []
             for s in build(cand, chain, spot):
-                out.append(capture_row(cand, s, minute, now, spot, state or {}, chain, pages, macro, extra))
+                out.append(capture_row(cand, s, minute, now, spot, state or {}, chain, pages, macro, extra, day=day))
                 summary['tradable'] += int(s.tradable)
                 self.log.info('%s %s %s %s: %s K0 %s straddle %s legs %s %s %s%s%s', cand.key, name, day, minute, s.structure,
                               fmt(s.k0), fmt(s.straddle), ' '.join(f'{l.side[0]}{l.right}{l.strike:g}@{l.bid}/{l.ask}' for l in s.legs),
@@ -1309,56 +1380,65 @@ class Tracker:
             self._vix_save(day, st)
         return None, None, 'none', msg or None
 
-    # -- 15:58: the fly5 structures read again off one chain a name --
+    # -- 15:58: every candidate's structures read again off one chain a name (fly5 alone before .3) --
     def close_quotes(self, day: str, when: dt.datetime | None = None, force: bool = False) -> dict:
+        """The 15:58 close-out: one same-day chain a name (SPY's serves condor_em1, condor_d20 and fly5's SPY; SPX's —
+        the SPXW root — fly_spxw), every logged structure of the day read again (`close1558` rows: the liquidation and
+        the exit P&L, stressed too). A candidate-name already done is skipped; a name all of whose candidates are done
+        makes no call."""
         self._budget_for(day)
         spent0 = self.limiter.spent
         summary = {'day': day, 'minute': CLOSE_TIME, 'jobs': 0, 'skipped': 0, 'rows': 0, 'calls': 0, 'failed': 0, 'tradable': 0}
-        cand = self.cand('fly5')
-        if cand is None:
-            return summary
         scan = (self.label + '-' if self.label else '') + 'close1558'
-        for name in cand.names:
-            df = self.store.read(cand.key, name, day)
-            caps = [] if df is None else df.filter((pl.col('row_kind') == 'capture') & pl.col('l1_symbol').is_not_null()).to_dicts()
-            if self.label:
-                caps = [c for c in caps if c.get('_scan') == self.label]
-            if not caps:
-                continue
-            summary['jobs'] += 1
-            had = self.store.marker(cand.key, name, day, scan)
-            if had and had.status == 'done' and not force:
-                summary['skipped'] += 1
+        names = list(dict.fromkeys(n for c in self.cands for n in c.names))
+        for name in names:
+            todo = []
+            for cand in [c for c in self.cands if name in c.names]:
+                df = self.store.read(cand.key, name, day)
+                caps = [] if df is None else df.filter((pl.col('row_kind') == 'capture') & pl.col('l1_symbol').is_not_null()).to_dicts()
+                if self.label:
+                    caps = [c for c in caps if c.get('_scan') == self.label]
+                if not caps:
+                    continue
+                summary['jobs'] += 1
+                had = self.store.marker(cand.key, name, day, scan)
+                if had and had.status == 'done' and not force:
+                    summary['skipped'] += 1
+                    continue
+                todo.append((cand, caps))
+            if not todo:
                 continue
             now = self.clock.utcnow()
             try:
                 rows, pages, err = fetch_chain(self.client, name, day)
             except R.BudgetExhausted as e:
                 self.log.error('STOP: %s — the 15:58 read ends here', e)
-                summary['failed'] += 1
+                summary['failed'] += len(todo)
                 break
             if err or not rows:
                 err = self.scrub(err or 'empty chain')
-                self.store.set_marker(R.Marker(cand.key, name, day, scan, 'partial', fetched_at=R.iso_z(now), note=err, version=VERSION))
-                self.store.record_failure(day, {'at': R.iso_z(now), 'candidate': cand.key, 'name': name, 'minute': CLOSE_TIME, 'error': err})
-                summary['failed'] += 1
+                for cand, _ in todo:
+                    self.store.set_marker(R.Marker(cand.key, name, day, scan, 'partial', fetched_at=R.iso_z(now), note=err, version=VERSION))
+                    self.store.record_failure(day, {'at': R.iso_z(now), 'candidate': cand.key, 'name': name, 'minute': CLOSE_TIME, 'error': err})
+                summary['failed'] += len(todo)
                 continue
-            chain = Chain(rows, day)
-            out = []
-            for cap in caps:
-                s = structure_from_row(cap)
-                if s is None:
-                    continue
-                r = close_row(cap, s, chain, now)
-                out.append(r)
-                self.log.info('15:58 %s %s %s %s: liquidation %s (mid %s) → P&L %s (mid %s)%s', name, day, cap['minute'], s.structure,
-                              r.get('liq_nbbo'), r.get('liq_mid'), r.get('pnl_1558_nbbo'), r.get('pnl_1558_mid'),
-                              f" — {r['close_reason']}" if r.get('close_reason') else '')
-            stamps = {'_day': day, '_scan': scan, '_scan_at': R.iso_z(when or R.ny_at(day, CLOSE_TIME)), '_fetched_at': R.iso_z(now), '_name': name}
-            added, _ = self.store.append(endpoint_for(cand), name, day, out, stamps)
-            summary['rows'] += added
-            self.store.set_marker(R.Marker(cand.key, name, day, scan, 'done', rows_fetched=len(out), rows_added=added, pages=pages,
-                                           calls=pages, fetched_at=R.iso_z(now), version=VERSION))
+            chain = Chain(rows, day, root='SPXW' if name == 'SPX' else None)
+            for i, (cand, caps) in enumerate(todo):
+                out = []
+                for cap in caps:
+                    s = structure_from_row(cap)
+                    if s is None:
+                        continue
+                    r = close_row(cap, s, chain, now)
+                    out.append(r)
+                    self.log.info('15:58 %s %s %s %s %s: liquidation %s (mid %s) → P&L %s (mid %s, +1c %s, +2c %s)%s', cand.key, name, day,
+                                  cap['minute'], s.structure, r.get('liq_nbbo'), r.get('liq_mid'), r.get('pnl_1558_nbbo'), r.get('pnl_1558_mid'),
+                                  r.get('pnl_1558_1c'), r.get('pnl_1558_2c'), f" — {r['close_reason']}" if r.get('close_reason') else '')
+                stamps = {'_day': day, '_scan': scan, '_scan_at': R.iso_z(when or R.ny_at(day, CLOSE_TIME)), '_fetched_at': R.iso_z(now), '_name': name}
+                added, _ = self.store.append(endpoint_for(cand), name, day, out, stamps)
+                summary['rows'] += added
+                self.store.set_marker(R.Marker(cand.key, name, day, scan, 'done', rows_fetched=len(out), rows_added=added, pages=pages,
+                                               calls=pages if i == 0 else 0, fetched_at=R.iso_z(now), version=VERSION))
         summary['calls'] = self.limiter.spent - spent0
         self.log.info('15:58 %s done: %d names, %d rows added, %d calls, %d failed', day, summary['jobs'], summary['rows'], summary['calls'], summary['failed'])
         return summary
@@ -1412,8 +1492,8 @@ class Tracker:
                 self.log.error('settle %s %s: %s', name, day, self.scrub(e))
                 self.store.record_failure(day, {'at': R.iso_z(now), 'name': name, 'settle': True, 'error': self.scrub(e)})
             if closes.get('close_official') is not None and self.official_from and not closes.get('close_official_from'):
-                closes['close_official_from'] = self.official_from
-            if closes.get('close_official') is None:
+                closes['close_official_from'] = self.official_from(name, day) if callable(self.official_from) else self.official_from
+            if closes.get('close_official') is None and self.later_state_official:
                 # a prev_close read after the session, on a later day's capture, is the official close too
                 closes['close_official'] = self._official_from_later_state(name, day)
                 if closes['close_official'] is not None:
@@ -1422,7 +1502,11 @@ class Tracker:
             if closes.get('close_official') is not None:
                 source, px = 'official', closes['close_official']
             elif closes.get('close_1m_r') is not None:
-                source, px = 'ohlc_1m_r', closes['close_1m_r']
+                # no official close yet: the 15:59 bar, labelled (live 'ohlc_1m_r', asked again by the next --settle;
+                # the replay '1559_bar') and flagged on the row (settle_fallback) — never silently
+                source, px = self.fallback_source, closes['close_1m_r']
+                self.log.warning('settle %s %s: NO OFFICIAL CLOSE — settled on the 15:59 bar (%s), labelled %s and flagged', name, day,
+                                 fmt(px), source)
             if source is None:
                 self.log.error('settle %s %s: no settlement price', name, day)
                 summary['failed'] += 1
@@ -1482,11 +1566,13 @@ class Tracker:
             self.store.record_failure(day, {'at': R.iso_z(now), 'name': 'SPX', 'settle': True, 'error': self.scrub(err)})
             summary['failed'] += 1
             return
+        closes_1558 = {(r['minute'], r['structure']): r for r in df.filter(pl.col('row_kind') == 'close1558').to_dicts()} if 'pnl_1558_nbbo' in df.columns else {}
         rows = []
         for cap in caps:
             s = structure_from_row(cap)
             if s is not None:
-                rows.append(settle_row(cap, s, src, px, {'close_state': px, 'state_market_time': at}, now))
+                rows.append(settle_row(cap, s, src, px, {'close_state': px, 'state_market_time': at}, now,
+                                       closes_1558.get((cap['minute'], cap['structure'])), cash_settled=True))
         stamps = {'_day': day, '_scan': 'settle' if not self.label else f'{self.label}-settle',
                   '_scan_at': R.iso_z(R.ny_at(day, SETTLE_TIME)), '_fetched_at': R.iso_z(now), '_name': 'SPX'}
         added, _ = self.store.append(endpoint_for(cand), 'SPX', day, rows, stamps)
@@ -1689,6 +1775,8 @@ def main(argv: list[str] | None = None) -> int:
                       'exit 1 on any failure')
     mode.add_argument('--merge-parquet', metavar='SRC', help='copy SRC\'s validated layout into --parquet-root; nothing copied while a file '
                       'fails or a target exists (--force replaces, keeping the old beside)')
+    mode.add_argument('--append-report', action='store_true', help='APPEND the newest whole forward sessions (2026-10-12 on) of --backtest-data '
+                      'to the cumulative report --cumulative, the historical sections untouched (created with --historical-from on the first run)')
     p.add_argument('--when', help='the minute for --log, HH:MM New York (11:30 12:00 12:30 13:00 13:30 14:00 14:30 15:00 15:30 15:58)')
     p.add_argument('--day', help='the New York day, YYYY-MM-DD (today by default)')
     p.add_argument('--dry-run', action='store_true', help='no network: the fixture chain, a fake clock, under <root>/dryrun')
@@ -1708,8 +1796,17 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument('--parquet-root', default=os.environ.get('PAPER_PARQUET_ROOT'),
                    help='--backtest / --fetch-theta: the stored Parquet layout (PAPER_PARQUET_ROOT): data_full/chains/<ROOT>/<D>.parquet, '
                         'data/underlying/<SYM>/<D>.parquet, data/index/<SYM>/<D>.parquet')
-    p.add_argument('--backtest-data', default=os.environ.get('PAPER_BACKTEST_DATA') or str(R.REPO / 'data_recorder' / 'paper_backtest'),
-                   help='--backtest: the replay\'s own root (PAPER_BACKTEST_DATA; never the live --data root)')
+    p.add_argument('--backtest-data', default=os.environ.get('PAPER_BACKTEST_DATA'),
+                   help='--backtest: the replay\'s own root (PAPER_BACKTEST_DATA; never the live --data root). Default by --settle-on: '
+                        'data_recorder/paper_backtest_official (official), data_recorder/paper_backtest (1559 — the committed reports\' root)')
+    p.add_argument('--settle-on', choices=('official', '1559'), default='official',
+                   help='--backtest: settle SPY and QQQ on the OFFICIAL close (the default: UW\'s daily bar, else Theta\'s EOD; none → the 15:59 '
+                        'bar labelled 1559_bar and flagged) or on the 15:59 bar (1559: the research\'s convention — reproduces the committed reports)')
+    p.add_argument('--cumulative', help='--append-report: the cumulative report file (default research_notes/Compass phase 3/forward_cumulative.md)')
+    p.add_argument('--historical-from', help='--append-report: a report embedded verbatim as the historical sections when the cumulative file is new')
+    p.add_argument('--decision-prices', help='--backtest / --append-report: a CSV name,day,price — the after-hours study\'s decision price '
+                   '(cases b and c); without it those columns stay null')
+    p.add_argument('--through', help='--append-report: the last forward session to consider (default: every one in the root)')
     p.add_argument('--out', help='--backtest: where backtest_<D1>_<D2>.md and .csv go (default <backtest-data>/reports)')
     p.add_argument('--only', help='--fetch-theta / --verify-parquet: the files to ask or check, e.g. SPY-underlying,SPXW-chain,VIX-index '
                    '(SPY|QQQ|SPXW-chain, SPY|QQQ-underlying, SPX|VIX-index)')
@@ -1722,7 +1819,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument('--theta-in-flight', type=int, choices=(1, 2, 3), help='--fetch-theta: requests in flight (default 3; 1 while another '
                    'downloader uses the account\'s eight)')
     args = p.parse_args(argv)
-    if args.backtest or args.fetch_theta or args.verify_parquet or args.merge_parquet:
+    if args.backtest or args.fetch_theta or args.verify_parquet or args.merge_parquet or args.append_report:
         import paper_backtest as B          # files only: no UW token is read or needed
         return B.run_cli(args)
 

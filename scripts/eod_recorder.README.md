@@ -418,15 +418,17 @@ from UW alone but VIX:
   (full) and 2 (no-VIX) of the 144; **at candidate 3's minutes (13:00 … 15:00) the full-model decile agreed 10 of 10**
   (5→5, 4→4, 5→5, 5→5, 2→2 and 7→7, 6→6, 6→6, 8→8, 8→8).
 
-### The 15:58 close quotes (fly5)
+### The 15:58 close quotes (every candidate since `paper-tracker-2026-10-22.3`; fly5 alone before)
 
-At **15:58** New York the tracker reads SPY's and QQQ's same-day chain once a name and writes a `close1558` row for
-every fly5 structure logged that day (the iron, call and put flies of the 15:00 and the 15:30 captures): the four legs'
+At **15:58** New York the tracker reads each name's same-day chain once (SPY's serves condor_em1, condor_d20 and fly5's
+SPY; QQQ's fly5's QQQ; SPX's — the SPXW root — fly_spxw) and writes a `close1558` row for every structure logged that
+day (fly5: the iron, call and put flies of the 15:00 and the 15:30 captures; the condors: every minute's): the four legs'
 NBBO (`l*_bid_1558`, `l*_ask_1558`), the liquidation value at the NBBO (`liq_nbbo`, cash a unit: sell what was bought
 at its bid, buy back what was sold at its ask) and at the mid (`liq_mid`), and the 15:58 exit P&L = (entry cash +
 liquidation cash) × 100 − $2.60 to open − $0.65 a contract closed (`pnl_1558_nbbo`: the NBBO both ways;
-`pnl_1558_mid`: the mid both ways). A long leg with no bid at 15:58 cannot be sold: it is left to expire (0 in both
-values, no fee); a leg missing from the chain leaves the row without a value and says so (`close_reason`). The settle
+`pnl_1558_mid`: the mid both ways; since `.3` `pnl_1558_1c` / `pnl_1558_2c`: every contract $0.01 / $0.02 worse at the
+open AND at the exit — a long sold at its bid less the stress, a short bought at its ask plus it, the audit's
+`exit_1558` rule). A long leg with no bid at 15:58 cannot be sold: it is left to expire (0 in both values, no fee); a leg missing from the chain leaves the row without a value and says so (`close_reason`). The settle
 rows carry the same figures beside the 16:00 intrinsic settlement (no fee at expiry). **Why**: an ETF option is
 physically settled — a SPY or QQQ option in the money at the close is exercised or assigned in shares. A fly that
 closes between its strikes leaves a long call exercised (100 shares bought, about $77,000 of SPY at ~773) and, past K0,
@@ -443,7 +445,8 @@ rows carry no underlying price, so SPX at the capture is read off the same chain
 bids > 0 (`spot_source`, `parity_strikes`). The settle (16:20) takes `price` from SPX's `/spot-exposures/strike`
 (page 0; UW's own SPX figure — a proxy for the official 16:00 SET, labelled `settle_source=spx_book_price`). Cost:
 **3–5 calls a session** (one chain page at each capture, two if the expiry's chain passes 500 contracts, and one at the
-settle). Cash-settled, SPXW needs no 15:58 exit.
+settle), and since `.3` one more at 15:58 (SPX's chain, for fly_spxw's close-out rows — cash-settled, it needs no exit,
+but the exit is the comparison the reports print for every candidate).
 
 ### The macro stamps
 
@@ -479,12 +482,12 @@ A session's calls, the default candidates (`condor_em1`, `fly5`, `condor_d20`), 
 | candidate 3: today's bars | **5** | one `ohlc/1m` a capture minute (+1 when the minute's bar is not out yet: at most +5) |
 | candidate 3: VIX | **1** | UW's VIX stock-state, once a session while it answers 422; Theta Data is not a UW call |
 | candidate 3: the sessions before | **0** warm / **20** cold | the cache; the first day backfills 20 sessions once (19 tomorrow: the recorder's 2026-10-21 file is read free) |
-| 15:58 close quotes | **2** | one chain a name |
+| 15:58 close quotes | **2** | one chain a name (SPY, QQQ) for every candidate's structures; +1 (SPX) with fly_spxw |
 | the settle | **6** | `ohlc/1m`, stock-state, `ohlc/1d` × SPY and QQQ (SPY's `ohlc/1m` also fills the cache) |
 | **a session, warm** | **36** | the tests' second day: 36 exactly |
 | **the first day, cold** | **56** | the tests' first day: 56 exactly |
 | the worst | **61** | cold, every bar asked twice |
-| `fly_spxw` (on by default) | **+3 to +5** | |
+| `fly_spxw` (on by default) | **+4 to +6** | its captures, its 15:58 read, its settle |
 
 The default `--budget` (`PAPER_BUDGET`) is **90**: the cold worst with the SPXW flies (66) with a third to spare.
 It is counted per New York day in `_budget/<day>.json` across runs; at the budget a capture stops with the STOP line.
@@ -692,7 +695,7 @@ NDJSON shape (`tests/test_paper_tracker.py`); untested against the real terminal
 defaults (strike and right, all contracts and both rights assumed), the venue, the strike units (dollars assumed, as
 3abida's fixtures carry) and how the real answers mark an empty minute.
 
-Tests (`python3 -I tests/test_paper_tracker.py`, since this build twenty-five): the Parquet-to-Chain adapter on a
+Tests (`python3 -I tests/test_paper_tracker.py`: forty-five since the audit's corrections of 2026-10-22 — the periods at their boundaries and against audit_lib, the session statistics against audit_lib's, the official-close chain, the official default and the 1559 option, the 15:58 rows of every candidate with the stress on the exit against run_audit's `exit_1558`, each flag, the after-hours cases by hand and against the study's rows, the padded-holiday next open, the append mode, the daily job's idempotency, partial-day refusals and SDK window; the replay build's twenty-five): the Parquet-to-Chain adapter on a
 fixture (the hand-checked strikes and fills — condor 776/771 · 778/769 at $0.30, the flies at K0 773 — the OCC symbols,
 an unquoted row, the sizes, the clock's minute, no bar past it, the 15:59 official close only after 16:00); a replay of
 fixture Parquet over five weekdays (two whole sessions, one missing QQQ's chain, two after the files) — the 15:59
@@ -701,6 +704,140 @@ settlement, condor −$92.60 / −$87.10 / −$96.60 / −$100.60, iron fly −$
 and hand-worked fill facts ($11.00 width / $5.50 slip for the condor), and a second replay writing nothing; the replay
 root refused where it meets the live root, from the command line too; and `--fetch-theta` against a fake terminal (the
 layout and dtypes, ≤ 3 in flight, NDJSON, 472, the skip, "localhost" refused, and a replay of the fetched day).
+
+### The audit's corrections are the defaults (2026-10-22, `paper-tracker-2026-10-22.3`, `paper-backtest-2026-10-22.2`)
+
+The owner: "Make the audit's corrections the tracker's defaults so forward reports don't need a separate audit". What
+`research_notes/Compass phase 3/backtest_audit/` corrected after the fact is now in the tracker's rows and the replay's
+report (`scripts/paper_audit.py` holds the pieces; the audit's folder is read by the tests, never written):
+
+- **The official close is the settlement** (`--settle-on official`, the default): the replay asks
+  `paper_audit.OfficialCloses` — UW's daily bar (`r` row: `data/official_closes/` as fetched, the lake's `ohlc__1d`, the
+  live tracker's own settle rows), then Theta's EOD daily bar (`data_lake/thetadata/stock_eod`). A session with none
+  settles on the 15:59 bar labelled **`settle_source = 1559_bar`**, `settle_fallback = true` on the row, the session listed
+  under `settle_fallback` in `_replay/days_*.json` and in the report — never silently, and never appended to the
+  cumulative report. `--settle-on 1559` keeps the research's convention (the committed reports) and writes the report
+  exactly as before. The two conventions never share a replay root (`_replay/settle_on.json`; a pre-.2 root reads as
+  1559): the defaults are `data_recorder/paper_backtest_official/` (official) and `data_recorder/paper_backtest/` (1559).
+  The live tracker already settled on the official close (UW's `/ohlc/1d` `r` row, asked at 16:20 and again by a later
+  `--settle` until it is there); its 15:59 fallback stays labelled `ohlc_1m_r` and is now flagged too.
+- **The 15:58 exit for every candidate** (condor_em1, condor_d20, fly5, fly_spxw), with the $0.01 / $0.02 stress on every
+  contract at the open AND the exit (`pnl_1558_1c`, `pnl_1558_2c`), $0.65 a contract closed, a long with no bid abandoned.
+- **On every settle row**: `stock_left` (the signed shares OCC's exercise-by-exception — in the money by ≥ $0.01 at the
+  settlement price — leaves; `stock_left_side` long / short / none, `cash-settled` for SPXW), `pin_dist`, `pin_025`,
+  `pin_050` (the settlement within $0.25 / $0.50 of a short strike), `pm_cross` (UW's post-market bar took a short strike
+  across the money; `pm_low`, `pm_high`, `pm_source` — `none: …` where no `po` bar is on disk; the report re-reads it,
+  so a later fetch with the whole evening counts). **`period` on every row** (capture, close1558, settle):
+  `paper_audit.period_of` — AUDIT.md section 5's spans (condor_em1 and fly5 i / ii / iii, condor_d20 i-a / i-b / ii / iii;
+  fly_spxw `hist` / iii; `pre` before 2022-11-11; forward = iii from 2026-10-12), one function for the rows and the report.
+- **The after-hours cases** (`paper_audit.after_hours_pnl`, the after-hours study's hook — reconciled with
+  `backtest_audit/out/afterhours_trades.csv` to the cent): 0 hold at intrinsic; a OCC's default at the official close,
+  the net stock marked at the next session's 09:30 open; b our shorts assigned iff in the money at the decision price,
+  our longs by default; c both at the decision price; a fee a contract exercised or assigned (default 0). The decision
+  price is the study's: the close of the last UW post-market 1-minute bar ending at or before 17:30 New York, from a
+  file proven taken after 17:30 (`paper_audit.decision_of` / `decision_prices_on_disk`: `data/postmarket_1m/<T>/<D>.json.gz`,
+  `data_recorder/ohlc_1m/`, and any folder in `PAPER_UW_1M_DIRS`; `--decision-prices CSV` overrides). Null where the next
+  open (a, b, c) or the decision price (b, c) is missing — the next daily run fills the open.
+- **The report** (`backtest_<D1>_<D2>.md` / `.csv`, plus `trades_<D1>_<D2>.csv` a trade with every flag and case): the
+  settlement sources and the flagged sessions; every candidate · structure **by period, never pooled**, on session sums
+  with iid and 20-session moving-block bootstrap intervals (`paper_audit.session_stats` = audit_lib's, checked to the last
+  digit by a test); hold-to-expiry beside the 15:58 exit (NBBO, +$0.01 and +$0.02 open-and-close, mids); the flags'
+  shares; the after-hours cases; then the replay's old tables as detail ("every period together — reconciliation, NOT a
+  result").
+- **The cumulative report and its append mode**: `paper_tracker.py --append-report [--cumulative FILE] [--historical-from
+  REPORT]` adds the newest whole forward sessions of the official replay root to the cumulative report
+  (`research_notes/Compass phase 3/forward_cumulative.md` by default). The file has a historical block (written once,
+  from `--historical-from`, never touched again — the append asserts the bytes before the forward block are unchanged)
+  and a forward block regenerated over every listed session (so a session's after-hours columns fill once the next
+  session is on disk). A session is appended only whole (replayed, no file missing, every tradable capture settled on the
+  official close); a listed session that is no longer whole in the root stops the append; nothing new → the file is not
+  written.
+
+The reproduction proofs (2026-10-22, this workspace, the stored Parquet of 2022-11-11 → 2026-10-09):
+
+- **`--settle-on 1559` reproduces the committed report byte for byte**: a fresh replay of 2022-11-11 → 2026-10-09 (two
+  chunks into one empty root, as the committed root was built) through the new code, its report's CSV equal to
+  `research_notes/Compass phase 3/backtest_replay/backtest_2022-11-11_2026-10-09.csv` — SHA-256 `5f40388affcb5efc…`, the
+  hash AUDIT.md records (the 2026-10-05 → 09 report likewise, `ce7ea5f9…`).
+- **The default reproduces the audit's official-close figures**: a fresh `--settle-on official` replay of the same span —
+  971 sessions, every SPY and QQQ name-session on an official close (Theta EOD 723 / 722, UW's daily bar 248 / 246; no
+  15:59 fallback) — gives AUDIT.md section 2's totals (condor_em1 +16,680, condor_d20 +25,424, fly5 iron +63,218, call
+  +32,647, put +25,391), section 4's per-period means and 20-session block intervals to the cent (e.g. condor_em1 i +3.47
+  [−0.04, +6.68], condor_d20 ii +7.67 [+3.87, +10.89], fly5 iron ii +16.20 [+10.26, +22.36]), section 3's 15:58 exits at
+  the NBBO, +$0.01 and +$0.02 open-and-close and the mids for every candidate and period (e.g. condor_em1 i −4.83 /
+  −11.26 / −17.70 / −0.83; fly5 put ii −39.19 / −46.87 / −54.55 / −6.15), and section 8's pin shares. The post-market
+  cross differs on one session: SPY 2026-07-16's post-market low 748.9901 against a 749 short put is $0.0099 in the money —
+  under OCC's $0.01 (the tracker's and the after-hours study's threshold) where the audit's 0.005 counted it — 4 trades
+  (condor_d20 51.5 % against 51.7 %, fly5 put 55.9 % against 56.0 %).
+- **The after-hours cases equal the study's rows** (`backtest_audit/out/afterhours_trades.csv`): on period ii's overlap
+  (2025-10-13 → 2026-10-09) all 2,163 fly5 iron and condor_d20 trades, cases 0 / a / b / c to the cent, with the same
+  official close, decision price and next open (the decision prices read from the UW minute answers the study read:
+  data/postmarket_1m and, through `PAPER_UW_1M_DIRS`, the backtest fetch cache). The reconciliation found one bug here,
+  fixed: the next open took Thanksgiving 2025-11-27's padded file as a session. One convention differs on period iii and
+  is kept as the owner's spec: where the next open is missing (2026-10-21) the study still prices a case with no net stock
+  (its five condor_d20 trades of that day); the tracker leaves every case but 0 null there until the open is on disk.
+- **The forward sessions through the daily job** (2026-10-12 → 21, already in the layout: no fetch, no vendor call)
+  append to `research_notes/Compass phase 3/forward_cumulative.md` with AUDIT.md's period-iii figures (condor_em1 +6.35
+  on 39 trades, fly5 iron +52.62, condor_d20 +21.59; the 15:58 exits −6.28, +3.07, +1.16) and the after-hours study's
+  period-iii cases (fly5 iron +40.51 / +117.26 / −41.81 / −41.81; condor_d20 +20.69 / +48.79 / +43.14 / +43.14); a second
+  run finds nothing pending.
+
+### The daily forward job (`scripts/daily_forward.py`)
+
+One run, for every forward session not yet in the cumulative report (oldest first, at most `--max-days` 10), stopping at
+the first failure: **fetch** the day's seven files into `<parquet root>/_daily_staging/<D>/` → **`--verify-parquet`** the
+staged day → **`--merge-parquet`** into the layout (then `--verify-parquet` the layout with the sessions before) → the
+**official close** (UW's daily bar, one call a name, kept as fetched in `data/official_closes/`, unless already on disk)
+→ the **decision price** (UW's `/ohlc/1m`, one call a name after 17:30, kept as answered in `data/postmarket_1m/`, unless
+on disk; without it only cases b and c stay null) → **replay** the session (`--settle-on official`, into
+`data_recorder/paper_backtest_official/`) → **append** the whole sessions. Idempotent: a day in the layout is not fetched,
+a close on disk is not asked, a replayed minute is skipped by its marker, an appended session is not pending (a run with
+nothing pending exits 0). On a new machine (the owner's PC with the committed report) the sessions the report already
+lists but the replay root does not hold are rebuilt first through the same steps — never appended twice. Any failure: one line `DAILY-FORWARD FAIL <day> <step>: <why>` (steps fetch, verify-parquet,
+merge-parquet, verify-layout, official-close, decision-price, replay, complete, append), exit 1, and nothing of that day
+(or after it) appended — the next run retries from there. A refusal (`DAILY-FORWARD REFUSED`, exit 2): the SDK outside
+its window, or any run inside Theta's 00:00–01:45 gap.
+
+**Two fetch sources, one a run.**
+- `--source terminal` (**the default**, the owner's PC): through the Theta Terminal already running there, the
+  `--fetch-theta` REST path (`127.0.0.1:25503`, at most 3 in flight, nothing ever signs in) — **no new login, so it never
+  collides with the owner's terminal session**.
+- `--source sdk` (the container): the `thetadata` SDK calls of `forward_2026-10-12_2026-10-21/sdk_fetch.py`, **one login
+  a run** (the key from `THETADATA_KEY` or `THETADATA_API_KEY` in the environment, never logged). That login signs the
+  owner's PC terminal out (it did on 2026-10-22), so the job runs it **only inside `THETA_SDK_WINDOW=HH:MM-HH:MM`** (New
+  York, set by the owner — refused when unset or outside it) **and never between 00:00 and 01:45 New York**.
+
+**The schedule**: 17:45 New York on weekdays — after the official close is published and after the 17:30 decision price;
+the job skips holidays and half days by the recorder's calendar (`HOLIDAYS`, `HALF_DAYS` — extend them each autumn), takes
+a session only after its 17:30, and catches up a session a missed run left.
+
+**The owner's PC (Windows), once:**
+
+```
+rem %USERPROFILE%\.eod_recorder\env (outside the repo) gains:  PAPER_PARQUET_ROOT=D:\theta   (the stored layout)
+cd C:\path\to\georgeredo
+set PAPER_PARQUET_ROOT=D:\theta
+rem (only if research_notes\Compass phase 3\forward_cumulative.md is not in the checkout yet) the official-close history,
+rem embedded once as the cumulative report's historical sections — ~10 minutes, files only:
+python -I scripts\paper_tracker.py --backtest --start 2022-11-11 --end 2026-10-09 --out data_recorder\reports_official
+python -I scripts\daily_forward.py --source terminal --historical-from data_recorder\reports_official\backtest_2022-11-11_2026-10-09.md
+rem (the Theta Terminal must be running and signed in on this PC; UW_API_TOKEN set in this shell for the official closes)
+rem then every weekday at 17:45 New York (16:45 on a Central-time clock):
+schtasks /Create /TN "Compass daily forward" /TR "\"C:\path\to\georgeredo\scripts\daily_forward.cmd\"" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 16:45
+rem by hand any time:   scripts\daily_forward.cmd          what is pending:   python -I scripts\daily_forward.py --status
+```
+
+`daily_forward.cmd` reads the recorder's env file (`UW_API_TOKEN`, `PAPER_PARQUET_ROOT`, optional `PAPER_FORWARD_DATA`,
+`PAPER_CUMULATIVE`, `THETA_BASE`), runs one `--source terminal` pass and appends to `data_recorder\daily_forward.cmd.log`.
+**Linux**: `scripts/daily_forward.service` (oneshot) + `scripts/daily_forward.timer` (`OnCalendar=Mon..Fri 17:45
+America/New_York`); on the container path set `DAILY_FORWARD_SOURCE=sdk` and `THETA_SDK_WINDOW` in the EnvironmentFile
+and fire the timer inside that window.
+
+**Size a session**: the seven Theta files ≈ 1.9 MB (zstd; 2026-10-12 1.86 MB, 2026-10-13 1.93 MB — `data/theta_forward`
+holds 8 sessions in 19 MB); UW's daily bars ≈ 5 KB and the two post-market minute answers ≈ 45 KB; the replay rows
+≈ 0.22 MB (the official root: 213 MB for 979 sessions); the cumulative report grows by about 2 KB a session (its ledger rows). About 2.3 MB a session, under 600 MB a
+year. Calls a session: 2 UW calls for the official close + 2 for the decision price (none when on disk), the Theta
+Terminal's 7 (or 7 SDK requests on one login).
 
 ## Settled by the smoke test (2026-10-21, the owner's token; `data_recorder/smoke/smoke_SPY.txt`, `smoke_SPX.txt`, the Parquet rows beside them, and seven follow-up probes the same evening)
 

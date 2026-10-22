@@ -22,9 +22,12 @@ THE ADAPTER (a minute m = 0 is 09:30 New York; a Parquet row stamped t is the qu
     parity spot is logged beside it (`parity_strikes`).
   - ohlc/1m: the day's bars as UW stamps them (start_time the bar's open, `r` 09:30–15:59, `po` the 16:00 bar when it
     printed); on the replayed day only the bars closed by the clock's minute — nothing ahead of the clock is served.
-  - the official close (ohlc/1d's `r` row): THE 15:59 BAR'S CLOSE — the research's convention (hyp_c common.py "the
-    16:00 close - the bar stamped 15:59"; hyp_b takes the last bar at or before 16:00 with a close, the same bar since
-    Theta's 16:00 bar carries none). Labelled `close_official_from` = OFFICIAL_FROM on every settle row.
+  - the official close (ohlc/1d's `r` row): SINCE .2 THE OFFICIAL CLOSE by default (`--settle-on official`: UW's daily
+    bar, then Theta's EOD — paper_audit.OfficialCloses; none on disk → the 15:59 bar, `settle_source = 1559_bar`, the
+    session flagged), with UW's post-market `po` bar where on disk. `--settle-on 1559` keeps THE 15:59 BAR'S CLOSE — the
+    research's convention (hyp_c common.py "the 16:00 close - the bar stamped 15:59"; hyp_b takes the last bar at or
+    before 16:00 with a close, the same bar since Theta's 16:00 bar carries none), labelled `close_official_from` =
+    OFFICIAL_FROM on every settle row, and its report exactly as before (the committed reports, byte for byte).
   - SPXW's settlement (fly_spxw, off unless listed): the last SPX print at or before 16:00 (`settle_source`
     'spx_last_print'), the research's SET proxy.
   - VIX: the day's prints out of ROOT/data/index/VIX through the tracker's Theta path (the print stamped m is the price
@@ -72,12 +75,16 @@ import polars as pl
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import eod_recorder as R  # noqa: E402
+import paper_audit as P  # noqa: E402
 import paper_tracker as T  # noqa: E402
 import vol_model as V  # noqa: E402
 
-REPLAY_VERSION = 'paper-backtest-2026-10-21.1'
+REPLAY_VERSION = 'paper-backtest-2026-10-22.2'   # .2: the official close by default (--settle-on 1559 keeps the old convention), the audit's report
 SOURCE = 'backtest-parquet'
-DEFAULT_REPLAY_ROOT = R.REPO / 'data_recorder' / 'paper_backtest'
+DEFAULT_REPLAY_ROOT = R.REPO / 'data_recorder' / 'paper_backtest'                    # --settle-on 1559 (the committed reports)
+DEFAULT_OFFICIAL_ROOT = R.REPO / 'data_recorder' / 'paper_backtest_official'         # --settle-on official (the default)
+SETTLE_MODES = ('official', '1559')
+DEFAULT_SETTLE = 'official'
 OFFICIAL_FROM = 'replay: the 15:59 bar close (the research convention)'
 SPX_SETTLE = 'spx_last_print'
 SPX_SPOT_SOURCE = 'replay: the SPX print at the minute (the research convention)'
@@ -241,10 +248,17 @@ class ReplayClock(R.FakeClock):
 
 class ReplayClient:
     """Answers GET <UW path> as UW would at the clock's minute, from the stored Parquet; never touches the network. Index
-    names answer stock-state / ohlc with 422, as UW Basic does."""
+    names answer stock-state / ohlc with 422, as UW Basic does. `settle_on`: 'official' (the default since .2) answers
+    ohlc/1d with the official close out of `closes` (paper_audit.OfficialCloses — UW's daily bar, then Theta's EOD) and
+    UW's post-market bar where on disk, nothing when no source holds the day (the tracker then settles on the 15:59 bar,
+    labelled '1559_bar' and flagged); '1559' answers it with the 15:59 bar's close, the research's convention."""
 
-    def __init__(self, src: ParquetSource, limiter, log, clock):
+    def __init__(self, src: ParquetSource, limiter, log, clock, settle_on: str = '1559', closes: P.OfficialCloses | None = None):
+        if settle_on not in SETTLE_MODES:
+            raise ValueError(f'settle_on is one of {SETTLE_MODES}')
         self.src, self.limiter, self.log, self.clock = src, limiter, log, clock
+        self.settle_on = settle_on
+        self.closes = closes if closes is not None else (P.OfficialCloses() if settle_on == 'official' else None)
         self.calls = 0
         self.requests: list = []
 
@@ -302,6 +316,8 @@ class ReplayClient:
             j, c = last[-1]
             pd_ = self.src.previous_day(name, today)
             prev = self.src.last_regular_close(name, pd_)[0] if pd_ else None
+            if pd_ and self.settle_on == 'official':
+                prev = self.closes.get(name, pd_)[0] or prev        # UW's prev_close is the official close
             tape = R.ny_at(today, '09:30') + dt.timedelta(minutes=j + 1)
             return 200, {'data': {'close': c, 'prev_close': prev, 'market_time': 'regular' if m <= 390 else 'postmarket',
                                   'tape_time': R.iso_z(tape)}}, None
@@ -316,6 +332,15 @@ class ReplayClient:
             day = str(params.get('date') or today)
             if day > today or (day == today and m < 390):
                 return 200, {'data': []}, None
+            if self.settle_on == 'official':
+                rows = []
+                px, src_ = self.closes.get(name, day)
+                if px is not None:
+                    rows.append({'date': day, 'market_time': 'r', 'close': px, 'source': src_})
+                lo, hi, pm_src = self.closes.post_market(name, day)
+                if lo is not None:
+                    rows.append({'date': day, 'market_time': 'po', 'low': lo, 'high': hi, 'source': pm_src})
+                return 200, {'data': rows}, None
             px, _ = self.src.last_regular_close(name, day)
             return 200, {'data': [] if px is None else [{'date': day, 'market_time': 'r', 'close': px}]}, None
         if path.endswith('/spot-exposures/strike'):
@@ -413,23 +438,29 @@ def needs(cand: T.Candidate, name: str) -> list[tuple[str, str]]:
 
 # ---- the replay ---------------------------------------------------------------------------------------------------------------------------
 
-def make_tracker(src: ParquetSource, replay_root: Path, live_root: Path | None, keys: tuple, stream=None):
+def make_tracker(src: ParquetSource, replay_root: Path, live_root: Path | None, keys: tuple, stream=None, settle_on: str = '1559',
+                 closes: P.OfficialCloses | None = None):
     scrub = R.Scrub(None)
     store = ReplayStore(replay_root, live_root)
     log = R.make_logger(scrub, store.root / '_logs', stream=stream, name='paper_backtest')
     log.setLevel(logging.WARNING)
     clock = ReplayClock(dt.datetime(2000, 1, 1, tzinfo=R.UTC))
     limiter = R.RateLimiter(max_in_flight=1, per_minute=10 ** 9, daily_budget=10 ** 9, clock=clock)
-    client = ReplayClient(src, limiter, log, clock)
+    client = ReplayClient(src, limiter, log, clock, settle_on=settle_on, closes=closes)
 
     def spx_spot(day: str, minute: str):
         m = MINUTE_OF(minute)
         p = dict(src.prints('SPX', day) or [])
         return p.get(m), SPX_SPOT_SOURCE
 
+    if settle_on == 'official':
+        def official_from(name, day):
+            return f'replay: official close ({client.closes.get(name, day)[1]})'
+        extra = dict(official_from=official_from, fallback_source=P.FALLBACK_1559, later_state_official=False)
+    else:
+        extra = dict(official_from=OFFICIAL_FROM)
     tr = T.Tracker(client, store, limiter, log, clock, scrub, cands=T.active_candidates(keys=keys), theta=ParquetVix(src),
-                   recorder_root=None, bar_wait_s=0, vix_uw=False, spx_spot=spx_spot, spx_settle_source=SPX_SETTLE,
-                   official_from=OFFICIAL_FROM)
+                   recorder_root=None, bar_wait_s=0, vix_uw=False, spx_spot=spx_spot, spx_settle_source=SPX_SETTLE, **extra)
     tr.bars = MemoBarCache(store.root)
     return tr, store, client, clock
 
@@ -459,16 +490,52 @@ def write_days(store_root: Path, start: str, end: str, info: dict) -> None:
     os.replace(tmp, f)
 
 
+MODE_FILE = 'settle_on.json'
+
+
+def root_mode(store_root: Path) -> str | None:
+    """the settlement convention a replay root was written with: its `_replay/settle_on.json`; a root written before
+    .2 (rows, no file) is '1559'; an empty root None"""
+    d = Path(store_root) / '_replay'
+    f = d / MODE_FILE
+    if f.exists():
+        try:
+            return json.loads(f.read_text(encoding='utf-8'))['settle_on']
+        except Exception:  # noqa: BLE001
+            return 'unreadable'
+    return '1559' if d.is_dir() and any(d.glob('days_*.json')) else None
+
+
+def claim_mode(store_root: Path, settle_on: str) -> None:
+    """one convention a root: rows settled on the 15:59 bar and on the official close never share a root (their
+    settle rows would collide in the dedupe — both are `settle_source = official` — and the markers would skip one)"""
+    have = root_mode(store_root)
+    if have is not None and have != settle_on:
+        raise ValueError(f'the replay root {store_root} holds rows settled with --settle-on {have}; this run asks {settle_on} — '
+                         f'use another --backtest-data (the defaults: {DEFAULT_OFFICIAL_ROOT.name} for official, {DEFAULT_REPLAY_ROOT.name} for 1559)')
+    if have is None:
+        f = Path(store_root) / '_replay' / MODE_FILE
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(json.dumps({'settle_on': settle_on, 'version': REPLAY_VERSION}), encoding='utf-8')
+
+
 def replay(start: str, end: str, keys: tuple, parquet_root: Path, replay_root: Path, live_root: Path | None = None,
-           progress=sys.stderr) -> dict:
-    """Every New York weekday in [start, end]: classify it, then run the tracker's events of the day at their minutes"""
+           progress=sys.stderr, settle_on: str = DEFAULT_SETTLE, closes: P.OfficialCloses | None = None) -> dict:
+    """Every New York weekday in [start, end]: classify it, then run the tracker's events of the day at their minutes.
+    `settle_on` 'official' (the default) settles SPY and QQQ on the official close (`closes`, paper_audit.OfficialCloses
+    by default), a session with none on the 15:59 bar labelled '1559_bar' and flagged in `_replay/days_*.json`
+    (`settle_fallback`); '1559' keeps the research's 15:59-bar convention (the committed reports)."""
+    if settle_on not in SETTLE_MODES:
+        raise ValueError(f'--settle-on is one of {SETTLE_MODES}')
     src = ParquetSource(parquet_root)
     days = weekdays(start, end)
+    ReplayStore(replay_root, live_root)                     # refuses the live root before anything is written
+    claim_mode(replay_root, settle_on)
     saved = install_calendar(src, days)
     t0 = time.time()
     info: dict = {}
     try:
-        tr, store, client, clock = make_tracker(src, replay_root, live_root, keys)
+        tr, store, client, clock = make_tracker(src, replay_root, live_root, keys, settle_on=settle_on, closes=closes)
         all_cands = tr.cands
         have = src.days('SPY')
         first, last = (have[0], have[-1]) if have else (None, None)
@@ -529,6 +596,13 @@ def replay(start: str, end: str, keys: tuple, parquet_root: Path, replay_root: P
                 else:
                     tr.settle(day, with_official=True)
             info[day] = {'status': 'replayed', 'candidates': [f'{c.key}:{"+".join(c.names)}' for c in cands], 'reads': client.calls - calls0}
+            if settle_on == 'official':
+                fb = sorted({f'{c.key} {nm}' for c in cands for nm in c.names
+                             if (lambda d: d is not None and 'settle_source' in d.columns
+                                 and d.filter(pl.col('settle_source') == P.FALLBACK_1559).height > 0)(store.read(c.key, nm, day))})
+                if fb:
+                    info[day]['settle_fallback'] = fb           # flagged: no official close on disk — settled on the 15:59 bar
+                    notes.append('NO OFFICIAL CLOSE: ' + ', '.join(fb) + ' settled on the 15:59 bar (1559_bar)')
             if missing:
                 info[day]['missing'] = missing
             if notes:
@@ -697,7 +771,35 @@ def _f(x, fmt='{:+.2f}'):
 
 
 def build_report(root: Path, keys: tuple, start: str, end: str, out_dir: Path, parquet_root: Path | None = None,
-                 wall_seconds: float | None = None, stream=sys.stdout) -> dict:
+                 wall_seconds: float | None = None, stream=sys.stdout, settle_on: str | None = None,
+                 closes: P.OfficialCloses | None = None, decision_prices: dict | None = None) -> dict:
+    """The replay's report. `settle_on` (default: the root's own convention, else official): '1559' writes the report
+    as it was before .2 (the committed reports, byte for byte); 'official' writes the audit's sections first — the
+    settlement, every candidate by PERIOD (never pooled) on session sums with iid and 20-session block-bootstrap
+    intervals, the 15:58 exit beside hold-to-expiry (the stress on the exit too), the expiry flags' shares, the
+    after-hours cases — then the replay's detail tables (all periods together, for reconciliation), and a per-trade CSV
+    (trades_<D1>_<D2>.csv) with every flag and the after-hours columns."""
+    mode = settle_on or root_mode(root) or DEFAULT_SETTLE
+    if mode == 'unreadable':
+        mode = DEFAULT_SETTLE
+    if mode == '1559':
+        return _report(root, keys, start, end, out_dir, parquet_root, wall_seconds, stream)
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    au = audit_sections(root, keys, start, end, parquet_root, closes, decision_prices)
+    tp = out_dir / f'trades_{start}_{end}.csv'
+    write_trades_csv(au['trades'], tp)
+    res = _report(root, keys, start, end, out_dir, parquet_root, wall_seconds, stream, mode='official', extra=au)
+    res['trades_csv'] = str(tp)
+    res['audit'] = {k: v for k, v in au.items() if k not in ('md', 'csv', 'trades')}
+    return res
+
+
+def _report(root: Path, keys: tuple, start: str, end: str, out_dir: Path, parquet_root: Path | None = None,
+            wall_seconds: float | None = None, stream=sys.stdout, mode: str = '1559', extra: dict | None = None) -> dict:
+    """The replay's tables. mode '1559': the report before .2, unchanged (the reproduction of the committed reports);
+    mode 'official': the same tables on the official-close settle rows (a '1559_bar' fallback counted, flagged), after
+    `extra['md']` (the audit's sections) — and `extra['csv']` appended to the CSV"""
     root = Path(root)
     df = read_rows(root, keys, start, end)
     days_info = {d: v for d, v in read_days(root).items() if start <= d <= end}
@@ -709,19 +811,34 @@ def build_report(root: Path, keys: tuple, start: str, end: str, out_dir: Path, p
     st_counts: dict = {}
     for v in days_info.values():
         st_counts[v['status']] = st_counts.get(v['status'], 0) + 1
-    md.append(f'# Paper tracker — historical replay {start} → {end}')
+    official = mode == 'official'
+    md.append(f'# Paper tracker — {"replay" if official else "historical replay"} {start} → {end}' + (' (official-close settlement)' if official else ''))
     md.append('')
     md.append(f'`{REPLAY_VERSION}` on `{T.VERSION}` ({T.RULES_VERSION}, {T.C3_RULES_VERSION}). Written {dt.datetime.now(R.UTC):%Y-%m-%d %H:%M} UTC'
               + (f'; this run took {wall_seconds:.0f} s (a minute already replayed into the root is skipped, so a resumed run is quick).' if wall_seconds else '.'))
     md.append('')
-    md.append('**What this is.** `paper_tracker.py --backtest` replays the stored 1-minute NBBO Parquet (the research\'s dataset'
-              + (f', `{parquet_root}`' if parquet_root else '') + ') through the live tracker\'s own code: each minute\'s rows are '
-              'adapted into the UW chain the live `Chain` reads, and `Tracker.capture`, `close_quotes` (15:58) and `settle` run '
-              'unchanged. Fills: shorts at the bid, longs at the ask; $0.65 a leg at the open, nothing at expiry; the 15:58 exit '
-              'pays $0.65 a contract closed. **Spot** at a minute = the close of the bar stamped one minute earlier. **The official '
-              'close** = the 15:59 bar\'s close for SPY and QQQ (the research\'s convention — the real closing print differs by '
-              'cents; the live tracker settles on UW\'s daily bar); SPXW on the last SPX print at or before 16:00. Rows carry '
-              '`source = backtest-parquet` and live under their own root, never the forward sample\'s.')
+    if official:
+        md.append('**What this is.** `paper_tracker.py --backtest` replays the stored 1-minute NBBO Parquet'
+                  + (f' (`{parquet_root}`)' if parquet_root else '') + ' through the live tracker\'s own code (`Tracker.capture`, '
+                  '`close_quotes` at 15:58 and `settle`, unchanged; each minute\'s rows adapted into the UW chain the live `Chain` '
+                  'reads). Fills: shorts at the bid, longs at the ask; $0.65 a contract at the open, nothing at expiry; the 15:58 exit '
+                  'pays $0.65 a contract closed (a long with no bid abandoned). **Spot** at a minute = the close of the bar stamped one '
+                  'minute earlier. **The settlement is the official close** (the audit\'s correction, the default since '
+                  f'`{REPLAY_VERSION}`): UW\'s daily bar (`r` row), else Theta\'s EOD daily bar; a session with neither settles on the '
+                  '15:59 bar, labelled `1559_bar` and flagged below — never silently. SPXW on the last SPX print at or before 16:00. '
+                  'The audit\'s other corrections are in every row and every table: the period (never pooled), session sums with '
+                  'block-bootstrap intervals, the 15:58 exit for every candidate with the $0.01 / $0.02 stress at the open AND the exit, '
+                  'the expiry flags (stock left, pins, the post-market cross) and the after-hours cases. Rows carry `source = '
+                  'backtest-parquet` and live under their own root.')
+    else:
+        md.append('**What this is.** `paper_tracker.py --backtest` replays the stored 1-minute NBBO Parquet (the research\'s dataset'
+                  + (f', `{parquet_root}`' if parquet_root else '') + ') through the live tracker\'s own code: each minute\'s rows are '
+                  'adapted into the UW chain the live `Chain` reads, and `Tracker.capture`, `close_quotes` (15:58) and `settle` run '
+                  'unchanged. Fills: shorts at the bid, longs at the ask; $0.65 a leg at the open, nothing at expiry; the 15:58 exit '
+                  'pays $0.65 a contract closed. **Spot** at a minute = the close of the bar stamped one minute earlier. **The official '
+                  'close** = the 15:59 bar\'s close for SPY and QQQ (the research\'s convention — the real closing print differs by '
+                  'cents; the live tracker settles on UW\'s daily bar); SPXW on the last SPX print at or before 16:00. Rows carry '
+                  '`source = backtest-parquet` and live under their own root, never the forward sample\'s.')
     md.append('')
     md.append(f'**Sessions**: {len(weekdays(start, end))} weekdays; ' + ', '.join(f'{v} {k}' for k, v in sorted(st_counts.items())) + '.')
     for kind in ('holiday', 'half day'):
@@ -740,22 +857,30 @@ def build_report(root: Path, keys: tuple, start: str, end: str, out_dir: Path, p
                   'their chains fetched first (`--fetch-theta`, on the owner\'s machine), then a replay.')
     if parquet_root is not None:
         have = ParquetSource(parquet_root).days('SPY')
-        if have:
+        if have and not official:
             nxt = next(d for d in weekdays(have[-1], (dt.date.fromisoformat(have[-1]) + dt.timedelta(days=7)).isoformat()) if d > have[-1])
             md.append(f'- The stored files end on {have[-1]}: sessions from {nxt} on (the 12th onward) are not in them and need their chains '
                       'fetched first — `paper_tracker.py --fetch-theta --start D1 --end D2 --parquet-root R` on the owner\'s machine '
                       '(the Theta Terminal running there), then `--backtest` over them.')
+        elif have and end > have[-1]:
+            md.append(f'- The stored files end on {have[-1]}: later sessions need their files fetched first (`scripts/daily_forward.py`, or '
+                      '`paper_tracker.py --fetch-theta` on the owner\'s machine), then `--backtest` over them.')
     notes = sorted(d for d, v in days_info.items() if v.get('note') and v['status'] == 'replayed')
     if notes:
         md.append(f'- Replayed with a note ({len(notes)}): ' + '; '.join(f'{d} {days_info[d]["note"]}' for d in notes[:20]) + (' …' if len(notes) > 20 else ''))
     md.append('')
+    if official and extra:
+        md += extra['md']
+        md.append('## Detail by candidate — every period together (reconciliation and detail, NOT a result: read the period tables above)')
+        md.append('')
     if df is None or df.height == 0:
         md.append('No replay rows in this range.')
         (out_dir / f'backtest_{stamp}.md').write_text('\n'.join(md) + '\n', encoding='utf-8')
         pl.DataFrame({'section': []}).write_csv(out_dir / f'backtest_{stamp}.csv')
         return {'md': str(out_dir / f'backtest_{stamp}.md'), 'csv': str(out_dir / f'backtest_{stamp}.csv'), 'cells': []}
     caps = df.filter(pl.col('row_kind') == 'capture')
-    sett = df.filter((pl.col('row_kind') == 'settle') & pl.col('settle_source').is_in(['official', SPX_SETTLE]) & (pl.col('tradable') == 'true'))
+    sources = ['official', SPX_SETTLE] + ([P.FALLBACK_1559] if official else [])
+    sett = df.filter((pl.col('row_kind') == 'settle') & pl.col('settle_source').is_in(sources) & (pl.col('tradable') == 'true'))
     sett = sett.with_columns(pl.col('_day').str.slice(0, 4).alias('year'), pl.col('_day').str.slice(0, 7).alias('month'))
     headline = []
     for k in keys:
@@ -925,6 +1050,8 @@ def build_report(root: Path, keys: tuple, start: str, end: str, out_dir: Path, p
                     md.append(f'| {s} | {nm} | {r["trades"]} | {_f(r["mean_1600_nbbo"])} | {_f(r["mean_1558_nbbo"])} | {_f(r["diff"])} [{_f(lo)}, {_f(hi)}] | '
                               f'{_f(r["mean_1558_mid"])} | {r["win_1600"]:.1%} | {r["win_1558"]:.1%} |')
             md.append('')
+    if official and extra:
+        rows_csv += extra['csv']
     mdp, csvp = out_dir / f'backtest_{stamp}.md', out_dir / f'backtest_{stamp}.csv'
     mdp.write_text('\n'.join(md) + '\n', encoding='utf-8')
     tab = pl.DataFrame([{kk: (None if isinstance(vv, float) and not math.isfinite(vv) else vv) for kk, vv in r.items()} for r in rows_csv], infer_schema_length=None)
@@ -939,6 +1066,497 @@ def build_report(root: Path, keys: tuple, start: str, end: str, out_dir: Path, p
             else:
                 print(f'  {r["candidate"]:<10} {r["structure"]:<7} no tradable trade ({r["captures"]} captures)', file=stream)
     return {'md': str(mdp), 'csv': str(csvp), 'cells': headline}
+
+
+# ---- the audit's sections (the official-close report and the cumulative forward report) -----------------------------------------
+
+STRUCT_LABEL = {('condor_em1', 'condor'): 'condor_em1 condor (SPY 2-wide, straddle edge, 11:30–13:30)',
+                ('fly5', 'iron'): 'fly5 iron ±5 (SPY+QQQ, 15:00 / 15:30)', ('fly5', 'call'): 'fly5 long call ±5',
+                ('fly5', 'put'): 'fly5 long put ±5', ('condor_d20', 'condor'): 'condor_d20 condor (SPY 2-wide 20-delta, 13:00–15:00)'}
+SETTLE_RANK = {'official': 0, SPX_SETTLE: 0, P.FALLBACK_1559: 1}
+
+
+def label_of(k: str, s: str) -> str:
+    return STRUCT_LABEL.get((k, s), f'{k} {s}')
+
+
+def next_session_open(src: ParquetSource | None, closes: P.OfficialCloses, name: str, day: str) -> tuple[float | None, str | None, str | None]:
+    """The next session's 09:30 open: the open of its 09:30 bar in the stored Parquet, else UW's daily `r` open of the
+    next calendar session. (price, the next session, source) — (None, …) until the next session's data is on disk"""
+    if src is not None:
+        import bisect
+        ds = src.days(name)
+        for nd in ds[bisect.bisect_right(ds, day):bisect.bisect_right(ds, day) + 6]:
+            b = src.bars(name, nd)
+            if not b or len(b['j']) < 30:
+                continue                            # a holiday's padded file (Thanksgiving 2025-11-27 is one) is no session
+            if b['j'][0] == 0 and b['o'][0] is not None:
+                return float(b['o'][0]), nd, 'parquet: the 09:30 bar\'s open'
+            break
+    d = dt.date.fromisoformat(day)
+    for _ in range(10):
+        d += dt.timedelta(days=1)
+        if d.weekday() < 5 and R.is_trading_day(d.isoformat()):
+            o = closes.open_r(name, d.isoformat())
+            return (o, d.isoformat(), 'uw_1d r open') if o is not None else (None, d.isoformat(), None)
+    return None, None, None
+
+
+def trade_table(df: pl.DataFrame | None, closes: P.OfficialCloses | None = None, parquet_root: Path | None = None,
+                decision_prices: dict | None = None, only_days: set | None = None) -> tuple[list, int]:
+    """One dict a settled trade (a tradable capture and its settle row — the official close preferred over a 1559_bar
+    fallback): the P&Ls held and at 15:58 (stressed too), the period, the expiry flags at the settlement price with the
+    post-market range read from disk NOW (a later fetch carries the whole evening), and the after-hours cases with the
+    next 09:30 open and the decision price where they exist. → (trades, tradable captures with no settle row)"""
+    if df is None or df.height == 0:
+        return [], 0
+    closes = closes if closes is not None else P.OfficialCloses()
+    src = ParquetSource(parquet_root) if parquet_root else None
+    if decision_prices is None:                     # the study's rule on every UW 1-minute answer on disk
+        decision_prices = P.decision_prices_on_disk(extra_dirs=uw_1m_dirs())
+    k5 = ('candidate', '_name', '_day', 'minute', 'structure')
+    caps = df.filter((pl.col('row_kind') == 'capture') & (pl.col('tradable') == 'true') & pl.col('l1_symbol').is_not_null())
+    sett = df.filter((pl.col('row_kind') == 'settle') & pl.col('settle_source').is_in(list(SETTLE_RANK)))
+    if only_days is not None:
+        caps = caps.filter(pl.col('_day').is_in(sorted(only_days)))
+        sett = sett.filter(pl.col('_day').is_in(sorted(only_days)))
+    sett = sett.with_columns(pl.col('settle_source').replace_strict(SETTLE_RANK, default=9).alias('_rank'))
+    sett = sett.sort(list(k5) + ['_rank']).unique(subset=list(k5), keep='first', maintain_order=True)
+    S = {tuple(r[k] for k in k5): r for r in sett.to_dicts()}
+    out, unsettled = [], 0
+    nf = T.fnum
+    for c in caps.sort(list(k5)).to_dicts():
+        s = S.get(tuple(c[k] for k in k5))
+        st = T.structure_from_row(c)
+        if s is None or st is None or nf(s.get('settle_px')) is None:
+            unsettled += 1
+            continue
+        k, name, day = c['candidate'], c['_name'], c['_day']
+        px = nf(s['settle_px'])
+        cash = k == 'fly_spxw'
+        lo, hi, pm_src = (None, None, 'cash-settled: no delivery') if cash else closes.post_market(name, day)
+        fl = P.flags(st, px, lo, hi, cash_settled=cash)
+        nxt, nday, nsrc = (None, None, None) if cash else next_session_open(src, closes, name, day)
+        dp = decision_prices.get((name, day))
+        is_off = s['settle_source'] == 'official'
+        ah = P.after_hours_pnl(st, st.entry_cash(), px, nxt, dp, cash_settled=cash) if (is_off or cash) else \
+            {'pnl_ah0': None, 'pnl_ah_a': None, 'pnl_ah_b': None, 'pnl_ah_c': None}
+        t = {'candidate': k, 'name': name, 'day': day, 'minute': c['minute'], 'structure': c['structure'],
+             'period': P.period_of(k, day), 'settle_source': s['settle_source'], 'settle_from': s.get('close_official_from'),
+             'settle_fallback': s['settle_source'] == P.FALLBACK_1559, 'settle_px': px, 'close_1559': nf(s.get('close_1m_r')),
+             'price_nbbo': nf(c.get('price_nbbo')), 'max_risk': nf(c.get('max_risk')),
+             'risk_usd': None if nf(c.get('max_risk')) is None else nf(c.get('max_risk')) * 100,
+             **{f'pnl_{x}': nf(s.get(f'pnl_{x}')) for x in ('nbbo', 'mid', '1c', '2c')},
+             **{f'pnl_1558_{x}': nf(s.get(f'pnl_1558_{x}')) for x in ('nbbo', 'mid', '1c', '2c')},
+             'legs_closed_1558': nf(s.get('legs_closed')),
+             'stock_left': fl['stock_left'], 'stock_left_side': fl['stock_left_side'],
+             'stock_value': None if fl['stock_left'] is None else abs(fl['stock_left']) * px,
+             'pin_dist': fl['pin_dist'], 'pin_025': fl['pin_025'], 'pin_050': fl['pin_050'],
+             'pm_low': lo, 'pm_high': hi, 'pm_cross': fl['pm_cross'], 'pm_source': pm_src,
+             'next_day': nday, 'next_open': nxt, 'next_open_source': nsrc, 'decision_price': dp, **ah,
+             't2_decile_primary': c.get('t2_decile_primary')}
+        out.append(t)
+    return out, unsettled
+
+
+TRADE_COLUMNS = ('candidate', 'name', 'day', 'minute', 'structure', 'period', 'settle_source', 'settle_from', 'settle_fallback', 'settle_px',
+                 'close_1559', 'price_nbbo', 'max_risk', 'pnl_nbbo', 'pnl_mid', 'pnl_1c', 'pnl_2c', 'pnl_1558_nbbo', 'pnl_1558_mid',
+                 'pnl_1558_1c', 'pnl_1558_2c', 'legs_closed_1558', 'stock_left', 'stock_left_side', 'stock_value', 'pin_dist', 'pin_025',
+                 'pin_050', 'pm_low', 'pm_high', 'pm_cross', 'pm_source', 'next_day', 'next_open', 'next_open_source', 'decision_price',
+                 'pnl_ah0', 'pnl_ah_a', 'pnl_ah_b', 'pnl_ah_c', 't2_decile_primary')
+
+
+def write_trades_csv(trades: list, path: Path) -> None:
+    rows = [{c: (None if isinstance(t.get(c), float) and not math.isfinite(t[c]) else t.get(c)) for c in TRADE_COLUMNS} for t in trades]
+    schema = {c: (pl.Boolean if c in ('settle_fallback', 'pin_025', 'pin_050', 'pm_cross') else
+                  pl.Int64 if c == 'stock_left' else
+                  pl.Utf8 if c in ('candidate', 'name', 'day', 'minute', 'structure', 'period', 'settle_source', 'settle_from', 'stock_left_side',
+                                   'pm_source', 'next_day', 'next_open_source', 't2_decile_primary') else pl.Float64) for c in TRADE_COLUMNS}
+    pl.DataFrame(rows, schema=schema).write_csv(path)
+
+
+def candidate_sessions(days_info: dict, key: str, only_days: set | None = None) -> list[str]:
+    """the replayed sessions the candidate ran (zero where it took no trade), in calendar order"""
+    out = []
+    for d, v in sorted(days_info.items()):
+        if v.get('status') != 'replayed' or (only_days is not None and d not in only_days):
+            continue
+        if any(str(x).split(':')[0] == key for x in v.get('candidates', [])):
+            out.append(d)
+    return out
+
+
+def _mean(xs):
+    xs = [x for x in xs if x is not None and isinstance(x, (int, float)) and math.isfinite(x)]
+    return (float(np.mean(xs)) if xs else float('nan')), len(xs)
+
+
+def _share(xs):
+    xs = [x for x in xs if x is not None]
+    return (sum(1 for x in xs if x) / len(xs)) if xs else float('nan'), len(xs)
+
+
+def _ci(t, fmt='{:+.2f}'):
+    if not t or any((v is None or not math.isfinite(v)) for v in t):
+        return '—'
+    return f'[{fmt.format(t[0])}, {fmt.format(t[1])}]'
+
+
+def _pct(x, d=1):
+    return '—' if x is None or (isinstance(x, float) and not math.isfinite(x)) else f'{100 * x:.{d}f}%'
+
+
+def audit_sections(root: Path, keys: tuple, start: str, end: str, parquet_root: Path | None = None, closes: P.OfficialCloses | None = None,
+                   decision_prices: dict | None = None, only_days: set | None = None, df: pl.DataFrame | None = None) -> dict:
+    """The audit's corrections as report sections: {'md': lines, 'csv': rows, 'trades': per-trade dicts, 'unsettled': n,
+    'fallback_sessions': [...]}. Every statistic is by candidate · structure · PERIOD (paper_audit.period_of), never
+    pooled across periods; inference on SESSION sums (every session the candidate ran, zero where it took no trade) by
+    the iid-session and 20-session moving-block bootstraps (paper_audit.session_stats — audit_lib's, 2,000 draws, seed
+    20261022)."""
+    closes = closes if closes is not None else P.OfficialCloses()
+    df = read_rows(root, keys, start, end) if df is None else df
+    days_info = {d: v for d, v in read_days(root).items() if start <= d <= end}
+    trades, unsettled = trade_table(df, closes, parquet_root, decision_prices, only_days)
+    md: list = []
+    csv: list = []
+    # -- the settlement
+    md.append('## Settlement: the official close')
+    md.append('')
+    md.append('The options settle (and are auto-exercised) on the primary listing\'s official closing price, not the 15:59 bar. Each '
+              'name-session\'s settlement source:')
+    md.append('')
+    md.append('| name | sessions settled | official close (source) | 15:59 bar fallback (flagged) | official − 15:59 bar: mean / max |abs| | sessions where they differ by > $0.05 |')
+    md.append('|---|---|---|---|---|---|')
+    sess_src: dict = {}
+    for t in trades:
+        sess_src.setdefault((t['name'], t['day']), (t['settle_source'], t['settle_from'], t['settle_px'], t['close_1559']))
+    fallback = sorted({f'{d} {nm}' for (nm, d), v in sess_src.items() if v[0] == P.FALLBACK_1559})
+    for nm in sorted({nm for nm, _ in sess_src}):
+        vs = [v for (n_, _), v in sess_src.items() if n_ == nm]
+        offs = [v for v in vs if v[0] == 'official']
+        by = {}
+        for v in offs:
+            lab = (v[1] or '').replace('replay: official close (', '').rstrip(')') or 'official'
+            by[lab] = by.get(lab, 0) + 1
+        dd = np.array([v[2] - v[3] for v in offs if v[3] is not None])
+        md.append(f'| {nm} | {len(vs)} | {len(offs)} ({", ".join(f"{k} {n}" for k, n in sorted(by.items()))}) | {sum(1 for v in vs if v[0] == P.FALLBACK_1559)} | '
+                  + (f'{np.mean(np.abs(dd)):.3f} / {np.max(np.abs(dd)):.2f} | {int((np.abs(dd) > 0.05).sum())} |' if dd.size else '— | — |'))
+        csv.append({'section': 'settlement', 'candidate': 'all', 'structure': 'all', 'cut': 'name', 'key': nm, 'sessions': len(vs),
+                    'official': len(offs), 'fallback_1559': sum(1 for v in vs if v[0] == P.FALLBACK_1559),
+                    'official_sources': json.dumps(by, sort_keys=True), 'mean_abs_off_minus_1559': float(np.mean(np.abs(dd))) if dd.size else None})
+    md.append('')
+    md.append(('**Flagged — settled on the 15:59 bar (`1559_bar`), no official close on disk:** ' + ', '.join(fallback)) if fallback
+              else 'No session fell back to the 15:59 bar.')
+    if unsettled:
+        md.append(f'\nTradable captures with no settle row: {unsettled}.')
+    md.append('')
+    # -- by period
+    md.append('## Results by period — never pooled')
+    md.append('')
+    md.append('Official close, every leg at its own NBBO, $0.65 a contract at the open, nothing at expiry, one lot. A session\'s P&L is the sum '
+              'of its trades (zero on a session the candidate ran and took no trade); intervals are percentile bootstraps over SESSIONS — '
+              'iid and moving blocks of 20 consecutive sessions (2,000 draws, seeded; a block interval needs 60 sessions). fly5\'s three '
+              'structures are one trade seen three ways; read them as one bet.')
+    md.append('')
+    for k in keys:
+        if k not in T.CANDIDATES:
+            continue
+        cand = T.CANDIDATES[k]
+        sessions = candidate_sessions(days_info, k, only_days)
+        pers = sorted({P.period_of(k, d) for d in sessions}, key=P.period_sort)
+        if not pers:
+            continue
+        md.append(f'### {k}')
+        md.append('')
+        for code in pers:
+            md.append(f'- **{code}** — {P.period_label(k, code)}')
+        md.append('')
+        md.append('| structure | period | sessions | trades | traded / run | mean $ a trade | block-20 CI (trade) | mean % of max risk | mean $ a session | session CI (iid) | session CI (block-20) | total $ | win | max drawdown $ (sessions) |')
+        md.append('|---|---|---|---|---|---|---|---|---|---|---|---|---|---|')
+        for s in cand.structures:
+            for code in pers:
+                days = [d for d in sessions if P.period_of(k, d) == code]
+                xs = [t for t in trades if t['candidate'] == k and t['structure'] == s and t['period'] == code]
+                Sv, Nv = P.session_series(days, [t['day'] for t in xs], [t['pnl_nbbo'] for t in xs])
+                stt = P.session_stats(Sv, Nv)
+                vals = [t['pnl_nbbo'] for t in xs if t['pnl_nbbo'] is not None]
+                pct_ = [t['pnl_nbbo'] / t['risk_usd'] for t in xs if t['pnl_nbbo'] is not None and t['risk_usd']]
+                row = {'section': 'period', 'candidate': k, 'structure': s, 'cut': 'period', 'key': code, 'sessions': stt['sessions'],
+                       'trades': stt['trades'], 'sessions_traded': stt['sessions_traded'], 'mean_nbbo': stt.get('mean_trade'),
+                       'mean_session': stt.get('mean_session'), 'total_nbbo': float(np.sum(vals)) if vals else 0.0,
+                       'win_rate': float(np.mean(np.array(vals) > 0)) if vals else None, 'mean_pct_risk': float(np.mean(pct_)) if pct_ else None,
+                       'max_drawdown': P.drawdown(Sv[Nv > 0]) if Nv.sum() else None}
+                for b in (1, 5, 20):
+                    for what in ('session', 'trade'):
+                        lo_hi = stt.get(f'ci_{what}_b{b}', (float('nan'), float('nan')))
+                        row[f'ci_{what}_b{b}_lo'], row[f'ci_{what}_b{b}_hi'] = lo_hi
+                csv.append(row)
+                if not stt['trades']:
+                    md.append(f'| {s} | {code} | {stt["sessions"]} | 0 | 0 / {stt["sessions"]} | — | — | — | — | — | — | — | — | — |')
+                    continue
+                md.append(f'| {s} | {code} | {stt["sessions"]} | {stt["trades"]} | {stt["sessions_traded"]} / {stt["sessions"]} | {_f(stt["mean_trade"])} | '
+                          f'{_ci(stt.get("ci_trade_b20"))} | {_pct(row["mean_pct_risk"], 2)} | {_f(stt["mean_session"])} | {_ci(stt.get("ci_session_b1"))} | '
+                          f'{_ci(stt.get("ci_session_b20"))} | {_f(row["total_nbbo"], "{:+,.0f}")} | {_pct(row["win_rate"])} | {_f(row["max_drawdown"], "{:,.0f}")} |')
+        md.append('')
+    # -- the 15:58 exit beside hold-to-expiry
+    md.append('## Hold to expiry against the 15:58 exit')
+    md.append('')
+    md.append('The same trades, $ a structure. The 15:58 exit (the tracker\'s `close_quotes`, every candidate): a long sold at its bid, a short '
+              'bought back at its ask, $0.65 a contract closed, a long with no bid abandoned (no fee); the stressed columns move every contract '
+              '$0.01 / $0.02 against us at the open AND at the exit. Holding to expiry leaves stock on most in-the-money trades (the flags below); '
+              'the 15:58 exit is the one a cash account can take.')
+    md.append('')
+    md.append('| candidate · structure | period | trades | hold NBBO | hold +$0.01 | hold +$0.02 | hold at mids | 15:58 trades | 15:58 NBBO | 15:58 +$0.01 open & close | 15:58 +$0.02 open & close | 15:58 at mids | 15:58 NBBO: block-20 CI (trade) |')
+    md.append('|---|---|---|---|---|---|---|---|---|---|---|---|---|')
+    for k in keys:
+        if k not in T.CANDIDATES:
+            continue
+        sessions = candidate_sessions(days_info, k, only_days)
+        for s in T.CANDIDATES[k].structures:
+            for code in sorted({P.period_of(k, d) for d in sessions}, key=P.period_sort):
+                xs = [t for t in trades if t['candidate'] == k and t['structure'] == s and t['period'] == code]
+                if not xs:
+                    continue
+                days = [d for d in sessions if P.period_of(k, d) == code]
+                ex = [t for t in xs if t['pnl_1558_nbbo'] is not None]
+                Se, Ne = P.session_series(days, [t['day'] for t in ex], [t['pnl_1558_nbbo'] for t in ex])
+                se = P.session_stats(Se, Ne, blocks=(20,))
+                m = {c: _mean([t[c] for t in xs])[0] for c in ('pnl_nbbo', 'pnl_1c', 'pnl_2c', 'pnl_mid')}
+                e = {c: _mean([t[c] for t in xs]) for c in ('pnl_1558_nbbo', 'pnl_1558_1c', 'pnl_1558_2c', 'pnl_1558_mid')}
+                row = {'section': 'exit1558', 'candidate': k, 'structure': s, 'cut': 'period', 'key': code, 'trades': len(xs),
+                       'hold_nbbo': m['pnl_nbbo'], 'hold_1c': m['pnl_1c'], 'hold_2c': m['pnl_2c'], 'hold_mid': m['pnl_mid'],
+                       'exit_trades': len(ex), 'exit_nbbo': e['pnl_1558_nbbo'][0], 'exit_1c': e['pnl_1558_1c'][0], 'exit_2c': e['pnl_1558_2c'][0],
+                       'exit_mid': e['pnl_1558_mid'][0]}
+                row['exit_ci_trade_b20_lo'], row['exit_ci_trade_b20_hi'] = se.get('ci_trade_b20', (float('nan'), float('nan')))
+                csv.append(row)
+                md.append(f'| {label_of(k, s)} | {code} | {len(xs)} | {_f(m["pnl_nbbo"])} | {_f(m["pnl_1c"])} | {_f(m["pnl_2c"])} | {_f(m["pnl_mid"])} | '
+                          f'{len(ex)} | {_f(row["exit_nbbo"])} | {_f(row["exit_1c"])} | {_f(row["exit_2c"])} | {_f(row["exit_mid"])} | {_ci(se.get("ci_trade_b20"))} |')
+    md.append('')
+    # -- the flags
+    md.append('## Expiry flags (held to the official close)')
+    md.append('')
+    md.append('SPY and QQQ options are American and physically settled: OCC exercises every option in the money by $0.01 or more at the '
+              'official close unless told otherwise, so a structure held to the close can leave shares (`stock_left`: the net of the '
+              'exercises and assignments, by sign) — a 100-share position per lot against a few hundred dollars of modeled risk. The pins: '
+              'the official close within $0.25 / $0.50 of a short strike (the writer does not know at 16:00 whether he is assigned). The '
+              'post-market cross: UW\'s post-market bar (16:00–20:00, read from disk now — the window to the exercise cut-off is shorter, '
+              'so an upper bound) took a short strike across the money; known only where that bar is on disk.')
+    md.append('')
+    md.append('| candidate · structure | period | trades | stock left (long / short) | mean / max stock left $ | pin ≤ $0.25 | pin ≤ $0.50 | post-market cross (of trades with the bar) | settled on the 15:59 bar (flagged) |')
+    md.append('|---|---|---|---|---|---|---|---|---|')
+    for k in keys:
+        if k not in T.CANDIDATES:
+            continue
+        sessions = candidate_sessions(days_info, k, only_days)
+        for s in T.CANDIDATES[k].structures:
+            for code in sorted({P.period_of(k, d) for d in sessions}, key=P.period_sort):
+                xs = [t for t in trades if t['candidate'] == k and t['structure'] == s and t['period'] == code]
+                if not xs:
+                    continue
+                n = len(xs)
+                left = [t for t in xs if t['stock_left']]
+                sl, _ = _share([bool(t['stock_left']) if t['stock_left'] is not None else None for t in xs])
+                lg = sum(1 for t in xs if (t['stock_left'] or 0) > 0) / n
+                sh = sum(1 for t in xs if (t['stock_left'] or 0) < 0) / n
+                p25, _ = _share([t['pin_025'] for t in xs])
+                p50, _ = _share([t['pin_050'] for t in xs])
+                pmc, pmn = _share([t['pm_cross'] for t in xs])
+                fb = sum(1 for t in xs if t['settle_fallback'])
+                vals = [t['stock_value'] for t in left if t['stock_value'] is not None]
+                row = {'section': 'flags', 'candidate': k, 'structure': s, 'cut': 'period', 'key': code, 'trades': n, 'stock_left_share': sl,
+                       'stock_long_share': lg, 'stock_short_share': sh, 'stock_value_mean': float(np.mean(vals)) if vals else None,
+                       'stock_value_max': float(np.max(vals)) if vals else None, 'pin_025_share': p25, 'pin_050_share': p50,
+                       'pm_cross_share': pmc, 'pm_known': pmn, 'settle_fallback': fb}
+                csv.append(row)
+                md.append(f'| {label_of(k, s)} | {code} | {n} | {_pct(sl)} ({_pct(lg)} / {_pct(sh)}) | '
+                          + (f'${np.mean(vals):,.0f} / ${np.max(vals):,.0f}' if vals else '—') + f' | {_pct(p25)} | {_pct(p50)} | '
+                          + (f'{_pct(pmc)} of {pmn}' if pmn else '— (no post-market bar on disk)') + f' | {fb} |')
+    md.append('')
+    # -- after hours
+    md.append('## After the close: the four expiry cases (the after-hours study\'s hook)')
+    md.append('')
+    md.append('`paper_audit.after_hours_pnl`, $ a structure, on the official-close trades: **0** hold at intrinsic (the settle P&L); **a** OCC\'s default '
+              'at the official close (every leg in the money by ≥ $0.01 exercised or assigned), the net stock marked at the next session\'s '
+              '09:30 open; **b** our shorts assigned iff in the money at the decision price, our longs by default; **c** both sides at the '
+              'decision price. The decision price is the close of the last UW post-market 1-minute bar ending at or before 17:30 New York (the after-hours '
+              'study\'s rule, `paper_audit.decision_of`, read off the UW 1-minute answers on disk — data/postmarket_1m, which the daily '
+              'job fills); every stock position marked at the next session\'s 09:30 bar open. No exercise or assignment fee (a parameter, '
+              'default 0). a needs the next open (filled once the next session is on disk — the next daily run); b and c also need '
+              'the decision price; without them they are —.')
+    md.append('')
+    md.append('| candidate · structure | period | official trades | with the next open | case 0 | case a | with a decision price too | case 0 | case a | case b | case c |')
+    md.append('|---|---|---|---|---|---|---|---|---|---|---|')
+    for k in keys:
+        if k not in T.CANDIDATES:
+            continue
+        sessions = candidate_sessions(days_info, k, only_days)
+        for s in T.CANDIDATES[k].structures:
+            for code in sorted({P.period_of(k, d) for d in sessions}, key=P.period_sort):
+                xs = [t for t in trades if t['candidate'] == k and t['structure'] == s and t['period'] == code and t['pnl_ah0'] is not None]
+                if not xs:
+                    continue
+                wa = [t for t in xs if t['pnl_ah_a'] is not None]
+                wb = [t for t in xs if t['pnl_ah_b'] is not None]
+                row = {'section': 'afterhours', 'candidate': k, 'structure': s, 'cut': 'period', 'key': code, 'trades': len(xs), 'with_open': len(wa),
+                       'case0_same': _mean([t['pnl_ah0'] for t in wa])[0], 'case_a': _mean([t['pnl_ah_a'] for t in wa])[0],
+                       'with_decision': len(wb), 'case0_b': _mean([t['pnl_ah0'] for t in wb])[0], 'case_a_b': _mean([t['pnl_ah_a'] for t in wb])[0],
+                       'case_b': _mean([t['pnl_ah_b'] for t in wb])[0], 'case_c': _mean([t['pnl_ah_c'] for t in wb])[0]}
+                csv.append(row)
+                md.append(f'| {label_of(k, s)} | {code} | {len(xs)} | {len(wa)} | {_f(row["case0_same"])} | {_f(row["case_a"])} | {len(wb)} | '
+                          f'{_f(row["case0_b"])} | {_f(row["case_a_b"])} | {_f(row["case_b"])} | {_f(row["case_c"])} |')
+    md.append('')
+    return {'md': md, 'csv': csv, 'trades': trades, 'unsettled': unsettled, 'fallback_sessions': fallback}
+
+
+# ---- the cumulative report: append the newest forward sessions, the history untouched ------------------------------------------
+
+CUM_HIST_BEGIN, CUM_HIST_END = '<!-- cumulative:historical:begin -->', '<!-- cumulative:historical:end -->'
+CUM_FWD_BEGIN, CUM_FWD_END = '<!-- cumulative:forward:begin -->', '<!-- cumulative:forward:end -->'
+CUM_STATE = '<!-- cumulative:forward-sessions '
+
+
+def complete_sessions(root: Path, keys: tuple, start: str, end: str) -> tuple[list, dict]:
+    """The forward sessions whole enough to append: replayed with no file missing, every tradable capture settled on the
+    official close (an SPXW proxy for fly_spxw) — a session with a 15:59-bar fallback, a missing file or an unsettled
+    capture is PENDING (with why), never appended. → (complete days, {day: why})"""
+    info = {d: v for d, v in read_days(root).items() if start <= d <= end}
+    df = read_rows(root, keys, start, end)
+    done, pend = [], {}
+    for d, v in sorted(info.items()):
+        if v.get('status') != 'replayed':
+            if v.get('status') not in ('holiday', 'half day', 'weekend'):
+                pend[d] = f'not replayed: {v.get("status")}'
+            continue
+        if v.get('missing'):
+            pend[d] = 'a file missing: ' + '; '.join(f'{m["candidate"]} {m["name"]}' for m in v['missing'])
+            continue
+        if v.get('settle_fallback'):
+            pend[d] = 'no official close yet (settled on the 15:59 bar): ' + ', '.join(v['settle_fallback'])
+            continue
+        ran = {str(x).split(':')[0] for x in v.get('candidates', [])}
+        if not ran >= {k for k in keys if k in T.CANDIDATES and not T.CANDIDATES[k].optional}:
+            pend[d] = f'not every candidate ran: {sorted(ran)}'
+            continue
+        x = df.filter(pl.col('_day') == d) if df is not None else None
+        if x is None or x.height == 0:
+            pend[d] = 'no rows'
+            continue
+        have = {(a, b) for a, b in x.filter(pl.col('row_kind') == 'capture').select('candidate', '_name').unique().iter_rows()}
+        gone = [f'{k} {nm}' for k_nm in v.get('candidates', []) for k, names in [str(k_nm).split(':')] if k in keys
+                for nm in names.split('+') if (k, nm) not in have]
+        if gone:
+            pend[d] = 'the day file says these ran but their rows are not in the root: ' + ', '.join(gone)
+            continue
+        caps = x.filter((pl.col('row_kind') == 'capture') & (pl.col('tradable') == 'true') & pl.col('l1_symbol').is_not_null())
+        st = x.filter((pl.col('row_kind') == 'settle') & pl.col('settle_source').is_in(['official', SPX_SETTLE]))
+        k5 = ['candidate', '_name', 'minute', 'structure']
+        miss = caps.select(k5).join(st.select(k5).unique(), on=k5, how='anti').height
+        if miss:
+            pend[d] = f'{miss} tradable captures without an official settle row'
+            continue
+        done.append(d)
+    return done, pend
+
+
+def _cum_parse(text: str) -> tuple[int, int, list]:
+    for m in (CUM_HIST_BEGIN, CUM_HIST_END, CUM_FWD_BEGIN, CUM_FWD_END):
+        if text.count(m) != 1:
+            raise ValueError(f'the cumulative report must hold {m} exactly once (found {text.count(m)})')
+    a, b = text.index(CUM_FWD_BEGIN) + len(CUM_FWD_BEGIN), text.index(CUM_FWD_END)
+    if not (text.index(CUM_HIST_END) < a):
+        raise ValueError('the forward block must follow the historical block')
+    block = text[a:b]
+    listed: list = []
+    if CUM_STATE in block:
+        j = block.index(CUM_STATE) + len(CUM_STATE)
+        listed = json.loads(block[j:block.index('-->', j)].strip())
+    return a, b, listed
+
+
+def init_cumulative(path: Path, historical: str | None = None, title: str = 'Paper tracker — cumulative report') -> None:
+    """A new cumulative report: the historical block (`historical`: e.g. the official-close replay report of
+    2022-11-11 → 2026-10-09, embedded verbatim) and an empty forward block"""
+    path = Path(path)
+    hist = (historical or '_The historical sections: none embedded. The official-close replay of the research\'s span goes here '
+            '(`--historical-from` on the first append)._\n').rstrip('\n') + '\n'
+    hist = hist.replace('\n# ', '\n## ') if hist.startswith('# ') else hist
+    if hist.startswith('# '):
+        hist = '#' + hist
+    txt = (f'# {title}\n\nTwo parts, never pooled: the HISTORICAL sections (development and selection periods — written once, never changed '
+           'by an append) and the FORWARD sessions (period iii, from 2026-10-12: untouched by any rule, model or choice), which the daily job '
+           '(`scripts/daily_forward.py`) appends session by session. A forward session is appended only whole: every file fetched and '
+           'verified, every capture settled on the official close.\n\n'
+           f'{CUM_HIST_BEGIN}\n{hist}{CUM_HIST_END}\n\n{CUM_FWD_BEGIN}\n_No forward session yet._\n{CUM_FWD_END}\n')
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + '.tmp')
+    tmp.write_text(txt, encoding='utf-8')
+    os.replace(tmp, path)
+
+
+def forward_block(root: Path, keys: tuple, sessions: list, parquet_root: Path | None = None, closes: P.OfficialCloses | None = None,
+                  decision_prices: dict | None = None) -> str:
+    """The forward block: the audit's sections over `sessions` alone (period iii) and a ledger a session"""
+    first, last = sessions[0], sessions[-1]
+    au = audit_sections(root, keys, first, last, parquet_root, closes, decision_prices, only_days=set(sessions))
+    md = [f'# Forward — period iii, {len(sessions)} session{"s" if len(sessions) != 1 else ""}, {first} → {last}', '',
+          f'Regenerated from the replay root `{Path(root).name}` by the append (`{REPLAY_VERSION}`, {dt.datetime.now(R.UTC):%Y-%m-%d %H:%M} UTC); '
+          'a session listed here is never dropped. These sessions are untouched by any rule, model or choice — an execution and data-quality '
+          'record until the thresholds (60 → 120 sessions for condor_em1, 150 for condor_d20\'s D1 re-test, 250 a name for fly5).', '']
+    md += [x.replace('## ', '### ', 1) if x.startswith('## ') else (x.replace('### ', '#### ', 1) if x.startswith('### ') else x) for x in au['md']]
+    md.append('### Sessions')
+    md.append('')
+    md.append('| session | candidate · structure | trades | session P&L held $ | at 15:58 $ | settlement | stock left (trades) | pin ≤ $0.50 (trades) | post-market cross |')
+    md.append('|---|---|---|---|---|---|---|---|---|')
+    for d in sessions:
+        for k in keys:
+            if k not in T.CANDIDATES:
+                continue
+            for s in T.CANDIDATES[k].structures:
+                xs = [t for t in au['trades'] if t['day'] == d and t['candidate'] == k and t['structure'] == s]
+                if not xs:
+                    continue
+                srcs = sorted({f'{t["name"]} {t["settle_px"]:g} ({(t["settle_from"] or t["settle_source"]).replace("replay: official close (", "").rstrip(")")})' for t in xs})
+                ex = [t['pnl_1558_nbbo'] for t in xs if t['pnl_1558_nbbo'] is not None]
+                pmk = [t['pm_cross'] for t in xs if t['pm_cross'] is not None]
+                md.append(f'| {d} | {label_of(k, s)} | {len(xs)} | {_f(float(sum(t["pnl_nbbo"] for t in xs)))} | '
+                          + (_f(float(sum(ex))) + (f' ({len(ex)})' if len(ex) != len(xs) else '') if ex else '—') + f' | {"; ".join(srcs)} | '
+                          f'{sum(1 for t in xs if t["stock_left"])} | {sum(1 for t in xs if t["pin_050"])} | '
+                          + (f'{sum(pmk)} of {len(pmk)}' if pmk else '—') + ' |')
+    md.append('')
+    md.append(f'{CUM_STATE}{json.dumps(sessions)} -->')
+    return '\n' + '\n'.join(md) + '\n'
+
+
+def append_cumulative(root: Path, cumulative: Path, keys: tuple = T.DEFAULT_KEYS, parquet_root: Path | None = None,
+                      closes: P.OfficialCloses | None = None, decision_prices: dict | None = None, through: str | None = None,
+                      historical_from: Path | None = None) -> dict:
+    """APPEND mode: the forward sessions of `root` (2026-10-12 on, through `through`) that are whole and not yet in
+    `cumulative` are added; the forward block is regenerated over every listed session (so a session's after-hours
+    columns fill once the next session is on disk); the historical block's bytes are never touched. A session listed
+    before but no longer whole in the root stops it (nothing written). Nothing new: the file is not written at all.
+    → {'added', 'pending', 'listed', 'written'}"""
+    cumulative = Path(cumulative)
+    if not cumulative.exists():
+        init_cumulative(cumulative, Path(historical_from).read_text(encoding='utf-8') if historical_from else None)
+    text = cumulative.read_text(encoding='utf-8')
+    a, b, listed = _cum_parse(text)
+    comp, pend = complete_sessions(root, keys, P.FORWARD_START, through or '9999-12-31')
+    gone = sorted(set(listed) - set(comp))
+    if gone:
+        raise ValueError(f'sessions already in {cumulative.name} are not whole in the replay root {root}: {gone} — nothing written')
+    new = sorted(set(comp) - set(listed))
+    res = {'added': new, 'pending': pend, 'listed': sorted(listed), 'written': False}
+    if not new:
+        return res
+    sessions = sorted(set(listed) | set(new))
+    block = forward_block(root, keys, sessions, parquet_root, closes, decision_prices)
+    out = text[:a] + block + text[b:]
+    assert out[:a] == text[:a], 'the historical part changed'                  # never: the prefix is the old text's
+    tmp = cumulative.with_name(cumulative.name + '.tmp')
+    tmp.write_text(out, encoding='utf-8')
+    os.replace(tmp, cumulative)
+    res['written'] = True
+    return res
 
 
 # ---- the parity check against the research's own trade tables ----------------------------------------------------------------------
@@ -2119,7 +2737,43 @@ def parquet_root_of(args) -> Path:
     return Path(r)
 
 
+def replay_root_of(args, settle_on: str) -> Path:
+    r = getattr(args, 'backtest_data', None) or os.environ.get('PAPER_BACKTEST_DATA')
+    return Path(r) if r else (DEFAULT_OFFICIAL_ROOT if settle_on == 'official' else DEFAULT_REPLAY_ROOT)
+
+
+DEFAULT_CUMULATIVE = R.REPO / 'research_notes' / 'Compass phase 3' / 'forward_cumulative.md'
+
+
+def uw_1m_dirs() -> tuple:
+    """more folders of UW /ohlc/1m answers to read decision prices from (PAPER_UW_1M_DIRS, os.pathsep-separated —
+    e.g. the backtest fetch cache the after-hours study read); data/postmarket_1m and data_recorder/ohlc_1m always"""
+    return tuple(Path(x) for x in (os.environ.get('PAPER_UW_1M_DIRS') or '').split(os.pathsep) if x)
+
+
+def read_decision_prices(path: str | None) -> dict | None:
+    """decision prices from a CSV (name, day, price) → {(name, day): price}; no file → None: the report reads them off the
+    UW 1-minute answers on disk (paper_audit.decision_prices_on_disk — the after-hours study's rule)"""
+    if not path:
+        return None
+    d = pl.read_csv(path, infer_schema_length=None)
+    return {(str(n), str(dd)[:10]): float(px) for n, dd, px in d.select('name', 'day', 'price').iter_rows() if px is not None}
+
+
 def run_cli(args) -> int:
+    settle_on = getattr(args, 'settle_on', None) or DEFAULT_SETTLE
+    if getattr(args, 'append_report', False):
+        pr = getattr(args, 'parquet_root', None) or os.environ.get('PAPER_PARQUET_ROOT')
+        keys = tuple(k.strip() for k in (getattr(args, 'candidates', None) or ','.join(T.DEFAULT_KEYS)).split(',') if k.strip())
+        try:
+            res = append_cumulative(replay_root_of(args, 'official'), Path(getattr(args, 'cumulative', None) or DEFAULT_CUMULATIVE), keys,
+                                    parquet_root=Path(pr) if pr else None, decision_prices=read_decision_prices(getattr(args, 'decision_prices', None)),
+                                    through=getattr(args, 'through', None), historical_from=getattr(args, 'historical_from', None))
+        except ValueError as e:
+            print(str(e), file=sys.stderr)
+            return 1
+        print(json.dumps(res))
+        return 0
     root = parquet_root_of(args)
     if getattr(args, 'merge_parquet', None):
         res = merge_parquet(Path(args.merge_parquet), root, force=args.force)
@@ -2164,14 +2818,15 @@ def run_cli(args) -> int:
     if bad:
         print(f'unknown candidate(s) {bad}: {", ".join(T.CANDIDATES)}', file=sys.stderr)
         return 2
-    rroot = Path(args.backtest_data)
+    rroot = replay_root_of(args, settle_on)
     try:
-        res = replay(args.start, args.end, keys, root, rroot, live_root=Path(args.data))
+        res = replay(args.start, args.end, keys, root, rroot, live_root=Path(args.data), settle_on=settle_on)
     except ValueError as e:
         print(str(e), file=sys.stderr)
         return 2
     out = Path(args.out) if args.out else rroot / 'reports'
-    build_report(rroot, keys, args.start, args.end, out, parquet_root=root, wall_seconds=res['seconds'])
+    build_report(rroot, keys, args.start, args.end, out, parquet_root=root, wall_seconds=res['seconds'], settle_on=settle_on,
+                 decision_prices=read_decision_prices(getattr(args, 'decision_prices', None)))
     print(json.dumps(res))
     return 0
 
@@ -2185,13 +2840,15 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument('--candidates', default=','.join(T.DEFAULT_KEYS))
     p.add_argument('--out', default=None)
     p.add_argument('--parquet-root', default=os.environ.get('PAPER_PARQUET_ROOT'), help='parity: re-figure the condors at hyp_b\'s settlement')
+    p.add_argument('--settle-on', choices=SETTLE_MODES, default=None, help='report: the convention (default: the root\'s own)')
     a = p.parse_args(argv)
     root = Path(a.backtest_data)
     out = Path(a.out) if a.out else root / 'reports'
     if a.mode == 'parity':
         parity(root, a.start, a.end, out, Path(a.parquet_root) if a.parquet_root else None)
     else:
-        build_report(root, tuple(a.candidates.split(',')), a.start, a.end, out)
+        build_report(root, tuple(a.candidates.split(',')), a.start, a.end, out, parquet_root=Path(a.parquet_root) if a.parquet_root else None,
+                     settle_on=a.settle_on)
     return 0
 
 

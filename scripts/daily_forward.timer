@@ -1,0 +1,13 @@
+# Fires daily_forward.service at 17:45 New York every weekday (after the official close is published and after the
+# 17:30 decision price); the job skips holidays and half days itself and catches up a missed session on the next run.
+#   sudo systemctl daemon-reload && sudo systemctl enable --now daily_forward.timer
+[Unit]
+Description=The Compass daily forward job at 17:45 New York
+
+[Timer]
+OnCalendar=Mon..Fri 17:45 America/New_York
+Persistent=true
+Unit=daily_forward.service
+
+[Install]
+WantedBy=timers.target
