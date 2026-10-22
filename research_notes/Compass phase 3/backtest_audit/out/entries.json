@@ -1,0 +1,6293 @@
+{
+ "n": 100,
+ "seed": 20261022,
+ "by_candidate": {
+  "condor_em1": 33,
+  "condor_d20": 33,
+  "fly5": 34
+ },
+ "diffs": {
+  "spot": 0,
+  "strikes": 0,
+  "expiry": 0,
+  "leg_quotes": 0,
+  "price_nbbo": 0,
+  "price_mid": 0,
+  "max_risk": 0,
+  "any": 0
+ },
+ "details": [
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2025-06-11",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     606.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     608.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     602.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     600.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     606.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     608.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     602.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     600.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "604.35",
+   "spot_raw": 604.35,
+   "price_logged": "0.24",
+   "price_raw": 0.24,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2024-12-17",
+   "minute": "12:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     606.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     608.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     603.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     601.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     606.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     608.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     603.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     601.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "604.54",
+   "spot_raw": 604.54,
+   "price_logged": "0.15",
+   "price_raw": 0.15,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2024-02-28",
+   "minute": "12:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     508.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     510.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     504.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     502.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     508.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     510.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     504.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     502.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "506.03",
+   "spot_raw": 506.03000000000003,
+   "price_logged": "0.15",
+   "price_raw": 0.15,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-03-14",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     394.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     396.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     389.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     387.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     394.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     396.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     389.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     387.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "391.43",
+   "spot_raw": 391.43,
+   "price_logged": "0.4",
+   "price_raw": 0.4,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2024-08-30",
+   "minute": "12:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     562.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     564.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     556.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     554.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     562.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     564.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     556.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     554.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "559.145",
+   "spot_raw": 559.145,
+   "price_logged": "0.29",
+   "price_raw": 0.29,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2024-08-02",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     535.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     537.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     527.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     525.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     535.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     537.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     527.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     525.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "530.58",
+   "spot_raw": 530.58,
+   "price_logged": "0.45",
+   "price_raw": 0.45,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2024-08-13",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     544.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     546.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     538.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     536.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     544.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     546.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     538.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     536.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "541.03",
+   "spot_raw": 541.03,
+   "price_logged": "0.22",
+   "price_raw": 0.22,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2022-11-17",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     397.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     399.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     392.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     390.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     397.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     399.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     392.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     390.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "394.26",
+   "spot_raw": 394.26,
+   "price_logged": "0.33",
+   "price_raw": 0.33,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-10-26",
+   "minute": "11:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     418.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     420.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     411.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     409.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     418.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     420.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     411.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     409.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "414.38",
+   "spot_raw": 414.38,
+   "price_logged": "0.33",
+   "price_raw": 0.33,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-04-10",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     410.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     412.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     407.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     405.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     410.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     412.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     407.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     405.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "408.68",
+   "spot_raw": 408.68,
+   "price_logged": "0.2",
+   "price_raw": 0.2,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2024-05-08",
+   "minute": "12:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     519.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     521.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     515.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     513.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     519.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     521.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     515.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     513.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "516.81",
+   "spot_raw": 516.8100000000001,
+   "price_logged": "0.21",
+   "price_raw": 0.21,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2024-04-24",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     508.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     510.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     503.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     501.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     508.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     510.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     503.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     501.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "505.21",
+   "spot_raw": 505.21000000000004,
+   "price_logged": "0.32",
+   "price_raw": 0.32,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2025-02-25",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     596.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     598.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     591.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     589.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     596.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     598.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     591.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     589.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "593.7",
+   "spot_raw": 593.7,
+   "price_logged": "0.41",
+   "price_raw": 0.41,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-08-21",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     439.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     441.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     435.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     433.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     439.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     441.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     435.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     433.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "437.31",
+   "spot_raw": 437.31,
+   "price_logged": "0.24",
+   "price_raw": 0.24,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-12-27",
+   "minute": "12:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     477.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     479.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     474.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     472.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     477.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     479.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     474.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     472.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "475.775",
+   "spot_raw": 475.77500000000003,
+   "price_logged": "0.19",
+   "price_raw": 0.19,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2026-07-24",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     744.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     746.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     739.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     737.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     744.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     746.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     739.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     737.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "741.45",
+   "spot_raw": 741.45,
+   "price_logged": "0.3",
+   "price_raw": 0.3,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-09-19",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     442.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     444.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     439.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     437.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     442.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     444.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     439.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     437.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "440.61",
+   "spot_raw": 440.61,
+   "price_logged": "0.15",
+   "price_raw": 0.15,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2024-06-27",
+   "minute": "12:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     548.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     550.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     544.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     542.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     548.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     550.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     544.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     542.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "545.86",
+   "spot_raw": 545.86,
+   "price_logged": "0.22",
+   "price_raw": 0.22,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2026-03-09",
+   "minute": "11:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     674.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     676.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     666.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     664.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     674.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     676.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     666.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     664.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "669.77",
+   "spot_raw": 669.77,
+   "price_logged": "0.47",
+   "price_raw": 0.47,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2022-11-23",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     403.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     405.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     397.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     395.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     403.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     405.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     397.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     395.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "399.79",
+   "spot_raw": 399.79,
+   "price_logged": "0.34",
+   "price_raw": 0.34,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-09-15",
+   "minute": "12:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     447.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     449.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     443.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     441.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     447.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     449.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     443.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     441.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "444.9391",
+   "spot_raw": 444.9391,
+   "price_logged": "0.15",
+   "price_raw": 0.15,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2025-07-24",
+   "minute": "12:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     637.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     639.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     634.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     632.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     637.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     639.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     634.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     632.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "635.54",
+   "spot_raw": 635.54,
+   "price_logged": "0.29",
+   "price_raw": 0.29,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-11-21",
+   "minute": "11:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     455.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     457.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     450.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     448.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     455.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     457.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     450.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     448.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "452.5",
+   "spot_raw": 452.5,
+   "price_logged": "0.18",
+   "price_raw": 0.18,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2025-05-30",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     589.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     591.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     583.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     581.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     589.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     591.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     583.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     581.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "585.895",
+   "spot_raw": 585.895,
+   "price_logged": "0.4",
+   "price_raw": 0.4,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2026-05-05",
+   "minute": "12:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     725.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     727.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     721.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     719.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     725.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     727.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     721.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     719.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "723.04",
+   "spot_raw": 723.0400000000001,
+   "price_logged": "0.28",
+   "price_raw": 0.28,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-04-04",
+   "minute": "11:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     411.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     413.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     407.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     405.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     411.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     413.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     407.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     405.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "408.8719",
+   "spot_raw": 408.87190000000004,
+   "price_logged": "0.36",
+   "price_raw": 0.36,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-04-17",
+   "minute": "11:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     414.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     416.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     410.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     408.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     414.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     416.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     410.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     408.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "412.15",
+   "spot_raw": 412.15000000000003,
+   "price_logged": "0.22",
+   "price_raw": 0.22,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-12-15",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     471.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     473.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     468.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     466.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     471.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     473.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     468.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     466.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "469.355",
+   "spot_raw": 469.355,
+   "price_logged": "0.21",
+   "price_raw": 0.21,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-12-13",
+   "minute": "11:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     468.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     470.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     462.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     460.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     468.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     470.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     462.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     460.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "464.885",
+   "spot_raw": 464.88500000000005,
+   "price_logged": "0.38",
+   "price_raw": 0.38,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2026-03-24",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     658.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     660.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     652.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     650.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     658.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     660.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     652.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     650.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "655.15",
+   "spot_raw": 655.15,
+   "price_logged": "0.38",
+   "price_raw": 0.38,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-04-26",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     409.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     411.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     405.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     403.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     409.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     411.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     405.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     403.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "406.68",
+   "spot_raw": 406.68,
+   "price_logged": "0.21",
+   "price_raw": 0.21,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2023-08-24",
+   "minute": "12:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     441.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     443.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     437.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     435.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     441.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     443.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     437.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     435.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "439.2",
+   "spot_raw": 439.2,
+   "price_logged": "0.33",
+   "price_raw": 0.33,
+   "differences": []
+  },
+  {
+   "candidate": "condor_em1",
+   "name": "SPY",
+   "day": "2024-07-19",
+   "minute": "12:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     554.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     556.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     548.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     546.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     554.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     556.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     548.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     546.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "551.0644",
+   "spot_raw": 551.0644,
+   "price_logged": "0.34",
+   "price_raw": 0.34,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2024-08-27",
+   "minute": "15:30",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     557.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     562.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     567.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     557.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     562.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     567.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "561.52",
+   "spot_raw": 561.52,
+   "price_logged": "4.29",
+   "price_raw": 4.29,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2024-08-29",
+   "minute": "15:00",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     558.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     558.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     553.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     563.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     558.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     558.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     553.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     563.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "558.493",
+   "spot_raw": 558.493,
+   "price_logged": "1.67",
+   "price_raw": 1.67,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2026-07-29",
+   "minute": "15:00",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     679.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     679.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     674.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     684.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     679.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     679.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     674.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     684.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "679.05",
+   "spot_raw": 679.0500000000001,
+   "price_logged": "2.88",
+   "price_raw": 2.88,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2023-11-30",
+   "minute": "15:00",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     387.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     387.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     382.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     392.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     387.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     387.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     382.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     392.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "387.495",
+   "spot_raw": 387.495,
+   "price_logged": "0.8",
+   "price_raw": 0.8,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2024-10-30",
+   "minute": "15:30",
+   "structure": "put",
+   "logged": [
+    [
+     "P",
+     492.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     497.0,
+     "short",
+     2
+    ],
+    [
+     "P",
+     502.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "P",
+     492.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     497.0,
+     "short",
+     2
+    ],
+    [
+     "P",
+     502.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "497.24",
+   "spot_raw": 497.24,
+   "price_logged": "2.88",
+   "price_raw": 2.88,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2023-10-17",
+   "minute": "15:00",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     435.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     435.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     430.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     440.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     435.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     435.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     430.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     440.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "434.5771",
+   "spot_raw": 434.57710000000003,
+   "price_logged": "1.16",
+   "price_raw": 1.16,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2025-10-14",
+   "minute": "15:00",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     665.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     665.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     660.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     670.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     665.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     665.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     660.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     670.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "664.9",
+   "spot_raw": 664.9,
+   "price_logged": "1.11",
+   "price_raw": 1.11,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2023-07-28",
+   "minute": "15:30",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     457.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     457.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     452.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     462.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     457.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     457.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     452.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     462.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "456.666",
+   "spot_raw": 456.666,
+   "price_logged": "0.65",
+   "price_raw": 0.65,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2023-11-03",
+   "minute": "15:30",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     368.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     368.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     363.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     373.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     368.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     368.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     363.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     373.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "368.25",
+   "spot_raw": 368.25,
+   "price_logged": "0.55",
+   "price_raw": 0.55,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2023-09-06",
+   "minute": "15:30",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     441.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     446.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     451.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     441.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     446.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     451.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "445.825",
+   "spot_raw": 445.825,
+   "price_logged": "4.34",
+   "price_raw": 4.34,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2024-01-08",
+   "minute": "15:00",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     474.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     474.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     469.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     479.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     474.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     474.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     469.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     479.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "473.7599",
+   "spot_raw": 473.7599,
+   "price_logged": "0.9",
+   "price_raw": 0.9,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2023-05-16",
+   "minute": "15:30",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     323.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     328.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     333.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     323.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     328.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     333.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "328.49",
+   "spot_raw": 328.49,
+   "price_logged": "4.34",
+   "price_raw": 4.34,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2024-04-05",
+   "minute": "15:00",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     435.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     440.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     445.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     435.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     440.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     445.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "440.1",
+   "spot_raw": 440.1,
+   "price_logged": "3.69",
+   "price_raw": 3.69,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2023-03-28",
+   "minute": "15:30",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     390.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     395.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     400.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     390.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     395.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     400.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "394.6579",
+   "spot_raw": 394.65790000000004,
+   "price_logged": "4.23",
+   "price_raw": 4.23,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2024-10-24",
+   "minute": "15:00",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     579.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     579.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     574.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     584.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     579.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     579.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     574.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     584.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "578.82",
+   "spot_raw": 578.82,
+   "price_logged": "0.86",
+   "price_raw": 0.86,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2025-03-07",
+   "minute": "15:00",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     486.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     491.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     496.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     486.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     491.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     496.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "491.02",
+   "spot_raw": 491.02,
+   "price_logged": "2.69",
+   "price_raw": 2.69,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2023-07-06",
+   "minute": "15:30",
+   "structure": "put",
+   "logged": [
+    [
+     "P",
+     363.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     368.0,
+     "short",
+     2
+    ],
+    [
+     "P",
+     373.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "P",
+     363.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     368.0,
+     "short",
+     2
+    ],
+    [
+     "P",
+     373.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "367.52",
+   "spot_raw": 367.52,
+   "price_logged": "4.38",
+   "price_raw": 4.38,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2023-08-31",
+   "minute": "15:00",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     373.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     378.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     383.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     373.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     378.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     383.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "378.42",
+   "spot_raw": 378.42,
+   "price_logged": "4.01",
+   "price_raw": 4.01,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2023-01-26",
+   "minute": "15:30",
+   "structure": "put",
+   "logged": [
+    [
+     "P",
+     399.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     404.0,
+     "short",
+     2
+    ],
+    [
+     "P",
+     409.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "P",
+     399.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     404.0,
+     "short",
+     2
+    ],
+    [
+     "P",
+     409.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "403.86",
+   "spot_raw": 403.86,
+   "price_logged": "4.25",
+   "price_raw": 4.25,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2023-12-04",
+   "minute": "15:30",
+   "structure": "put",
+   "logged": [
+    [
+     "P",
+     380.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     385.0,
+     "short",
+     2
+    ],
+    [
+     "P",
+     390.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "P",
+     380.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     385.0,
+     "short",
+     2
+    ],
+    [
+     "P",
+     390.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "385.41",
+   "spot_raw": 385.41,
+   "price_logged": "4.4",
+   "price_raw": 4.4,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2026-03-04",
+   "minute": "15:00",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     607.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     612.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     617.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     607.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     612.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     617.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "612.23",
+   "spot_raw": 612.23,
+   "price_logged": "3.63",
+   "price_raw": 3.63,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2024-07-23",
+   "minute": "15:00",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     555.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     555.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     550.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     560.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     555.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     555.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     550.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     560.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "555.0901",
+   "spot_raw": 555.0901,
+   "price_logged": "1.7",
+   "price_raw": 1.7,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2024-12-30",
+   "minute": "15:00",
+   "structure": "put",
+   "logged": [
+    [
+     "P",
+     513.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     518.0,
+     "short",
+     2
+    ],
+    [
+     "P",
+     523.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "P",
+     513.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     518.0,
+     "short",
+     2
+    ],
+    [
+     "P",
+     523.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "518.41",
+   "spot_raw": 518.41,
+   "price_logged": "3.92",
+   "price_raw": 3.92,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2022-12-07",
+   "minute": "15:00",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     280.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     280.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     275.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     285.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     280.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     280.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     275.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     285.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "280.24",
+   "spot_raw": 280.24,
+   "price_logged": "1",
+   "price_raw": 1.0,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2023-12-22",
+   "minute": "15:00",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     404.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     409.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     414.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     404.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     409.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     414.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "408.645",
+   "spot_raw": 408.64500000000004,
+   "price_logged": "4.13",
+   "price_raw": 4.13,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2023-09-13",
+   "minute": "15:00",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     374.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     374.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     369.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     379.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     374.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     374.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     369.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     379.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "374.245",
+   "spot_raw": 374.245,
+   "price_logged": "0.72",
+   "price_raw": 0.72,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2023-04-12",
+   "minute": "15:30",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     408.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     408.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     403.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     413.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     408.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     408.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     403.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     413.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "407.58",
+   "spot_raw": 407.58,
+   "price_logged": "0.99",
+   "price_raw": 0.99,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2025-04-23",
+   "minute": "15:30",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     454.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     454.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     449.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     459.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     454.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     454.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     449.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     459.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "454.01",
+   "spot_raw": 454.01000000000005,
+   "price_logged": "1.79",
+   "price_raw": 1.79,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2025-04-11",
+   "minute": "15:00",
+   "structure": "put",
+   "logged": [
+    [
+     "P",
+     527.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     532.0,
+     "short",
+     2
+    ],
+    [
+     "P",
+     537.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "P",
+     527.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     532.0,
+     "short",
+     2
+    ],
+    [
+     "P",
+     537.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "532.16",
+   "spot_raw": 532.16,
+   "price_logged": "2.17",
+   "price_raw": 2.17,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2024-05-08",
+   "minute": "15:30",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     512.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     517.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     522.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     512.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     517.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     522.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "517.31",
+   "spot_raw": 517.3100000000001,
+   "price_logged": "4.5",
+   "price_raw": 4.5,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2024-04-11",
+   "minute": "15:30",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     514.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     519.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     524.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     514.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     519.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     524.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "518.91",
+   "spot_raw": 518.91,
+   "price_logged": "4.2",
+   "price_raw": 4.2,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2025-11-24",
+   "minute": "15:00",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     663.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     668.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     673.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     663.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     668.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     673.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "668.3",
+   "spot_raw": 668.3000000000001,
+   "price_logged": "3.73",
+   "price_raw": 3.73,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "QQQ",
+   "day": "2023-09-11",
+   "minute": "15:00",
+   "structure": "iron",
+   "logged": [
+    [
+     "C",
+     377.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     377.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     372.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     382.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     377.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     377.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     372.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     382.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "376.97",
+   "spot_raw": 376.97,
+   "price_logged": "0.74",
+   "price_raw": 0.74,
+   "differences": []
+  },
+  {
+   "candidate": "fly5",
+   "name": "SPY",
+   "day": "2024-11-13",
+   "minute": "15:00",
+   "structure": "call",
+   "logged": [
+    [
+     "C",
+     592.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     597.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     602.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     592.0,
+     "long",
+     1
+    ],
+    [
+     "C",
+     597.0,
+     "short",
+     2
+    ],
+    [
+     "C",
+     602.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "597.21",
+   "spot_raw": 597.21,
+   "price_logged": "4.23",
+   "price_raw": 4.23,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2023-04-11",
+   "minute": "14:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     412.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     414.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     410.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     408.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     412.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     414.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     410.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     408.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "410.81",
+   "spot_raw": 410.81,
+   "price_logged": "0.19",
+   "price_raw": 0.19,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2025-07-02",
+   "minute": "15:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     621.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     623.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     619.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     617.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     621.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     623.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     619.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     617.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "619.855",
+   "spot_raw": 619.855,
+   "price_logged": "0.18",
+   "price_raw": 0.18,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2023-02-23",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     399.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     401.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     396.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     394.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     399.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     401.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     396.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     394.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "397.66",
+   "spot_raw": 397.66,
+   "price_logged": "0.49",
+   "price_raw": 0.49,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2025-08-06",
+   "minute": "14:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     633.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     635.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     631.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     629.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     633.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     635.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     631.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     629.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "632.23",
+   "spot_raw": 632.23,
+   "price_logged": "0.32",
+   "price_raw": 0.32,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2022-11-28",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     399.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     401.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     396.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     394.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     399.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     401.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     396.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     394.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "397.65",
+   "spot_raw": 397.65000000000003,
+   "price_logged": "0.41",
+   "price_raw": 0.41,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2026-04-29",
+   "minute": "15:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     714.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     716.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     707.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     705.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     714.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     716.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     707.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     705.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "710.57",
+   "spot_raw": 710.57,
+   "price_logged": "0.56",
+   "price_raw": 0.56,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2023-02-09",
+   "minute": "15:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     410.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     412.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     407.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     405.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     410.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     412.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     407.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     405.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "408.44",
+   "spot_raw": 408.44,
+   "price_logged": "0.25",
+   "price_raw": 0.25,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2024-08-08",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     531.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     533.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     523.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     521.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     531.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     533.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     523.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     521.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "527.85",
+   "spot_raw": 527.85,
+   "price_logged": "0.55",
+   "price_raw": 0.55,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2023-01-24",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     402.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     404.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     399.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     397.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     402.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     404.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     399.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     397.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "400.49",
+   "spot_raw": 400.49,
+   "price_logged": "0.48",
+   "price_raw": 0.48,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2024-01-19",
+   "minute": "14:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     483.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     485.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     480.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     478.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     483.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     485.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     480.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     478.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "481.97",
+   "spot_raw": 481.97,
+   "price_logged": "0.28",
+   "price_raw": 0.28,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2025-02-04",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     603.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     605.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     598.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     596.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     603.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     605.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     598.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     596.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "600.99",
+   "spot_raw": 600.99,
+   "price_logged": "0.45",
+   "price_raw": 0.45,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2026-07-28",
+   "minute": "14:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     743.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     745.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     739.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     737.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     743.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     745.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     739.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     737.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "741.19",
+   "spot_raw": 741.19,
+   "price_logged": "0.29",
+   "price_raw": 0.29,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2026-06-23",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     740.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     742.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     735.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     733.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     740.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     742.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     735.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     733.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "737.53",
+   "spot_raw": 737.53,
+   "price_logged": "0.33",
+   "price_raw": 0.33,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2026-07-29",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     742.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     744.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     730.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     728.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     742.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     744.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     730.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     728.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "735.74",
+   "spot_raw": 735.74,
+   "price_logged": "0.65",
+   "price_raw": 0.65,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2025-07-15",
+   "minute": "15:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     624.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     626.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     622.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     620.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     624.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     626.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     622.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     620.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "623.28",
+   "spot_raw": 623.28,
+   "price_logged": "0.33",
+   "price_raw": 0.33,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2023-02-27",
+   "minute": "14:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     401.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     403.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     397.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     395.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     401.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     403.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     397.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     395.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "399.02",
+   "spot_raw": 399.02,
+   "price_logged": "0.18",
+   "price_raw": 0.18,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2025-02-12",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     605.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     607.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     602.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     600.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     605.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     607.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     602.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     600.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "603.57",
+   "spot_raw": 603.57,
+   "price_logged": "0.32",
+   "price_raw": 0.32,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2026-04-01",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     660.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     662.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     655.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     653.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     660.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     662.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     655.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     653.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "657.81",
+   "spot_raw": 657.8100000000001,
+   "price_logged": "0.27",
+   "price_raw": 0.27,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2022-12-19",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     383.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     385.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     379.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     377.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     383.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     385.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     379.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     377.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "381.0765",
+   "spot_raw": 381.0765,
+   "price_logged": "0.24",
+   "price_raw": 0.24,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2023-09-25",
+   "minute": "14:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     432.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     434.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     429.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     427.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     432.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     434.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     429.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     427.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "430.995",
+   "spot_raw": 430.995,
+   "price_logged": "0.31",
+   "price_raw": 0.31,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2023-01-30",
+   "minute": "14:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     403.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     405.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     400.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     398.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     403.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     405.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     400.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     398.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "401.47",
+   "spot_raw": 401.47,
+   "price_logged": "0.32",
+   "price_raw": 0.32,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2025-01-02",
+   "minute": "14:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     585.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     587.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     579.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     577.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     585.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     587.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     579.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     577.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "581.9",
+   "spot_raw": 581.9,
+   "price_logged": "0.4",
+   "price_raw": 0.4,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2023-03-17",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     393.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     395.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     388.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     386.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     393.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     395.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     388.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     386.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "390.93",
+   "spot_raw": 390.93,
+   "price_logged": "0.41",
+   "price_raw": 0.41,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2023-03-06",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     407.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     409.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     404.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     402.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     407.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     409.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     404.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     402.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "405.85",
+   "spot_raw": 405.85,
+   "price_logged": "0.34",
+   "price_raw": 0.34,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2026-06-29",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     742.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     744.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     738.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     736.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     742.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     744.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     738.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     736.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "740.14",
+   "spot_raw": 740.14,
+   "price_logged": "0.36",
+   "price_raw": 0.36,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2022-12-16",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     383.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     385.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     379.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     377.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     383.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     385.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     379.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     377.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "381.16",
+   "spot_raw": 381.16,
+   "price_logged": "0.43",
+   "price_raw": 0.43,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2025-08-26",
+   "minute": "14:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     644.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     646.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     642.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     640.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     644.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     646.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     642.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     640.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "642.86",
+   "spot_raw": 642.86,
+   "price_logged": "0.2",
+   "price_raw": 0.2,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2026-07-22",
+   "minute": "13:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     751.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     753.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     747.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     745.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     751.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     753.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     747.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     745.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "749.0445",
+   "spot_raw": 749.0445000000001,
+   "price_logged": "0.45",
+   "price_raw": 0.45,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2024-11-21",
+   "minute": "14:30",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     596.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     598.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     593.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     591.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     596.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     598.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     593.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     591.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "594.42",
+   "spot_raw": 594.42,
+   "price_logged": "0.25",
+   "price_raw": 0.25,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2025-12-26",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     691.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     693.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     689.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     687.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     691.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     693.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     689.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     687.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "689.79",
+   "spot_raw": 689.79,
+   "price_logged": "0.18",
+   "price_raw": 0.18,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2023-01-03",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     381.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     383.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     376.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     374.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     381.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     383.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     376.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     374.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "378.61",
+   "spot_raw": 378.61,
+   "price_logged": "0.32",
+   "price_raw": 0.32,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2026-03-11",
+   "minute": "15:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     677.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     679.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     673.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     671.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     677.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     679.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     673.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     671.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "675.25",
+   "spot_raw": 675.25,
+   "price_logged": "0.41",
+   "price_raw": 0.41,
+   "differences": []
+  },
+  {
+   "candidate": "condor_d20",
+   "name": "SPY",
+   "day": "2025-04-30",
+   "minute": "13:00",
+   "structure": "condor",
+   "logged": [
+    [
+     "C",
+     553.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     555.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     546.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     544.0,
+     "long",
+     1
+    ]
+   ],
+   "derived": [
+    [
+     "C",
+     553.0,
+     "short",
+     1
+    ],
+    [
+     "C",
+     555.0,
+     "long",
+     1
+    ],
+    [
+     "P",
+     546.0,
+     "short",
+     1
+    ],
+    [
+     "P",
+     544.0,
+     "long",
+     1
+    ]
+   ],
+   "why": "",
+   "spot_logged": "549.5557",
+   "spot_raw": 549.5557,
+   "price_logged": "0.54",
+   "price_raw": 0.54,
+   "differences": []
+  }
+ ]
+}
