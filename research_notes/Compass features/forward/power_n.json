@@ -1,0 +1,454 @@
+{
+ "source": "features_work/hold/trades_with_inputs.parquet (Phase A corrected holdout table)",
+ "forward_names": [
+  "SPY",
+  "QQQ",
+  "SPXW"
+ ],
+ "bucket": "0DTE",
+ "z": 2.8016212335729143,
+ "floor": 60,
+ "block": 20,
+ "boot_seed": 20261022,
+ "boot_n": 2000,
+ "outer_seed": 20261023,
+ "outer_draws": 2000,
+ "target_power": 0.8,
+ "first_all_three": "2023-02-01",
+ "models": {
+  "V1": {
+   "span": [
+    "2022-09-01",
+    "2026-10-21"
+   ],
+   "A_forward_composition": {
+    "sessions": 302,
+    "sessions_traded": 302,
+    "trades_with": 90860,
+    "trades_without": 92136,
+    "mean_with": -0.12866474418582374,
+    "mean_without": -0.12925918659658223,
+    "delta": 0.0005944424107584834,
+    "se_boot20": 0.0018383413755376536,
+    "sigma_lr": 0.03284252640917595,
+    "sigma_lr_boot": 0.03194696702239712,
+    "sigma_lr_blockmeans": 0.03284252640917595,
+    "N0_formula": 23960,
+    "N0": 23960,
+    "power_at_N0": 0.369,
+    "N": 23960,
+    "power_at_N": 0.369,
+    "tried": [
+     [
+      23960,
+      0.369
+     ]
+    ]
+   },
+   "B_all_restricted": {
+    "sessions": 1029,
+    "sessions_traded": 1021,
+    "trades_with": 159799,
+    "trades_without": 162306,
+    "mean_with": -0.13562579775310032,
+    "mean_without": -0.13690874652315355,
+    "delta": 0.0012829487700532216,
+    "se_boot20": 0.0012661950071421524,
+    "sigma_lr": 0.04061704125362845,
+    "sigma_lr_boot": 0.04061704125362845,
+    "sigma_lr_blockmeans": 0.0394365447917659,
+    "N0_formula": 7868,
+    "N0": 7868,
+    "power_at_N0": 0.765,
+    "N": 8262,
+    "power_at_N": 0.8015,
+    "tried": [
+     [
+      7868,
+      0.765
+     ],
+     [
+      8262,
+      0.8015
+     ]
+    ]
+   },
+   "N": 23960
+  },
+  "X3": {
+   "span": [
+    "2022-09-01",
+    "2026-10-21"
+   ],
+   "A_forward_composition": {
+    "sessions": 302,
+    "sessions_traded": 302,
+    "trades_with": 70163,
+    "trades_without": 70163,
+    "mean_with": -0.0037672152424289107,
+    "mean_without": -0.10135344614401354,
+    "delta": 0.09758623090158462,
+    "se_boot20": 0.03530710264795949,
+    "sigma_lr": 0.636134215826701,
+    "sigma_lr_boot": 0.6135720269152201,
+    "sigma_lr_blockmeans": 0.636134215826701,
+    "N0_formula": 334,
+    "N0": 334,
+    "power_at_N0": 0.773,
+    "N": 369,
+    "power_at_N": 0.81,
+    "tried": [
+     [
+      334,
+      0.773
+     ],
+     [
+      351,
+      0.7865
+     ],
+     [
+      369,
+      0.81
+     ]
+    ]
+   },
+   "B_all_restricted": {
+    "sessions": 1029,
+    "sessions_traded": 1021,
+    "trades_with": 123938,
+    "trades_without": 123938,
+    "mean_with": -0.045856446825378996,
+    "mean_without": -0.12323989540340709,
+    "delta": 0.07738344857802809,
+    "se_boot20": 0.023311895830495016,
+    "sigma_lr": 0.747799690653182,
+    "sigma_lr_boot": 0.747799690653182,
+    "sigma_lr_blockmeans": 0.6988793135967013,
+    "N0_formula": 733,
+    "N0": 733,
+    "power_at_N0": 0.73,
+    "N": 893,
+    "power_at_N": 0.822,
+    "tried": [
+     [
+      733,
+      0.73
+     ],
+     [
+      770,
+      0.7495
+     ],
+     [
+      809,
+      0.7675
+     ],
+     [
+      850,
+      0.7945
+     ],
+     [
+      893,
+      0.822
+     ]
+    ]
+   },
+   "N": 893
+  },
+  "VN1": {
+   "span": [
+    "2023-02-01",
+    "2026-10-21"
+   ],
+   "A_forward_composition": {
+    "sessions": 302,
+    "sessions_traded": 302,
+    "trades_with": 25845,
+    "trades_without": 51690,
+    "mean_with": -0.11485160655593858,
+    "mean_without": -0.1288258768582773,
+    "delta": 0.013974270302338707,
+    "se_boot20": 0.006843988181059619,
+    "sigma_lr": 0.12077431248685581,
+    "sigma_lr_boot": 0.1189358340248644,
+    "sigma_lr_blockmeans": 0.12077431248685581,
+    "N0_formula": 587,
+    "N0": 587,
+    "power_at_N0": 0.9575,
+    "N": 587,
+    "power_at_N": 0.9575,
+    "tried": [
+     [
+      587,
+      0.9575
+     ]
+    ]
+   },
+   "B_all_restricted": {
+    "sessions": 926,
+    "sessions_traded": 302,
+    "trades_with": 25845,
+    "trades_without": 51690,
+    "mean_with": -0.11485160655593858,
+    "mean_without": -0.12882587685827732,
+    "delta": 0.013974270302338734,
+    "se_boot20": 0.006351711766161534,
+    "sigma_lr": 0.1979174888777712,
+    "sigma_lr_boot": 0.19328416496372808,
+    "sigma_lr_blockmeans": 0.1979174888777712,
+    "N0_formula": 1575,
+    "N0": 1575,
+    "power_at_N0": 0.943,
+    "N": 1575,
+    "power_at_N": 0.943,
+    "tried": [
+     [
+      1575,
+      0.943
+     ]
+    ]
+   },
+   "N": 1575
+  },
+  "BV1b": {
+   "span": [
+    "2022-09-01",
+    "2026-10-21"
+   ],
+   "A_forward_composition": {
+    "sessions": 302,
+    "sessions_traded": 302,
+    "trades_with": 63169,
+    "trades_without": 92136,
+    "mean_with": -0.08722167063530474,
+    "mean_without": -0.12925918659658223,
+    "delta": 0.042037515961277486,
+    "se_boot20": 0.0155425496726841,
+    "sigma_lr": 0.3054974937527854,
+    "sigma_lr_boot": 0.2701007160283206,
+    "sigma_lr_blockmeans": 0.3054974937527854,
+    "N0_formula": 415,
+    "N0": 415,
+    "power_at_N0": 0.7675,
+    "N": 481,
+    "power_at_N": 0.83,
+    "tried": [
+     [
+      415,
+      0.7675
+     ],
+     [
+      436,
+      0.7885
+     ],
+     [
+      458,
+      0.7895
+     ],
+     [
+      481,
+      0.83
+     ]
+    ]
+   },
+   "B_all_restricted": {
+    "sessions": 1029,
+    "sessions_traded": 1021,
+    "trades_with": 111761,
+    "trades_without": 162306,
+    "mean_with": -0.10609307052800486,
+    "mean_without": -0.13690874652315355,
+    "delta": 0.030815675995148686,
+    "se_boot20": 0.010675658130222278,
+    "sigma_lr": 0.34245408032650027,
+    "sigma_lr_boot": 0.34245408032650027,
+    "sigma_lr_blockmeans": 0.32714218857982447,
+    "N0_formula": 970,
+    "N0": 970,
+    "power_at_N0": 0.7405,
+    "N": 1181,
+    "power_at_N": 0.8225,
+    "tried": [
+     [
+      970,
+      0.7405
+     ],
+     [
+      1019,
+      0.7755
+     ],
+     [
+      1070,
+      0.7945
+     ],
+     [
+      1124,
+      0.7995
+     ],
+     [
+      1181,
+      0.8225
+     ]
+    ]
+   },
+   "N": 1181
+  },
+  "BX3e": {
+   "span": [
+    "2022-11-11",
+    "2026-10-21"
+   ],
+   "A_forward_composition": {
+    "sessions": 302,
+    "sessions_traded": 302,
+    "trades_with": 43778,
+    "trades_without": 43778,
+    "mean_with": -0.010958834788864627,
+    "mean_without": -0.11920581879243741,
+    "delta": 0.10824698400357279,
+    "se_boot20": 0.03352868422356365,
+    "sigma_lr": 0.6281114009045423,
+    "sigma_lr_boot": 0.5826664097582429,
+    "sigma_lr_blockmeans": 0.6281114009045423,
+    "N0_formula": 265,
+    "N0": 265,
+    "power_at_N0": 0.8505,
+    "N": 265,
+    "power_at_N": 0.8505,
+    "tried": [
+     [
+      265,
+      0.8505
+     ]
+    ]
+   },
+   "B_all_restricted": {
+    "sessions": 979,
+    "sessions_traded": 979,
+    "trades_with": 93773,
+    "trades_without": 93773,
+    "mean_with": -0.06307469186695805,
+    "mean_without": -0.13790842325986036,
+    "delta": 0.07483373139290231,
+    "se_boot20": 0.021060979889817994,
+    "sigma_lr": 0.6589764878711624,
+    "sigma_lr_boot": 0.6589764878711624,
+    "sigma_lr_blockmeans": 0.6524054550964806,
+    "N0_formula": 609,
+    "N0": 609,
+    "power_at_N0": 0.6935,
+    "N": 819,
+    "power_at_N": 0.8135,
+    "tried": [
+     [
+      609,
+      0.6935
+     ],
+     [
+      640,
+      0.704
+     ],
+     [
+      672,
+      0.7085
+     ],
+     [
+      706,
+      0.761
+     ],
+     [
+      742,
+      0.78
+     ],
+     [
+      780,
+      0.798
+     ],
+     [
+      819,
+      0.8135
+     ]
+    ]
+   },
+   "N": 819
+  },
+  "BC3": {
+   "span": [
+    "2022-09-01",
+    "2026-10-21"
+   ],
+   "A_forward_composition": {
+    "sessions": 302,
+    "sessions_traded": 302,
+    "trades_with": 63302,
+    "trades_without": 92136,
+    "mean_with": -0.038969076261178605,
+    "mean_without": -0.12925918659658223,
+    "delta": 0.09029011033540363,
+    "se_boot20": 0.030922897291696776,
+    "sigma_lr": 0.5373826608922863,
+    "sigma_lr_boot": 0.5373826608922863,
+    "sigma_lr_blockmeans": 0.5251173761331979,
+    "N0_formula": 279,
+    "N0": 279,
+    "power_at_N0": 0.7355,
+    "N": 341,
+    "power_at_N": 0.822,
+    "tried": [
+     [
+      279,
+      0.7355
+     ],
+     [
+      293,
+      0.744
+     ],
+     [
+      308,
+      0.749
+     ],
+     [
+      324,
+      0.7825
+     ],
+     [
+      341,
+      0.822
+     ]
+    ]
+   },
+   "B_all_restricted": {
+    "sessions": 1029,
+    "sessions_traded": 1021,
+    "trades_with": 112813,
+    "trades_without": 162306,
+    "mean_with": -0.06404200361267902,
+    "mean_without": -0.13690874652315355,
+    "delta": 0.07286674291047453,
+    "se_boot20": 0.020468649122170293,
+    "sigma_lr": 0.6565939378308575,
+    "sigma_lr_boot": 0.6565939378308575,
+    "sigma_lr_blockmeans": 0.5884914102171194,
+    "N0_formula": 638,
+    "N0": 638,
+    "power_at_N0": 0.78,
+    "N": 704,
+    "power_at_N": 0.8015,
+    "tried": [
+     [
+      638,
+      0.78
+     ],
+     [
+      670,
+      0.778
+     ],
+     [
+      704,
+      0.8015
+     ]
+    ]
+   },
+   "N": 704
+  }
+ }
+}
