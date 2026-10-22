@@ -1,0 +1,375 @@
+{
+ "n": 50,
+ "tradable": 50,
+ "differences": {
+  "spot": 0,
+  "ratio": 0,
+  "k0": 0,
+  "k_hi": 0,
+  "k_lo": 0,
+  "k_sc": 0,
+  "k_sp": 0,
+  "k_lc": 0,
+  "k_lp": 0,
+  "tradable": 0,
+  "width": 0,
+  "credit_legs": 0,
+  "credit_pkg": 0,
+  "fees_open": 0,
+  "pnl_pkg_off": 0,
+  "x_pkg": 0
+ },
+ "any": 0,
+ "detail": [
+  {
+   "day": "2025-04-09",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2024-09-10",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-10-12",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2022-10-05",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2024-05-07",
+   "minute": "15:30",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2024-04-04",
+   "minute": "15:30",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2024-04-17",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2022-05-20",
+   "minute": "15:30",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-06-12",
+   "minute": "15:30",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2022-11-04",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2024-01-02",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-12-14",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2024-11-21",
+   "minute": "15:30",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-03-29",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-08-08",
+   "minute": "15:30",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2026-07-22",
+   "minute": "15:30",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-04-26",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2024-02-23",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2026-02-02",
+   "minute": "15:30",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2022-05-27",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-04-24",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2025-05-22",
+   "minute": "15:30",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-07-12",
+   "minute": "15:30",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2025-03-26",
+   "minute": "15:00",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2026-04-14",
+   "minute": "15:30",
+   "analogue": "iron_fly",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2022-09-27",
+   "minute": "14:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2022-10-06",
+   "minute": "15:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-05-04",
+   "minute": "13:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-05-01",
+   "minute": "14:30",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2025-05-19",
+   "minute": "14:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2022-10-14",
+   "minute": "15:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-01-30",
+   "minute": "13:30",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2026-01-30",
+   "minute": "13:30",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-11-01",
+   "minute": "13:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2025-09-30",
+   "minute": "14:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2025-10-01",
+   "minute": "14:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2024-07-24",
+   "minute": "15:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2022-12-27",
+   "minute": "14:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-07-17",
+   "minute": "13:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2025-03-31",
+   "minute": "14:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2026-06-04",
+   "minute": "13:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2025-02-11",
+   "minute": "13:30",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2022-12-12",
+   "minute": "14:30",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2025-03-06",
+   "minute": "13:30",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2025-05-16",
+   "minute": "14:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2022-08-31",
+   "minute": "13:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-03-13",
+   "minute": "14:30",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2024-11-22",
+   "minute": "13:30",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2025-11-03",
+   "minute": "15:00",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  },
+  {
+   "day": "2023-09-25",
+   "minute": "14:30",
+   "analogue": "condor_d20",
+   "tradable": true,
+   "diffs": []
+  }
+ ]
+}
