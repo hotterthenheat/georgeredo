@@ -565,8 +565,20 @@ python3 -I scripts/paper_tracker.py --backtest --start 2025-01-02 --end 2026-10-
     [--candidates condor_em1,fly5,condor_d20[,fly_spxw]] [--parquet-root R | PAPER_PARQUET_ROOT] \
     [--backtest-data DIR | PAPER_BACKTEST_DATA] [--out DIR]
 python3 -I scripts/paper_backtest.py parity --start 2022-11-11 --end 2026-10-09 --parquet-root R [--out DIR]
-python3 -I scripts/paper_tracker.py --fetch-theta --start 2026-10-12 --end 2026-10-16 --parquet-root R     # the owner's machine only
+python3 -I scripts/paper_tracker.py --fetch-theta --start 2026-10-12 --end 2026-10-21 --parquet-root R     # the owner's machine only
+python3 -I scripts/paper_tracker.py --verify-parquet --start D1 --end D2 --parquet-root R [--no-prior] [--compare-root REF]
+python3 -I scripts/paper_tracker.py --merge-parquet SRC --parquet-root DST
 ```
+
+**The fetch is staged, validated and recorded** (2026-10-22, `docs/fetch-theta-audit.md`: the audit against the code that
+built the stored files and against v3's documented behaviour, the fixes, and the owner's PowerShell lines): a day's
+files land in `R/_staging/<run>/` and are placed only when `validate_frame` passes (every minute 09:30–16:00, every
+contract every minute, no duplicate key, NBBO sane, strikes and volume near the stored norm); `R/_manifest/<D>.json`
+records each file's status (ok / FAILED / INCOMPLETE), request and hash. A 472, an empty answer, an error or a short
+answer for a calendar session is FAILED / INCOMPLETE — never an empty session — and the replay reads such a file as
+absent (`refused`); from the recorder's calendar's first year a missing SPY file is a missing session, never a holiday.
+An existing file is never overwritten without `--force`, which keeps the old one beside it. The stock bars are asked on
+venue **nqb** — what the stored bars were asked with (the SDK's default), not `utp_cta`.
 
 - **The layout** (the research's dataset): `R/data_full/chains/{SPY,QQQ,SPXW}/<D>.parquet` (every same-day contract's
   1-minute NBBO: timestamp New York, strike, right CALL/PUT, bid, ask, bid_size, ask_size, mid; a row stamped t is the

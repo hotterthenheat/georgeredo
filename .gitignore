@@ -15,3 +15,7 @@ research/**/*.npz
 
 # the Compass Phase 2 recorder's Parquet store (scripts/eod_recorder.py) — local data, never committed
 data_recorder/
+
+# --fetch-theta staging (scripts/paper_backtest.py): a fetch's files before they are validated and placed — never committed;
+# the layout, its _manifest and any <file>.prev-<run> kept beside are
+data/theta_*/_staging/

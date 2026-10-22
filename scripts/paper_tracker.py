@@ -90,7 +90,9 @@ minute, to 15:58 and to 16:20, Mon–Fri, the recorder's holidays, half days ski
 --backtest --start D1 --end D2 [--candidates …] [--parquet-root R] [--backtest-data DIR] [--out DIR]: the historical
 replay through THIS code (scripts/paper_backtest.py — the stored minute NBBO Parquet adapted into the UW answers the
 tracker reads; rows apart, source=backtest-parquet; a P&L and fill report); --fetch-theta --start --end: on the owner's
-machine, those sessions from the Theta Terminal running there into the same Parquet layout (README "Historical replay").
+machine, those sessions from the Theta Terminal running there into the same Parquet layout (README "Historical replay"),
+staged and validated, a manifest a day; --verify-parquet checks a span of the layout, --merge-parquet SRC adds a
+validated layout to another without overwriting (docs/fetch-theta-audit.md).
 
 The token: UW_API_TOKEN in the environment alone — the recorder's client, limiter and scrubber (never logged).
 """
@@ -1680,7 +1682,13 @@ def main(argv: list[str] | None = None) -> int:
                       '(--parquet-root), every candidate at its minutes through this tracker\'s own code; rows under --backtest-data '
                       '(source=backtest-parquet), then the P&L and fill report in --out (scripts/paper_backtest.py)')
     mode.add_argument('--fetch-theta', action='store_true', help='ON THE OWNER\'S MACHINE: write --start/--end into the Parquet layout '
-                      'from the Theta Terminal already running on 127.0.0.1:25503 (at most 3 requests in flight; never starts one)')
+                      'from the Theta Terminal already running on 127.0.0.1:25503 (at most 3 requests in flight; never starts one): '
+                      'staged, validated, then placed; a day\'s manifest under <root>/_manifest (docs/fetch-theta-audit.md)')
+    mode.add_argument('--verify-parquet', action='store_true', help='check --start/--end in --parquet-root: per session and file — expected, '
+                      'present, complete (minutes, strikes, NBBO sanity), duplicates, the manifest, the sessions before the replay reads; '
+                      'exit 1 on any failure')
+    mode.add_argument('--merge-parquet', metavar='SRC', help='copy SRC\'s validated layout into --parquet-root; nothing copied while a file '
+                      'fails or a target exists (--force replaces, keeping the old beside)')
     p.add_argument('--when', help='the minute for --log, HH:MM New York (11:30 12:00 12:30 13:00 13:30 14:00 14:30 15:00 15:30 15:58)')
     p.add_argument('--day', help='the New York day, YYYY-MM-DD (today by default)')
     p.add_argument('--dry-run', action='store_true', help='no network: the fixture chain, a fake clock, under <root>/dryrun')
@@ -1703,8 +1711,18 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument('--backtest-data', default=os.environ.get('PAPER_BACKTEST_DATA') or str(R.REPO / 'data_recorder' / 'paper_backtest'),
                    help='--backtest: the replay\'s own root (PAPER_BACKTEST_DATA; never the live --data root)')
     p.add_argument('--out', help='--backtest: where backtest_<D1>_<D2>.md and .csv go (default <backtest-data>/reports)')
+    p.add_argument('--only', help='--fetch-theta / --verify-parquet: the files to ask or check, e.g. SPY-underlying,SPXW-chain,VIX-index '
+                   '(SPY|QQQ|SPXW-chain, SPY|QQQ-underlying, SPX|VIX-index)')
+    p.add_argument('--stock-venue', choices=('nqb', 'utp_cta'), help='--fetch-theta: the stock bars\' venue (default nqb — what the stored '
+                   'files were asked with; docs/fetch-theta-audit.md)')
+    p.add_argument('--compare-root', help='--fetch-theta / --verify-parquet: a stored layout read for the norms; --verify-parquet also compares '
+                   'every file found there value for value')
+    p.add_argument('--no-prior', action='store_true', help='--verify-parquet: skip the sessions-before check (a folder holding only new days)')
+    p.add_argument('--verify-json', help='--verify-parquet: write the full report here as JSON')
+    p.add_argument('--theta-in-flight', type=int, choices=(1, 2, 3), help='--fetch-theta: requests in flight (default 3; 1 while another '
+                   'downloader uses the account\'s eight)')
     args = p.parse_args(argv)
-    if args.backtest or args.fetch_theta:
+    if args.backtest or args.fetch_theta or args.verify_parquet or args.merge_parquet:
         import paper_backtest as B          # files only: no UW token is read or needed
         return B.run_cli(args)
 
