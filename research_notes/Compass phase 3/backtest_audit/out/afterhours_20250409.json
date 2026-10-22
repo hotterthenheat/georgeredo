@@ -1,0 +1,138 @@
+{
+ "day": "2025-04-09",
+ "theta_eod": [
+  {
+   "created": "2025-04-09 17:16:06.002000-04:00",
+   "last_trade": "2025-04-09 17:16:02.158000-04:00",
+   "open": 415.66,
+   "high": 467.83000000000004,
+   "low": 415.43,
+   "close": 466.0,
+   "volume": 140891528,
+   "count": 1748051,
+   "bid_size": 4,
+   "bid_exchange": 7,
+   "bid": 467.81,
+   "bid_condition": 0,
+   "ask_size": 20,
+   "ask_exchange": 1,
+   "ask": 467.90000000000003,
+   "ask_condition": 0,
+   "symbol": "QQQ"
+  },
+  {
+   "created": "2025-04-09 17:16:06.002000-04:00",
+   "last_trade": "2025-04-09 17:16:04.861000-04:00",
+   "open": 493.5,
+   "high": 548.62,
+   "low": 493.05,
+   "close": 548.62,
+   "volume": 240539966,
+   "count": 2283309,
+   "bid_size": 3,
+   "bid_exchange": 7,
+   "bid": 546.03,
+   "bid_condition": 0,
+   "ask_size": 2,
+   "ask_exchange": 7,
+   "ask": 546.2,
+   "ask_condition": 0,
+   "symbol": "SPY"
+  }
+ ],
+ "spy_1m_last_bars": [
+  {
+   "timestamp": "2025-04-09 15:58:00-04:00",
+   "open": 543.64,
+   "high": 544.22,
+   "low": 543.25,
+   "close": 543.585,
+   "volume": 2242459,
+   "count": 18059,
+   "vwap": 521.45
+  },
+  {
+   "timestamp": "2025-04-09 15:59:00-04:00",
+   "open": 543.59,
+   "high": 544.5600000000001,
+   "low": 542.66,
+   "close": 543.37,
+   "volume": 4637786,
+   "count": 29945,
+   "vwap": 522.0600000000001
+  },
+  {
+   "timestamp": "2025-04-09 16:00:00-04:00",
+   "open": 543.48,
+   "high": 543.48,
+   "low": 543.48,
+   "close": 543.48,
+   "volume": 1310,
+   "count": 1,
+   "vwap": 522.0600000000001
+  }
+ ],
+ "spy_1m_high_of_day": 546.33,
+ "spy_close_1559": 543.37,
+ "second_sources": {
+  "theta_1m_1600_bar": 543.48,
+  "spx_cboe": 5456.9,
+  "spx_fred": 5456.9,
+  "spx_print_1600": 5453.35,
+  "spx_anchored": 543.7237208321491,
+  "ivv_anchored": 543.569018404908,
+  "voo_anchored": 542.9674795283
+ },
+ "spy_spx_ratio_nearby": {
+  "2025-04-01": 0.09958512853559427,
+  "2025-04-02": 0.09954558038571884,
+  "2025-04-03": 0.09945298080985523,
+  "2025-04-04": 0.09958061362848045,
+  "2025-04-07": 0.09963553755741024,
+  "2025-04-08": 0.09963935722499734,
+  "2025-04-10": 0.09957764258122076,
+  "2025-04-11": 0.09955326511738911,
+  "2025-04-14": 0.0997267835374595,
+  "2025-04-15": 0.0996195774029348,
+  "2025-04-16": 0.09963796273480298,
+  "2025-04-17": 0.0996479073201204
+ },
+ "ratio_median": 0.09960235296926453,
+ "ratio_implied": 543.5200799179796,
+ "qqq_official": 466.0,
+ "qqq_close_1559": 465.14,
+ "ivv_eod": 546.25,
+ "voo_eod": 499.1,
+ "ivv_1559": 546.05,
+ "voo_1559": 499.47,
+ "uw_daily": null,
+ "uw_minute_files": 0,
+ "alt_close": 543.569018404908,
+ "stake": {
+  "condor_d20 condor": {
+   "trades": 5,
+   "total_at_official": -764.0000000000005,
+   "total_at_second_median": -401.99999999999994
+  },
+  "condor_em1 condor": {
+   "trades": 5,
+   "total_at_official": -754.0,
+   "total_at_second_median": -754.0
+  },
+  "fly5 call": {
+   "trades": 2,
+   "total_at_official": -294.19999999999953,
+   "total_at_second_median": -151.10184049079743
+  },
+  "fly5 iron": {
+   "trades": 2,
+   "total_at_official": -282.19999999999953,
+   "total_at_second_median": -139.10184049079743
+  },
+  "fly5 put": {
+   "trades": 2,
+   "total_at_official": -293.19999999999953,
+   "total_at_second_median": -150.10184049079743
+  }
+ }
+}
