@@ -1,0 +1,344 @@
+{
+ "split": "expl",
+ "checked": 40,
+ "fields": [
+  "R",
+  "P",
+  "E1",
+  "exit",
+  "pick",
+  "expiry",
+  "strike",
+  "F",
+  "IM",
+  "ask",
+  "exit bid",
+  "r"
+ ],
+ "disk_trades": 3,
+ "fetched_trades": 37,
+ "differences": 0,
+ "detail": [],
+ "trades": [
+  {
+   "ticker": "VEEV",
+   "report_date": "2022-06-01",
+   "right": "C",
+   "sb": "OTM1",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "ITW",
+   "report_date": "2021-10-28",
+   "right": "C",
+   "sb": "ITM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "GD",
+   "report_date": "2025-07-23",
+   "right": "C",
+   "sb": "ITM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "CCJ",
+   "report_date": "2023-03-29",
+   "right": "C",
+   "sb": "ATM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "ARGX",
+   "report_date": "2026-02-26",
+   "right": "C",
+   "sb": "ITM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "ARGX",
+   "report_date": "2022-07-28",
+   "right": "P",
+   "sb": "ATM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "WDAY",
+   "report_date": "2021-05-26",
+   "right": "C",
+   "sb": "OTM1",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "RGLD",
+   "report_date": "2020-08-05",
+   "right": "C",
+   "sb": "OTM1",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "MHK",
+   "report_date": "2025-07-24",
+   "right": "C",
+   "sb": "OTM3",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "AZO",
+   "report_date": "2022-09-19",
+   "right": "P",
+   "sb": "ATM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "BSY",
+   "report_date": "2026-08-06",
+   "right": "P",
+   "sb": "OTM3",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "LVS",
+   "report_date": "2022-07-20",
+   "right": "P",
+   "sb": "ATM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "DE",
+   "report_date": "2020-05-22",
+   "right": "C",
+   "sb": "OTM3",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "STE",
+   "report_date": "2020-08-03",
+   "right": "P",
+   "sb": "ITM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "WELL",
+   "report_date": "2025-07-28",
+   "right": "C",
+   "sb": "OTM1",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "NLY",
+   "report_date": "2022-10-26",
+   "right": "C",
+   "sb": "OTM3",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "CTAS",
+   "report_date": "2025-07-17",
+   "right": "P",
+   "sb": "OTM1",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "APTV",
+   "report_date": "2019-05-02",
+   "right": "C",
+   "sb": "OTM3",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "CBRL",
+   "report_date": "2020-06-02",
+   "right": "C",
+   "sb": "OTM1",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "HLT",
+   "report_date": "2024-04-24",
+   "right": "P",
+   "sb": "OTM2",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "NDSN",
+   "report_date": "2024-05-20",
+   "right": "P",
+   "sb": "OTM1",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "WEC",
+   "report_date": "2021-05-03",
+   "right": "P",
+   "sb": "OTM1",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "LNT",
+   "report_date": "2025-02-20",
+   "right": "C",
+   "sb": "OTM1",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "FOXA",
+   "report_date": "2020-05-06",
+   "right": "C",
+   "sb": "OTM3",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "JKS",
+   "report_date": "2020-12-31",
+   "right": "P",
+   "sb": "ITM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "WLK",
+   "report_date": "2024-05-01",
+   "right": "C",
+   "sb": "OTM3",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "ARRY",
+   "report_date": "2025-11-05",
+   "right": "C",
+   "sb": "OTM2",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "IEX",
+   "report_date": "2024-07-31",
+   "right": "C",
+   "sb": "ITM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "MET",
+   "report_date": "2024-10-30",
+   "right": "P",
+   "sb": "OTM2",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "ESS",
+   "report_date": "2023-04-27",
+   "right": "P",
+   "sb": "ITM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "ETSY",
+   "report_date": "2022-11-02",
+   "right": "P",
+   "sb": "OTM3",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "BG",
+   "report_date": "2020-07-29",
+   "right": "C",
+   "sb": "ATM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "GD",
+   "report_date": "2019-07-24",
+   "right": "C",
+   "sb": "OTM2",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "DT",
+   "report_date": "2024-08-07",
+   "right": "C",
+   "sb": "OTM3",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "PEN",
+   "report_date": "2025-11-05",
+   "right": "P",
+   "sb": "OTM2",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "ACLS",
+   "report_date": "2023-05-03",
+   "right": "P",
+   "sb": "ATM",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "ENPH",
+   "report_date": "2021-07-27",
+   "right": "P",
+   "sb": "OTM3",
+   "disk": false,
+   "ok": true
+  },
+  {
+   "ticker": "AAPL",
+   "report_date": "2019-04-30",
+   "right": "P",
+   "sb": "ITM",
+   "disk": true,
+   "ok": true
+  },
+  {
+   "ticker": "INTC",
+   "report_date": "2024-08-01",
+   "right": "C",
+   "sb": "OTM1",
+   "disk": true,
+   "ok": true
+  },
+  {
+   "ticker": "MU",
+   "report_date": "2024-12-18",
+   "right": "P",
+   "sb": "OTM1",
+   "disk": true,
+   "ok": true
+  }
+ ]
+}

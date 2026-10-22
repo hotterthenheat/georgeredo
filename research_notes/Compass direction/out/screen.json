@@ -1,0 +1,578 @@
+{
+ "split": "expl",
+ "prereg": "38b11bf",
+ "info": {
+  "fetch_stages": {
+   "under the $50 M floor": 8578,
+   "fetched": 3005,
+   "entry chain empty": 18,
+   "entry session is a half day": 15,
+   "no bar for P or R": 541,
+   "under 50 of 60 days of bars": 134,
+   "no listed 31-60 expiry": 75,
+   "entry chain failed": 1
+  },
+  "fetched_events": 3005,
+  "build_counts_fetched": {
+   "trade: no standing quote in the bucket": 6940,
+   "events with trades": 2935,
+   "no standing ATM pair": 30,
+   "g = 0: undefined": 4,
+   "expiry on a half day": 15,
+   "trade: no EOD row at the exit": 38,
+   "events with no trade": 6,
+   "a split-sized close-to-close move in P..X": 4,
+   "bars and options disagree (parity > 5 %)": 11
+  },
+  "disk_events": 507,
+  "build_counts_disk": {
+   "no bar for P or R": 21,
+   "under 50 of 60 days of bars": 2,
+   "events with trades": 194,
+   "trade: no standing quote in the bucket": 56,
+   "outside the stored option EOD span": 285,
+   "entry session is a half day": 3,
+   "no listed 31-60 expiry": 1,
+   "a split-sized close-to-close move in P..X": 1
+  }
+ },
+ "trades": 24316,
+ "events": 3129,
+ "names": 625,
+ "main": {
+  "sessions": 1849,
+  "first": "2019-04-11",
+  "last": "2026-09-10",
+  "trades_with": 12114,
+  "trades_without": 24316,
+  "sessions_with": 893,
+  "sessions_without": 893,
+  "events": 3129,
+  "mean_with": -0.24294463113884496,
+  "mean_without": -0.2339363250031841,
+  "delta": -0.009008306135660865,
+  "ci": [
+   -0.03529435696242493,
+   0.01708207177786849
+  ],
+  "n_eff_block20": 1927.799354425504,
+  "n_eff_acf": 974.0116023246585,
+  "arm_with": {
+   "sessions": 1849,
+   "sessions_traded": 893,
+   "trades": 12114,
+   "mean_session": -1.5916880809172351,
+   "mean_trade": -0.24294463113884496,
+   "ci_session_b1": [
+    -1.8523722276562713,
+    -1.3340039852015355
+   ],
+   "ci_trade_b1": [
+    -0.2728103058025996,
+    -0.21004770028914477
+   ],
+   "ci_session_b5": [
+    -1.928339988384666,
+    -1.2879159943524274
+   ],
+   "ci_trade_b5": [
+    -0.275493284325914,
+    -0.2070270193220678
+   ],
+   "ci_session_b20": [
+    -2.057746560006068,
+    -1.1674452830343285
+   ],
+   "ci_trade_b20": [
+    -0.28282687031811565,
+    -0.19975475782798674
+   ],
+   "acf": [
+    0.21413616556436463,
+    0.15703432222778757,
+    0.13444187124290582,
+    0.13951769959745428,
+    0.23455521732413084
+   ],
+   "n_eff_acf": 670.7804117678221,
+   "n_eff_block20": 616.5151938781997
+  },
+  "arm_without": {
+   "sessions": 1849,
+   "sessions_traded": 893,
+   "trades": 24316,
+   "mean_session": -3.07647143254593,
+   "mean_trade": -0.2339363250031841,
+   "ci_session_b1": [
+    -3.4727880652287,
+    -2.7281292320498394
+   ],
+   "ci_trade_b1": [
+    -0.25148593050652884,
+    -0.2168562632321632
+   ],
+   "ci_session_b5": [
+    -3.6523064671543586,
+    -2.5561294632564864
+   ],
+   "ci_trade_b5": [
+    -0.25556557426590876,
+    -0.2100581948234837
+   ],
+   "ci_session_b20": [
+    -3.8968238484437467,
+    -2.3336613340683825
+   ],
+   "ci_trade_b20": [
+    -0.263343222438882,
+    -0.20213183110418195
+   ],
+   "acf": [
+    0.4388375027019104,
+    0.2596208778734247,
+    0.24524993332783274,
+    0.29616599548892647,
+    0.4075332814662083
+   ],
+   "n_eff_acf": 431.0528174008774,
+   "n_eff_block20": 397.8628583463372
+  }
+ },
+ "pass": false,
+ "descriptive": {
+  "pick=C": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 6155,
+   "trades_without": 12405,
+   "sessions_with": 657,
+   "sessions_without": 657,
+   "events": 1586,
+   "mean_with": -0.1761583449128446,
+   "mean_without": -0.2402976487076139,
+   "delta": 0.06413930379476929,
+   "ci": [
+    -0.004822113198956597,
+    0.1361528355903361
+   ]
+  },
+  "pick=P": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 5959,
+   "trades_without": 11911,
+   "sessions_with": 649,
+   "sessions_without": 651,
+   "events": 1543,
+   "mean_with": -0.3119276134716243,
+   "mean_without": -0.2273111700578855,
+   "delta": -0.08461644341373878,
+   "ci": [
+    -0.16094733161961128,
+    -0.010127251430246462
+   ]
+  },
+  "report_time=postmarket": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 6127,
+   "trades_without": 12278,
+   "sessions_with": 581,
+   "sessions_without": 581,
+   "events": 1555,
+   "mean_with": -0.22691498346929678,
+   "mean_without": -0.21494715971748576,
+   "delta": -0.011967823751811019,
+   "ci": [
+    -0.05115828165604816,
+    0.02972710550503901
+   ]
+  },
+  "report_time=premarket": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 5987,
+   "trades_without": 12038,
+   "sessions_with": 689,
+   "sessions_without": 690,
+   "events": 1574,
+   "mean_with": -0.2593491160680786,
+   "mean_without": -0.2533040747438225,
+   "delta": -0.006045041324256095,
+   "ci": [
+    -0.04048845389160119,
+    0.02768576880198103
+   ]
+  },
+  "sb=ATM": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 2190,
+   "trades_without": 4373,
+   "sessions_with": 791,
+   "sessions_without": 791,
+   "events": 2192,
+   "mean_with": -0.18406926114402888,
+   "mean_without": -0.17158310127922394,
+   "delta": -0.012486159864804947,
+   "ci": [
+    -0.036846378562371905,
+    0.012856364833392551
+   ]
+  },
+  "sb=ITM": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 2365,
+   "trades_without": 4767,
+   "sessions_with": 798,
+   "sessions_without": 847,
+   "events": 2717,
+   "mean_with": -0.16461004426718387,
+   "mean_without": -0.15579954085524403,
+   "delta": -0.00881050341193984,
+   "ci": [
+    -0.03342951670766978,
+    0.015679295578513424
+   ]
+  },
+  "sb=OTM1": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 2395,
+   "trades_without": 4749,
+   "sessions_with": 814,
+   "sessions_without": 847,
+   "events": 2710,
+   "mean_with": -0.20978032831860777,
+   "mean_without": -0.20485470960509844,
+   "delta": -0.004925618713509328,
+   "ci": [
+    -0.033131204900746176,
+    0.022995383041219546
+   ]
+  },
+  "sb=OTM2": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 2700,
+   "trades_without": 5407,
+   "sessions_with": 856,
+   "sessions_without": 880,
+   "events": 2953,
+   "mean_with": -0.2714190876311531,
+   "mean_without": -0.25609198178094555,
+   "delta": -0.015327105850207523,
+   "ci": [
+    -0.04315177265485993,
+    0.01488895167764508
+   ]
+  },
+  "sb=OTM3": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 2464,
+   "trades_without": 5020,
+   "sessions_with": 829,
+   "sessions_without": 869,
+   "events": 2813,
+   "mean_with": -0.3714940755241379,
+   "mean_without": -0.36610000084108474,
+   "delta": -0.0053940746830531405,
+   "ci": [
+    -0.03912226466929245,
+    0.02793276554558444
+   ]
+  },
+  "settlement=physical": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 12114,
+   "trades_without": 24316,
+   "sessions_with": 893,
+   "sessions_without": 893,
+   "events": 3129,
+   "mean_with": -0.24294463113884496,
+   "mean_without": -0.2339363250031841,
+   "delta": -0.009008306135660865,
+   "ci": [
+    -0.03529435696242493,
+    0.01708207177786849
+   ]
+  },
+  "tier=1": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 167,
+   "trades_without": 334,
+   "sessions_with": 33,
+   "sessions_without": 33,
+   "events": 34,
+   "mean_with": -0.2416246131313855,
+   "mean_without": -0.15561221398037076,
+   "delta": -0.08601239915101475,
+   "ci": [
+    -0.294087058721913,
+    0.15630608729196405
+   ]
+  },
+  "tier=2": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 375,
+   "trades_without": 752,
+   "sessions_with": 60,
+   "sessions_without": 60,
+   "events": 79,
+   "mean_with": -0.2137121039300552,
+   "mean_without": -0.06823198117490194,
+   "delta": -0.14548012275515326,
+   "ci": [
+    -0.3534383249038446,
+    0.036864032612972455
+   ]
+  },
+  "tier=3": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 11540,
+   "trades_without": 23169,
+   "sessions_with": 884,
+   "sessions_without": 884,
+   "events": 2994,
+   "mean_with": -0.24300759035055,
+   "mean_without": -0.24028887891584347,
+   "delta": -0.0027187114347065333,
+   "ci": [
+    -0.030326712214472064,
+    0.02462441490994671
+   ]
+  },
+  "tier=U": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 32,
+   "trades_without": 61,
+   "sessions_with": 20,
+   "sessions_without": 22,
+   "events": 22,
+   "mean_with": -0.5696974876221401,
+   "mean_without": -0.29274940759470397,
+   "delta": -0.27694808002743615,
+   "ci": [
+    -0.630365755592881,
+    0.10578215141481163
+   ]
+  },
+  "year=2019": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 702,
+   "trades_without": 1407,
+   "sessions_with": 71,
+   "sessions_without": 71,
+   "events": 194,
+   "mean_with": -0.10352233205467655,
+   "mean_without": -0.11325331290251657,
+   "delta": 0.00973098084784002,
+   "ci": [
+    -0.10287440197127556,
+    0.06672739561681229
+   ]
+  },
+  "year=2020": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 1187,
+   "trades_without": 2389,
+   "sessions_with": 105,
+   "sessions_without": 105,
+   "events": 300,
+   "mean_with": -0.27943882832440986,
+   "mean_without": -0.21082932152399433,
+   "delta": -0.06860950680041553,
+   "ci": [
+    -0.15439116872742892,
+    0.04630373101371292
+   ]
+  },
+  "year=2021": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 1485,
+   "trades_without": 2987,
+   "sessions_with": 124,
+   "sessions_without": 124,
+   "events": 372,
+   "mean_with": -0.20779666059986607,
+   "mean_without": -0.2017473880119878,
+   "delta": -0.006049272587878268,
+   "ci": [
+    -0.12588068418543416,
+    0.07437100476059907
+   ]
+  },
+  "year=2022": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 1549,
+   "trades_without": 3106,
+   "sessions_with": 113,
+   "sessions_without": 113,
+   "events": 386,
+   "mean_with": -0.19353175642341963,
+   "mean_without": -0.20829683775743427,
+   "delta": 0.014765081334014635,
+   "ci": [
+    -0.07848099920874925,
+    0.09543825267106777
+   ]
+  },
+  "year=2023": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 1520,
+   "trades_without": 3059,
+   "sessions_with": 116,
+   "sessions_without": 116,
+   "events": 402,
+   "mean_with": -0.25149666477631244,
+   "mean_without": -0.21265069540782297,
+   "delta": -0.03884596936848947,
+   "ci": [
+    -0.0959227497410055,
+    0.028078923941575386
+   ]
+  },
+  "year=2024": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 1604,
+   "trades_without": 3222,
+   "sessions_with": 117,
+   "sessions_without": 117,
+   "events": 418,
+   "mean_with": -0.24673290343063206,
+   "mean_without": -0.2793398832717861,
+   "delta": 0.03260697984115404,
+   "ci": [
+    -0.0304447182431766,
+    0.09144167018146128
+   ]
+  },
+  "year=2025": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 2170,
+   "trades_without": 4349,
+   "sessions_with": 146,
+   "sessions_without": 146,
+   "events": 563,
+   "mean_with": -0.24509385817852702,
+   "mean_without": -0.25149047438190414,
+   "delta": 0.0063966162033771146,
+   "ci": [
+    -0.05303711660319309,
+    0.06845092768160597
+   ]
+  },
+  "year=2026": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 1897,
+   "trades_without": 3797,
+   "sessions_with": 101,
+   "sessions_without": 101,
+   "events": 494,
+   "mean_with": -0.3270520736909329,
+   "mean_without": -0.29800472428107366,
+   "delta": -0.029047349409859258,
+   "ci": [
+    -0.11724851584834373,
+    0.03832830661446774
+   ]
+  }
+ },
+ "absolute": {
+  "picked_mean": -0.24294463113884496,
+  "other_side_mean": -0.2249929861630435,
+  "all_mean": -0.23393632500318412,
+  "exit_at_zero_share": 0.05329823984207929
+ },
+ "parts": {
+  "X before 2023 (unopened cells)": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 4768,
+   "trades_without": 9579,
+   "sessions_with": 410,
+   "sessions_without": 410,
+   "events": 1220,
+   "mean_with": -0.20351419415941924,
+   "mean_without": -0.19594384421525426,
+   "delta": -0.007570349944164972,
+   "ci": [
+    -0.05739764179331873,
+    0.03769195148047912
+   ]
+  },
+  "X from 2023 (opened cells)": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 6404,
+   "trades_without": 12853,
+   "sessions_with": 461,
+   "sessions_without": 461,
+   "events": 1715,
+   "mean_with": -0.2881201809010554,
+   "mean_without": -0.2868252444707911,
+   "delta": -0.001294936430264293,
+   "ci": [
+    -0.029260495860867205,
+    0.028185595671952033
+   ]
+  },
+  "on-disk names (opened)": {
+   "sessions": 1849,
+   "first": "2019-04-11",
+   "last": "2026-09-10",
+   "trades_with": 942,
+   "trades_without": 1884,
+   "sessions_with": 146,
+   "sessions_without": 146,
+   "events": 194,
+   "mean_with": -0.13540758532218433,
+   "mean_without": -0.06628701053950459,
+   "delta": -0.06912057478267974,
+   "ci": [
+    -0.19087879932822194,
+    0.057782544247818604
+   ]
+  }
+ },
+ "screen_pass": false
+}
