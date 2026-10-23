@@ -1,0 +1,16 @@
+{"t": "2026-10-23T00:31:11Z", "event": "login ok"}
+{"t": "2026-10-23T00:31:15Z", "event": "eod", "symbol": "SPY", "year": 2012, "rows": 0, "status": ["NOT_FOUND"], "first": null, "last": null, "s": 5.1}
+{"t": "2026-10-23T00:31:21Z", "event": "eod", "symbol": "QQQ", "year": 2012, "rows": 146, "status": ["OK"], "first": "2012-06-01 20:00:00.150000-04:00", "last": "2012-12-31 17:35:03.150000-05:00", "s": 6.4}
+{"t": "2026-10-23T00:31:27Z", "event": "eod", "symbol": "SPY", "year": 2013, "rows": 0, "status": ["NOT_FOUND"], "first": null, "last": null, "s": 5.8}
+{"t": "2026-10-23T00:31:35Z", "event": "eod", "symbol": "QQQ", "year": 2013, "rows": 252, "status": ["OK"], "first": "2013-01-02 18:02:59.575000-05:00", "last": "2013-12-31 18:00:03.475000-05:00", "s": 7.8}
+{"t": "2026-10-23T00:31:41Z", "event": "eod", "symbol": "SPY", "year": 2014, "rows": 0, "status": ["NOT_FOUND"], "first": null, "last": null, "s": 6.3}
+{"t": "2026-10-23T00:31:46Z", "event": "eod", "symbol": "QQQ", "year": 2014, "rows": 252, "status": ["OK"], "first": "2014-01-02 18:20:56.550000-05:00", "last": "2014-12-31 17:30:08.225000-05:00", "s": 5.3}
+{"t": "2026-10-23T00:31:50Z", "event": "eod", "symbol": "SPY", "year": 2015, "rows": 0, "status": ["NOT_FOUND"], "first": null, "last": null, "s": 3.7}
+{"t": "2026-10-23T00:31:55Z", "event": "eod", "symbol": "QQQ", "year": 2015, "rows": 252, "status": ["OK"], "first": "2015-01-02 17:20:01.400000-05:00", "last": "2015-12-31 18:32:34.575000-05:00", "s": 5.4}
+{"t": "2026-10-23T00:31:59Z", "event": "eod", "symbol": "SPY", "year": 2016, "rows": 0, "status": ["NOT_FOUND"], "first": null, "last": null, "s": 3.6}
+{"t": "2026-10-23T00:32:03Z", "event": "eod", "symbol": "QQQ", "year": 2016, "rows": 252, "status": ["OK"], "first": "2016-01-04 17:50:57.200000-05:00", "last": "2016-12-30 19:01:17.900000-05:00", "s": 4.5}
+{"t": "2026-10-23T00:32:09Z", "event": "eod", "symbol": "SPY", "year": 2017, "rows": 251, "status": ["OK"], "first": "2017-01-03 17:37:29.775000-05:00", "last": "2017-12-29 18:30:00-05:00", "s": 5.3}
+{"t": "2026-10-23T00:32:14Z", "event": "eod", "symbol": "QQQ", "year": 2017, "rows": 251, "status": ["OK"], "first": "2017-01-03 17:37:29.775000-05:00", "last": "2017-12-29 18:30:00-05:00", "s": 5.1}
+{"t": "2026-10-23T00:32:17Z", "event": "eod", "symbol": "SPY", "year": 2018, "rows": 251, "status": ["OK"], "first": "2018-01-02 17:17:09.050000-05:00", "last": "2018-12-31 17:17:22.025000-05:00", "s": 3.1}
+{"t": "2026-10-23T00:32:23Z", "event": "eod", "symbol": "QQQ", "year": 2018, "rows": 251, "status": ["OK"], "first": "2018-01-02 17:17:09.050000-05:00", "last": "2018-12-31 17:17:22.025000-05:00", "s": 5.6}
+{"t": "2026-10-23T00:32:23Z", "event": "probe", "s": 0.1, "day": "2016-06-01", "status": ["OK"], "rows": 391, "priced": 0, "other_day_rows": 0, "schema_equal_stored": true}

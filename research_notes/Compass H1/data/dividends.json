@@ -1,0 +1,475 @@
+{
+ "note": "ex-dividend dates (New York) and cash amounts per share; SPY from Yahoo chart events (Nasdaq serves no SPY history); QQQ from Nasdaq dividend history, Yahoo where Nasdaq has no row; fetched 2026-10-22",
+ "SPY": {
+  "2012-03-16": {
+   "amount": 0.614,
+   "src": "yahoo"
+  },
+  "2012-06-15": {
+   "amount": 0.688,
+   "src": "yahoo"
+  },
+  "2012-09-21": {
+   "amount": 0.779,
+   "src": "yahoo"
+  },
+  "2012-12-21": {
+   "amount": 1.022,
+   "src": "yahoo"
+  },
+  "2013-03-15": {
+   "amount": 0.694,
+   "src": "yahoo"
+  },
+  "2013-06-21": {
+   "amount": 0.839,
+   "src": "yahoo"
+  },
+  "2013-09-20": {
+   "amount": 0.838,
+   "src": "yahoo"
+  },
+  "2013-12-20": {
+   "amount": 0.98,
+   "src": "yahoo"
+  },
+  "2014-03-21": {
+   "amount": 0.825,
+   "src": "yahoo"
+  },
+  "2014-06-20": {
+   "amount": 0.937,
+   "src": "yahoo"
+  },
+  "2014-09-19": {
+   "amount": 0.939,
+   "src": "yahoo"
+  },
+  "2014-12-19": {
+   "amount": 1.135,
+   "src": "yahoo"
+  },
+  "2015-03-20": {
+   "amount": 0.931,
+   "src": "yahoo"
+  },
+  "2015-06-19": {
+   "amount": 1.03,
+   "src": "yahoo"
+  },
+  "2015-09-18": {
+   "amount": 1.033,
+   "src": "yahoo"
+  },
+  "2015-12-18": {
+   "amount": 1.212,
+   "src": "yahoo"
+  },
+  "2016-03-18": {
+   "amount": 1.05,
+   "src": "yahoo"
+  },
+  "2016-06-17": {
+   "amount": 1.078,
+   "src": "yahoo"
+  },
+  "2016-09-16": {
+   "amount": 1.082,
+   "src": "yahoo"
+  },
+  "2016-12-16": {
+   "amount": 1.329,
+   "src": "yahoo"
+  },
+  "2017-03-17": {
+   "amount": 1.033,
+   "src": "yahoo"
+  },
+  "2017-06-16": {
+   "amount": 1.183,
+   "src": "yahoo"
+  },
+  "2017-09-15": {
+   "amount": 1.235,
+   "src": "yahoo"
+  },
+  "2017-12-15": {
+   "amount": 1.351,
+   "src": "yahoo"
+  },
+  "2018-03-16": {
+   "amount": 1.097,
+   "src": "yahoo"
+  },
+  "2018-06-15": {
+   "amount": 1.246,
+   "src": "yahoo"
+  },
+  "2018-09-21": {
+   "amount": 1.323,
+   "src": "yahoo"
+  },
+  "2018-12-21": {
+   "amount": 1.435,
+   "src": "yahoo"
+  },
+  "2019-03-15": {
+   "amount": 1.233,
+   "src": "yahoo"
+  },
+  "2019-06-21": {
+   "amount": 1.432,
+   "src": "yahoo"
+  },
+  "2019-09-20": {
+   "amount": 1.384,
+   "src": "yahoo"
+  },
+  "2019-12-20": {
+   "amount": 1.57,
+   "src": "yahoo"
+  },
+  "2020-03-20": {
+   "amount": 1.406,
+   "src": "yahoo"
+  },
+  "2020-06-19": {
+   "amount": 1.366,
+   "src": "yahoo"
+  },
+  "2020-09-18": {
+   "amount": 1.339,
+   "src": "yahoo"
+  },
+  "2020-12-18": {
+   "amount": 1.58,
+   "src": "yahoo"
+  },
+  "2021-03-19": {
+   "amount": 1.278,
+   "src": "yahoo"
+  },
+  "2021-06-18": {
+   "amount": 1.376,
+   "src": "yahoo"
+  },
+  "2021-09-17": {
+   "amount": 1.428,
+   "src": "yahoo"
+  },
+  "2021-12-17": {
+   "amount": 1.633,
+   "src": "yahoo"
+  },
+  "2022-03-18": {
+   "amount": 1.366,
+   "src": "yahoo"
+  },
+  "2022-06-17": {
+   "amount": 1.577,
+   "src": "yahoo"
+  },
+  "2022-09-16": {
+   "amount": 1.596,
+   "src": "yahoo"
+  },
+  "2022-12-16": {
+   "amount": 1.781,
+   "src": "yahoo"
+  },
+  "2023-03-17": {
+   "amount": 1.506,
+   "src": "yahoo"
+  },
+  "2023-06-16": {
+   "amount": 1.638,
+   "src": "yahoo"
+  },
+  "2023-09-15": {
+   "amount": 1.583,
+   "src": "yahoo"
+  },
+  "2023-12-15": {
+   "amount": 1.906,
+   "src": "yahoo"
+  },
+  "2024-03-15": {
+   "amount": 1.595,
+   "src": "yahoo"
+  },
+  "2024-06-21": {
+   "amount": 1.759,
+   "src": "yahoo"
+  },
+  "2024-09-20": {
+   "amount": 1.746,
+   "src": "yahoo"
+  },
+  "2024-12-20": {
+   "amount": 1.966,
+   "src": "yahoo"
+  },
+  "2025-03-21": {
+   "amount": 1.696,
+   "src": "yahoo"
+  },
+  "2025-06-20": {
+   "amount": 1.761,
+   "src": "yahoo"
+  },
+  "2025-09-19": {
+   "amount": 1.831,
+   "src": "yahoo"
+  },
+  "2025-12-19": {
+   "amount": 1.993,
+   "src": "yahoo"
+  }
+ },
+ "QQQ": {
+  "2012-03-16": {
+   "amount": 0.113,
+   "src": "yahoo (nasdaq has no row)"
+  },
+  "2012-06-15": {
+   "amount": 0.14312,
+   "src": "nasdaq"
+  },
+  "2012-09-21": {
+   "amount": 0.2,
+   "src": "yahoo (nasdaq has no row)"
+  },
+  "2012-12-21": {
+   "amount": 0.367,
+   "src": "yahoo (nasdaq has no row)"
+  },
+  "2013-03-15": {
+   "amount": 0.15931,
+   "src": "nasdaq"
+  },
+  "2013-06-21": {
+   "amount": 0.22361,
+   "src": "nasdaq"
+  },
+  "2013-09-20": {
+   "amount": 0.23771,
+   "src": "nasdaq"
+  },
+  "2013-12-20": {
+   "amount": 0.27241,
+   "src": "nasdaq"
+  },
+  "2014-02-27": {
+   "amount": 0.37313,
+   "src": "nasdaq"
+  },
+  "2014-03-21": {
+   "amount": 0.20606,
+   "src": "nasdaq"
+  },
+  "2014-06-20": {
+   "amount": 0.2491,
+   "src": "nasdaq"
+  },
+  "2014-09-19": {
+   "amount": 0.2378,
+   "src": "nasdaq"
+  },
+  "2014-12-19": {
+   "amount": 0.38681,
+   "src": "nasdaq"
+  },
+  "2015-03-20": {
+   "amount": 0.24806,
+   "src": "nasdaq"
+  },
+  "2015-06-19": {
+   "amount": 0.25416,
+   "src": "nasdaq"
+  },
+  "2015-09-18": {
+   "amount": 0.26002,
+   "src": "nasdaq"
+  },
+  "2015-12-18": {
+   "amount": 0.34233,
+   "src": "nasdaq"
+  },
+  "2016-03-18": {
+   "amount": 0.3178,
+   "src": "nasdaq"
+  },
+  "2016-06-17": {
+   "amount": 0.28665,
+   "src": "nasdaq"
+  },
+  "2016-09-16": {
+   "amount": 0.29387,
+   "src": "nasdaq"
+  },
+  "2016-12-16": {
+   "amount": 0.35494,
+   "src": "nasdaq"
+  },
+  "2017-03-17": {
+   "amount": 0.27415,
+   "src": "nasdaq"
+  },
+  "2017-06-16": {
+   "amount": 0.37842,
+   "src": "nasdaq"
+  },
+  "2017-09-18": {
+   "amount": 0.31938,
+   "src": "nasdaq"
+  },
+  "2017-12-18": {
+   "amount": 0.32941,
+   "src": "nasdaq"
+  },
+  "2018-03-19": {
+   "amount": 0.27655,
+   "src": "nasdaq"
+  },
+  "2018-06-18": {
+   "amount": 0.37837,
+   "src": "nasdaq"
+  },
+  "2018-09-24": {
+   "amount": 0.32975,
+   "src": "nasdaq"
+  },
+  "2018-12-24": {
+   "amount": 0.42061,
+   "src": "nasdaq"
+  },
+  "2019-03-18": {
+   "amount": 0.32421,
+   "src": "nasdaq"
+  },
+  "2019-06-24": {
+   "amount": 0.41558,
+   "src": "nasdaq"
+  },
+  "2019-09-23": {
+   "amount": 0.38415,
+   "src": "nasdaq"
+  },
+  "2019-12-23": {
+   "amount": 0.45765,
+   "src": "nasdaq"
+  },
+  "2020-03-23": {
+   "amount": 0.36269,
+   "src": "nasdaq"
+  },
+  "2020-06-22": {
+   "amount": 0.42426,
+   "src": "nasdaq"
+  },
+  "2020-09-21": {
+   "amount": 0.38824,
+   "src": "nasdaq"
+  },
+  "2020-12-21": {
+   "amount": 0.56133,
+   "src": "nasdaq"
+  },
+  "2021-03-22": {
+   "amount": 0.39468,
+   "src": "nasdaq"
+  },
+  "2021-06-21": {
+   "amount": 0.39679,
+   "src": "nasdaq"
+  },
+  "2021-09-20": {
+   "amount": 0.41391,
+   "src": "nasdaq"
+  },
+  "2021-12-20": {
+   "amount": 0.49141,
+   "src": "nasdaq"
+  },
+  "2022-03-21": {
+   "amount": 0.43369,
+   "src": "nasdaq"
+  },
+  "2022-06-21": {
+   "amount": 0.5274,
+   "src": "nasdaq"
+  },
+  "2022-09-19": {
+   "amount": 0.51856,
+   "src": "nasdaq"
+  },
+  "2022-12-19": {
+   "amount": 0.65541,
+   "src": "nasdaq"
+  },
+  "2023-03-20": {
+   "amount": 0.47223,
+   "src": "nasdaq"
+  },
+  "2023-06-20": {
+   "amount": 0.50395,
+   "src": "nasdaq"
+  },
+  "2023-09-18": {
+   "amount": 0.53555,
+   "src": "nasdaq"
+  },
+  "2023-12-18": {
+   "amount": 0.80826,
+   "src": "nasdaq"
+  },
+  "2023-12-27": {
+   "amount": 0.21584,
+   "src": "nasdaq"
+  },
+  "2024-03-18": {
+   "amount": 0.57345,
+   "src": "nasdaq"
+  },
+  "2024-06-24": {
+   "amount": 0.7615,
+   "src": "nasdaq"
+  },
+  "2024-09-23": {
+   "amount": 0.67686,
+   "src": "nasdaq"
+  },
+  "2024-12-23": {
+   "amount": 0.83466,
+   "src": "nasdaq"
+  },
+  "2025-03-24": {
+   "amount": 0.71571,
+   "src": "nasdaq"
+  },
+  "2025-06-23": {
+   "amount": 0.59111,
+   "src": "nasdaq"
+  },
+  "2025-09-22": {
+   "amount": 0.69395,
+   "src": "nasdaq"
+  },
+  "2025-12-22": {
+   "amount": 0.79408,
+   "src": "nasdaq"
+  },
+  "2026-03-23": {
+   "amount": 0.73282,
+   "src": "nasdaq"
+  },
+  "2026-06-22": {
+   "amount": 0.81349,
+   "src": "nasdaq"
+  },
+  "2026-09-21": {
+   "amount": 0.75143,
+   "src": "nasdaq"
+  }
+ }
+}

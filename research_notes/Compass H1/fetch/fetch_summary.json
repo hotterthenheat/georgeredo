@@ -1,0 +1,137 @@
+{
+ "requests": 15,
+ "bytes_written": 142147,
+ "eod": {
+  "SPY 2012": {
+   "rows": 0,
+   "status": [
+    "NOT_FOUND"
+   ],
+   "first": "None",
+   "last": "None"
+  },
+  "QQQ 2012": {
+   "rows": 146,
+   "status": [
+    "OK"
+   ],
+   "first": "2012-06-01 20:00:00.150000-04:00",
+   "last": "2012-12-31 17:35:03.150000-05:00"
+  },
+  "SPY 2013": {
+   "rows": 0,
+   "status": [
+    "NOT_FOUND"
+   ],
+   "first": "None",
+   "last": "None"
+  },
+  "QQQ 2013": {
+   "rows": 252,
+   "status": [
+    "OK"
+   ],
+   "first": "2013-01-02 18:02:59.575000-05:00",
+   "last": "2013-12-31 18:00:03.475000-05:00"
+  },
+  "SPY 2014": {
+   "rows": 0,
+   "status": [
+    "NOT_FOUND"
+   ],
+   "first": "None",
+   "last": "None"
+  },
+  "QQQ 2014": {
+   "rows": 252,
+   "status": [
+    "OK"
+   ],
+   "first": "2014-01-02 18:20:56.550000-05:00",
+   "last": "2014-12-31 17:30:08.225000-05:00"
+  },
+  "SPY 2015": {
+   "rows": 0,
+   "status": [
+    "NOT_FOUND"
+   ],
+   "first": "None",
+   "last": "None"
+  },
+  "QQQ 2015": {
+   "rows": 252,
+   "status": [
+    "OK"
+   ],
+   "first": "2015-01-02 17:20:01.400000-05:00",
+   "last": "2015-12-31 18:32:34.575000-05:00"
+  },
+  "SPY 2016": {
+   "rows": 0,
+   "status": [
+    "NOT_FOUND"
+   ],
+   "first": "None",
+   "last": "None"
+  },
+  "QQQ 2016": {
+   "rows": 252,
+   "status": [
+    "OK"
+   ],
+   "first": "2016-01-04 17:50:57.200000-05:00",
+   "last": "2016-12-30 19:01:17.900000-05:00"
+  },
+  "SPY 2017": {
+   "rows": 251,
+   "status": [
+    "OK"
+   ],
+   "first": "2017-01-03 17:37:29.775000-05:00",
+   "last": "2017-12-29 18:30:00-05:00"
+  },
+  "QQQ 2017": {
+   "rows": 251,
+   "status": [
+    "OK"
+   ],
+   "first": "2017-01-03 17:37:29.775000-05:00",
+   "last": "2017-12-29 18:30:00-05:00"
+  },
+  "SPY 2018": {
+   "rows": 251,
+   "status": [
+    "OK"
+   ],
+   "first": "2018-01-02 17:17:09.050000-05:00",
+   "last": "2018-12-31 17:17:22.025000-05:00"
+  },
+  "QQQ 2018": {
+   "rows": 251,
+   "status": [
+    "OK"
+   ],
+   "first": "2018-01-02 17:17:09.050000-05:00",
+   "last": "2018-12-31 17:17:22.025000-05:00"
+  }
+ },
+ "probe": {
+  "day": "2016-06-01",
+  "status": [
+   "OK"
+  ],
+  "rows": 391,
+  "priced": 0,
+  "other_day_rows": 0,
+  "schema_equal_stored": true
+ },
+ "bars": {
+  "fetched": false,
+  "why": "the probe came back with no price: SPY starts 2017-01-03"
+ },
+ "eod_file": {
+  "path": "data/stock_eod_2012_2018.parquet",
+  "rows": 2158,
+  "sha256": "80e4cedba55c1226b3ecd8e32655ba35a9489aa10c35a88422f8b70880a39cf5"
+ }
+}
