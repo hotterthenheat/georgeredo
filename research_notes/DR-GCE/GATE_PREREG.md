@@ -129,3 +129,14 @@ Written and committed ALONE, before any signal, touch rate or outcome is compute
 - Lookahead: 3 sessions rebuilt with every input after the decision minute blanked; the signals must not change. A
   control that reads one minute ahead must change them.
 - sha256 of every script recorded in the report.
+
+## Amendment 1 (2026-10-23), committed alone before the gate is run
+
+- **The clock of σ_ATM in VolRatio.** Section 2 pins the IV clock as calendar minutes (T = (390 − m) ÷ 525,600), while
+  3.3's denominator σ̂1m · √(252 · 390) annualizes on TRADING minutes. The two are not the same unit: on a 0DTE contract
+  a calendar-clock IV is √(525,600 ÷ 98,280) = 2.31 × the trading-clock IV of the same quote. Pinned **[v0, A1]**:
+  VolRatio's σ_ATM is put on the trading-minute clock, σ_ATM,tr = σ_ATM,cal × √(98,280 ÷ 525,600) (identical to solving
+  the IV with T = (390 − m) ÷ 98,280). Every greek, Θ_5min and C_K is unchanged (each depends on σ√T alone).
+- **Disclosure.** The mismatch was found while smoke-testing the engine on one session (2025-04-07, Mode 1 candidate
+  bars 40–45: VolRatio 1.9–2.1 on the calendar clock, ≈ 0.8–0.9 on the trading clock). No signal count, touch, outcome
+  or baseline had been computed on any session; the change follows from the units, not from a result.
