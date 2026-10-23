@@ -114,3 +114,32 @@ displacement bar's close, row j + 1, inside a killzone); without the killzones (
 - No bootstrap (10 sessions: meaningless). Everything labelled **PREVIEW — 10 sessions, no verdict**; no finalist is chosen.
 - Integrity: every v0 setup and 5 no-trade sessions re-derived by separate plain-loop code (0 differences required); 3
   sessions rebuilt with the files cut at the entry minute, plus a control cut earlier.
+
+## Amendment 1 (2026-10-23)
+
+Committed alone, before any exploration setup, trade or P&L is computed. The owner's amendment.
+
+- **Reason.** v0 traded once in the 10 preview sessions. At that rate holdout B gives far fewer than the 80 trades its
+  pass needs: about 27 on its 269 full SPXW sessions (13 of the 28 months have SPXW chains; about 60 if all 28 had), so
+  v0 cannot pass B whatever its edge. The amendment rests on trade counts only, not on returns.
+- **Change 1.** The four ablations of section 3 (no HTF bias, no sweep, no FVG, no killzones) become finalist candidates
+  under the same rule as V1–V4: exploration mean % per trade > 0 and the underlying's signed return > 0. Finalists stay
+  v0 plus at most 2 candidates; k = the number of finalists (v0 included).
+- **Change 2.** A candidate is eligible only if its projected holdout-B trade count is ≥ 80. Projected count =
+  exploration trades per session × holdout-B sessions. The holdout-B sessions are counted from the SPXW files' dates
+  (`theta/data_full/chains/SPXW`), without opening them: 273 files in the 28 months (2022-12 21, 2023-05 22, 2023-11 21,
+  2024-05 22, 2024-06 19, 2024-07 22, 2024-08 22, 2024-11 20, 2025-08 21, 2025-11 19, 2026-03 22, 2026-04 21,
+  2026-08 21), less the 4 exchange half days among them by the calendar (2023-11-24, 2024-07-03, 2024-11-29,
+  2025-11-28) = **269 full sessions**. Every candidate's exploration count and projected B count is reported.
+- **Ranking.** Section 4 does not say how the at most 2 are picked when more qualify. Tie-break, a mechanical consequence
+  of Change 1 and not a new choice: **highest exploration mean % per trade**.
+- **Forward sessions.** The 9 sessions after 2026-10-09 (2026-10-12, 10-13, 10-14, 10-15, 10-16, 10-19, 10-20, 10-21,
+  10-22) are reported separately, apart from the exploration and both holdouts, and play no part in choosing
+  finalists. 2026-10-09, inside the exploration span, was read once by the preview (section 5).
+- **How the span is read (the preview's convention, section 5, carried over; not a rule change).** Full sessions only
+  (the calendar's half days out, as in the preview). No file dated before 2022-05-13 (holdout A) or inside the 28 months
+  is opened, even as context; a guard raises if one is. So the HTF daily history of a session starts at the first
+  session after the most recent held-out month before it (or at 2022-05-13), as the preview's started at 2026-09-01;
+  a session whose prior session is held out (the first session after each held-out month, and 2022-05-13) cannot form
+  PDH/PDL or the prior-session bars and is not run (listed). Trades per session = trades ÷ exploration sessions run.
+- **Nothing else changes.**
