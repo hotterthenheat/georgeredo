@@ -1,0 +1,1 @@
+all tests pass (no-lookahead: 47558 v1 decisions unchanged with every later bar truncated)
