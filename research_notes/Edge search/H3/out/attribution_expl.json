@@ -1,0 +1,9 @@
+{
+ "note": "exploratory, after the screen; no verdict",
+ "trades": 2208,
+ "mean_at_mid_no_fees": -20.166213768115938,
+ "median_at_mid": -20.749999999999996,
+ "win_rate_at_mid": 0.38813405797101447,
+ "mean_spread_and_fees": -141.35849576086957,
+ "mean_pnl_after_costs": -161.5247095289855
+}
