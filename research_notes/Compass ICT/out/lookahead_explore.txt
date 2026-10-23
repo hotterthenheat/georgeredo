@@ -1,0 +1,11 @@
+v0 2023-10-13 entry 14:01: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+V1 OTE 2023-09-05 entry 10:33: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+V2 out 14:00 2023-08-10 entry 10:48: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+V3 range gate 2025-10-09 entry 14:01: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+V4 5-min 2024-03-22 entry 14:01: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+A no HTF bias 2023-08-04 entry 14:54: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+A no sweep 2026-06-25 entry 09:50: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+A no FVG 2023-10-30 entry 10:03: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+A no killzones 2022-06-22 entry 11:04: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+v0 2025-05-30 entry 14:01: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+TOTAL: 10 sessions, 0 differences in 120 values at the entry cut; control 120 of 120 differ

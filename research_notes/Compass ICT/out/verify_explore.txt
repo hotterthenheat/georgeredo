@@ -1,0 +1,1 @@
+v0 re-derived by plain loops on 156 sessions (116 with a v0 trade, 40 seeded no-trade sessions): 255 setups (sweep bar, extreme, displacement bar, FVG zone, entry minute), 142 trades (strike, ask, every exit leg: size, minute, reason, bid; net; underlying bp), 40 no-trade sessions (bias, furthest stage); differences: 0
