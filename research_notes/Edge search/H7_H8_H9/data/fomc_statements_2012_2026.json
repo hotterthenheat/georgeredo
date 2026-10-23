@@ -1,0 +1,848 @@
+{
+ "note": "Scheduled FOMC statement dates 2012-2026 (the day the post-meeting statement was released), parsed on 2026-10-23 from the Federal Reserve Board's pages: the historical calendars https://www.federalreserve.gov/monetarypolicy/fomchistorical<YEAR>.htm (2012-2020; each meeting panel's \"Statement\" link monetary<YYYYMMDD>a.htm gives the release date) and the current calendar https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm (2021-2026). Unscheduled meetings, conference calls, notation votes and the cancelled 2020-03-17/18 meeting are listed apart under \"excluded\" and are not scheduled statements. Release times: 12:30 pm on 2012 press-conference days (e.g. https://www.federalreserve.gov/monetarypolicy/fomcpresconf20121212.htm: \"Released December 12, 2012 at 12:30 p.m.\"), 2:00 pm for every scheduled meeting from 2013-03-20 (https://www.federalreserve.gov/newsevents/pressreleases/monetary20130313a.htm: policy statements for all regularly scheduled meetings \"will now be released at 2 p.m.\"; https://www.federalreserve.gov/monetarypolicy/fomcpresconf20130320.htm: \"Released March 20, 2013 at 2:00 p.m.\"). time_et = \"14:00\" is set from 2013-03-20 on; before it time_et is \"not 14:00\" (12:30 pm on press-conference days, otherwise the pre-2013 afternoon time, not needed by the rule).",
+ "scheduled": [
+  {
+   "date": "2012-01-25",
+   "meeting": "January 24-25 Meeting - 2012",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2012.htm",
+   "time_et": "not 14:00"
+  },
+  {
+   "date": "2012-03-13",
+   "meeting": "March 13 Meeting - 2012",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2012.htm",
+   "time_et": "not 14:00"
+  },
+  {
+   "date": "2012-04-25",
+   "meeting": "April 24-25 Meeting - 2012",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2012.htm",
+   "time_et": "not 14:00"
+  },
+  {
+   "date": "2012-06-20",
+   "meeting": "June 19-20 Meeting - 2012",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2012.htm",
+   "time_et": "not 14:00"
+  },
+  {
+   "date": "2012-08-01",
+   "meeting": "July 31-August 1 Meeting - 2012",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2012.htm",
+   "time_et": "not 14:00"
+  },
+  {
+   "date": "2012-09-13",
+   "meeting": "September 12-13 Meeting - 2012",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2012.htm",
+   "time_et": "not 14:00"
+  },
+  {
+   "date": "2012-10-24",
+   "meeting": "October 23-24 Meeting - 2012",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2012.htm",
+   "time_et": "not 14:00"
+  },
+  {
+   "date": "2012-12-12",
+   "meeting": "December 11-12 Meeting - 2012",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2012.htm",
+   "time_et": "not 14:00"
+  },
+  {
+   "date": "2013-01-30",
+   "meeting": "January 29-30 Meeting - 2013",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2013.htm",
+   "time_et": "not 14:00"
+  },
+  {
+   "date": "2013-03-20",
+   "meeting": "March 19-20 Meeting - 2013",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2013.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2013-05-01",
+   "meeting": "April/May 30-1 Meeting - 2013",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2013.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2013-06-19",
+   "meeting": "June 18-19 Meeting - 2013",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2013.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2013-07-31",
+   "meeting": "July 30-31 Meeting - 2013",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2013.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2013-09-18",
+   "meeting": "September 17-18 Meeting - 2013",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2013.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2013-10-30",
+   "meeting": "October 29-30 Meeting - 2013",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2013.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2013-12-18",
+   "meeting": "December 17-18 Meeting - 2013",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2013.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2014-01-29",
+   "meeting": "January 28-29 Meeting - 2014",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2014.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2014-03-19",
+   "meeting": "March 18-19 Meeting - 2014",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2014.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2014-04-30",
+   "meeting": "April 29-30 Meeting - 2014",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2014.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2014-06-18",
+   "meeting": "June 17-18 Meeting - 2014",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2014.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2014-07-30",
+   "meeting": "July 29-30 Meeting - 2014",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2014.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2014-09-17",
+   "meeting": "September 16-17 Meeting - 2014",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2014.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2014-10-29",
+   "meeting": "October 28-29 Meeting - 2014",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2014.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2014-12-17",
+   "meeting": "December 16-17 Meeting - 2014",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2014.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2015-01-28",
+   "meeting": "January 27-28 Meeting - 2015",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2015.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2015-03-18",
+   "meeting": "March 17-18 Meeting - 2015",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2015.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2015-04-29",
+   "meeting": "April 28-29 Meeting - 2015",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2015.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2015-06-17",
+   "meeting": "June 16-17 Meeting - 2015",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2015.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2015-07-29",
+   "meeting": "July 28-29 Meeting - 2015",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2015.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2015-09-17",
+   "meeting": "September 16-17 Meeting - 2015",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2015.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2015-10-28",
+   "meeting": "October 27-28 Meeting - 2015",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2015.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2015-12-16",
+   "meeting": "December 15-16 Meeting - 2015",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2015.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2016-01-27",
+   "meeting": "January 26-27 Meeting - 2016",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2016.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2016-03-16",
+   "meeting": "March 15-16 Meeting - 2016",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2016.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2016-04-27",
+   "meeting": "April 26-27 Meeting - 2016",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2016.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2016-06-15",
+   "meeting": "June 14-15 Meeting - 2016",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2016.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2016-07-27",
+   "meeting": "July 26-27 Meeting - 2016",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2016.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2016-09-21",
+   "meeting": "September 20-21 Meeting - 2016",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2016.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2016-11-02",
+   "meeting": "November 1-2 Meeting - 2016",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2016.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2016-12-14",
+   "meeting": "December 13-14 Meeting - 2016",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2016.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2017-02-01",
+   "meeting": "Jan/Feb 31-1 Meeting - 2017",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2017.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2017-03-15",
+   "meeting": "March 14-15 Meeting - 2017",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2017.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2017-05-03",
+   "meeting": "May 2-3 Meeting - 2017",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2017.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2017-06-14",
+   "meeting": "June 13-14 Meeting - 2017",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2017.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2017-07-26",
+   "meeting": "July 25-26 Meeting - 2017",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2017.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2017-09-20",
+   "meeting": "September 19-20 Meeting - 2017",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2017.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2017-11-01",
+   "meeting": "Oct/Nov 31-1 Meeting - 2017",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2017.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2017-12-13",
+   "meeting": "December 12-13 Meeting - 2017",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2017.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2018-01-31",
+   "meeting": "January 30-31 Meeting - 2018",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2018.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2018-03-21",
+   "meeting": "March 20-21 Meeting - 2018",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2018.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2018-05-02",
+   "meeting": "May 1-2 Meeting - 2018",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2018.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2018-06-13",
+   "meeting": "June 12-13 Meeting - 2018",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2018.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2018-08-01",
+   "meeting": "Jul/Aug 31-1 Meeting - 2018",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2018.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2018-09-26",
+   "meeting": "September 25-26 Meeting - 2018",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2018.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2018-11-08",
+   "meeting": "November 7-8 Meeting - 2018",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2018.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2018-12-19",
+   "meeting": "December 18-19 Meeting - 2018",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2018.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2019-01-30",
+   "meeting": "January 29-30 Meeting - 2019",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2019-03-20",
+   "meeting": "March 19-20 Meeting - 2019",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2019-05-01",
+   "meeting": "April/May 30-1 Meeting - 2019",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2019-06-19",
+   "meeting": "June 18-19 Meeting - 2019",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2019-07-31",
+   "meeting": "July 30-31 Meeting - 2019",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2019-09-18",
+   "meeting": "September 17-18 Meeting - 2019",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2019-10-30",
+   "meeting": "October 29-30 Meeting - 2019",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2019-12-11",
+   "meeting": "December 10-11 Meeting - 2019",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2020-01-29",
+   "meeting": "January 28-29 Meeting - 2020",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2020-04-29",
+   "meeting": "April 28-29 Meeting - 2020",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2020-06-10",
+   "meeting": "June 9-10 Meeting - 2020",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2020-07-29",
+   "meeting": "July 28-29 Meeting - 2020",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2020-09-16",
+   "meeting": "September 15-16 Meeting - 2020",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2020-11-05",
+   "meeting": "November 4-5 Meeting - 2020",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2020-12-16",
+   "meeting": "December 15-16 Meeting - 2020",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2021-01-27",
+   "meeting": "January 26-27 - 2021",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2021-03-17",
+   "meeting": "March 16-17* - 2021",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2021-04-28",
+   "meeting": "April 27-28 - 2021",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2021-06-16",
+   "meeting": "June 15-16* - 2021",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2021-07-28",
+   "meeting": "July 27-28 - 2021",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2021-09-22",
+   "meeting": "September 21-22* - 2021",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2021-11-03",
+   "meeting": "November 2-3 - 2021",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2021-12-15",
+   "meeting": "December 14-15* - 2021",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2022-01-26",
+   "meeting": "January 25-26 - 2022",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2022-03-16",
+   "meeting": "March 15-16* - 2022",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2022-05-04",
+   "meeting": "May 3-4 - 2022",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2022-06-15",
+   "meeting": "June 14-15* - 2022",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2022-07-27",
+   "meeting": "July 26-27 - 2022",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2022-09-21",
+   "meeting": "September 20-21* - 2022",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2022-11-02",
+   "meeting": "November 1-2 - 2022",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2022-12-14",
+   "meeting": "December 13-14* - 2022",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2023-02-01",
+   "meeting": "Jan/Feb 31-1 - 2023",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2023-03-22",
+   "meeting": "March 21-22* - 2023",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2023-05-03",
+   "meeting": "May 2-3 - 2023",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2023-06-14",
+   "meeting": "June 13-14* - 2023",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2023-07-26",
+   "meeting": "July 25-26 - 2023",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2023-09-20",
+   "meeting": "September 19-20* - 2023",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2023-11-01",
+   "meeting": "Oct/Nov 31-1 - 2023",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2023-12-13",
+   "meeting": "December 12-13* - 2023",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2024-01-31",
+   "meeting": "January 30-31 - 2024",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2024-03-20",
+   "meeting": "March 19-20* - 2024",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2024-05-01",
+   "meeting": "Apr/May 30-1 - 2024",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2024-06-12",
+   "meeting": "June 11-12* - 2024",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2024-07-31",
+   "meeting": "July 30-31 - 2024",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2024-09-18",
+   "meeting": "September 17-18* - 2024",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2024-11-07",
+   "meeting": "November 6-7 - 2024",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2024-12-18",
+   "meeting": "December 17-18* - 2024",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2025-01-29",
+   "meeting": "January 28-29 - 2025",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2025-03-19",
+   "meeting": "March 18-19* - 2025",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2025-05-07",
+   "meeting": "May 6-7 - 2025",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2025-06-18",
+   "meeting": "June 17-18* - 2025",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2025-07-30",
+   "meeting": "July 29-30 - 2025",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2025-09-17",
+   "meeting": "September 16-17* - 2025",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2025-10-29",
+   "meeting": "October 28-29 - 2025",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2025-12-10",
+   "meeting": "December 9-10* - 2025",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2026-01-28",
+   "meeting": "January 27-28 - 2026",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2026-03-18",
+   "meeting": "March 17-18* - 2026",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2026-04-29",
+   "meeting": "April 28-29 - 2026",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2026-06-17",
+   "meeting": "June 16-17* - 2026",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2026-07-29",
+   "meeting": "July 28-29 - 2026",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": "2026-09-16",
+   "meeting": "September 15-16* - 2026",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "time_et": "14:00"
+  },
+  {
+   "date": null,
+   "meeting": "April 27-28 - 2027",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "status": "not yet held (after 2026-10-22)"
+  },
+  {
+   "date": null,
+   "meeting": "December 7-8* - 2027",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "status": "not yet held (after 2026-10-22)"
+  },
+  {
+   "date": null,
+   "meeting": "December 8-9* - 2026",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "status": "not yet held (after 2026-10-22)"
+  },
+  {
+   "date": null,
+   "meeting": "January 26-27 - 2027",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "status": "not yet held (after 2026-10-22)"
+  },
+  {
+   "date": null,
+   "meeting": "July 27-28 - 2027",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "status": "not yet held (after 2026-10-22)"
+  },
+  {
+   "date": null,
+   "meeting": "June 8-9* - 2027",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "status": "not yet held (after 2026-10-22)"
+  },
+  {
+   "date": null,
+   "meeting": "March 16-17* - 2027",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "status": "not yet held (after 2026-10-22)"
+  },
+  {
+   "date": null,
+   "meeting": "October 26-27 - 2027",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "status": "not yet held (after 2026-10-22)"
+  },
+  {
+   "date": null,
+   "meeting": "October 27-28 - 2026",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "status": "not yet held (after 2026-10-22)"
+  },
+  {
+   "date": null,
+   "meeting": "September 14-15* - 2027",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "status": "not yet held (after 2026-10-22)"
+  }
+ ],
+ "excluded": [
+  {
+   "meeting": "October 16 (unscheduled) - 2013",
+   "statement": [],
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2013.htm",
+   "why": "not a scheduled meeting statement"
+  },
+  {
+   "meeting": "March 4 (unscheduled) - 2014",
+   "statement": [],
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2014.htm",
+   "why": "not a scheduled meeting statement"
+  },
+  {
+   "meeting": "October 4 (unscheduled) - 2019",
+   "statement": [
+    "2019-10-11"
+   ],
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm",
+   "why": "not a scheduled meeting statement"
+  },
+  {
+   "meeting": "March 2 (unscheduled) Meeting - 2020",
+   "statement": [
+    "2020-03-03"
+   ],
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "why": "not a scheduled meeting statement"
+  },
+  {
+   "meeting": "March 15 (unscheduled) Meeting - 2020",
+   "statement": [
+    "2020-03-15"
+   ],
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "why": "not a scheduled meeting statement"
+  },
+  {
+   "meeting": "March 17-18 (cancelled) Meeting - 2020",
+   "statement": [],
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "why": "not a scheduled meeting statement"
+  },
+  {
+   "meeting": "March 19 (notation vote) - 2020",
+   "statement": [],
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "why": "not a scheduled meeting statement"
+  },
+  {
+   "meeting": "March 23 (notation vote) - 2020",
+   "statement": [
+    "2020-03-23"
+   ],
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "why": "not a scheduled meeting statement"
+  },
+  {
+   "meeting": "March 31 (notation vote) - 2020",
+   "statement": [],
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "why": "not a scheduled meeting statement"
+  },
+  {
+   "meeting": "August 27 (notation vote) - 2020",
+   "statement": [
+    "2020-08-27"
+   ],
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm",
+   "why": "not a scheduled meeting statement"
+  },
+  {
+   "meeting": "August 22 (notation vote) - 2025",
+   "statement": [
+    "2025-08-22"
+   ],
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "why": "not a scheduled meeting statement"
+  }
+ ],
+ "crosscheck": "2022-01 to 2026-10-22: the 38 dates equal data/macro_events_2022_2027.json FOMC_DECISION dates: True"
+}
