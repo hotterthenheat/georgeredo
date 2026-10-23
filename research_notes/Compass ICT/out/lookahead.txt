@@ -1,0 +1,4 @@
+v0 2026-10-14 entry 09:50: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+A no HTF bias 2026-10-15 entry 09:43: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+A no HTF bias 2026-10-16 entry 14:01: cut at the entry minute -> 0 of 12 differ; control cut a minute earlier -> 12 of 12 differ (setup gone)
+TOTAL: 0 differences in 36 values at the entry cut; control 36 of 36 differ
