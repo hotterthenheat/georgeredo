@@ -41,6 +41,18 @@ run), in this order, stopping at the first failure:
                missing anything fails loudly (`DAILY-FORWARD FAIL <day> features-<step>`, exit 1, nothing written for it);
                the paper tracker's append above is not held back by it. forward/FORWARD_REPORT.md is rewritten each run:
                sessions counted against each model's N, "no verdict" until N.
+  8. edge H5 / H6 (on by default from the command line; --no-edge skips it): the forward-only tests of the edge-search
+               queue's H5 and H6 (research_notes/Edge search/H5_H6/PREREG_H5.md, PREREG_H6.md, e114e30; the code
+               edge_forward.py there) on every complete forward session. H5 (from 2026-10-23): 10 SPY same-day ATM straddles
+               sold at the 15:30 bids against 1 SPXW straddle bought at the asks, all four legs closed at 15:58 — read from
+               the layout this job already holds, nothing fetched. H6 (each month's first full session from November 2026):
+               SPY and QQQ 0.30/0.15-delta put spreads 30–45 days out, closed on the first full session 21 days before
+               expiry — on END-OF-DAY option quotes, which steps 1–7 do not fetch: step 8 asks the run's own --source for
+               them (the terminal's /option/history/eod, or the SDK's option_history_eod; every expiration on an entry
+               session, the one expiration on an exit session — at most four calls a month), kept as answered under
+               <parquet-root>/edge_forward/eod/ and never asked twice. A session missing anything fails loudly
+               (`DAILY-FORWARD FAIL <day> edge-<step>`, exit 1, nothing written for it); the steps before are not held
+               back by it. forward/EDGE_FORWARD_REPORT.md is rewritten each run: counted against N, "no verdict" until N.
 
 A NEW MACHINE: the sessions the cumulative report already lists but this replay root does not hold (the owner's PC
 with the committed report) go through the same steps first — fetched if the layout lacks them, replayed — so the
@@ -58,6 +70,7 @@ eod_recorder.README.md "The daily forward job".
 
     python3 -I scripts/daily_forward.py [--source terminal|sdk] [--parquet-root R] [--backtest-data DIR] [--cumulative FILE]
                                         [--historical-from REPORT] [--day D] [--max-days N] [--no-uw] [--status]
+                                        [--no-features] [--no-cboe] [--no-edge]
 """
 from __future__ import annotations
 
@@ -82,7 +95,7 @@ import paper_audit as P  # noqa: E402
 import paper_backtest as B  # noqa: E402
 import paper_tracker as T  # noqa: E402
 
-JOB_VERSION = 'daily-forward-2026-10-22.2'
+JOB_VERSION = 'daily-forward-2026-10-23.3'
 READY_AFTER = '17:30'               # a session is pending once its official close is out and the 17:30 decision price has passed
 SCHEDULE_NY = '17:45'
 THETA_GAP_END_MIN = 105             # 00:00–01:45 New York: Theta serves no previous day; the SDK never logs in then
@@ -199,6 +212,30 @@ class SdkSource:
         if kind == 'under':
             return c.stock_history_ohlc(symbol=sym, interval='1m', date=D)
         return c.index_history_price(symbol=sym, interval='1m', date=D)
+
+    def eod(self, sym: str, day: str, expiration: str | None) -> list[dict]:
+        """step 8's end-of-day option quotes of `sym` on `day` — every expiration (None) or one — through the same login
+        (fetch_h3's call: option_history_eod, start_date = end_date = day). → the rows; EdgeFetchError when none come"""
+        EF = edge_module()
+        D = dt.date.fromisoformat(day)
+        exp = '*' if expiration is None else dt.date.fromisoformat(expiration)
+        err = None
+        for attempt in range(self.retries):
+            try:
+                df = self.client().option_history_eod(start_date=D, end_date=D, symbol=sym, expiration=exp)
+                if df is None or getattr(df, 'height', 0) == 0:
+                    raise EF.EdgeFetchError('the SDK answered no rows')
+                return df.to_dicts()
+            except EF.EdgeFetchError:
+                raise
+            except Exception as e:  # noqa: BLE001 — never with the key in it
+                name = type(e).__name__
+                err = red(f'{name}: {e}')[:200]
+                if name == 'NoDataFoundError' or 'UNAUTHENTICATED' in str(e).upper():
+                    break
+                if attempt + 1 < self.retries:
+                    self.sleep(2.0 * (attempt + 1))
+        raise EF.EdgeFetchError(err or 'no answer')
 
     def fetch(self, day: str, staging: Path, norm_roots: tuple = ()) -> dict:
         """the seven files of `day` into `staging` (its layout and manifest), each shaped as the stored dataset was
@@ -385,6 +422,9 @@ class Job:
     features_report: Path | None = None     # default: …/forward/FORWARD_REPORT.md
     features_work: Path | None = None       # default: <replay root>/_compass_features
     use_cboe: bool = True
+    edge: bool = False                      # step 8 (the command line turns it on unless --no-edge)
+    edge_folder: Path | None = None         # default: research_notes/Edge search/H5_H6/forward
+    edge_store: Path | None = None          # default: <parquet root>/edge_forward/eod
 
     def __post_init__(self):
         self.parquet_root, self.replay_root, self.cumulative = Path(self.parquet_root), Path(self.replay_root), Path(self.cumulative)
@@ -453,8 +493,78 @@ def features_step(job: Job, res: dict, log: logging.Logger, spx_fetch=None) -> N
         res.update(rc=1, failure=res['failure'] or f'features: {red(type(e).__name__)}')
 
 
+def edge_module():
+    """research_notes/Edge search/H5_H6/edge_forward.py (imported only when step 8 runs)"""
+    d = str(R.REPO / 'research_notes' / 'Edge search' / 'H5_H6')
+    if d not in sys.path:
+        sys.path.insert(0, d)
+    import edge_forward as EF  # noqa: E402
+    return EF
+
+
+def terminal_eod(theta_fetcher=None):
+    """step 8's end-of-day fetch through the Theta Terminal (the run's --source terminal): GET /option/history/eod with
+    symbol, expiration (* = every one) and start_date = end_date = the day, format=ndjson, 127.0.0.1 only, no key —
+    the fetcher made on the first call and the terminal's own status asked first"""
+    EF = edge_module()
+    box = {}
+
+    def fetch(sym: str, day: str, expiration: str | None) -> list[dict]:
+        if 'th' not in box:
+            th = theta_fetcher or B.ThetaFetch(os.environ.get('THETA_BASE') or B.THETA_BASE)
+            ok, word = th.terminal_status()
+            if not ok:
+                raise EF.EdgeFetchError(f'the Theta Terminal on {th.base} is not CONNECTED ({word}) — nothing asked')
+            box['th'] = th
+        d8 = day.replace('-', '')
+        ans = box['th'].get('/option/history/eod', {'symbol': sym, 'expiration': '*' if expiration is None else expiration.replace('-', ''),
+                                                    'start_date': d8, 'end_date': d8})
+        if not ans.ok:
+            raise EF.EdgeFetchError(red(f'{ans.status}: {ans.error}')[:300])
+        if not ans.rows:
+            raise EF.EdgeFetchError('HTTP 200 with no rows')
+        return ans.rows
+    return fetch
+
+
+def run_edge(job: Job, log: logging.Logger, closes: P.OfficialCloses | None = None, theta_fetcher=None, sdk: SdkSource | None = None,
+             edge_fetch=None) -> dict:
+    """step 8: every whole forward session (the replay root's complete sessions) through edge_forward.run"""
+    EF = edge_module()
+    comp = B.complete_sessions(job.replay_root, job.keys, EF.H5_START, '9999-12-31')[0]
+    closes = closes if closes is not None else P.OfficialCloses(uw_dirs=(job.official_dir,))
+    if edge_fetch is None:
+        if job.source == 'sdk':
+            sdk = sdk or SdkSource(log=log)
+            edge_fetch = sdk.eod
+        else:
+            edge_fetch = terminal_eod(theta_fetcher)
+    return EF.run(comp, job.parquet_root, lambda nm, d: closes.get(nm, d)[0], eod_fetch=edge_fetch,
+                  store=job.edge_store or (job.parquet_root / EF.EOD_STORE), folder=job.edge_folder, log=log)
+
+
+def edge_step(job: Job, res: dict, log: logging.Logger, closes=None, theta_fetcher=None, sdk=None, edge_fetch=None) -> None:
+    """step 8 into the run's result: each failure is one DAILY-FORWARD FAIL line and rc 1, never a half-written row"""
+    try:
+        er = run_edge(job, log, closes, theta_fetcher, sdk, edge_fetch)
+        res['edge_added'] = {k: er[k] for k in ('h5_added', 'h6_entries', 'h6_trades')}
+        res['edge_calls'] = er['calls']
+        for f in er['failures']:
+            day_, _, why_ = f.partition(' ')
+            step_, _, why_ = why_.partition(': ')
+            log.error('DAILY-FORWARD FAIL %s edge-%s: %s', day_, step_, red(why_)[:400])
+        if er['failures']:
+            res.update(rc=1, failure=res['failure'] or f'edge {red(er["failures"][0])}'[:400])
+        else:
+            log.info('edge H5/H6: H5 %s; H6 entries %s, closed %s; %d end-of-day calls', ' '.join(er['h5_added']) or 'nothing new',
+                     ' '.join(er['h6_entries']) or 'none', ' '.join(er['h6_trades']) or 'none', er['calls'])
+    except Exception as e:  # noqa: BLE001
+        log.error('DAILY-FORWARD FAIL - edge: %s', red(f'{type(e).__name__}: {e}')[:400])
+        res.update(rc=1, failure=res['failure'] or f'edge: {red(type(e).__name__)}')
+
+
 def run_job(job: Job, now: dt.datetime | None = None, log: logging.Logger | None = None, theta_fetcher=None, sdk: SdkSource | None = None,
-            uw_client=None, closes: P.OfficialCloses | None = None, window: str | None = None, spx_fetch=None) -> dict:
+            uw_client=None, closes: P.OfficialCloses | None = None, window: str | None = None, spx_fetch=None, edge_fetch=None) -> dict:
     """One run. → {'rc': 0 ok or nothing to do | 1 a failure | 2 refused, 'pending', 'completed', 'appended', 'failure',
     'uw_calls', 'logins', 'fetched'}"""
     now = now or dt.datetime.now(R.UTC)
@@ -490,6 +600,8 @@ def run_job(job: Job, now: dt.datetime | None = None, log: logging.Logger | None
                  len(listed), job.cumulative.name, READY_AFTER)
         if job.features:                     # a session the tracker finished earlier may still wait for step 7
             features_step(job, res, log, spx_fetch)
+        if job.edge:                         # … and for step 8 (an H6 exit falls weeks after its entry)
+            edge_step(job, res, log, closes, theta_fetcher, sdk, edge_fetch)
         return res
     log.info('daily forward %s (%s): pending %s%s', JOB_VERSION, job.source, ' '.join(res['pending']) or '—',
              f"; listed but not in this replay root, rebuilt first: {' '.join(rebuild)}" if rebuild else '')
@@ -569,6 +681,8 @@ def run_job(job: Job, now: dt.datetime | None = None, log: logging.Logger | None
             res.update(rc=1, failure=f'append: {red(e)}'[:400])
     if job.features:
         features_step(job, res, log, spx_fetch)
+    if job.edge:
+        edge_step(job, res, log, closes, theta_fetcher, sdk, edge_fetch)
     if res['rc'] == 0:
         log.info('DAILY-FORWARD OK: %d session(s) completed, %d appended (%s), %d UW calls, %d Theta logins', len(res['completed']),
                  len(res['appended']), ' '.join(res['appended']) or '—', res['uw_calls'], res['logins'])
@@ -601,6 +715,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument('--status', action='store_true', help='what the cumulative report holds and what is pending; asks nothing')
     p.add_argument('--no-features', action='store_true', help='skip step 7 (the Compass features forward test)')
     p.add_argument('--no-cboe', action='store_true', help='step 7 asks Cboe nothing: the official SPX close must be on disk already')
+    p.add_argument('--no-edge', action='store_true', help='skip step 8 (the edge-search H5 and H6 forward tests)')
     a = p.parse_args(argv)
     if not a.parquet_root:
         print('--parquet-root (or PAPER_PARQUET_ROOT) names the stored Parquet layout', file=sys.stderr)
@@ -608,7 +723,8 @@ def main(argv: list[str] | None = None) -> int:
     job = Job(Path(a.parquet_root), Path(a.backtest_data), Path(a.cumulative), a.source,
               tuple(k.strip() for k in a.candidates.split(',') if k.strip()), Path(a.official_dir), max_days=a.max_days, day=a.day,
               prior_check=not a.no_prior_check, use_uw=not a.no_uw, historical_from=Path(a.historical_from) if a.historical_from else None,
-              decision_prices=B.read_decision_prices(a.decision_prices), features=not a.no_features, use_cboe=not a.no_cboe)
+              decision_prices=B.read_decision_prices(a.decision_prices), features=not a.no_features, use_cboe=not a.no_cboe,
+              edge=not a.no_edge)
     if a.status:
         print(json.dumps(status(job), indent=1))
         return 0
