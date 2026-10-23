@@ -31,3 +31,14 @@ This file fixes the order and the rules of that search before any queued hypothe
 5. H6 — volatility risk premium at 30–45 DTE: monthly short put spreads on SPY/QQQ (S17 read 2012–2026 put-writing and
    covered calls: forward-only).
 Anything added later goes to the end of the queue with its reason, never ahead of an untested entry.
+
+## Additions (2026-10-23, after H1, H3 and H4 failed and H5/H6 went forward-only; appended before any of these is computed)
+Reason: the queue's historical tests are exhausted with no pass. These are calendar effects with long published records on
+the index itself, cheap to trade in stock, and not read by any study in this repo (each prereg must confirm that).
+7. H7 — pre-FOMC drift (Lucca & Moench 2015): long 100 shares SPY / QQQ from the close two sessions before... exactly as its
+   prereg states (the published window: the 24 hours before the 2:00 pm announcement), scheduled FOMC dates only.
+8. H8 — turn of the month (Ariel 1987; Lakonishok & Smidt 1988; McConnell & Xu 2008): long 100 shares SPY / QQQ from the close
+   of the last trading day before month end... exactly as its prereg states (the published window: the last trading day
+   through the third trading day of the new month).
+9. H9 — overnight drift (Cliff, Cooper & Gulen 2008; Kelly & Clark 2011): long 100 shares SPY / QQQ every close → next
+   open. H1 already read its components (longs and shorts at the close → open), so H9 is FORWARD-ONLY from 2026-10-23.
