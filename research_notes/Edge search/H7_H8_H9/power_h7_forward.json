@@ -1,0 +1,109 @@
+{
+ "trades_file": "research_notes/Edge search/H7_H8_H9/out/h7_trades.csv",
+ "trades_sha256": "c1af017ae6932dbd6f66e4fcb9fd372eec3851090310770e824447e9c79e0e50",
+ "z_sum": 2.801585218112968,
+ "shrink": 0.5,
+ "block": 20,
+ "boot_n": 2000,
+ "seed": 20261023,
+ "outer": 2000,
+ "first_position": 3,
+ "names": {
+  "SPY": {
+   "trades": 77,
+   "span": [
+    "2017-02-01",
+    "2026-09-16"
+   ],
+   "mean_bp": 19.008910344870323,
+   "sd_bp": 64.901021375551,
+   "mean_usd": 70.43389610389595,
+   "sd_usd": 260.83093818327546,
+   "lag1_corr": 0.13236266835552826,
+   "gap_weekdays": {
+    "min": 29,
+    "max": 65,
+    "mean": 33.026315789473685
+   },
+   "mu_bp": 9.504455172435161,
+   "N0": 366,
+   "power_steps": [
+    [
+     366,
+     0.821
+    ]
+   ],
+   "N": 366,
+   "power_at_N": 0.821,
+   "years_at_8_a_year": 45.75,
+   "forward_sessions_at_N": 12070,
+   "mu_usd_at_2026_10_22_close": 72.61023573533568,
+   "for_reading": {
+    "Song 2016-2023 (overnight gap +0.19 % and open-to-release -0.03 %)": {
+     "mu_bp_net": 15.8,
+     "N_formula": 133
+    },
+    "Hu, Pan, Wang & Zhu 2012-2018 (close to release - 5 min)": {
+     "mu_bp_net": 3.76,
+     "N_formula": 2339
+    },
+    "Lucca & Moench 1994-2011 (24 h before)": {
+     "mu_bp_net": 48.8,
+     "N_formula": 14
+    },
+    "the test mean, unshrunk": {
+     "mu_bp_net": 19.008910344870323,
+     "N_formula": 92
+    }
+   }
+  },
+  "QQQ": {
+   "trades": 108,
+   "span": [
+    "2013-03-20",
+    "2026-09-16"
+   ],
+   "mean_bp": 21.048662044034874,
+   "sd_bp": 82.4899030253921,
+   "mean_usd": 69.58898148148171,
+   "sd_usd": 268.02728675755435,
+   "lag1_corr": 0.1860092657275785,
+   "gap_weekdays": {
+    "min": 29,
+    "max": 65,
+    "mean": 32.89719626168224
+   },
+   "mu_bp": 10.524331022017437,
+   "N0": 483,
+   "power_steps": [
+    [
+     483,
+     0.826
+    ]
+   ],
+   "N": 483,
+   "power_at_N": 0.826,
+   "years_at_8_a_year": 60.375,
+   "forward_sessions_at_N": 15839,
+   "mu_usd_at_2026_10_22_close": 74.14075475080625,
+   "for_reading": {
+    "Song 2016-2023 (overnight gap +0.19 % and open-to-release -0.03 %)": {
+     "mu_bp_net": 15.8,
+     "N_formula": 214
+    },
+    "Hu, Pan, Wang & Zhu 2012-2018 (close to release - 5 min)": {
+     "mu_bp_net": 3.76,
+     "N_formula": 3778
+    },
+    "Lucca & Moench 1994-2011 (24 h before)": {
+     "mu_bp_net": 48.8,
+     "N_formula": 23
+    },
+    "the test mean, unshrunk": {
+     "mu_bp_net": 21.048662044034874,
+     "N_formula": 121
+    }
+   }
+  }
+ }
+}
