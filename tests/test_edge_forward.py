@@ -13,6 +13,15 @@ idempotent; H6's calendar (entry and exit sessions), expiration, strikes, fills,
 source, each answer asked once and kept as answered, its failures loud; the months counted in order; no verdict before N,
 the verdict at exactly N on the first N, written once; the terminal path asks /option/history/eod on 127.0.0.1 with no
 key; the daily job runs step 8 after the tracker, once, and a step-8 failure keeps the tracker's append.
+
+H7 and H9 (research_notes/Edge search/H7_H8_H9/forward_h7_h9.py, against FORWARD_RULE_H7.md fcc1f4d and PREREG_H9.md
+edca472): the N, costs, starts and seed in the code are the rules' and power_h7_forward.py reproduces N; the forward rule
+was committed alone; the FOMC calendar lookup (the macro calendar against the committed list, a disagreement loud, the
+calendar's and the holidays' ends loud); golden rows from made-up quotes (H7 at the 13:58 close, H9 at the next 09:30 open,
+1× and 2×); a missing 13:58 bar excludes the meeting, any other missing input fails loudly and writes nothing, an official
+close not from UW is refused; dividends paid by ex-date, never assumed past the table's complete_through or without an
+amount; idempotent append; no verdict before N, the verdict at exactly N on the first N, written once; the checkpoint every
+8 trades labelled no verdict; the daily job asks a half day's close and bars for H9 (terminal) and says so on the SDK.
 """
 from __future__ import annotations
 
@@ -441,19 +450,22 @@ def test_the_daily_job_runs_step_8_after_the_tracker_once_and_keeps_its_append_o
     try:
         with tempfile.TemporaryDirectory() as d:
             job, log, lines, uw, closes = TP.job_pieces(d)
-            job.edge, job.edge_folder = True, Path(d) / 'edge'
+            job.edge, job.edge_folder, job.h7h9_folder = True, Path(d) / 'edge', Path(d) / 'h7h9'
             asked = []
             res = DF.run_job(job, now=TP.JOB_NOW, log=log, theta_fetcher=term.fetcher(), uw_client=uw, closes=closes,
                              edge_fetch=lambda *a: asked.append(a) or [])
             # 2026-10-22 is the tracker's session but before H5's start and no H6 entry: step 8 runs, adds nothing, asks nothing
             assert res['rc'] == 0 and res['appended'] == [TP.JOB_DAY] and res['edge_added'] == {'h5_added': [], 'h6_entries': [], 'h6_trades': []}, (res, lines.lines[-5:])
             assert not asked and res['edge_calls'] == 0 and '| 0 / 1,326 |' in (job.edge_folder / 'EDGE_FORWARD_REPORT.md').read_text()
+            # H7 / H9 run too: 2026-10-22 is before their series, so nothing is added and the report says no verdict
+            assert res['edge_h7h9_added'] == {'h7': [], 'h9': []}, res
+            assert '| H7 | SPY | 0 / 366 |' in (job.h7h9_folder / 'H7_H9_FORWARD_REPORT.md').read_text()
             again = DF.run_job(job, now=TP.JOB_NOW + dt.timedelta(hours=1), log=log, theta_fetcher=term.fetcher(), uw_client=uw, closes=closes,
                                edge_fetch=lambda *a: asked.append(a) or [])
             assert again['rc'] == 0 and again['edge_added']['h5_added'] == [] and not asked
         with tempfile.TemporaryDirectory() as d:
             job, log, lines, uw, closes = TP.job_pieces(d)
-            job.edge, job.edge_folder = True, Path(d) / 'edge'
+            job.edge, job.edge_folder, job.h7h9_folder = True, Path(d) / 'edge', Path(d) / 'h7h9'
             job.edge_folder.mkdir()
             (job.edge_folder / 'h5_sessions.csv').write_text('not,this,file\n1,2,3\n')
             res = DF.run_job(job, now=TP.JOB_NOW, log=log, theta_fetcher=term.fetcher(), uw_client=uw, closes=closes)
@@ -461,6 +473,286 @@ def test_the_daily_job_runs_step_8_after_the_tracker_once_and_keeps_its_append_o
             assert any(re.search(r'DAILY-FORWARD FAIL - edge', l) for l in lines.lines), lines.lines[-5:]
     finally:
         term.close()
+
+
+# ---- H7 and H9 (research_notes/Edge search/H7_H8_H9/forward_h7_h9.py) ---------------------------------------------------------------------
+
+H7DIR = REPO / 'research_notes' / 'Edge search' / 'H7_H8_H9'
+sys.path.insert(0, str(H7DIR))
+import forward_h7_h9 as FH  # noqa: E402
+
+
+def test_h7_h9_the_rules_in_the_code_are_the_forward_rule_and_the_prereg():
+    fr = (H7DIR / 'FORWARD_RULE_H7.md').read_text()
+    p9 = (H7DIR / 'PREREG_H9.md').read_text()
+    assert FH.N_RULE == {('H7', 'SPY'): 366, ('H7', 'QQQ'): 483, ('H9', 'SPY'): 7940, ('H9', 'QQQ'): 7940}
+    assert '| SPY | 77 | 19.01 | 64.90 | 9.50 | **366** |' in fr and '| QQQ | 108 | 21.05 | 82.49 | 10.52 | **483** |' in fr
+    assert '**N = 7,940 sessions for both names**' in p9 or 'N = 7,940 sessions for both names' in p9
+    assert FH.H7_COST == {'1x': 1.50, '2x': 3.00} and FH.H9_COST == {'1x': 2.00, '2x': 4.00} and FH.H7_EXIT_J == 268
+    assert (FH.BLOCK, FH.BOOT_N, FH.SEED, FH.H7_CHECKPOINT) == (20, 2000, 20261023, 8)
+    assert FH.H7_START == '2026-10-28' and FH.SERIES_START == '2026-10-23'
+    pw = json.loads((H7DIR / 'power_h7_forward.json').read_text())
+    assert {nm: pw['names'][nm]['N'] for nm in ('SPY', 'QQQ')} == {'SPY': 366, 'QQQ': 483}
+    try:
+        names = subprocess.run(['git', '-C', str(REPO), 'show', '--name-only', '--format=', 'fcc1f4d'], capture_output=True, text=True,
+                               check=True).stdout.split('\n')
+    except Exception as e:  # noqa: BLE001
+        skip(f'forward rule commit: git cannot show fcc1f4d here ({type(e).__name__})')
+        return
+    assert sorted(x for x in names if x.strip()) == sorted(f'research_notes/Edge search/H7_H8_H9/{f}' for f in
+                                                           ('FORWARD_RULE_H7.md', 'power_h7_forward.json', 'power_h7_forward.py'))
+
+
+def test_h7_the_power_script_reproduces_N():
+    import importlib.util
+    import numpy as np
+    spec = importlib.util.spec_from_file_location('power_h7_forward', H7DIR / 'power_h7_forward.py')
+    PW = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(PW)
+    t = pl.read_csv(PW.TRADES).filter(pl.col('net_1x').is_not_null())
+    for nm, n in (('SPY', 366), ('QQQ', 483)):
+        u = t.filter(pl.col('name') == nm).sort('A')
+        x = (u['net_1x'] / (100.0 * u['C_prev']) * 1e4).to_numpy()
+        assert PW.n0(float(x.std(ddof=1)), 0.5 * float(x.mean())) == n
+        a = np.array(u['A'].to_list(), dtype='datetime64[D]')
+        assert PW.power(x, 0.5 * float(x.mean()), np.busday_count(a[:-1], a[1:]), n) >= 0.80
+
+
+def test_h7_the_fomc_calendar_lookup():
+    cal, end = FH.fomc_calendar()
+    assert [r['date'] for r in cal[:4]] == ['2026-10-28', '2026-12-09', '2027-01-27', '2027-03-17'] and end == '2027-12-31'
+    assert all(r['time_et'] == '14:00' for r in cal) and len(cal) == 10
+    assert FH.meeting_end('October 27-28 - 2026') == '2026-10-28' and FH.meeting_end('June 8-9* - 2027') == '2027-06-09'
+    assert FH.meeting_end('April 30-May 1 - 2024') == '2024-05-01' and FH.meeting_end('nothing') is None
+    with tempfile.TemporaryDirectory() as d:                 # a calendar missing a meeting the committed list has: loud
+        rows = [r for r in json.loads(FH.MACRO.read_text()) if r['date'] != '2027-06-09']
+        f = Path(d) / 'macro.json'
+        f.write_text(json.dumps(rows))
+        try:
+            FH.fomc_calendar(macro=f)
+            raise AssertionError('a missing statement went unnoticed')
+        except FH.EdgeDataError as e:
+            assert '2027-06-09' in e.why and 'disagree' in e.why
+    assert FH.prev_session('2026-10-28') == '2026-10-27' and FH.next_session('2026-11-25') == '2026-11-27'
+    assert FH.half_days_due(['2026-11-30']) == ['2026-11-27'] and FH.half_days_due(['2026-10-22']) == []
+    try:
+        FH.sessions('2027-12-30', '2028-01-04')
+        raise AssertionError('a session past the holidays list went unnoticed')
+    except FH.EdgeDataError as e:
+        assert 'HOLIDAYS' in e.why
+
+
+def _bars(root: Path, name: str, day: str, quotes: dict):
+    """quotes {hhmm: (open, close)} → the layout's 1-minute file"""
+    rows = [(_ts(day, m), o, max(o, c), min(o, c), c, 1000, 10, c) for m, (o, c) in sorted(quotes.items())]
+    df = pl.DataFrame(rows, schema={'timestamp': pl.Datetime('ms'), 'open': pl.Float64, 'high': pl.Float64, 'low': pl.Float64, 'close': pl.Float64,
+                                    'volume': pl.Int64, 'count': pl.Int64, 'vwap': pl.Float64}, orient='row').with_columns(pl.col('timestamp').dt.replace_time_zone(NY))
+    (root / f'data/underlying/{name}').mkdir(parents=True, exist_ok=True)
+    df.write_parquet(root / f'data/underlying/{name}/{day}.parquet')
+
+
+def _divs(d, through: str = '2026-12-11', ex: dict | None = None) -> Path:
+    f = Path(d) / f'divs_{through}_{len(json.dumps(ex or {}))}.json'
+    f.write_text(json.dumps({nm: {'complete_through': through, 'ex': (ex or {}).get(nm, {})} for nm in ('SPY', 'QQQ')}))
+    return f
+
+
+CLOSES = {('SPY', '2026-10-23'): 760.00, ('QQQ', '2026-10-23'): 700.00, ('SPY', '2026-10-26'): 761.50, ('QQQ', '2026-10-26'): 702.25,
+          ('SPY', '2026-10-27'): 762.00, ('QQQ', '2026-10-27'): 703.00, ('SPY', '2026-10-28'): 766.00, ('QQQ', '2026-10-28'): 701.00}
+
+
+def official_uw(nm, d):
+    c = CLOSES.get((nm, d))
+    return (c, 'uw_1d') if c is not None else (None, None)
+
+
+def h7_layout(root: Path, drop_1358: bool = False):
+    for nm, (o930, x) in (('SPY', (763.10, 764.55)), ('QQQ', (702.40, 701.95))):
+        for day, q in (('2026-10-26', {'09:30': (760.80, 761.0)}), ('2026-10-27', {'09:30': (761.90, 762.0)}),
+                       ('2026-10-28', {'09:30': (o930, o930 + 0.1), **({} if drop_1358 else {'13:58': (x - 0.05, x)}), '15:59': (x, x)})):
+            _bars(root, nm, day, q)
+
+
+def test_h7_golden_trade_from_made_up_quotes_and_the_exclusion_rule():
+    with tempfile.TemporaryDirectory() as d:
+        root, out = Path(d) / 'pq', Path(d) / 'fwd'
+        h7_layout(root)
+        days = ['2026-10-23', '2026-10-26', '2026-10-27', '2026-10-28']
+        res = FH.run(days, root, official_uw, folder=out, divs_path=_divs(d), only=('H7',))
+        assert not res['failures'] and res['h7_added'] == ['SPY/2026-10-28', 'QQQ/2026-10-28'], res
+        rows = {r['name']: r for r in EF.read_rows(out / 'h7_trades.csv')}
+        # SPY: buy 100 at the 2026-10-27 close 762.00, sell at the 13:58 close 764.55: 100 × 2.55 − 1.50 = 253.50 (2× 252.00)
+        s = rows['SPY']
+        assert (s['prev'], s['status'], float(s['C_prev']), float(s['X']), s['C_prev_src']) == ('2026-10-27', 'trade', 762.0, 764.55, 'uw_1d')
+        assert abs(float(s['net_1x']) - 253.50) < 1e-9 and abs(float(s['net_2x']) - 252.0) < 1e-9 and float(s['dividend']) == 0.0
+        assert abs(float(s['night']) - 110.0) < 1e-9 and abs(float(s['day']) - 145.0) < 1e-9
+        # QQQ: 100 × (701.95 − 703.00) − 1.50 = −106.50
+        assert abs(float(rows['QQQ']['net_1x']) - (-106.50)) < 1e-9
+        rep = (out / 'H7_H9_FORWARD_REPORT.md').read_text()
+        assert '| H7 | SPY | 1 / 366 | +253.50 | +252.00 | — | no verdict |' in rep, rep
+    with tempfile.TemporaryDirectory() as d:                 # the file is there but no priced 13:58 bar: excluded and listed
+        root, out = Path(d) / 'pq', Path(d) / 'fwd'
+        h7_layout(root, drop_1358=True)
+        res = FH.run(['2026-10-27', '2026-10-28'], root, official_uw, folder=out, divs_path=_divs(d), only=('H7',))
+        r = EF.read_rows(out / 'h7_trades.csv')
+        assert not res['failures'] and {x['status'] for x in r} == {'excluded'} and all(x['excluded'] == 'no priced 13:58 bar' for x in r)
+        assert 'no priced 13:58 bar' in (out / 'H7_H9_FORWARD_REPORT.md').read_text() and FH.evaluate('H7', 'SPY', r)['counted'] == 0
+
+
+def test_h7_waits_before_the_statement_and_fails_loudly_on_a_missing_input():
+    with tempfile.TemporaryDirectory() as d:
+        root, out = Path(d) / 'pq', Path(d) / 'fwd'
+        h7_layout(root)
+        res = FH.run(['2026-10-23', '2026-10-27'], root, official_uw, folder=out, divs_path=_divs(d), only=('H7',))
+        assert res == {'h7_added': [], 'h9_added': [], 'failures': [], 'warnings': []} and not (out / 'h7_trades.csv').exists()
+        res = FH.run(['2026-10-28'], root, lambda nm, dd: (None, None), folder=out, divs_path=_divs(d), only=('H7',))
+        assert [f.split(':')[0] for f in res['failures']] == ['2026-10-27 h7-official-close'] * 2 and not (out / 'h7_trades.csv').exists()
+        res = FH.run(['2026-10-28'], root, lambda nm, dd: (762.0, 'theta_eod'), folder=out, divs_path=_divs(d), only=('H7',))
+        assert 'not UW' in res['failures'][0] and not (out / 'h7_trades.csv').exists()          # another source is never taken
+        (root / 'data/underlying/SPY/2026-10-28.parquet').unlink()
+        res = FH.run(['2026-10-28'], root, official_uw, folder=out, divs_path=_divs(d), only=('H7',))
+        assert res['failures'] == ['2026-10-28 h7-bars: SPY 1-minute bars of 2026-10-28 are not in the layout'] and res['h7_added'] == ['QQQ/2026-10-28']
+
+
+def test_h7_h9_dividends_are_paid_by_ex_date_and_never_assumed():
+    with tempfile.TemporaryDirectory() as d:
+        root, out = Path(d) / 'pq', Path(d) / 'fwd'
+        h7_layout(root)
+        f = _divs(d, ex={'SPY': {'2026-10-28': {'amount': 1.90, 'source': 'made up'}}})
+        FH.run(['2026-10-28'], root, official_uw, folder=out, divs_path=f, only=('H7',))
+        s = {r['name']: r for r in EF.read_rows(out / 'h7_trades.csv')}['SPY']
+        assert abs(float(s['net_1x']) - (253.50 + 190.0)) < 1e-9 and float(s['div']) == 1.90
+    with tempfile.TemporaryDirectory() as d:                 # the table not complete through A: loud, nothing written
+        root, out = Path(d) / 'pq', Path(d) / 'fwd'
+        h7_layout(root)
+        res = FH.run(['2026-10-28'], root, official_uw, folder=out, divs_path=_divs(d, through='2026-10-27'), only=('H7',))
+        assert len(res['failures']) == 2 and all('h7-dividend' in x and 'may be' in x for x in res['failures']), res
+        assert not (out / 'h7_trades.csv').exists() and len(res['warnings']) == 2
+        res = FH.run(['2026-10-28'], root, official_uw, folder=out,
+                     divs_path=_divs(d, ex={'QQQ': {'2026-10-28': {'amount': None, 'source': 'announced'}}}), only=('H7',))
+        assert res['h7_added'] == ['SPY/2026-10-28'] and 'no amount yet' in res['failures'][0]
+    with tempfile.TemporaryDirectory() as d:                 # H9: the dividend whose ex-date is the next session is paid
+        root, out = Path(d) / 'pq', Path(d) / 'fwd'
+        h9_layout(root)
+        f = _divs(d, ex={'QQQ': {'2026-10-26': {'amount': 0.75, 'source': 'made up'}}})
+        FH.run(['2026-10-23', '2026-10-26'], root, official_uw, folder=out, divs_path=f, only=('H9',))
+        q = {r['name']: r for r in EF.read_rows(out / 'h9_sessions.csv')}['QQQ']
+        assert abs(float(q['net_1x']) - (100 * (699.10 - 700.00) + 75.0 - 2.0)) < 1e-9
+    divs = {'SPY': {'complete_through': '2026-12-11', 'ex': {'2026-10-26': {'amount': 2.0}}}, 'QQQ': {'complete_through': '2026-12-11', 'ex': {}}}
+    assert FH.dividend(divs, 'SPY', '2026-10-26', 's') == 2.0 and FH.dividend(divs, 'QQQ', '2026-10-26', 's') == 0.0
+    real = FH.load_divs()
+    assert real['SPY']['complete_through'] == real['QQQ']['complete_through'] == '2026-12-11'
+
+
+def h9_layout(root: Path):
+    for nm, o in (('SPY', 761.20), ('QQQ', 699.10)):
+        _bars(root, nm, '2026-10-26', {'09:30': (o, o + 0.2), '09:31': (o + 0.2, o)})
+        _bars(root, nm, '2026-10-27', {'09:30': (o + 1.0, o + 1.1)})
+
+
+def test_h9_golden_rows_idempotent_append_and_loud_failures():
+    with tempfile.TemporaryDirectory() as d:
+        root, out = Path(d) / 'pq', Path(d) / 'fwd'
+        h9_layout(root)
+        res = FH.run(['2026-10-23', '2026-10-26'], root, official_uw, folder=out, divs_path=_divs(d), only=('H9',))
+        # one night each: the 2026-10-23 close → the 2026-10-26 09:30 open; 10-26's night waits for 10-27
+        assert not res['failures'] and res['h9_added'] == ['SPY/2026-10-23', 'QQQ/2026-10-23'], res
+        rows = {r['name']: r for r in EF.read_rows(out / 'h9_sessions.csv')}
+        assert abs(float(rows['SPY']['net_1x']) - (100 * (761.20 - 760.00) - 2.0)) < 1e-9          # +118.00
+        assert abs(float(rows['QQQ']['net_1x']) - (100 * (699.10 - 700.00) - 2.0)) < 1e-9          # −92.00
+        assert abs(float(rows['QQQ']['net_2x']) - (-94.0)) < 1e-9 and rows['SPY']['next'] == '2026-10-26'
+        f = out / 'h9_sessions.csv'
+        txt = f.read_text()
+        again = FH.run(['2026-10-23', '2026-10-26'], root, official_uw, folder=out, divs_path=_divs(d), only=('H9',))
+        assert again['h9_added'] == [] and f.read_text() == txt
+        res = FH.run(['2026-10-23', '2026-10-26', '2026-10-27'], root, official_uw, folder=out, divs_path=_divs(d), only=('H9',))
+        assert res['h9_added'] == ['SPY/2026-10-26', 'QQQ/2026-10-26'] and len(EF.read_rows(f)) == 4
+        rep = (out / 'H7_H9_FORWARD_REPORT.md').read_text()
+        assert '| H9 | SPY | 2 / 7,940 | +93.00 | +91.00 | — | no verdict |' in rep and 'no verdict' in rep, rep
+    with tempfile.TemporaryDirectory() as d:                 # an unpriced 09:30 bar: loud, nothing written, never substituted
+        root, out = Path(d) / 'pq', Path(d) / 'fwd'
+        for nm in ('SPY', 'QQQ'):
+            _bars(root, nm, '2026-10-26', {'09:31': (760.0, 760.1)})
+        res = FH.run(['2026-10-23', '2026-10-26'], root, official_uw, folder=out, divs_path=_divs(d), only=('H9',))
+        assert res['failures'] == ['2026-10-23 h9-bars: SPY has no priced 09:30 bar on 2026-10-26',
+                                   '2026-10-23 h9-bars: QQQ has no priced 09:30 bar on 2026-10-26'] and not (out / 'h9_sessions.csv').exists()
+
+
+def test_h7_h9_no_verdict_before_N_and_the_verdict_at_exactly_N_written_once():
+    cal, _ = FH.fomc_calendar()
+    keep = dict(FH.N_RULE)
+    try:
+        FH.N_RULE[('H7', 'SPY')] = 10
+        good = [{'name': 'SPY', 'A': r['date'], 'status': 'trade', 'net_1x': str(40.0 + i), 'net_2x': str(38.5 + i)} for i, r in enumerate(cal)]
+        e9 = FH.evaluate('H7', 'SPY', good[:9])
+        assert e9['verdict'] == 'no verdict' and e9['counted'] == 9 and e9['ci'] is None
+        e10 = FH.evaluate('H7', 'SPY', good)
+        assert e10['verdict'] == 'CONFIRMED' and e10['ci'][0] > 0 and abs(e10['mean_1x'] - 44.5) < 1e-12 and e10['through'] == '2027-12-08'
+        bad = [dict(r, net_1x=str(-float(r['net_1x']))) for r in good]
+        assert FH.evaluate('H7', 'SPY', bad)['verdict'] == 'NOT CONFIRMED'
+        FH.N_RULE[('H9', 'QQQ')] = 80
+        h9 = [{'name': 'QQQ', 'day': f'd{i:03d}', 'net_1x': str(5.0 + i % 3), 'net_2x': str(3.0 + i % 3)} for i in range(80)]
+        ev = FH.evaluate('H9', 'QQQ', h9 + [{'name': 'QQQ', 'day': 'd999', 'net_1x': '-1e9', 'net_2x': '-1e9'}])   # past N: no effect
+        assert ev['verdict'] == 'PASS' and ev['counted'] == 81 and ev['trades'] == 80 and ev['through'] == 'd079'
+        assert FH.evaluate('H9', 'QQQ', h9[:79])['verdict'] == 'no verdict'
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / 'v.json'
+            first = FH.record_verdict(p, e10)
+            later = FH.record_verdict(p, FH.evaluate('H7', 'SPY', bad))
+            assert first['verdict'] == later['verdict'] == 'CONFIRMED' and json.loads(p.read_text())['H7 SPY']['through'] == '2027-12-08'
+        cps = FH.checkpoints(good, 'SPY')
+        assert [c['k'] for c in cps] == [8] and cps[0]['ci'] is None and cps[0]['through'] == '2027-09-15'
+    finally:
+        FH.N_RULE.clear()
+        FH.N_RULE.update(keep)
+    with tempfile.TemporaryDirectory() as d:                 # the report labels a checkpoint "no verdict"
+        out = Path(d)
+        rows = [{c: '' for c in FH.H7_COLS} | {'name': 'SPY', 'A': r['date'], 'status': 'trade', 'net_1x': '10.0', 'net_2x': '8.5'} for r in cal[:8]]
+        EF.append_rows(out / 'h7_trades.csv', FH.H7_COLS, rows, ('name', 'A'))
+        rep = FH.write_report(FH.default_paths(out))
+        assert 'SPY after 8 trades (through 2027-09-15): mean +10.00' in rep and 'checkpoint — no verdict' in rep, rep
+        assert '| H7 | SPY | 8 / 366 | +10.00 | +8.50 | — | no verdict |' in rep and not (out / 'verdicts.json').exists()
+
+
+def logging_quiet():
+    import logging
+    lg = logging.getLogger('edge_forward_test_quiet')
+    lg.handlers[:] = [logging.NullHandler()]
+    lg.propagate = False
+    return lg
+
+
+def test_the_daily_job_collects_a_half_days_close_and_bars_for_h9():
+    import daily_forward as DF
+    import paper_backtest as B
+    import paper_audit as PA
+    calls = {'fetch': [], 'uw': []}
+    orig = (B.complete_sessions, B.fetch_theta, DF.ensure_official)
+
+    def fake_fetch(a, b, root, **kw):
+        calls['fetch'].append((a, sorted(kw['only'])))
+        return {'rc': 0, 'failed': [], 'incomplete': [], 'exists': [], 'not_asked': []}
+
+    def fake_official(day, closes, odir, uw, log, names=('SPY', 'QQQ')):
+        calls['uw'].append((day, uw is not None))
+        return closes, [], 2
+    try:
+        B.complete_sessions = lambda *a, **k: (['2026-11-30'], {})
+        B.fetch_theta = fake_fetch
+        DF.ensure_official = fake_official
+        with tempfile.TemporaryDirectory() as d:
+            job = DF.Job(Path(d) / 'pq', Path(d) / 'replay', Path(d) / 'cum.md', official_dir=Path(d) / 'oc', h7h9_folder=Path(d) / 'h7h9')
+            closes = PA.OfficialCloses(uw_dirs=(Path(d) / 'oc',), uw_lake_glob=None, theta_glob=None, live_root=None)
+            out = DF.run_h7h9(job, logging_quiet(), closes, uw_client=object())
+            assert calls['uw'] == [('2026-11-27', True)] and calls['fetch'] == [('2026-11-27', [('under', 'QQQ'), ('under', 'SPY')])]
+            # nothing else is on disk: the first H9 night (2026-10-23) fails loudly on its official close and writes nothing
+            assert out['uw_calls'] == 2 and out['failures'] and out['failures'][0].startswith('2026-10-27 h7-official-close'), out
+            assert any(f.startswith('2026-10-23 h9-official-close') for f in out['failures']) and not (Path(d) / 'h7h9' / 'h9_sessions.csv').exists()
+            job.source = 'sdk'
+            out = DF.run_h7h9(job, logging_quiet(), closes, uw_client=object())
+            assert len(calls['fetch']) == 1 and any('--source sdk fetches none' in n for n in out['half_day_notes'])
+    finally:
+        B.complete_sessions, B.fetch_theta, DF.ensure_official = orig
 
 
 if __name__ == '__main__':
