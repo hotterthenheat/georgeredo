@@ -32,6 +32,14 @@
 - Adding each contract's minute-by-minute trading volume (3,687 sessions) barely changed how well the models rank, and their top picks still rest on a handful of days.
 - See `step5/README.md`.
 
+**Step 6 (done):** the anatomy of the runners, never holding to the close: 240,493 near-the-money buys (2022-05 to 2026-10-09). It asks how the +40% and +500% runs happened, and whether anything visible at the buy picked them. Everything was pre-registered first (`step6/PREREG.md`).
+- **How they worked:** the underlying moved the contract's way, and the price move made 97–108% of the gain.
+  - +40% in an hour took a median 0.72 of the remaining expected move over 39 minutes.
+  - +500% by 3:30 pm took 2.8 expected moves over 3¾ hours, on trend days, as a grind rather than a spike. Implied vol rising added about 12%.
+- **What was visible before:** nothing raised the odds by 25% in both periods. Small lifts did hold: a wide first half hour, a jumpy tape, a crushed contract, a contract already rising. They added 7–24%.
+- **Trading it:** the 6 rules picked on 2022–2024, with 3 exits each, all lost on 2025–2026 (−3% to −22% a trade). Most did no better than random contracts bought at the same times.
+- See `step6/README.md`.
+
 ## Compass engine audit (2026-10-21)
 
 The owner's 16-module Compass specification audited under its own guardrails (no invented weights, friction-adjusted, picked on 2022–2024 and read on 2025–2026). Six groups of tests on the data on disk, one report: `reports/Compass engine audit.md`, with every number's script under `research_notes/Compass engine audit/`. No directional rule survives after fees; what holds is the 15:58 flat, the −32% backstop, a breakeven lock at +0% with a target on, a trailed remainder, the r,q pricer read off put-call parity, Method A flips with three-book slicing, a net/gross confidence in place of the sign gate, the MOC magnitude as a volatility gauge, and an ATR > 1.5 block on counter-trend fades.
