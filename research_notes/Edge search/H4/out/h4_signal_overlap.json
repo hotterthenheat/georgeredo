@@ -1,0 +1,18 @@
+{
+ "QQQ exploration": {
+  "n": 3301,
+  "agree": 2254
+ },
+ "QQQ test": {
+  "n": 255,
+  "agree": 167
+ },
+ "SPY exploration": {
+  "n": 2175,
+  "agree": 1383
+ },
+ "SPY test": {
+  "n": 257,
+  "agree": 172
+ }
+}
