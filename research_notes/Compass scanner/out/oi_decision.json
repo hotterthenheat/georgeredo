@@ -1,0 +1,127 @@
+{
+ "sessions": 512,
+ "first": "2023-12-01",
+ "last": "2026-10-21",
+ "jobs": 1441,
+ "onsets": 25972,
+ "SPY+QQQ": {
+  "onsets": 18287,
+  "nofilter": {
+   "picks": 17892,
+   "changed": 59,
+   "share": 0.0032975631567180863,
+   "v0_none_alt_pick": 54,
+   "both_pick_differ": 5
+  },
+  "none": {
+   "picks": 17892,
+   "changed": 3269,
+   "share": 0.1827073552425665,
+   "v0_none_alt_pick": 54,
+   "both_pick_differ": 3215
+  },
+  "v0_reasons": {
+   "ok": 17838,
+   "delta": 322,
+   "open interest": 54,
+   "spread": 2,
+   "volume": 71
+  }
+ },
+ "SPY": {
+  "onsets": 8987,
+  "nofilter": {
+   "picks": 8789,
+   "changed": 9,
+   "share": 0.0010240072818295596,
+   "v0_none_alt_pick": 9,
+   "both_pick_differ": 0
+  },
+  "none": {
+   "picks": 8789,
+   "changed": 1490,
+   "share": 0.1695300944362271,
+   "v0_none_alt_pick": 9,
+   "both_pick_differ": 1481
+  },
+  "v0_reasons": {
+   "ok": 8780,
+   "delta": 196,
+   "open interest": 9,
+   "spread": 2
+  }
+ },
+ "QQQ": {
+  "onsets": 9300,
+  "nofilter": {
+   "picks": 9103,
+   "changed": 50,
+   "share": 0.0054926947160276835,
+   "v0_none_alt_pick": 45,
+   "both_pick_differ": 5
+  },
+  "none": {
+   "picks": 9103,
+   "changed": 1779,
+   "share": 0.19543007799626497,
+   "v0_none_alt_pick": 45,
+   "both_pick_differ": 1734
+  },
+  "v0_reasons": {
+   "ok": 9058,
+   "delta": 126,
+   "volume": 71,
+   "open interest": 45
+  }
+ },
+ "IWM": {
+  "onsets": 7685,
+  "nofilter": {
+   "picks": 6563,
+   "changed": 82,
+   "share": 0.012494286149626695,
+   "v0_none_alt_pick": 82,
+   "both_pick_differ": 0
+  },
+  "none": {
+   "picks": 6563,
+   "changed": 507,
+   "share": 0.07725125704708213,
+   "v0_none_alt_pick": 82,
+   "both_pick_differ": 425
+  },
+  "v0_reasons": {
+   "ok": 6481,
+   "delta": 1083,
+   "open interest": 82,
+   "volume": 37,
+   "spread": 1,
+   "no standing quote (ask > bid > 0)": 1
+  }
+ },
+ "SPY+QQQ+IWM": {
+  "onsets": 25972,
+  "nofilter": {
+   "picks": 24455,
+   "changed": 141,
+   "share": 0.005765692087507667,
+   "v0_none_alt_pick": 136,
+   "both_pick_differ": 5
+  },
+  "none": {
+   "picks": 24455,
+   "changed": 3776,
+   "share": 0.15440605193212023,
+   "v0_none_alt_pick": 136,
+   "both_pick_differ": 3640
+  },
+  "v0_reasons": {
+   "ok": 24319,
+   "delta": 1405,
+   "open interest": 136,
+   "spread": 3,
+   "volume": 108,
+   "no standing quote (ask > bid > 0)": 1
+  }
+ }
+}
