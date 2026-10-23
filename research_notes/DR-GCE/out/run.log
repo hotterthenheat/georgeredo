@@ -1,0 +1,115 @@
+guard selftest: raises on 5 of 5 (2023-11-30, 2024-06-03, 2026-08-31, 2026-10-12, 2023-11-20)
+/home/user/georgeredo/research_notes/DR-GCE/dr_gce.py:347: RuntimeWarning: divide by zero encountered in divide
+  CK = (np.abs(dl) * dS + 0.5 * gm * dS * dS) / (th + (a - b))
+/home/user/georgeredo/research_notes/DR-GCE/dr_gce.py:347: RuntimeWarning: invalid value encountered in divide
+  CK = (np.abs(dl) * dS + 0.5 * gm * dS * dS) / (th + (a - b))
+{
+ "sessions": 504,
+ "skips": {
+  "m1:overlap": 32,
+  "m1:no contract": 4
+ },
+ "baseline_redraws": 3142,
+ "pooled": {
+  "n": 98,
+  "touches": 32,
+  "rate": 0.32653061224489793,
+  "ci": [
+   0.2329925468274983,
+   0.4019607843137255
+  ],
+  "stops": 20,
+  "none": 46,
+  "base_mean": 0.1599591836734694,
+  "base_ci": [
+   0.09183673469387756,
+   0.22448979591836735
+  ],
+  "calls": 37,
+  "stop24": 84,
+  "pass": true,
+  "years": {
+   "2023": {
+    "n": 1,
+    "touches": 1,
+    "rate": 1.0
+   },
+   "2024": {
+    "n": 35,
+    "touches": 14,
+    "rate": 0.4
+   },
+   "2025": {
+    "n": 36,
+    "touches": 11,
+    "rate": 0.3055555555555556
+   },
+   "2026": {
+    "n": 26,
+    "touches": 6,
+    "rate": 0.23076923076923078
+   }
+  }
+ },
+ "mode1": {
+  "n": 98,
+  "touches": 32,
+  "rate": 0.32653061224489793,
+  "ci": [
+   0.2329925468274983,
+   0.4019607843137255
+  ],
+  "stops": 20,
+  "none": 46,
+  "base_mean": 0.1599591836734694,
+  "base_ci": [
+   0.09183673469387756,
+   0.22448979591836735
+  ],
+  "calls": 37,
+  "stop24": 84,
+  "pass": true,
+  "years": {
+   "2023": {
+    "n": 1,
+    "touches": 1,
+    "rate": 1.0
+   },
+   "2024": {
+    "n": 35,
+    "touches": 14,
+    "rate": 0.4
+   },
+   "2025": {
+    "n": 36,
+    "touches": 11,
+    "rate": 0.3055555555555556
+   },
+   "2026": {
+    "n": 26,
+    "touches": 6,
+    "rate": 0.23076923076923078
+   }
+  }
+ },
+ "mode2": {
+  "n": 0,
+  "touches": 0,
+  "rate": NaN,
+  "ci": [
+   NaN,
+   NaN
+  ],
+  "stops": 0,
+  "none": 0,
+  "base_mean": NaN,
+  "base_ci": [
+   NaN,
+   NaN
+  ],
+  "calls": 0,
+  "stop24": 0,
+  "pass": false,
+  "years": {}
+ }
+}
