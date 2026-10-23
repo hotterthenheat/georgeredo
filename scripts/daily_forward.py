@@ -41,7 +41,7 @@ run), in this order, stopping at the first failure:
                missing anything fails loudly (`DAILY-FORWARD FAIL <day> features-<step>`, exit 1, nothing written for it);
                the paper tracker's append above is not held back by it. forward/FORWARD_REPORT.md is rewritten each run:
                sessions counted against each model's N, "no verdict" until N.
-  8. edge H5 / H6 / H7 / H9 (on by default from the command line; --no-edge skips it): the forward-only tests of the edge-search
+  8. edge H5 / H6 / H7 (on by default from the command line; --no-edge skips it): the forward-only tests of the edge-search
                queue's H5 and H6 (research_notes/Edge search/H5_H6/PREREG_H5.md, PREREG_H6.md, e114e30; the code
                edge_forward.py there) on every complete forward session. H5 (from 2026-10-23): 10 SPY same-day ATM straddles
                sold at the 15:30 bids against 1 SPXW straddle bought at the asks, all four legs closed at 15:58 — read from
@@ -53,16 +53,14 @@ run), in this order, stopping at the first failure:
                <parquet-root>/edge_forward/eod/ and never asked twice. A session missing anything fails loudly
                (`DAILY-FORWARD FAIL <day> edge-<step>`, exit 1, nothing written for it); the steps before are not held
                back by it. forward/EDGE_FORWARD_REPORT.md is rewritten each run: counted against N, "no verdict" until N.
-               Step 8 also runs H7 and H9 (research_notes/Edge search/H7_H8_H9/forward_h7_h9.py): H7 the pre-FOMC drift
+               Step 8 also runs H7 (research_notes/Edge search/H7_H8_H9/forward_h7_h9.py): the pre-FOMC drift
                (FORWARD_RULE_H7.md, fcc1f4d: 100 SPY / QQQ from the official close before each scheduled 2:00 pm FOMC
-               statement from 2026-10-28 to the 13:58 bar's close; N 366 / 483 trades) and H9 the overnight drift
-               (PREREG_H9.md, edca472: 100 SPY / QQQ from every official close from 2026-10-23 to the next 09:30 open; N
-               7,940 sessions) — on the official closes and 1-minute bars this job keeps, the FOMC calendar in data/
-               macro_events_2022_2027.json and the hand-kept dividend table data/dividends_forward.json (a row past its
-               complete_through fails loudly). H9 counts half days, which steps 1–7 skip: step 8 asks UW's daily bar for a
-               half day's official close (one call a name) and, on --source terminal, the Theta Terminal for its SPY and
-               QQQ 1-minute bars only (on --source sdk it fails loudly instead). Its report: H7_H8_H9/forward/
-               H7_H9_FORWARD_REPORT.md, "no verdict" until N.
+               statement from 2026-10-28 to the 13:58 bar's close; N 366 / 483 trades) — on the official closes and
+               1-minute bars this job keeps (nothing fetched for it), the FOMC calendar in data/macro_events_2022_2027.json
+               and H7's hand-kept dividend table H7_H8_H9/data/dividends_h7.json (the ex-dates that fall on statement
+               dates; a statement past its complete_through fails loudly). Its report: H7_H8_H9/forward/
+               H7_FORWARD_REPORT.md, "no verdict" until N. (H9, the overnight drift, was withdrawn from this job by the
+               owner on 2026-10-23, with its half-day collection and its dividend table; no H9 forward row was written.)
 
 A NEW MACHINE: the sessions the cumulative report already lists but this replay root does not hold (the owner's PC
 with the committed report) go through the same steps first — fetched if the layout lacks them, replayed — so the
@@ -105,7 +103,7 @@ import paper_audit as P  # noqa: E402
 import paper_backtest as B  # noqa: E402
 import paper_tracker as T  # noqa: E402
 
-JOB_VERSION = 'daily-forward-2026-10-23.4'
+JOB_VERSION = 'daily-forward-2026-10-23.5'
 READY_AFTER = '17:30'               # a session is pending once its official close is out and the 17:30 decision price has passed
 SCHEDULE_NY = '17:45'
 THETA_GAP_END_MIN = 105             # 00:00–01:45 New York: Theta serves no previous day; the SDK never logs in then
@@ -434,7 +432,7 @@ class Job:
     use_cboe: bool = True
     edge: bool = False                      # step 8 (the command line turns it on unless --no-edge)
     edge_folder: Path | None = None         # default: research_notes/Edge search/H5_H6/forward
-    h7h9_folder: Path | None = None         # default: research_notes/Edge search/H7_H8_H9/forward
+    h7_folder: Path | None = None           # default: research_notes/Edge search/H7_H8_H9/forward
     edge_store: Path | None = None          # default: <parquet root>/edge_forward/eod
 
     def __post_init__(self):
@@ -554,7 +552,7 @@ def run_edge(job: Job, log: logging.Logger, closes: P.OfficialCloses | None = No
                   store=job.edge_store or (job.parquet_root / EF.EOD_STORE), folder=job.edge_folder, log=log)
 
 
-def h7h9_module():
+def h7_module():
     """research_notes/Edge search/H7_H8_H9/forward_h7_h9.py (imported only when step 8 runs)"""
     d = str(R.REPO / 'research_notes' / 'Edge search' / 'H7_H8_H9')
     if d not in sys.path:
@@ -563,47 +561,20 @@ def h7h9_module():
     return FH
 
 
-def run_h7h9(job: Job, log: logging.Logger, closes: P.OfficialCloses | None = None, uw_client=None, theta_fetcher=None,
-             now: dt.datetime | None = None) -> dict:
-    """step 8's H7 and H9: every complete forward session from 2026-10-23 through forward_h7_h9.run. First the half days
-    those sessions passed (steps 1–7 skip them; H9 trades them): UW's daily bar for their official close (ensure_official,
-    one call a name, only when not on disk) and, on --source terminal, their SPY and QQQ 1-minute bars (fetch_theta with
-    only those two files, validated and placed in the layout as any fetch). → forward_h7_h9.run's result + 'uw_calls',
-    'half_days'"""
-    FH = h7h9_module()
+def run_h7(job: Job, log: logging.Logger, closes: P.OfficialCloses | None = None) -> dict:
+    """step 8's H7: every complete forward session from 2026-10-23 through forward_h7_h9.run, on the closes and bars the job
+    already keeps (it fetches nothing). → forward_h7_h9.run's result"""
+    FH = h7_module()
     comp = B.complete_sessions(job.replay_root, job.keys, FH.SERIES_START, '9999-12-31')[0]
     closes = closes if closes is not None else P.OfficialCloses(uw_dirs=(job.official_dir,))
-    uw_calls, notes = 0, []
-    for h in FH.half_days_due(comp):
-        closes, missing, calls = ensure_official(h, closes, job.official_dir, uw_client if job.use_uw else None, log)
-        uw_calls += calls
-        if missing:
-            notes.append(f'{h}: no official close for {", ".join(missing)}')
-        need = [nm for nm in CLOSE_NAMES if not (job.parquet_root / B.rel_of('under', nm, h)).exists()]
-        if need and job.source == 'terminal':
-            fr = B.fetch_theta(h, h, job.parquet_root, fetcher=theta_fetcher, only={('under', nm) for nm in need},
-                               norm_roots=(job.parquet_root,), now=now or dt.datetime.now(R.UTC), stream=None)
-            if fr['rc'] != 0:
-                notes.append(f'{h}: half-day bars not fetched: ' + red(fr.get('aborted') or '; '.join(
-                    f'{x["file"]}: {x["error"]}' for x in fr['failed'] + fr['incomplete'] + fr['exists'] + fr['not_asked']))[:300])
-            else:
-                log.info('edge H9 half day %s: %s 1-minute bars fetched and placed', h, ' '.join(need))
-        elif need:
-            notes.append(f'{h}: half-day bars of {" ".join(need)} are not in the layout and --source sdk fetches none')
-    out = FH.run(comp, job.parquet_root, closes.get, folder=job.h7h9_folder, log=log)
-    out['uw_calls'], out['half_day_notes'] = uw_calls, notes
-    return out
+    return FH.run(comp, job.parquet_root, closes.get, folder=job.h7_folder, log=log)
 
 
-def edge_step(job: Job, res: dict, log: logging.Logger, closes=None, theta_fetcher=None, sdk=None, edge_fetch=None, uw_client=None,
-              now: dt.datetime | None = None) -> None:
+def edge_step(job: Job, res: dict, log: logging.Logger, closes=None, theta_fetcher=None, sdk=None, edge_fetch=None) -> None:
     """step 8 into the run's result: each failure is one DAILY-FORWARD FAIL line and rc 1, never a half-written row"""
     try:
-        hr = run_h7h9(job, log, closes, uw_client, theta_fetcher, now)
-        res['edge_h7h9_added'] = {'h7': hr['h7_added'], 'h9': hr['h9_added']}
-        res['uw_calls'] = res.get('uw_calls', 0) + hr['uw_calls']
-        for w in hr['warnings'] + hr['half_day_notes']:
-            log.warning('edge H7/H9: %s', w)
+        hr = run_h7(job, log, closes)
+        res['edge_h7_added'] = hr['h7_added']
         for f in hr['failures']:
             day_, _, why_ = f.partition(' ')
             step_, _, why_ = why_.partition(': ')
@@ -611,10 +582,10 @@ def edge_step(job: Job, res: dict, log: logging.Logger, closes=None, theta_fetch
         if hr['failures']:
             res.update(rc=1, failure=res['failure'] or f'edge {red(hr["failures"][0])}'[:400])
         else:
-            log.info('edge H7/H9: H7 %s; H9 %s', ' '.join(hr['h7_added']) or 'nothing new', ' '.join(hr['h9_added']) or 'nothing new')
+            log.info('edge H7: %s', ' '.join(hr['h7_added']) or 'nothing new')
     except Exception as e:  # noqa: BLE001
-        log.error('DAILY-FORWARD FAIL - edge-h7h9: %s', red(f'{type(e).__name__}: {e}')[:400])
-        res.update(rc=1, failure=res['failure'] or f'edge-h7h9: {red(type(e).__name__)}')
+        log.error('DAILY-FORWARD FAIL - edge-h7: %s', red(f'{type(e).__name__}: {e}')[:400])
+        res.update(rc=1, failure=res['failure'] or f'edge-h7: {red(type(e).__name__)}')
     try:
         er = run_edge(job, log, closes, theta_fetcher, sdk, edge_fetch)
         res['edge_added'] = {k: er[k] for k in ('h5_added', 'h6_entries', 'h6_trades')}
@@ -671,7 +642,7 @@ def run_job(job: Job, now: dt.datetime | None = None, log: logging.Logger | None
         if job.features:                     # a session the tracker finished earlier may still wait for step 7
             features_step(job, res, log, spx_fetch)
         if job.edge:                         # … and for step 8 (an H6 exit falls weeks after its entry)
-            edge_step(job, res, log, closes, theta_fetcher, sdk, edge_fetch, uw_client, now)
+            edge_step(job, res, log, closes, theta_fetcher, sdk, edge_fetch)
         return res
     log.info('daily forward %s (%s): pending %s%s', JOB_VERSION, job.source, ' '.join(res['pending']) or '—',
              f"; listed but not in this replay root, rebuilt first: {' '.join(rebuild)}" if rebuild else '')
@@ -752,7 +723,7 @@ def run_job(job: Job, now: dt.datetime | None = None, log: logging.Logger | None
     if job.features:
         features_step(job, res, log, spx_fetch)
     if job.edge:
-        edge_step(job, res, log, closes, theta_fetcher, sdk, edge_fetch, uw_client, now)
+        edge_step(job, res, log, closes, theta_fetcher, sdk, edge_fetch)
     if res['rc'] == 0:
         log.info('DAILY-FORWARD OK: %d session(s) completed, %d appended (%s), %d UW calls, %d Theta logins', len(res['completed']),
                  len(res['appended']), ' '.join(res['appended']) or '—', res['uw_calls'], res['logins'])
@@ -785,7 +756,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument('--status', action='store_true', help='what the cumulative report holds and what is pending; asks nothing')
     p.add_argument('--no-features', action='store_true', help='skip step 7 (the Compass features forward test)')
     p.add_argument('--no-cboe', action='store_true', help='step 7 asks Cboe nothing: the official SPX close must be on disk already')
-    p.add_argument('--no-edge', action='store_true', help='skip step 8 (the edge-search H5, H6, H7 and H9 forward tests)')
+    p.add_argument('--no-edge', action='store_true', help='skip step 8 (the edge-search H5, H6 and H7 forward tests)')
     a = p.parse_args(argv)
     if not a.parquet_root:
         print('--parquet-root (or PAPER_PARQUET_ROOT) names the stored Parquet layout', file=sys.stderr)
