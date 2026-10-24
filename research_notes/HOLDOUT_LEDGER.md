@@ -43,6 +43,9 @@
 | Step 6 (`30babaa`, `44b5547`) | 0DTE 2022-05-13 → 2026-10-09, the 28 months never opened | 18 rules | 0 | 0 |
 | Compass ICT (`9d6c37e`, `0943030`) | exploration only; holdouts never opened | — | 0 | 0 |
 | Compass EMA (this study, prereg) | not yet read | — | 0 | 0 |
+| Compass Close (`research_notes/Compass Close/PREREG_COMPASS_CLOSE.md`, row added with the prereg, before any fetch or computation) | SPXW same-day PM chains 15:45–16:00, SPX prints, Cboe SPX closes: 470 new sessions 2017-06-02 → 2022-05-12 (gate = odd months 236, P&L = even months 234; 15 of B's 28 months inside); previously read 2022-05-13 → 2026-10-09 reported, not judged | 1 judged rule (15:55 ATM straddle to settlement) + 8 reported entry/exit books (call, put, move side, narrower leg, 15:50, 15:58, 15:56 ask, one-strike-OTM strangle); fee and event-day lines not counted | 9 | 9 |
+
+**Running count with Compass Close's row (2026-10-24): holdout A ≥ 142 rules (≥ 133 before it); holdout B ≥ 15,975 rules (≥ 15,966 before it); Compass EMA's prereg has read nothing.**
 
 **Running count before Compass EMA's read: holdout A ≥ 133 rules; holdout B ≥ 15,966 rules** (11,136 of them Lifecycle
 Tier I and ≥ 4,630 the short-premium grids, all in B's 13 option-era months; the 15 pre-2022-05 months carry the A-span
