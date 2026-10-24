@@ -41,7 +41,9 @@ run), in this order, stopping at the first failure:
                missing anything fails loudly (`DAILY-FORWARD FAIL <day> features-<step>`, exit 1, nothing written for it);
                the paper tracker's append above is not held back by it. forward/FORWARD_REPORT.md is rewritten each run:
                sessions counted against each model's N, "no verdict" until N.
-  8. edge H5 / H6 / H7 (on by default from the command line; --no-edge skips it): the forward-only tests of the edge-search
+  8. edge H5 / H6 / H7 and S17 (on by default from the command line; --no-edge skips it; S17 is Compass Final's forward
+               test of monthly ATM put-writing, research_notes/Compass Final/forward/s17_forward.py, from the 2026-11-20 roll,
+               two end-of-day answers a roll through the same fetch as H6): the forward-only tests of the edge-search
                queue's H5 and H6 (research_notes/Edge search/H5_H6/PREREG_H5.md, PREREG_H6.md, e114e30; the code
                edge_forward.py there) on every complete forward session. H5 (from 2026-10-23): 10 SPY same-day ATM straddles
                sold at the 15:30 bids against 1 SPXW straddle bought at the asks, all four legs closed at 15:58 — read from
@@ -570,8 +572,32 @@ def run_h7(job: Job, log: logging.Logger, closes: P.OfficialCloses | None = None
     return FH.run(comp, job.parquet_root, closes.get, folder=job.h7_folder, log=log)
 
 
+def s17_module():
+    """research_notes/Compass Final/forward/s17_forward.py (imported only when step 8 runs)"""
+    d = str(R.REPO / 'research_notes' / 'Compass Final' / 'forward')
+    if d not in sys.path:
+        sys.path.insert(0, d)
+    import s17_forward as S17  # noqa: E402
+    return S17
+
+
+def run_s17(job: Job, log: logging.Logger, edge_fetch) -> dict:
+    """step 8's S17 (Compass Final, PREREG_COMPASS_FINAL.md section 9): every complete forward session through
+    s17_forward.run, with step 8's end-of-day fetch (a roll asks two answers: SPY's and QQQ's next standard monthly)"""
+    S17 = s17_module()
+    comp = B.complete_sessions(job.replay_root, job.keys, S17.FIRST_ROLL, '9999-12-31')[0]
+    return S17.run(comp, job.parquet_root, eod_fetch=edge_fetch, store=job.edge_store or (job.parquet_root / edge_module().EOD_STORE),
+                   folder=(Path(job.edge_folder) / 's17') if job.edge_folder else None, log=log)
+
+
 def edge_step(job: Job, res: dict, log: logging.Logger, closes=None, theta_fetcher=None, sdk=None, edge_fetch=None) -> None:
     """step 8 into the run's result: each failure is one DAILY-FORWARD FAIL line and rc 1, never a half-written row"""
+    if edge_fetch is None:                  # one fetcher (one SDK login) for H5/H6 and S17
+        if job.source == 'sdk':
+            sdk = sdk or SdkSource(log=log)
+            edge_fetch = sdk.eod
+        else:
+            edge_fetch = terminal_eod(theta_fetcher)
     try:
         hr = run_h7(job, log, closes)
         res['edge_h7_added'] = hr['h7_added']
@@ -602,6 +628,21 @@ def edge_step(job: Job, res: dict, log: logging.Logger, closes=None, theta_fetch
     except Exception as e:  # noqa: BLE001
         log.error('DAILY-FORWARD FAIL - edge: %s', red(f'{type(e).__name__}: {e}')[:400])
         res.update(rc=1, failure=res['failure'] or f'edge: {red(type(e).__name__)}')
+    try:
+        sr = run_s17(job, log, edge_fetch)
+        res['s17_added'] = {'entries': sr['s17_entries'], 'trades': sr['s17_trades']}
+        for f in sr['failures']:
+            day_, _, why_ = f.partition(' ')
+            step_, _, why_ = why_.partition(': ')
+            log.error('DAILY-FORWARD FAIL %s edge-%s: %s', day_, step_, red(why_)[:400])
+        if sr['failures']:
+            res.update(rc=1, failure=res['failure'] or f'edge {red(sr["failures"][0])}'[:400])
+        else:
+            log.info('S17: entries %s, closed %s; %d end-of-day calls', ' '.join(sr['s17_entries']) or 'none',
+                     ' '.join(sr['s17_trades']) or 'none', sr['calls'])
+    except Exception as e:  # noqa: BLE001
+        log.error('DAILY-FORWARD FAIL - s17: %s', red(f'{type(e).__name__}: {e}')[:400])
+        res.update(rc=1, failure=res['failure'] or f's17: {red(type(e).__name__)}')
 
 
 def run_job(job: Job, now: dt.datetime | None = None, log: logging.Logger | None = None, theta_fetcher=None, sdk: SdkSource | None = None,
