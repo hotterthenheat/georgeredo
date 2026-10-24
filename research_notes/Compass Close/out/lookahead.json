@@ -1,0 +1,97 @@
+{
+ "sessions": 10,
+ "unchanged_when_blanked": 10,
+ "control_changed": 9,
+ "rows": [
+  {
+   "day": "2018-05-18",
+   "blanked_equal": true,
+   "control_changed": true,
+   "entry": null,
+   "entry_1556": 237.56,
+   "trade": false,
+   "trade_1556": true
+  },
+  {
+   "day": "2018-07-16",
+   "blanked_equal": true,
+   "control_changed": true,
+   "entry": 317.56,
+   "entry_1556": null,
+   "trade": true,
+   "trade_1556": false
+  },
+  {
+   "day": "2019-05-03",
+   "blanked_equal": true,
+   "control_changed": true,
+   "entry": 222.56000000000003,
+   "entry_1556": 177.56,
+   "trade": true,
+   "trade_1556": true
+  },
+  {
+   "day": "2019-07-12",
+   "blanked_equal": true,
+   "control_changed": true,
+   "entry": 317.56,
+   "entry_1556": null,
+   "trade": true,
+   "trade_1556": false
+  },
+  {
+   "day": "2019-07-29",
+   "blanked_equal": true,
+   "control_changed": false,
+   "entry": null,
+   "entry_1556": null,
+   "trade": false,
+   "trade_1556": false
+  },
+  {
+   "day": "2020-05-04",
+   "blanked_equal": true,
+   "control_changed": true,
+   "entry": 447.55999999999995,
+   "entry_1556": 347.56,
+   "trade": true,
+   "trade_1556": true
+  },
+  {
+   "day": "2020-11-25",
+   "blanked_equal": true,
+   "control_changed": true,
+   "entry": 322.56,
+   "entry_1556": 312.55999999999995,
+   "trade": true,
+   "trade_1556": true
+  },
+  {
+   "day": "2021-03-17",
+   "blanked_equal": true,
+   "control_changed": true,
+   "entry": 512.56,
+   "entry_1556": 462.55999999999995,
+   "trade": true,
+   "trade_1556": true
+  },
+  {
+   "day": "2021-07-23",
+   "blanked_equal": true,
+   "control_changed": true,
+   "entry": 372.56,
+   "entry_1556": 462.55999999999995,
+   "trade": true,
+   "trade_1556": true
+  },
+  {
+   "day": "2022-03-07",
+   "blanked_equal": true,
+   "control_changed": true,
+   "entry": 932.5600000000001,
+   "entry_1556": 1007.5600000000001,
+   "trade": true,
+   "trade_1556": true
+  }
+ ]
+}
