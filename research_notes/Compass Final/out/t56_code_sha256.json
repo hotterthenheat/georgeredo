@@ -1,0 +1,8 @@
+{
+ "research/thetadata/hwr_grid/spxw_v2/sim.py": "25a5bff80c8d0c6828611f322c89dd15133b85b9cf7b8c92b6d95c82c9d3a854",
+ "research/thetadata/hwr_grid/spxw_v2/random_minutes.csv": "51cf900691ef4ce7edfe322aa6d230fe981a2cde9211d5d4d4a63fadebbf09ca",
+ "research/thetadata/dataset/load.py": "0d7f455ab41c5f179417955c46bd649a735c76efe843ac76742705b761fae5c4",
+ "research/thetadata/dataset/calendar_2017_2026.csv": "f7697956231773cf910b0855709b76b167c1b7d8b0349d623bade76510af4d4d",
+ "research/thetadata/vol_filters/events.csv": "7fb48095632919fd40e8b2e0f4b510d5ab0f17ce5ff3c9634395693b87346f0d",
+ "research/thetadata/settlement_audit/settlement_reconciliation.csv": "495f4dd10fc85b53c4b02efda64697a30a80f56338aa3a1897ad43915ccd21a7"
+}

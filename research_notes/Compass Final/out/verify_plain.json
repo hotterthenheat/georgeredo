@@ -1,0 +1,18 @@
+{
+ "T1-T3": {
+  "fields": 210
+ },
+ "T4": {
+  "fields": 70
+ },
+ "T5-T6": {
+  "fields": 140
+ },
+ "T7": {
+  "fields": 70
+ },
+ "trades": 70,
+ "fields_compared": 490,
+ "differences": 0,
+ "difference_rows": []
+}

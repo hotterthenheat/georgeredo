@@ -1,0 +1,14 @@
+{
+ "replay": {
+  "days": 2595,
+  "replayed": 471,
+  "seconds": 220.7,
+  "root": "/tmp/claude-0/-home-user-georgeredo/c2861f8a-c5af-5ae3-9258-5ee40d17d74a/scratchpad/compass_final/replay_official"
+ },
+ "status_counts": {
+  "replayed": 471,
+  "missing files": 2010,
+  "half day": 23,
+  "holiday": 91
+ }
+}
