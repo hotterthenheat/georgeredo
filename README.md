@@ -1,5 +1,7 @@
 # georgeredo
 
+Default cost model from 2026-10-24: Robinhood (docs/FEES_ROBINHOOD.md); studies before this date ran at $0.65/contract each way and are re-scored beside their original figures.
+
 **Fresh start, 2026-10-16.** At the owner's request, everything built before this date was cleared from this branch: the GeorgeFi research, the Compass studies, the backtests and the reports. Nothing was deleted from history. All of it is in commit `7dfea57`, and `git checkout 7dfea57 -- <path>` brings any file back.
 
 **Kept:** raw market data only.
