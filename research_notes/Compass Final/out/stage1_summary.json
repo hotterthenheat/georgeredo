@@ -1,0 +1,318 @@
+{
+ "calendar_check": {
+  "half_days_from_bars_2017+": [
+   "2017-07-03",
+   "2017-11-24",
+   "2018-07-03",
+   "2018-11-23",
+   "2018-12-24",
+   "2019-07-03",
+   "2019-11-29",
+   "2019-12-24",
+   "2020-11-27",
+   "2020-12-24",
+   "2021-11-26"
+  ],
+  "half_days_calendar_2017+": [
+   "2017-07-03",
+   "2017-11-24",
+   "2018-07-03",
+   "2018-11-23",
+   "2018-12-24",
+   "2019-07-03",
+   "2019-11-29",
+   "2019-12-24",
+   "2020-11-27",
+   "2020-12-24",
+   "2021-11-26"
+  ],
+  "calendar_holidays_with_a_bar_file": []
+ },
+ "half_days_2012_2016": [
+  "2012-07-03",
+  "2012-11-23",
+  "2012-12-24",
+  "2013-07-03",
+  "2013-11-29",
+  "2013-12-24",
+  "2014-07-03",
+  "2014-11-28",
+  "2014-12-24",
+  "2015-11-27",
+  "2015-12-24",
+  "2016-11-25"
+ ],
+ "families": {
+  "fly5": {
+   "roots": [
+    "SPY",
+    "QQQ"
+   ],
+   "window": "15:00-16:00",
+   "listed_sessions": {
+    "SPY": 782,
+    "QQQ": 616
+   },
+   "half_days": {
+    "SPY": 10,
+    "QQQ": 13
+   },
+   "excluded_read": {
+    "V8": 81,
+    "S03": 137,
+    "S16b": 392,
+    "CompassClose": 326
+   },
+   "excluded_any": 793,
+   "in_test": {
+    "SPY": 266,
+    "QQQ": 339
+   },
+   "in_test_by_year": {
+    "SPY 2012": 0,
+    "SPY 2013": 0,
+    "SPY 2014": 0,
+    "SPY 2015": 0,
+    "SPY 2016": 0,
+    "SPY 2017": 61,
+    "SPY 2018": 52,
+    "SPY 2019": 47,
+    "SPY 2020": 48,
+    "SPY 2021": 44,
+    "SPY 2022": 14,
+    "QQQ 2012": 24,
+    "QQQ 2013": 41,
+    "QQQ 2014": 42,
+    "QQQ 2015": 53,
+    "QQQ 2016": 53,
+    "QQQ 2017": 30,
+    "QQQ 2018": 19,
+    "QQQ 2019": 14,
+    "QQQ 2020": 14,
+    "QQQ 2021": 35,
+    "QQQ 2022": 14
+   },
+   "in_test_by_weekday": {
+    "SPY Mon": 66,
+    "SPY Tue": 1,
+    "SPY Wed": 102,
+    "SPY Thu": 4,
+    "SPY Fri": 93,
+    "QQQ Mon": 19,
+    "QQQ Tue": 4,
+    "QQQ Wed": 16,
+    "QQQ Thu": 11,
+    "QQQ Fri": 289
+   },
+   "in_test_with_eod_marks": 605,
+   "in_test_compass_close_pnl_sample": 328,
+   "first": "2012-06-01",
+   "last": "2022-04-27"
+  },
+  "condor_em1": {
+   "roots": [
+    "SPY"
+   ],
+   "window": "11:30-16:00",
+   "listed_sessions": {
+    "SPY": 782
+   },
+   "half_days": {
+    "SPY": 10
+   },
+   "excluded_read": {
+    "V8": 43,
+    "S03": 124,
+    "S16b": 255,
+    "CompassClose": 223
+   },
+   "excluded_any": 516,
+   "in_test": {
+    "SPY": 266
+   },
+   "in_test_by_year": {
+    "SPY 2017": 61,
+    "SPY 2018": 52,
+    "SPY 2019": 47,
+    "SPY 2020": 48,
+    "SPY 2021": 44,
+    "SPY 2022": 14
+   },
+   "in_test_by_weekday": {
+    "SPY Mon": 66,
+    "SPY Tue": 1,
+    "SPY Wed": 102,
+    "SPY Thu": 4,
+    "SPY Fri": 93
+   },
+   "in_test_with_eod_marks": 266,
+   "in_test_compass_close_pnl_sample": 223,
+   "first": "2017-01-04",
+   "last": "2022-04-27"
+  },
+  "condor_d20": {
+   "roots": [
+    "SPY"
+   ],
+   "window": "13:00-16:00",
+   "listed_sessions": {
+    "SPY": 782
+   },
+   "half_days": {
+    "SPY": 10
+   },
+   "excluded_read": {
+    "V8": 43,
+    "S03": 104,
+    "S16b": 255,
+    "CompassClose": 223
+   },
+   "excluded_any": 516,
+   "in_test": {
+    "SPY": 266
+   },
+   "in_test_by_year": {
+    "SPY 2017": 61,
+    "SPY 2018": 52,
+    "SPY 2019": 47,
+    "SPY 2020": 48,
+    "SPY 2021": 44,
+    "SPY 2022": 14
+   },
+   "in_test_by_weekday": {
+    "SPY Mon": 66,
+    "SPY Tue": 1,
+    "SPY Wed": 102,
+    "SPY Thu": 4,
+    "SPY Fri": 93
+   },
+   "in_test_with_eod_marks": 266,
+   "in_test_compass_close_pnl_sample": 223,
+   "first": "2017-01-04",
+   "last": "2022-04-27"
+  },
+  "touch_d25": {
+   "roots": [
+    "SPY"
+   ],
+   "window": "09:35-16:00",
+   "listed_sessions": {
+    "SPY": 782
+   },
+   "half_days": {
+    "SPY": 10
+   },
+   "excluded_read": {
+    "V8": 43,
+    "S03": 139,
+    "S16b": 255,
+    "CompassClose": 223
+   },
+   "excluded_any": 516,
+   "in_test": {
+    "SPY": 266
+   },
+   "in_test_by_year": {
+    "SPY 2017": 61,
+    "SPY 2018": 52,
+    "SPY 2019": 47,
+    "SPY 2020": 48,
+    "SPY 2021": 44,
+    "SPY 2022": 14
+   },
+   "in_test_by_weekday": {
+    "SPY Mon": 66,
+    "SPY Tue": 1,
+    "SPY Wed": 102,
+    "SPY Thu": 4,
+    "SPY Fri": 93
+   },
+   "in_test_with_eod_marks": 266,
+   "in_test_compass_close_pnl_sample": 223,
+   "first": "2017-01-04",
+   "last": "2022-04-27"
+  },
+  "h13_te": {
+   "roots": [
+    "SPXW"
+   ],
+   "window": "13:00-16:00",
+   "listed_sessions": {
+    "SPXW": 855
+   },
+   "half_days": {
+    "SPXW": 11
+   },
+   "excluded_read": {
+    "V8": 56,
+    "S03": 110,
+    "S16b": 275,
+    "CompassClose": 236
+   },
+   "excluded_any": 558,
+   "in_test": {
+    "SPXW": 297
+   },
+   "in_test_by_year": {
+    "SPXW 2017": 89,
+    "SPXW 2018": 54,
+    "SPXW 2019": 47,
+    "SPXW 2020": 48,
+    "SPXW 2021": 44,
+    "SPXW 2022": 15
+   },
+   "in_test_by_weekday": {
+    "SPXW Mon": 93,
+    "SPXW Tue": 9,
+    "SPXW Wed": 102,
+    "SPXW Thu": 4,
+    "SPXW Fri": 89
+   },
+   "in_test_with_eod_marks": 297,
+   "in_test_compass_close_pnl_sample": 234,
+   "first": "2017-01-03",
+   "last": "2022-04-27"
+  },
+  "h15_s2": {
+   "roots": [
+    "SPXW"
+   ],
+   "window": "14:05-16:00",
+   "listed_sessions": {
+    "SPXW": 855
+   },
+   "half_days": {
+    "SPXW": 11
+   },
+   "excluded_read": {
+    "V8": 56,
+    "S03": 102,
+    "S16b": 275,
+    "CompassClose": 236
+   },
+   "excluded_any": 558,
+   "in_test": {
+    "SPXW": 297
+   },
+   "in_test_by_year": {
+    "SPXW 2017": 89,
+    "SPXW 2018": 54,
+    "SPXW 2019": 47,
+    "SPXW 2020": 48,
+    "SPXW 2021": 44,
+    "SPXW 2022": 15
+   },
+   "in_test_by_weekday": {
+    "SPXW Mon": 93,
+    "SPXW Tue": 9,
+    "SPXW Wed": 102,
+    "SPXW Thu": 4,
+    "SPXW Fri": 89
+   },
+   "in_test_with_eod_marks": 297,
+   "in_test_compass_close_pnl_sample": 234,
+   "first": "2017-01-03",
+   "last": "2022-04-27"
+  }
+ }
+}

@@ -44,6 +44,9 @@
 | Compass ICT (`9d6c37e`, `0943030`) | exploration only; holdouts never opened | — | 0 | 0 |
 | Compass EMA (this study, prereg) | not yet read | — | 0 | 0 |
 | Compass Close (`research_notes/Compass Close/PREREG_COMPASS_CLOSE.md`, row added with the prereg, before any fetch or computation) | SPXW same-day PM chains 15:45–16:00, SPX prints, Cboe SPX closes: 470 new sessions 2017-06-02 → 2022-05-12 (gate = odd months 236, P&L = even months 234; 15 of B's 28 months inside); previously read 2022-05-13 → 2026-10-09 reported, not judged | 1 judged rule (15:55 ATM straddle to settlement) + 8 reported entry/exit books (call, put, move side, narrower leg, 15:50, 15:58, 15:56 ask, one-strike-OTM strangle); fee and event-day lines not counted | 9 | 9 |
+| Compass Final (`research_notes/Compass Final/PREREG_COMPASS_FINAL.md`, row added with the prereg, before any fetch or computation) | SPY same-day chains 09:30–16:00, 266 sessions 2017-01-04 → 2022-04-27; QQQ same-day chains 15:00–16:00, 339 sessions 2012-06-01 → 2022-04-27; SPXW same-day chains at 13:00 and 14:05, 297 sessions 2017-01-03 → 2022-04-27; SPY/QQQ post-market bars to 17:30 on those sessions; QQQ stock 2025-10-13 → 2026-10-22 (H1, 257 sessions); every session read earlier for an index-product option (V8, S03, S16b, Compass Close's gate sample) excluded | 9 entry rules (fly5 iron judged, its call and put flies reported; condor_em1; condor_d20; the hyp B touch pick; T-E; H15 S2; H1 QQQ) + 4 settlement lines (0, a, c, 15:58 or the study's convention) on each of the 6 physically settled cells | 32 | 33 |
+
+**Running count with Compass Final's row (2026-10-24): holdout A ≥ 174 rules; holdout B ≥ 16,008 rules.**
 
 **Running count with Compass Close's row (2026-10-24): holdout A ≥ 142 rules (≥ 133 before it); holdout B ≥ 15,975 rules (≥ 15,966 before it); Compass EMA's prereg has read nothing.**
 

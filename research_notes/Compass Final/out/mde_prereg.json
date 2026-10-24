@@ -1,0 +1,150 @@
+{
+ "k": 7,
+ "alpha_one_sided": 0.0035714285714285718,
+ "z": 2.690109527158866,
+ "z80": 0.8416212335729144,
+ "fomc_jan_may_2017": [
+  "2017-02-01",
+  "2017-03-15",
+  "2017-05-03"
+ ],
+ "bls_jan_may_2017": {
+  "CPI": [
+   "2017-01-18",
+   "2017-02-15",
+   "2017-03-15",
+   "2017-04-14",
+   "2017-05-12"
+  ],
+  "NFP": [
+   "2017-01-06",
+   "2017-02-03",
+   "2017-03-10",
+   "2017-04-07",
+   "2017-05-05"
+  ]
+ },
+ "tests": {
+  "fly5_iron": {
+   "planned_trades_max": 1210,
+   "sessions": 479,
+   "sd_trade": 144.03478747662567,
+   "sd_session": 115.1722858988031,
+   "sd_source": "AFTERHOURS period ii, fly5 iron, case (b), Robinhood fees",
+   "mde_trade": 14.62386936979806,
+   "mde_session": 18.58522477480329,
+   "note": "2 entry minutes x name-sessions"
+  },
+  "condor_em1": {
+   "planned_trades_max": 1330,
+   "sessions": 266,
+   "sd_trade": 128.0843998349461,
+   "sd_session": 98.79712362156195,
+   "sd_source": "AFTERHOURS period ii, condor_d20, case (b), Robinhood fees (proxy for em1: AFTERHOURS ran no em1)",
+   "mde_trade": 12.403892827056056,
+   "mde_session": 21.39395462745899,
+   "note": "5 entry minutes a session"
+  },
+  "condor_d20": {
+   "planned_trades_max": 1330,
+   "sessions": 266,
+   "sd_trade": 128.0843998349461,
+   "sd_session": 98.79712362156195,
+   "sd_source": "AFTERHOURS period ii, condor_d20, case (b), Robinhood fees",
+   "mde_trade": 12.403892827056056,
+   "mde_session": 21.39395462745899,
+   "note": "5 entry minutes a session"
+  },
+  "touch_d25": {
+   "planned_trades_max": 1601,
+   "sessions": 266,
+   "sd_trade": 128.0843998349461,
+   "sd_session": 98.79712362156195,
+   "sd_source": "proxy: condor_d20 case (b) (no case (b) was run on the touch spreads)",
+   "mde_trade": 11.305457967910598,
+   "mde_session": 21.39395462745899,
+   "note": "planned count = 6.019 touch rows a session (2025-26 OOS rate) x sessions: an estimate, touches are not scheduled"
+  },
+  "h13_te": {
+   "planned_trades_max": 246,
+   "sessions": 246,
+   "sd_trade": 80.01659362594044,
+   "sd_session": 80.01659362594044,
+   "sd_source": "final report 6d TEST at Robinhood fees (settled at the official close: no exercise risk on SPXW)",
+   "mde_trade": 18.01773078735916,
+   "mde_session": 18.01773078735916,
+   "note": ""
+  },
+  "h15_s2": {
+   "planned_trades_max": 281,
+   "sessions": 281,
+   "sd_trade": 137.90201850247223,
+   "sd_session": 137.90201850247223,
+   "sd_source": "final report 6e TEST at Robinhood fees",
+   "mde_trade": 29.05394105788154,
+   "mde_session": 29.05394105788154,
+   "note": ""
+  },
+  "h1_qqq": {
+   "planned_trades_max": 257,
+   "sessions": 257,
+   "sd_trade": 0.8011350070359555,
+   "sd_session": 0.8011350070359556,
+   "sd_source": "final report 32 QQQ single test at Robinhood fees (% of notional)",
+   "mde_trade": 0.17649269542196677,
+   "mde_session": 0.1764926954219668,
+   "note": "one trade a session at most (flat when the close equals the 15:00 price)"
+  }
+ },
+ "h1_sessions": [
+  "2025-10-13",
+  "2026-10-22",
+  257
+ ],
+ "h1_half_days_in_span": [
+  "2025-11-28",
+  "2025-12-24"
+ ],
+ "prev_means": {
+  "fly5_iron_ii_caseb": 6.923372555772762,
+  "condor_d20_ii_caseb": 3.8030829387663863,
+  "h13_test": 8.73611460863511,
+  "h15_test": 17.97712679609497,
+  "h1_qqq": 0.03789786302263295,
+  "touch_oos_case0": 4.590757284500018,
+  "em1_ii_case0": 3.900420919814076,
+  "fly5_ii_case0_all": 4.294877570405272
+ },
+ "forward_n": {
+  "S17 ATM put SPY": {
+   "mean": 0.594135986620266,
+   "sd": 3.146818501364977,
+   "n_80": 174
+  },
+  "S17 ATM put QQQ": {
+   "mean": 0.7241008345719722,
+   "sd": 3.211460672362445,
+   "n_80": 122
+  },
+  "S17 0.30-delta put SPY": {
+   "mean": 0.40030599643640113,
+   "sd": 2.6818581819086975,
+   "n_80": 278
+  },
+  "S17 0.30-delta put QQQ": {
+   "mean": 0.523530654293205,
+   "sd": 2.5432635215428476,
+   "n_80": 146
+  },
+  "H1 QQQ": {
+   "mean": 0.03789786302263295,
+   "sd": 0.8011350070359555,
+   "n_80": 2763
+  },
+  "S17 ATM put, SPY + QQQ pooled (the forward primary)": {
+   "mean": 0.6591184105961191,
+   "sd": 3.211460672362445,
+   "n_80": 147
+  }
+ }
+}

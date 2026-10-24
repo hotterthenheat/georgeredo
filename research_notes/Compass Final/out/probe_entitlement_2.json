@@ -1,0 +1,136 @@
+[
+ {
+  "probe": "SPX index 2017-01-05 13:00-13:05",
+  "status": "ok",
+  "rows": 6,
+  "columns": [
+   "timestamp",
+   "price"
+  ],
+  "first_timestamp": "2017-01-05 13:00:00-05:00",
+  "last_timestamp": "2017-01-05 13:05:00-05:00",
+  "finite_price": 6,
+  "rows_after_1600": 0,
+  "at": "2026-10-23T21:21:44-04:00"
+ },
+ {
+  "probe": "SPX index 2017-05-16 13:00-13:05",
+  "status": "ok",
+  "rows": 6,
+  "columns": [
+   "timestamp",
+   "price"
+  ],
+  "first_timestamp": "2017-05-16 13:00:00-04:00",
+  "last_timestamp": "2017-05-16 13:05:00-04:00",
+  "finite_price": 6,
+  "rows_after_1600": 0,
+  "at": "2026-10-23T21:21:44-04:00"
+ },
+ {
+  "probe": "SPX index 2016-12-20 13:00-13:05",
+  "status": "no data",
+  "at": "2026-10-23T21:21:44-04:00"
+ },
+ {
+  "probe": "SPY EOD 2016-12-27..2017-01-05 (non-expiry probe window incl. 2016-12-27..29, 2017-01-05)",
+  "status": "ok",
+  "rows": 1,
+  "columns": [
+   "created",
+   "last_trade",
+   "open",
+   "high",
+   "low",
+   "close",
+   "volume",
+   "count",
+   "bid_size",
+   "bid_exchange",
+   "bid",
+   "bid_condition",
+   "ask_size",
+   "ask_exchange",
+   "ask",
+   "ask_condition"
+  ],
+  "first_created": "2017-01-05 17:20:06.725000-05:00",
+  "last_created": "2017-01-05 17:20:06.725000-05:00",
+  "first_last_trade": "2017-01-05 17:19:36.666000-05:00",
+  "last_last_trade": "2017-01-05 17:19:36.666000-05:00",
+  "finite_close": 1,
+  "finite_bid": 1,
+  "at": "2026-10-23T21:21:44-04:00"
+ },
+ {
+  "probe": "SPY EOD 2016-12-20",
+  "status": "no data",
+  "at": "2026-10-23T21:21:44-04:00"
+ },
+ {
+  "probe": "QQQ bars utp_cta 2014-03-04 16:00-17:31",
+  "status": "ok",
+  "rows": 92,
+  "columns": [
+   "timestamp",
+   "open",
+   "high",
+   "low",
+   "close",
+   "volume",
+   "count",
+   "vwap"
+  ],
+  "first_timestamp": "2014-03-04 16:00:00-05:00",
+  "last_timestamp": "2014-03-04 17:31:00-05:00",
+  "finite_close": 37,
+  "rows_after_1600": 91,
+  "finite_close_after_1600": 36,
+  "volume_after_1600": 1291132,
+  "at": "2026-10-23T21:21:44-04:00"
+ },
+ {
+  "probe": "SPY bars utp_cta 2017-01-05 16:00-17:31",
+  "status": "ok",
+  "rows": 92,
+  "columns": [
+   "timestamp",
+   "open",
+   "high",
+   "low",
+   "close",
+   "volume",
+   "count",
+   "vwap"
+  ],
+  "first_timestamp": "2017-01-05 16:00:00-05:00",
+  "last_timestamp": "2017-01-05 17:31:00-05:00",
+  "finite_close": 70,
+  "rows_after_1600": 91,
+  "finite_close_after_1600": 69,
+  "volume_after_1600": 4106746,
+  "at": "2026-10-23T21:21:44-04:00"
+ },
+ {
+  "probe": "SPY bars nqb 2017-01-05 16:00-17:31",
+  "status": "ok",
+  "rows": 92,
+  "columns": [
+   "timestamp",
+   "open",
+   "high",
+   "low",
+   "close",
+   "volume",
+   "count",
+   "vwap"
+  ],
+  "first_timestamp": "2017-01-05 16:00:00-05:00",
+  "last_timestamp": "2017-01-05 17:31:00-05:00",
+  "finite_close": 70,
+  "rows_after_1600": 91,
+  "finite_close_after_1600": 69,
+  "volume_after_1600": 4106746,
+  "at": "2026-10-23T21:21:44-04:00"
+ }
+]
