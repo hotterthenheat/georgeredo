@@ -370,6 +370,15 @@ def ci_txt(c):
     return '—' if not c else f'[{money(c[0])}, {money(c[1])}]'
 
 
+def rh_saving(row: dict) -> float:
+    """dollars a trade gained by replacing the pre-registered $0.01 a share auction fee with Robinhood's fees (the buy's CAT,
+    the sale's SEC fee and TAF at the 13:58 price, docs/FEES_ROBINHOOD.md); the $0.005 exit half-spread stays"""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[3] / 'scripts'))
+    import fees_robinhood as FR
+    px = lambda k: float(row[k]) if row.get(k) not in (None, '') else 0.0   # noqa: E731  (a row without a price: no SEC fee figured)
+    return SHARES * 0.01 - FR.stock_fee(px('C_prev'), SHARES, 'buy') - FR.stock_fee(px('X'), SHARES, 'sell')
+
+
 def write_report(paths: dict) -> str:
     h7 = EF.read_rows(paths['h7'])
     evs = {}
@@ -398,6 +407,18 @@ def write_report(paths: dict) -> str:
             L.append(f'- {nm} after {c["k"]} trades (through {c["through"]}): mean {money(c["mean_1x"])} (2× {money(c["mean_2x"])}), '
                      f'{100 * c["win"]:.0f} % of trades > 0, total {money(c["total"])}, worst {money(c["worst"])}, best {money(c["best"])}'
                      + (f', interval {ci_txt(c["ci"])}' if c['ci'] else '') + ' — **checkpoint — no verdict**')
+    L += ['', '## At Robinhood fees (descriptive)', '',
+          'The same trades re-priced at Robinhood\'s fees (the research\'s default cost model from 2026-10-24, '
+          '`docs/FEES_ROBINHOOD.md`): the $0.01 a share at the auction entry is fees and is replaced by Robinhood\'s (CAT only on '
+          'a purchase); the $0.005 a share at the exit is half the spread and stays; the sale pays the SEC fee and the TAF, '
+          'each rounded up to the cent. **The pass rule and N stay on the pre-registered costs (FORWARD_RULE_H7.md, frozen); '
+          'the verdict column above is the only verdict.**', '',
+          '| name | trades | mean $ a trade at Robinhood fees | pre-registered 1× |', '|---|---|---|---|']
+    for nm in NAMES:
+        tr = [x for x in h7 if x['name'] == nm and x['status'] == 'trade']
+        pre = [float(x['net_1x']) for x in tr]
+        rh = [float(x['net_1x']) + rh_saving(x) for x in tr]
+        L.append(f'| {nm} | {len(tr):,} | {money(sum(rh) / len(rh) if rh else None)} | {money(sum(pre) / len(pre) if pre else None)} |')
     exc = [r for r in h7 if r['status'] == 'excluded']
     L += ['', 'H7 meetings excluded (no trade): ' + ('; '.join(f'{r["name"]} {r["A"]} ({r["excluded"]})' for r in exc) or 'none') + '.', '']
     txt = '\n'.join(L)

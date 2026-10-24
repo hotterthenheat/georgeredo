@@ -467,7 +467,7 @@ The time-matched lift of D1 (Hypothesis E §8: Σ_s N_D1(s)·[mean(D1 at s) − 
 <!-- cumulative:forward:begin -->
 # Forward — period iii, 10 sessions, 2026-10-12 → 2026-10-23
 
-Regenerated from the replay root `paper_backtest_official` by the append (`paper-backtest-2026-10-22.2`, 2026-10-23 23:49 UTC); a session listed here is never dropped. These sessions are untouched by any rule, model or choice — an execution and data-quality record until the thresholds (60 → 120 sessions for condor_em1, 150 for condor_d20's D1 re-test, 250 a name for fly5).
+Regenerated from the replay root `paper_backtest_official` by the append (`paper-backtest-2026-10-22.2`, 2026-10-24 00:44 UTC); a session listed here is never dropped. These sessions are untouched by any rule, model or choice — an execution and data-quality record until the thresholds (60 → 120 sessions for condor_em1, 150 for condor_d20's D1 re-test, 250 a name for fly5).
 
 ### Settlement: the official close
 
@@ -545,6 +545,18 @@ SPY and QQQ options are American and physically settled: OCC exercises every opt
 | fly5 long call ±5 | iii | 40 | 36 | +50.07 | +162.78 | 36 | +50.07 | +162.78 | -1.30 | -1.30 |
 | fly5 long put ±5 | iii | 40 | 36 | +50.68 | +177.17 | 36 | +50.68 | +177.17 | +20.14 | +20.76 |
 | condor_d20 condor (SPY 2-wide 20-delta, 13:00–15:00) | iii | 46 | 41 | +23.38 | +44.62 | 41 | +23.38 | +44.62 | +50.36 | +50.36 |
+
+### Robinhood fees (the default cost model from 2026-10-24)
+
+The same trades, the same fills, re-priced at Robinhood's fees (`docs/FEES_ROBINHOOD.md`, `robinhood-2026-10-24.1`): $0 commission, $0.0403 a contract a side, and on each sold leg the TAF and SEC fee rounded up to the cent. Held to the official close there is no closing fee. At 15:58 a short is bought back and a long with a bid is sold. **The pre-registered figures above stay the record.** Each candidate's confirmation threshold and N are counted on the tracker's own $0.65 a contract, as frozen. The Robinhood columns are descriptive.
+
+| candidate · structure | period | trades | mean $ a trade held, pre-registered fees | held, Robinhood | win held, pre-registered / Robinhood | total held, pre-registered / Robinhood | mean $ at 15:58, pre-registered / Robinhood |
+|---|---|---|---|---|---|---|---|
+| condor_em1 condor (SPY 2-wide, straddle edge, 11:30–13:30) | iii | 49 | +12.40 | **+14.80** | 87.8% / 87.8% | +608 / +725 | -0.08 / +4.49 |
+| fly5 iron ±5 (SPY+QQQ, 15:00 / 15:30) | iii | 40 | +54.90 | **+57.30** | 72.5% / 72.5% | +2,196 / +2,292 | +6.77 / +11.27 |
+| fly5 long call ±5 | iii | 40 | +52.10 | **+54.52** | 72.5% / 72.5% | +2,084 / +2,181 | -0.68 / +4.01 |
+| fly5 long put ±5 | iii | 40 | +52.73 | **+55.14** | 72.5% / 72.5% | +2,109 / +2,206 | +1.30 / +6.06 |
+| condor_d20 condor (SPY 2-wide 20-delta, 13:00–15:00) | iii | 46 | +24.31 | **+26.71** | 95.7% / 95.7% | +1,118 / +1,229 | +4.72 / +9.50 |
 
 ### Sessions
 

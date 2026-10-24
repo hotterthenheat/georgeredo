@@ -622,14 +622,29 @@ def summary_table(summary) -> str:
         rows += _row(st, rr)
     rows.sort(key=lambda t: (-(t[3].get('mean_pct') if math.isfinite(t[3].get('mean_pct', float('nan'))) else -1e9)))
     U = {'premium': '% prem', 'risk': '% risk', 'stock': '% notional', 'credit': '% credit', 'capital': '% capital'}
-    out = ['| # | strategy | name | period | trades | win % | avg win | avg loss | mean trade | biggest win | biggest loss | 20-session block 95% (mean %) | verdict |',
-           '|' + '|'.join('-' * (3 * k) for k in (3, 16, 6, 9, 5, 4, 7, 7, 9, 8, 8, 9, 12)) + '|']
+    out = ['| # | strategy | name | period | trades | mean trade at Robinhood fees | mean trade at the study\'s fees | win % Robinhood / study | '
+           'biggest win | biggest loss | 20-session block 95% (mean %, Robinhood) | verdict (as pre-registered, at the study\'s fees) | '
+           'would the verdict differ at Robinhood fees? (descriptive) |',
+           '|' + '|'.join('-' * (3 * k) for k in (3, 14, 5, 8, 4, 9, 9, 6, 7, 7, 8, 10, 22)) + '|']
     for st, inst, per, m in rows:
         f = M.fnum
-        out.append(f"| {st.sid} | {label(st)} | {inst} | {per} | {m['trades']:,} | {m['win_rate']:.1f} | {f(m['avg_win_pct'], 1)}% / {f(m['avg_win_usd'], 0)} | "
-                   f"{f(m['avg_loss_pct'], 1)}% / {f(m['avg_loss_usd'], 0)} | **{f(m['mean_pct'], 3 if st.unit == 'stock' else 2)} {U.get(st.unit, '')}** / {f(m['mean_usd'], 2)} | "
-                   f"{f(m['best'][0], 0)} ({m['best'][2]}) | {f(m['worst'][0], 0)} ({m['worst'][2]}) | {M.fci(m['ci_pct'], 3 if st.unit == 'stock' else 2)} | {short_verdict(st)} |")
+        ms = m.get('study', {})
+        dp = 3 if st.unit == 'stock' else 2
+        inf = ' ‡' if any(h.startswith('Robinhood fees inferred') for h in m.get('fee_how', [])) else ''
+        vend = ' §' if st.vendor else ''
+        out.append(f"| {st.sid} | {label(st)} | {inst} | {per} | {m['trades']:,} | **{f(m['mean_pct'], dp)} {U.get(st.unit, '')}** / {f(m['mean_usd'], 2)}{inf}{vend} | "
+                   f"{f(ms.get('mean_pct', float('nan')), dp)} / {f(ms.get('mean_usd', float('nan')), 2)} | {m['win_rate']:.1f} / {ms.get('win_rate', float('nan')):.1f} | "
+                   f"{f(m['best'][0], 0)} ({m['best'][2]}) | {f(m['worst'][0], 0)} ({m['worst'][2]}) | {M.fci(m['ci_pct'], dp)} | {short_verdict(st)} | "
+                   f"{m.get('verdict_rh', '—').replace('|', '/')} |")
     return '\n'.join(out)
+
+
+def changes(summary) -> list:
+    """(st, inst, per, m) for every page-1 row"""
+    rows = []
+    for st, rr in summary:
+        rows += _row(st, rr)
+    return rows
 
 
 def label(st) -> str:
@@ -642,15 +657,52 @@ def short_verdict(st) -> str:
     return v if len(v) <= 70 else v[:68].rsplit(' ', 1)[0] + ' …'
 
 
+def passed_rh(rows1) -> str:
+    """the passed rules' own holdout and single-test figures at Robinhood fees, descriptive"""
+    import verdict_rh as VR
+    out = ['**The same rules at Robinhood fees (descriptive; the pre-registered results above stand).** The Compass features\' Δ '
+           'is re-run by the study\'s own `stats.delta` on the holdout with each trade re-priced; H7 is its single-test row.', '',
+           '| rule | Δ or mean at the study\'s fees | at Robinhood fees | 95% interval at Robinhood fees | the frozen pass rule at Robinhood fees |',
+           '|---|---|---|---|---|']
+    for fid in ('V1', 'X3', 'BV1b', 'BX3e'):
+        try:
+            r = VR.features_delta(fid)
+        except Exception as e:  # noqa: BLE001
+            out.append(f'| {fid} | not computed ({type(e).__name__}) | | | |')
+            continue
+        out.append(f"| {fid} | Δ {M.fnum(r['study']['delta'] * 100)} | Δ **{M.fnum(r['rh']['delta'] * 100)}** | "
+                   f"[{M.fnum(r['rh']['ci'][0] * 100)}, {M.fnum(r['rh']['ci'][1] * 100)}] | {'passes' if r['rh']['pass'] else 'fails'} |")
+    out.append('| VN1, BC3 | not re-run: their per-trade arms are not on disk (and VN1\'s choice itself prices the fee) | | | |')
+    for st, i, p, m in rows1:
+        if st.sid == '37a':
+            out.append(f"| H7 {i} | {M.fnum(m['study']['mean_usd'])} $ | **{M.fnum(m['mean_usd'])} $** | {M.fci(m['ci_usd'])} | "
+                       f"{'passes' if (m['mean_usd'] > 0 and m['ci_usd'][0] > 0) else 'fails'} (report interval, 1×) |")
+    return '\n'.join(out)
+
+
 def write_report(secs, summary, outdir: Path, want):
     import front
-    body = [front.HEAD, '## Page 1. Every strategy, sorted by mean trade', '', front.SUMMARY_NOTE, '', summary_table(summary), '',
+    rows1 = changes(summary)
+    flips = [(st, i, p, m) for st, i, p, m in rows1 if m.get('study') and (m['mean_pct'] > 0) != (m['study']['mean_pct'] > 0)]
+    differ = [(st, i, p, m) for st, i, p, m in rows1 if '**Yes**' in m.get('verdict_rh', '')]
+    big = sorted(rows1, key=lambda t: -abs(t[3]['mean_pct'] - t[3]['study']['mean_pct']))[:5]
+    U = {'premium': '% of premium', 'risk': '% of max risk', 'stock': '% of notional', 'credit': '% of the credit', 'capital': '% of cash'}
+    note = [f"**Robinhood against the study's fees, on page 1.** {len(rows1)} rows. The five largest changes in the mean trade:", '']
+    for st, i, p, m in big:
+        note.append(f"- #{st.sid} {label(st)} ({i}, {p}): {M.fnum(m['study']['mean_pct'])} → **{M.fnum(m['mean_pct'])}** {U.get(st.unit, '')} "
+                    f"({M.fnum(m['study']['mean_usd'])} → {M.fnum(m['mean_usd'])} $ a trade).")
+    note += ['', f"Rows whose mean trade changes sign: **{len(flips)}**" + (': ' + '; '.join(
+        f"#{st.sid} {i} {p} ({M.fnum(m['study']['mean_pct'])} → {M.fnum(m['mean_pct'])})" for st, i, p, m in flips) if flips else '') + '.',
+        '', f"Rows where the frozen pass rule, run on Robinhood-fee returns, would read differently: **{len(differ)}**" + (': ' + '; '.join(
+        f"#{st.sid} {i}" for st, i, p, m in differ) if differ else '') + '. This is descriptive; every verdict stays as pre-registered.']
+    body = [front.HEAD, '## Page 1. Every strategy, sorted by mean trade at Robinhood fees', '', front.SUMMARY_NOTE, '', '\n'.join(note), '',
+            summary_table(summary), '',
             '**Studies with no trade-level result** (each has its own short section below):', '',
             '| # | study | why no metrics | verdict |', '|' + '|'.join('-' * (3 * k) for k in (2, 14, 30, 10)) + '|']
     for st, _ in summary:
         if st.load is None:
             body.append(f"| {st.sid} | {st.name} | {st.na.replace('not available — ', '')[:160]} | {short_verdict(st)} |")
-    body += ['', front.PASSED, '', front.ledger(), '', front.DATA, '', front.FORWARD, '', front.METHOD, '']
+    body += ['', front.PASSED, '', passed_rh(rows1), '', front.ledger(), '', front.DATA, '', front.FORWARD, '', front.METHOD, '']
     cur = None
     for st, md in secs:
         if st.group != cur:

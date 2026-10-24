@@ -98,5 +98,6 @@ The stock studies charged two different things:
 For a 100-share SPY sale at $600, Robinhood's fees are $1.24 (SEC) + $0.02 (TAF) + $0.0003 (CAT). That is about $1.26,
 against the study's $1.00 for the same sale.
 
-The code that applies this is `research_notes/FINAL REPORT/build/fees.py` (`RH`). The daily forward job reads the same
-module.
+The code that applies this is `scripts/fees_robinhood.py`. The final report's build (`research_notes/FINAL REPORT/build/`)
+and the daily forward job's reports (`scripts/paper_backtest.py`, the Compass features and edge forward tests) read that
+same module.

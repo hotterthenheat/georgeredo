@@ -46,6 +46,7 @@ for _p in (REPO / 'scripts', REPO / 'research_notes' / 'Compass phase 3' / 'back
 import paper_backtest as B  # noqa: E402
 import paper_tracker as T  # noqa: E402
 import audit_lib as AL  # noqa: E402
+import fees_robinhood as FR  # noqa: E402  (the default cost model from 2026-10-24 — beside the frozen tests, never in them)
 
 VERSION = 'edge-forward-2026-10-23.1'
 PREREG_COMMIT = 'e114e30'
@@ -515,6 +516,59 @@ def money(x):
     return '—' if x is None else f'{x:+,.2f}'
 
 
+def _fl(x):
+    return None if x in ('', None) else float(x)
+
+
+def h5_rh_fees(row: dict) -> float:
+    """Robinhood's fees on one traded H5 package (docs/FEES_ROBINHOOD.md), on the row's own fills: 10 SPY calls and puts sold
+    at the 15:30 bids and bought back at the 15:58 asks (the entry ask where the exit ask was not quoted), the SPXW call and
+    put bought at the asks and sold at the 15:58 bids (an unquoted bid taken at the $1.00 tier; a $0 bid not sold)"""
+    n = H5_SPY_N
+    f = FR.option_fee('SPY', _fl(row['spy_c_bid']), n, 'sell') + FR.option_fee('SPY', _fl(row['spy_p_bid']), n, 'sell')
+    for leg in ('spy_c', 'spy_p'):
+        a = _fl(row[f'{leg}_ask_x'])
+        f += FR.option_fee('SPY', a if a is not None else _fl(row[f'{leg}_ask']), n, 'buy')
+    for leg in ('spxw_c', 'spxw_p'):
+        f += FR.option_fee('SPXW', _fl(row[f'{leg}_ask']), H5_SPXW_N, 'buy')
+        b = _fl(row[f'{leg}_bid_x'])
+        b = 1.0 if b is None else b
+        if b > 0:
+            f += FR.option_fee('SPXW', b, H5_SPXW_N, 'sell')
+    return f
+
+
+def h6_rh_fees(trade: dict, entry: dict | None) -> float:
+    """Robinhood on one H6 spread: the short put sold at its entry bid and bought back at its exit ask, the long bought at its
+    entry ask and sold at its exit bid (a $0 bid not sold)"""
+    nm = trade['name']
+    sb = _fl((entry or {}).get('short_bid')) or 0.0
+    la = _fl((entry or {}).get('long_ask')) or 0.0
+    sa, lb = _fl(trade['short_ask_x']) or 0.0, _fl(trade['long_bid_x']) or 0.0
+    return (FR.option_fee(nm, sb, 1, 'sell') + FR.option_fee(nm, la, 1, 'buy') + FR.option_fee(nm, sa, 1, 'buy')
+            + (FR.option_fee(nm, lb, 1, 'sell') if lb > 0 else 0.0))
+
+
+def rh_lines(h5: list, ents: list, trs: list) -> list:
+    """the forward rows at Robinhood's fees, beside the pre-registered ones — descriptive; N and the pass rules stay frozen"""
+    t5 = [x for x in h5 if x['traded'] == '1']
+    pre5 = [float(x['pnl']) for x in t5]
+    rh5 = [float(x['pnl']) + float(x['fees']) - h5_rh_fees(x) for x in t5]
+    em = {(x['month'], x['name']): x for x in ents}
+    pre6 = [float(t['pnl']) for t in trs]
+    rh6 = [float(t['pnl']) + float(t['fees']) - h6_rh_fees(t, em.get((t['month'], t['name']))) for t in trs]
+    avg = lambda v: (sum(v) / len(v)) if v else None   # noqa: E731
+    return ['## At Robinhood fees (descriptive)', '',
+            'The same forward trades on the same fills, re-priced at Robinhood\'s fees (the research\'s default cost model from '
+            f'2026-10-24, `docs/FEES_ROBINHOOD.md`, `{FR.VERSION}`): the study\'s $0.68748 a SPY/QQQ contract a side and SPXW\'s '
+            '$1.18748 / $1.27748 added back; Robinhood\'s $0.0403 a contract a side (plus TAF and SEC on an ETF sale) and SPXW '
+            '$1.0403 / $1.1303 charged. **The pass rules and N stay on the pre-registered fees (PREREG_H5.md, PREREG_H6.md, '
+            'frozen); the verdict column above is the only verdict.**', '',
+            '| test | trades | mean $ a trade at Robinhood fees | pre-registered fees |', '|---|---|---|---|',
+            f'| H5 | {len(t5):,} | {money(avg(rh5))} | {money(avg(pre5))} |',
+            f'| H6 | {len(trs):,} | {money(avg(rh6))} | {money(avg(pre6))} |', '']
+
+
 def write_report(paths: dict) -> str:
     h5 = read_rows(paths['h5'])
     ents, trs = read_rows(paths['h6_entries']), read_rows(paths['h6_trades'])
@@ -556,7 +610,7 @@ def write_report(paths: dict) -> str:
          'for reading only: ' + ', '.join(f'{nm} {c} closed, mean {money(m)}' for nm, (c, m) in per_name.items()) + '. '
          'N = 449 months (898 spreads, about 37 years): no verdict is reachable in any useful time (PREREG_H6.md section 6).', '',
          'No interval is printed under 60 sessions (H5) or 12 months (H6). The two tests are read separately; the ledger counts '
-         'each as a hypothesis.', '']
+         'each as a hypothesis.', ''] + rh_lines(h5, ents, trs)
     txt = '\n'.join(L)
     p = Path(paths['report'])
     p.parent.mkdir(parents=True, exist_ok=True)

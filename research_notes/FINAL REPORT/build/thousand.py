@@ -7,7 +7,8 @@ through its own trades, in date order, under two sizing rules, and writes THOUSA
 
 Read-only with respect to the research: every trade list comes from registry.py's loaders, cut to the page-1 row by
 the same slice logic build.py and registry._row use; no rule is recomputed, nothing is fetched, no holdout is opened.
-Each trade's return is 100 × pnl ÷ cost, the report's own figure (costs already inside pnl).
+Each trade's return is 100 × pnl ÷ cost, the report's own figure — from 2026-10-24 at ROBINHOOD's fees (pnl_rh, the
+default cost model: docs/FEES_ROBINHOOD.md), the study's own fees' ending balances beside them.
 
 Method A, "all in each day": each session the whole balance is split equally across that session's trades, so the
 balance grows by the session's mean return. A session whose mean return is −100% or worse leaves nothing: the row is
@@ -143,9 +144,13 @@ def tag(st) -> str:
 
 # ---- charts -----------------------------------------------------------------------------------------------------------------------------
 
-def chart(k: int, st, inst, per, wa, wb) -> str:
+def chart(k: int, st, inst, per, wa, wb, wa0=None) -> str:
     fig, ax = plt.subplots(figsize=(3.3, 1.95), dpi=150)
     floor = None
+    if wa0 is not None:
+        pos0 = [(dt.date.fromisoformat(d), v) for d, v in wa0['path'] if v > 0]
+        if pos0:
+            ax.plot([p[0] for p in pos0], [p[1] for p in pos0], lw=0.7, ls='--', color='#7f7f7f', label="A, study's fees")
     for w, col, lab in ((wa, '#1f4e79', 'A all in'), (wb, '#c0504d', 'B 10%')):
         X = [dt.date.fromisoformat(d) for d, _ in w['path']]
         Y = [v for _, v in w['path']]
@@ -186,9 +191,14 @@ def chart(k: int, st, inst, per, wa, wb) -> str:
 
 # ---- the document -----------------------------------------------------------------------------------------------------------------------
 
-METHOD = """**What this is.** Every row of the final report's page-1 table (`FINAL_RESEARCH_REPORT.md`, commit 14a30a7), each
-on the same strategy, instrument and period as listed there, started with **$1,000** and walked through its own trades in
-date order. The trades are the report's own (its loaders in `build/`); nothing was re-tested, re-priced or fetched.
+METHOD = """**What this is.** Every row of the final report's page-1 table (`FINAL_RESEARCH_REPORT.md`), each on the same strategy,
+instrument and period as listed there, started with **$1,000** and walked through its own trades in date order. The trades
+are the report's own (its loaders in `build/`); nothing was re-tested or fetched.
+
+**Fees: Robinhood is primary (2026-10-24).** Each trade's return is at **Robinhood's fees**, the research's default cost
+model from 2026-10-24 (`docs/FEES_ROBINHOOD.md`): the study's own fills, its modelled fee added back, Robinhood's charged.
+Rows marked ‡ have Robinhood's fees partly inferred from the rule. The ending balances at the study's own fees (the
+version of 2026-10-23, a9d4950) stand beside them.
 
 **Method A, "all in each day".** Each session, the whole balance is split equally across that session's trades. Each
 slice earns that trade's return in the row's own unit (% of premium paid, % of max risk, % of the credit received, % of
@@ -204,7 +214,7 @@ session ends the same under A and B.
 
 **For both.** Fractional contracts are allowed. That is not realistic: $1,000 often cannot buy one real SPXW contract,
 or post the margin on a short straddle or strangle, and short-premium rows would need far more than $1,000 in a real
-account. Costs are already inside each trade's return, as the study ran it. There are no taxes, no margin interest and
+account. Costs are already inside each trade's return: the study's fills, at Robinhood's fees. There are no taxes, no margin interest and
 no slippage beyond the study's own fills. A trade is booked on its entry session (the trade lists carry the entry date
 only), so a trade held for days or weeks is treated as if its money came back the same day. "Worst point" is the lowest
 balance under method A and its date ("start" if it never fell below $1,000).
@@ -214,15 +224,18 @@ balance under method A and its date ("start" if it never fell below $1,000).
 def main():
     rows, na = page1_rows()
     res = []
-    for st, inst, per, d in rows:
-        d = d.sort('date')
+    for st, inst, per, d0 in rows:
+        d0 = d0.sort('date')
+        d = d0.with_columns(pl.col('pnl_rh').alias('pnl'))      # Robinhood's fees (primary)
         wa, wb = walk(d, 'A'), walk(d, 'B')
         res.append(dict(st=st, inst=inst, per=per, n=d.height, sess=d['date'].n_unique(), a0=d['date'].min(), a1=d['date'].max(),
-                        A=wa, B=wb, mean=float((100 * d['pnl'] / d['cost']).mean())))
+                        A=wa, B=wb, A0=walk(d0, 'A'), B0=walk(d0, 'B'), mean=float((100 * d['pnl'] / d['cost']).mean()),
+                        mean0=float((100 * d0['pnl'] / d0['cost']).mean()),
+                        inferred=bool(d0['fee_how'].str.starts_with('Robinhood fees inferred').any())))
     # by the A ending balance; wiped-out rows last, the one that lasted longest first
     res.sort(key=lambda r: (-r['A']['end'], '' if not r['A']['wiped'] else ''.join(chr(255 - ord(ch)) for ch in r['A']['wiped'])))
     for k, r in enumerate(res, 1):
-        r['chart'] = chart(k, r['st'], r['inst'], r['per'], r['A'], r['B'])
+        r['chart'] = chart(k, r['st'], r['inst'], r['per'], r['A'], r['B'], r['A0'])
         r['k'] = k
 
     nA = sum(r['A']['end'] > START for r in res)
@@ -235,33 +248,39 @@ def main():
     n_stock = sum(r['st'].unit == 'stock' for r in up)
     n_vend = sum(r['st'].vendor for r in up)
     n_prev_rows = sum('PREVIEW' in r['st'].verdict for r in up)
-    assert n_short + n_stock + n_vend + n_prev_rows == nA and n_vend == 1 and n_prev_rows == 1, 'rewrite the plain-words note'
+    n_other = nA - n_short - n_stock - n_vend - n_prev_rows
+    nA0 = sum(r['A0']['end'] > START for r in res)
+    nB0 = sum(r['B0']['end'] > START for r in res)
+    wA0 = sum(bool(r['A0']['wiped']) for r in res)
 
     md = ['# $1,000 in each strategy', '',
           '**Repository:** georgeredo, branch `claude/lucid-heisenberg-bpyq7k`. **Built:** 2026-10-23 by '
-          '`research_notes/FINAL REPORT/build/thousand.py`, from the trade lists of `FINAL_RESEARCH_REPORT.md` (14a30a7).', '',
+          '`research_notes/FINAL REPORT/build/thousand.py`, from the trade lists of `FINAL_RESEARCH_REPORT.md`; **re-scored 2026-10-24 at '
+          'Robinhood\'s fees** (the original balances beside them).', '',
           METHOD, '',
           f'**In plain words.** These are what each strategy did over its own study period, not a forecast of what it will do next. '
           f'Most rows lose: {len(res) - nA} of {len(res)} end below $1,000 under method A ({wA} of them wiped out) and '
           f'{len(res) - nB} of {len(res)} under method B. '
           f'The big gains come from short-premium and spread rows ({n_short} of the {nA} that end above $1,000 under A, led by '
           f'#{res[0]["st"].sid}), whose real-account margin or cash $1,000 could not post; the other {nA - n_short} are '
-          f'{n_stock} stock rows with small gains, the vendor\'s own Epoch 1 cards and a five-session preview.', '',
-          '## Page 1. Every row, sorted by the method A ending balance', '',
-          '| # | strategy | instrument | period | trades | ending $ (A) | ending $ (B) | worst point (A) | verdict from the report |',
-          '|' + '|'.join('-' * (3 * w) for w in (2, 18, 6, 9, 4, 7, 7, 9, 12)) + '|']
+          f'{n_stock} stock rows with small gains, {n_vend} vendor row{"s" if n_vend != 1 else ""} (the vendor\'s own Epoch 1 cards), '
+          + ('' if n_other else 'and ') + f'{n_prev_rows} preview row{"s" if n_prev_rows != 1 else ""}' + (f' and {n_other} other{"s" if n_other != 1 else ""}' if n_other else '') + '. '
+          f'At the study\'s own fees the counts were {nA0} above $1,000 under A, {nB0} under B, {wA0} wiped out under A.', '',
+          '## Page 1. Every row, sorted by the method A ending balance at Robinhood fees', '',
+          '| # | strategy | instrument | period | trades | ending $ (A), Robinhood | ending $ (A), study\'s fees | ending $ (B), Robinhood | ending $ (B), study\'s fees | worst point (A, Robinhood) | verdict from the report |',
+          '|' + '|'.join('-' * (3 * w) for w in (2, 18, 6, 9, 4, 7, 6, 7, 6, 9, 12)) + '|']
     for r in res:
         st = r['st']
-        md.append(f"| {r['k']} | #{st.sid} {R.label(st)}{tag(st)} | {r['inst']} | {r['per']} | {r['n']:,} | {end_cell(r['A'])} | "
-                  f"{end_cell(r['B'])} | {low_cell(r['A'])} | {R.short_verdict(st)} |")
+        md.append(f"| {r['k']} | #{st.sid} {R.label(st)}{tag(st)}{' ‡' if r['inferred'] else ''} | {r['inst']} | {r['per']} | {r['n']:,} | **{end_cell(r['A'])}** | "
+                  f"{end_cell(r['A0'])} | **{end_cell(r['B'])}** | {end_cell(r['B0'])} | {low_cell(r['A'])} | {R.short_verdict(st)} |")
     for st in na:
         why = st.na.replace('not available — ', '')
         why = why if len(why) <= 150 else why[:148].rsplit(' ', 1)[0] + ' …'
-        md.append(f"| — | #{st.sid} {R.label(st)} | — | — | — | not available — {why} | not available | — | {R.short_verdict(st)} |")
+        md.append(f"| — | #{st.sid} {R.label(st)} | — | — | — | not available — {why} | — | not available | — | — | {R.short_verdict(st)} |")
     md += ['', f'**Counts.** Above $1,000 at the end: {nA} of {len(res)} rows under A, {nB} under B. Wiped out: {wA} under A, '
            f'{wB} under B. The {len(na)} studies at the foot of the table have no trade list with usable per-trade returns.', '',
            '## Every row in full', '',
-           'Return unit is the row\'s own. "Sessions" counts the sessions with at least one trade. Max drawdown is the largest fall '
+           'At Robinhood fees. Return unit is the row\'s own. "Sessions" counts the sessions with at least one trade. Max drawdown is the largest fall '
            'from a running peak of the balance, in %.', '',
            '| # | strategy | instrument | period | unit | start | end | sessions | trades | A: ending $ | A: total return | A: lowest (date) | A: max DD | B: ending $ | B: total return | B: lowest (date) | B: max DD |',
            '|' + '|'.join('-' * (3 * w) for w in (2, 14, 5, 7, 5, 5, 5, 4, 4, 6, 6, 8, 4, 6, 6, 8, 4)) + '|']
@@ -271,8 +290,8 @@ def main():
                   f"{r['sess']:,} | {r['n']:,} | {end_cell(a)} | {'−100% (wiped out)' if a['wiped'] else pct(a['ret'])} | {low_cell(a)} | {a['mdd']:.1f}% | "
                   f"{end_cell(b)} | {'−100% (wiped out)' if b['wiped'] else pct(b['ret'])} | {low_cell(b)} | {b['mdd']:.1f}% |")
     md += ['', '## Balance curves', '',
-           'One chart a row, in the page-1 order: method A in blue, method B in red, the balance on a log scale, the dashed line '
-           'at $1,000, an ✕ where a row is wiped out.', '',
+           'One chart a row, in the page-1 order, at Robinhood fees: method A in blue, method B in red, the balance on a log scale, '
+           'the dashed line at $1,000, an ✕ where a row is wiped out; grey dashes: method A at the study\'s own fees.', '',
            '<div class="grid">', '']
     for r in res:
         md.append(f"![]({r['chart']}){{width=24%}}")
@@ -282,7 +301,7 @@ def main():
 
     # summary for the hand-off
     for r in res[:5] + res[-5:]:
-        print(r['k'], '#' + r['st'].sid, r['inst'], r['per'], end_cell(r['A']), end_cell(r['B']), r['n'], f"{r['mean']:+.3f}")
+        print(r['k'], '#' + r['st'].sid, r['inst'], r['per'], end_cell(r['A']), end_cell(r['B']), '| study', end_cell(r['A0']), end_cell(r['B0']), r['n'], f"{r['mean']:+.3f}")
     print('above A', nA, 'above B', nB, 'wiped A', wA, 'wiped B', wB, 'rows', len(res), 'na', len(na), 'short among up', n_short)
     render()
 

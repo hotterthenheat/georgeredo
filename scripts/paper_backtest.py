@@ -78,6 +78,7 @@ import eod_recorder as R  # noqa: E402
 import paper_audit as P  # noqa: E402
 import paper_tracker as T  # noqa: E402
 import vol_model as V  # noqa: E402
+import fees_robinhood as FR  # noqa: E402  (the default cost model from 2026-10-24: docs/FEES_ROBINHOOD.md)
 
 REPLAY_VERSION = 'paper-backtest-2026-10-22.2'   # .2: the official close by default (--settle-on 1559 keeps the old convention), the audit's report
 SOURCE = 'backtest-parquet'
@@ -1141,6 +1142,7 @@ def trade_table(df: pl.DataFrame | None, closes: P.OfficialCloses | None = None,
         is_off = s['settle_source'] == 'official'
         ah = P.after_hours_pnl(st, st.entry_cash(), px, nxt, dp, cash_settled=cash) if (is_off or cash) else \
             {'pnl_ah0': None, 'pnl_ah_a': None, 'pnl_ah_b': None, 'pnl_ah_c': None}
+        rh = rh_fees(st, s, name)
         t = {'candidate': k, 'name': name, 'day': day, 'minute': c['minute'], 'structure': c['structure'],
              'period': P.period_of(k, day), 'settle_source': s['settle_source'], 'settle_from': s.get('close_official_from'),
              'settle_fallback': s['settle_source'] == P.FALLBACK_1559, 'settle_px': px, 'close_1559': nf(s.get('close_1m_r')),
@@ -1154,9 +1156,35 @@ def trade_table(df: pl.DataFrame | None, closes: P.OfficialCloses | None = None,
              'pin_dist': fl['pin_dist'], 'pin_025': fl['pin_025'], 'pin_050': fl['pin_050'],
              'pm_low': lo, 'pm_high': hi, 'pm_cross': fl['pm_cross'], 'pm_source': pm_src,
              'next_day': nday, 'next_open': nxt, 'next_open_source': nsrc, 'decision_price': dp, **ah,
-             't2_decile_primary': c.get('t2_decile_primary')}
+             't2_decile_primary': c.get('t2_decile_primary'), **rh}
+        for x, fee_x in (('pnl_rh', 'nbbo'), ('pnl_1558_rh', '1558_nbbo')):
+            v = t.get(f'pnl_{fee_x}')
+            t[x] = None if v is None or rh[f'fee_rh_{"open" if x == "pnl_rh" else "1558"}'] is None else \
+                v + rh['fee_study_open'] + (rh['fee_study_close'] if x == 'pnl_1558_rh' else 0.0) - rh['fee_rh_open'] - \
+                (rh['fee_rh_close'] if x == 'pnl_1558_rh' else 0.0)
         out.append(t)
     return out, unsettled
+
+
+def rh_fees(st, s: dict, name: str) -> dict:
+    """Robinhood's fees on one tracker trade (docs/FEES_ROBINHOOD.md), beside the tracker's own (T.FEE a contract at the open,
+    LEGS contracts; at 15:58 T.FEE a contract closed): to open, each short leg sold at its bid and each long bought at its
+    ask; held to the official close nothing more; at 15:58 each short bought back at its 15:58 ask and each long with a bid
+    sold at it (a long with no bid abandoned, no fee — the tracker's rule)"""
+    nf = T.fnum
+    opn = sum(FR.option_fee(name, l.bid, l.qty, 'sell') if l.side == 'short' else FR.option_fee(name, l.ask, l.qty, 'buy') for l in st.legs)
+    close, closed = 0.0, nf(s.get('legs_closed'))
+    for i, l in enumerate(st.legs, 1):
+        b, a = nf(s.get(f'l{i}_bid_1558')), nf(s.get(f'l{i}_ask_1558'))
+        if closed is None:
+            close = None
+            break
+        if l.side == 'short':
+            close += FR.option_fee(name, a or 0.0, l.qty, 'buy')
+        elif b is not None and b > 0:
+            close += FR.option_fee(name, b, l.qty, 'sell')
+    return {'fee_study_open': T.LEGS * T.FEE, 'fee_study_close': (closed or 0.0) * T.FEE, 'fee_rh_open': opn,
+            'fee_rh_1558': close, 'fee_rh_close': close or 0.0}
 
 
 TRADE_COLUMNS = ('candidate', 'name', 'day', 'minute', 'structure', 'period', 'settle_source', 'settle_from', 'settle_fallback', 'settle_px',
@@ -1503,6 +1531,7 @@ def forward_block(root: Path, keys: tuple, sessions: list, parquet_root: Path | 
           'a session listed here is never dropped. These sessions are untouched by any rule, model or choice — an execution and data-quality '
           'record until the thresholds (60 → 120 sessions for condor_em1, 150 for condor_d20\'s D1 re-test, 250 a name for fly5).', '']
     md += [x.replace('## ', '### ', 1) if x.startswith('## ') else (x.replace('### ', '#### ', 1) if x.startswith('### ') else x) for x in au['md']]
+    md += robinhood_section(au['trades'], keys)
     md.append('### Sessions')
     md.append('')
     md.append('| session | candidate · structure | trades | session P&L held $ | at 15:58 $ | settlement | stock left (trades) | pin ≤ $0.50 (trades) | post-market cross |')
@@ -1525,6 +1554,59 @@ def forward_block(root: Path, keys: tuple, sessions: list, parquet_root: Path | 
     md.append('')
     md.append(f'{CUM_STATE}{json.dumps(sessions)} -->')
     return '\n' + '\n'.join(md) + '\n'
+
+
+def robinhood_section(trades: list, keys: tuple) -> list:
+    """the same forward trades at Robinhood's fees (the research's default cost model from 2026-10-24), beside the tracker's
+    pre-registered $0.65 a contract; descriptive — the thresholds and N stay on the pre-registered fees"""
+    md = ['### Robinhood fees (the default cost model from 2026-10-24)', '',
+          f'The same trades, the same fills, re-priced at Robinhood\'s fees (`docs/FEES_ROBINHOOD.md`, `{FR.VERSION}`): '
+          '$0 commission, $0.0403 a contract a side, and on each sold leg the TAF and SEC fee rounded up to the cent. Held to the '
+          'official close there is no closing fee. At 15:58 a short is bought back and a long with a bid is sold. **The '
+          'pre-registered figures above stay the record.** Each candidate\'s confirmation threshold and N are counted on '
+          'the tracker\'s own $0.65 a contract, as frozen. The Robinhood columns are descriptive.', '',
+          '| candidate · structure | period | trades | mean $ a trade held, pre-registered fees | held, Robinhood | win held, pre-registered / Robinhood | total held, pre-registered / Robinhood | mean $ at 15:58, pre-registered / Robinhood |',
+          '|---|---|---|---|---|---|---|---|']
+    for k in keys:
+        if k not in T.CANDIDATES:
+            continue
+        for s_ in T.CANDIDATES[k].structures:
+            for per in sorted({t['period'] for t in trades if t['candidate'] == k and t['structure'] == s_}, key=P.period_sort):
+                xs = [t for t in trades if t['candidate'] == k and t['structure'] == s_ and t['period'] == per]
+                if not xs:
+                    continue
+                a = np.array([t['pnl_nbbo'] for t in xs], float)
+                b = np.array([t['pnl_rh'] for t in xs if t.get('pnl_rh') is not None], float)
+                e = [t['pnl_1558_nbbo'] for t in xs if t.get('pnl_1558_nbbo') is not None]
+                er = [t['pnl_1558_rh'] for t in xs if t.get('pnl_1558_rh') is not None]
+                md.append(f'| {label_of(k, s_)} | {per} | {len(xs)} | {_f(float(a.mean()))} | **{_f(float(b.mean())) if b.size else "—"}** | '
+                          f'{100 * (a > 0).mean():.1f}% / {(100 * (b > 0).mean()) if b.size else float("nan"):.1f}% | '
+                          f'{_f(float(a.sum()), "{:+,.0f}")} / {_f(float(b.sum()), "{:+,.0f}") if b.size else "—"} | '
+                          f'{_f(float(np.mean(e))) if e else "—"} / {_f(float(np.mean(er))) if er else "—"} |')
+    md.append('')
+    return md
+
+
+def rerender_cumulative(root: Path, cumulative: Path, keys: tuple = T.DEFAULT_KEYS, parquet_root: Path | None = None,
+                        closes: P.OfficialCloses | None = None, decision_prices: dict | None = None) -> dict:
+    """the forward block regenerated over the sessions the file ALREADY lists, from the replay root on disk — nothing
+    fetched, no session added, the historical block's bytes untouched (an offline re-render, e.g. after a report change)"""
+    cumulative = Path(cumulative)
+    text = cumulative.read_text(encoding='utf-8')
+    a, b, listed = _cum_parse(text)
+    if not listed:
+        return {'listed': [], 'written': False}
+    comp, _ = complete_sessions(root, keys, P.FORWARD_START, '9999-12-31')
+    gone = sorted(set(listed) - set(comp))
+    if gone:
+        raise ValueError(f'sessions in {cumulative.name} are not whole in the replay root {root}: {gone} — nothing written')
+    block = forward_block(root, keys, sorted(listed), parquet_root, closes, decision_prices)
+    out = text[:a] + block + text[b:]
+    assert out[:a] == text[:a], 'the historical part changed'
+    tmp = cumulative.with_name(cumulative.name + '.tmp')
+    tmp.write_text(out, encoding='utf-8')
+    os.replace(tmp, cumulative)
+    return {'listed': sorted(listed), 'written': True}
 
 
 def append_cumulative(root: Path, cumulative: Path, keys: tuple = T.DEFAULT_KEYS, parquet_root: Path | None = None,

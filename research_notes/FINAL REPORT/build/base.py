@@ -5,6 +5,7 @@ from __future__ import annotations
 import gzip
 import io
 import subprocess
+import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable
@@ -20,6 +21,17 @@ DR = REPO / 'data_recorder'
 ARCHIVE = '7dfea57'                   # the last commit before the fresh start (75c29c9)
 
 STD = ['date', 'inst', 'period', 'contract', 'cost', 'pnl', 'reason']
+FEE_COLS = ['fee_old', 'fee_rh', 'fee_how']   # the study's own fee on the trade, Robinhood's, and how Robinhood's was found
+
+sys.path.insert(0, str(REPO / 'scripts'))
+import fees_robinhood as FR  # noqa: E402  (the default cost model from 2026-10-24: docs/FEES_ROBINHOOD.md)
+
+EXACT = 'exact'
+VENDOR = 'vendor-recorded: no fee in either column'
+
+
+def INFERRED(why: str) -> str:
+    return 'Robinhood fees inferred from the rule: ' + why
 
 
 def git_bytes(path: str, rev: str = ARCHIVE) -> bytes:
@@ -37,7 +49,12 @@ def git_frame(path: str, rev: str = ARCHIVE) -> pl.DataFrame:
 
 
 def std(df: pl.DataFrame) -> pl.DataFrame:
-    """the standard trade frame: types fixed, rows with no P&L or no positive base dropped"""
+    """the standard trade frame: types fixed, rows with no P&L or no positive base dropped. Every loader also gives
+    fee_old (the dollars the study charged the trade), fee_rh (Robinhood's dollars on the same fills) and fee_how; the
+    trade's P&L at Robinhood's fees is pnl + fee_old − fee_rh (pnl_rh)."""
+    missing = [c for c in FEE_COLS if c not in df.columns]
+    if missing:
+        raise ValueError(f'a loader must give {FEE_COLS}; missing {missing}')
     out = df.select(
         pl.col('date').cast(pl.Utf8).str.slice(0, 10),
         pl.col('inst').cast(pl.Utf8),
@@ -46,7 +63,10 @@ def std(df: pl.DataFrame) -> pl.DataFrame:
         pl.col('cost').cast(pl.Float64),
         pl.col('pnl').cast(pl.Float64),
         pl.col('reason').cast(pl.Utf8).fill_null(''),
-    )
+        pl.col('fee_old').cast(pl.Float64).fill_null(0.0),
+        pl.col('fee_rh').cast(pl.Float64).fill_null(0.0),
+        pl.col('fee_how').cast(pl.Utf8),
+    ).with_columns((pl.col('pnl') + pl.col('fee_old') - pl.col('fee_rh')).alias('pnl_rh'))
     return out.filter(pl.col('pnl').is_not_null() & pl.col('pnl').is_finite() & (pl.col('cost') > 0))
 
 

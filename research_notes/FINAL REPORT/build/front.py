@@ -7,7 +7,24 @@ from base import RN
 HEAD = """# Final research report
 
 **Repository:** georgeredo, branch `claude/lucid-heisenberg-bpyq7k`. **Built:** 2026-10-23 by
-`research_notes/FINAL REPORT/build/` (`build.py`, then `render.py` for the PDF).
+`research_notes/FINAL REPORT/build/` (`build.py`, then `render.py` for the PDF); **re-scored 2026-10-24 at Robinhood's fees**.
+
+**Fees: Robinhood is primary.** From 2026-10-24 the research's default cost model is Robinhood's options fee schedule
+(`docs/FEES_ROBINHOOD.md`, read 2026-10-24). In short: $0 commission; ETF options about $0.04 a contract to buy and $0.06
+to sell (a 1-lot); SPXW $1.04 a contract a side under $1.00 of premium and $1.13 at $1.00 and up (non-Gold); nothing at
+expiry or settlement. The studies charged $0.65 a contract each way, or $0.68748 with pass-throughs, or $0.70 for the
+older Compass studies; SPXW was $1.18748 / $1.27748.
+
+Every trade is re-priced on its own fills: buys at the ask and sales at the bid, exactly as the study filled them. The
+study's modelled fee is added back and Robinhood's is charged. Every figure is printed at Robinhood's fees first, with the
+study's own beside it on page 1 and in each section's fee table.
+
+Where a trade file lacks a leg's price, side or exit, Robinhood's fee is inferred from the rule. Those rows are marked ‡
+and labelled "Robinhood fees inferred from the rule" in their section. Vendor-recorded rows (§) carry no fee in either
+column.
+
+Every verdict stays exactly as pre-registered, on the study's own fees. The column "would the verdict differ at Robinhood
+fees?" only runs the frozen pass rule on the Robinhood-fee returns. It is descriptive, not a new verdict.
 **Inventory of every study:** `INVENTORY.md`, the file beside this one.
 
 This report is read-only with respect to the research. It adds no test, variant or fetch, opens no holdout and
@@ -29,11 +46,14 @@ writes "not available — <why>". GeorgeFi's own recorded card returns appear on
 $ per trade is one lot, after every fee the study charged.
 """
 
-SUMMARY_NOTE = """One row per strategy, on the period that carries its verdict, sorted by mean trade (% in each row's own
-unit). The table pools all names when a study judged them together, and shows one row per name or variant when it did
+SUMMARY_NOTE = """One row per strategy, on the period that carries its verdict, sorted by mean trade at Robinhood fees (% in
+each row's own unit), with the mean at the study's own fees beside it. The table pools all names when a study judged them together, and shows one row per name or variant when it did
 not. The interval is the 20-session moving-block bootstrap of the mean % a trade (`audit_lib.session_stats`, 2,000
 draws). It is "n/a" when the period has fewer than 60 sessions. "Biggest win/loss" are $ for one trade, with its entry
-date. The verdict is the study's own, as pre-registered."""
+date. The verdict is the study's own, as pre-registered. The last column is descriptive. It runs the study's frozen pass
+rule on the Robinhood-fee returns: through the study's own code where the trade list allows (the Compass features' Δ, the
+direction screen); otherwise through the rule's computable part, with the report's block-20 interval, and it says so. ‡ marks
+a row whose Robinhood fees are partly inferred from the rule. § marks a vendor-recorded row."""
 
 PASSED = """## The rules that passed, with their numbers
 
@@ -162,6 +182,16 @@ METHOD = """## Method (every section)
 
 - **Fills.** As each study ran them: ask in, bid out, at the 1-minute NBBO unless the section says otherwise. Older
   studies (#2, #4b, #5) used Unusual Whales bars with a modelled spread. Each section states its fee schedule.
+- **Fees (from 2026-10-24).** Every trade is re-priced at Robinhood's fees: `pnl_rh = pnl + the study's fee − Robinhood's
+  fee`, on the study's own fills (`scripts/fees_robinhood.py`, `docs/FEES_ROBINHOOD.md`).
+  - The study's fee is taken from its own fee column when the file has one, and otherwise from its code's formula.
+  - Robinhood's fee is figured from each leg's contracts, side and price.
+  - A contract held to expiry or settlement pays no exit fee. Where a study charged a sale on a contract held in the money
+    to the close (steps 2 and 4), Robinhood's fee is $0.
+  - Where only the structure's total price is kept, a leg's price is taken as its share of that total. It is used only for
+    the SEC fee's cent and SPXW's $1.00 tier. A row that needed any other guess is labelled "inferred".
+  - Stock trades: the studies' $0.01 a share on an auction fill is their fee allowance, so it is replaced. Their $0.005 a
+    share on a bar fill is half the spread, so it stays.
 - **Win and loss.** A win is a trade whose P&L after fees is above zero. A breakeven counts as a loss.
 - **Session span.** The calendar is every stored SPY minute-file session in the period's span. A session with no trade
   counts as zero.

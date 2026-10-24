@@ -42,6 +42,8 @@ import build_0dte as B0  # noqa: E402
 import stats as ST  # noqa: E402
 import screen as SC  # noqa: E402
 import phase_b as PB  # noqa: E402
+sys.path.insert(0, str(REPO / 'scripts'))
+import fees_robinhood as FR  # noqa: E402  (the default cost model from 2026-10-24, docs/FEES_ROBINHOOD.md — beside, never in, the test)
 
 AL = C.AL
 VERSION = 'compass-features-forward-2026-10-22.1'
@@ -55,6 +57,7 @@ NO_CI_UNDER = 60
 DAILY_WINDOW = 60
 CSV_PATH = HERE / 'forward_sessions.csv'
 REPORT_PATH = HERE / 'FORWARD_REPORT.md'
+RH_CSV_PATH = HERE / 'forward_sessions_robinhood.csv'   # the same sessions and arms at Robinhood's fees: descriptive only
 CSV_COLS = ('day', 'model', 'S_with', 'N_with', 'S_without', 'N_without', 'mean_with', 'mean_without', 'd_session', 'version', 'written_at')
 CBOE_URL = 'https://cdn.cboe.com/api/global/us_indices/daily_prices/SPX_History.csv'
 
@@ -224,6 +227,35 @@ def session_rows(day: str, T: pl.DataFrame) -> list[dict]:
     return out
 
 
+def rh_repriced(T: pl.DataFrame) -> pl.DataFrame:
+    """the same base trades with r and r_x3 at Robinhood's fees: the study's fee (fcommon.fee on the buy at the ask and the
+    sale at exit_px; SPXW settled 0DTE pays no exit fee; a $0 price pays none) added back, Robinhood's charged. The rows,
+    and so every model's arms, are unchanged — only the returns move. The 14:00 bid is read back from r_x3."""
+    def old(name, px):
+        return pl.when(px > 0).then(pl.when(name == 'SPXW').then(pl.when(px < 1.0 - 1e-9).then(C.FEE_SPXW_LO).otherwise(C.FEE_SPXW_HI))
+                                    .otherwise(C.FEE_ETF)).otherwise(0.0)
+    nm, ask = pl.col('name'), pl.col('ask')
+    settled = (nm == 'SPXW') & (pl.col('eb') == '0DTE')
+    f_in = old(nm, ask)
+    buy = FR.option_fee_expr(nm, ask, 1.0, 'buy')
+    fee_old = f_in + pl.when(settled).then(0.0).otherwise(old(nm, pl.col('exit_px')))
+    fee_rh = buy + pl.when(settled | (pl.col('exit_px') <= 0)).then(0.0).otherwise(FR.option_fee_expr(nm, pl.col('exit_px'), 1.0, 'sell'))
+    base = pl.col('r_x3') * ask + ask + f_in / 100
+    lo, hi, etf = base + C.FEE_SPXW_LO / 100, base + C.FEE_SPXW_HI / 100, base + C.FEE_ETF / 100
+    px3 = pl.when(base.abs() < 1e-7).then(0.0).otherwise(pl.when(nm == 'SPXW').then(pl.when(lo < 1.0 - 1e-9).then(lo).otherwise(hi)).otherwise(etf))
+    old3 = f_in + old(nm, px3)
+    rh3 = buy + pl.when(px3 > 0).then(FR.option_fee_expr(nm, px3, 1.0, 'sell')).otherwise(0.0)
+    return T.with_columns(((pl.col('r') * ask * 100 + fee_old - fee_rh) / (ask * 100)).alias('r'),
+                          pl.when(pl.col('r_x3').is_null()).then(None).otherwise((pl.col('r_x3') * ask * 100 + old3 - rh3) / (ask * 100)).alias('r_x3'))
+
+
+def rh_session_rows(day: str, T: pl.DataFrame) -> list[dict]:
+    rows = session_rows(day, rh_repriced(T))
+    for x in rows:
+        x['version'] = f'{VERSION} + {FR.VERSION}'
+    return rows
+
+
 # ---- the cumulative file ----------------------------------------------------------------------------------------------------------------
 
 def read_csv(path: Path = CSV_PATH) -> list[dict]:
@@ -323,6 +355,22 @@ def write_report(path: Path = REPORT_PATH, csv_path: Path = CSV_PATH) -> str:
           'stop. At N the verdict uses exactly the first N counted sessions and is never revised. V1\'s N (23,960 sessions) is '
           'out of reach on this forward set (FORWARD_RULE.md section 4). The six models are read separately, without a '
           'multiple-test correction.', '']
+    rh = read_csv(RH_CSV_PATH if Path(csv_path) == CSV_PATH else Path(csv_path).with_name(RH_CSV_PATH.name))
+    rdays = sorted({x['day'] for x in rh})
+    L += ['## At Robinhood fees (descriptive)', '',
+          f'The same sessions, trades and arms, each trade re-priced at Robinhood\'s fees (the research\'s default cost model '
+          f'from 2026-10-24, `docs/FEES_ROBINHOOD.md`, `{FR.VERSION}`). The study\'s modelled fee ($0.68748 a contract a side; '
+          'SPXW $1.18748 / $1.27748) is added back and Robinhood\'s charged: $0.0403 a contract to buy, and $0.0603 to sell a '
+          'one-lot ETF option; SPXW $1.0403 / $1.1303 a side. **The pass rule and each model\'s N stay on the pre-registered '
+          'fees (FORWARD_RULE.md, frozen)**, and the verdict column above is the only verdict. This table is descriptive.', '',
+          f'Sessions re-priced: **{len(rdays)}** ({rdays[0] + " → " + rdays[-1] if rdays else "none yet"}).', '',
+          '| model | sessions | mean with, Robinhood (pre-registered) | mean without, Robinhood (pre-registered) | Δ, Robinhood (pre-registered) |',
+          '|---|---|---|---|---|']
+    for m in MODELS:
+        a, b = evaluate(rows, m), evaluate(rh, m)
+        L.append(f'| {m} | {b["counted"]:,} | {pp(b["mean_with"])} ({pp(a["mean_with"])}) | {pp(b["mean_without"])} ({pp(a["mean_without"])}) | '
+                 f'{pp(b["delta"])} ({pp(a["delta"])}) |')
+    L.append('')
     txt = '\n'.join(L)
     tmp = Path(path).with_suffix('.part')
     tmp.write_text(txt)
@@ -346,10 +394,27 @@ def run(days: list[str], layout: Path, work: Path, official_dir: Path, csv_path:
             res['calls'] += calls
             T = build_session(d, layout, work, official_dir)
             res['added'] += append_rows(session_rows(d, T), csv_path)
+            append_rows(rh_session_rows(d, T), Path(csv_path).with_name(RH_CSV_PATH.name))
             if log:
                 log.info('compass features %s: %d base trades, six models appended', d, T.height)
         except FeatureDataError as e:
             res['failure'] = f'{e.day} {e.step}: {e.why}'
             break
+    res['rh_backfilled'] = backfill_rh(layout, work, official_dir, csv_path, log)
     write_report(report_path, csv_path)
     return res
+
+
+def backfill_rh(layout: Path, work: Path, official_dir: Path, csv_path: Path = CSV_PATH, log=None) -> list[str]:
+    """the Robinhood re-pricing for sessions already counted before it existed: their base trades rebuilt from the layout on
+    disk (nothing fetched; the counted file is never touched); a session that cannot be rebuilt is said and skipped"""
+    rh_path = Path(csv_path).with_name(RH_CSV_PATH.name)
+    done = []
+    for d in sorted(days_in(csv_path) - days_in(rh_path)):
+        try:
+            T = build_session(d, layout, work, official_dir)
+            done += append_rows(rh_session_rows(d, T), rh_path)
+        except FeatureDataError as e:
+            if log:
+                log.warning('compass features Robinhood re-pricing %s skipped: %s', d, e)
+    return done
